@@ -1,0 +1,123 @@
+{
+  "id": "preview-l6",
+  "title": "Personnel (preview)",
+  "lessons": [
+    {
+      "id": "p6-personnel",
+      "title": "Personnel Packages",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "p6-personnel-01",
+          "title": "The code",
+          "body": "Personnel is two digits: running backs, then tight ends. The rest of the five skill spots are wide receivers. 11 personnel is 1 RB, 1 TE, 3 WR. It is the NFL's most-used package.",
+          "concept": "personnel"
+        },
+        {
+          "type": "match",
+          "id": "p6-personnel-02",
+          "prompt": "Match the package to its skill players.",
+          "pairs": [
+            {
+              "left": "11",
+              "right": "1 RB, 1 TE, 3 WR"
+            },
+            {
+              "left": "12",
+              "right": "1 RB, 2 TE, 2 WR"
+            },
+            {
+              "left": "21",
+              "right": "2 RB, 1 TE, 2 WR"
+            },
+            {
+              "left": "10",
+              "right": "1 RB, 0 TE, 4 WR"
+            },
+            {
+              "left": "13",
+              "right": "1 RB, 3 TE, 1 WR"
+            },
+            {
+              "left": "22",
+              "right": "2 RB, 2 TE, 1 WR"
+            }
+          ],
+          "explanation": "First digit RBs, second digit TEs, and WRs fill the remaining skill spots out of five.",
+          "concept": "personnel"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "p6-personnel-03",
+          "prompt": "How many wide receivers are on the field in 12 personnel?",
+          "choices": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "answer": 1,
+          "explanation": "12 personnel is 1 RB + 2 TE, so 5 - 3 = 2 WR.",
+          "concept": "personnel"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "p6-personnel-04",
+          "prompt": "How many running backs are in 21 personnel?",
+          "choices": [
+            "1",
+            "2",
+            "3",
+            "0"
+          ],
+          "answer": 1,
+          "explanation": "The first digit is the RB count. 21 is often called 'regular' or 'I-formation' personnel (a halfback and a fullback).",
+          "concept": "personnel"
+        },
+        {
+          "type": "true_false",
+          "id": "p6-personnel-05",
+          "statement": "22 personnel has two wide receivers.",
+          "answer": false,
+          "explanation": "22 is 2 RB + 2 TE, leaving just 1 WR. It is a heavy, run-oriented package.",
+          "concept": "personnel"
+        },
+        {
+          "type": "situation",
+          "id": "p6-personnel-06",
+          "state": {
+            "quarter": 1,
+            "clock": 600,
+            "down": 1,
+            "toGo": 10,
+            "yardLine": 50,
+            "scoreDiff": 0,
+            "timeouts": 3,
+            "note": "The offense trots out 11 personnel (3 WR, 1 TE, 1 RB)."
+          },
+          "prompt": "The offense shows 11 personnel. The defense must pick a package. Which is the most common answer?",
+          "options": [
+            {
+              "text": "Nickel: 4 DL, 2 LB, 5 DB",
+              "quality": "best",
+              "why": "Three WR means the defense adds a fifth defensive back so each receiver has an answer."
+            },
+            {
+              "text": "Base 4-3: 4 DL, 3 LB, 4 DB",
+              "quality": "ok",
+              "why": "Base is strong against the run, but a linebacker covering a slot receiver is a mismatch the offense wants."
+            },
+            {
+              "text": "Goal line: 6 DL, 3 LB, 2 DB",
+              "quality": "poor",
+              "why": "Mid-field with three receivers, a goal-line group would have no one to cover them."
+            }
+          ],
+          "explanation": "Defenses match personnel: more receivers means more defensive backs.",
+          "concept": "nickel"
+        }
+      ],
+      "blurb": "Preview: reading the two-digit code."
+    }
+  ]
+}

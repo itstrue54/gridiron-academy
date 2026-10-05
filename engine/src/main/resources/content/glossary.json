@@ -1,0 +1,326 @@
+{
+  "entries": [
+    {
+      "id": "field",
+      "term": "Field",
+      "kid": "The football field is 100 yards long, with an end zone at each end.",
+      "full": "100 yards between the goal lines, plus a 10-yard end zone at each end; 53 1/3 yards wide.",
+      "level": 1
+    },
+    {
+      "id": "endzone",
+      "term": "End zone",
+      "kid": "The place where you score a touchdown.",
+      "full": "The 10-yard scoring area beyond each goal line.",
+      "level": 1
+    },
+    {
+      "id": "yard-line",
+      "term": "Yard lines",
+      "kid": "Lines painted every 5 yards to show how far the ball has gone.",
+      "full": "Field markings every 5 yards, numbered every 10, with the 50-yard line at midfield.",
+      "level": 1
+    },
+    {
+      "id": "offense",
+      "term": "Offense",
+      "kid": "The team with the ball. It tries to score.",
+      "full": "The team in possession, trying to advance the ball and score.",
+      "level": 1
+    },
+    {
+      "id": "defense",
+      "term": "Defense",
+      "kid": "The team without the ball. It tries to stop the other team.",
+      "full": "The team not in possession, trying to stop the offense and take the ball away.",
+      "level": 1
+    },
+    {
+      "id": "quarter",
+      "term": "Quarter",
+      "kid": "One of the 4 parts of a game.",
+      "full": "One of four periods of a game; 15 minutes in the NFL and college, 12 in most high schools.",
+      "level": 1
+    },
+    {
+      "id": "referee",
+      "term": "Referee",
+      "kid": "The official who makes sure everyone follows the rules.",
+      "full": "The lead official; with the rest of the crew enforces the rules and signals calls.",
+      "level": 1
+    },
+    {
+      "id": "touchdown",
+      "term": "Touchdown",
+      "kid": "Getting the ball into the end zone. Worth 6 points!",
+      "full": "Possession of the ball in or over the opponent's goal line; 6 points.",
+      "level": 1
+    },
+    {
+      "id": "extra-point",
+      "term": "Extra point",
+      "kid": "A kick after a touchdown for 1 extra point.",
+      "full": "A try after a touchdown: a 1-point kick (NFL: 33 yards, from the 15) .",
+      "level": 1
+    },
+    {
+      "id": "two-point",
+      "term": "Two-point conversion",
+      "kid": "A run or pass after a touchdown for 2 points.",
+      "full": "A try from the 2-yard line (NFL) worth 2 points instead of the kick's 1.",
+      "level": 1
+    },
+    {
+      "id": "field-goal",
+      "term": "Field goal",
+      "kid": "A kick through the posts. Worth 3 points.",
+      "full": "A placekick through the uprights; 3 points.",
+      "level": 1
+    },
+    {
+      "id": "safety-score",
+      "term": "Safety (scoring)",
+      "kid": "When the defense tackles the offense in its own end zone. Worth 2 points.",
+      "full": "A 2-point score for the defense when the ball carrier is down in his own end zone, among other situations.",
+      "level": 1
+    },
+    {
+      "id": "down",
+      "term": "Down",
+      "kid": "One of the offense's 4 tries to go 10 yards.",
+      "full": "One play in a series of four; the offense must gain 10 yards in four downs to earn a new series.",
+      "level": 1
+    },
+    {
+      "id": "first-down",
+      "term": "First down",
+      "kid": "When the offense goes 10 yards and gets 4 new tries.",
+      "full": "The first play of a new series, earned by gaining the necessary yardage.",
+      "level": 1
+    },
+    {
+      "id": "down-and-distance",
+      "term": "Down and distance",
+      "kid": "How many tries are left and how far you still need to go.",
+      "full": "The situation: which down it is and how many yards remain for a first down (e.g. 3rd and 4).",
+      "level": 1
+    },
+    {
+      "id": "fourth-down",
+      "term": "Fourth down",
+      "kid": "The last try. Punt, kick, or go for it.",
+      "full": "The last down; teams punt, kick a field goal or go for it depending on the situation.",
+      "level": 1
+    },
+    {
+      "id": "punt",
+      "term": "Punt",
+      "kid": "A long kick to give the ball to the other team.",
+      "full": "A kick dropped and kicked before it hits the ground, usually on 4th down, to improve field position.",
+      "level": 1
+    },
+    {
+      "id": "snap",
+      "term": "Snap",
+      "kid": "The center passes the ball back to start the play.",
+      "full": "The backward pass from the center that begins each down.",
+      "level": 1
+    },
+    {
+      "id": "handoff",
+      "term": "Handoff",
+      "kid": "The QB hands the ball to a runner.",
+      "full": "A direct exchange of the ball from the quarterback to another back.",
+      "level": 1
+    },
+    {
+      "id": "incomplete",
+      "term": "Incomplete pass",
+      "kid": "A pass nobody caught. The play is over.",
+      "full": "A forward pass that hits the ground or goes out of bounds; the ball returns to the previous spot.",
+      "level": 1
+    },
+    {
+      "id": "tackle",
+      "term": "Tackle",
+      "kid": "Bringing the runner to the ground.",
+      "full": "Stopping a ball carrier by bringing him to the ground; in flag football, pulling the flag.",
+      "level": 1
+    },
+    {
+      "id": "turnover",
+      "term": "Turnover",
+      "kid": "When the defense takes the ball away.",
+      "full": "A change of possession by interception or fumble recovery (or on downs).",
+      "level": 1
+    },
+    {
+      "id": "interception",
+      "term": "Interception",
+      "kid": "When a defender catches the QB's pass.",
+      "full": "A forward pass caught by a defender, giving his team possession.",
+      "level": 1
+    },
+    {
+      "id": "fumble",
+      "term": "Fumble",
+      "kid": "When the runner drops the ball.",
+      "full": "A loose ball after a carrier loses possession; either team may recover.",
+      "level": 1
+    },
+    {
+      "id": "quarterback",
+      "term": "Quarterback",
+      "kid": "The leader of the offense. Throws passes and hands off.",
+      "full": "The player who takes the snap and throws or hands off the ball; calls the offense's plays on the field.",
+      "level": 1
+    },
+    {
+      "id": "receivers",
+      "term": "Receivers",
+      "kid": "Players who catch passes: wide receivers and tight ends.",
+      "full": "Wide receivers and tight ends, the primary targets of forward passes.",
+      "level": 1
+    },
+    {
+      "id": "running-back",
+      "term": "Running back",
+      "kid": "The player who runs with the ball.",
+      "full": "A back lined up behind or beside the quarterback; carries the ball and catches passes.",
+      "level": 1
+    },
+    {
+      "id": "center",
+      "term": "Center",
+      "kid": "The lineman who snaps the ball.",
+      "full": "The middle offensive lineman, who snaps the ball to the quarterback.",
+      "level": 1
+    },
+    {
+      "id": "offensive-line",
+      "term": "Offensive line",
+      "kid": "Five big players who block.",
+      "full": "Five linemen (LT, LG, C, RG, RT) who block for runs and pass protection.",
+      "level": 1
+    },
+    {
+      "id": "defense-positions",
+      "term": "Defensive positions",
+      "kid": "Linemen rush, linebackers tackle, cornerbacks and safeties guard receivers.",
+      "full": "DL rush and stop runs; LB tackle, rush and cover; CB cover receivers; S defend deep and support.",
+      "level": 1
+    },
+    {
+      "id": "flag-football",
+      "term": "Flag football",
+      "kid": "A game with no tackling. You pull a flag.",
+      "full": "A non-contact variant where defenders pull a flag from the ball carrier's belt.",
+      "level": 1
+    },
+    {
+      "id": "penalty",
+      "term": "Penalty",
+      "kid": "A broken rule, shown by a yellow flag.",
+      "full": "A foul called by officials, enforced by yardage and sometimes loss of down.",
+      "level": 1
+    },
+    {
+      "id": "false-start",
+      "term": "False start",
+      "kid": "Moving too early on offense.",
+      "full": "An offensive player moving illegally before the snap: 5 yards.",
+      "level": 1
+    },
+    {
+      "id": "special-teams",
+      "term": "Special teams",
+      "kid": "Kicking plays: kickoffs, punts, field goals.",
+      "full": "The units that handle kickoffs, punts, field goals and returns.",
+      "level": 1
+    },
+    {
+      "id": "line-of-scrimmage",
+      "term": "Line of scrimmage",
+      "kid": "The imaginary line where the ball is.",
+      "full": "The line parallel to the goal lines through the ball's forward point; teams are on opposite sides at the snap.",
+      "level": 1
+    },
+    {
+      "id": "eligible-receiver",
+      "term": "Eligible receiver",
+      "kid": "A player allowed to catch a forward pass.",
+      "full": "QB, RB, WR and TE by number and position; linemen are ineligible downfield.",
+      "level": 1
+    },
+    {
+      "id": "game-clock",
+      "term": "Game clock",
+      "kid": "The clock for each quarter. It stops for some things.",
+      "full": "Stops on incompletions, out of bounds, timeouts and most penalties; first downs do not stop it in the NFL.",
+      "level": 1
+    },
+    {
+      "id": "play-clock",
+      "term": "Play clock",
+      "kid": "The timer for how fast the offense must snap.",
+      "full": "40 seconds (25 after some stoppages); delay of game is 5 yards.",
+      "level": 1
+    },
+    {
+      "id": "two-minute-warning",
+      "term": "Two-minute warning",
+      "kid": "An automatic timeout at 2:00 in each half.",
+      "full": "An automatic stoppage at 2:00 of the second and fourth quarters.",
+      "level": 1
+    },
+    {
+      "id": "touchback",
+      "term": "Touchback",
+      "kid": "When a ball stops in the end zone. The team starts at the 20.",
+      "full": "A dead ball in the end zone after a punt, or an interception there: placed at the 20.",
+      "level": 1
+    },
+    {
+      "id": "personnel",
+      "term": "Personnel",
+      "kid": "The mix of players on the field, named by two digits.",
+      "full": "Number of RBs then TEs; WRs fill the remaining skill spots. 11 = 1 RB, 1 TE, 3 WR.",
+      "level": 6
+    },
+    {
+      "id": "nickel",
+      "term": "Nickel",
+      "kid": "A defense with five defensive backs.",
+      "full": "A sub package of 4 DL, 2 LB, 5 DB (a 4-2-5), the usual answer to 11 personnel.",
+      "level": 6
+    },
+    {
+      "id": "mofc",
+      "term": "Middle of the field closed",
+      "kid": "One safety deep in the middle.",
+      "full": "A single-high safety look; Cover 1 and Cover 3 are the usual coverages from it.",
+      "level": 7
+    },
+    {
+      "id": "mofo",
+      "term": "Middle of the field open",
+      "kid": "Two safeties deep, split.",
+      "full": "Two-high safeties; Cover 2, Cover 4 and Cover 6 live here.",
+      "level": 7
+    },
+    {
+      "id": "disguise",
+      "term": "Disguise",
+      "kid": "Hiding what the defense will really do.",
+      "full": "Showing a look pre-snap that differs from the coverage or pressure actually played.",
+      "level": 7
+    },
+    {
+      "id": "rotation",
+      "term": "Rotation",
+      "kid": "Safeties moving after the snap.",
+      "full": "Post-snap movement of safeties (and sometimes corners) into the final coverage.",
+      "level": 7
+    }
+  ]
+}

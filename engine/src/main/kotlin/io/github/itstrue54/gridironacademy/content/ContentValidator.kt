@@ -1,0 +1,141 @@
+package io.github.itstrue54.gridironacademy.content
+
+import io.github.itstrue54.gridironacademy.engine.LevelTest
+import io.github.itstrue54.gridironacademy.model.*
+
+/**
+ * Every content mistake that would otherwise surface as a wrong answer key or a
+ * crash on a child's phone is caught here, and CI runs it over all shipped content.
+ */
+object ContentValidator {
+    /** Kid-track text limits (words). Read-aloud is on, but short is still kinder. */
+    const val KID_BODY_MAX_WORDS = 45
+    const val KID_PROMPT_MAX_WORDS = 28
+
+    fun validate(c: Content): List<String> {
+        val errs = mutableListOf<String>()
+        fun err(where: String, msg: String) { errs += "$where: $msg" }
+
+        val levelIds = c.curriculum.levels.map { it.id }
+        dupes(levelIds).forEach { err("curriculum", "duplicate level id $it") }
+        dupes(c.curriculum.levels.map { it.number + 1000 * it.track.ordinal }).forEach {
+            err("curriculum", "duplicate level number within a track: ${it % 1000}")
+        }
+        val glossaryIds = c.glossary.entries.map { it.id }.toSet()
+        dupes(c.glossary.entries.map { it.id }).forEach { err("glossary", "duplicate id $it") }
+        c.glossary.entries.forEach {
+            if (it.kid.isBlank() || it.full.isBlank() || it.term.isBlank()) err("glossary ${it.id}", "blank field")
+        }
+
+        val allStepIds = mutableListOf<String>()
+        val allLessonIds = mutableListOf<String>()
+
+        for (lv in c.curriculum.levels) {
+            (lv.requires + lv.requiresAny).forEach { if (it !in levelIds) err("level ${lv.id}", "requires unknown level $it") }
+            val units = c.unitsByLevel[lv.id].orEmpty()
+            if (units.isEmpty()) err("level ${lv.id}", "has no units")
+            if (!LevelTest.gateIsPlayable(units, lv.gate)) {
+                err("level ${lv.id}", "not enough ${lv.gate.game} content to run its gate")
+            }
+            for (u in units) {
+                errs += validateUnit(u, lv.track == Track.KID, glossaryIds)
+                u.lessons.forEach { l -> allLessonIds += l.id; l.steps.forEach { allStepIds += it.id } }
+            }
+        }
+        dupes(allStepIds).forEach { err("content", "duplicate step id $it") }
+        dupes(allLessonIds).forEach { err("content", "duplicate lesson id $it") }
+        return errs
+    }
+
+    /** Validates one unit on its own: used for shipped levels and for preview units. */
+    fun validateUnit(u: CourseUnit, kid: Boolean, glossaryIds: Set<String>): List<String> {
+        val errs = mutableListOf<String>()
+        fun err(where: String, msg: String) { errs += "$where: $msg" }
+        for (l in u.lessons) {
+            if (l.steps.isEmpty()) err("lesson ${l.id}", "no steps")
+            if (l.steps.none { it !is Learn }) err("lesson ${l.id}", "has no graded step")
+            dupes(l.steps.map { it.id }).forEach { err("lesson ${l.id}", "duplicate step id $it") }
+            for (s in l.steps) {
+                val where = "step ${s.id}"
+                s.concept?.let { if (it !in glossaryIds) err(where, "unknown concept '$it'") }
+                checkStep(s, where, kid, ::err)
+            }
+        }
+        return errs
+    }
+
+    private fun checkStep(s: Step, w: String, kid: Boolean, err: (String, String) -> Unit) {
+        fun words(t: String) = t.trim().split(Regex("\\s+")).count { it.isNotEmpty() }
+        fun prompt(t: String) {
+            if (t.isBlank()) err(w, "blank prompt")
+            if (kid && words(t) > KID_PROMPT_MAX_WORDS) err(w, "kid prompt over $KID_PROMPT_MAX_WORDS words")
+        }
+        fun explain(t: String) { if (t.isBlank()) err(w, "missing explanation") }
+        fun choices(list: List<String>, ans: Int) {
+            if (list.size < 2) err(w, "needs at least 2 choices")
+            if (list.toSet().size != list.size) err(w, "duplicate choices")
+            if (ans !in list.indices) err(w, "answer index $ans out of range")
+            if (list.any { it.isBlank() }) err(w, "blank choice")
+        }
+        when (s) {
+            is Learn -> {
+                if (s.title.isBlank() || s.body.isBlank()) err(w, "blank learn card")
+                if (kid && words(s.body) > KID_BODY_MAX_WORDS) err(w, "kid card over $KID_BODY_MAX_WORDS words")
+                s.diagram?.let { diagram(it, w, err) }
+            }
+            is MultipleChoice -> { prompt(s.prompt); explain(s.explanation); choices(s.choices, s.answer); s.diagram?.let { diagram(it, w, err) } }
+            is TrueFalse -> { prompt(s.statement); explain(s.explanation) }
+            is Match -> {
+                prompt(s.prompt); explain(s.explanation)
+                if (s.pairs.size < 2) err(w, "needs at least 2 pairs")
+                if (s.pairs.map { it.left }.toSet().size != s.pairs.size) err(w, "duplicate left side")
+                if (s.pairs.map { it.right }.toSet().size != s.pairs.size) err(w, "duplicate right side")
+            }
+            is Order -> {
+                prompt(s.prompt); explain(s.explanation)
+                if (s.items.size < 2) err(w, "needs at least 2 items")
+                if (s.items.toSet().size != s.items.size) err(w, "duplicate items")
+            }
+            is DiagramTap -> {
+                prompt(s.prompt); explain(s.explanation); diagram(s.diagram, w, err)
+                val ids = s.diagram.players.map { it.id } + s.diagram.zones.map { it.id }
+                if (s.targets.isEmpty()) err(w, "no targets")
+                s.targets.forEach { if (it !in ids) err(w, "target '$it' is not on the diagram") }
+            }
+            is ReadDefense -> {
+                prompt(s.prompt); explain(s.explanation)
+                choices(s.choices, s.answer)
+                diagram(s.preSnap, w, err); diagram(s.reveal, w, err)
+                if (s.preSnap.players.map { it.id }.toSet() != s.reveal.players.map { it.id }.toSet()) {
+                    err(w, "preSnap and reveal must show the same players")
+                }
+                if (s.disguised && s.reveal.routes.none { it.kind == PathKind.ROTATE || it.kind == PathKind.BLITZ || it.kind == PathKind.DROP }) {
+                    err(w, "disguised look needs a reveal with rotate/blitz/drop paths")
+                }
+            }
+            is Situation -> {
+                explain(s.explanation); if (s.prompt.isBlank()) err(w, "blank prompt")
+                if (s.options.size < 2) err(w, "needs at least 2 options")
+                if (s.options.count { it.quality == Quality.BEST } != 1) err(w, "needs exactly one BEST option")
+                if (s.options.any { it.why.isBlank() }) err(w, "every option needs a why")
+                val g = s.state
+                if (g.down !in 1..4 || g.quarter !in 1..5 || g.yardLine !in 1..99 || g.toGo < 1 || g.clock !in 0..900) {
+                    err(w, "implausible game state")
+                }
+            }
+        }
+    }
+
+    private fun diagram(d: Diagram, w: String, err: (String, String) -> Unit) {
+        val ids = d.players.map { it.id }
+        dupes(ids).forEach { err(w, "diagram duplicate player id $it") }
+        dupes(d.zones.map { it.id }).forEach { err(w, "diagram duplicate zone id $it") }
+        d.routes.forEach { r ->
+            if (r.playerId !in ids) err(w, "route for unknown player '${r.playerId}'")
+            if (r.points.isEmpty()) err(w, "empty route for '${r.playerId}'")
+        }
+        d.players.forEach { if (it.x !in -27f..27f) err(w, "player ${it.id} off the field (x=${it.x})") }
+    }
+
+    private fun <T> dupes(l: List<T>): Set<T> = l.groupingBy { it }.eachCount().filterValues { it > 1 }.keys
+}

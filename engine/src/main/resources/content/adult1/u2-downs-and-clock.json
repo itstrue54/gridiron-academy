@@ -1,0 +1,232 @@
+{
+  "id": "adult1-u2",
+  "title": "Downs and Clock",
+  "lessons": [
+    {
+      "id": "a1-downs",
+      "title": "Downs and Distance",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "a1-downs-01",
+          "title": "Four downs to go 10",
+          "body": "A team on offense has four plays (downs) to gain 10 yards. If it does, it earns a new first down and the count resets. If not, the ball goes to the other team, usually after a punt on 4th down.",
+          "concept": "down"
+        },
+        {
+          "type": "learn",
+          "id": "a1-downs-02",
+          "title": "Reading the situation",
+          "body": "Football describes situations as 'down and distance': '3rd and 4' means third down with 4 yards still needed. Every strategic choice in the sport starts here.",
+          "concept": "down-and-distance"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a1-downs-03",
+          "prompt": "It is 2nd down and 6. The offense runs for 2 yards. What is the next situation?",
+          "choices": [
+            "3rd and 4",
+            "3rd and 8",
+            "2nd and 4",
+            "1st and 10"
+          ],
+          "answer": 0,
+          "explanation": "The 2-yard gain leaves 4 yards still to go, and the next play is 3rd down.",
+          "concept": "down-and-distance"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a1-downs-04",
+          "prompt": "It is 3rd and 7. The offense gains 9 yards. What happens?",
+          "choices": [
+            "Fourth down",
+            "A new first down and 10",
+            "The offense punts",
+            "A turnover"
+          ],
+          "answer": 1,
+          "explanation": "Gaining the 7 (or more) yards needed earns a first down.",
+          "concept": "first-down"
+        },
+        {
+          "type": "true_false",
+          "id": "a1-downs-05",
+          "statement": "An incomplete forward pass keeps the clock running.",
+          "answer": false,
+          "explanation": "The clock stops on an incomplete pass. It also stops when a runner goes out of bounds, on timeouts, and on most penalties.",
+          "concept": "game-clock"
+        },
+        {
+          "type": "situation",
+          "id": "a1-downs-06",
+          "state": {
+            "quarter": 4,
+            "clock": 480,
+            "down": 4,
+            "toGo": 20,
+            "yardLine": 22,
+            "scoreDiff": -3,
+            "timeouts": 3
+          },
+          "prompt": "4th and 20 from your own 22, down 3, 8:00 left. What is the right call?",
+          "options": [
+            {
+              "text": "Punt",
+              "quality": "best",
+              "why": "Twenty yards is far too many. Punting protects field position and you still have time to get the ball back."
+            },
+            {
+              "text": "Go for it",
+              "quality": "poor",
+              "why": "Your odds of 20 yards are tiny, and failing gives the opponent a short field."
+            },
+            {
+              "text": "Kick a field goal",
+              "quality": "poor",
+              "why": "You are about 80 yards from the posts; not an option."
+            }
+          ],
+          "explanation": "Long-distance 4th downs in your own territory are almost always punts.",
+          "concept": "punt"
+        },
+        {
+          "type": "situation",
+          "id": "a1-downs-07",
+          "state": {
+            "quarter": 4,
+            "clock": 30,
+            "down": 4,
+            "toGo": 1,
+            "yardLine": 99,
+            "scoreDiff": -4,
+            "timeouts": 1
+          },
+          "prompt": "4th and goal at the 1, down 4, 30 seconds left, one timeout. What is the right call?",
+          "options": [
+            {
+              "text": "Run or pass for the touchdown",
+              "quality": "best",
+              "why": "A field goal would still leave you down 1. You need the touchdown, so you go for it."
+            },
+            {
+              "text": "Kick a field goal",
+              "quality": "poor",
+              "why": "A field goal makes it 3, which is still a one-point loss."
+            },
+            {
+              "text": "Punt",
+              "quality": "poor",
+              "why": "You are at the goal line; there is nothing to punt for."
+            }
+          ],
+          "explanation": "When a field goal cannot win the game, only a touchdown helps. Always compare the score to what each option is worth.",
+          "concept": "fourth-down"
+        }
+      ],
+      "blurb": "The heart of the sport."
+    },
+    {
+      "id": "a1-clock",
+      "title": "The Clock and the Flags",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "a1-clock-01",
+          "title": "Stopping the clock",
+          "body": "The game clock stops on incomplete passes, when a ball carrier goes out of bounds, on timeouts (three per half), at the two-minute warning in each half, and for most penalties. It runs after in-bounds tackles, and a first down alone does not stop it.",
+          "concept": "game-clock"
+        },
+        {
+          "type": "learn",
+          "id": "a1-clock-02",
+          "title": "The play clock",
+          "body": "The offense must snap the ball within 40 seconds of the previous play ending (25 after some stoppages). If not, it is a delay of game penalty.",
+          "concept": "play-clock"
+        },
+        {
+          "type": "learn",
+          "id": "a1-clock-03",
+          "title": "Common penalties",
+          "body": "False start (offense moves early) is 5 yards. Offside (defense across the line early) is 5. Offensive holding is 10. Defensive holding is 5 plus an automatic first down. Facemask and roughing the passer are 15.",
+          "concept": "penalty"
+        },
+        {
+          "type": "match",
+          "id": "a1-clock-04",
+          "prompt": "Match each penalty to its yardage.",
+          "pairs": [
+            {
+              "left": "False start",
+              "right": "5 yards (offense)"
+            },
+            {
+              "left": "Offside",
+              "right": "5 yards (defense)"
+            },
+            {
+              "left": "Offensive holding",
+              "right": "10 yards"
+            },
+            {
+              "left": "Roughing the passer",
+              "right": "15 yards and automatic first down"
+            }
+          ],
+          "explanation": "Know these four and most flags make sense instantly.",
+          "concept": "penalty"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a1-clock-05",
+          "prompt": "A defender holds a receiver during a pass play. What happens?",
+          "choices": [
+            "10 yards, replay the down",
+            "5 yards and an automatic first down",
+            "15 yards",
+            "Loss of down"
+          ],
+          "answer": 1,
+          "explanation": "Defensive holding is 5 yards plus an automatic first down, which is why it is so costly.",
+          "concept": "penalty"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a1-clock-06",
+          "prompt": "What is the two-minute warning?",
+          "choices": [
+            "A penalty",
+            "An automatic timeout at 2:00 of each half",
+            "A two-minute overtime",
+            "A rule that bans huddles"
+          ],
+          "answer": 1,
+          "explanation": "It is at the two-minute mark of the 2nd and 4th quarters.",
+          "concept": "two-minute-warning"
+        },
+        {
+          "type": "true_false",
+          "id": "a1-clock-07",
+          "statement": "Offensive holding is a 5-yard penalty.",
+          "answer": false,
+          "explanation": "Offensive holding is 10 yards. False start and offside are the 5-yard fouls.",
+          "concept": "penalty"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a1-clock-08",
+          "prompt": "The offense takes more than 40 seconds to snap the ball. What is the penalty?",
+          "choices": [
+            "Offside",
+            "Delay of game, 5 yards",
+            "False start",
+            "Illegal motion"
+          ],
+          "answer": 1,
+          "explanation": "Delay of game is a 5-yard penalty.",
+          "concept": "play-clock"
+        }
+      ],
+      "blurb": "Stoppages and penalties."
+    }
+  ]
+}

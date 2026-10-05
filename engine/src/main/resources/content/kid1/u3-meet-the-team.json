@@ -1,0 +1,589 @@
+{
+  "id": "kid1-u3",
+  "title": "Meet the Team",
+  "lessons": [
+    {
+      "id": "k1-positions",
+      "title": "Meet the Players",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "k1-positions-01",
+          "title": "Quarterback",
+          "body": "The quarterback (QB) is the leader of the offense. The QB throws passes and hands off the ball.",
+          "concept": "quarterback"
+        },
+        {
+          "type": "learn",
+          "id": "k1-positions-02",
+          "title": "Runners and catchers",
+          "body": "Running backs (RB) run with the ball. Wide receivers (WR) and tight ends (TE) catch passes.",
+          "concept": "receivers"
+        },
+        {
+          "type": "learn",
+          "id": "k1-positions-03",
+          "title": "The offensive line",
+          "body": "Five big players called the offensive line (OL) block. They give the QB time and open room for runners. The center (C) snaps the ball.",
+          "concept": "offensive-line"
+        },
+        {
+          "type": "learn",
+          "id": "k1-positions-04",
+          "title": "The defense",
+          "body": "Linemen (DL) rush the QB. Linebackers (LB) tackle and cover. Cornerbacks (CB) and safeties (S) guard the receivers.",
+          "concept": "defense-positions"
+        },
+        {
+          "type": "match",
+          "id": "k1-positions-05",
+          "prompt": "Who does what on offense?",
+          "pairs": [
+            {
+              "left": "QB",
+              "right": "Throws the ball"
+            },
+            {
+              "left": "RB",
+              "right": "Runs with the ball"
+            },
+            {
+              "left": "WR",
+              "right": "Catches passes"
+            },
+            {
+              "left": "C",
+              "right": "Snaps the ball"
+            }
+          ],
+          "explanation": "Each position has a special job.",
+          "concept": "quarterback"
+        },
+        {
+          "type": "match",
+          "id": "k1-positions-06",
+          "prompt": "Who does what on defense?",
+          "pairs": [
+            {
+              "left": "DL",
+              "right": "Rushes the passer"
+            },
+            {
+              "left": "LB",
+              "right": "Tackles runners"
+            },
+            {
+              "left": "CB",
+              "right": "Covers a receiver"
+            },
+            {
+              "left": "OL",
+              "right": "Blocks for the QB"
+            }
+          ],
+          "explanation": "OL is on offense, but they are the ones the defense must get past.",
+          "concept": "defense-positions"
+        },
+        {
+          "type": "diagram_tap",
+          "id": "k1-positions-07",
+          "prompt": "Tap the quarterback.",
+          "diagram": {
+            "players": [
+              {
+                "id": "qb",
+                "label": "12",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -1.3
+              },
+              {
+                "id": "rb",
+                "label": "22",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "c",
+                "label": "55",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "66",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "67",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "lt",
+                "label": "70",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "71",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "te",
+                "label": "88",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0.2
+              },
+              {
+                "id": "wr1",
+                "label": "81",
+                "side": "OFFENSE",
+                "x": -20,
+                "y": 0.2
+              },
+              {
+                "id": "wr2",
+                "label": "84",
+                "side": "OFFENSE",
+                "x": 17,
+                "y": 0.2
+              },
+              {
+                "id": "wr3",
+                "label": "83",
+                "side": "OFFENSE",
+                "x": -10,
+                "y": -1
+              }
+            ],
+            "caption": "Offense, numbered"
+          },
+          "targets": [
+            "qb"
+          ],
+          "explanation": "The QB stands right behind the center and takes the snap.",
+          "concept": "quarterback"
+        },
+        {
+          "type": "diagram_tap",
+          "id": "k1-positions-08",
+          "prompt": "Tap the center. The center snaps the ball.",
+          "diagram": {
+            "players": [
+              {
+                "id": "qb",
+                "label": "12",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -1.3
+              },
+              {
+                "id": "rb",
+                "label": "22",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "c",
+                "label": "55",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "66",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "67",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "lt",
+                "label": "70",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "71",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "te",
+                "label": "88",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0.2
+              },
+              {
+                "id": "wr1",
+                "label": "81",
+                "side": "OFFENSE",
+                "x": -20,
+                "y": 0.2
+              },
+              {
+                "id": "wr2",
+                "label": "84",
+                "side": "OFFENSE",
+                "x": 17,
+                "y": 0.2
+              },
+              {
+                "id": "wr3",
+                "label": "83",
+                "side": "OFFENSE",
+                "x": -10,
+                "y": -1
+              }
+            ],
+            "caption": "Offense, numbered"
+          },
+          "targets": [
+            "c"
+          ],
+          "explanation": "The center is in the middle of the line, right in front of the QB.",
+          "concept": "center"
+        },
+        {
+          "type": "diagram_tap",
+          "id": "k1-positions-09",
+          "prompt": "Tap the two wide receivers on the outside.",
+          "diagram": {
+            "players": [
+              {
+                "id": "qb",
+                "label": "12",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -1.3
+              },
+              {
+                "id": "rb",
+                "label": "22",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "c",
+                "label": "55",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "66",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "67",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "lt",
+                "label": "70",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "71",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "te",
+                "label": "88",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0.2
+              },
+              {
+                "id": "wr1",
+                "label": "81",
+                "side": "OFFENSE",
+                "x": -20,
+                "y": 0.2
+              },
+              {
+                "id": "wr2",
+                "label": "84",
+                "side": "OFFENSE",
+                "x": 17,
+                "y": 0.2
+              },
+              {
+                "id": "wr3",
+                "label": "83",
+                "side": "OFFENSE",
+                "x": -10,
+                "y": -1
+              }
+            ],
+            "caption": "Offense, numbered"
+          },
+          "targets": [
+            "wr1",
+            "wr2"
+          ],
+          "explanation": "Wide receivers line up wide, near the sideline, so they can run out for passes.",
+          "concept": "receivers"
+        },
+        {
+          "type": "diagram_tap",
+          "id": "k1-positions-10",
+          "prompt": "Tap the running back.",
+          "diagram": {
+            "players": [
+              {
+                "id": "qb",
+                "label": "12",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -1.3
+              },
+              {
+                "id": "rb",
+                "label": "22",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "c",
+                "label": "55",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "66",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "67",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "lt",
+                "label": "70",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "71",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "te",
+                "label": "88",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0.2
+              },
+              {
+                "id": "wr1",
+                "label": "81",
+                "side": "OFFENSE",
+                "x": -20,
+                "y": 0.2
+              },
+              {
+                "id": "wr2",
+                "label": "84",
+                "side": "OFFENSE",
+                "x": 17,
+                "y": 0.2
+              },
+              {
+                "id": "wr3",
+                "label": "83",
+                "side": "OFFENSE",
+                "x": -10,
+                "y": -1
+              }
+            ],
+            "caption": "Offense, numbered"
+          },
+          "targets": [
+            "rb"
+          ],
+          "explanation": "The running back lines up behind the quarterback, ready for a handoff.",
+          "concept": "running-back"
+        }
+      ],
+      "blurb": "Who does what."
+    },
+    {
+      "id": "k1-flag",
+      "title": "Flag or Tackle?",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "k1-flag-01",
+          "title": "Flag football",
+          "body": "Many kids start with flag football. Players wear flags on a belt. To stop a runner, you pull the flag. No tackling!",
+          "concept": "flag-football"
+        },
+        {
+          "type": "learn",
+          "id": "k1-flag-02",
+          "title": "Tackle football",
+          "body": "In tackle football, players wear helmets and pads and can tackle. Most youth leagues use rules like the NFL's, with some changes.",
+          "concept": "tackle"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k1-flag-03",
+          "prompt": "In flag football, how do you stop the ball carrier?",
+          "choices": [
+            "Tackle them",
+            "Pull their flag",
+            "Tap their helmet",
+            "Blow a whistle"
+          ],
+          "answer": 1,
+          "explanation": "Pulling the flag ends the play, just like a tackle would.",
+          "concept": "flag-football"
+        },
+        {
+          "type": "true_false",
+          "id": "k1-flag-04",
+          "statement": "Players tackle each other to the ground in flag football.",
+          "answer": false,
+          "explanation": "Flag football has no tackling.",
+          "concept": "flag-football"
+        },
+        {
+          "type": "true_false",
+          "id": "k1-flag-05",
+          "statement": "The rules can be a little different in each league.",
+          "answer": true,
+          "explanation": "Always ask your coach about your league's rules.",
+          "concept": "flag-football"
+        }
+      ],
+      "blurb": "Two ways to play."
+    },
+    {
+      "id": "k1-refs",
+      "title": "Referees and Flags",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "k1-refs-01",
+          "title": "Penalty",
+          "body": "Referees make sure everyone follows the rules. If a player breaks a rule, the referee throws a yellow flag. That is a penalty.",
+          "concept": "penalty"
+        },
+        {
+          "type": "learn",
+          "id": "k1-refs-02",
+          "title": "Common penalties",
+          "body": "A false start is moving too early before the snap. Offside is jumping across the line too early. The team that broke the rule usually loses yards.",
+          "concept": "false-start"
+        },
+        {
+          "type": "learn",
+          "id": "k1-refs-03",
+          "title": "Touchdown signal",
+          "body": "When a team scores a touchdown, the referee holds both arms straight up in the air.",
+          "concept": "referee"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k1-refs-04",
+          "prompt": "What color flag does a referee throw for a penalty?",
+          "choices": [
+            "Yellow",
+            "Blue",
+            "Green",
+            "Pink"
+          ],
+          "answer": 0,
+          "explanation": "A yellow flag means a penalty.",
+          "concept": "penalty"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k1-refs-05",
+          "prompt": "A player moves too early, before the snap. What penalty is that?",
+          "choices": [
+            "Fumble",
+            "False start",
+            "Field goal",
+            "Touchdown"
+          ],
+          "answer": 1,
+          "explanation": "Moving too early on offense is a false start.",
+          "concept": "false-start"
+        },
+        {
+          "type": "true_false",
+          "id": "k1-refs-06",
+          "statement": "A penalty means someone broke a rule.",
+          "answer": true,
+          "explanation": "The yellow flag tells everyone a rule was broken.",
+          "concept": "penalty"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k1-refs-07",
+          "prompt": "The referee holds both arms straight up. What happened?",
+          "choices": [
+            "Touchdown",
+            "Penalty",
+            "Fumble",
+            "Time out"
+          ],
+          "answer": 0,
+          "explanation": "Both arms up is the touchdown signal.",
+          "concept": "touchdown"
+        }
+      ],
+      "blurb": "Keeping the game fair."
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "levels": [
+    {
+      "id": "kid-1",
+      "number": 1,
+      "track": "kid",
+      "title": "Pee-wee",
+      "tagline": "The field, the points, and the players.",
+      "unitFiles": [
+        "kid1/u1-big-picture.json",
+        "kid1/u2-moving-the-ball.json",
+        "kid1/u3-meet-the-team.json"
+      ],
+      "gate": {
+        "testPassPct": 80,
+        "testQuestions": 12,
+        "game": "speed_round",
+        "gameQuestions": 10,
+        "gamePassPct": 70
+      }
+    },
+    {
+      "id": "adult-1",
+      "number": 1,
+      "track": "adult",
+      "title": "Fan Starter",
+      "tagline": "Everything you need to follow a game.",
+      "unitFiles": [
+        "adult1/u1-the-game.json",
+        "adult1/u2-downs-and-clock.json",
+        "adult1/u3-the-players.json"
+      ],
+      "gate": {
+        "testPassPct": 80,
+        "testQuestions": 12,
+        "game": "speed_round",
+        "gameQuestions": 10,
+        "gamePassPct": 70
+      }
+    }
+  ]
+}

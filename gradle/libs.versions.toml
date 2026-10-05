@@ -1,0 +1,13 @@
+[versions]
+kotlin = "2.2.10"
+kotlinxSerialization = "1.8.0"
+junitBom = "5.11.4"
+
+[libraries]
+kotlinx-serialization-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core", version.ref = "kotlinxSerialization" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
+jupiter-bom = { group = "org.junit", name = "junit-bom", version.ref = "junitBom" }
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

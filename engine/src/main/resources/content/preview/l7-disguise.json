@@ -1,0 +1,768 @@
+{
+  "id": "preview-l7",
+  "title": "Disguise (preview)",
+  "lessons": [
+    {
+      "id": "p7-disguise",
+      "title": "Disguised Coverages",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "p7-disguise-01",
+          "title": "Why disguise",
+          "body": "A quarterback reads the safeties before the snap. Two deep safeties look like Cover 2 or Cover 4. Defenses show that picture, then rotate after the snap so the QB's pre-snap read is wrong.",
+          "concept": "disguise"
+        },
+        {
+          "type": "read_defense",
+          "id": "p7-disguise-02",
+          "prompt": "The defense shows two deep safeties, but the strong safety is a step shallower than the free safety. Which coverage is most likely after the snap?",
+          "preSnap": {
+            "players": [
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -7.5
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0.2
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -20,
+                "y": 0.2
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 20,
+                "y": 0.2
+              },
+              {
+                "id": "h",
+                "label": "H",
+                "side": "OFFENSE",
+                "x": -10,
+                "y": -1
+              },
+              {
+                "id": "dl1",
+                "label": "DL",
+                "side": "DEFENSE",
+                "x": -4.5,
+                "y": 1
+              },
+              {
+                "id": "dl2",
+                "label": "DL",
+                "side": "DEFENSE",
+                "x": -1.5,
+                "y": 1
+              },
+              {
+                "id": "dl3",
+                "label": "DL",
+                "side": "DEFENSE",
+                "x": 1.5,
+                "y": 1
+              },
+              {
+                "id": "dl4",
+                "label": "DL",
+                "side": "DEFENSE",
+                "x": 4.5,
+                "y": 1
+              },
+              {
+                "id": "lb1",
+                "label": "W",
+                "side": "DEFENSE",
+                "x": -5.5,
+                "y": 4.5
+              },
+              {
+                "id": "lb2",
+                "label": "M",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 4.5
+              },
+              {
+                "id": "lb3",
+                "label": "S",
+                "side": "DEFENSE",
+                "x": 5.5,
+                "y": 4.5
+              },
+              {
+                "id": "cb1",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": -20,
+                "y": 6
+              },
+              {
+                "id": "cb2",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": 18,
+                "y": 6
+              },
+              {
+                "id": "fs",
+                "label": "FS",
+                "side": "DEFENSE",
+                "x": -9,
+                "y": 13
+              },
+              {
+                "id": "ss",
+                "label": "SS",
+                "side": "DEFENSE",
+                "x": 8,
+                "y": 10
+              }
+            ],
+            "caption": "Two safeties deep, SS a step shallower"
+          },
+          "choices": [
+            "Cover 2",
+            "Cover 3",
+            "Cover 4",
+            "Cover 0"
+          ],
+          "answer": 1,
+          "reveal": {
+            "players": [
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -7.5
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0.2
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -20,
+                "y": 0.2
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 20,
+                "y": 0.2
+              },
+              {
+                "id": "h",
+                "label": "H",
+                "side": "OFFENSE",
+                "x": -10,
+                "y": -1
+              },
+              {
+                "id": "dl1",
+                "label": "DL",
+                "side": "DEFENSE",
+                "x": -4.5,
+                "y": 1
+              },
+              {
+                "id": "dl2",
+                "label": "DL",
+                "side": "DEFENSE",
+                "x": -1.5,
+                "y": 1
+              },
+              {
+                "id": "dl3",
+                "label": "DL",
+                "side": "DEFENSE",
+                "x": 1.5,
+                "y": 1
+              },
+              {
+                "id": "dl4",
+                "label": "DL",
+                "side": "DEFENSE",
+                "x": 4.5,
+                "y": 1
+              },
+              {
+                "id": "lb1",
+                "label": "W",
+                "side": "DEFENSE",
+                "x": -5.5,
+                "y": 4.5
+              },
+              {
+                "id": "lb2",
+                "label": "M",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 4.5
+              },
+              {
+                "id": "lb3",
+                "label": "S",
+                "side": "DEFENSE",
+                "x": 5.5,
+                "y": 4.5
+              },
+              {
+                "id": "cb1",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": -20,
+                "y": 6
+              },
+              {
+                "id": "cb2",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": 18,
+                "y": 6
+              },
+              {
+                "id": "fs",
+                "label": "FS",
+                "side": "DEFENSE",
+                "x": -9,
+                "y": 13
+              },
+              {
+                "id": "ss",
+                "label": "SS",
+                "side": "DEFENSE",
+                "x": 8,
+                "y": 10
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "fs",
+                "points": [
+                  {
+                    "x": 0,
+                    "y": 14
+                  }
+                ],
+                "kind": "rotate",
+                "label": "slides to middle"
+              },
+              {
+                "playerId": "ss",
+                "points": [
+                  {
+                    "x": 10,
+                    "y": 5
+                  }
+                ],
+                "kind": "rotate",
+                "label": "rolls to flat"
+              },
+              {
+                "playerId": "cb1",
+                "points": [
+                  {
+                    "x": -17,
+                    "y": 13
+                  }
+                ],
+                "kind": "drop",
+                "label": "deep third"
+              },
+              {
+                "playerId": "cb2",
+                "points": [
+                  {
+                    "x": 17,
+                    "y": 13
+                  }
+                ],
+                "kind": "drop",
+                "label": "deep third"
+              }
+            ]
+          },
+          "explanation": "A safety creeping down while the other holds depth is a classic tell of a rotation: the free safety slides to the middle third, the strong safety rolls to the flat, and the corners bail to the deep thirds. That is Cover 3 'Sky'. A tell is a clue, not a guarantee, which is why QBs also use motion and watch the corners.",
+          "disguised": true,
+          "concept": "rotation"
+        },
+        {
+          "type": "read_defense",
+          "id": "p7-disguise-03",
+          "prompt": "One safety is deep in the middle and the other walks near the box (a single-high look). At the snap the safeties split to deep halves. What happened?",
+          "preSnap": {
+            "players": [
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -7.5
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0.2
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -20,
+                "y": 0.2
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 20,
+                "y": 0.2
+              },
+              {
+                "id": "h",
+                "label": "H",
+                "side": "OFFENSE",
+                "x": -10,
+                "y": -1
+              },
+              {
+                "id": "dl1",
+                "label": "DL",
+                "side": "DEFENSE",
+                "x": -4.5,
+                "y": 1
+              },
+              {
+                "id": "dl2",
+                "label": "DL",
+                "side": "DEFENSE",
+                "x": -1.5,
+                "y": 1
+              },
+              {
+                "id": "dl3",
+                "label": "DL",
+                "side": "DEFENSE",
+                "x": 1.5,
+                "y": 1
+              },
+              {
+                "id": "dl4",
+                "label": "DL",
+                "side": "DEFENSE",
+                "x": 4.5,
+                "y": 1
+              },
+              {
+                "id": "lb1",
+                "label": "W",
+                "side": "DEFENSE",
+                "x": -5.5,
+                "y": 4.5
+              },
+              {
+                "id": "lb2",
+                "label": "M",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 4.5
+              },
+              {
+                "id": "lb3",
+                "label": "S",
+                "side": "DEFENSE",
+                "x": 5.5,
+                "y": 4.5
+              },
+              {
+                "id": "cb1",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": -20,
+                "y": 6
+              },
+              {
+                "id": "cb2",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": 18,
+                "y": 6
+              },
+              {
+                "id": "fs",
+                "label": "FS",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 14
+              },
+              {
+                "id": "ss",
+                "label": "SS",
+                "side": "DEFENSE",
+                "x": 5,
+                "y": 7
+              }
+            ],
+            "caption": "One safety in the middle, one near the box"
+          },
+          "choices": [
+            "The defense was in Cover 1 all along",
+            "A rotation from a one-high look to Cover 2",
+            "A blitz",
+            "A change to Cover 0"
+          ],
+          "answer": 1,
+          "reveal": {
+            "players": [
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -7.5
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0.2
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -20,
+                "y": 0.2
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 20,
+                "y": 0.2
+              },
+              {
+                "id": "h",
+                "label": "H",
+                "side": "OFFENSE",
+                "x": -10,
+                "y": -1
+              },
+              {
+                "id": "dl1",
+                "label": "DL",
+                "side": "DEFENSE",
+                "x": -4.5,
+                "y": 1
+              },
+              {
+                "id": "dl2",
+                "label": "DL",
+                "side": "DEFENSE",
+                "x": -1.5,
+                "y": 1
+              },
+              {
+                "id": "dl3",
+                "label": "DL",
+                "side": "DEFENSE",
+                "x": 1.5,
+                "y": 1
+              },
+              {
+                "id": "dl4",
+                "label": "DL",
+                "side": "DEFENSE",
+                "x": 4.5,
+                "y": 1
+              },
+              {
+                "id": "lb1",
+                "label": "W",
+                "side": "DEFENSE",
+                "x": -5.5,
+                "y": 4.5
+              },
+              {
+                "id": "lb2",
+                "label": "M",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 4.5
+              },
+              {
+                "id": "lb3",
+                "label": "S",
+                "side": "DEFENSE",
+                "x": 5.5,
+                "y": 4.5
+              },
+              {
+                "id": "cb1",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": -20,
+                "y": 6
+              },
+              {
+                "id": "cb2",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": 18,
+                "y": 6
+              },
+              {
+                "id": "fs",
+                "label": "FS",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 14
+              },
+              {
+                "id": "ss",
+                "label": "SS",
+                "side": "DEFENSE",
+                "x": 5,
+                "y": 7
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "fs",
+                "points": [
+                  {
+                    "x": -9,
+                    "y": 14
+                  }
+                ],
+                "kind": "rotate",
+                "label": "splits to half"
+              },
+              {
+                "playerId": "ss",
+                "points": [
+                  {
+                    "x": 9,
+                    "y": 12
+                  }
+                ],
+                "kind": "rotate",
+                "label": "drops to half"
+              }
+            ]
+          },
+          "explanation": "A one-high shell is called 'middle of the field closed' (MOFC). Splitting at the snap makes it 'middle open' (MOFO), here Cover 2. The reverse of the usual disguise, it is meant to bait a deep middle throw.",
+          "disguised": true,
+          "concept": "mofc"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "p7-disguise-04",
+          "prompt": "Which pre-snap clue does NOT suggest a defense is about to rotate?",
+          "choices": [
+            "A safety creeping toward the line",
+            "Corners squatting at 7 yards",
+            "Both safeties 14 yards deep and perfectly even, no motion",
+            "A defender who keeps shifting his alignment"
+          ],
+          "answer": 2,
+          "explanation": "Even, still alignments tell the QB little either way. Creeping, shifting and squatting are the common signs of a late change.",
+          "concept": "disguise"
+        }
+      ],
+      "blurb": "Preview: the shell is not the coverage."
+    }
+  ]
+}

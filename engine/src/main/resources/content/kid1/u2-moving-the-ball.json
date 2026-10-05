@@ -1,0 +1,276 @@
+{
+  "id": "kid1-u2",
+  "title": "Moving the Ball",
+  "lessons": [
+    {
+      "id": "k1-downs",
+      "title": "Four Downs",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "k1-downs-01",
+          "title": "Downs",
+          "body": "The offense gets 4 tries, called downs, to move the ball 10 yards forward.",
+          "concept": "down"
+        },
+        {
+          "type": "learn",
+          "id": "k1-downs-02",
+          "title": "First down!",
+          "body": "If the offense moves 10 yards, that is a first down! They get 4 brand new tries.",
+          "concept": "first-down"
+        },
+        {
+          "type": "learn",
+          "id": "k1-downs-03",
+          "title": "Punt",
+          "body": "On 4th down, teams often punt. They kick the ball far away so the other team starts farther from their end zone.",
+          "concept": "punt"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k1-downs-04",
+          "prompt": "How many yards must the offense move to earn a first down?",
+          "choices": [
+            "5",
+            "10",
+            "20",
+            "100"
+          ],
+          "answer": 1,
+          "explanation": "Ten yards earns a new set of downs.",
+          "concept": "first-down"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k1-downs-05",
+          "prompt": "How many tries (downs) does the offense get?",
+          "choices": [
+            "2",
+            "3",
+            "4",
+            "10"
+          ],
+          "answer": 2,
+          "explanation": "Four downs.",
+          "concept": "down"
+        },
+        {
+          "type": "true_false",
+          "id": "k1-downs-06",
+          "statement": "When a team gets a first down, it gets 4 new tries.",
+          "answer": true,
+          "explanation": "Yes! That is why first downs are so important.",
+          "concept": "first-down"
+        },
+        {
+          "type": "order",
+          "id": "k1-downs-07",
+          "prompt": "Put the downs in order.",
+          "items": [
+            "1st down",
+            "2nd down",
+            "3rd down",
+            "4th down"
+          ],
+          "explanation": "Downs go 1st, 2nd, 3rd, 4th. Then the other team gets the ball unless you made a first down.",
+          "concept": "down"
+        },
+        {
+          "type": "situation",
+          "id": "k1-downs-08",
+          "state": {
+            "quarter": 2,
+            "clock": 300,
+            "down": 4,
+            "toGo": 15,
+            "yardLine": 25,
+            "scoreDiff": 0,
+            "timeouts": 3
+          },
+          "prompt": "It is 4th down and 15 yards to go, far from the end zone. What should the coach do?",
+          "options": [
+            {
+              "text": "Punt the ball away",
+              "quality": "best",
+              "why": "Punting sends the ball far away so the other team has a long way to go."
+            },
+            {
+              "text": "Try to get all 15 yards",
+              "quality": "poor",
+              "why": "15 yards is very hard. If you miss, the other team starts close to your end zone."
+            },
+            {
+              "text": "Kick a field goal",
+              "quality": "poor",
+              "why": "The goal posts are way too far away."
+            }
+          ],
+          "explanation": "When it is 4th down and a long way to go, punting is the safe, smart choice.",
+          "concept": "punt"
+        }
+      ],
+      "blurb": "Four tries to go ten yards."
+    },
+    {
+      "id": "k1-moving",
+      "title": "Running and Passing",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "k1-moving-01",
+          "title": "The snap",
+          "body": "The center passes the ball back to the quarterback. This is the snap. The snap starts every play!",
+          "concept": "snap"
+        },
+        {
+          "type": "learn",
+          "id": "k1-moving-02",
+          "title": "Handoff",
+          "body": "In a handoff, the quarterback hands the ball to a running back. The running back runs with it.",
+          "concept": "handoff"
+        },
+        {
+          "type": "learn",
+          "id": "k1-moving-03",
+          "title": "Pass",
+          "body": "In a pass, the quarterback throws the ball to a receiver. If nobody catches it, it is an incomplete pass and the play is over.",
+          "concept": "incomplete"
+        },
+        {
+          "type": "learn",
+          "id": "k1-moving-04",
+          "title": "Tackle",
+          "body": "The defense stops a runner by tackling: bringing them to the ground. In flag football, they pull a flag instead.",
+          "concept": "tackle"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k1-moving-05",
+          "prompt": "Who throws the pass?",
+          "choices": [
+            "The center",
+            "The quarterback",
+            "The kicker",
+            "The referee"
+          ],
+          "answer": 1,
+          "explanation": "The quarterback (QB) throws the ball.",
+          "concept": "quarterback"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k1-moving-06",
+          "prompt": "What is it called when the QB hands the ball to a runner?",
+          "choices": [
+            "A handoff",
+            "A punt",
+            "A snap",
+            "A kickoff"
+          ],
+          "answer": 0,
+          "explanation": "The QB hands off the ball to a running back.",
+          "concept": "handoff"
+        },
+        {
+          "type": "true_false",
+          "id": "k1-moving-07",
+          "statement": "If a pass hits the ground, the play is over.",
+          "answer": true,
+          "explanation": "That is an incomplete pass. The ball goes back and the team tries again.",
+          "concept": "incomplete"
+        },
+        {
+          "type": "match",
+          "id": "k1-moving-08",
+          "prompt": "Match the word to what it means.",
+          "pairs": [
+            {
+              "left": "Snap",
+              "right": "Starts the play"
+            },
+            {
+              "left": "Handoff",
+              "right": "QB gives the ball to a runner"
+            },
+            {
+              "left": "Tackle",
+              "right": "Bringing the runner down"
+            },
+            {
+              "left": "Incomplete",
+              "right": "A pass nobody caught"
+            }
+          ],
+          "explanation": "These four words are used on almost every play.",
+          "concept": "snap"
+        }
+      ],
+      "blurb": "Two ways to move the ball."
+    },
+    {
+      "id": "k1-turnovers",
+      "title": "Turnovers",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "k1-turnovers-01",
+          "title": "Turnover",
+          "body": "A turnover is when the defense takes the ball away from the offense. The ball changes teams right away!",
+          "concept": "turnover"
+        },
+        {
+          "type": "learn",
+          "id": "k1-turnovers-02",
+          "title": "Interception",
+          "body": "An interception is when a defender catches the quarterback's pass. The defense now has the ball!",
+          "concept": "interception"
+        },
+        {
+          "type": "learn",
+          "id": "k1-turnovers-03",
+          "title": "Fumble",
+          "body": "A fumble is when the runner drops the ball. Anyone can pounce on it. Whoever recovers it gets the ball.",
+          "concept": "fumble"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k1-turnovers-04",
+          "prompt": "A defender catches the quarterback's pass. What is that called?",
+          "choices": [
+            "Touchdown",
+            "Interception",
+            "Handoff",
+            "Field goal"
+          ],
+          "answer": 1,
+          "explanation": "The defense intercepted the pass.",
+          "concept": "interception"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k1-turnovers-05",
+          "prompt": "A runner drops the ball and the other team grabs it. What happened?",
+          "choices": [
+            "A safety",
+            "A fumble",
+            "A snap",
+            "A punt"
+          ],
+          "answer": 1,
+          "explanation": "The runner fumbled, and the other team recovered it.",
+          "concept": "fumble"
+        },
+        {
+          "type": "true_false",
+          "id": "k1-turnovers-06",
+          "statement": "After a turnover, the other team gets the ball.",
+          "answer": true,
+          "explanation": "That is what makes turnovers so big.",
+          "concept": "turnover"
+        }
+      ],
+      "blurb": "When the ball switches teams."
+    }
+  ]
+}

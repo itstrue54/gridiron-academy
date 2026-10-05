@@ -1,0 +1,340 @@
+{
+  "id": "kid1-u1",
+  "title": "The Big Picture",
+  "lessons": [
+    {
+      "id": "k1-field",
+      "title": "The Field",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "k1-field-01",
+          "title": "The field",
+          "body": "A football field is 100 yards long. At each end is an end zone. The goal is to get the ball into the other team's end zone.",
+          "concept": "field"
+        },
+        {
+          "type": "learn",
+          "id": "k1-field-02",
+          "title": "The lines",
+          "body": "Lines are painted every 5 yards. Big numbers show every 10 yards. The middle of the field is the 50-yard line.",
+          "concept": "yard-line"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k1-field-03",
+          "prompt": "How many yards long is the field from goal line to goal line?",
+          "choices": [
+            "10",
+            "50",
+            "100",
+            "200"
+          ],
+          "answer": 2,
+          "explanation": "It is 100 yards from one goal line to the other. The end zones are extra space past each goal line.",
+          "concept": "field"
+        },
+        {
+          "type": "true_false",
+          "id": "k1-field-04",
+          "statement": "The end zone is where you score a touchdown.",
+          "answer": true,
+          "explanation": "Yes! Get the ball into the end zone to score.",
+          "concept": "endzone"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k1-field-05",
+          "prompt": "What is the middle of the field called?",
+          "choices": [
+            "The 50-yard line",
+            "The end zone",
+            "The sideline",
+            "The huddle"
+          ],
+          "answer": 0,
+          "explanation": "The 50-yard line is right in the middle. It is 50 yards from each goal line.",
+          "concept": "yard-line"
+        },
+        {
+          "type": "order",
+          "id": "k1-field-06",
+          "prompt": "Walk down the field. Put these in order from one goal line to the other.",
+          "items": [
+            "Goal line",
+            "10-yard line",
+            "50-yard line",
+            "10-yard line (other side)",
+            "Other goal line"
+          ],
+          "explanation": "You start at a goal line, pass the 10, reach the 50 in the middle, then the other 10, then the other goal line.",
+          "concept": "yard-line"
+        },
+        {
+          "type": "diagram_tap",
+          "id": "k1-field-07",
+          "prompt": "The offense runs toward the top of the page. Tap the end zone they are trying to reach.",
+          "diagram": {
+            "players": [],
+            "zones": [
+              {
+                "id": "A",
+                "label": "A",
+                "x": -26.5,
+                "y": 10,
+                "w": 53,
+                "h": 4.5
+              },
+              {
+                "id": "B",
+                "label": "B",
+                "x": -26.5,
+                "y": 0,
+                "w": 53,
+                "h": 9
+              },
+              {
+                "id": "C",
+                "label": "C",
+                "x": -26.5,
+                "y": -6,
+                "w": 53,
+                "h": 5.5
+              }
+            ],
+            "caption": "Going up the page"
+          },
+          "targets": [
+            "A"
+          ],
+          "explanation": "Zone A is the end zone at the far end. That is where the offense wants to carry or catch the ball.",
+          "concept": "endzone"
+        }
+      ],
+      "blurb": "Where the game happens."
+    },
+    {
+      "id": "k1-game",
+      "title": "How the Game Works",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "k1-game-01",
+          "title": "Offense and defense",
+          "body": "Two teams play. The team with the ball is the offense. The team without it is the defense. Each team has 11 players on the field.",
+          "concept": "offense"
+        },
+        {
+          "type": "learn",
+          "id": "k1-game-02",
+          "title": "Switching jobs",
+          "body": "The offense tries to score. The defense tries to stop them. When the ball changes teams, the teams switch jobs!",
+          "concept": "defense"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k1-game-03",
+          "prompt": "Who tries to stop the other team from scoring?",
+          "choices": [
+            "The offense",
+            "The defense",
+            "The referee",
+            "The fans"
+          ],
+          "answer": 1,
+          "explanation": "The defense's job is to stop the offense.",
+          "concept": "defense"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k1-game-04",
+          "prompt": "How many players does one team have on the field?",
+          "choices": [
+            "9",
+            "11",
+            "15",
+            "22"
+          ],
+          "answer": 1,
+          "explanation": "Each team plays with 11. That is 22 players on the field in all.",
+          "concept": "offense"
+        },
+        {
+          "type": "true_false",
+          "id": "k1-game-05",
+          "statement": "The team with the ball is called the defense.",
+          "answer": false,
+          "explanation": "The team with the ball is the offense.",
+          "concept": "offense"
+        },
+        {
+          "type": "learn",
+          "id": "k1-game-06",
+          "title": "Time to play",
+          "body": "A game has 4 quarters. In the NFL, each quarter is 15 minutes. Younger leagues often use shorter quarters.",
+          "concept": "quarter"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k1-game-07",
+          "prompt": "How many quarters are in a football game?",
+          "choices": [
+            "2",
+            "3",
+            "4",
+            "6"
+          ],
+          "answer": 2,
+          "explanation": "Four quarters make a game.",
+          "concept": "quarter"
+        },
+        {
+          "type": "match",
+          "id": "k1-game-08",
+          "prompt": "Match each one to its job.",
+          "pairs": [
+            {
+              "left": "Offense",
+              "right": "Tries to score"
+            },
+            {
+              "left": "Defense",
+              "right": "Tries to stop the score"
+            },
+            {
+              "left": "Referee",
+              "right": "Makes sure everyone follows the rules"
+            }
+          ],
+          "explanation": "The offense scores, the defense stops, and the referees keep the game fair.",
+          "concept": "referee"
+        }
+      ],
+      "blurb": "Two teams, two jobs."
+    },
+    {
+      "id": "k1-scoring",
+      "title": "Scoring Points",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "k1-scoring-01",
+          "title": "Touchdown!",
+          "body": "A touchdown is worth 6 points! You score one by carrying or catching the ball in the end zone.",
+          "concept": "touchdown"
+        },
+        {
+          "type": "learn",
+          "id": "k1-scoring-02",
+          "title": "Extra point",
+          "body": "After a touchdown, a team can kick an extra point for 1 point. Or they can try to run or pass it in again for 2 points.",
+          "concept": "extra-point"
+        },
+        {
+          "type": "learn",
+          "id": "k1-scoring-03",
+          "title": "Field goal",
+          "body": "A field goal is a kick through the tall yellow posts. It is worth 3 points.",
+          "concept": "field-goal"
+        },
+        {
+          "type": "learn",
+          "id": "k1-scoring-04",
+          "title": "Safety",
+          "body": "A safety is worth 2 points. The defense gets it by tackling the offense in its own end zone.",
+          "concept": "safety-score"
+        },
+        {
+          "type": "match",
+          "id": "k1-scoring-05",
+          "prompt": "Match each score to its points.",
+          "pairs": [
+            {
+              "left": "Touchdown",
+              "right": "6 points"
+            },
+            {
+              "left": "Field goal",
+              "right": "3 points"
+            },
+            {
+              "left": "Safety",
+              "right": "2 points"
+            },
+            {
+              "left": "Extra point kick",
+              "right": "1 point"
+            }
+          ],
+          "explanation": "Touchdown 6, field goal 3, safety 2, extra point kick 1.",
+          "concept": "touchdown"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k1-scoring-06",
+          "prompt": "A team scores a touchdown and kicks the extra point. How many points in all?",
+          "choices": [
+            "6",
+            "7",
+            "8",
+            "9"
+          ],
+          "answer": 1,
+          "explanation": "6 for the touchdown plus 1 for the kick makes 7.",
+          "concept": "extra-point"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k1-scoring-07",
+          "prompt": "Which score is worth the most?",
+          "choices": [
+            "Field goal",
+            "Safety",
+            "Touchdown",
+            "Extra point"
+          ],
+          "answer": 2,
+          "explanation": "A touchdown is 6 points. That is more than any of the others by itself.",
+          "concept": "touchdown"
+        },
+        {
+          "type": "true_false",
+          "id": "k1-scoring-08",
+          "statement": "A field goal is worth 3 points.",
+          "answer": true,
+          "explanation": "Yes. Kick it through the posts for 3.",
+          "concept": "field-goal"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k1-scoring-09",
+          "prompt": "A team has 1 touchdown (6 points) and 1 field goal (3 points). What is their score?",
+          "choices": [
+            "6",
+            "8",
+            "9",
+            "10"
+          ],
+          "answer": 2,
+          "explanation": "6 plus 3 is 9.",
+          "concept": "field-goal"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k1-scoring-10",
+          "prompt": "The defense tackles the ball carrier in the offense's own end zone. How many points?",
+          "choices": [
+            "1",
+            "2",
+            "3",
+            "6"
+          ],
+          "answer": 1,
+          "explanation": "That is a safety, and it is worth 2 points.",
+          "concept": "safety-score"
+        }
+      ],
+      "blurb": "Touchdowns, kicks and more."
+    }
+  ]
+}
