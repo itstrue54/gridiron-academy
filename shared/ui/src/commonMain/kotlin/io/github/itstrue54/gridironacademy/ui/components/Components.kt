@@ -42,6 +42,19 @@ import androidx.compose.ui.unit.dp
 import io.github.itstrue54.gridironacademy.ui.theme.DiagramColors
 import io.github.itstrue54.gridironacademy.ui.theme.Gridiron
 
+/** Prime Time calls to action are condensed italic capitals, like a broadcast graphic. */
+@Composable
+private fun ctaText(text: String): String = if (Gridiron.skin.primeTime) text.uppercase() else text
+
+/**
+ * A raised surface. Prime Time cards are glass: slightly see-through so the stadium
+ * glow shows through, with a hairline border doing the work of a shadow (DESIGN 2.2).
+ */
+@Composable
+fun glass(): Color = Gridiron.colors.surfaceRaised.let { if (Gridiron.skin.primeTime) it.copy(alpha = GLASS_ALPHA) else it }
+
+private const val GLASS_ALPHA = 0.82f
+
 /** The one action a screen is for: gold fill, full width (DESIGN 5). At most one per screen. */
 @Composable
 fun PrimaryButton(text: String, onClick: () -> Unit, modifier: Modifier = Modifier, enabled: Boolean = true) {
@@ -55,7 +68,7 @@ fun PrimaryButton(text: String, onClick: () -> Unit, modifier: Modifier = Modifi
         modifier = modifier.fillMaxWidth().heightIn(min = Gridiron.skin.touchTarget),
     ) {
         Box(contentAlignment = Alignment.Center, modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)) {
-            Text(text, style = Gridiron.type.answer, textAlign = TextAlign.Center)
+            Text(ctaText(text), style = Gridiron.type.cta, textAlign = TextAlign.Center)
         }
     }
 }
@@ -73,7 +86,7 @@ fun SecondaryButton(text: String, onClick: () -> Unit, modifier: Modifier = Modi
         modifier = modifier.fillMaxWidth().heightIn(min = Gridiron.skin.touchTarget),
     ) {
         Box(contentAlignment = Alignment.Center, modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)) {
-            Text(text, style = Gridiron.type.answer, textAlign = TextAlign.Center)
+            Text(ctaText(text), style = Gridiron.type.cta, textAlign = TextAlign.Center)
         }
     }
 }
@@ -121,7 +134,7 @@ fun AnswerButton(
         onClick = onClick,
         enabled = state == AnswerState.REST || state == AnswerState.SELECTED,
         shape = skin.buttonShape,
-        color = c.surfaceRaised,
+        color = glass(),
         contentColor = if (state == AnswerState.DISABLED) c.inkDim else c.ink,
         border = BorderStroke(if (state == AnswerState.REST || state == AnswerState.DISABLED) 2.dp else 3.dp, edge),
         modifier = modifier
@@ -222,7 +235,7 @@ fun FeedbackSheet(
     }
     Surface(
         shape = skin.sheetShape,
-        color = c.surfaceRaised,
+        color = c.surfaceRaised, // opaque: the explanation must not show the lesson through it
         contentColor = c.ink,
         border = BorderStroke(2.dp, accent),
         modifier = modifier.fillMaxWidth().heightIn(max = maxHeight),
@@ -255,11 +268,11 @@ fun Card(modifier: Modifier = Modifier, edge: Color? = null, onClick: (() -> Uni
     val c = Gridiron.colors
     val border = BorderStroke(1.dp, c.line)
     if (onClick != null) {
-        Surface(onClick = onClick, shape = Gridiron.skin.cardShape, color = c.surfaceRaised, contentColor = c.ink, border = border, modifier = modifier.fillMaxWidth()) {
+        Surface(onClick = onClick, shape = Gridiron.skin.cardShape, color = glass(), contentColor = c.ink, border = border, modifier = modifier.fillMaxWidth()) {
             CardBody(edge, content)
         }
     } else {
-        Surface(shape = Gridiron.skin.cardShape, color = c.surfaceRaised, contentColor = c.ink, border = border, modifier = modifier.fillMaxWidth()) {
+        Surface(shape = Gridiron.skin.cardShape, color = glass(), contentColor = c.ink, border = border, modifier = modifier.fillMaxWidth()) {
             CardBody(edge, content)
         }
     }

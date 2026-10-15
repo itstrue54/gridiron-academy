@@ -11,6 +11,12 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.foundation.background
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 
 val LocalGridironColors = staticCompositionLocalOf { Daylight }
 val LocalGridironType = staticCompositionLocalOf { adultType(GridironFontFamilies.System) }
@@ -30,7 +36,12 @@ fun GridironTheme(
     reducedMotion: Boolean = false,
     content: @Composable () -> Unit,
 ) {
-    val colors = if (dark) Floodlight else Daylight
+    // Prime Time is a night game whatever the phone's setting (DESIGN 2.2).
+    val colors = when {
+        skin.primeTime -> PrimeTime
+        dark -> Floodlight
+        else -> Daylight
+    }
     val fonts = rememberGridironFonts()
     val type = remember(skin.voice, fonts) { if (skin.voice == Voice.KID) kidType(fonts) else adultType(fonts) }
     CompositionLocalProvider(
@@ -44,6 +55,35 @@ fun GridironTheme(
             typography = type.toMaterial(),
             shapes = Shapes(small = skin.chipShape, medium = skin.buttonShape, large = skin.cardShape),
             content = content,
+        )
+    }
+}
+
+/**
+ * A screen's ground: flat surface, or for Prime Time the surface under two floodlight
+ * glows and a faint rise of turf green from the bottom (DESIGN 2.2).
+ */
+@Composable
+fun Modifier.screenBackground(): Modifier {
+    val c = Gridiron.colors
+    if (!Gridiron.skin.primeTime) return background(c.surface)
+    return drawBehind {
+        drawRect(c.surface)
+        for (x in listOf(0.12f, 0.88f)) {
+            drawRect(
+                Brush.radialGradient(
+                    listOf(StadiumLights.glow.copy(alpha = StadiumLights.GLOW_ALPHA), Color.Transparent),
+                    center = Offset(size.width * x, 0f),
+                    radius = size.width * 0.75f,
+                ),
+            )
+        }
+        drawRect(
+            Brush.verticalGradient(
+                listOf(Color.Transparent, StadiumLights.turf.copy(alpha = StadiumLights.TURF_ALPHA)),
+                startY = size.height * 0.7f,
+                endY = size.height,
+            ),
         )
     }
 }

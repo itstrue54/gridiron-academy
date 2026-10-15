@@ -44,6 +44,7 @@ import io.github.itstrue54.gridironacademy.ui.resources.level_n
 import io.github.itstrue54.gridironacademy.ui.resources.level_progress
 import io.github.itstrue54.gridironacademy.ui.resources.stars_label
 import io.github.itstrue54.gridironacademy.ui.theme.Gridiron
+import io.github.itstrue54.gridironacademy.ui.theme.screenBackground
 import org.jetbrains.compose.resources.stringResource
 
 /**
@@ -56,7 +57,7 @@ fun LevelScreen(state: LearnerAppState, level: Level) {
     val skin = Gridiron.skin
     val units = state.content.unitsOf(level)
     val lessons = units.flatMap { it.lessons }
-    Column(Modifier.fillMaxSize().background(c.surface).safeDrawingPadding()) {
+    Column(Modifier.fillMaxSize().screenBackground().safeDrawingPadding()) {
         Row(Modifier.padding(horizontal = 4.dp), verticalAlignment = Alignment.CenterVertically) {
             IconAction(Glyph.BACK, stringResource(Res.string.back), onClick = { state.back() })
             Text(stringResource(Res.string.level_n, level.number), style = Gridiron.type.label, color = c.inkDim)

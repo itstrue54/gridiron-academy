@@ -19,6 +19,8 @@ data class Skin(
     val voice: Voice,
     /** Level 0: pre-readers, picture answers, recorded voice, no timers (DESIGN §2.1). */
     val littleHuddle: Boolean,
+    /** Prime Time (DESIGN 2.2): the always-dark night-game look for teens and adults. */
+    val primeTime: Boolean = false,
     val cardShape: RoundedCornerShape,
     val buttonShape: RoundedCornerShape,
     val chipShape: RoundedCornerShape,
@@ -75,6 +77,7 @@ data class Skin(
             cardPadding = 16.dp,
             motionScale = 0.7f,
             playerMark = 22.dp,
+            primeTime = true,
             helmets = false,
             losTag = true,
             readAloudByDefault = false,

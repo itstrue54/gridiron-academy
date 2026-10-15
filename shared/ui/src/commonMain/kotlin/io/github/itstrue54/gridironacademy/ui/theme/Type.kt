@@ -5,6 +5,7 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontVariation
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
@@ -12,6 +13,7 @@ import io.github.itstrue54.gridironacademy.ui.resources.Res
 import io.github.itstrue54.gridironacademy.ui.resources.atkinson_hyperlegible_bold
 import io.github.itstrue54.gridironacademy.ui.resources.atkinson_hyperlegible_regular
 import io.github.itstrue54.gridironacademy.ui.resources.barlow_semi_condensed_bold
+import io.github.itstrue54.gridironacademy.ui.resources.barlow_semi_condensed_bold_italic
 import io.github.itstrue54.gridironacademy.ui.resources.fredoka_variable
 import org.jetbrains.compose.resources.Font
 
@@ -39,11 +41,12 @@ fun rememberGridironFonts(): GridironFontFamilies {
         variationSettings = FontVariation.Settings(FontVariation.weight(FontWeight.SemiBold.weight)),
     )
     val barlow = Font(Res.font.barlow_semi_condensed_bold, FontWeight.Bold)
-    return remember(regular, bold, fredoka, barlow) {
+    val barlowItalic = Font(Res.font.barlow_semi_condensed_bold_italic, FontWeight.Bold, FontStyle.Italic)
+    return remember(regular, bold, fredoka, barlow, barlowItalic) {
         GridironFontFamilies(
             body = FontFamily(regular, bold),
             kidDisplay = FontFamily(fredoka),
-            adultDisplay = FontFamily(barlow),
+            adultDisplay = FontFamily(barlow, barlowItalic),
         )
     }
 }
@@ -59,18 +62,29 @@ data class GridironType(
     val label: TextStyle,
     /** Tabular figures so a scoreboard or down-and-distance never jitters. */
     val scoreboard: TextStyle,
+    /** The primary button's label. Prime Time sets it in condensed italic capitals. */
+    val cta: TextStyle,
+    /** Small section labels such as "SEASON PROGRESS". */
+    val eyebrow: TextStyle,
 )
 
 private const val TABULAR = "tnum"
 
-private fun style(family: FontFamily, size: Int, line: Int, weight: FontWeight = FontWeight.Normal, features: String? = null) =
-    TextStyle(
-        fontFamily = family,
-        fontWeight = weight,
-        fontSize = size.sp,
-        lineHeight = line.sp,
-        fontFeatureSettings = features,
-    )
+private fun style(
+    family: FontFamily,
+    size: Int,
+    line: Int,
+    weight: FontWeight = FontWeight.Normal,
+    features: String? = null,
+    italic: Boolean = false,
+) = TextStyle(
+    fontFamily = family,
+    fontWeight = weight,
+    fontStyle = if (italic) FontStyle.Italic else FontStyle.Normal,
+    fontSize = size.sp,
+    lineHeight = line.sp,
+    fontFeatureSettings = features,
+)
 
 fun kidType(f: GridironFontFamilies) = GridironType(
     displayLarge = style(f.kidDisplay, 40, 48, FontWeight.SemiBold),
@@ -80,14 +94,18 @@ fun kidType(f: GridironFontFamilies) = GridironType(
     answer = style(f.body, 20, 26, FontWeight.Bold),
     label = style(f.body, 16, 20),
     scoreboard = style(f.body, 28, 28, FontWeight.Bold, TABULAR),
+    cta = style(f.body, 20, 26, FontWeight.Bold),
+    eyebrow = style(f.body, 14, 18, FontWeight.Bold),
 )
 
 fun adultType(f: GridironFontFamilies) = GridironType(
-    displayLarge = style(f.adultDisplay, 36, 40, FontWeight.Bold),
-    headline = style(f.adultDisplay, 24, 30, FontWeight.Bold),
+    displayLarge = style(f.adultDisplay, 38, 42, FontWeight.Bold, italic = true),
+    headline = style(f.adultDisplay, 28, 32, FontWeight.Bold, italic = true),
     title = style(f.adultDisplay, 20, 26, FontWeight.Bold),
     body = style(f.body, 16, 24),
     answer = style(f.body, 17, 24, FontWeight.Bold),
     label = style(f.body, 14, 18),
     scoreboard = style(f.body, 24, 24, FontWeight.Bold, TABULAR),
+    cta = style(f.adultDisplay, 22, 26, FontWeight.Bold, italic = true),
+    eyebrow = style(f.adultDisplay, 16, 20, FontWeight.Bold, italic = true),
 )

@@ -10,4 +10,4 @@ screen must list them (DESIGN 9.9).
 |---|---|---|
 | `atkinson_hyperlegible_regular.ttf`, `atkinson_hyperlegible_bold.ttf` | Atkinson Hyperlegible 1.006 | Body text and all data |
 | `fredoka_variable.ttf` | Fredoka (variable wdth/wght) | Kid display, used at weight 600 |
-| `barlow_semi_condensed_bold.ttf` | Barlow Semi Condensed | Adult display, weight 700 |
+| `barlow_semi_condensed_bold.ttf`, `barlow_semi_condensed_bold_italic.ttf` | Barlow Semi Condensed | Adult (Prime Time) display, weight 700; italic for headlines and calls to action |

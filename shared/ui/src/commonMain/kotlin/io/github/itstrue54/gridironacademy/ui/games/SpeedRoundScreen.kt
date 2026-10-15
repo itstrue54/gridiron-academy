@@ -52,6 +52,7 @@ import io.github.itstrue54.gridironacademy.ui.resources.speed_round
 import io.github.itstrue54.gridironacademy.ui.resources.speed_seconds_left
 import io.github.itstrue54.gridironacademy.ui.resources.speed_streak
 import io.github.itstrue54.gridironacademy.ui.theme.Gridiron
+import io.github.itstrue54.gridironacademy.ui.theme.screenBackground
 import org.jetbrains.compose.resources.stringResource
 
 private val LETTERS = listOf("A", "B", "C", "D")
@@ -82,7 +83,7 @@ fun SpeedRoundScreen(state: LearnerAppState, levelId: String, round: SpeedRoundC
     }
     LaunchedEffect(round.over) { if (round.over) state.finishSpeedRound(levelId, round) }
 
-    Column(Modifier.fillMaxSize().background(c.surface).safeDrawingPadding()) {
+    Column(Modifier.fillMaxSize().screenBackground().safeDrawingPadding()) {
         Row(Modifier.padding(start = 4.dp, end = skin.gutter), verticalAlignment = Alignment.CenterVertically) {
             IconAction(Glyph.CLOSE, stringResource(Res.string.close_game), onClick = { state.back() })
             Text(stringResource(Res.string.speed_round), style = Gridiron.type.title, color = c.ink, modifier = Modifier.weight(1f))

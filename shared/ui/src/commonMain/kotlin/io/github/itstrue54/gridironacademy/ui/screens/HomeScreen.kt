@@ -4,6 +4,14 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import io.github.itstrue54.gridironacademy.ui.resources.xp_total
+import io.github.itstrue54.gridironacademy.ui.resources.season_progress
+import io.github.itstrue54.gridironacademy.ui.components.glass
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.Color
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -54,6 +62,7 @@ import io.github.itstrue54.gridironacademy.ui.resources.streak_start_adult
 import io.github.itstrue54.gridironacademy.ui.resources.streak_start_kid
 import io.github.itstrue54.gridironacademy.ui.theme.DiagramColors
 import io.github.itstrue54.gridironacademy.ui.theme.Gridiron
+import io.github.itstrue54.gridironacademy.ui.theme.screenBackground
 import io.github.itstrue54.gridironacademy.ui.theme.Voice
 import org.jetbrains.compose.resources.stringResource
 
@@ -67,16 +76,24 @@ fun HomeScreen(state: LearnerAppState) {
     val skin = Gridiron.skin
     val kid = skin.voice == Voice.KID
     val next = state.nextUp()
-    Column(Modifier.fillMaxSize().background(c.surface).safeDrawingPadding().padding(skin.gutter)) {
+    Column(Modifier.fillMaxSize().screenBackground().safeDrawingPadding().padding(skin.gutter)) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(state.profile?.nickname.orEmpty(), style = Gridiron.type.title, color = c.ink, modifier = Modifier.weight(1f))
             StreakChip(state.save.progress.streakDays, kid)
         }
         Spacer(Modifier.size(12.dp))
-        Text(stringResource(Res.string.home_title), style = Gridiron.type.headline, color = c.ink, modifier = Modifier.semantics { heading() })
-        Spacer(Modifier.size(12.dp))
-        Column(Modifier.weight(1f).verticalScroll(rememberScrollState())) {
-            DriveMap(state)
+        if (skin.primeTime) {
+            SeasonHeader(state.save.progress.xp)
+            Spacer(Modifier.size(14.dp))
+            Column(Modifier.weight(1f).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                state.levels.forEach { SeasonCard(state, it) }
+            }
+        } else {
+            Text(stringResource(Res.string.home_title), style = Gridiron.type.headline, color = c.ink, modifier = Modifier.semantics { heading() })
+            Spacer(Modifier.size(12.dp))
+            Column(Modifier.weight(1f).verticalScroll(rememberScrollState())) {
+                DriveMap(state)
+            }
         }
         Spacer(Modifier.size(16.dp))
         if (next != null) {
@@ -214,5 +231,114 @@ private fun LevelNode(number: Int, state: NodeState, progress: Float) {
             NodeState.LOCKED -> GlyphIcon(Glyph.LOCK, c.inkDim, size = 24.dp)
             NodeState.OPEN -> Text(number.toString(), style = Gridiron.type.headline, color = c.ink)
         }
+    }
+}
+
+// ---- Prime Time (DESIGN 2.2): the season ladder ----
+
+/** "SEASON PROGRESS" between two rules, and the learner's XP in cyan. */
+@Composable
+private fun SeasonHeader(xp: Int) {
+    val c = Gridiron.colors
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Box(Modifier.weight(1f).height(1.dp).background(c.gold.copy(alpha = 0.5f)))
+        Text(
+            stringResource(Res.string.season_progress).uppercase(),
+            style = Gridiron.type.eyebrow,
+            color = c.gold,
+            modifier = Modifier.padding(horizontal = 12.dp).semantics { heading() },
+        )
+        Box(Modifier.weight(1f).height(1.dp).background(c.gold.copy(alpha = 0.5f)))
+    }
+    Spacer(Modifier.size(8.dp))
+    Text(stringResource(Res.string.xp_total, xp), style = Gridiron.type.scoreboard, color = c.xp, modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
+}
+
+/**
+ * A level as a season card: a shield rank badge, the level name, and an XP-style bar of
+ * drills passed. Passed is volt with a check; the open level is magenta; locked is grey.
+ */
+@Composable
+private fun SeasonCard(state: LearnerAppState, level: Level) {
+    val c = Gridiron.colors
+    val unlocked = state.levelUnlocked(level)
+    val passed = level.id in state.save.progress.levelsPassed
+    val done = state.lessonsPassed(level)
+    val total = state.lessonCount(level)
+    val nodeState = when {
+        passed -> NodeState.PASSED
+        unlocked -> NodeState.OPEN
+        else -> NodeState.LOCKED
+    }
+    val stateWord = stringResource(
+        when (nodeState) {
+            NodeState.LOCKED -> Res.string.level_state_locked
+            NodeState.OPEN -> Res.string.level_state_open
+            NodeState.PASSED -> Res.string.level_state_passed
+        },
+    )
+    val levelLabel = stringResource(Res.string.level_n, level.number)
+    val progressLabel = stringResource(Res.string.level_progress, done, total)
+    val accent = when (nodeState) { NodeState.PASSED -> c.gold; NodeState.OPEN -> c.rank; NodeState.LOCKED -> c.line }
+    Surface(
+        onClick = { state.openLevel(level) },
+        enabled = unlocked,
+        shape = Gridiron.skin.cardShape,
+        color = glass(),
+        contentColor = c.ink,
+        border = BorderStroke(if (nodeState == NodeState.OPEN) 1.5.dp else 1.dp, if (nodeState == NodeState.OPEN) c.rank else c.line),
+        modifier = Modifier.fillMaxWidth().clearAndSetSemantics {
+            contentDescription = "$levelLabel, ${level.title}. $stateWord. $progressLabel"
+        },
+    ) {
+        Row(Modifier.padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
+            ShieldBadge(level.number, nodeState, accent)
+            Spacer(Modifier.width(14.dp))
+            Column(Modifier.weight(1f)) {
+                Text(levelLabel.uppercase(), style = Gridiron.type.eyebrow, color = c.inkDim)
+                Text(level.title.uppercase(), style = Gridiron.type.headline, color = if (unlocked) c.ink else c.inkDim)
+                Spacer(Modifier.size(8.dp))
+                XpBar(if (total == 0) 0f else done.toFloat() / total, if (passed) c.gold else c.xp)
+                Spacer(Modifier.size(4.dp))
+                Text(progressLabel, style = Gridiron.type.label, color = c.inkDim)
+            }
+        }
+    }
+}
+
+/** Season Mode's rank badge: a shield with the level number. */
+@Composable
+private fun ShieldBadge(number: Int, state: NodeState, accent: Color) {
+    val c = Gridiron.colors
+    Box(Modifier.size(width = 56.dp, height = 64.dp), contentAlignment = Alignment.Center) {
+        Canvas(Modifier.matchParentSize()) {
+            val w = size.width
+            val h = size.height
+            val shield = Path().apply {
+                moveTo(w * 0.5f, 0f)
+                lineTo(w, h * 0.14f)
+                lineTo(w, h * 0.52f)
+                cubicTo(w, h * 0.80f, w * 0.72f, h * 0.92f, w * 0.5f, h)
+                cubicTo(w * 0.28f, h * 0.92f, 0f, h * 0.80f, 0f, h * 0.52f)
+                lineTo(0f, h * 0.14f)
+                close()
+            }
+            drawPath(shield, accent.copy(alpha = if (state == NodeState.LOCKED) 0.35f else 0.22f))
+            drawPath(shield, accent, style = Stroke(2.5.dp.toPx()))
+        }
+        when (state) {
+            NodeState.PASSED -> GlyphIcon(Glyph.CHECK, c.gold, size = 26.dp)
+            NodeState.LOCKED -> GlyphIcon(Glyph.LOCK, c.inkDim, size = 22.dp)
+            NodeState.OPEN -> Text("$number", style = Gridiron.type.headline, color = c.ink)
+        }
+    }
+}
+
+/** A rounded progress bar on a dim track (DESIGN 2.2). */
+@Composable
+private fun XpBar(fraction: Float, color: Color) {
+    val c = Gridiron.colors
+    Box(Modifier.fillMaxWidth().height(6.dp).clip(RoundedCornerShape(3.dp)).background(c.line)) {
+        Box(Modifier.fillMaxWidth(fraction.coerceIn(0f, 1f)).height(6.dp).clip(RoundedCornerShape(3.dp)).background(color))
     }
 }

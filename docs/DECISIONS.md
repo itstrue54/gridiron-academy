@@ -42,3 +42,21 @@ lens would quietly misteach them. Zoom is pinch plus +/− buttons (DESIGN 7.10)
 **Consequences.** Crowded diagrams look busy until zoomed; the buttons appear only
 then. Grading of tap, `align` and `draw_route` steps uses the zoomed transform, so
 answers are the same in yards at any zoom.
+
+## ADR-008: Prime Time look for teens and adults (2026-10-15)
+
+**Context.** The Adult skin ("Film Room") was a quieter version of the kid look. The
+product owner asked for a redesign that makes the app enticing to teenagers and adults.
+
+**Options.** Three directions were mocked up with Nano Banana (`docs/design/concepts/`):
+A Prime Time (night-game broadcast), B Chalk Talk (coach's chalkboard), C Season Mode
+(sports video game menu).
+
+**Decision.** A mix of A and C, chosen by the product owner: Prime Time's always-dark
+broadcast look with Season Mode's shield rank badges and XP bars (DESIGN 2.2). The
+kid look is unchanged.
+
+**Consequences.** Adults lose the light theme: Prime Time is a night game by design. A
+"Daylight for adults" setting can return with profile settings if people ask. The
+field diagrams keep their turf, so content and the renderer are untouched; contrast is
+re-measured and tested for the new palette.

@@ -72,6 +72,7 @@ import io.github.itstrue54.gridironacademy.ui.resources.right_kid_2
 import io.github.itstrue54.gridironacademy.ui.resources.right_kid_3
 import io.github.itstrue54.gridironacademy.ui.resources.step_of
 import io.github.itstrue54.gridironacademy.ui.theme.Gridiron
+import io.github.itstrue54.gridironacademy.ui.theme.screenBackground
 import io.github.itstrue54.gridironacademy.ui.theme.Voice
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
@@ -140,7 +141,7 @@ fun StepPlayer(
     val stepKey = "${step.id}#${controller.done}"
     val pending = controller.draft
 
-    BoxWithConstraints(Modifier.fillMaxSize().background(c.surface).safeDrawingPadding()) {
+    BoxWithConstraints(Modifier.fillMaxSize().screenBackground().safeDrawingPadding()) {
         val sheetMax = maxHeight * SHEET_MAX_FRACTION
         Column(Modifier.fillMaxSize()) {
             Row(Modifier.padding(start = 4.dp, end = skin.gutter), verticalAlignment = Alignment.CenterVertically) {

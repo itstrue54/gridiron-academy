@@ -26,6 +26,8 @@
 
     <!-- Home (DESIGN 9.1) -->
     <string name="home_title">Your drive</string>
+    <string name="season_progress">Season progress</string>
+    <string name="xp_total">%1$d XP</string>
     <string name="level_n">Level %1$d</string>
     <string name="streak_days">%1$d day streak</string>
     <string name="streak_start_kid">Start a streak today!</string>

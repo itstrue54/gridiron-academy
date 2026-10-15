@@ -57,6 +57,7 @@ import io.github.itstrue54.gridironacademy.ui.resources.try_again
 import io.github.itstrue54.gridironacademy.ui.resources.your_score
 import io.github.itstrue54.gridironacademy.engine.LessonSession
 import io.github.itstrue54.gridironacademy.ui.theme.Gridiron
+import io.github.itstrue54.gridironacademy.ui.theme.screenBackground
 import io.github.itstrue54.gridironacademy.ui.theme.Voice
 import org.jetbrains.compose.resources.stringResource
 
@@ -85,14 +86,14 @@ fun GateDoneScreen(state: LearnerAppState, done: Screen.GateDone) {
         else -> stringResource(if (kid) Res.string.game_not_yet_kid else Res.string.game_not_yet_adult, done.passPct)
     }
     val stars = LessonSession.stars(done.scorePct)
-    Column(Modifier.fillMaxSize().background(c.surface).safeDrawingPadding().padding(Gridiron.skin.gutter)) {
+    Column(Modifier.fillMaxSize().screenBackground().safeDrawingPadding().padding(Gridiron.skin.gutter)) {
         Column(
             Modifier.weight(1f).verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(14.dp),
         ) {
             Spacer(Modifier.size(24.dp))
-            Text(headline, style = Gridiron.type.displayLarge, color = c.ink, textAlign = TextAlign.Center, modifier = Modifier.semantics { heading() })
+            Text(headline, style = Gridiron.type.displayLarge, color = if (Gridiron.skin.primeTime) c.gold else c.ink, textAlign = TextAlign.Center, modifier = Modifier.semantics { heading() })
             StarRow(stars, stringResource(Res.string.stars_label, stars), size = 44.dp)
             Text(stringResource(Res.string.your_score, done.scorePct), style = Gridiron.type.scoreboard, color = c.ink)
             if (done.points > 0 || done.bestStreak > 0) {

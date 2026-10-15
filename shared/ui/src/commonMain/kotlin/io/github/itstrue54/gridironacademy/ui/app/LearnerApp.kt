@@ -51,6 +51,7 @@ import io.github.itstrue54.gridironacademy.ui.screens.LevelScreen
 import io.github.itstrue54.gridironacademy.ui.screens.OnboardingScreen
 import io.github.itstrue54.gridironacademy.ui.screens.WelcomeScreen
 import io.github.itstrue54.gridironacademy.ui.theme.Gridiron
+import io.github.itstrue54.gridironacademy.ui.theme.screenBackground
 import io.github.itstrue54.gridironacademy.ui.theme.GridironTheme
 import io.github.itstrue54.gridironacademy.ui.theme.Skin
 import io.github.itstrue54.gridironacademy.ui.theme.Voice
@@ -67,7 +68,7 @@ fun LearnerApp(state: LearnerAppState, dark: Boolean, reducedMotion: Boolean = f
     GridironTheme(skin = skin, dark = dark, reducedMotion = reducedMotion) {
         // One readable column, centred: a landscape phone or a tablet gets margins of
         // surface colour instead of screens stretched edge to edge.
-        Box(Modifier.fillMaxSize().background(Gridiron.colors.surface), contentAlignment = Alignment.TopCenter) {
+        Box(Modifier.fillMaxSize().screenBackground(), contentAlignment = Alignment.TopCenter) {
         AnimatedContent(
             targetState = state.screen,
             modifier = Modifier.widthIn(max = MAX_CONTENT_WIDTH).fillMaxSize(),
@@ -105,7 +106,7 @@ fun LessonDoneScreen(state: LearnerAppState, done: Screen.LessonDone) {
     val c = Gridiron.colors
     val kid = Gridiron.skin.voice == Voice.KID
     Column(
-        Modifier.fillMaxSize().background(c.surface).safeDrawingPadding().padding(Gridiron.skin.gutter),
+        Modifier.fillMaxSize().screenBackground().safeDrawingPadding().padding(Gridiron.skin.gutter),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
     ) {
@@ -117,12 +118,12 @@ fun LessonDoneScreen(state: LearnerAppState, done: Screen.LessonDone) {
                 },
             ),
             style = Gridiron.type.displayLarge,
-            color = c.ink,
+            color = if (Gridiron.skin.primeTime) c.gold else c.ink,
             modifier = Modifier.semantics { heading() },
         )
         StarRow(done.stars, stringResource(Res.string.stars_label, done.stars), size = 44.dp)
         Text(stringResource(Res.string.done_score, done.scorePct), style = Gridiron.type.title, color = c.ink)
-        Text(stringResource(Res.string.done_xp, done.xpGained), style = Gridiron.type.label, color = c.inkDim)
+        Text(stringResource(Res.string.done_xp, done.xpGained), style = Gridiron.type.answer, color = c.xp)
         Text(
             if (done.passed) stringResource(if (kid) Res.string.done_passed_kid else Res.string.done_passed_adult)
             else stringResource(if (kid) Res.string.done_try_again_kid else Res.string.done_try_again_adult, LessonSession.LESSON_PASS_PCT),

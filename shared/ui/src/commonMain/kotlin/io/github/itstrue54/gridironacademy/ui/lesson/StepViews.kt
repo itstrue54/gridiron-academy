@@ -48,6 +48,7 @@ import io.github.itstrue54.gridironacademy.ui.components.AnswerState
 import io.github.itstrue54.gridironacademy.ui.components.Glyph
 import io.github.itstrue54.gridironacademy.ui.components.GlyphIcon
 import io.github.itstrue54.gridironacademy.ui.components.IconAction
+import io.github.itstrue54.gridironacademy.ui.components.glass
 import io.github.itstrue54.gridironacademy.ui.field.FieldDiagram
 import io.github.itstrue54.gridironacademy.ui.field.FieldGeometry
 import io.github.itstrue54.gridironacademy.ui.field.rememberFieldZoomState
@@ -95,7 +96,20 @@ fun Diagram.spoken(): String = listOf(caption, DiagramDescriber.describe(this)).
 
 @Composable
 fun Prompt(text: String) {
-    Text(text, style = Gridiron.type.body, color = Gridiron.colors.ink, modifier = Modifier.semantics { heading() })
+    if (!Gridiron.skin.primeTime) {
+        Text(text, style = Gridiron.type.body, color = Gridiron.colors.ink, modifier = Modifier.semantics { heading() })
+        return
+    }
+    // Prime Time sets the question apart on its own glass card, in the display face.
+    Surface(
+        shape = Gridiron.skin.cardShape,
+        color = glass(),
+        contentColor = Gridiron.colors.ink,
+        border = BorderStroke(1.dp, Gridiron.colors.line),
+        modifier = Modifier.fillMaxWidth(),
+    ) {
+        Text(text, style = Gridiron.type.title, modifier = Modifier.padding(16.dp).semantics { heading() })
+    }
 }
 
 @Composable

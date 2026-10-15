@@ -32,6 +32,10 @@ data class GridironColors(
     val retry: Color,
     /** Links and glossary terms. */
     val link: Color,
+    /** XP numbers and XP bars (from the Season Mode concept). */
+    val xp: Color,
+    /** Rank badges: the level you're on now. */
+    val rank: Color,
     val isDark: Boolean,
 )
 
@@ -49,6 +53,8 @@ val Daylight = GridironColors(
     correct = Color(0xFF176B3A),
     retry = Color(0xFF8A5A00),
     link = Color(0xFF14532D),
+    xp = Color(0xFF075985),
+    rank = Color(0xFFA3195B),
     isDark = false,
 )
 
@@ -66,8 +72,43 @@ val Floodlight = GridironColors(
     correct = Color(0xFF5BDB92),
     retry = Color(0xFFF5C451),
     link = Color(0xFF8FE3B0),
+    xp = Color(0xFF3FD4FF),
+    rank = Color(0xFFFF5CB8),
     isDark = true,
 )
+
+/**
+ * Prime Time: the teen/adult look (DESIGN 2.2). A night game under the lights: near-black
+ * navy, glassy cards, volt green for the one action, cyan XP and magenta rank. Always
+ * dark. The token named [GridironColors.gold] is "the one action", so here it is volt.
+ */
+val PrimeTime = GridironColors(
+    surface = Color(0xFF0A1020),
+    surfaceRaised = Color(0xFF151E33),
+    line = Color(0xFF2B3757),
+    ink = Color(0xFFF2F5FA),
+    inkDim = Color(0xFFA3AFC4),
+    gold = Color(0xFFCCF53A),
+    onGold = Color(0xFF0A1020),
+    offense = Color(0xFF79AEFF),
+    defense = Color(0xFFFF9A62),
+    correct = Color(0xFF3DDC97),
+    retry = Color(0xFFFFC857),
+    link = Color(0xFF7FE3FF),
+    xp = Color(0xFF3FD4FF),
+    rank = Color(0xFFFF5CB8),
+    isDark = true,
+)
+
+/** The stadium lights behind every Prime Time screen. */
+object StadiumLights {
+    val glow = Color(0xFF9DB8FF)
+    /** How strong the two top-corner floodlights are at their centre. */
+    const val GLOW_ALPHA = 0.20f
+    /** A faint turf-green rise from the bottom edge. */
+    val turf = Color(0xFF1F5A3A)
+    const val TURF_ALPHA = 0.28f
+}
 
 /**
  * The field diagram palette (DESIGN §3.1), identical in both themes: the field is dark

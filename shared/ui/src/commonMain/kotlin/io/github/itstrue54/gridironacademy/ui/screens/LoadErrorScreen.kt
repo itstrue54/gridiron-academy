@@ -19,6 +19,7 @@ import io.github.itstrue54.gridironacademy.ui.resources.load_error_body
 import io.github.itstrue54.gridironacademy.ui.resources.load_error_title
 import io.github.itstrue54.gridironacademy.ui.resources.try_again
 import io.github.itstrue54.gridironacademy.ui.theme.Gridiron
+import io.github.itstrue54.gridironacademy.ui.theme.screenBackground
 import io.github.itstrue54.gridironacademy.ui.theme.GridironTheme
 import io.github.itstrue54.gridironacademy.ui.theme.Skin
 import org.jetbrains.compose.resources.stringResource
@@ -32,7 +33,7 @@ fun LoadErrorScreen(dark: Boolean, onRetry: () -> Unit) {
     GridironTheme(skin = Skin.Adult, dark = dark) {
         val c = Gridiron.colors
         Column(
-            Modifier.fillMaxSize().background(c.surface).safeDrawingPadding().padding(Gridiron.skin.gutter),
+            Modifier.fillMaxSize().screenBackground().safeDrawingPadding().padding(Gridiron.skin.gutter),
             verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
         ) {
             Text(stringResource(Res.string.load_error_title), style = Gridiron.type.headline, color = c.ink, modifier = Modifier.semantics { heading() })

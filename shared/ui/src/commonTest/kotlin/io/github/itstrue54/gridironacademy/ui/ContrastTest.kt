@@ -17,11 +17,12 @@ class ContrastTest {
     private fun textPairs(c: GridironColors) = mapOf(
         "ink" to c.ink, "inkDim" to c.inkDim, "offense" to c.offense, "defense" to c.defense,
         "correct" to c.correct, "retry" to c.retry, "link" to c.link,
+        "xp" to c.xp, "rank" to c.rank,
     )
 
     @Test
     fun everyTextColourClearsAaOnBothSurfacesInBothThemes() {
-        for ((theme, c) in listOf("Daylight" to Daylight, "Floodlight" to Floodlight)) {
+        for ((theme, c) in listOf("Daylight" to Daylight, "Floodlight" to Floodlight, "PrimeTime" to PrimeTime)) {
             for ((name, fg) in textPairs(c)) {
                 for ((bgName, bg) in listOf("surface" to c.surface, "surfaceRaised" to c.surfaceRaised)) {
                     val r = ratio(fg, bg)
@@ -39,6 +40,18 @@ class ContrastTest {
         assertEquals(4.71f, ratio(Daylight.defense, Daylight.surface), 0.05f)
         assertEquals(9.60f, ratio(Daylight.onGold, Daylight.gold), 0.05f)
         assertEquals(15.50f, ratio(Floodlight.ink, Floodlight.surface), 0.05f)
+    }
+
+    @Test
+    fun primeTimeTextHoldsUpThroughGlassCards() {
+        // Glass cards are surfaceRaised at 82% over the surface; text sits on that blend.
+        val g = 0.82f
+        val glass = Color(
+            PrimeTime.surfaceRaised.red * g + PrimeTime.surface.red * (1 - g),
+            PrimeTime.surfaceRaised.green * g + PrimeTime.surface.green * (1 - g),
+            PrimeTime.surfaceRaised.blue * g + PrimeTime.surface.blue * (1 - g),
+        )
+        for ((name, fg) in textPairs(PrimeTime)) assertTrue(ratio(fg, glass) >= 4.5f, "$name on Prime Time glass")
     }
 
     @Test

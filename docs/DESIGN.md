@@ -73,7 +73,25 @@ these overrides, carried as `Skin.littleHuddle = true`:
 | Motion | Kid motion, slower (1.2x durations); reduced motion rules still apply |
 
 The mode applies only inside Level 0. A 4-7 profile that moves on to Kid L1 gets the
-normal Kid skin.
+the normal Kid skin.
+
+### 2.2 Prime Time (the teen and adult look)
+Chosen on 2026-10-15 from three Nano Banana concepts (`docs/design/concepts/`): the
+**Prime Time** night-game broadcast look, plus **Season Mode**'s shield rank badges and
+XP bars (ADR-008). It is the Adult skin's look (`Skin.primeTime`), so every profile of
+13 and up gets it, and onboarding uses it before a profile exists.
+
+| | Prime Time |
+|---|---|
+| Palette | Always dark: the Prime Time values in section 3, whatever the phone's theme |
+| Ground | `screenBackground()`: surface, two floodlight glows from the top corners, a faint rise of turf green at the bottom |
+| Cards | Glass: `surfaceRaised` at 82% so the glow shows through, 1dp `line` border. The feedback sheet stays opaque |
+| The one action | Volt green fill, near-black label, in Barlow Semi Condensed Bold *Italic* capitals |
+| Headlines | Barlow Semi Condensed Bold Italic; display headlines in volt |
+| Questions | On their own glass card in the condensed display face |
+| Home | "SEASON PROGRESS" between gold rules, total XP in cyan, each level a season card: shield rank badge (magenta = the open level, volt with a check = passed, grey with a lock = locked), name in condensed italic capitals, an XP-style bar of drills passed |
+| Results | Volt headline, XP earned in cyan |
+| Unchanged | Turf field diagrams, Atkinson body text, amber (never red) "not quite", touch targets |
 
 ## 3. Palette
 
@@ -109,6 +127,15 @@ Measured contrast (text on `surface` / `surfaceRaised`):
 | retry | 5.39 / 5.93 | 10.85 / 9.27 |
 | link | 8.28 / 9.11 | 11.59 / 9.91 |
 | onGold on gold | 9.60 | 9.60 |
+
+**Prime Time** (always dark, section 2.2), measured on `surface` `#0A1020` / glass
+cards (`surfaceRaised` `#151E33`): ink `#F2F5FA` 17.35 / 15.19, inkDim `#A3AFC4`
+8.56 / 7.50, volt (`gold` token) `#CCF53A` 15.06 / 13.19 with `onGold` `#0A1020` on it at
+15.06, offense `#79AEFF` 8.40, defense `#FF9A62` 9.07, correct `#3DDC97` 10.73, retry
+`#FFC857` 12.32, link `#7FE3FF` 12.94, xp `#3FD4FF` 10.90, rank `#FF5CB8` 6.75 / 5.91.
+Two tokens are new in every palette: **xp** (XP numbers and bars) and **rank** (the
+open level's badge). `ContrastTest` checks all three palettes, and Prime Time text on
+the 82% glass blend.
 
 Every text pair clears **4.5:1** in both themes (lowest: Daylight defense on
 surface, 4.71). Gold is a **fill**, never text on surface (1.74:1 on Daylight): it

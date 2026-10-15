@@ -55,6 +55,7 @@ import io.github.itstrue54.gridironacademy.ui.resources.welcome_start
 import io.github.itstrue54.gridironacademy.ui.resources.welcome_title
 import io.github.itstrue54.gridironacademy.ui.resources.who_title
 import io.github.itstrue54.gridironacademy.ui.theme.Gridiron
+import io.github.itstrue54.gridironacademy.ui.theme.screenBackground
 import org.jetbrains.compose.resources.stringResource
 
 /** First launch (DESIGN 9.8): what this is, in one card, and one button. */
@@ -63,12 +64,12 @@ fun WelcomeScreen(scene: Scene, onStart: () -> Unit) {
     val c = Gridiron.colors
     val skin = Gridiron.skin
     Column(
-        Modifier.fillMaxSize().background(c.surface).safeDrawingPadding().padding(skin.gutter),
+        Modifier.fillMaxSize().screenBackground().safeDrawingPadding().padding(skin.gutter),
         verticalArrangement = Arrangement.spacedBy(20.dp),
     ) {
         Column(Modifier.weight(1f).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(16.dp)) {
             Text(stringResource(Res.string.app_name), style = Gridiron.type.label, color = c.inkDim)
-            Text(stringResource(Res.string.welcome_title), style = Gridiron.type.displayLarge, color = c.ink, modifier = Modifier.semantics { heading() })
+            Text(stringResource(Res.string.welcome_title), style = Gridiron.type.displayLarge, color = if (Gridiron.skin.primeTime) c.gold else c.ink, modifier = Modifier.semantics { heading() })
             FieldDiagram(scene.diagram, description = scene.description, modifier = Modifier.fillMaxWidth())
             Text(stringResource(Res.string.welcome_body), style = Gridiron.type.body, color = c.ink)
         }
@@ -89,7 +90,7 @@ fun OnboardingScreen(onDone: (nickname: String, band: AgeBand) -> Unit) {
     // Picking an age (or pressing Done) closes the keyboard so Start isn't hidden under it.
     val focus = LocalFocusManager.current
     Column(
-        Modifier.fillMaxSize().background(c.surface).safeDrawingPadding().padding(skin.gutter),
+        Modifier.fillMaxSize().screenBackground().safeDrawingPadding().padding(skin.gutter),
         verticalArrangement = Arrangement.spacedBy(20.dp),
     ) {
         Column(Modifier.weight(1f).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(16.dp)) {
