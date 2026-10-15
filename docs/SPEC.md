@@ -442,7 +442,7 @@ Proposal (to be decided, §15):
 ## 6. Learner app
 
 ### 6.1 Home: the drive map
-DESIGN §9.1, extended: Level 0 sits **behind the goal line** as a "practice field"
+DESIGN §9.1: Level 0 sits **behind the goal line** as a "practice field"
 pad for kid profiles 4-7 and is hidden for adults. An **Assignments** strip appears
 above the primary action when a coach or parent has assigned something (§6.5).
 
@@ -503,9 +503,8 @@ event log (§8).
 ### 6.10 Settings and grown-up zone
 DESIGN §9.9, plus **Link to a coach or parent** (scan a QR or type an 8-character
 code shown in the Coach app), **Linked adults** (list, and for 13+ the option to
-leave a team) and content-update status. The DESIGN §9.9 line "nothing leaves this
-device" becomes "nothing leaves this device unless a parent links it" (DESIGN update
-needed).
+leave a team) and content-update status. The privacy statement reads "nothing
+leaves this device unless a parent links it" (DESIGN §9.9).
 
 ---
 
