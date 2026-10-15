@@ -1,0 +1,559 @@
+{
+  "id": "college5-u2",
+  "title": "Tempo, Splits and Motion",
+  "lessons": [
+    {
+      "id": "c5-tempo",
+      "title": "Tempo and Splits",
+      "blurb": "Speed and spacing as weapons.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "c5-tempo-01",
+          "title": "Tempo",
+          "body": "Snapping the ball quickly, without a huddle, stops the defense from substituting and gives it less time to disguise or call a complex blitz.",
+          "concept": "tempo"
+        },
+        {
+          "type": "learn",
+          "id": "c5-tempo-02",
+          "title": "Check with me",
+          "body": "Some no-huddle offenses line up fast, then look to the sideline or let the quarterback pick the play once the defense shows its look.",
+          "concept": "tempo"
+        },
+        {
+          "type": "learn",
+          "id": "c5-tempo-03",
+          "title": "Splits",
+          "body": "Wide splits between linemen or receivers stretch the defense and open creases. Tight splits pull defenders in and set up crack blocks and rubs.",
+          "concept": "splits"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "c5-tempo-04",
+          "prompt": "Why play fast after a big gain?",
+          "choices": [
+            "The tired defense can't substitute",
+            "To get a penalty",
+            "To end the half",
+            "To save timeouts for the defense"
+          ],
+          "answer": 0,
+          "explanation": "Snapping before the defense can sub keeps tired players on the field.",
+          "concept": "tempo"
+        },
+        {
+          "type": "true_false",
+          "id": "c5-tempo-05",
+          "statement": "Tight receiver splits can set up rub routes and crack blocks.",
+          "answer": true,
+          "explanation": "Bunched receivers create traffic for defenders and angles for blockers.",
+          "concept": "splits"
+        }
+      ]
+    },
+    {
+      "id": "c5-motion",
+      "title": "Motion Types",
+      "blurb": "Jet, orbit, return and across.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "c5-motion-01",
+          "title": "Jet",
+          "body": "A receiver sprints across the formation in front of the quarterback, timed to arrive at the snap. Good for a handoff or a fake that pulls the defense.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 1.8,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": -1
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "z",
+                "points": [
+                  {
+                    "x": 6,
+                    "y": -1.5
+                  },
+                  {
+                    "x": -4,
+                    "y": -1.5
+                  }
+                ],
+                "kind": "motion",
+                "label": "jet"
+              }
+            ],
+            "caption": "Jet motion"
+          },
+          "concept": "jet-motion"
+        },
+        {
+          "type": "learn",
+          "id": "c5-motion-02",
+          "title": "Orbit",
+          "body": "The receiver loops behind the quarterback instead of in front, ending up in the backfield on the other side.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 1.8,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": -1
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "z",
+                "points": [
+                  {
+                    "x": 8,
+                    "y": -3
+                  },
+                  {
+                    "x": 2,
+                    "y": -8
+                  },
+                  {
+                    "x": -5,
+                    "y": -6
+                  }
+                ],
+                "kind": "motion",
+                "label": "orbit"
+              }
+            ],
+            "caption": "Orbit motion"
+          },
+          "concept": "jet-motion"
+        },
+        {
+          "type": "learn",
+          "id": "c5-motion-03",
+          "title": "Return and across",
+          "body": "Return motion starts across, then comes back to where it began. Across (or zip) motion moves a receiver to the other side and sets there.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 1.8,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": -1
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "z",
+                "points": [
+                  {
+                    "x": 6,
+                    "y": -1.2
+                  },
+                  {
+                    "x": 9,
+                    "y": -1.2
+                  }
+                ],
+                "kind": "motion",
+                "label": "return"
+              }
+            ],
+            "caption": "Return motion"
+          },
+          "concept": "motion"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "c5-motion-04",
+          "prompt": "Name this motion.",
+          "choices": [
+            "Orbit",
+            "Jet",
+            "Return",
+            "Across"
+          ],
+          "answer": 0,
+          "explanation": "Looping behind the quarterback is orbit motion.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 1.8,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": -1
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "z",
+                "points": [
+                  {
+                    "x": 8,
+                    "y": -3
+                  },
+                  {
+                    "x": 2,
+                    "y": -8
+                  },
+                  {
+                    "x": -5,
+                    "y": -6
+                  }
+                ],
+                "kind": "motion",
+                "label": "orbit"
+              }
+            ],
+            "caption": ""
+          },
+          "concept": "jet-motion"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "c5-motion-05",
+          "prompt": "Name this motion.",
+          "choices": [
+            "Jet",
+            "Orbit",
+            "Return",
+            "Shift"
+          ],
+          "answer": 0,
+          "explanation": "Full speed across in front of the quarterback at the snap: jet motion.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 1.8,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": -1
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "z",
+                "points": [
+                  {
+                    "x": 6,
+                    "y": -1.5
+                  },
+                  {
+                    "x": -4,
+                    "y": -1.5
+                  }
+                ],
+                "kind": "motion",
+                "label": "jet"
+              }
+            ],
+            "caption": ""
+          },
+          "concept": "jet-motion"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "c5-motion-06",
+          "prompt": "A defender runs across with the receiver in motion. What does that suggest?",
+          "choices": [
+            "Man coverage",
+            "Zone coverage",
+            "A punt",
+            "A safety blitz is impossible"
+          ],
+          "answer": 0,
+          "explanation": "A defender following the motion is usually in man. Defenses disguise this too.",
+          "concept": "motion"
+        }
+      ]
+    }
+  ]
+}

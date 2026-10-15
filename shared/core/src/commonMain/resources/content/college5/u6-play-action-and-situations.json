@@ -1,0 +1,466 @@
+{
+  "id": "college5-u6",
+  "title": "Play-Action and Situations",
+  "lessons": [
+    {
+      "id": "c5-playaction",
+      "title": "Play-Action, Boots and Screens",
+      "blurb": "Using the run to set up the pass.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "c5-playaction-01",
+          "title": "Play-action",
+          "body": "The quarterback fakes a handoff. Linebackers and safeties step up for the run, and receivers get behind them.",
+          "concept": "play-action"
+        },
+        {
+          "type": "learn",
+          "id": "c5-playaction-02",
+          "title": "Boot",
+          "body": "After the run fake one way, the quarterback rolls out the other way, usually with a tight end crossing toward him and receivers flooding that side at different depths.",
+          "concept": "play-action"
+        },
+        {
+          "type": "learn",
+          "id": "c5-playaction-03",
+          "title": "The screen game",
+          "body": "A running back slip screen, a wide receiver bubble or tunnel, a middle screen: each lets the rush come or the defense drop, then throws short behind blockers.",
+          "concept": "screen"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "c5-playaction-04",
+          "prompt": "Why does play-action work best when the run game is working?",
+          "choices": [
+            "Defenders respect the fake and step up",
+            "It's always a touchdown",
+            "The line can go downfield",
+            "It stops the clock"
+          ],
+          "answer": 0,
+          "explanation": "The more a defense fears the run, the harder it bites on the fake.",
+          "concept": "play-action"
+        },
+        {
+          "type": "true_false",
+          "id": "c5-playaction-05",
+          "statement": "On a bootleg, the quarterback rolls out the opposite way from the run fake.",
+          "answer": true,
+          "explanation": "That's the boot: fake one way, move the other.",
+          "concept": "play-action"
+        }
+      ]
+    },
+    {
+      "id": "c5-gameday",
+      "title": "College Game Day",
+      "blurb": "Option, tempo, pressure and the red zone.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "c5-gameday-01",
+          "title": "Make the call",
+          "body": "Each card is a game moment. Pick the call most modern coaches and win-probability models would make, then see why.",
+          "concept": "game-situation"
+        },
+        {
+          "type": "situation",
+          "id": "c5-gameday-02",
+          "state": {
+            "quarter": 2,
+            "clock": 400,
+            "down": 1,
+            "toGo": 1,
+            "yardLine": 99,
+            "scoreDiff": 0,
+            "timeouts": 2
+          },
+          "prompt": "1st and goal at the 1, second quarter, tied. What's the call?",
+          "options": [
+            {
+              "text": "Quarterback sneak or power run",
+              "quality": "best",
+              "why": "One yard is the shortest, highest-percentage play in football."
+            },
+            {
+              "text": "Deep drop-back pass",
+              "quality": "poor",
+              "why": "Pressure and a sack lose yards you can't afford."
+            },
+            {
+              "text": "Field goal on 1st down",
+              "quality": "poor",
+              "why": "Gives up three downs to score seven."
+            }
+          ],
+          "explanation": "Short yardage at the goal line: run it in.",
+          "concept": "goal-line"
+        },
+        {
+          "type": "situation",
+          "id": "c5-gameday-03",
+          "state": {
+            "quarter": 3,
+            "clock": 500,
+            "down": 2,
+            "toGo": 3,
+            "yardLine": 55,
+            "scoreDiff": 0,
+            "timeouts": 3
+          },
+          "prompt": "The defense subs into dime on 2nd and 3. What do you call?",
+          "options": [
+            {
+              "text": "Run the ball",
+              "quality": "best",
+              "why": "Six defensive backs means a light box: run at it."
+            },
+            {
+              "text": "Screen",
+              "quality": "ok",
+              "why": "Reasonable, but the run is the clear advantage."
+            },
+            {
+              "text": "Max-protect deep shot",
+              "quality": "poor",
+              "why": "Dime is built to stop exactly that."
+            }
+          ],
+          "explanation": "Attack the personnel the defense chose.",
+          "concept": "dime"
+        },
+        {
+          "type": "situation",
+          "id": "c5-gameday-04",
+          "state": {
+            "quarter": 3,
+            "clock": 300,
+            "down": 3,
+            "toGo": 8,
+            "yardLine": 45,
+            "scoreDiff": -3,
+            "timeouts": 2
+          },
+          "prompt": "3rd and 8. Two linebackers walk up into the A gaps. What's your adjustment?",
+          "options": [
+            {
+              "text": "Set the protection to the A gaps and have a quick throw ready",
+              "quality": "best",
+              "why": "ID the threat, block the middle, and know where the hot throw goes."
+            },
+            {
+              "text": "Seven-step drop for a deep shot",
+              "quality": "poor",
+              "why": "Interior pressure arrives before a deep route can open."
+            },
+            {
+              "text": "Ignore it",
+              "quality": "poor",
+              "why": "Unblocked A-gap rushers mean a sack."
+            }
+          ],
+          "explanation": "Name the threat before the snap.",
+          "concept": "a-gap-blitz"
+        },
+        {
+          "type": "situation",
+          "id": "c5-gameday-05",
+          "state": {
+            "quarter": 2,
+            "clock": 600,
+            "down": 1,
+            "toGo": 10,
+            "yardLine": 30,
+            "scoreDiff": 0,
+            "timeouts": 3
+          },
+          "prompt": "Zone read. The unblocked end crashes down hard on the back. Give or keep?",
+          "options": [
+            {
+              "text": "Keep it",
+              "quality": "best",
+              "why": "He took the back, so the edge is open for the quarterback."
+            },
+            {
+              "text": "Give it",
+              "quality": "poor",
+              "why": "Handing off into a crashing end is exactly what he wants."
+            },
+            {
+              "text": "Throw it away",
+              "quality": "poor",
+              "why": "There's a free run available."
+            }
+          ],
+          "explanation": "Make the read defender wrong.",
+          "concept": "zone-read"
+        },
+        {
+          "type": "situation",
+          "id": "c5-gameday-06",
+          "state": {
+            "quarter": 1,
+            "clock": 700,
+            "down": 1,
+            "toGo": 10,
+            "yardLine": 40,
+            "scoreDiff": 0,
+            "timeouts": 3
+          },
+          "prompt": "RPO: the nickel steps into the box at the snap. Hand off or throw the bubble?",
+          "options": [
+            {
+              "text": "Throw the bubble",
+              "quality": "best",
+              "why": "With the nickel in the box, the slot is uncovered."
+            },
+            {
+              "text": "Hand off",
+              "quality": "poor",
+              "why": "You'd run into the extra defender."
+            },
+            {
+              "text": "Pull it and run",
+              "quality": "ok",
+              "why": "Possible, but the bubble is the designed answer."
+            }
+          ],
+          "explanation": "The conflict defender tells you where the ball goes.",
+          "concept": "rpo"
+        },
+        {
+          "type": "situation",
+          "id": "c5-gameday-07",
+          "state": {
+            "quarter": 2,
+            "clock": 50,
+            "down": 1,
+            "toGo": 10,
+            "yardLine": 35,
+            "scoreDiff": 0,
+            "timeouts": 2
+          },
+          "prompt": "50 seconds left in the half. You just completed a pass in bounds at your 35; the clock is running. What now?",
+          "options": [
+            {
+              "text": "Hurry to the line and snap",
+              "quality": "best",
+              "why": "No-huddle saves the most time and keeps your timeouts."
+            },
+            {
+              "text": "Call a timeout right away",
+              "quality": "ok",
+              "why": "Stops the clock, but costs a timeout you might need later."
+            },
+            {
+              "text": "Huddle up",
+              "quality": "poor",
+              "why": "A huddle burns precious seconds."
+            }
+          ],
+          "explanation": "In the two-minute drill, tempo is a timeout you don't have to spend.",
+          "concept": "tempo"
+        },
+        {
+          "type": "situation",
+          "id": "c5-gameday-08",
+          "state": {
+            "quarter": 3,
+            "clock": 420,
+            "down": 4,
+            "toGo": 2,
+            "yardLine": 62,
+            "scoreDiff": -4,
+            "timeouts": 2
+          },
+          "prompt": "4th and 2 at their 38, down 4 in the third quarter. What's the call?",
+          "options": [
+            {
+              "text": "Go for it",
+              "quality": "best",
+              "why": "A 55-yard field goal is a low-percentage kick, and two yards converts often."
+            },
+            {
+              "text": "Punt",
+              "quality": "ok",
+              "why": "Pins them deep but gives up a good chance to keep the drive."
+            },
+            {
+              "text": "Long field goal",
+              "quality": "poor",
+              "why": "55 yards is a long shot that also hands them good field position if it misses."
+            }
+          ],
+          "explanation": "In no-man's-land, short yardage usually means go.",
+          "concept": "fourth-down"
+        },
+        {
+          "type": "situation",
+          "id": "c5-gameday-09",
+          "state": {
+            "quarter": 3,
+            "clock": 200,
+            "down": 3,
+            "toGo": 5,
+            "yardLine": 52,
+            "scoreDiff": 0,
+            "timeouts": 3
+          },
+          "prompt": "3rd and 5. No safety deep and everyone walked up: it looks like Cover 0. What do you want?",
+          "options": [
+            {
+              "text": "A quick throw to a hot route",
+              "quality": "best",
+              "why": "The ball has to beat the rush; there's no deep help, so a catch can go far."
+            },
+            {
+              "text": "Seven-step drop",
+              "quality": "poor",
+              "why": "More rushers than blockers: no time."
+            },
+            {
+              "text": "Run into the loaded box",
+              "quality": "ok",
+              "why": "Sometimes catches the blitz, but the numbers are against it."
+            }
+          ],
+          "explanation": "Against Cover 0, get the ball out.",
+          "concept": "cover-0"
+        },
+        {
+          "type": "situation",
+          "id": "c5-gameday-10",
+          "state": {
+            "quarter": 1,
+            "clock": 500,
+            "down": 1,
+            "toGo": 10,
+            "yardLine": 60,
+            "scoreDiff": 0,
+            "timeouts": 3
+          },
+          "prompt": "After a 25-yard gain, the defense is gassed and trying to substitute. What do you do?",
+          "options": [
+            {
+              "text": "Go tempo: snap before they can sub",
+              "quality": "best",
+              "why": "Tired players and a scrambling defense are an advantage you keep by hurrying."
+            },
+            {
+              "text": "Huddle normally",
+              "quality": "ok",
+              "why": "Fine, but you let them reset."
+            },
+            {
+              "text": "Call timeout",
+              "quality": "poor",
+              "why": "Gives them the rest they need."
+            }
+          ],
+          "explanation": "Tempo turns fatigue into yards.",
+          "concept": "tempo"
+        },
+        {
+          "type": "situation",
+          "id": "c5-gameday-11",
+          "state": {
+            "quarter": 2,
+            "clock": 480,
+            "down": 1,
+            "toGo": 10,
+            "yardLine": 50,
+            "scoreDiff": 0,
+            "timeouts": 3
+          },
+          "prompt": "1st and 10 at midfield. Your run game is working and they've put eight defenders in the box. What's the call?",
+          "options": [
+            {
+              "text": "Play-action shot",
+              "quality": "best",
+              "why": "Eight in the box means one-on-one coverage behind defenders who'll bite on the fake."
+            },
+            {
+              "text": "Run into the eight-man box",
+              "quality": "ok",
+              "why": "Can work, but the numbers favour them."
+            },
+            {
+              "text": "Kneel",
+              "quality": "poor",
+              "why": "No reason to waste a down."
+            }
+          ],
+          "explanation": "When they load the box, play-action punishes it.",
+          "concept": "play-action"
+        },
+        {
+          "type": "situation",
+          "id": "c5-gameday-12",
+          "state": {
+            "quarter": 4,
+            "clock": 480,
+            "down": 3,
+            "toGo": 6,
+            "yardLine": 88,
+            "scoreDiff": -3,
+            "timeouts": 3
+          },
+          "prompt": "3rd and 6 at their 12, down 3 with 8:00 left. What's the priority?",
+          "options": [
+            {
+              "text": "Throw to the sticks or the end zone",
+              "quality": "best",
+              "why": "A first down or a touchdown is worth far more than settling now with time left."
+            },
+            {
+              "text": "Run to set up the field goal",
+              "quality": "ok",
+              "why": "Secures three points but likely ends the drive."
+            },
+            {
+              "text": "Throw it out of the back of the end zone",
+              "quality": "poor",
+              "why": "Wastes the down."
+            }
+          ],
+          "explanation": "In the red zone with time left, keep the drive alive for seven.",
+          "concept": "red-zone"
+        },
+        {
+          "type": "situation",
+          "id": "c5-gameday-13",
+          "state": {
+            "quarter": 4,
+            "clock": 240,
+            "down": 3,
+            "toGo": 7,
+            "yardLine": 30,
+            "scoreDiff": 7,
+            "timeouts": 3
+          },
+          "prompt": "You lead by 7 with 4:00 left. 3rd and 7 at your 30; they have three timeouts. What's the call?",
+          "options": [
+            {
+              "text": "Throw for the first down",
+              "quality": "best",
+              "why": "A conversion lets you burn more clock and keep the ball."
+            },
+            {
+              "text": "Run and punt",
+              "quality": "ok",
+              "why": "Safe, but they get the ball back with time and timeouts."
+            },
+            {
+              "text": "Deep shot",
+              "quality": "poor",
+              "why": "Low-percentage, and an incompletion stops the clock."
+            }
+          ],
+          "explanation": "Moving the chains is the best clock management.",
+          "concept": "game-clock"
+        }
+      ]
+    }
+  ]
+}

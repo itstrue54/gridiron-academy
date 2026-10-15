@@ -210,9 +210,9 @@ class ScreenRenderTest {
         lessonShot("36-tree-tap-adult", AgeBand.AGE_18_PLUS, dark = true, pick = { it.id == "a3-tree-05" })
     }
 
-    private fun sharedShot(name: String, band: AgeBand, id: String, answer: ((Step) -> Answer)? = null) {
+    private fun sharedShot(name: String, band: AgeBand, id: String, levelId: String = "varsity-4", answer: ((Step) -> Answer)? = null) {
         val state = appState(band)
-        val level = content.level("varsity-4")
+        val level = content.level(levelId)
         val lesson = content.unitsOf(level).flatMap { it.lessons }.first { l -> l.steps.any { it.id == id } }
         val controller = LessonController(listOf(lesson.steps.first { it.id == id }))
         if (answer != null) controller.submit(answer(controller.step!!))
@@ -221,12 +221,24 @@ class ScreenRenderTest {
 
     @Test fun levelFour() {
         sharedShot("37-cover3-presnap-adult", AgeBand.AGE_18_PLUS, "v4-cover3-04")
-        sharedShot("38-cover3-reveal-adult", AgeBand.AGE_18_PLUS, "v4-cover3-04") { Answer.Choice((it as ReadDefense).answer) }
-        sharedShot("39-cover2-reveal-kid", AgeBand.AGE_10_12, "v4-cover2-04") { Answer.Choice((it as ReadDefense).answer) }
+        sharedShot("38-cover3-reveal-adult", AgeBand.AGE_18_PLUS, "v4-cover3-04", answer = { Answer.Choice((it as ReadDefense).answer) })
+        sharedShot("39-cover2-reveal-kid", AgeBand.AGE_10_12, "v4-cover2-04", answer = { Answer.Choice((it as ReadDefense).answer) })
         sharedShot("40-cover4-presnap-adult", AgeBand.AGE_18_PLUS, "v4-cover4-04")
         sharedShot("41-front-bear-adult", AgeBand.AGE_18_PLUS, "v4-fronts-05")
         sharedShot("42-power-tap-adult", AgeBand.AGE_18_PLUS, "v4-gap-05")
         sharedShot("43-mesh-adult", AgeBand.AGE_18_PLUS, "v4-dropback-05")
         sharedShot("44-gaps-tap-kid", AgeBand.AGE_10_12, "v4-gaps-04")
+    }
+
+    @Test fun levelFive() {
+        val c = "college-5"
+        sharedShot("45-zone-read-tap", AgeBand.AGE_18_PLUS, "c5-option-05", c)
+        sharedShot("46-rpo-tap", AgeBand.AGE_18_PLUS, "c5-rpo-03", c)
+        sharedShot("47-hot-tap", AgeBand.AGE_18_PLUS, "c5-protect-05", c)
+        sharedShot("48-crossdog-reveal", AgeBand.AGE_18_PLUS, "c5-pressure-05", c, answer = { Answer.Choice((it as ReadDefense).answer) })
+        sharedShot("49-firezone-reveal", AgeBand.AGE_18_PLUS, "c5-pressure-06", c, answer = { Answer.Choice((it as ReadDefense).answer) })
+        sharedShot("50-orbit", AgeBand.AGE_18_PLUS, "c5-motion-04", c)
+        sharedShot("51-nickel-tap", AgeBand.AGE_10_12, "c5-subs-04", c)
+        sharedShot("52-gameday", AgeBand.AGE_18_PLUS, "c5-gameday-06", c, answer = { Answer.Choice(0) })
     }
 }

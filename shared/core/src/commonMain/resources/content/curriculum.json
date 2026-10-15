@@ -151,6 +151,31 @@
         "gameQuestions": 10,
         "gamePassPct": 70
       }
+    },
+    {
+      "id": "college-5",
+      "number": 5,
+      "track": "shared",
+      "title": "College",
+      "tagline": "Option football, RPOs, protections, pressures and game-day calls.",
+      "requires": [
+        "varsity-4"
+      ],
+      "unitFiles": [
+        "college5/u1-option-and-rpo.json",
+        "college5/u2-tempo-and-motion.json",
+        "college5/u3-protection.json",
+        "college5/u4-pressure.json",
+        "college5/u5-sub-packages.json",
+        "college5/u6-play-action-and-situations.json"
+      ],
+      "gate": {
+        "testPassPct": 80,
+        "testQuestions": 12,
+        "game": "game_day",
+        "gameQuestions": 10,
+        "gamePassPct": 70
+      }
     }
   ]
 }

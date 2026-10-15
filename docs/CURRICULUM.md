@@ -14,7 +14,7 @@ and validated, `preview` = exemplar content proving the model, `planned` = to be
 | 3 | Junior Varsity | kid | ~11-12 | Diagram dash | **done** (`kid-3`, coach review pending) |
 | 3 | Armchair Coach | adult | fans | Diagram dash | **done** (`adult-3`, coach review pending) |
 | 4 | Varsity | shared | both | Read the defense | **done** (`varsity-4`, coach review pending) |
-| 5 | College | shared | | Game day | planned |
+| 5 | College | shared | | Game day | **done** (`college-5`, coach review pending) |
 | 6 | Pro | shared | | Read the defense | preview (personnel) |
 | 7 | Coordinator | shared | | Read the defense | preview (disguise) |
 | 8 | Architect | shared | | Game day | planned |
@@ -84,7 +84,16 @@ coverages (Cover 0, 1, 2, 3, 4) and what beats each; zone-run schemes (inside zo
 outside zone) vs gap schemes (power, counter, trap, duo); basic pass concepts (curl-flat,
 smash, stick, snag, mesh, four verticals, Y-cross); sacks and pressure vocabulary.
 
-## Level 5: College
+## Level 5: College (done; see `docs/content-review/level-5.md`)
+As written: 6 units, 9 drills, 66 steps. Option football (zone read, speed and triple
+option) and RPOs with the conflict defender; tempo, splits and jet/orbit/return/across
+motion; slide protection, Mike ID, hot routes and max protect; fire zone, double A-gap,
+cross dog, overload and creeper pressures (4 animated reveals); nickel, dime, 3-3-5 and
+big nickel; play-action, boots and screens; and 12 Game Day situations for the level
+game (goal line, sub-package matchups, A-gap pressure, zone read and RPO reads, tempo,
+4th down, Cover 0, play-action, red zone and late-game clock).
+
+Originally planned:
 RPOs, zone read, speed/triple option; tempo and no-huddle; tight and wide splits;
 pre-snap motion types (jet, orbit, return, across); protections (slide, MIKE ID, hot,
 sight adjust, max protect); blitz families (zone blitz, fire zone, double A-gap, cross-dog,

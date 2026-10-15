@@ -818,6 +818,125 @@
       "kid": "A run where linemen block areas and the back picks the hole.",
       "full": "Inside and outside zone: linemen step together, combine and climb; the back reads the blocks to hit, bounce or cut back.",
       "level": 4
+    },
+    {
+      "id": "a-gap-blitz",
+      "term": "A-gap pressure",
+      "kid": "Linebackers blitzing through the gaps beside the center.",
+      "full": "Double A-gap mugs and cross dogs: linebackers threatening or attacking the interior gaps to collapse the pocket.",
+      "level": 5
+    },
+    {
+      "id": "dime",
+      "term": "Dime",
+      "kid": "A defense with six defensive backs.",
+      "full": "Six defensive backs, typically against four receivers or on long passing downs; package names beyond dime vary by staff.",
+      "level": 5
+    },
+    {
+      "id": "fire-zone",
+      "term": "Fire zone",
+      "kid": "A five-man blitz with zone coverage behind it.",
+      "full": "Five rushers with three deep and three underneath zones, often with a lineman dropping into coverage.",
+      "level": 5
+    },
+    {
+      "id": "goal-line",
+      "term": "Goal line",
+      "kid": "Plays from just outside the end zone.",
+      "full": "Short-yardage situations at the goal line, usually with heavy personnel on both sides.",
+      "level": 5
+    },
+    {
+      "id": "hot-route",
+      "term": "Hot route",
+      "kid": "A quick throw when a blitzer is unblocked.",
+      "full": "When rushers outnumber blockers, the quarterback throws quickly to a receiver breaking into the space the blitzer left.",
+      "level": 5
+    },
+    {
+      "id": "jet-motion",
+      "term": "Jet and orbit motion",
+      "kid": "A receiver running across the formation before the snap.",
+      "full": "Jet motion crosses in front of the quarterback at full speed at the snap; orbit motion loops behind him.",
+      "level": 5
+    },
+    {
+      "id": "max-protect",
+      "term": "Max protect",
+      "kid": "Keeping extra players in to block.",
+      "full": "Seven or eight blockers with two or three receivers in the route: more time, fewer targets.",
+      "level": 5
+    },
+    {
+      "id": "mike-id",
+      "term": "Mike ID",
+      "kid": "Naming the middle linebacker to set blocking.",
+      "full": "The pre-snap identification of a 'Mike' that sets every blocker's assignment in pass protection.",
+      "level": 5
+    },
+    {
+      "id": "option",
+      "term": "Option",
+      "kid": "The quarterback reads a defender instead of blocking him.",
+      "full": "Plays that leave one defender unblocked and let the quarterback choose (give, keep, pitch) based on what he does: zone read, speed option, triple option.",
+      "level": 5
+    },
+    {
+      "id": "play-action",
+      "term": "Play-action",
+      "kid": "Faking a run before passing.",
+      "full": "A run fake that draws linebackers and safeties forward before a pass behind them; includes bootlegs that roll away from the fake.",
+      "level": 5
+    },
+    {
+      "id": "red-zone",
+      "term": "Red zone",
+      "kid": "Inside the opponent's 20-yard line.",
+      "full": "The area inside the opponent's 20, where the field is compressed and scoring touchdowns rather than field goals decides games.",
+      "level": 5
+    },
+    {
+      "id": "rpo",
+      "term": "RPO",
+      "kid": "A run play with a quick pass option.",
+      "full": "Run-pass option: the line run-blocks while the quarterback reads a conflict defender after the snap and hands off or throws a quick route.",
+      "level": 5
+    },
+    {
+      "id": "simulated-pressure",
+      "term": "Overload and creeper",
+      "kid": "Blitzes that out-number one side or hide who's rushing.",
+      "full": "An overload sends more rushers to one side than it can block; a creeper (simulated pressure) rushes four from unexpected spots while dropping a lineman.",
+      "level": 5
+    },
+    {
+      "id": "slide-protection",
+      "term": "Slide protection",
+      "kid": "The line slides one way to block.",
+      "full": "Linemen block zones by sliding together to one side while a back takes the edge rusher on the other.",
+      "level": 5
+    },
+    {
+      "id": "splits",
+      "term": "Splits",
+      "kid": "How far apart players line up.",
+      "full": "The spacing between linemen or receivers; wide splits stretch a defense, tight splits create traffic, rubs and blocking angles.",
+      "level": 5
+    },
+    {
+      "id": "tempo",
+      "term": "Tempo",
+      "kid": "Snapping the ball fast without a huddle.",
+      "full": "No-huddle speed that limits defensive substitution, disguise and complex calls; also a clock tool.",
+      "level": 5
+    },
+    {
+      "id": "zone-read",
+      "term": "Zone read",
+      "kid": "Hand off or keep, based on one unblocked defender.",
+      "full": "Inside zone with the backside end left unblocked; if he crashes on the back, the quarterback keeps; if he stays, the quarterback gives.",
+      "level": 5
     }
   ]
 }

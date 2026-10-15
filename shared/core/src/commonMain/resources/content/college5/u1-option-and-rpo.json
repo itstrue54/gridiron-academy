@@ -1,0 +1,973 @@
+{
+  "id": "college5-u1",
+  "title": "Option Football and RPOs",
+  "lessons": [
+    {
+      "id": "c5-option",
+      "title": "Option Football",
+      "blurb": "Reading a defender instead of blocking him.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "c5-option-01",
+          "title": "Why read?",
+          "body": "Option plays leave one defender unblocked on purpose. The quarterback reads him and makes whichever choice he can't defend. It's an extra blocker without a blocker.",
+          "concept": "option"
+        },
+        {
+          "type": "learn",
+          "id": "c5-option-02",
+          "title": "Zone read",
+          "body": "The line blocks inside zone and leaves the backside end alone. If the end crashes toward the back, the quarterback pulls it and runs where the end left. If the end stays home, he hands it off.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": -1.8,
+                "y": -5
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              },
+              {
+                "id": "de1",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": -4.5,
+                "y": 1
+              },
+              {
+                "id": "dt1",
+                "label": "DT",
+                "side": "DEFENSE",
+                "x": -1.2,
+                "y": 1
+              },
+              {
+                "id": "dt2",
+                "label": "DT",
+                "side": "DEFENSE",
+                "x": 1.2,
+                "y": 1
+              },
+              {
+                "id": "de2",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": 4.5,
+                "y": 1
+              },
+              {
+                "id": "w",
+                "label": "W",
+                "side": "DEFENSE",
+                "x": -4,
+                "y": 4.5
+              },
+              {
+                "id": "m",
+                "label": "M",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 4.5
+              },
+              {
+                "id": "s",
+                "label": "S",
+                "side": "DEFENSE",
+                "x": 4,
+                "y": 4.5
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "lg",
+                "points": [
+                  {
+                    "x": -0.6000000000000001,
+                    "y": 1.5
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "c",
+                "points": [
+                  {
+                    "x": 1,
+                    "y": 1.5
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "rg",
+                "points": [
+                  {
+                    "x": 2.6,
+                    "y": 1.5
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "rt",
+                "points": [
+                  {
+                    "x": 4.2,
+                    "y": 1.5
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "lt",
+                "points": [
+                  {
+                    "x": -1.6,
+                    "y": 1.5
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "rb",
+                "points": [
+                  {
+                    "x": 0.2,
+                    "y": -4.5
+                  },
+                  {
+                    "x": 1.5,
+                    "y": 4
+                  }
+                ],
+                "kind": "run"
+              },
+              {
+                "playerId": "qb",
+                "points": [
+                  {
+                    "x": -3,
+                    "y": -5
+                  },
+                  {
+                    "x": -7,
+                    "y": 2
+                  }
+                ],
+                "kind": "run",
+                "label": "keep"
+              }
+            ],
+            "caption": "Zone read"
+          },
+          "concept": "zone-read"
+        },
+        {
+          "type": "learn",
+          "id": "c5-option-03",
+          "title": "Speed option",
+          "body": "The quarterback attacks the edge with the back trailing for a pitch. If the edge defender takes the quarterback, he pitches; if he takes the back, the quarterback keeps.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": -1.8,
+                "y": -5
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              },
+              {
+                "id": "de1",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": -4.5,
+                "y": 1
+              },
+              {
+                "id": "dt1",
+                "label": "DT",
+                "side": "DEFENSE",
+                "x": -1.2,
+                "y": 1
+              },
+              {
+                "id": "dt2",
+                "label": "DT",
+                "side": "DEFENSE",
+                "x": 1.2,
+                "y": 1
+              },
+              {
+                "id": "de2",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": 4.5,
+                "y": 1
+              },
+              {
+                "id": "s",
+                "label": "S",
+                "side": "DEFENSE",
+                "x": 6.5,
+                "y": 3
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "qb",
+                "points": [
+                  {
+                    "x": 3,
+                    "y": -3.5
+                  },
+                  {
+                    "x": 6,
+                    "y": 0.5
+                  }
+                ],
+                "kind": "run"
+              },
+              {
+                "playerId": "rb",
+                "points": [
+                  {
+                    "x": 5,
+                    "y": -6.5
+                  },
+                  {
+                    "x": 10,
+                    "y": -3
+                  }
+                ],
+                "kind": "pass",
+                "label": "pitch"
+              }
+            ],
+            "caption": "Speed option"
+          },
+          "concept": "option"
+        },
+        {
+          "type": "learn",
+          "id": "c5-option-04",
+          "title": "Triple option",
+          "body": "Three choices on one snap: give to the dive back (reading a defensive lineman), then keep or pitch (reading the next defender outside).",
+          "concept": "option"
+        },
+        {
+          "type": "diagram_tap",
+          "id": "c5-option-05",
+          "prompt": "Tap the defender the quarterback is reading on this zone read.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": -1.8,
+                "y": -5
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              },
+              {
+                "id": "de1",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": -4.5,
+                "y": 1
+              },
+              {
+                "id": "dt1",
+                "label": "DT",
+                "side": "DEFENSE",
+                "x": -1.2,
+                "y": 1
+              },
+              {
+                "id": "dt2",
+                "label": "DT",
+                "side": "DEFENSE",
+                "x": 1.2,
+                "y": 1
+              },
+              {
+                "id": "de2",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": 4.5,
+                "y": 1
+              },
+              {
+                "id": "w",
+                "label": "W",
+                "side": "DEFENSE",
+                "x": -4,
+                "y": 4.5
+              },
+              {
+                "id": "m",
+                "label": "M",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 4.5
+              },
+              {
+                "id": "s",
+                "label": "S",
+                "side": "DEFENSE",
+                "x": 4,
+                "y": 4.5
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "lg",
+                "points": [
+                  {
+                    "x": -0.6000000000000001,
+                    "y": 1.5
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "c",
+                "points": [
+                  {
+                    "x": 1,
+                    "y": 1.5
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "rg",
+                "points": [
+                  {
+                    "x": 2.6,
+                    "y": 1.5
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "rt",
+                "points": [
+                  {
+                    "x": 4.2,
+                    "y": 1.5
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "lt",
+                "points": [
+                  {
+                    "x": -1.6,
+                    "y": 1.5
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "rb",
+                "points": [
+                  {
+                    "x": 0.2,
+                    "y": -4.5
+                  },
+                  {
+                    "x": 1.5,
+                    "y": 4
+                  }
+                ],
+                "kind": "run"
+              },
+              {
+                "playerId": "qb",
+                "points": [
+                  {
+                    "x": -3,
+                    "y": -5
+                  },
+                  {
+                    "x": -7,
+                    "y": 2
+                  }
+                ],
+                "kind": "run",
+                "label": "keep"
+              }
+            ],
+            "caption": ""
+          },
+          "targets": [
+            "de1"
+          ],
+          "explanation": "The left end is the one nobody blocks; his choice tells the quarterback whether to give or keep.",
+          "concept": "zone-read"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "c5-option-06",
+          "prompt": "On a zone read, the unblocked end crashes hard down the line toward the back. What should the quarterback do?",
+          "choices": [
+            "Keep it and run around him",
+            "Hand it off",
+            "Throw deep",
+            "Kneel"
+          ],
+          "answer": 0,
+          "explanation": "If the end chases the back, the space he left is the quarterback's.",
+          "concept": "zone-read"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "c5-option-07",
+          "prompt": "On a speed option, the edge defender charges the quarterback. What's the right play?",
+          "choices": [
+            "Pitch to the back",
+            "Keep it",
+            "Throw it away",
+            "Call timeout"
+          ],
+          "answer": 0,
+          "explanation": "He's committed to the quarterback, so the pitch man is free.",
+          "concept": "option"
+        },
+        {
+          "type": "true_false",
+          "id": "c5-option-08",
+          "statement": "Option plays deliberately leave a defender unblocked.",
+          "answer": true,
+          "explanation": "Reading one defender lets the offense block everyone else and still out-number him.",
+          "concept": "option"
+        }
+      ]
+    },
+    {
+      "id": "c5-rpo",
+      "title": "RPOs",
+      "blurb": "A run and a pass on the same play.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "c5-rpo-01",
+          "title": "Run-pass option",
+          "body": "An RPO pairs a run with a quick pass. The line blocks the run; the quarterback reads one defender after the snap and either hands off or throws.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 1.8,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "h",
+                "label": "H",
+                "side": "OFFENSE",
+                "x": -7,
+                "y": -1
+              },
+              {
+                "id": "de1",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": -4.5,
+                "y": 1
+              },
+              {
+                "id": "dt1",
+                "label": "DT",
+                "side": "DEFENSE",
+                "x": -1.2,
+                "y": 1
+              },
+              {
+                "id": "dt2",
+                "label": "DT",
+                "side": "DEFENSE",
+                "x": 1.2,
+                "y": 1
+              },
+              {
+                "id": "de2",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": 4.5,
+                "y": 1
+              },
+              {
+                "id": "n",
+                "label": "NB",
+                "side": "DEFENSE",
+                "x": -5,
+                "y": 4
+              },
+              {
+                "id": "m",
+                "label": "M",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 4.5
+              },
+              {
+                "id": "s",
+                "label": "S",
+                "side": "DEFENSE",
+                "x": 3,
+                "y": 4.5
+              },
+              {
+                "id": "cb1",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": -12,
+                "y": 6
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "rb",
+                "points": [
+                  {
+                    "x": 0.6,
+                    "y": -3
+                  },
+                  {
+                    "x": -0.8,
+                    "y": 4
+                  }
+                ],
+                "kind": "run"
+              },
+              {
+                "playerId": "h",
+                "points": [
+                  {
+                    "x": -9,
+                    "y": -2
+                  },
+                  {
+                    "x": -12,
+                    "y": -1.5
+                  }
+                ],
+                "kind": "pass",
+                "label": "bubble"
+              }
+            ],
+            "caption": "RPO: inside zone with a bubble"
+          },
+          "concept": "rpo"
+        },
+        {
+          "type": "learn",
+          "id": "c5-rpo-02",
+          "title": "The conflict defender",
+          "body": "The read is usually an overhang defender, such as a nickel back, who has to choose between fitting the run and covering the slot. Whatever he does is wrong.",
+          "concept": "rpo"
+        },
+        {
+          "type": "diagram_tap",
+          "id": "c5-rpo-03",
+          "prompt": "Tap the defender this RPO puts in conflict.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 1.8,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "h",
+                "label": "H",
+                "side": "OFFENSE",
+                "x": -7,
+                "y": -1
+              },
+              {
+                "id": "de1",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": -4.5,
+                "y": 1
+              },
+              {
+                "id": "dt1",
+                "label": "DT",
+                "side": "DEFENSE",
+                "x": -1.2,
+                "y": 1
+              },
+              {
+                "id": "dt2",
+                "label": "DT",
+                "side": "DEFENSE",
+                "x": 1.2,
+                "y": 1
+              },
+              {
+                "id": "de2",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": 4.5,
+                "y": 1
+              },
+              {
+                "id": "n",
+                "label": "NB",
+                "side": "DEFENSE",
+                "x": -5,
+                "y": 4
+              },
+              {
+                "id": "m",
+                "label": "M",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 4.5
+              },
+              {
+                "id": "s",
+                "label": "S",
+                "side": "DEFENSE",
+                "x": 3,
+                "y": 4.5
+              },
+              {
+                "id": "cb1",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": -12,
+                "y": 6
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "rb",
+                "points": [
+                  {
+                    "x": 0.6,
+                    "y": -3
+                  },
+                  {
+                    "x": -0.8,
+                    "y": 4
+                  }
+                ],
+                "kind": "run"
+              },
+              {
+                "playerId": "h",
+                "points": [
+                  {
+                    "x": -9,
+                    "y": -2
+                  },
+                  {
+                    "x": -12,
+                    "y": -1.5
+                  }
+                ],
+                "kind": "pass",
+                "label": "bubble"
+              }
+            ],
+            "caption": ""
+          },
+          "targets": [
+            "n"
+          ],
+          "explanation": "The nickel back sits between the box and the slot: he can stop the run or cover the bubble, not both.",
+          "concept": "rpo"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "c5-rpo-04",
+          "prompt": "The nickel steps into the box to stop the run. What does the quarterback do?",
+          "choices": [
+            "Throw the bubble to the slot",
+            "Hand off anyway",
+            "Kneel",
+            "Punt"
+          ],
+          "answer": 0,
+          "explanation": "With the nickel in the box, the slot is uncovered: throw it.",
+          "concept": "rpo"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "c5-rpo-05",
+          "prompt": "The nickel stays out over the slot. What does the quarterback do?",
+          "choices": [
+            "Hand off",
+            "Throw the bubble",
+            "Spike it",
+            "Run backwards"
+          ],
+          "answer": 0,
+          "explanation": "With the nickel out, the box has one fewer defender: hand off.",
+          "concept": "rpo"
+        },
+        {
+          "type": "true_false",
+          "id": "c5-rpo-06",
+          "statement": "On an RPO, offensive linemen block as if it's a run.",
+          "answer": true,
+          "explanation": "They run-block, which is why the pass has to come out quickly: linemen can't be far downfield on a pass.",
+          "concept": "rpo"
+        }
+      ]
+    }
+  ]
+}
