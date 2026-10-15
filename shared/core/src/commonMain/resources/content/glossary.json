@@ -937,6 +937,62 @@
       "kid": "Hand off or keep, based on one unblocked defender.",
       "full": "Inside zone with the backside end left unblocked; if he crashes on the back, the quarterback keeps; if he stays, the quarterback gives.",
       "level": 5
+    },
+    {
+      "id": "box-count",
+      "term": "Box count",
+      "kid": "How many defenders are near the line.",
+      "full": "The number of defenders in the box compared with the offense's blockers; more blockers favours the run, more defenders the pass.",
+      "level": 6
+    },
+    {
+      "id": "cover-6",
+      "term": "Cover 6",
+      "kid": "Quarters to one side, Cover 2 to the other.",
+      "full": "Quarter-quarter-half: quarters to one side of the formation and halves (Cover 2) to the other.",
+      "level": 6
+    },
+    {
+      "id": "option-route",
+      "term": "Option route",
+      "kid": "A route the receiver chooses after the snap.",
+      "full": "A route that breaks away from man leverage or settles in a zone window, read by both the receiver and the quarterback.",
+      "level": 6
+    },
+    {
+      "id": "pattern-matching",
+      "term": "Pattern matching",
+      "kid": "Zone coverage that turns into man as routes develop.",
+      "full": "Zone rules that convert to man once routes declare; quarters (with variations such as palms) is the classic example. Rules and names vary by staff.",
+      "level": 6
+    },
+    {
+      "id": "pro-rules",
+      "term": "NFL vs college rules",
+      "kid": "Rules that differ between the pros and college.",
+      "full": "Examples: two feet in for an NFL catch (one in college); NFL runners must be touched down; narrower NFL hash marks; NFL pass interference is a spot foul (college: up to 15 yards).",
+      "level": 6
+    },
+    {
+      "id": "progression",
+      "term": "Progression",
+      "kid": "The order a quarterback reads his receivers.",
+      "full": "The sequence of reads on a pass play: hot (against a blitz), first, second and third reads, then the checkdown.",
+      "level": 6
+    },
+    {
+      "id": "tampa-2",
+      "term": "Tampa 2",
+      "kid": "Cover 2 with the middle linebacker running deep.",
+      "full": "Cover 2 in which the Mike linebacker carries the deep middle, closing the hole between the safeties.",
+      "level": 6
+    },
+    {
+      "id": "two-man",
+      "term": "2-man",
+      "kid": "Man coverage with two deep safeties.",
+      "full": "Man coverage underneath with two safeties splitting the deep field in halves, letting corners play tight.",
+      "level": 6
     }
   ]
 }

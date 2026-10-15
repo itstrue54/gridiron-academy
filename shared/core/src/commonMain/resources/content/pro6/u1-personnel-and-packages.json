@@ -1,0 +1,311 @@
+{
+  "id": "pro6-u1",
+  "title": "Personnel and Packages",
+  "lessons": [
+    {
+      "id": "p6-groupings",
+      "title": "Every Personnel Grouping",
+      "blurb": "From empty to jumbo.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "p6-groupings-01",
+          "title": "The full menu",
+          "body": "Backs then tight ends: 00, 01 and 02 empty the backfield; 10 and 11 spread it; 12, 13, 21, 22 and 23 bring more blockers. Jumbo adds a sixth offensive lineman for short yardage.",
+          "concept": "personnel"
+        },
+        {
+          "type": "learn",
+          "id": "p6-groupings-02",
+          "title": "What it signals",
+          "body": "Lighter groupings (10, 11, 00) lean pass and pull defensive backs onto the field. Heavier ones (12, 13, 21, 22, jumbo) lean run and invite linebackers. Good offenses run and pass from the same grouping to break the pattern.",
+          "concept": "personnel"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "p6-groupings-03",
+          "prompt": "How many wide receivers are in 01 personnel?",
+          "choices": [
+            "4",
+            "3",
+            "5",
+            "2"
+          ],
+          "answer": 0,
+          "explanation": "0 backs + 1 tight end = 1, so 5 - 1 = 4 receivers, with an empty backfield.",
+          "concept": "personnel"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "p6-groupings-04",
+          "prompt": "How many wide receivers are in 23 personnel?",
+          "choices": [
+            "0",
+            "1",
+            "2",
+            "3"
+          ],
+          "answer": 0,
+          "explanation": "2 backs + 3 tight ends = 5: no receivers at all. A goal-line grouping.",
+          "concept": "personnel"
+        },
+        {
+          "type": "match",
+          "id": "p6-groupings-05",
+          "prompt": "Match each grouping to its usual purpose.",
+          "pairs": [
+            {
+              "left": "Jumbo",
+              "right": "Short yardage with a sixth lineman"
+            },
+            {
+              "left": "10",
+              "right": "Four receivers to spread the field"
+            },
+            {
+              "left": "22",
+              "right": "Heavy run with two backs and two tight ends"
+            },
+            {
+              "left": "00",
+              "right": "Five receivers, empty backfield"
+            }
+          ],
+          "explanation": "The grouping tells you what the offense probably wants, and good offenses use that against you.",
+          "concept": "personnel"
+        },
+        {
+          "type": "true_false",
+          "id": "p6-groupings-06",
+          "statement": "Good offenses run and pass from the same personnel to keep defenses guessing.",
+          "answer": true,
+          "explanation": "If a grouping always meant one thing, defenses would just match it.",
+          "concept": "personnel"
+        }
+      ]
+    },
+    {
+      "id": "p6-packages",
+      "title": "Defensive Packages",
+      "blurb": "Matching the offense's personnel.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "p6-packages-01",
+          "title": "Count the defensive backs",
+          "body": "Base defenses (4-3 or 3-4) play four defensive backs, nickel five, dime six, and some packages seven. Teams name six- and seven-back packages differently, so this course goes by the count.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "h",
+                "label": "H",
+                "side": "OFFENSE",
+                "x": -7,
+                "y": -1
+              },
+              {
+                "id": "f",
+                "label": "F",
+                "side": "OFFENSE",
+                "x": 7,
+                "y": -1
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": 0
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 1.8,
+                "y": -5
+              },
+              {
+                "id": "de1",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": -4.5,
+                "y": 1
+              },
+              {
+                "id": "dt1",
+                "label": "DT",
+                "side": "DEFENSE",
+                "x": -1.2,
+                "y": 1
+              },
+              {
+                "id": "dt2",
+                "label": "DT",
+                "side": "DEFENSE",
+                "x": 1.2,
+                "y": 1
+              },
+              {
+                "id": "de2",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": 4.5,
+                "y": 1
+              },
+              {
+                "id": "w",
+                "label": "W",
+                "side": "DEFENSE",
+                "x": -3,
+                "y": 4.5
+              },
+              {
+                "id": "m",
+                "label": "M",
+                "side": "DEFENSE",
+                "x": 1.5,
+                "y": 4.5
+              },
+              {
+                "id": "nb",
+                "label": "NB",
+                "side": "DEFENSE",
+                "x": 7,
+                "y": 4
+              },
+              {
+                "id": "cb1",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": -12,
+                "y": 6
+              },
+              {
+                "id": "cb2",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": 12,
+                "y": 6
+              },
+              {
+                "id": "fs",
+                "label": "FS",
+                "side": "DEFENSE",
+                "x": -6,
+                "y": 13
+              },
+              {
+                "id": "ss",
+                "label": "SS",
+                "side": "DEFENSE",
+                "x": 6,
+                "y": 13
+              }
+            ],
+            "caption": "Nickel: five defensive backs"
+          },
+          "concept": "dime"
+        },
+        {
+          "type": "learn",
+          "id": "p6-packages-02",
+          "title": "Big nickel and goal line",
+          "body": "Big nickel uses a third safety instead of a nickel corner to stay strong against the run. Goal-line defenses go the other way: five or six linemen and only a few defensive backs.",
+          "concept": "goal-line"
+        },
+        {
+          "type": "learn",
+          "id": "p6-packages-03",
+          "title": "The chess match",
+          "body": "Offenses pick personnel; defenses answer. Heavy offensive groupings draw base or big nickel; spread groupings draw nickel and dime. Then the offense attacks whatever the defense gave up.",
+          "concept": "dime"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "p6-packages-04",
+          "prompt": "The offense brings in 10 personnel (four receivers). What do most defenses use?",
+          "choices": [
+            "Dime (six defensive backs)",
+            "Goal line",
+            "Base 4-3",
+            "Five linemen"
+          ],
+          "answer": 0,
+          "explanation": "Four receivers usually draws six defensive backs.",
+          "concept": "dime"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "p6-packages-05",
+          "prompt": "The defense answers 12 personnel with big nickel. Why a safety instead of a corner?",
+          "choices": [
+            "Safeties are usually sturdier against the run",
+            "Corners can't cover tight ends at all",
+            "It's required by the rules",
+            "To blitz more"
+          ],
+          "answer": 0,
+          "explanation": "Against two tight ends the extra back has to tackle; a safety is the better fit.",
+          "concept": "dime"
+        },
+        {
+          "type": "true_false",
+          "id": "p6-packages-06",
+          "statement": "A goal-line defense usually has more defensive linemen than a base defense.",
+          "answer": true,
+          "explanation": "Five or six linemen to stop short-yardage runs.",
+          "concept": "goal-line"
+        }
+      ]
+    }
+  ]
+}

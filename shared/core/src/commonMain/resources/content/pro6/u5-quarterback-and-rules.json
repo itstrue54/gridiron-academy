@@ -1,0 +1,140 @@
+{
+  "id": "pro6-u5",
+  "title": "The Quarterback and the Rulebook",
+  "lessons": [
+    {
+      "id": "p6-qb",
+      "title": "The Quarterback's Process",
+      "blurb": "Progressions, hots, sight adjusts and checks.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "p6-qb-01",
+          "title": "Progressions",
+          "body": "Each play has an order of reads: the hot if there's a blitz, then the first read, second, third, and finally a checkdown to the back. The coverage decides which side he starts on.",
+          "concept": "progression"
+        },
+        {
+          "type": "learn",
+          "id": "p6-qb-02",
+          "title": "Option routes",
+          "body": "Some receivers choose their route after the snap: against man, break away from the defender's leverage; against zone, settle in the open window between defenders.",
+          "concept": "option-route"
+        },
+        {
+          "type": "learn",
+          "id": "p6-qb-03",
+          "title": "Checks and kills",
+          "body": "At the line the quarterback can check to a better play, or 'kill' to the second of two plays called in the huddle, based on the look.",
+          "concept": "audible"
+        },
+        {
+          "type": "order",
+          "id": "p6-qb-04",
+          "prompt": "Put a standard dropback progression in order.",
+          "items": [
+            "Hot read (if they blitz)",
+            "First read",
+            "Second read",
+            "Checkdown to the back"
+          ],
+          "explanation": "Beat the blitz first, then work the progression, and take the checkdown when nothing else is open.",
+          "concept": "progression"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "p6-qb-05",
+          "prompt": "On an option route against zone, what does the receiver do?",
+          "choices": [
+            "Settle in the open window",
+            "Run as deep as possible",
+            "Block",
+            "Stop at the line"
+          ],
+          "answer": 0,
+          "explanation": "Against zone, find the space between defenders and sit down.",
+          "concept": "option-route"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "p6-qb-06",
+          "prompt": "On an option route against man with inside leverage, where does the receiver break?",
+          "choices": [
+            "Outside, away from the defender",
+            "Inside, into the defender",
+            "Straight back",
+            "Nowhere"
+          ],
+          "answer": 0,
+          "explanation": "Break away from leverage: the defender is inside, so go outside.",
+          "concept": "option-route"
+        },
+        {
+          "type": "true_false",
+          "id": "p6-qb-07",
+          "statement": "A 'kill' call switches to the second of two plays called in the huddle.",
+          "answer": true,
+          "explanation": "It lets the quarterback pick the better play once he sees the defense.",
+          "concept": "audible"
+        }
+      ]
+    },
+    {
+      "id": "p6-rules",
+      "title": "NFL vs College Rules",
+      "blurb": "Same sport, different rulebooks.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "p6-rules-01",
+          "title": "Catches and tackles",
+          "body": "An NFL catch needs two feet down in bounds; college needs one. In college a ball carrier is down when a knee touches; in the NFL he's down only if a defender touched him.",
+          "concept": "pro-rules"
+        },
+        {
+          "type": "learn",
+          "id": "p6-rules-02",
+          "title": "Hashes and flags",
+          "body": "NFL hash marks are much closer together, so there's less difference between the wide and short sides of the field. Defensive pass interference is a spot foul in the NFL; in college it's at most 15 yards.",
+          "concept": "pro-rules"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "p6-rules-03",
+          "prompt": "A receiver catches the ball with one foot in bounds. Catch in the NFL?",
+          "choices": [
+            "No, the NFL needs two feet",
+            "Yes",
+            "Only in the end zone",
+            "Only on 4th down"
+          ],
+          "answer": 0,
+          "explanation": "Two feet in bounds in the NFL; one is enough in college.",
+          "concept": "pro-rules"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "p6-rules-04",
+          "prompt": "A ball carrier slips and his knee hits the ground with nobody touching him. In the NFL, is he down?",
+          "choices": [
+            "No, he can get up and keep running",
+            "Yes",
+            "Only if he's the quarterback",
+            "Only in college"
+          ],
+          "answer": 0,
+          "explanation": "In the NFL he must be touched down by a defender. In college the knee down ends it.",
+          "concept": "pro-rules"
+        },
+        {
+          "type": "true_false",
+          "id": "p6-rules-05",
+          "statement": "College defensive pass interference can be worth more than 15 yards.",
+          "answer": false,
+          "explanation": "College DPI is capped at 15 yards; the NFL spots it where the foul happened.",
+          "concept": "pass-interference"
+        }
+      ]
+    }
+  ]
+}

@@ -15,7 +15,7 @@ and validated, `preview` = exemplar content proving the model, `planned` = to be
 | 3 | Armchair Coach | adult | fans | Diagram dash | **done** (`adult-3`, coach review pending) |
 | 4 | Varsity | shared | both | Read the defense | **done** (`varsity-4`, coach review pending) |
 | 5 | College | shared | | Game day | **done** (`college-5`, coach review pending) |
-| 6 | Pro | shared | | Read the defense | preview (personnel) |
+| 6 | Pro | shared | | Read the defense | **done** (`pro-6`, coach review pending) |
 | 7 | Coordinator | shared | | Read the defense | preview (disguise) |
 | 8 | Architect | shared | | Game day | planned |
 
@@ -100,7 +100,17 @@ sight adjust, max protect); blitz families (zone blitz, fire zone, double A-gap,
 overload, creeper); sub packages (nickel, dime, quarter, dollar, 3-3-5); screen game;
 play-action and boot; clock and situational football (red zone, goal line, two-minute).
 
-## Level 6: Pro
+## Level 6: Pro (done; see `docs/content-review/level-6.md`)
+As written: 5 units, 10 drills, 59 steps. Every offensive grouping (00 to 23 and jumbo)
+and defensive packages taught by defensive-back count (names for six- and seven-back
+packages vary, so the course doesn't pick one staff's); Cover 1 robber, 2-man, Cover 2
+vs Tampa 2, Cover 3 sky/buzz/cloud, quarters with pattern matching and palms, Cover 6
+(12 read-the-defense items); pre-snap reads (safeties, corners, box count with
+pictures, motion); the quarterback's progression, option routes and checks; and NFL vs
+college rule differences. Deliberately left out pending review: MOD, Cover 9 and Cover 7,
+whose names mean different coverages on different staffs.
+
+Originally planned:
 **Offensive personnel:** 00, 01, 02, 10, 11, 12, 13, 20, 21, 22, 23 and 6-OL jumbo, with
 what each is used for and what defenses answer with. **Defensive packages:** base 4-3 and
 3-4, nickel 4-2-5, dime 4-1-6, quarter 3-2-6, big nickel, dollar 3-1-7, goal line 6-2-3 and

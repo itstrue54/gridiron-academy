@@ -176,6 +176,30 @@
         "gameQuestions": 10,
         "gamePassPct": 70
       }
+    },
+    {
+      "id": "pro-6",
+      "number": 6,
+      "track": "shared",
+      "title": "Pro",
+      "tagline": "Every grouping and package, coverage variations, pre-snap reads and the quarterback's process.",
+      "requires": [
+        "college-5"
+      ],
+      "unitFiles": [
+        "pro6/u1-personnel-and-packages.json",
+        "pro6/u2-man-and-two-high.json",
+        "pro6/u3-three-deep-and-quarters.json",
+        "pro6/u4-presnap-reads.json",
+        "pro6/u5-quarterback-and-rules.json"
+      ],
+      "gate": {
+        "testPassPct": 80,
+        "testQuestions": 12,
+        "game": "read_defense",
+        "gameQuestions": 10,
+        "gamePassPct": 70
+      }
     }
   ]
 }

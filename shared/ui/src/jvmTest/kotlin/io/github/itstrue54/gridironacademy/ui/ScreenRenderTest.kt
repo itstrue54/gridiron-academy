@@ -241,4 +241,17 @@ class ScreenRenderTest {
         sharedShot("51-nickel-tap", AgeBand.AGE_10_12, "c5-subs-04", c)
         sharedShot("52-gameday", AgeBand.AGE_18_PLUS, "c5-gameday-06", c, answer = { Answer.Choice(0) })
     }
+
+    @Test fun levelSix() {
+        val p = "pro-6"
+        val reveal: (Step) -> Answer = { Answer.Choice((it as ReadDefense).answer) }
+        sharedShot("53-robber", AgeBand.AGE_18_PLUS, "p6-cover1-03", p, reveal)
+        sharedShot("54-2man", AgeBand.AGE_18_PLUS, "p6-cover1-04", p, reveal)
+        sharedShot("55-tampa2", AgeBand.AGE_18_PLUS, "p6-tampa-03", p, reveal)
+        sharedShot("56-buzz", AgeBand.AGE_18_PLUS, "p6-cover3-05", p, reveal)
+        sharedShot("57-cloud", AgeBand.AGE_18_PLUS, "p6-cover3-06", p, reveal)
+        sharedShot("58-cover6", AgeBand.AGE_18_PLUS, "p6-quarters-05", p, reveal)
+        sharedShot("59-box6", AgeBand.AGE_18_PLUS, "p6-presnap-03", p)
+        sharedShot("60-box8", AgeBand.AGE_18_PLUS, "p6-presnap-04", p)
+    }
 }
