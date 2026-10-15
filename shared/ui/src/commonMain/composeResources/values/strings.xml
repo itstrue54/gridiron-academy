@@ -121,6 +121,8 @@
     <string name="level_done_adult">Level %1$d complete</string>
     <string name="level_done_body_kid">You finished %1$s. Your next level opens as soon as it's written.</string>
     <string name="level_done_body_adult">%1$s is done. The next level opens as soon as it's published.</string>
+    <string name="level_done_next_kid">You finished %1$s. Level %2$d, %3$s, is open!</string>
+    <string name="level_done_next_adult">%1$s is done. Level %2$d, %3$s, is open.</string>
     <string name="your_score">%1$d%</string>
     <string name="speed_summary">%1$d pts, best streak %2$d</string>
     <string name="review_title">Look again</string>

@@ -31,10 +31,26 @@ Okie/Tite, the 46 Bear, counter/trap/duo, the Smash and Snag concepts, Cover 0/1
 Tampa 2/buzz/Cover 6, fire zone, overload, the speed-option and zone-read keys, the clock
 decisions (kneel, spike, field-goal distances), and the coverage-beater match.
 
+## Phone run (S24, adult profile)
+
+- Level 1: all six drills, Checkpoint 100%, Speed Round 100% (streak 10).
+- Levels 2, 3 and 4 by test-out: every Checkpoint and every Big Game type (Game Day,
+  Diagram Dash, Read the Defense) played through and passed. Level 5 unlocked.
+- Read the Defense: the reveal plays with ghosts, blitz and drop paths, and "Replay the
+  snap". The zoom buttons work, and dragging pans the zoomed field. A two-finger pinch
+  can't be sent over adb, so pinch itself still needs a finger test.
+- Fixed on the way: the result screen centred its content on the widest line rather than
+  the screen, and "Level N complete" said the next level "opens as soon as it's
+  published" even when it was already open. It now names the level that opened.
+- No crashes in logcat.
+
 ## Still to do
 
-- Phone: finish Level 1 through the Checkpoint and Speed Round, then the read-the-defense
-  reveals and pinch zoom on a Level 4+ profile.
-- A human coach should still sign off the per-level lists in `level-2.md` … `level-8.md`.
-- Product gaps a coach would ask for: a glossary screen, daily review, Level 0, and the
-  Coach & Parent app (assignment of specific schemes).
+- A human coach should sign off the per-level lists in `level-2.md` … `level-8.md`; the
+  ~620 steps below Jev's top 42 have not had a coach's read.
+- Product notes from the run:
+  - Zoomed in one step, the corners leave the frame, though their depth is a key tell;
+    consider a first zoom step that keeps the whole secondary in view.
+  - One tap on ✕ leaves a 12-question Checkpoint without asking (by design for
+    adults, DESIGN §2); a confirm after the first answer would save a misclick.
+  - A glossary screen, daily review, Level 0, and the Coach & Parent app.

@@ -45,6 +45,8 @@ import io.github.itstrue54.gridironacademy.ui.resources.level_done_adult
 import io.github.itstrue54.gridironacademy.ui.resources.level_done_body_adult
 import io.github.itstrue54.gridironacademy.ui.resources.level_done_body_kid
 import io.github.itstrue54.gridironacademy.ui.resources.level_done_kid
+import io.github.itstrue54.gridironacademy.ui.resources.level_done_next_adult
+import io.github.itstrue54.gridironacademy.ui.resources.level_done_next_kid
 import io.github.itstrue54.gridironacademy.ui.resources.play_again
 import io.github.itstrue54.gridironacademy.ui.resources.play_big_game
 import io.github.itstrue54.gridironacademy.ui.resources.review_answer
@@ -71,12 +73,15 @@ fun GateDoneScreen(state: LearnerAppState, done: Screen.GateDone) {
     val c = Gridiron.colors
     val kid = Gridiron.skin.voice == Voice.KID
     val level = state.content.level(done.levelId)
+    val next = state.levels.firstOrNull { it.number == level.number + 1 }
     val headline = when {
         done.levelPassed -> stringResource(if (kid) Res.string.level_done_kid else Res.string.level_done_adult, level.number)
         done.gate == Gate.CHECKPOINT -> stringResource(Res.string.checkpoint)
         else -> stringResource(Res.string.big_game)
     }
     val message = when {
+        done.levelPassed && next != null ->
+            stringResource(if (kid) Res.string.level_done_next_kid else Res.string.level_done_next_adult, level.title, next.number, next.title)
         done.levelPassed -> stringResource(if (kid) Res.string.level_done_body_kid else Res.string.level_done_body_adult, level.title)
         done.gate == Gate.CHECKPOINT && done.passed && done.testOut ->
             stringResource(if (kid) Res.string.testout_passed_kid else Res.string.testout_passed_adult)
@@ -88,7 +93,8 @@ fun GateDoneScreen(state: LearnerAppState, done: Screen.GateDone) {
     val stars = LessonSession.stars(done.scorePct)
     Column(Modifier.fillMaxSize().screenBackground().safeDrawingPadding().padding(Gridiron.skin.gutter)) {
         Column(
-            Modifier.weight(1f).verticalScroll(rememberScrollState()),
+            // Full width, or "centred" means centred on the widest line, not the screen.
+            Modifier.weight(1f).fillMaxWidth().verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(14.dp),
         ) {
