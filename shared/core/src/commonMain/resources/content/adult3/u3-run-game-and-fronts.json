@@ -1,0 +1,1610 @@
+{
+  "id": "adult3-u3",
+  "title": "Run Game and Fronts",
+  "lessons": [
+    {
+      "id": "a3-runs",
+      "title": "The Run Game",
+      "blurb": "Five runs every fan should know.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "a3-runs-01",
+          "title": "Dive and sweep",
+          "body": "A dive hits quickly between the tackles. A sweep attacks the edge, often with guards pulling out in front.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -1.2
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -6
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "rb",
+                "points": [
+                  {
+                    "x": 7,
+                    "y": -4
+                  },
+                  {
+                    "x": 10,
+                    "y": 0
+                  },
+                  {
+                    "x": 11,
+                    "y": 6
+                  }
+                ],
+                "kind": "run"
+              },
+              {
+                "playerId": "lg",
+                "points": [
+                  {
+                    "x": 2,
+                    "y": -1.5
+                  },
+                  {
+                    "x": 6.5,
+                    "y": -1
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "rg",
+                "points": [
+                  {
+                    "x": 4,
+                    "y": -1.2
+                  },
+                  {
+                    "x": 8,
+                    "y": 1
+                  }
+                ],
+                "kind": "block"
+              }
+            ],
+            "caption": "Sweep"
+          },
+          "concept": "sweep"
+        },
+        {
+          "type": "learn",
+          "id": "a3-runs-02",
+          "title": "Counter",
+          "body": "The back takes a step one way to pull the defense, then cuts back behind a pulling lineman going the other way.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -1.2
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -6
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "rb",
+                "points": [
+                  {
+                    "x": -1.5,
+                    "y": -5
+                  },
+                  {
+                    "x": 1.5,
+                    "y": -3
+                  },
+                  {
+                    "x": 2.2,
+                    "y": 4
+                  }
+                ],
+                "kind": "run"
+              },
+              {
+                "playerId": "lg",
+                "points": [
+                  {
+                    "x": 1.5,
+                    "y": -1.5
+                  },
+                  {
+                    "x": 4.2,
+                    "y": 1
+                  }
+                ],
+                "kind": "block"
+              }
+            ],
+            "caption": "Counter"
+          },
+          "concept": "counter"
+        },
+        {
+          "type": "learn",
+          "id": "a3-runs-03",
+          "title": "Draw and screen",
+          "body": "A draw shows pass, drawing the rush upfield, then hands off. A screen lets rushers through and throws behind them to a back with linemen out in front.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -1.2
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -6
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "rb",
+                "points": [
+                  {
+                    "x": 5,
+                    "y": -3
+                  },
+                  {
+                    "x": 8,
+                    "y": -2
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "rg",
+                "points": [
+                  {
+                    "x": 4,
+                    "y": -1
+                  },
+                  {
+                    "x": 7,
+                    "y": 1
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "rt",
+                "points": [
+                  {
+                    "x": 6,
+                    "y": -1
+                  },
+                  {
+                    "x": 9,
+                    "y": 2
+                  }
+                ],
+                "kind": "block"
+              }
+            ],
+            "caption": "Screen"
+          },
+          "concept": "draw"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a3-runs-04",
+          "prompt": "Name this play.",
+          "choices": [
+            "Screen",
+            "Draw",
+            "Dive",
+            "Sweep"
+          ],
+          "answer": 0,
+          "explanation": "Linemen release out in front and the back catches a short throw behind them: a screen.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -1.2
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -6
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "rb",
+                "points": [
+                  {
+                    "x": 5,
+                    "y": -3
+                  },
+                  {
+                    "x": 8,
+                    "y": -2
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "rg",
+                "points": [
+                  {
+                    "x": 4,
+                    "y": -1
+                  },
+                  {
+                    "x": 7,
+                    "y": 1
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "rt",
+                "points": [
+                  {
+                    "x": 6,
+                    "y": -1
+                  },
+                  {
+                    "x": 9,
+                    "y": 2
+                  }
+                ],
+                "kind": "block"
+              }
+            ],
+            "caption": ""
+          },
+          "concept": "screen"
+        },
+        {
+          "type": "diagram_tap",
+          "id": "a3-runs-05",
+          "prompt": "Tap the pulling lineman on this counter.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -1.2
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -6
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "rb",
+                "points": [
+                  {
+                    "x": -1.5,
+                    "y": -5
+                  },
+                  {
+                    "x": 1.5,
+                    "y": -3
+                  },
+                  {
+                    "x": 2.2,
+                    "y": 4
+                  }
+                ],
+                "kind": "run"
+              },
+              {
+                "playerId": "lg",
+                "points": [
+                  {
+                    "x": 1.5,
+                    "y": -1.5
+                  },
+                  {
+                    "x": 4.2,
+                    "y": 1
+                  }
+                ],
+                "kind": "block"
+              }
+            ],
+            "caption": ""
+          },
+          "targets": [
+            "lg"
+          ],
+          "explanation": "The left guard pulls across the formation to lead the cutback.",
+          "concept": "pull-block"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a3-runs-06",
+          "prompt": "Which play is designed to punish a defense that rushes hard upfield?",
+          "choices": [
+            "Draw",
+            "Dive",
+            "Sweep",
+            "Kneel"
+          ],
+          "answer": 0,
+          "explanation": "The draw invites the rush, then runs right past it.",
+          "concept": "draw"
+        }
+      ]
+    },
+    {
+      "id": "a3-blocking",
+      "title": "Blocking Basics",
+      "blurb": "How linemen move people.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "a3-blocking-01",
+          "title": "Base and double team",
+          "body": "A base block is one blocker on the man in front of him. A double team puts two on one, and one of them climbs to a linebacker.",
+          "concept": "double-team"
+        },
+        {
+          "type": "learn",
+          "id": "a3-blocking-02",
+          "title": "Pull and kick out",
+          "body": "A pulling lineman leaves his spot to block somewhere else, often kicking the end man of the line outward so the runner can cut inside.",
+          "concept": "pull-block"
+        },
+        {
+          "type": "diagram_tap",
+          "id": "a3-blocking-03",
+          "prompt": "Tap the two pulling guards on this sweep.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -1.2
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -6
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "rb",
+                "points": [
+                  {
+                    "x": 7,
+                    "y": -4
+                  },
+                  {
+                    "x": 10,
+                    "y": 0
+                  },
+                  {
+                    "x": 11,
+                    "y": 6
+                  }
+                ],
+                "kind": "run"
+              },
+              {
+                "playerId": "lg",
+                "points": [
+                  {
+                    "x": 2,
+                    "y": -1.5
+                  },
+                  {
+                    "x": 6.5,
+                    "y": -1
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "rg",
+                "points": [
+                  {
+                    "x": 4,
+                    "y": -1.2
+                  },
+                  {
+                    "x": 8,
+                    "y": 1
+                  }
+                ],
+                "kind": "block"
+              }
+            ],
+            "caption": ""
+          },
+          "targets": [
+            "lg",
+            "rg"
+          ],
+          "explanation": "Both guards pull toward the sideline to lead the sweep.",
+          "concept": "pull-block"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a3-blocking-04",
+          "prompt": "Two linemen block one defender, then one moves on to a linebacker. What is that?",
+          "choices": [
+            "A double team",
+            "A pull",
+            "A screen",
+            "Holding"
+          ],
+          "answer": 0,
+          "explanation": "Double teams move the defender, then one blocker climbs to the second level.",
+          "concept": "double-team"
+        },
+        {
+          "type": "true_false",
+          "id": "a3-blocking-05",
+          "statement": "A pulling guard leaves his spot to block elsewhere.",
+          "answer": true,
+          "explanation": "Yes. Pulling gets an extra blocker to the point of attack.",
+          "concept": "pull-block"
+        }
+      ]
+    },
+    {
+      "id": "a3-fronts",
+      "title": "4-3 and 3-4",
+      "blurb": "How each front plays the run and the rush.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "a3-fronts-01",
+          "title": "4-3",
+          "body": "Four linemen and three linebackers: Will, Mike and Sam. Linemen usually attack one gap each and try to get upfield.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": -1
+              },
+              {
+                "id": "de1",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": -4.5,
+                "y": 1
+              },
+              {
+                "id": "dt1",
+                "label": "DT",
+                "side": "DEFENSE",
+                "x": -1.2,
+                "y": 1
+              },
+              {
+                "id": "dt2",
+                "label": "DT",
+                "side": "DEFENSE",
+                "x": 1.2,
+                "y": 1
+              },
+              {
+                "id": "de2",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": 4.5,
+                "y": 1
+              },
+              {
+                "id": "wlb",
+                "label": "W",
+                "side": "DEFENSE",
+                "x": -4,
+                "y": 4.5
+              },
+              {
+                "id": "mlb",
+                "label": "M",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 4.5
+              },
+              {
+                "id": "slb",
+                "label": "S",
+                "side": "DEFENSE",
+                "x": 4,
+                "y": 4.5
+              },
+              {
+                "id": "cb1",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": -12,
+                "y": 6
+              },
+              {
+                "id": "cb2",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": 12,
+                "y": 6
+              },
+              {
+                "id": "fs",
+                "label": "FS",
+                "side": "DEFENSE",
+                "x": -6,
+                "y": 13
+              },
+              {
+                "id": "ss",
+                "label": "SS",
+                "side": "DEFENSE",
+                "x": 6,
+                "y": 13
+              }
+            ],
+            "caption": "4-3 front"
+          },
+          "concept": "four-three"
+        },
+        {
+          "type": "learn",
+          "id": "a3-fronts-02",
+          "title": "3-4",
+          "body": "Three linemen and four linebackers. The nose tackle and ends often occupy blockers so the linebackers run free; the outside linebackers rush the passer.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": -1
+              },
+              {
+                "id": "de1",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": -3,
+                "y": 1
+              },
+              {
+                "id": "nt",
+                "label": "NT",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 1
+              },
+              {
+                "id": "de2",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": 3,
+                "y": 1
+              },
+              {
+                "id": "olb1",
+                "label": "OLB",
+                "side": "DEFENSE",
+                "x": -6,
+                "y": 1.5
+              },
+              {
+                "id": "ilb1",
+                "label": "ILB",
+                "side": "DEFENSE",
+                "x": -2,
+                "y": 4.5
+              },
+              {
+                "id": "ilb2",
+                "label": "ILB",
+                "side": "DEFENSE",
+                "x": 2,
+                "y": 4.5
+              },
+              {
+                "id": "olb2",
+                "label": "OLB",
+                "side": "DEFENSE",
+                "x": 6,
+                "y": 1.5
+              },
+              {
+                "id": "cb1",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": -12,
+                "y": 6
+              },
+              {
+                "id": "cb2",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": 12,
+                "y": 6
+              },
+              {
+                "id": "fs",
+                "label": "FS",
+                "side": "DEFENSE",
+                "x": -6,
+                "y": 13
+              },
+              {
+                "id": "ss",
+                "label": "SS",
+                "side": "DEFENSE",
+                "x": 6,
+                "y": 13
+              }
+            ],
+            "caption": "3-4 front"
+          },
+          "concept": "three-four"
+        },
+        {
+          "type": "diagram_tap",
+          "id": "a3-fronts-03",
+          "prompt": "Tap the two defensive tackles in this 4-3.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": -1
+              },
+              {
+                "id": "de1",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": -4.5,
+                "y": 1
+              },
+              {
+                "id": "dt1",
+                "label": "DT",
+                "side": "DEFENSE",
+                "x": -1.2,
+                "y": 1
+              },
+              {
+                "id": "dt2",
+                "label": "DT",
+                "side": "DEFENSE",
+                "x": 1.2,
+                "y": 1
+              },
+              {
+                "id": "de2",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": 4.5,
+                "y": 1
+              },
+              {
+                "id": "wlb",
+                "label": "W",
+                "side": "DEFENSE",
+                "x": -4,
+                "y": 4.5
+              },
+              {
+                "id": "mlb",
+                "label": "M",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 4.5
+              },
+              {
+                "id": "slb",
+                "label": "S",
+                "side": "DEFENSE",
+                "x": 4,
+                "y": 4.5
+              },
+              {
+                "id": "cb1",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": -12,
+                "y": 6
+              },
+              {
+                "id": "cb2",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": 12,
+                "y": 6
+              },
+              {
+                "id": "fs",
+                "label": "FS",
+                "side": "DEFENSE",
+                "x": -6,
+                "y": 13
+              },
+              {
+                "id": "ss",
+                "label": "SS",
+                "side": "DEFENSE",
+                "x": 6,
+                "y": 13
+              }
+            ],
+            "caption": ""
+          },
+          "targets": [
+            "dt1",
+            "dt2"
+          ],
+          "explanation": "The two tackles line up inside, on either side of the center.",
+          "concept": "four-three"
+        },
+        {
+          "type": "diagram_tap",
+          "id": "a3-fronts-04",
+          "prompt": "Tap the outside linebackers in this 3-4.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": -1
+              },
+              {
+                "id": "de1",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": -3,
+                "y": 1
+              },
+              {
+                "id": "nt",
+                "label": "NT",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 1
+              },
+              {
+                "id": "de2",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": 3,
+                "y": 1
+              },
+              {
+                "id": "olb1",
+                "label": "OLB",
+                "side": "DEFENSE",
+                "x": -6,
+                "y": 1.5
+              },
+              {
+                "id": "ilb1",
+                "label": "ILB",
+                "side": "DEFENSE",
+                "x": -2,
+                "y": 4.5
+              },
+              {
+                "id": "ilb2",
+                "label": "ILB",
+                "side": "DEFENSE",
+                "x": 2,
+                "y": 4.5
+              },
+              {
+                "id": "olb2",
+                "label": "OLB",
+                "side": "DEFENSE",
+                "x": 6,
+                "y": 1.5
+              },
+              {
+                "id": "cb1",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": -12,
+                "y": 6
+              },
+              {
+                "id": "cb2",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": 12,
+                "y": 6
+              },
+              {
+                "id": "fs",
+                "label": "FS",
+                "side": "DEFENSE",
+                "x": -6,
+                "y": 13
+              },
+              {
+                "id": "ss",
+                "label": "SS",
+                "side": "DEFENSE",
+                "x": 6,
+                "y": 13
+              }
+            ],
+            "caption": ""
+          },
+          "targets": [
+            "olb1",
+            "olb2"
+          ],
+          "explanation": "The outside linebackers stand on the edges, usually the main pass rushers in a 3-4.",
+          "concept": "three-four"
+        },
+        {
+          "type": "diagram_tap",
+          "id": "a3-fronts-05",
+          "prompt": "Tap the Mike linebacker.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": -1
+              },
+              {
+                "id": "de1",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": -4.5,
+                "y": 1
+              },
+              {
+                "id": "dt1",
+                "label": "DT",
+                "side": "DEFENSE",
+                "x": -1.2,
+                "y": 1
+              },
+              {
+                "id": "dt2",
+                "label": "DT",
+                "side": "DEFENSE",
+                "x": 1.2,
+                "y": 1
+              },
+              {
+                "id": "de2",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": 4.5,
+                "y": 1
+              },
+              {
+                "id": "wlb",
+                "label": "W",
+                "side": "DEFENSE",
+                "x": -4,
+                "y": 4.5
+              },
+              {
+                "id": "mlb",
+                "label": "M",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 4.5
+              },
+              {
+                "id": "slb",
+                "label": "S",
+                "side": "DEFENSE",
+                "x": 4,
+                "y": 4.5
+              },
+              {
+                "id": "cb1",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": -12,
+                "y": 6
+              },
+              {
+                "id": "cb2",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": 12,
+                "y": 6
+              },
+              {
+                "id": "fs",
+                "label": "FS",
+                "side": "DEFENSE",
+                "x": -6,
+                "y": 13
+              },
+              {
+                "id": "ss",
+                "label": "SS",
+                "side": "DEFENSE",
+                "x": 6,
+                "y": 13
+              }
+            ],
+            "caption": ""
+          },
+          "targets": [
+            "mlb"
+          ],
+          "explanation": "The Mike is the middle linebacker, often the one who makes the defensive calls.",
+          "concept": "four-three"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a3-fronts-06",
+          "prompt": "In many 3-4 defenses, who are the main pass rushers?",
+          "choices": [
+            "The outside linebackers",
+            "The nose tackle",
+            "The safeties",
+            "The inside linebackers"
+          ],
+          "answer": 0,
+          "explanation": "3-4 outside linebackers rush from the edge on most passing downs.",
+          "concept": "three-four"
+        }
+      ]
+    },
+    {
+      "id": "a3-twominute",
+      "title": "The Two-Minute Drill",
+      "blurb": "Managing the clock to score.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "a3-twominute-01",
+          "title": "What stops the clock",
+          "body": "In the NFL: an incomplete pass, a timeout, a score, the two-minute warning, and a player going out of bounds. A first down does not stop the NFL clock.",
+          "concept": "two-minute-drill"
+        },
+        {
+          "type": "learn",
+          "id": "a3-twominute-02",
+          "title": "Out of bounds, late",
+          "body": "Late in each half, the clock stays stopped after a runner goes out of bounds until the next snap. Earlier in the game it restarts once the ball is spotted.",
+          "concept": "game-clock"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a3-twominute-03",
+          "prompt": "In the NFL, does a first down stop the game clock?",
+          "choices": [
+            "No",
+            "Yes, until the next snap",
+            "Only in overtime",
+            "Only on 4th down"
+          ],
+          "answer": 0,
+          "explanation": "Not in the NFL. In college, first downs stop the clock briefly late in each half.",
+          "concept": "game-clock"
+        },
+        {
+          "type": "situation",
+          "id": "a3-twominute-04",
+          "state": {
+            "quarter": 2,
+            "clock": 40,
+            "down": 1,
+            "toGo": 10,
+            "yardLine": 55,
+            "scoreDiff": 0,
+            "timeouts": 1
+          },
+          "prompt": "40 seconds left in the half, 1st and 10 at their 45, one timeout. What's the play?",
+          "options": [
+            {
+              "text": "Throw to the sideline",
+              "quality": "best",
+              "why": "A catch near the sideline gains yards and stops the clock when the receiver steps out."
+            },
+            {
+              "text": "Run up the middle",
+              "quality": "poor",
+              "why": "It burns clock you can't spare unless you spend your last timeout."
+            },
+            {
+              "text": "Kneel down",
+              "quality": "poor",
+              "why": "You're near field-goal range with time to get there."
+            }
+          ],
+          "explanation": "Gain yards and stop the clock in the same play.",
+          "concept": "two-minute-drill"
+        },
+        {
+          "type": "situation",
+          "id": "a3-twominute-05",
+          "state": {
+            "quarter": 4,
+            "clock": 125,
+            "down": 2,
+            "toGo": 6,
+            "yardLine": 60,
+            "scoreDiff": -3,
+            "timeouts": 2
+          },
+          "prompt": "2:05 left, down 3, 2nd and 6 at their 40, two timeouts. What do you do?",
+          "options": [
+            {
+              "text": "Run a play and let the two-minute warning stop the clock",
+              "quality": "best",
+              "why": "The warning is a free stoppage; save your timeouts for later."
+            },
+            {
+              "text": "Call timeout now",
+              "quality": "poor",
+              "why": "The two-minute warning is seconds away and would stop the clock for free."
+            },
+            {
+              "text": "Spike the ball",
+              "quality": "poor",
+              "why": "Wastes a down when the clock is about to stop anyway."
+            }
+          ],
+          "explanation": "Use free clock stoppages before your timeouts.",
+          "concept": "two-minute-drill"
+        },
+        {
+          "type": "true_false",
+          "id": "a3-twominute-06",
+          "statement": "Spiking the ball stops the clock but uses up a down.",
+          "answer": true,
+          "explanation": "Yes, so spike only when the down is cheaper than the seconds.",
+          "concept": "spike"
+        }
+      ]
+    }
+  ]
+}

@@ -198,4 +198,15 @@ class ScreenRenderTest {
             Answer.Choice(0)
         }
     }
+
+    @Test fun levelThree() {
+        lessonShot("29-route-tap-kid", AgeBand.AGE_10_12, dark = false, pick = { it.id == "k3-moreroutes-05" })
+        lessonShot("30-zone-tap-kid", AgeBand.AGE_10_12, dark = false, pick = { it.id == "k3-zone-04" })
+        lessonShot("31-front-34-adult", AgeBand.AGE_18_PLUS, dark = true, pick = { it.id == "a3-fronts-04" })
+        lessonShot("32-sweep-pullers-adult", AgeBand.AGE_18_PLUS, dark = true, pick = { it.id == "a3-blocking-03" })
+        lessonShot("33-leverage-adult", AgeBand.AGE_18_PLUS, dark = true, pick = { it.id == "a3-leverage-02" })
+        lessonShot("34-highlow-adult", AgeBand.AGE_18_PLUS, dark = true, pick = { it.id == "a3-pairs-03" })
+        lessonShot("35-counter-kid", AgeBand.AGE_10_12, dark = false, pick = { it.id == "k3-runs-06" })
+        lessonShot("36-tree-tap-adult", AgeBand.AGE_18_PLUS, dark = true, pick = { it.id == "a3-tree-05" })
+    }
 }

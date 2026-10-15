@@ -1,0 +1,1338 @@
+{
+  "id": "kid3-u1",
+  "title": "Routes",
+  "lessons": [
+    {
+      "id": "k3-routes",
+      "title": "Running Routes",
+      "blurb": "The paths receivers run.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "k3-routes-01",
+          "title": "What is a route?",
+          "body": "A route is the path a receiver runs on a pass play. The quarterback knows every route, so he knows where to throw.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -10,
+                "y": 0
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "x",
+                "points": [
+                  {
+                    "x": -10,
+                    "y": 22
+                  }
+                ],
+                "kind": "pass"
+              }
+            ],
+            "caption": "Go"
+          },
+          "concept": "route"
+        },
+        {
+          "type": "learn",
+          "id": "k3-routes-02",
+          "title": "Go",
+          "body": "On a go route, the receiver sprints straight down the field as fast as he can. It is the deep shot.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -10,
+                "y": 0
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "x",
+                "points": [
+                  {
+                    "x": -10,
+                    "y": 22
+                  }
+                ],
+                "kind": "pass"
+              }
+            ],
+            "caption": "Go"
+          },
+          "concept": "route"
+        },
+        {
+          "type": "learn",
+          "id": "k3-routes-03",
+          "title": "Slant",
+          "body": "On a slant, the receiver takes a few steps, then cuts at an angle toward the middle of the field. It is quick and short.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -10,
+                "y": 0
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "x",
+                "points": [
+                  {
+                    "x": -10,
+                    "y": 2.0
+                  },
+                  {
+                    "x": -4,
+                    "y": 7.0
+                  }
+                ],
+                "kind": "pass"
+              }
+            ],
+            "caption": "Slant"
+          },
+          "concept": "route"
+        },
+        {
+          "type": "learn",
+          "id": "k3-routes-04",
+          "title": "Out",
+          "body": "On an out, the receiver runs up the field, then turns sharply toward the sideline.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -10,
+                "y": 0
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "x",
+                "points": [
+                  {
+                    "x": -10,
+                    "y": 10.0
+                  },
+                  {
+                    "x": -15,
+                    "y": 10.0
+                  }
+                ],
+                "kind": "pass"
+              }
+            ],
+            "caption": "Out"
+          },
+          "concept": "route"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k3-routes-05",
+          "prompt": "Which route goes straight down the field, as deep as possible?",
+          "choices": [
+            "Go",
+            "Slant",
+            "Out",
+            "Curl"
+          ],
+          "answer": 0,
+          "explanation": "The go route is the deep one: straight down the field.",
+          "concept": "route"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k3-routes-06",
+          "prompt": "A receiver cuts toward the sideline. Which route is that?",
+          "choices": [
+            "Out",
+            "Slant",
+            "Post",
+            "Go"
+          ],
+          "answer": 0,
+          "explanation": "An out breaks toward the sideline.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -10,
+                "y": 0
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "x",
+                "points": [
+                  {
+                    "x": -10,
+                    "y": 10.0
+                  },
+                  {
+                    "x": -15,
+                    "y": 10.0
+                  }
+                ],
+                "kind": "pass"
+              }
+            ],
+            "caption": "Out"
+          },
+          "concept": "route"
+        },
+        {
+          "type": "diagram_tap",
+          "id": "k3-routes-07",
+          "prompt": "Tap the receiver running a slant.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": 0
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "x",
+                "points": [
+                  {
+                    "x": -12,
+                    "y": 2
+                  },
+                  {
+                    "x": -6,
+                    "y": 7
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "z",
+                "points": [
+                  {
+                    "x": 12,
+                    "y": 22
+                  }
+                ],
+                "kind": "pass"
+              }
+            ]
+          },
+          "targets": [
+            "x"
+          ],
+          "explanation": "X cuts at an angle toward the middle: that is a slant. Z runs straight down the field.",
+          "concept": "route"
+        },
+        {
+          "type": "diagram_tap",
+          "id": "k3-routes-08",
+          "prompt": "Tap the receiver running a go route.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": 0
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "x",
+                "points": [
+                  {
+                    "x": -12,
+                    "y": 10
+                  },
+                  {
+                    "x": -17,
+                    "y": 10
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "z",
+                "points": [
+                  {
+                    "x": 12,
+                    "y": 22
+                  }
+                ],
+                "kind": "pass"
+              }
+            ]
+          },
+          "targets": [
+            "z"
+          ],
+          "explanation": "Z goes straight down the field. X turns toward the sideline on an out.",
+          "concept": "route"
+        }
+      ]
+    },
+    {
+      "id": "k3-moreroutes",
+      "title": "More Routes",
+      "blurb": "Curl, post and corner.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "k3-moreroutes-01",
+          "title": "Curl",
+          "body": "On a curl, the receiver runs up the field, then stops and turns back toward the quarterback.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -10,
+                "y": 0
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "x",
+                "points": [
+                  {
+                    "x": -10,
+                    "y": 12.0
+                  },
+                  {
+                    "x": -8.5,
+                    "y": 10.0
+                  }
+                ],
+                "kind": "pass"
+              }
+            ],
+            "caption": "Curl"
+          },
+          "concept": "route"
+        },
+        {
+          "type": "learn",
+          "id": "k3-moreroutes-02",
+          "title": "Post",
+          "body": "On a post, the receiver runs up the field, then angles deep toward the middle, toward the goal posts.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -10,
+                "y": 0
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "x",
+                "points": [
+                  {
+                    "x": -10,
+                    "y": 12.0
+                  },
+                  {
+                    "x": -4,
+                    "y": 22.0
+                  }
+                ],
+                "kind": "pass"
+              }
+            ],
+            "caption": "Post"
+          },
+          "concept": "route"
+        },
+        {
+          "type": "learn",
+          "id": "k3-moreroutes-03",
+          "title": "Corner",
+          "body": "On a corner, the receiver runs up the field, then angles deep toward the sideline, toward the corner of the end zone.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -10,
+                "y": 0
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "x",
+                "points": [
+                  {
+                    "x": -10,
+                    "y": 12.0
+                  },
+                  {
+                    "x": -16,
+                    "y": 20.0
+                  }
+                ],
+                "kind": "pass"
+              }
+            ],
+            "caption": "Corner"
+          },
+          "concept": "route"
+        },
+        {
+          "type": "match",
+          "id": "k3-moreroutes-04",
+          "prompt": "Match each route to its path.",
+          "pairs": [
+            {
+              "left": "Go",
+              "right": "Straight down the field"
+            },
+            {
+              "left": "Curl",
+              "right": "Up, then turn back"
+            },
+            {
+              "left": "Post",
+              "right": "Deep toward the middle"
+            },
+            {
+              "left": "Corner",
+              "right": "Deep toward the sideline"
+            }
+          ],
+          "explanation": "Each route has its own shape. The name tells you where it ends up.",
+          "concept": "route"
+        },
+        {
+          "type": "diagram_tap",
+          "id": "k3-moreroutes-05",
+          "prompt": "Tap the receiver running a post.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": 0
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "x",
+                "points": [
+                  {
+                    "x": -12,
+                    "y": 12
+                  },
+                  {
+                    "x": -18,
+                    "y": 20
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "z",
+                "points": [
+                  {
+                    "x": 12,
+                    "y": 12
+                  },
+                  {
+                    "x": 6,
+                    "y": 22
+                  }
+                ],
+                "kind": "pass"
+              }
+            ]
+          },
+          "targets": [
+            "z"
+          ],
+          "explanation": "Z angles deep toward the middle: a post. X angles toward the sideline: a corner.",
+          "concept": "route"
+        },
+        {
+          "type": "diagram_tap",
+          "id": "k3-moreroutes-06",
+          "prompt": "Tap the receiver running a curl.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "h",
+                "label": "H",
+                "side": "OFFENSE",
+                "x": -7,
+                "y": -1
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": 0
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "x",
+                "points": [
+                  {
+                    "x": -12,
+                    "y": 12
+                  },
+                  {
+                    "x": -10.5,
+                    "y": 10
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "h",
+                "points": [
+                  {
+                    "x": -7,
+                    "y": 22
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "z",
+                "points": [
+                  {
+                    "x": 12,
+                    "y": 10
+                  },
+                  {
+                    "x": 17,
+                    "y": 10
+                  }
+                ],
+                "kind": "pass"
+              }
+            ]
+          },
+          "targets": [
+            "x"
+          ],
+          "explanation": "X runs up the field and turns back toward the quarterback: a curl.",
+          "concept": "route"
+        },
+        {
+          "type": "true_false",
+          "id": "k3-moreroutes-07",
+          "statement": "A post route goes deep toward the middle of the field.",
+          "answer": true,
+          "explanation": "Yes. It aims for the goal posts, in the middle.",
+          "concept": "route"
+        }
+      ]
+    },
+    {
+      "id": "k3-combos",
+      "title": "Routes That Work Together",
+      "blurb": "Making the defense choose.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "k3-combos-01",
+          "title": "One deep, one short",
+          "body": "Plays use routes together. If one receiver runs deep and another runs short underneath, a defender can't cover both.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "h",
+                "label": "H",
+                "side": "OFFENSE",
+                "x": -7,
+                "y": -1
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "x",
+                "points": [
+                  {
+                    "x": -12,
+                    "y": 22
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "h",
+                "points": [
+                  {
+                    "x": -7,
+                    "y": 5
+                  },
+                  {
+                    "x": -6.5,
+                    "y": 4
+                  }
+                ],
+                "kind": "pass"
+              }
+            ],
+            "caption": "Deep and short together"
+          },
+          "concept": "route-combination"
+        },
+        {
+          "type": "learn",
+          "id": "k3-combos-02",
+          "title": "Read and throw",
+          "body": "The quarterback watches the defender. If he stays deep, throw short. If he comes up, throw deep.",
+          "concept": "route-combination"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k3-combos-03",
+          "prompt": "Why run one deep route and one short route together?",
+          "choices": [
+            "A defender can't cover both",
+            "To confuse the referee",
+            "To use up time",
+            "So nobody gets open"
+          ],
+          "answer": 0,
+          "explanation": "One defender can't be deep and short at the same time.",
+          "concept": "route-combination"
+        },
+        {
+          "type": "diagram_tap",
+          "id": "k3-combos-04",
+          "prompt": "The defender stayed deep. Tap the receiver the quarterback should throw to.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "h",
+                "label": "H",
+                "side": "OFFENSE",
+                "x": -7,
+                "y": -1
+              },
+              {
+                "id": "cb1",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": -11,
+                "y": 16
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "x",
+                "points": [
+                  {
+                    "x": -12,
+                    "y": 22
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "h",
+                "points": [
+                  {
+                    "x": -7,
+                    "y": 5
+                  },
+                  {
+                    "x": -6.5,
+                    "y": 4
+                  }
+                ],
+                "kind": "pass"
+              }
+            ]
+          },
+          "targets": [
+            "h"
+          ],
+          "explanation": "With the defender deep, the short receiver, H, is open underneath.",
+          "concept": "route-combination"
+        },
+        {
+          "type": "true_false",
+          "id": "k3-combos-05",
+          "statement": "The quarterback throws to the receiver the defense is not covering.",
+          "answer": true,
+          "explanation": "That is the whole idea: read the defender, throw away from him.",
+          "concept": "route-combination"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k3-combos-06",
+          "prompt": "The defender comes up to cover the short receiver. Where should the quarterback throw?",
+          "choices": [
+            "To the deep receiver",
+            "To the short receiver",
+            "Out of bounds",
+            "Nowhere"
+          ],
+          "answer": 0,
+          "explanation": "If the defender comes up, the deep receiver is behind him and open.",
+          "concept": "route-combination"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,779 @@
+{
+  "id": "adult3-u1",
+  "title": "The Route Tree",
+  "lessons": [
+    {
+      "id": "a3-tree",
+      "title": "The Route Tree",
+      "blurb": "Nine routes and how they're numbered.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "a3-tree-01",
+          "title": "A numbered menu",
+          "body": "Many offenses number their routes so a call can name them fast. In one common tree: 1 flat, 2 slant, 3 comeback, 4 curl, 5 out, 6 dig, 7 corner, 8 post, 9 go. Systems differ.",
+          "concept": "route-tree"
+        },
+        {
+          "type": "learn",
+          "id": "a3-tree-02",
+          "title": "Odd out, even in",
+          "body": "In that tree the odd numbers break toward the sideline and the even numbers break toward the middle. The higher the number, the deeper the route.",
+          "concept": "route-tree"
+        },
+        {
+          "type": "learn",
+          "id": "a3-tree-03",
+          "title": "Dig and comeback",
+          "body": "A dig runs about 12 yards, then cuts flat across the middle. A comeback runs deep, then works back toward the sideline.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": 0
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "x",
+                "points": [
+                  {
+                    "x": -12,
+                    "y": 12
+                  },
+                  {
+                    "x": -2,
+                    "y": 12
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "z",
+                "points": [
+                  {
+                    "x": 12,
+                    "y": 15
+                  },
+                  {
+                    "x": 14,
+                    "y": 12
+                  }
+                ],
+                "kind": "pass"
+              }
+            ],
+            "caption": "Dig (X) and comeback (Z)"
+          },
+          "concept": "route"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a3-tree-04",
+          "prompt": "In the common tree, do even-numbered routes break inside or outside?",
+          "choices": [
+            "Inside, toward the middle",
+            "Outside, toward the sideline",
+            "Straight upfield",
+            "Backward"
+          ],
+          "answer": 0,
+          "explanation": "Even numbers break inside (slant, curl, dig, post); odd numbers break outside.",
+          "concept": "route-tree"
+        },
+        {
+          "type": "diagram_tap",
+          "id": "a3-tree-05",
+          "prompt": "Tap the receiver running a dig.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "h",
+                "label": "H",
+                "side": "OFFENSE",
+                "x": -7,
+                "y": -1
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": 0
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "x",
+                "points": [
+                  {
+                    "x": -12,
+                    "y": 12
+                  },
+                  {
+                    "x": -2,
+                    "y": 12
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "h",
+                "points": [
+                  {
+                    "x": -7,
+                    "y": 22
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "z",
+                "points": [
+                  {
+                    "x": 12,
+                    "y": 10
+                  },
+                  {
+                    "x": 17,
+                    "y": 10
+                  }
+                ],
+                "kind": "pass"
+              }
+            ]
+          },
+          "targets": [
+            "x"
+          ],
+          "explanation": "X runs to about 12 yards and cuts flat across the middle: a dig.",
+          "concept": "route"
+        },
+        {
+          "type": "diagram_tap",
+          "id": "a3-tree-06",
+          "prompt": "Tap the receiver running a corner.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": 0
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "x",
+                "points": [
+                  {
+                    "x": -12,
+                    "y": 12
+                  },
+                  {
+                    "x": -6,
+                    "y": 22
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "z",
+                "points": [
+                  {
+                    "x": 12,
+                    "y": 12
+                  },
+                  {
+                    "x": 18,
+                    "y": 20
+                  }
+                ],
+                "kind": "pass"
+              }
+            ]
+          },
+          "targets": [
+            "z"
+          ],
+          "explanation": "Z stems upfield then angles deep toward the sideline: a corner. X angles to the middle: a post.",
+          "concept": "route"
+        },
+        {
+          "type": "diagram_tap",
+          "id": "a3-tree-07",
+          "prompt": "Tap the receiver running a comeback.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": 0
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "x",
+                "points": [
+                  {
+                    "x": -12,
+                    "y": 12
+                  },
+                  {
+                    "x": -10.5,
+                    "y": 10
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "z",
+                "points": [
+                  {
+                    "x": 12,
+                    "y": 15
+                  },
+                  {
+                    "x": 14,
+                    "y": 12
+                  }
+                ],
+                "kind": "pass"
+              }
+            ]
+          },
+          "targets": [
+            "z"
+          ],
+          "explanation": "Z runs deep and works back toward the sideline: a comeback. X turns back inside: a curl.",
+          "concept": "route"
+        },
+        {
+          "type": "match",
+          "id": "a3-tree-08",
+          "prompt": "Match each number in the common tree to its route.",
+          "pairs": [
+            {
+              "left": "2",
+              "right": "Slant"
+            },
+            {
+              "left": "5",
+              "right": "Out"
+            },
+            {
+              "left": "8",
+              "right": "Post"
+            },
+            {
+              "left": "9",
+              "right": "Go"
+            }
+          ],
+          "explanation": "Learn the pattern, not just the list: odd outside, even inside, higher means deeper.",
+          "concept": "route-tree"
+        }
+      ]
+    },
+    {
+      "id": "a3-timing",
+      "title": "Stems, Breaks and Timing",
+      "blurb": "Why the depth of a route matters.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "a3-timing-01",
+          "title": "Stem and break",
+          "body": "Every route has a stem, the run before the cut, and a break, the cut itself. A good stem makes the defender guess which way the break will go.",
+          "concept": "route"
+        },
+        {
+          "type": "learn",
+          "id": "a3-timing-02",
+          "title": "Matched to the drop",
+          "body": "Routes are timed to the quarterback's drop: quick three-step throws for slants and hitches, five-step drops for curls, outs and digs, longer drops or play-action for posts, corners and go routes.",
+          "concept": "route"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a3-timing-03",
+          "prompt": "Which route pairs with a quick three-step drop?",
+          "choices": [
+            "Slant",
+            "Post",
+            "Corner",
+            "Go"
+          ],
+          "answer": 0,
+          "explanation": "The slant is a quick-game throw: the ball comes out on the third step.",
+          "concept": "route"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a3-timing-04",
+          "prompt": "Which part of a route is meant to make the defender guess?",
+          "choices": [
+            "The stem",
+            "The huddle",
+            "The snap count",
+            "The catch"
+          ],
+          "answer": 0,
+          "explanation": "A stem that could become several routes keeps the defender from jumping the break.",
+          "concept": "route"
+        },
+        {
+          "type": "true_false",
+          "id": "a3-timing-05",
+          "statement": "Deep routes like the post usually need more time than the quick game.",
+          "answer": true,
+          "explanation": "Yes. Deeper routes take longer to develop, so they pair with longer drops or play-action.",
+          "concept": "route"
+        }
+      ]
+    },
+    {
+      "id": "a3-pairs",
+      "title": "Route Pairs",
+      "blurb": "Putting a defender in conflict.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "a3-pairs-01",
+          "title": "High-low",
+          "body": "Two routes at different depths on the same side, like a curl over a flat. The defender between them can't take both.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "h",
+                "label": "H",
+                "side": "OFFENSE",
+                "x": -7,
+                "y": -1
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "x",
+                "points": [
+                  {
+                    "x": -12,
+                    "y": 12
+                  },
+                  {
+                    "x": -10.5,
+                    "y": 10
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "h",
+                "points": [
+                  {
+                    "x": -8.5,
+                    "y": 1
+                  },
+                  {
+                    "x": -13,
+                    "y": 2
+                  }
+                ],
+                "kind": "pass"
+              }
+            ],
+            "caption": "Curl over flat"
+          },
+          "concept": "route-combination"
+        },
+        {
+          "type": "learn",
+          "id": "a3-pairs-02",
+          "title": "Stretch it",
+          "body": "A vertical stretch puts receivers deep and short; a horizontal stretch spreads them across the field. Either way, the quarterback reads one conflict defender.",
+          "concept": "route-combination"
+        },
+        {
+          "type": "diagram_tap",
+          "id": "a3-pairs-03",
+          "prompt": "The flat defender jumped the flat route. Tap the open receiver.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "h",
+                "label": "H",
+                "side": "OFFENSE",
+                "x": -7,
+                "y": -1
+              },
+              {
+                "id": "ol1",
+                "label": "OLB",
+                "side": "DEFENSE",
+                "x": -10,
+                "y": 4
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "x",
+                "points": [
+                  {
+                    "x": -12,
+                    "y": 12
+                  },
+                  {
+                    "x": -10.5,
+                    "y": 10
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "h",
+                "points": [
+                  {
+                    "x": -8.5,
+                    "y": 1
+                  },
+                  {
+                    "x": -13,
+                    "y": 2
+                  }
+                ],
+                "kind": "pass"
+              }
+            ]
+          },
+          "targets": [
+            "x"
+          ],
+          "explanation": "With the defender chasing the flat, the curl behind him is open.",
+          "concept": "route-combination"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a3-pairs-04",
+          "prompt": "What makes a high-low concept work?",
+          "choices": [
+            "One defender has to choose between two receivers",
+            "Both receivers run the same route",
+            "The quarterback runs instead",
+            "The defense has to punt"
+          ],
+          "answer": 0,
+          "explanation": "The defender who covers the short man leaves the deep man open, and the other way round.",
+          "concept": "route-combination"
+        },
+        {
+          "type": "true_false",
+          "id": "a3-pairs-05",
+          "statement": "In a high-low read, the quarterback watches the defender in the middle of the two routes.",
+          "answer": true,
+          "explanation": "That conflict defender tells him which receiver to throw to.",
+          "concept": "route-combination"
+        }
+      ]
+    }
+  ]
+}

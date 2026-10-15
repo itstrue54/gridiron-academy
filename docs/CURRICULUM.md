@@ -11,8 +11,8 @@ and validated, `preview` = exemplar content proving the model, `planned` = to be
 | 1 | Fan Starter | adult | new fans | Speed round | **done** (`adult-1`) |
 | 2 | Rookie | kid | ~9-10 | Speed round | **done** (`kid-2`, coach review pending) |
 | 2 | Season Ticket | adult | casual fans | Game day | **done** (`adult-2`, coach review pending) |
-| 3 | Junior Varsity | kid | ~11-12 | Diagram dash | planned |
-| 3 | Armchair Coach | adult | fans | Diagram dash | planned |
+| 3 | Junior Varsity | kid | ~11-12 | Diagram dash | **done** (`kid-3`, coach review pending) |
+| 3 | Armchair Coach | adult | fans | Diagram dash | **done** (`adult-3`, coach review pending) |
 | 4 | Varsity | shared | both | Read the defense | planned |
 | 5 | College | shared | | Game day | planned |
 | 6 | Pro | shared | | Read the defense | preview (personnel) |
@@ -53,7 +53,17 @@ Adults: formations by name (I, singleback, shotgun, pistol, empty), eligible num
 ineligible-receiver rules, motion and shift rules, pass interference vs contact, targeting
 and roughing, challenges and replay, overtime, special-teams anatomy, simple play calls.
 
-## Level 3: Junior Varsity / Armchair Coach
+## Level 3: Junior Varsity / Armchair Coach (done; see `docs/content-review/level-3.md`)
+As written: Kid 9 drills (Routes: go, slant, out, curl, post, corner, deep-and-short
+pairs; Man and Zone: man, zone, count the safeties; Runs and Fronts: dive, sweep,
+counter, draw, screen, 4-3 and 3-4, 4th down and two-minute basics), 58 steps, 12 taps.
+Adult 10 drills (Route Tree: numbering, stems and timing, high-low pairs; Coverage
+Basics: man or zone clues, one-high vs two-high shells, leverage; Run Game and Fronts:
+five runs, blocking basics, how 4-3 and 3-4 play, the two-minute drill), 57 steps,
+12 taps. Every route, front and run is drawn from one set of diagram builders so the
+pictures are consistent across tracks.
+
+Originally planned:
 Route tree 0-9 (flat, slant, comeback, curl, out, dig, corner, post, go) drawn on diagrams;
 man vs zone coverage in plain language; run plays (dive, sweep, counter, draw, screen);
 basic blocking; 4-3 and 3-4 fronts; the 4th-down decision; two-minute drill basics;

@@ -559,6 +559,118 @@
       "kid": "A real game moment to make a call on.",
       "full": "A decision point defined by down, distance, field position, score, clock and timeouts.",
       "level": 2
+    },
+    {
+      "id": "counter",
+      "term": "Counter",
+      "kid": "A run that starts one way, then cuts back.",
+      "full": "A misdirection run: the back steps away from the play, then cuts back behind pulling linemen.",
+      "level": 3
+    },
+    {
+      "id": "double-team",
+      "term": "Double team",
+      "kid": "Two blockers on one defender.",
+      "full": "Two linemen combining on one defender to move him, one usually climbing off to a linebacker.",
+      "level": 3
+    },
+    {
+      "id": "draw",
+      "term": "Draw",
+      "kid": "A run that looks like a pass at first.",
+      "full": "The offense shows pass protection to draw the rush upfield, then hands off underneath it.",
+      "level": 3
+    },
+    {
+      "id": "four-three",
+      "term": "4-3 defense",
+      "kid": "4 linemen and 3 linebackers.",
+      "full": "A front with four down linemen and three linebackers (Will, Mike, Sam); linemen usually attack single gaps.",
+      "level": 3
+    },
+    {
+      "id": "leverage",
+      "term": "Leverage",
+      "kid": "Which side of a receiver a defender lines up on.",
+      "full": "A defender's alignment inside or outside the receiver, which takes away routes that way and concedes the other side.",
+      "level": 3
+    },
+    {
+      "id": "man-coverage",
+      "term": "Man coverage",
+      "kid": "Each defender follows one receiver.",
+      "full": "Each defender is assigned a specific receiver and travels with him; usually paired with a free safety (Cover 1) or no deep help (Cover 0).",
+      "level": 3
+    },
+    {
+      "id": "pull-block",
+      "term": "Pull",
+      "kid": "A lineman leaves his spot to block elsewhere.",
+      "full": "A lineman steps back and runs along the line to block at the point of attack, leading a sweep or kicking out an edge player on a counter or trap.",
+      "level": 3
+    },
+    {
+      "id": "route",
+      "term": "Route",
+      "kid": "The path a receiver runs on a pass play.",
+      "full": "The path a receiver runs: a stem upfield, then a break at a set depth and angle, timed to the quarterback's drop.",
+      "level": 3
+    },
+    {
+      "id": "route-combination",
+      "term": "Route combination",
+      "kid": "Routes that work together so one defender can't cover both.",
+      "full": "Routes paired to stretch a defender high-low or across the field, so the quarterback reads one conflict defender and throws away from him.",
+      "level": 3
+    },
+    {
+      "id": "route-tree",
+      "term": "Route tree",
+      "kid": "A numbered list of routes.",
+      "full": "A numbered menu of routes. In one common tree: 1 flat, 2 slant, 3 comeback, 4 curl, 5 out, 6 dig, 7 corner, 8 post, 9 go; odd break outside, even inside. Numbering differs by system.",
+      "level": 3
+    },
+    {
+      "id": "safety-position",
+      "term": "Safeties",
+      "kid": "The deepest defenders.",
+      "full": "The two deepest defenders, free and strong safety. How many sit deep in the middle before the snap is the first clue to the coverage.",
+      "level": 3
+    },
+    {
+      "id": "screen",
+      "term": "Screen",
+      "kid": "A short pass with blockers out in front.",
+      "full": "Linemen let rushers through, then release downfield to block for a short throw behind the rush.",
+      "level": 3
+    },
+    {
+      "id": "sweep",
+      "term": "Sweep",
+      "kid": "A run wide around the end.",
+      "full": "A perimeter run to the edge, often with pulling linemen leading the back.",
+      "level": 3
+    },
+    {
+      "id": "three-four",
+      "term": "3-4 defense",
+      "kid": "3 linemen and 4 linebackers.",
+      "full": "A front with three down linemen (nose and two ends) and four linebackers; the outside linebackers are usually the edge rushers.",
+      "level": 3
+    },
+    {
+      "id": "two-minute-drill",
+      "term": "Two-minute drill",
+      "kid": "Hurrying to score before time runs out.",
+      "full": "The offense's hurry-up mode at the end of a half: quick plays, sideline throws, timeouts and spikes to stop the clock.",
+      "level": 3
+    },
+    {
+      "id": "zone-coverage",
+      "term": "Zone coverage",
+      "kid": "Each defender guards an area of the field.",
+      "full": "Each defender is responsible for an area and covers whoever enters it, with eyes on the quarterback.",
+      "level": 3
     }
   ]
 }

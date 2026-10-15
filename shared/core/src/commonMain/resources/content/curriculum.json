@@ -82,6 +82,50 @@
         "gameQuestions": 10,
         "gamePassPct": 70
       }
+    },
+    {
+      "id": "kid-3",
+      "number": 3,
+      "track": "kid",
+      "title": "Junior Varsity",
+      "tagline": "Routes, man and zone, runs and fronts.",
+      "requires": [
+        "kid-2"
+      ],
+      "unitFiles": [
+        "kid3/u1-routes.json",
+        "kid3/u2-man-and-zone.json",
+        "kid3/u3-runs-and-fronts.json"
+      ],
+      "gate": {
+        "testPassPct": 80,
+        "testQuestions": 12,
+        "game": "diagram_dash",
+        "gameQuestions": 10,
+        "gamePassPct": 70
+      }
+    },
+    {
+      "id": "adult-3",
+      "number": 3,
+      "track": "adult",
+      "title": "Armchair Coach",
+      "tagline": "The route tree, coverage clues, and how runs are blocked.",
+      "requires": [
+        "adult-2"
+      ],
+      "unitFiles": [
+        "adult3/u1-the-route-tree.json",
+        "adult3/u2-coverage-basics.json",
+        "adult3/u3-run-game-and-fronts.json"
+      ],
+      "gate": {
+        "testPassPct": 80,
+        "testQuestions": 12,
+        "game": "diagram_dash",
+        "gameQuestions": 10,
+        "gamePassPct": 70
+      }
     }
   ]
 }

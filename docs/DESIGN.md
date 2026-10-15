@@ -370,8 +370,8 @@ Diagrams stay **to scale**: one uniform scale, never a stretched "box" (ADR-007)
 Where that makes a phone picture crowded, the learner zooms instead.
 - **Pinch** with two fingers zooms (1x to 4x) about the point between them and pans.
   One finger pans **only once zoomed in**, so at 1x a drag still scrolls the lesson.
-- **Zoom buttons** (− and +, 1.5x a tap, about the centre) sit at the bottom-right of
-  the field whenever the fitted picture had to shrink its marks (7.3) or is zoomed.
+- **Zoom buttons** (− and +, 1.5x a tap, about the centre) sit under the field at the
+  right end of the caption row (on the field they hid players in that corner) whenever the fitted picture had to shrink its marks (7.3) or is zoomed.
   They are the motor-accessible alternative to pinching (section 12) and use the
   skin's touch target.
 - Zoomed in, marks grow back toward the skin's size because spacing grows; line

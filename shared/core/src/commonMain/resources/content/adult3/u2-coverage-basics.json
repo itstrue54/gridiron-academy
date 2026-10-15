@@ -1,0 +1,970 @@
+{
+  "id": "adult3-u2",
+  "title": "Coverage Basics",
+  "lessons": [
+    {
+      "id": "a3-manzone",
+      "title": "Man or Zone?",
+      "blurb": "Clues before and after the snap.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "a3-manzone-01",
+          "title": "Man coverage",
+          "body": "Each defender takes one receiver and travels with him. Defenders' eyes stay on their man.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": 0
+              },
+              {
+                "id": "cb1",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": -12,
+                "y": 2
+              },
+              {
+                "id": "cb2",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": 12,
+                "y": 2
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "x",
+                "points": [
+                  {
+                    "x": -12,
+                    "y": 6
+                  },
+                  {
+                    "x": -6,
+                    "y": 12
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "z",
+                "points": [
+                  {
+                    "x": 12,
+                    "y": 10
+                  },
+                  {
+                    "x": 16,
+                    "y": 10
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "cb1",
+                "points": [
+                  {
+                    "x": -12,
+                    "y": 7
+                  },
+                  {
+                    "x": -7,
+                    "y": 12
+                  }
+                ],
+                "kind": "drop"
+              },
+              {
+                "playerId": "cb2",
+                "points": [
+                  {
+                    "x": 12,
+                    "y": 10
+                  },
+                  {
+                    "x": 15,
+                    "y": 10
+                  }
+                ],
+                "kind": "drop"
+              }
+            ],
+            "caption": "Man: each defender follows a receiver"
+          },
+          "concept": "man-coverage"
+        },
+        {
+          "type": "learn",
+          "id": "a3-manzone-02",
+          "title": "Zone coverage",
+          "body": "Each defender guards an area and reacts to the throw. Defenders' eyes are on the quarterback.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": 0
+              },
+              {
+                "id": "cb1",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": -12,
+                "y": 2
+              },
+              {
+                "id": "cb2",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": 12,
+                "y": 2
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "x",
+                "points": [
+                  {
+                    "x": -12,
+                    "y": 6
+                  },
+                  {
+                    "x": -6,
+                    "y": 12
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "z",
+                "points": [
+                  {
+                    "x": 12,
+                    "y": 10
+                  },
+                  {
+                    "x": 16,
+                    "y": 10
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "cb1",
+                "points": [
+                  {
+                    "x": -13,
+                    "y": 14
+                  }
+                ],
+                "kind": "drop"
+              },
+              {
+                "playerId": "cb2",
+                "points": [
+                  {
+                    "x": 13,
+                    "y": 14
+                  }
+                ],
+                "kind": "drop"
+              }
+            ],
+            "zones": [
+              {
+                "id": "zl",
+                "label": "Deep left",
+                "x": -20,
+                "y": 12,
+                "w": 12,
+                "h": 8
+              },
+              {
+                "id": "zr",
+                "label": "Deep right",
+                "x": 8,
+                "y": 12,
+                "w": 12,
+                "h": 8
+              }
+            ],
+            "caption": "Zone: each defender guards an area"
+          },
+          "concept": "zone-coverage"
+        },
+        {
+          "type": "learn",
+          "id": "a3-manzone-03",
+          "title": "The motion test",
+          "body": "Send a receiver in motion. If a defender runs across with him, that suggests man. If the defenders just shift over, that suggests zone.",
+          "concept": "motion"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a3-manzone-04",
+          "prompt": "A cornerback is staring at the quarterback, not the receiver. What does that suggest?",
+          "choices": [
+            "Zone coverage",
+            "Man coverage",
+            "A blitz is certain",
+            "A punt"
+          ],
+          "answer": 0,
+          "explanation": "Zone defenders read the quarterback; man defenders watch their receiver.",
+          "concept": "zone-coverage"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a3-manzone-05",
+          "prompt": "Against man coverage, which kind of route is hardest to stay with?",
+          "choices": [
+            "A sharp-breaking route like a slant or out",
+            "A route with no break",
+            "A route that stops at the line",
+            "None"
+          ],
+          "answer": 0,
+          "explanation": "A sudden break can create a step of separation from a defender who has to follow.",
+          "concept": "man-coverage"
+        },
+        {
+          "type": "true_false",
+          "id": "a3-manzone-06",
+          "statement": "Against zone, receivers try to settle in the gaps between defenders.",
+          "answer": true,
+          "explanation": "Zones leave windows. Finding and sitting in them beats zone.",
+          "concept": "zone-coverage"
+        }
+      ]
+    },
+    {
+      "id": "a3-shells",
+      "title": "Shells: One High or Two High",
+      "blurb": "Counting the safeties.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "a3-shells-01",
+          "title": "Middle of the field",
+          "body": "One deep safety means the middle of the field is closed: usually Cover 1 or Cover 3. Two deep safeties means it is open: usually Cover 2 or Cover 4.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": -1
+              },
+              {
+                "id": "wlb",
+                "label": "W",
+                "side": "DEFENSE",
+                "x": -4,
+                "y": 4.5
+              },
+              {
+                "id": "mlb",
+                "label": "M",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 4.5
+              },
+              {
+                "id": "slb",
+                "label": "S",
+                "side": "DEFENSE",
+                "x": 4,
+                "y": 4.5
+              },
+              {
+                "id": "cb1",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": -12,
+                "y": 6
+              },
+              {
+                "id": "cb2",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": 12,
+                "y": 6
+              },
+              {
+                "id": "fs",
+                "label": "FS",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 14
+              },
+              {
+                "id": "ss",
+                "label": "SS",
+                "side": "DEFENSE",
+                "x": 6,
+                "y": 7
+              }
+            ],
+            "caption": "One high: middle closed"
+          },
+          "concept": "mofc"
+        },
+        {
+          "type": "learn",
+          "id": "a3-shells-02",
+          "title": "Two high",
+          "body": "With two safeties deep, the hole is in the deep middle between them, and the defense has fewer players near the line.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": -1
+              },
+              {
+                "id": "wlb",
+                "label": "W",
+                "side": "DEFENSE",
+                "x": -4,
+                "y": 4.5
+              },
+              {
+                "id": "mlb",
+                "label": "M",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 4.5
+              },
+              {
+                "id": "slb",
+                "label": "S",
+                "side": "DEFENSE",
+                "x": 4,
+                "y": 4.5
+              },
+              {
+                "id": "cb1",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": -12,
+                "y": 6
+              },
+              {
+                "id": "cb2",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": 12,
+                "y": 6
+              },
+              {
+                "id": "fs",
+                "label": "FS",
+                "side": "DEFENSE",
+                "x": -6,
+                "y": 13
+              },
+              {
+                "id": "ss",
+                "label": "SS",
+                "side": "DEFENSE",
+                "x": 6,
+                "y": 13
+              }
+            ],
+            "caption": "Two high: middle open"
+          },
+          "concept": "mofo"
+        },
+        {
+          "type": "diagram_tap",
+          "id": "a3-shells-03",
+          "prompt": "Tap the deep safeties.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": -1
+              },
+              {
+                "id": "wlb",
+                "label": "W",
+                "side": "DEFENSE",
+                "x": -4,
+                "y": 4.5
+              },
+              {
+                "id": "mlb",
+                "label": "M",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 4.5
+              },
+              {
+                "id": "slb",
+                "label": "S",
+                "side": "DEFENSE",
+                "x": 4,
+                "y": 4.5
+              },
+              {
+                "id": "cb1",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": -12,
+                "y": 6
+              },
+              {
+                "id": "cb2",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": 12,
+                "y": 6
+              },
+              {
+                "id": "fs",
+                "label": "FS",
+                "side": "DEFENSE",
+                "x": -6,
+                "y": 13
+              },
+              {
+                "id": "ss",
+                "label": "SS",
+                "side": "DEFENSE",
+                "x": 6,
+                "y": 13
+              }
+            ],
+            "caption": ""
+          },
+          "targets": [
+            "fs",
+            "ss"
+          ],
+          "explanation": "Both safeties are deep and split: a two-high shell.",
+          "concept": "mofo"
+        },
+        {
+          "type": "diagram_tap",
+          "id": "a3-shells-04",
+          "prompt": "Tap the single deep safety.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": -1
+              },
+              {
+                "id": "wlb",
+                "label": "W",
+                "side": "DEFENSE",
+                "x": -4,
+                "y": 4.5
+              },
+              {
+                "id": "mlb",
+                "label": "M",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 4.5
+              },
+              {
+                "id": "slb",
+                "label": "S",
+                "side": "DEFENSE",
+                "x": 4,
+                "y": 4.5
+              },
+              {
+                "id": "cb1",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": -12,
+                "y": 6
+              },
+              {
+                "id": "cb2",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": 12,
+                "y": 6
+              },
+              {
+                "id": "fs",
+                "label": "FS",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 14
+              },
+              {
+                "id": "ss",
+                "label": "SS",
+                "side": "DEFENSE",
+                "x": 6,
+                "y": 7
+              }
+            ],
+            "caption": ""
+          },
+          "targets": [
+            "fs"
+          ],
+          "explanation": "The free safety is alone in the deep middle; the strong safety has come down near the box.",
+          "concept": "mofc"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a3-shells-05",
+          "prompt": "One high safety, middle of the field closed. Which coverage families are most likely?",
+          "choices": [
+            "Cover 1 or Cover 3",
+            "Cover 2 or Cover 4",
+            "Only Cover 0",
+            "No coverage"
+          ],
+          "answer": 0,
+          "explanation": "A single-high shell usually means Cover 1 (man) or Cover 3 (zone).",
+          "concept": "mofc"
+        },
+        {
+          "type": "true_false",
+          "id": "a3-shells-06",
+          "statement": "The shell before the snap always matches the coverage after it.",
+          "answer": false,
+          "explanation": "Defenses disguise by rotating at the snap. The shell is a strong clue, not a guarantee.",
+          "concept": "disguise"
+        }
+      ]
+    },
+    {
+      "id": "a3-leverage",
+      "title": "Leverage",
+      "blurb": "Where the defender stands decides what's open.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "a3-leverage-01",
+          "title": "Inside and outside leverage",
+          "body": "A defender lined up inside his receiver has inside leverage: he protects the middle, so routes to the sideline are easier. Outside leverage is the opposite.",
+          "concept": "leverage"
+        },
+        {
+          "type": "diagram_tap",
+          "id": "a3-leverage-02",
+          "prompt": "Tap the receiver whose defender gives him the easier out route.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": 0
+              },
+              {
+                "id": "cb1",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": -10.8,
+                "y": 5
+              },
+              {
+                "id": "cb2",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": 13.2,
+                "y": 5
+              }
+            ]
+          },
+          "targets": [
+            "x"
+          ],
+          "explanation": "X's cornerback sits inside him, protecting the middle, so the out toward the sideline is easier. Z's defender is outside, taking the out away.",
+          "concept": "leverage"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a3-leverage-03",
+          "prompt": "The cornerback has outside leverage on X. Which route is he giving up?",
+          "choices": [
+            "A slant to the inside",
+            "An out to the sideline",
+            "A comeback outside",
+            "A corner route"
+          ],
+          "answer": 0,
+          "explanation": "Lined up outside, he takes away outside routes and concedes the inside: the slant.",
+          "concept": "leverage"
+        },
+        {
+          "type": "true_false",
+          "id": "a3-leverage-04",
+          "statement": "A defender with inside leverage is protecting the middle of the field.",
+          "answer": true,
+          "explanation": "Yes. Inside leverage takes away inside-breaking routes.",
+          "concept": "leverage"
+        }
+      ]
+    }
+  ]
+}

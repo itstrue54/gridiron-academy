@@ -17,6 +17,14 @@ import kotlin.test.*
 class LearnerAppStateTest {
     private val content = ContentLoader.load(ClasspathContentSource())
 
+    /** The ladder is exactly this track's levels (plus shared ones), in order, from Level 1. */
+    private fun assertTrackLadder(s: LearnerAppState, track: Track) {
+        val expected = content.curriculum.levels.filter { it.track == track || it.track == Track.SHARED }.sortedBy { it.number }
+        assertEquals(expected.map { it.id }, s.levels.map { it.id })
+        assertEquals(1, s.levels.first().number)
+        assertTrue(s.levels.zipWithNext().all { (a, b) -> a.number < b.number })
+    }
+
     /** The right answer for any graded step, so a test can play a perfect lesson. */
     private fun perfect(step: Step): Answer = when (step) {
         is Learn -> Answer.Seen
@@ -40,7 +48,7 @@ class LearnerAppStateTest {
         assertEquals(listOf(Screen.Home), s.backStack)
         assertEquals("Leo", store.load()?.profile?.nickname)
         assertEquals(Skin.Kid, s.skin)
-        assertEquals(listOf("kid-1", "kid-2"), s.levels.map { it.id })
+        assertTrackLadder(s, Track.KID)
         assertFalse(s.back(), "Home is the root")
     }
 
@@ -51,7 +59,7 @@ class LearnerAppStateTest {
         val s = LearnerAppState(content, store) { 2 }
         assertEquals(Screen.Home, s.screen)
         assertEquals(Skin.Adult, s.skin)
-        assertEquals(listOf("adult-1", "adult-2"), s.levels.map { it.id })
+        assertTrackLadder(s, Track.ADULT)
     }
 
     @Test

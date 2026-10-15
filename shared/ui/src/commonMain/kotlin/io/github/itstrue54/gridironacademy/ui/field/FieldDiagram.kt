@@ -251,24 +251,21 @@ fun FieldDiagram(
                     }
                 }
             }
-            if (crowded || zoomed) {
-                ZoomButtons(
-                    zoom = zoom,
-                    size = canvasSize,
-                    labels = labels,
-                    modifier = Modifier.align(Alignment.BottomEnd).padding(ZOOM_BUTTON_INSET.dp),
-                )
-            }
         }
-        if (diagram.caption.isNotEmpty()) {
-            Text(diagram.caption, style = type.label, color = colors.inkDim, modifier = Modifier.padding(top = 8.dp))
+        // Under the field, beside the caption: zoom buttons on the field covered players
+        // in its bottom corner (DESIGN 7.10).
+        val showZoom = crowded || zoomed
+        if (diagram.caption.isNotEmpty() || showZoom) {
+            Row(Modifier.fillMaxWidth().padding(top = 8.dp), verticalAlignment = Alignment.CenterVertically) {
+                Text(diagram.caption, style = type.label, color = colors.inkDim, modifier = Modifier.weight(1f))
+                if (showZoom) ZoomButtons(zoom = zoom, size = canvasSize, labels = labels, modifier = Modifier)
+            }
         }
     }
 }
 
 private const val PILL_ALPHA = 0.7f
 private const val GHOST_ALPHA = 0.25f
-private const val ZOOM_BUTTON_INSET = 6
 private const val ZOOM_BUTTON_ALPHA = 0.92f
 private const val TEXT_CACHE = 64
 private const val ROUTE_LABEL_LIFT = 14
