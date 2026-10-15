@@ -1,0 +1,510 @@
+{
+  "id": "adult2-u3",
+  "title": "Special Teams and Calls",
+  "lessons": [
+    {
+      "id": "a2-special",
+      "title": "Special Teams Anatomy",
+      "blurb": "Tries, kicks and returns.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "a2-special-01",
+          "title": "The try",
+          "body": "After a touchdown, the NFL extra point is snapped from the 15-yard line, a 33-yard kick. A two-point try is snapped from the 2.",
+          "concept": "extra-point"
+        },
+        {
+          "type": "learn",
+          "id": "a2-special-02",
+          "title": "Field goal distance",
+          "body": "Add 17 yards to the line of scrimmage: 10 for the end zone and about 7 for the snap and hold. From the opponent's 30, it is a 47-yard try.",
+          "concept": "field-goal"
+        },
+        {
+          "type": "learn",
+          "id": "a2-special-03",
+          "title": "The modern kickoff",
+          "body": "Since 2024 the NFL kickoff lines the coverage players up close to the returners, and nobody moves until the ball lands or is caught. The aim is more returns with fewer high-speed collisions.",
+          "concept": "kickoff"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a2-special-04",
+          "prompt": "The ball is on the opponent's 25. About how long is a field goal from there?",
+          "choices": [
+            "42 yards",
+            "25 yards",
+            "35 yards",
+            "52 yards"
+          ],
+          "answer": 0,
+          "explanation": "25 + 10 (end zone) + 7 (snap and hold) = 42 yards.",
+          "concept": "field-goal"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a2-special-05",
+          "prompt": "Where is the NFL two-point try snapped from?",
+          "choices": [
+            "The 2-yard line",
+            "The 15-yard line",
+            "The 5-yard line",
+            "The 10-yard line"
+          ],
+          "answer": 0,
+          "explanation": "Two-point tries start at the 2. Extra-point kicks are snapped from the 15.",
+          "concept": "two-point"
+        },
+        {
+          "type": "true_false",
+          "id": "a2-special-06",
+          "statement": "In the NFL, a team trying an onside kick has to tell the officials first.",
+          "answer": true,
+          "explanation": "Under the kickoff rules adopted in 2024, onside kicks must be declared in advance.",
+          "concept": "onside-kick"
+        }
+      ]
+    },
+    {
+      "id": "a2-calls",
+      "title": "Reading a Play Call",
+      "blurb": "What the quarterback says in the huddle.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "a2-calls-01",
+          "title": "Anatomy of a call",
+          "body": "A typical huddle call gives the formation, any motion, the play, and the snap count, for example \"Gun Trips Right, Jet, 24 Power, on two.\" Every system words it differently.",
+          "concept": "play-call"
+        },
+        {
+          "type": "learn",
+          "id": "a2-calls-02",
+          "title": "Audibles",
+          "body": "At the line, the quarterback can change the play after seeing the defense. That is an audible. Some calls include two plays and he picks one at the line.",
+          "concept": "audible"
+        },
+        {
+          "type": "learn",
+          "id": "a2-calls-03",
+          "title": "Spike and kneel",
+          "body": "A spike throws the ball straight down to stop the clock; it costs a down. A kneel takes a safe loss of a yard to keep the clock running.",
+          "concept": "spike"
+        },
+        {
+          "type": "order",
+          "id": "a2-calls-04",
+          "prompt": "Put the parts of a typical play call in order.",
+          "items": [
+            "Formation",
+            "Motion",
+            "The play",
+            "Snap count"
+          ],
+          "explanation": "Formation first (where to line up), then motion, then the play, then when the ball will be snapped.",
+          "concept": "play-call"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a2-calls-05",
+          "prompt": "The quarterback changes the play at the line after reading the defense. What is that called?",
+          "choices": [
+            "An audible",
+            "A shift",
+            "A spike",
+            "A kneel"
+          ],
+          "answer": 0,
+          "explanation": "An audible is a play change at the line of scrimmage.",
+          "concept": "audible"
+        },
+        {
+          "type": "true_false",
+          "id": "a2-calls-06",
+          "statement": "Spiking the ball uses up a down.",
+          "answer": true,
+          "explanation": "Yes. A spike stops the clock but counts as an incomplete pass.",
+          "concept": "spike"
+        }
+      ]
+    },
+    {
+      "id": "a2-gameday",
+      "title": "Game Day Decisions",
+      "blurb": "Make the call, then see why.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "a2-gameday-01",
+          "title": "You're the coach",
+          "body": "Each card is a real game moment: down, distance, clock, score and timeouts. Pick the call. \"Best\" is what most modern coaches and win-probability models would choose.",
+          "concept": "game-situation"
+        },
+        {
+          "type": "situation",
+          "id": "a2-gameday-02",
+          "state": {
+            "quarter": 4,
+            "clock": 70,
+            "down": 1,
+            "toGo": 10,
+            "yardLine": 35,
+            "scoreDiff": -7,
+            "timeouts": 0
+          },
+          "prompt": "You just scored to trail by 7 with 1:10 left and no timeouts. You're kicking off. What's the call?",
+          "options": [
+            {
+              "text": "Onside kick",
+              "quality": "best",
+              "why": "With no timeouts, you can't stop the clock: kick deep and they can run out the 1:10. You have to try to get the ball back now."
+            },
+            {
+              "text": "Kick it deep",
+              "quality": "poor",
+              "why": "They can kneel and let the clock run. Without timeouts you never see the ball again."
+            },
+            {
+              "text": "Squib kick",
+              "quality": "poor",
+              "why": "It keeps the ball away from the returner but still hands them possession with no way to stop the clock."
+            }
+          ],
+          "explanation": "When you can't stop the clock, the kickoff is your last chance at the ball.",
+          "concept": "onside-kick"
+        },
+        {
+          "type": "situation",
+          "id": "a2-gameday-03",
+          "state": {
+            "quarter": 4,
+            "clock": 180,
+            "down": 1,
+            "toGo": 10,
+            "yardLine": 35,
+            "scoreDiff": -7,
+            "timeouts": 3
+          },
+          "prompt": "You trail by 7 with 3:00 left and all three timeouts. You're kicking off. What's the call?",
+          "options": [
+            {
+              "text": "Kick it deep",
+              "quality": "best",
+              "why": "With three timeouts and the two-minute warning, a defensive stop gets you the ball back with time to tie."
+            },
+            {
+              "text": "Onside kick",
+              "quality": "poor",
+              "why": "Onside kicks rarely work, and a miss hands them a short field when a field goal would end it."
+            },
+            {
+              "text": "Pooch kick out of bounds",
+              "quality": "poor",
+              "why": "A kick out of bounds is a penalty that gives them the ball at their 40."
+            }
+          ],
+          "explanation": "Your timeouts are your plan: kick deep, stop them, and get the ball back.",
+          "concept": "kickoff"
+        },
+        {
+          "type": "situation",
+          "id": "a2-gameday-04",
+          "state": {
+            "quarter": 2,
+            "clock": 4,
+            "down": 4,
+            "toGo": 8,
+            "yardLine": 70,
+            "scoreDiff": 0,
+            "timeouts": 0
+          },
+          "prompt": "4 seconds left in the half, 4th and 8 at their 30, tied, no timeouts. What do you do?",
+          "options": [
+            {
+              "text": "Kick the field goal",
+              "quality": "best",
+              "why": "A 47-yard try is a good-percentage kick, and the half ends either way."
+            },
+            {
+              "text": "Go for it",
+              "quality": "poor",
+              "why": "Even a first down leaves no time to score. You'd give up three points for nothing."
+            },
+            {
+              "text": "Take a knee",
+              "quality": "poor",
+              "why": "Kneeling throws away a makeable field goal."
+            }
+          ],
+          "explanation": "With no time for another play, take the points that are on the table.",
+          "concept": "field-goal"
+        },
+        {
+          "type": "situation",
+          "id": "a2-gameday-05",
+          "state": {
+            "quarter": 4,
+            "clock": 90,
+            "down": 1,
+            "toGo": 10,
+            "yardLine": 70,
+            "scoreDiff": 3,
+            "timeouts": 3
+          },
+          "prompt": "You lead by 3 with 1:30 left. It's 1st and 10 at their 30, and they have no timeouts. What's the call?",
+          "options": [
+            {
+              "text": "Kneel down",
+              "quality": "best",
+              "why": "With no timeouts against you, three kneels run off the 1:30. Game over, no risk."
+            },
+            {
+              "text": "Run the ball",
+              "quality": "ok",
+              "why": "It also runs the clock, but every handoff risks a fumble you don't need to risk."
+            },
+            {
+              "text": "Throw for the end zone",
+              "quality": "poor",
+              "why": "An incompletion stops the clock and an interception gives them life."
+            }
+          ],
+          "explanation": "When the clock can win the game for you, let it.",
+          "concept": "kneel-down"
+        },
+        {
+          "type": "situation",
+          "id": "a2-gameday-06",
+          "state": {
+            "quarter": 3,
+            "clock": 420,
+            "down": 3,
+            "toGo": 6,
+            "yardLine": 45,
+            "scoreDiff": 0,
+            "timeouts": 2
+          },
+          "prompt": "Your receiver's sideline catch is ruled incomplete. The replay on the big screen shows both feet in. 3rd quarter, two timeouts, challenges left. What do you do?",
+          "options": [
+            {
+              "text": "Challenge the call",
+              "quality": "best",
+              "why": "Clear evidence of a catch is exactly what a challenge is for, and you have the timeouts to risk."
+            },
+            {
+              "text": "Let it go",
+              "quality": "poor",
+              "why": "You'd give up a first down that the replay clearly supports."
+            },
+            {
+              "text": "Call a timeout to think",
+              "quality": "ok",
+              "why": "It buys time, but you spend a timeout you might need later."
+            }
+          ],
+          "explanation": "Challenge when the evidence is clear and the timeout risk is affordable.",
+          "concept": "challenge"
+        },
+        {
+          "type": "situation",
+          "id": "a2-gameday-07",
+          "state": {
+            "quarter": 4,
+            "clock": 30,
+            "down": 1,
+            "toGo": 2,
+            "yardLine": 98,
+            "scoreDiff": -2,
+            "timeouts": 1
+          },
+          "prompt": "You just scored a touchdown to trail by 2 with 30 seconds left. What's the try?",
+          "options": [
+            {
+              "text": "Go for two",
+              "quality": "best",
+              "why": "Two points ties the game. A kick leaves you a point behind with almost no time."
+            },
+            {
+              "text": "Kick the extra point",
+              "quality": "poor",
+              "why": "Even a good kick still loses by one."
+            },
+            {
+              "text": "Take a delay penalty and kick",
+              "quality": "poor",
+              "why": "It moves you back and still only gets one point."
+            }
+          ],
+          "explanation": "Do the math first: you need two, so go for two.",
+          "concept": "two-point"
+        },
+        {
+          "type": "situation",
+          "id": "a2-gameday-08",
+          "state": {
+            "quarter": 1,
+            "clock": 600,
+            "down": 1,
+            "toGo": 15,
+            "yardLine": 85,
+            "scoreDiff": 6,
+            "timeouts": 3
+          },
+          "prompt": "First quarter. Your touchdown just put you up 6. What's the try?",
+          "options": [
+            {
+              "text": "Kick the extra point",
+              "quality": "best",
+              "why": "Early on, the near-sure point and the two-point try are worth about the same; most coaches take the kick."
+            },
+            {
+              "text": "Go for two",
+              "quality": "ok",
+              "why": "Reasonable: about the same expected points, but more variance this early."
+            },
+            {
+              "text": "Decline the try",
+              "quality": "poor",
+              "why": "Throws away a free shot at points."
+            }
+          ],
+          "explanation": "Early in the game the choice is close; late in the game the score decides it.",
+          "concept": "extra-point"
+        },
+        {
+          "type": "situation",
+          "id": "a2-gameday-09",
+          "state": {
+            "quarter": 4,
+            "clock": 12,
+            "down": 1,
+            "toGo": 10,
+            "yardLine": 75,
+            "scoreDiff": -2,
+            "timeouts": 0
+          },
+          "prompt": "You trail by 2 with 12 seconds left. 1st and 10 at their 25, clock running, no timeouts. What do you do?",
+          "options": [
+            {
+              "text": "Spike the ball",
+              "quality": "best",
+              "why": "It stops the clock in a few seconds, then the field goal team comes on for a 42-yard try to win."
+            },
+            {
+              "text": "Rush the kicking team onto the field",
+              "quality": "ok",
+              "why": "Possible, but a hurried kick with the clock running can go wrong."
+            },
+            {
+              "text": "Run one more play",
+              "quality": "poor",
+              "why": "If it doesn't stop the clock, time runs out before you can kick."
+            }
+          ],
+          "explanation": "No timeouts means you have to stop the clock some other way.",
+          "concept": "spike"
+        },
+        {
+          "type": "situation",
+          "id": "a2-gameday-10",
+          "state": {
+            "quarter": 2,
+            "clock": 420,
+            "down": 4,
+            "toGo": 1,
+            "yardLine": 45,
+            "scoreDiff": 0,
+            "timeouts": 3
+          },
+          "prompt": "Second quarter, tied. 4th and 1 at your own 45. What's the call?",
+          "options": [
+            {
+              "text": "Go for it",
+              "quality": "best",
+              "why": "Short-yardage conversions succeed often, and keeping the ball is worth more than the punt's field position."
+            },
+            {
+              "text": "Punt",
+              "quality": "ok",
+              "why": "The traditional choice, and not a disaster, but it gives up a likely first down."
+            },
+            {
+              "text": "Try a 72-yard field goal",
+              "quality": "poor",
+              "why": "Far beyond any realistic range."
+            }
+          ],
+          "explanation": "On 4th and short near midfield, modern coaches go for it more often than not.",
+          "concept": "fourth-down"
+        },
+        {
+          "type": "situation",
+          "id": "a2-gameday-11",
+          "state": {
+            "quarter": 3,
+            "clock": 300,
+            "down": 4,
+            "toGo": 10,
+            "yardLine": 25,
+            "scoreDiff": 0,
+            "timeouts": 3
+          },
+          "prompt": "Third quarter, tied. 4th and 10 at your own 25. What's the call?",
+          "options": [
+            {
+              "text": "Punt",
+              "quality": "best",
+              "why": "Ten yards is a long conversion, and failing gives them a short field."
+            },
+            {
+              "text": "Go for it",
+              "quality": "poor",
+              "why": "Low odds, and a miss hands them the ball in field goal range."
+            },
+            {
+              "text": "Field goal",
+              "quality": "poor",
+              "why": "A 92-yard kick isn't a real option."
+            }
+          ],
+          "explanation": "Long yardage deep in your own end is still a punt.",
+          "concept": "punt"
+        },
+        {
+          "type": "situation",
+          "id": "a2-gameday-12",
+          "state": {
+            "quarter": 4,
+            "clock": 58,
+            "down": 2,
+            "toGo": 8,
+            "yardLine": 40,
+            "scoreDiff": 4,
+            "timeouts": 2
+          },
+          "prompt": "You lead by 4 with 0:58 left. 2nd and 8 at your own 40. They have 3 timeouts. What's the call?",
+          "options": [
+            {
+              "text": "Run the ball",
+              "quality": "best",
+              "why": "It keeps the clock moving or forces them to burn a timeout, with low risk."
+            },
+            {
+              "text": "Kneel down",
+              "quality": "ok",
+              "why": "Safe, but with their timeouts they'll stop the clock anyway, and you lose yards."
+            },
+            {
+              "text": "Throw deep",
+              "quality": "poor",
+              "why": "An incompletion stops the clock for free, and an interception could lose the game."
+            }
+          ],
+          "explanation": "Make them use their timeouts, and protect the ball.",
+          "concept": "game-clock"
+        }
+      ]
+    }
+  ]
+}

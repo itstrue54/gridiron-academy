@@ -1,0 +1,216 @@
+{
+  "id": "adult2-u2",
+  "title": "Rules That Decide Games",
+  "lessons": [
+    {
+      "id": "a2-pi",
+      "title": "Pass Interference",
+      "blurb": "Contact, coverage and the catch.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "a2-pi-01",
+          "title": "Both have a right to the ball",
+          "body": "Once a forward pass is in the air, the receiver and the defender both have a right to play the ball. Neither may push, grab or cut off the other to stop a catch.",
+          "concept": "pass-interference"
+        },
+        {
+          "type": "learn",
+          "id": "a2-pi-02",
+          "title": "Defensive pass interference",
+          "body": "In the NFL it is a spot foul: the offense gets the ball where the foul happened, with an automatic first down. In the end zone, the ball goes to the 1-yard line.",
+          "concept": "pass-interference"
+        },
+        {
+          "type": "learn",
+          "id": "a2-pi-03",
+          "title": "Offensive pass interference",
+          "body": "A receiver who pushes off to create space is called for offensive pass interference: 10 yards.",
+          "concept": "pass-interference"
+        },
+        {
+          "type": "learn",
+          "id": "a2-pi-04",
+          "title": "Illegal contact",
+          "body": "Before the pass is thrown, a defender may jam a receiver within 5 yards of the line. Contact beyond 5 yards is illegal contact: 5 yards and an automatic first down.",
+          "concept": "illegal-contact"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a2-pi-05",
+          "prompt": "A defender grabs a receiver's arm 30 yards downfield as the ball arrives. Where does the NFL spot the ball?",
+          "choices": [
+            "At the spot of the foul",
+            "15 yards from the line",
+            "At the 50-yard line",
+            "No penalty"
+          ],
+          "answer": 0,
+          "explanation": "Defensive pass interference is a spot foul in the NFL, plus an automatic first down.",
+          "concept": "pass-interference"
+        },
+        {
+          "type": "true_false",
+          "id": "a2-pi-06",
+          "statement": "A cornerback may jam a receiver 3 yards past the line of scrimmage before the pass is thrown.",
+          "answer": true,
+          "explanation": "Within 5 yards of the line, contact is allowed until the ball is thrown.",
+          "concept": "illegal-contact"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a2-pi-07",
+          "prompt": "A receiver shoves the defender away just before the catch. What is called?",
+          "choices": [
+            "Offensive pass interference",
+            "Defensive holding",
+            "Illegal contact",
+            "Roughing the passer"
+          ],
+          "answer": 0,
+          "explanation": "Pushing off to create separation is offensive pass interference: 10 yards.",
+          "concept": "pass-interference"
+        }
+      ]
+    },
+    {
+      "id": "a2-protect",
+      "title": "Protecting Players",
+      "blurb": "Fouls that cost 15 yards.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "a2-protect-01",
+          "title": "Roughing the passer",
+          "body": "Hitting the quarterback after he has thrown, hitting his head or neck, or landing on him with full body weight: 15 yards and an automatic first down.",
+          "concept": "roughing-the-passer"
+        },
+        {
+          "type": "learn",
+          "id": "a2-protect-02",
+          "title": "Unnecessary roughness",
+          "body": "Extra hits away from the play, late hits on a runner who is down or out of bounds: 15 yards.",
+          "concept": "unnecessary-roughness"
+        },
+        {
+          "type": "learn",
+          "id": "a2-protect-03",
+          "title": "Targeting is a college rule",
+          "body": "\"Targeting\" is a college football rule: forcible contact to the head or neck, or with the crown of the helmet, means 15 yards and an ejection. The NFL penalizes helmet hits under its own rules instead.",
+          "concept": "targeting"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a2-protect-04",
+          "prompt": "A defender hits the quarterback two steps after the ball is gone. What is the penalty?",
+          "choices": [
+            "Roughing the passer",
+            "Pass interference",
+            "Offside",
+            "Holding"
+          ],
+          "answer": 0,
+          "explanation": "A late hit on a quarterback who has thrown is roughing the passer: 15 yards and a first down.",
+          "concept": "roughing-the-passer"
+        },
+        {
+          "type": "true_false",
+          "id": "a2-protect-05",
+          "statement": "In college football, a targeting foul also ejects the player.",
+          "answer": true,
+          "explanation": "Yes. Targeting is 15 yards plus an ejection after review.",
+          "concept": "targeting"
+        },
+        {
+          "type": "match",
+          "id": "a2-protect-06",
+          "prompt": "Match each foul to its usual NFL yardage.",
+          "pairs": [
+            {
+              "left": "Roughing the passer",
+              "right": "15 yards and a first down"
+            },
+            {
+              "left": "Offensive holding",
+              "right": "10 yards"
+            },
+            {
+              "left": "False start",
+              "right": "5 yards"
+            },
+            {
+              "left": "Defensive pass interference",
+              "right": "Spot of the foul"
+            }
+          ],
+          "explanation": "The most dangerous fouls carry the biggest penalties.",
+          "concept": "penalty"
+        }
+      ]
+    },
+    {
+      "id": "a2-replay",
+      "title": "Replay, Challenges and Overtime",
+      "blurb": "How calls get fixed, and how ties end.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "a2-replay-01",
+          "title": "Coach's challenge",
+          "body": "An NFL coach throws a red flag to challenge a call. Each team gets two challenges, and a third if both succeed. A lost challenge costs a timeout.",
+          "concept": "challenge"
+        },
+        {
+          "type": "learn",
+          "id": "a2-replay-02",
+          "title": "Automatic reviews",
+          "body": "Scoring plays and turnovers are reviewed by the replay official without a challenge. Inside the last two minutes of each half and in overtime, reviews start from the replay booth, not a coach's flag.",
+          "concept": "replay-review"
+        },
+        {
+          "type": "learn",
+          "id": "a2-replay-03",
+          "title": "Overtime (as of the 2025 season)",
+          "body": "In the NFL regular season, overtime is one 10-minute period, and both teams get a possession unless the defense scores on the first one. After that, the next score wins. A regular-season game can end in a tie.",
+          "concept": "overtime"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a2-replay-04",
+          "prompt": "A coach's challenge fails. What does it cost?",
+          "choices": [
+            "A timeout",
+            "15 yards",
+            "A down",
+            "Nothing"
+          ],
+          "answer": 0,
+          "explanation": "A lost challenge costs a timeout, so a coach needs one left to challenge.",
+          "concept": "challenge"
+        },
+        {
+          "type": "true_false",
+          "id": "a2-replay-05",
+          "statement": "A coach must throw the red flag to get a touchdown reviewed.",
+          "answer": false,
+          "explanation": "Scoring plays are reviewed automatically by the replay official.",
+          "concept": "replay-review"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a2-replay-06",
+          "prompt": "With 1:30 left in the half, a coach wants a sideline catch reviewed. What happens?",
+          "choices": [
+            "The replay official decides; coaches can't challenge",
+            "The coach throws the red flag",
+            "Nothing can be reviewed",
+            "The play is replayed"
+          ],
+          "answer": 0,
+          "explanation": "Inside two minutes of each half, reviews come from the replay booth, not the coach.",
+          "concept": "replay-review"
+        }
+      ]
+    }
+  ]
+}

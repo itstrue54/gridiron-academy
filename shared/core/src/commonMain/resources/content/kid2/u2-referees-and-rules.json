@@ -1,0 +1,248 @@
+{
+  "id": "kid2-u2",
+  "title": "Referees and Rules",
+  "lessons": [
+    {
+      "id": "k2-signals",
+      "title": "Referee Signals",
+      "blurb": "What the referees' arms mean.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "k2-signals-01",
+          "title": "Touchdown signal",
+          "body": "When a team scores a touchdown, the referee raises both arms straight up over their head.",
+          "concept": "referee-signal"
+        },
+        {
+          "type": "learn",
+          "id": "k2-signals-02",
+          "title": "First down signal",
+          "body": "For a first down, the referee points one arm forward, toward the end zone the offense is going to.",
+          "concept": "referee-signal"
+        },
+        {
+          "type": "learn",
+          "id": "k2-signals-03",
+          "title": "Incomplete pass",
+          "body": "If a pass is not caught, the referee swings both arms back and forth, crossing in front of their body.",
+          "concept": "referee-signal"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k2-signals-04",
+          "prompt": "Both of the referee's arms go straight up. What happened?",
+          "choices": [
+            "A touchdown",
+            "A penalty",
+            "A timeout",
+            "A first down"
+          ],
+          "answer": 0,
+          "explanation": "Both arms straight up means touchdown!",
+          "concept": "referee-signal"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k2-signals-05",
+          "prompt": "A referee throws a yellow flag. What does it mean?",
+          "choices": [
+            "A penalty happened",
+            "The game is over",
+            "A touchdown",
+            "Halftime"
+          ],
+          "answer": 0,
+          "explanation": "The yellow flag means a player broke a rule. The referee explains after the play.",
+          "concept": "penalty"
+        },
+        {
+          "type": "match",
+          "id": "k2-signals-06",
+          "prompt": "Match the signal to what it means.",
+          "pairs": [
+            {
+              "left": "Both arms straight up",
+              "right": "Touchdown"
+            },
+            {
+              "left": "Arm points forward",
+              "right": "First down"
+            },
+            {
+              "left": "Arms swing across",
+              "right": "Incomplete pass"
+            },
+            {
+              "left": "Yellow flag",
+              "right": "Penalty"
+            }
+          ],
+          "explanation": "Learn these four and you can follow the referees in any game.",
+          "concept": "referee-signal"
+        }
+      ]
+    },
+    {
+      "id": "k2-penalties",
+      "title": "Common Penalties",
+      "blurb": "Rules that cost yards.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "k2-penalties-01",
+          "title": "Offside",
+          "body": "Before the snap, the defense must stay on its side of the line. If a defender is across the line when the ball is snapped, it is offside: 5 yards.",
+          "concept": "offside"
+        },
+        {
+          "type": "learn",
+          "id": "k2-penalties-02",
+          "title": "Holding",
+          "body": "Blockers may push, but they can't grab and hold another player to stop them. That is holding, and it costs 10 yards on the offense.",
+          "concept": "holding"
+        },
+        {
+          "type": "learn",
+          "id": "k2-penalties-03",
+          "title": "Pass interference",
+          "body": "When a pass is in the air, players can't push or grab to stop someone from catching it. That is pass interference.",
+          "concept": "pass-interference"
+        },
+        {
+          "type": "learn",
+          "id": "k2-penalties-04",
+          "title": "Delay of game",
+          "body": "The offense has a play clock. If it runs out before the snap, it is delay of game: 5 yards.",
+          "concept": "delay-of-game"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k2-penalties-05",
+          "prompt": "A blocker grabs a defender's jersey to stop him. What penalty is that?",
+          "choices": [
+            "Holding",
+            "Offside",
+            "Delay of game",
+            "Fair catch"
+          ],
+          "answer": 0,
+          "explanation": "Grabbing to stop a player is holding.",
+          "concept": "holding"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k2-penalties-06",
+          "prompt": "A defender is across the line when the ball is snapped. What is it?",
+          "choices": [
+            "Offside",
+            "Holding",
+            "Touchback",
+            "Pass interference"
+          ],
+          "answer": 0,
+          "explanation": "The defense must stay on its side until the snap. Crossing early is offside.",
+          "concept": "offside"
+        },
+        {
+          "type": "true_false",
+          "id": "k2-penalties-07",
+          "statement": "If the play clock runs out before the snap, the offense loses 5 yards.",
+          "answer": true,
+          "explanation": "Yes. That is delay of game.",
+          "concept": "delay-of-game"
+        },
+        {
+          "type": "match",
+          "id": "k2-penalties-08",
+          "prompt": "Match each penalty to its meaning.",
+          "pairs": [
+            {
+              "left": "Offside",
+              "right": "Defense across the line at the snap"
+            },
+            {
+              "left": "Holding",
+              "right": "Grabbing to stop a player"
+            },
+            {
+              "left": "Pass interference",
+              "right": "Stopping a catch by pushing or grabbing"
+            },
+            {
+              "left": "Delay of game",
+              "right": "Play clock runs out"
+            }
+          ],
+          "explanation": "Penalties keep the game fair. Each one has its own yards.",
+          "concept": "penalty"
+        }
+      ]
+    },
+    {
+      "id": "k2-clock",
+      "title": "The Clock and Timeouts",
+      "blurb": "When time stops.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "k2-clock-01",
+          "title": "Timeouts",
+          "body": "A timeout stops the clock so a team can rest and plan. In the NFL, each team gets 3 timeouts in each half.",
+          "concept": "timeout"
+        },
+        {
+          "type": "learn",
+          "id": "k2-clock-02",
+          "title": "When the clock stops",
+          "body": "The game clock stops when a pass is not caught. It also stops for timeouts, scores and penalties.",
+          "concept": "game-clock"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k2-clock-03",
+          "prompt": "In the NFL, how many timeouts does each team get in a half?",
+          "choices": [
+            "1",
+            "3",
+            "5",
+            "10"
+          ],
+          "answer": 1,
+          "explanation": "Three per half. Coaches save them for the end of the half.",
+          "concept": "timeout"
+        },
+        {
+          "type": "true_false",
+          "id": "k2-clock-04",
+          "statement": "The clock stops after an incomplete pass.",
+          "answer": true,
+          "explanation": "Yes! A pass that is not caught stops the clock.",
+          "concept": "game-clock"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k2-clock-05",
+          "prompt": "Why do teams save timeouts for the end of a half?",
+          "choices": [
+            "To stop the clock when time is short",
+            "To make the game longer for fun",
+            "To get extra points",
+            "To change the score"
+          ],
+          "answer": 0,
+          "explanation": "Near the end, every second matters. A timeout saves time for one more play.",
+          "concept": "timeout"
+        },
+        {
+          "type": "true_false",
+          "id": "k2-clock-06",
+          "statement": "Kids' leagues always use exactly the same timeout rules as the NFL.",
+          "answer": false,
+          "explanation": "Not quite. Youth and flag leagues set their own rules, so ask your coach.",
+          "concept": "timeout"
+        }
+      ]
+    }
+  ]
+}

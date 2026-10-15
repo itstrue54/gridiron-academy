@@ -131,7 +131,13 @@ class EngineTest {
             assertTrue(LevelTest.test(units, lv.gate, 99).none { it is Learn })
             val pool = LevelTest.gamePool(units, lv.gate, 5)
             assertEquals(lv.gate.gameQuestions, pool.size)
-            SpeedRound(pool) // must be valid speed round content
+            // Each pool must be valid content for its own game type.
+            when (lv.gate.game) {
+                GameType.SPEED_ROUND -> SpeedRound(pool)
+                GameType.GAME_DAY -> GameDay(pool.map { it as Situation })
+                GameType.READ_DEFENSE -> assertTrue(pool.all { it is ReadDefense })
+                GameType.DIAGRAM_DASH -> assertTrue(pool.all { it is DiagramTap })
+            }
         }
     }
 

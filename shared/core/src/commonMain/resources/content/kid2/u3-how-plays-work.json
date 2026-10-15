@@ -1,0 +1,439 @@
+{
+  "id": "kid2-u3",
+  "title": "How Plays Work",
+  "lessons": [
+    {
+      "id": "k2-runpass",
+      "title": "Run or Pass?",
+      "blurb": "Choosing a play.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "k2-runpass-01",
+          "title": "Run plays",
+          "body": "On a run play, the quarterback hands the ball to a runner, who runs it forward. Runs are safer, and the clock keeps going.",
+          "concept": "run-play"
+        },
+        {
+          "type": "learn",
+          "id": "k2-runpass-02",
+          "title": "Pass plays",
+          "body": "On a pass play, the quarterback throws the ball to a receiver. Passes can gain lots of yards, but they can be dropped or intercepted.",
+          "concept": "pass-play"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k2-runpass-03",
+          "prompt": "Which play can gain lots of yards fast?",
+          "choices": [
+            "A pass",
+            "A punt",
+            "A timeout",
+            "A kneel"
+          ],
+          "answer": 0,
+          "explanation": "A long pass can gain many yards at once.",
+          "concept": "pass-play"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k2-runpass-04",
+          "prompt": "Which play is usually safer?",
+          "choices": [
+            "A run",
+            "A long pass",
+            "An onside kick",
+            "A trick play"
+          ],
+          "answer": 0,
+          "explanation": "Runs are less risky: there is no pass to drop or intercept.",
+          "concept": "run-play"
+        },
+        {
+          "type": "true_false",
+          "id": "k2-runpass-05",
+          "statement": "A pass can be intercepted by the defense.",
+          "answer": true,
+          "explanation": "Yes. That is one of the risks of passing.",
+          "concept": "interception"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k2-runpass-06",
+          "prompt": "It's 3rd down and 1 yard to go. What do many teams choose?",
+          "choices": [
+            "A short run",
+            "A punt",
+            "A very long pass",
+            "A timeout"
+          ],
+          "answer": 0,
+          "explanation": "With only 1 yard to go, a short, safe run is a common choice.",
+          "concept": "run-play"
+        }
+      ]
+    },
+    {
+      "id": "k2-oline",
+      "title": "The Offensive Line",
+      "blurb": "The players who block.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "k2-oline-01",
+          "title": "Five blockers",
+          "body": "The offensive line is five players: the center, two guards and two tackles. The center snaps the ball.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "70",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "66",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "55",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "67",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "71",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "12",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -1.3
+              },
+              {
+                "id": "rb",
+                "label": "22",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "te",
+                "label": "88",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              },
+              {
+                "id": "wr1",
+                "label": "81",
+                "side": "OFFENSE",
+                "x": -11,
+                "y": 0
+              },
+              {
+                "id": "wr2",
+                "label": "84",
+                "side": "OFFENSE",
+                "x": 11,
+                "y": -1
+              }
+            ],
+            "caption": "The offensive line: 70, 66, 55, 67, 71"
+          },
+          "concept": "offensive-line"
+        },
+        {
+          "type": "learn",
+          "id": "k2-oline-02",
+          "title": "Their jobs",
+          "body": "On runs, linemen push defenders out of the way. On passes, they protect the quarterback so he has time to throw.",
+          "concept": "offensive-line"
+        },
+        {
+          "type": "diagram_tap",
+          "id": "k2-oline-03",
+          "prompt": "Tap all five offensive linemen.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "70",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "66",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "55",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "67",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "71",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "12",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -1.3
+              },
+              {
+                "id": "rb",
+                "label": "22",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "te",
+                "label": "88",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              },
+              {
+                "id": "wr1",
+                "label": "81",
+                "side": "OFFENSE",
+                "x": -11,
+                "y": 0
+              },
+              {
+                "id": "wr2",
+                "label": "84",
+                "side": "OFFENSE",
+                "x": 11,
+                "y": -1
+              }
+            ],
+            "caption": "Offense, numbered"
+          },
+          "targets": [
+            "lt",
+            "lg",
+            "c",
+            "rg",
+            "rt"
+          ],
+          "explanation": "The five linemen stand side by side in the middle: the center and the guards and tackles next to him.",
+          "concept": "offensive-line"
+        },
+        {
+          "type": "diagram_tap",
+          "id": "k2-oline-04",
+          "prompt": "Tap the player who snaps the ball.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "70",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "66",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "55",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "67",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "71",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "12",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -1.3
+              },
+              {
+                "id": "rb",
+                "label": "22",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "te",
+                "label": "88",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              },
+              {
+                "id": "wr1",
+                "label": "81",
+                "side": "OFFENSE",
+                "x": -11,
+                "y": 0
+              },
+              {
+                "id": "wr2",
+                "label": "84",
+                "side": "OFFENSE",
+                "x": 11,
+                "y": -1
+              }
+            ],
+            "caption": "Offense, numbered"
+          },
+          "targets": [
+            "c"
+          ],
+          "explanation": "The center, in the middle of the line, snaps the ball to the quarterback.",
+          "concept": "center"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k2-oline-05",
+          "prompt": "On a pass play, what is the line's main job?",
+          "choices": [
+            "Protect the quarterback",
+            "Catch the ball",
+            "Kick the ball",
+            "Call the play"
+          ],
+          "answer": 0,
+          "explanation": "They hold off defenders so the quarterback has time to throw.",
+          "concept": "offensive-line"
+        },
+        {
+          "type": "true_false",
+          "id": "k2-oline-06",
+          "statement": "Offensive linemen usually catch passes.",
+          "answer": false,
+          "explanation": "Not quite. Linemen block. In the NFL, they usually aren't allowed to catch passes.",
+          "concept": "offensive-line"
+        }
+      ]
+    },
+    {
+      "id": "k2-scoreboard",
+      "title": "Reading the Scoreboard",
+      "blurb": "What all the numbers mean.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "k2-scoreboard-01",
+          "title": "The scoreboard",
+          "body": "A scoreboard shows each team's score, the quarter, and the time left. It also shows the down, the yards to go, and where the ball is.",
+          "concept": "scoreboard"
+        },
+        {
+          "type": "learn",
+          "id": "k2-scoreboard-02",
+          "title": "Down and distance",
+          "body": "\"3rd and 4\" means it is 3rd down and the offense needs 4 more yards for a first down.",
+          "concept": "down-and-distance"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k2-scoreboard-03",
+          "prompt": "The scoreboard says \"2nd and 7\". What does that mean?",
+          "choices": [
+            "2nd down, 7 yards to go",
+            "2 yards on 7th down",
+            "Quarter 2, 7 minutes left",
+            "Team 2 has 7 points"
+          ],
+          "answer": 0,
+          "explanation": "The first number is the down. The second is the yards needed.",
+          "concept": "down-and-distance"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k2-scoreboard-04",
+          "prompt": "\"4th and 1\": how many yards does the offense need?",
+          "choices": [
+            "1",
+            "4",
+            "10",
+            "41"
+          ],
+          "answer": 0,
+          "explanation": "One yard. It's 4th down, so this is the last try.",
+          "concept": "down-and-distance"
+        },
+        {
+          "type": "order",
+          "id": "k2-scoreboard-05",
+          "prompt": "Put the downs in order.",
+          "items": [
+            "1st down",
+            "2nd down",
+            "3rd down",
+            "4th down"
+          ],
+          "explanation": "Downs count up from 1 to 4. A first down starts the count again.",
+          "concept": "down"
+        },
+        {
+          "type": "true_false",
+          "id": "k2-scoreboard-06",
+          "statement": "\"Ball on 30\" tells you where the ball is on the field.",
+          "answer": true,
+          "explanation": "Yes. It is the yard line where the next play starts.",
+          "concept": "yard-line"
+        }
+      ]
+    }
+  ]
+}

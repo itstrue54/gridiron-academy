@@ -9,8 +9,8 @@ and validated, `preview` = exemplar content proving the model, `planned` = to be
 | 0 | Little Huddle | kid | 4-7, pre-readers | Picture Play (no test) | planned |
 | 1 | Pee-wee | kid | ~8 | Speed round | **done** (`kid-1`) |
 | 1 | Fan Starter | adult | new fans | Speed round | **done** (`adult-1`) |
-| 2 | Rookie | kid | ~9-10 | Speed round | planned |
-| 2 | Season Ticket | adult | casual fans | Game day | planned |
+| 2 | Rookie | kid | ~9-10 | Speed round | **done** (`kid-2`, coach review pending) |
+| 2 | Season Ticket | adult | casual fans | Game day | **done** (`adult-2`, coach review pending) |
 | 3 | Junior Varsity | kid | ~11-12 | Diagram dash | planned |
 | 3 | Armchair Coach | adult | fans | Diagram dash | planned |
 | 4 | Varsity | shared | both | Read the defense | planned |
@@ -35,7 +35,17 @@ turnovers; position names; flag vs tackle; referees and penalties. Adults add: N
 dimensions, extra point spot (15) and two-point spot (2), down-and-distance, clock
 stoppages, play clock, penalty yardage, 7-on-the-line and eligible receivers, touchbacks.
 
-## Level 2: Rookie / Season Ticket
+## Level 2: Rookie / Season Ticket (done; see `docs/content-review/level-2.md`)
+As written: Kid 9 drills in 3 units (Kicking Plays: kickoff, onside kick, punts and fair
+catches; Referees and Rules: signals, common penalties, clock and timeouts; How Plays
+Work: run or pass, the offensive line, reading the scoreboard), 58 steps. Adult 9 drills
+in 3 units (Formations and Personnel: backfield sets, eligibility, motion and shifts;
+Rules That Decide Games: pass interference, protecting players, replay, challenges and
+overtime; Special Teams and Calls: tries and kicks, reading a play call, and 11 Game Day
+situations for the level game), 65 steps. Kids' scoreboard and timeout rules say "in the
+NFL" and point to their own league for youth and flag rules.
+
+Originally planned:
 Kids: kicking game (kickoff, onside, return), more penalties and referee signals, the
 clock, timeouts, why teams pick run vs pass, offensive line jobs, reading a scoreboard,
 basic rules of their own league (flag/youth variants).

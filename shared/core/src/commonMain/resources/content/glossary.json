@@ -321,6 +321,244 @@
       "kid": "Safeties moving after the snap.",
       "full": "Post-snap movement of safeties (and sometimes corners) into the final coverage.",
       "level": 7
+    },
+    {
+      "id": "kickoff",
+      "term": "Kickoff",
+      "kid": "A long kick that starts each half and comes after touchdowns and field goals.",
+      "full": "A free kick from the kicking team's 35 (NFL) that starts each half and follows touchdowns and field goals. Since 2024 the NFL uses a format with the coverage team aligned close to the returners.",
+      "level": 2
+    },
+    {
+      "id": "kick-returner",
+      "term": "Kick returner",
+      "kid": "The player who catches a kick and runs it back.",
+      "full": "The receiving team's player who fields a kickoff or punt and returns it.",
+      "level": 2
+    },
+    {
+      "id": "onside-kick",
+      "term": "Onside kick",
+      "kid": "A short kick the kicking team tries to get back.",
+      "full": "A short kickoff the kicking team may recover after it travels 10 yards (or is touched by the receiving team). In the NFL it must be declared in advance.",
+      "level": 2
+    },
+    {
+      "id": "fair-catch",
+      "term": "Fair catch",
+      "kid": "Wave one arm, catch the ball, and nobody may tackle you.",
+      "full": "The returner signals by extending and waving one arm overhead; he may not be hit and may not advance the ball after the catch.",
+      "level": 2
+    },
+    {
+      "id": "referee-signal",
+      "term": "Referee signals",
+      "kid": "How referees show what happened, using their arms.",
+      "full": "Standard arm signals: both arms up for a score, arm forward for a first down, arms crossed in front for an incomplete pass, and many more for each foul.",
+      "level": 2
+    },
+    {
+      "id": "offside",
+      "term": "Offside",
+      "kid": "A defender is across the line when the ball is snapped.",
+      "full": "A defender in the neutral zone at the snap: 5 yards. Contact before the snap is encroachment.",
+      "level": 2
+    },
+    {
+      "id": "holding",
+      "term": "Holding",
+      "kid": "Grabbing a player to stop them.",
+      "full": "Illegally restricting an opponent with the hands or arms. Offensive holding is 10 yards; defensive holding is 5 yards and an automatic first down in the NFL.",
+      "level": 2
+    },
+    {
+      "id": "pass-interference",
+      "term": "Pass interference",
+      "kid": "Stopping a catch by pushing or grabbing.",
+      "full": "Illegal contact that restricts a player's chance to catch a forward pass once it is in the air. NFL defensive PI is a spot foul with an automatic first down; offensive PI is 10 yards.",
+      "level": 2
+    },
+    {
+      "id": "delay-of-game",
+      "term": "Delay of game",
+      "kid": "The play clock runs out before the snap.",
+      "full": "Failing to snap the ball before the play clock expires (and some other delays): 5 yards.",
+      "level": 2
+    },
+    {
+      "id": "timeout",
+      "term": "Timeout",
+      "kid": "A break that stops the clock.",
+      "full": "A stoppage a team calls to stop the clock. NFL teams get three per half; youth and flag leagues vary.",
+      "level": 2
+    },
+    {
+      "id": "run-play",
+      "term": "Run play",
+      "kid": "The ball is handed off and carried forward.",
+      "full": "A play in which the ball is advanced by running, usually after a handoff or pitch from the quarterback.",
+      "level": 2
+    },
+    {
+      "id": "pass-play",
+      "term": "Pass play",
+      "kid": "The quarterback throws the ball to a receiver.",
+      "full": "A play built around a forward pass to an eligible receiver.",
+      "level": 2
+    },
+    {
+      "id": "scoreboard",
+      "term": "Scoreboard",
+      "kid": "Shows the score, the time and the down.",
+      "full": "Displays the score, quarter, game clock, timeouts, down, distance and the ball's yard line.",
+      "level": 2
+    },
+    {
+      "id": "formation",
+      "term": "Formation",
+      "kid": "Where the offense lines up before the snap.",
+      "full": "The alignment of the 11 offensive players, named mostly by the backfield (I, singleback, shotgun, pistol, empty) and receiver sets (twins, trips, bunch).",
+      "level": 2
+    },
+    {
+      "id": "i-formation",
+      "term": "I formation",
+      "kid": "A fullback and a tailback lined up behind the quarterback.",
+      "full": "Quarterback under center with a fullback and tailback aligned in a line behind him: a power-running formation.",
+      "level": 2
+    },
+    {
+      "id": "singleback",
+      "term": "Singleback",
+      "kid": "One running back behind the quarterback.",
+      "full": "Quarterback under center with a single running back about 7 yards deep; also called Ace.",
+      "level": 2
+    },
+    {
+      "id": "shotgun",
+      "term": "Shotgun",
+      "kid": "The quarterback stands a few yards back to get the snap.",
+      "full": "Quarterback aligned about 5 yards behind the center, usually with a back beside him, for a better view and more time to throw.",
+      "level": 2
+    },
+    {
+      "id": "pistol",
+      "term": "Pistol",
+      "kid": "The quarterback is a few yards back with the runner right behind him.",
+      "full": "Quarterback about 4 yards deep with the running back directly behind, combining a downhill run game with shotgun vision.",
+      "level": 2
+    },
+    {
+      "id": "empty-backfield",
+      "term": "Empty",
+      "kid": "No running backs: everyone spreads out to catch.",
+      "full": "A formation with no backs besides the quarterback, usually five receivers.",
+      "level": 2
+    },
+    {
+      "id": "ineligible-receiver",
+      "term": "Ineligible receiver",
+      "kid": "A player who isn't allowed to catch a forward pass.",
+      "full": "Interior linemen (NFL numbers 50 to 79) may not catch a forward pass unless they report as eligible and align at an eligible spot; they may not go more than a yard downfield before a pass beyond the line.",
+      "level": 2
+    },
+    {
+      "id": "motion",
+      "term": "Motion",
+      "kid": "One player moving before the snap.",
+      "full": "One offensive player may be moving at the snap, parallel to or away from the line of scrimmage.",
+      "level": 2
+    },
+    {
+      "id": "shift",
+      "term": "Shift",
+      "kid": "Players changing spots before the snap.",
+      "full": "Offensive players changing positions before the snap; afterwards all must be set for a full second.",
+      "level": 2
+    },
+    {
+      "id": "illegal-contact",
+      "term": "Illegal contact",
+      "kid": "A defender bumps a receiver too far downfield before the pass.",
+      "full": "NFL: contact by a defender beyond 5 yards from the line before the ball is thrown; 5 yards and an automatic first down.",
+      "level": 2
+    },
+    {
+      "id": "roughing-the-passer",
+      "term": "Roughing the passer",
+      "kid": "Hitting the quarterback after he throws.",
+      "full": "Late, high or full-weight hits on a passer: 15 yards and an automatic first down.",
+      "level": 2
+    },
+    {
+      "id": "unnecessary-roughness",
+      "term": "Unnecessary roughness",
+      "kid": "An extra, dangerous hit.",
+      "full": "Excessive or late contact, such as hitting a player who is down or out of bounds: 15 yards.",
+      "level": 2
+    },
+    {
+      "id": "targeting",
+      "term": "Targeting",
+      "kid": "A college rule against hits to the head.",
+      "full": "College football foul for forcible contact to the head or neck area, or with the crown of the helmet: 15 yards and an ejection after review.",
+      "level": 2
+    },
+    {
+      "id": "challenge",
+      "term": "Challenge",
+      "kid": "A coach asks for a play to be looked at again.",
+      "full": "An NFL coach's request, by red flag, for a replay review. Two per game, a third if both succeed; a lost challenge costs a timeout.",
+      "level": 2
+    },
+    {
+      "id": "replay-review",
+      "term": "Replay review",
+      "kid": "Officials watch video to check a call.",
+      "full": "Video review of a play. Scoring plays and turnovers are reviewed automatically; late in halves and in overtime, the replay booth starts reviews.",
+      "level": 2
+    },
+    {
+      "id": "overtime",
+      "term": "Overtime",
+      "kid": "Extra time when the game is tied.",
+      "full": "An extra period played when regulation ends tied. NFL rules change over time; content states the season it describes.",
+      "level": 2
+    },
+    {
+      "id": "play-call",
+      "term": "Play call",
+      "kid": "The name of the play the team will run.",
+      "full": "The huddle call: formation, motion, the play itself and the snap count, worded differently in each system.",
+      "level": 2
+    },
+    {
+      "id": "audible",
+      "term": "Audible",
+      "kid": "Changing the play at the line.",
+      "full": "A change of play called at the line of scrimmage after reading the defense.",
+      "level": 2
+    },
+    {
+      "id": "spike",
+      "term": "Spike",
+      "kid": "Throwing the ball at the ground to stop the clock.",
+      "full": "An intentional incompletion right after the snap to stop the clock; it costs a down.",
+      "level": 2
+    },
+    {
+      "id": "kneel-down",
+      "term": "Kneel down",
+      "kid": "The quarterback kneels to keep the clock running.",
+      "full": "Ending a play immediately with a kneel to run the clock safely, usually when protecting a lead.",
+      "level": 2
+    },
+    {
+      "id": "game-situation",
+      "term": "Game situation",
+      "kid": "A real game moment to make a call on.",
+      "full": "A decision point defined by down, distance, field position, score, clock and timeouts.",
+      "level": 2
     }
   ]
 }

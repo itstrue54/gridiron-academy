@@ -1,0 +1,900 @@
+{
+  "id": "adult2-u1",
+  "title": "Formations and Personnel",
+  "lessons": [
+    {
+      "id": "a2-formations",
+      "title": "Backfield Sets",
+      "blurb": "Where the quarterback and backs line up.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "a2-formations-01",
+          "title": "I formation",
+          "body": "The quarterback takes the snap under center, with a fullback and a tailback lined up behind him in a straight line. Built for downhill running.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -1.2
+              },
+              {
+                "id": "fb",
+                "label": "FB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -4.2
+              },
+              {
+                "id": "tb",
+                "label": "TB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -7
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": -1
+              }
+            ],
+            "caption": "I formation"
+          },
+          "concept": "i-formation"
+        },
+        {
+          "type": "learn",
+          "id": "a2-formations-02",
+          "title": "Singleback",
+          "body": "One running back behind a quarterback under center. Frees a spot for an extra receiver or tight end.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -1.2
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -6.5
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": -1
+              },
+              {
+                "id": "h",
+                "label": "H",
+                "side": "OFFENSE",
+                "x": -7.5,
+                "y": -1
+              }
+            ],
+            "caption": "Singleback"
+          },
+          "concept": "singleback"
+        },
+        {
+          "type": "learn",
+          "id": "a2-formations-03",
+          "title": "Shotgun",
+          "body": "The quarterback stands about five yards back, with a back beside him. He sees the defense sooner and has more time to throw.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 1.8,
+                "y": -5
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": -1
+              },
+              {
+                "id": "h",
+                "label": "H",
+                "side": "OFFENSE",
+                "x": -7.5,
+                "y": -1
+              }
+            ],
+            "caption": "Shotgun"
+          },
+          "concept": "shotgun"
+        },
+        {
+          "type": "learn",
+          "id": "a2-formations-04",
+          "title": "Pistol",
+          "body": "The quarterback stands about four yards back with the running back directly behind him: shotgun vision with a downhill run game.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -4
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -7
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": -1
+              },
+              {
+                "id": "h",
+                "label": "H",
+                "side": "OFFENSE",
+                "x": -7.5,
+                "y": -1
+              }
+            ],
+            "caption": "Pistol"
+          },
+          "concept": "pistol"
+        },
+        {
+          "type": "learn",
+          "id": "a2-formations-05",
+          "title": "Empty",
+          "body": "No backs at all: five receivers spread out. It stretches the defense, but the quarterback has to get the ball out fast.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "h",
+                "label": "H",
+                "side": "OFFENSE",
+                "x": -8,
+                "y": -1
+              },
+              {
+                "id": "y",
+                "label": "Y",
+                "side": "OFFENSE",
+                "x": -5,
+                "y": -1
+              },
+              {
+                "id": "f",
+                "label": "F",
+                "side": "OFFENSE",
+                "x": 8,
+                "y": -1
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": 0
+              }
+            ],
+            "caption": "Empty"
+          },
+          "concept": "empty-backfield"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a2-formations-06",
+          "prompt": "Name this formation.",
+          "choices": [
+            "Shotgun",
+            "I formation",
+            "Pistol",
+            "Empty"
+          ],
+          "answer": 2,
+          "explanation": "The quarterback is a few yards back with the running back directly behind him: that is the pistol.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -4
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -7
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": -1
+              },
+              {
+                "id": "h",
+                "label": "H",
+                "side": "OFFENSE",
+                "x": -7.5,
+                "y": -1
+              }
+            ],
+            "caption": ""
+          },
+          "concept": "pistol"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a2-formations-07",
+          "prompt": "Name this formation.",
+          "choices": [
+            "Singleback",
+            "I formation",
+            "Empty",
+            "Shotgun"
+          ],
+          "answer": 1,
+          "explanation": "Quarterback under center, fullback and tailback stacked behind: the I formation.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -1.2
+              },
+              {
+                "id": "fb",
+                "label": "FB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -4.2
+              },
+              {
+                "id": "tb",
+                "label": "TB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -7
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": -1
+              }
+            ],
+            "caption": ""
+          },
+          "concept": "i-formation"
+        },
+        {
+          "type": "match",
+          "id": "a2-formations-08",
+          "prompt": "Match each formation to its signature.",
+          "pairs": [
+            {
+              "left": "Shotgun",
+              "right": "QB about 5 yards back, back beside him"
+            },
+            {
+              "left": "Pistol",
+              "right": "QB about 4 back, back directly behind"
+            },
+            {
+              "left": "Empty",
+              "right": "No backs, five receivers"
+            },
+            {
+              "left": "I formation",
+              "right": "Fullback and tailback stacked"
+            }
+          ],
+          "explanation": "Read the backfield first: where the quarterback stands and where the backs are names the formation.",
+          "concept": "formation"
+        }
+      ]
+    },
+    {
+      "id": "a2-eligibility",
+      "title": "Who Can Catch a Pass",
+      "blurb": "Eligible and ineligible receivers.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "a2-eligibility-01",
+          "title": "Seven on the line",
+          "body": "The offense must have at least seven players on the line of scrimmage at the snap. Fewer is an illegal formation: 5 yards.",
+          "concept": "line-of-scrimmage"
+        },
+        {
+          "type": "learn",
+          "id": "a2-eligibility-02",
+          "title": "Who is eligible",
+          "body": "The two players at the ends of the line, and every player in the backfield, are eligible to catch a forward pass. The interior linemen are not.",
+          "concept": "eligible-receiver"
+        },
+        {
+          "type": "learn",
+          "id": "a2-eligibility-03",
+          "title": "Numbers tell the story",
+          "body": "In the NFL, offensive linemen wear 50 to 79. A player in one of those numbers who lines up to catch passes must report to the referee as eligible first.",
+          "concept": "ineligible-receiver"
+        },
+        {
+          "type": "diagram_tap",
+          "id": "a2-eligibility-04",
+          "prompt": "Tap every player who is NOT allowed to catch a forward pass.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 1.8,
+                "y": -5
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": -1
+              }
+            ],
+            "caption": "Shotgun, one tight end"
+          },
+          "targets": [
+            "lt",
+            "lg",
+            "c",
+            "rg",
+            "rt"
+          ],
+          "explanation": "The five interior linemen are ineligible. The tight end and X are on the ends of the line, and Z, the running back and the quarterback are in the backfield, so all of them are eligible.",
+          "concept": "ineligible-receiver"
+        },
+        {
+          "type": "true_false",
+          "id": "a2-eligibility-05",
+          "statement": "An offensive tackle can catch a pass if he reports to the referee as eligible and lines up at an eligible spot.",
+          "answer": true,
+          "explanation": "Teams use this near the goal line: a lineman reports eligible and lines up as a tight end.",
+          "concept": "ineligible-receiver"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a2-eligibility-06",
+          "prompt": "A guard runs 5 yards downfield before a pass is thrown over the line. What is the call?",
+          "choices": [
+            "Ineligible receiver downfield",
+            "Holding",
+            "Pass interference",
+            "Illegal motion"
+          ],
+          "answer": 0,
+          "explanation": "Ineligible players may not drift more than a yard downfield before a forward pass beyond the line is thrown. In the NFL it is a 5-yard penalty.",
+          "concept": "ineligible-receiver"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a2-eligibility-07",
+          "prompt": "The offense snaps the ball with six players on the line. What happens?",
+          "choices": [
+            "Illegal formation, 5 yards",
+            "Nothing, six is enough",
+            "Offside on the defense",
+            "Loss of down"
+          ],
+          "answer": 0,
+          "explanation": "Seven must be on the line. Six is an illegal formation.",
+          "concept": "line-of-scrimmage"
+        }
+      ]
+    },
+    {
+      "id": "a2-motion",
+      "title": "Motion and Shifts",
+      "blurb": "Moving before the snap.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "a2-motion-01",
+          "title": "Motion",
+          "body": "One offensive player may be moving at the snap, as long as he is moving parallel to the line or away from it, never toward it.",
+          "concept": "motion"
+        },
+        {
+          "type": "learn",
+          "id": "a2-motion-02",
+          "title": "Shifts",
+          "body": "When several players change position before the snap, that is a shift. Afterwards everyone must be set for a full second before the ball is snapped.",
+          "concept": "shift"
+        },
+        {
+          "type": "learn",
+          "id": "a2-motion-03",
+          "title": "Why move?",
+          "body": "Motion changes the picture for the defense. If a defender runs across the field with the man in motion, that hints at man coverage; if the defense just slides over, that hints at zone.",
+          "concept": "motion"
+        },
+        {
+          "type": "true_false",
+          "id": "a2-motion-04",
+          "statement": "Two offensive players can be in motion at the snap.",
+          "answer": false,
+          "explanation": "Only one player may be in motion when the ball is snapped.",
+          "concept": "motion"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a2-motion-05",
+          "prompt": "A receiver in motion is moving toward the line of scrimmage at the snap. What is the call?",
+          "choices": [
+            "Illegal motion",
+            "Offside",
+            "False start",
+            "Nothing"
+          ],
+          "answer": 0,
+          "explanation": "Motion must be parallel to the line or away from it. Moving forward at the snap is illegal motion.",
+          "concept": "motion"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a2-motion-06",
+          "prompt": "A cornerback runs across the formation, following the receiver in motion. What does that suggest?",
+          "choices": [
+            "Man coverage",
+            "Zone coverage",
+            "A blitz is impossible",
+            "A punt"
+          ],
+          "answer": 0,
+          "explanation": "A defender who travels with the motion is usually covering that man. It is a clue, not a guarantee.",
+          "concept": "motion"
+        },
+        {
+          "type": "true_false",
+          "id": "a2-motion-07",
+          "statement": "After a shift, the offense must be set for one second before the snap.",
+          "answer": true,
+          "explanation": "Yes. Moving without setting for a second after a shift is an illegal shift.",
+          "concept": "shift"
+        }
+      ]
+    }
+  ]
+}

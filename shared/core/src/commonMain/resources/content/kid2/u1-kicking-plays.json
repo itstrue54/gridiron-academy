@@ -1,0 +1,232 @@
+{
+  "id": "kid2-u1",
+  "title": "Kicking Plays",
+  "lessons": [
+    {
+      "id": "k2-kickoff",
+      "title": "The Kickoff",
+      "blurb": "How every half begins.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "k2-kickoff-01",
+          "title": "Kickoff!",
+          "body": "A kickoff starts each half of the game. One team kicks the ball far down the field, and the other team catches it and runs it back.",
+          "concept": "kickoff"
+        },
+        {
+          "type": "learn",
+          "id": "k2-kickoff-02",
+          "title": "After a score",
+          "body": "Kickoffs also happen after a touchdown or a field goal. The team that just scored kicks the ball to the other team.",
+          "concept": "kickoff"
+        },
+        {
+          "type": "learn",
+          "id": "k2-kickoff-03",
+          "title": "The returner",
+          "body": "The player who catches the kick is the kick returner. Their job is to run the ball back as far as they can.",
+          "concept": "kick-returner"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k2-kickoff-04",
+          "prompt": "When does a kickoff happen?",
+          "choices": [
+            "At the start of each half",
+            "After every incomplete pass",
+            "On every 3rd down",
+            "Only in overtime"
+          ],
+          "answer": 0,
+          "explanation": "Kickoffs start each half, and they come after touchdowns and field goals too.",
+          "concept": "kickoff"
+        },
+        {
+          "type": "true_false",
+          "id": "k2-kickoff-05",
+          "statement": "After a team scores a touchdown, that team kicks off to the other team.",
+          "answer": true,
+          "explanation": "Yes! The scoring team kicks, so the other team gets the ball.",
+          "concept": "kickoff"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k2-kickoff-06",
+          "prompt": "What does the kick returner try to do?",
+          "choices": [
+            "Kick the ball back",
+            "Catch the kick and run it back",
+            "Block the kicker",
+            "Call a timeout"
+          ],
+          "answer": 1,
+          "explanation": "The returner catches the ball and runs it back up the field.",
+          "concept": "kick-returner"
+        },
+        {
+          "type": "learn",
+          "id": "k2-kickoff-07",
+          "title": "Touchback",
+          "body": "If the kick goes into the end zone and the returner stays there, it is a touchback. Play stops, and their team starts from a set spot on the field.",
+          "concept": "touchback"
+        },
+        {
+          "type": "true_false",
+          "id": "k2-kickoff-08",
+          "statement": "On a touchback, the receiving team gets the ball without running it out.",
+          "answer": true,
+          "explanation": "Right. A touchback is a safe choice: no run, but a good starting spot.",
+          "concept": "touchback"
+        }
+      ]
+    },
+    {
+      "id": "k2-onside",
+      "title": "The Onside Kick",
+      "blurb": "A surprise short kick.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "k2-onside-01",
+          "title": "Onside kick",
+          "body": "Sometimes the kicking team wants the ball back. They kick it short on purpose and try to grab it. That is an onside kick.",
+          "concept": "onside-kick"
+        },
+        {
+          "type": "learn",
+          "id": "k2-onside-02",
+          "title": "Ten yards",
+          "body": "The ball must go 10 yards before the kicking team can grab it. The other team can grab it any time.",
+          "concept": "onside-kick"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k2-onside-03",
+          "prompt": "Why would a team try an onside kick?",
+          "choices": [
+            "To get the ball back",
+            "To score a touchdown",
+            "To start the game",
+            "To end the quarter"
+          ],
+          "answer": 0,
+          "explanation": "An onside kick is a way to try to keep the ball, usually when a team is behind late in the game.",
+          "concept": "onside-kick"
+        },
+        {
+          "type": "true_false",
+          "id": "k2-onside-04",
+          "statement": "On an onside kick, the kicking team can grab the ball after it goes 10 yards.",
+          "answer": true,
+          "explanation": "Yes. Before 10 yards, only the other team may grab it.",
+          "concept": "onside-kick"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k2-onside-05",
+          "prompt": "When do teams most often try onside kicks?",
+          "choices": [
+            "When they are winning big",
+            "When they are losing near the end",
+            "On the first kick of the game",
+            "Every kickoff"
+          ],
+          "answer": 1,
+          "explanation": "A team that is behind late needs the ball back, so the risk is worth it.",
+          "concept": "onside-kick"
+        },
+        {
+          "type": "true_false",
+          "id": "k2-onside-06",
+          "statement": "An onside kick is a long, high kick down the field.",
+          "answer": false,
+          "explanation": "Not quite. An onside kick is short, so the kicking team has a chance to get it.",
+          "concept": "onside-kick"
+        }
+      ]
+    },
+    {
+      "id": "k2-punts",
+      "title": "Punts and Fair Catches",
+      "blurb": "Catching a punt safely.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "k2-punts-01",
+          "title": "Punt return",
+          "body": "When a team punts, a player on the other team catches it and tries to run it back. That is a punt return.",
+          "concept": "punt"
+        },
+        {
+          "type": "learn",
+          "id": "k2-punts-02",
+          "title": "Fair catch",
+          "body": "The returner can wave one arm over their head before catching. That is a fair catch: nobody may tackle them, but they can't run after catching.",
+          "concept": "fair-catch"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k2-punts-03",
+          "prompt": "How does a returner ask for a fair catch?",
+          "choices": [
+            "Raises both arms",
+            "Waves one arm over their head",
+            "Throws a flag",
+            "Kneels down"
+          ],
+          "answer": 1,
+          "explanation": "Waving one arm over the head is the fair catch signal.",
+          "concept": "fair-catch"
+        },
+        {
+          "type": "true_false",
+          "id": "k2-punts-04",
+          "statement": "After a fair catch, the returner can run with the ball.",
+          "answer": false,
+          "explanation": "Not quite. With a fair catch, play stops where they catch it. In exchange, nobody may hit them.",
+          "concept": "fair-catch"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k2-punts-05",
+          "prompt": "Why call for a fair catch?",
+          "choices": [
+            "To catch the ball safely",
+            "To score a touchdown",
+            "To stop the clock forever",
+            "To kick it back"
+          ],
+          "answer": 0,
+          "explanation": "Tacklers are running right at the returner. A fair catch keeps them safe.",
+          "concept": "fair-catch"
+        },
+        {
+          "type": "match",
+          "id": "k2-punts-06",
+          "prompt": "Match each kick to what it does.",
+          "pairs": [
+            {
+              "left": "Kickoff",
+              "right": "Starts each half"
+            },
+            {
+              "left": "Onside kick",
+              "right": "Short kick to get the ball back"
+            },
+            {
+              "left": "Punt",
+              "right": "Kicks it away on 4th down"
+            },
+            {
+              "left": "Field goal",
+              "right": "Kicks for 3 points"
+            }
+          ],
+          "explanation": "Each kick has its own job. Kickoffs start play, punts give the ball away far from your goal, and field goals score.",
+          "concept": "special-teams"
+        }
+      ]
+    }
+  ]
+}

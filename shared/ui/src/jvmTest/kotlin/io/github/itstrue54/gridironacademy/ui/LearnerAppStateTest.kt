@@ -40,7 +40,7 @@ class LearnerAppStateTest {
         assertEquals(listOf(Screen.Home), s.backStack)
         assertEquals("Leo", store.load()?.profile?.nickname)
         assertEquals(Skin.Kid, s.skin)
-        assertEquals(listOf("kid-1"), s.levels.map { it.id })
+        assertEquals(listOf("kid-1", "kid-2"), s.levels.map { it.id })
         assertFalse(s.back(), "Home is the root")
     }
 
@@ -51,7 +51,7 @@ class LearnerAppStateTest {
         val s = LearnerAppState(content, store) { 2 }
         assertEquals(Screen.Home, s.screen)
         assertEquals(Skin.Adult, s.skin)
-        assertEquals(listOf("adult-1"), s.levels.map { it.id })
+        assertEquals(listOf("adult-1", "adult-2"), s.levels.map { it.id })
     }
 
     @Test
@@ -222,7 +222,11 @@ class LearnerAppStateTest {
         assertEquals(100, game.scorePct)
         assertTrue(game.passed && game.levelPassed)
         assertTrue(level.id in s.save.progress.levelsPassed)
-        assertNull(s.nextUp(), "nothing left on this track until Level 2 is written")
+        // Passing Level 1 opens Level 2, and Continue goes straight to its first drill.
+        val next = s.nextUp() as NextUp.Drill
+        assertEquals("kid-2", next.level.id)
+        assertTrue(s.levelUnlocked(next.level))
+        assertEquals(content.unitsOf(next.level).first().lessons.first().id, next.lesson.id)
     }
 
     @Test

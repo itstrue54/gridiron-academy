@@ -187,4 +187,15 @@ class ScreenRenderTest {
             GridironTheme(skin = state.skin, dark = true) { LessonScreen(state, level.id, "preview", graded) }
         }
     }
+
+    @Test fun levelTwo() {
+        lessonShot("25-formation-question-adult", AgeBand.AGE_18_PLUS, dark = true, pick = { it.id == "a2-formations-06" })
+        lessonShot("26-ineligible-tap-graded-adult", AgeBand.AGE_18_PLUS, dark = true, pick = { it.id == "a2-eligibility-04" }) {
+            Answer.Taps(setOf("lt", "lg", "c", "te"))
+        }
+        lessonShot("27-oline-tap-kid", AgeBand.AGE_8_9, dark = false, pick = { it.id == "k2-oline-03" })
+        lessonShot("28-gameday-adult", AgeBand.AGE_18_PLUS, dark = true, pick = { it.id == "a2-gameday-09" }) {
+            Answer.Choice(0)
+        }
+    }
 }

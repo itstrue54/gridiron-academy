@@ -38,6 +38,50 @@
         "gameQuestions": 10,
         "gamePassPct": 70
       }
+    },
+    {
+      "id": "kid-2",
+      "number": 2,
+      "track": "kid",
+      "title": "Rookie",
+      "tagline": "Kicks, referees and how plays work.",
+      "requires": [
+        "kid-1"
+      ],
+      "unitFiles": [
+        "kid2/u1-kicking-plays.json",
+        "kid2/u2-referees-and-rules.json",
+        "kid2/u3-how-plays-work.json"
+      ],
+      "gate": {
+        "testPassPct": 80,
+        "testQuestions": 12,
+        "game": "speed_round",
+        "gameQuestions": 10,
+        "gamePassPct": 70
+      }
+    },
+    {
+      "id": "adult-2",
+      "number": 2,
+      "track": "adult",
+      "title": "Season Ticket",
+      "tagline": "Formations, the rules that decide games, and game-day calls.",
+      "requires": [
+        "adult-1"
+      ],
+      "unitFiles": [
+        "adult2/u1-formations-and-personnel.json",
+        "adult2/u2-rules-that-decide-games.json",
+        "adult2/u3-special-teams-and-calls.json"
+      ],
+      "gate": {
+        "testPassPct": 80,
+        "testQuestions": 12,
+        "game": "game_day",
+        "gameQuestions": 10,
+        "gamePassPct": 70
+      }
     }
   ]
 }
