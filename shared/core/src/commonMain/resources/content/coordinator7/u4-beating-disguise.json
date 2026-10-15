@@ -1,0 +1,77 @@
+{
+  "id": "coordinator7-u4",
+  "title": "Beating Disguise",
+  "lessons": [
+    {
+      "id": "co7-offense",
+      "title": "Beating Disguise",
+      "blurb": "What the offense does about it.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "co7-offense-01",
+          "title": "Make them declare",
+          "body": "Motion before the snap forces the defense to adjust: a defender who travels says man; a rotation of safeties says zone. Shifts do the same with whole formations.",
+          "concept": "motion"
+        },
+        {
+          "type": "learn",
+          "id": "co7-offense-02",
+          "title": "Tempo",
+          "body": "Snapping fast leaves no time to rotate, walk down or sub. A defense that has to line up quickly usually shows what it plays.",
+          "concept": "tempo"
+        },
+        {
+          "type": "learn",
+          "id": "co7-offense-03",
+          "title": "Bunch and stack",
+          "body": "Receivers lined up close together make man defenders fight through traffic and force zone defenders to pass routes off, both of which expose a disguise.",
+          "concept": "route-combination"
+        },
+        {
+          "type": "learn",
+          "id": "co7-offense-04",
+          "title": "Alerts",
+          "body": "Some plays carry an alert: if the middle of the field opens after the snap, throw the post; if it closes, work the play underneath. The quarterback reads the post-snap safeties, not the pre-snap ones.",
+          "concept": "progression"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "co7-offense-05",
+          "prompt": "The defense keeps rotating late. What's the simplest offensive answer?",
+          "choices": [
+            "Go tempo so they can't disguise",
+            "Huddle longer",
+            "Kneel",
+            "Punt early"
+          ],
+          "answer": 0,
+          "explanation": "Without time to disguise, defenses tend to play what they show.",
+          "concept": "tempo"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "co7-offense-06",
+          "prompt": "After the snap, the middle of the field opens up. What does an 'alert' tell the quarterback?",
+          "choices": [
+            "Throw the deep post",
+            "Throw it away",
+            "Run a sneak",
+            "Spike it"
+          ],
+          "answer": 0,
+          "explanation": "An open middle after the snap is the alert to take the post.",
+          "concept": "progression"
+        },
+        {
+          "type": "true_false",
+          "id": "co7-offense-07",
+          "statement": "Stack and bunch formations make man coverage harder to play.",
+          "answer": true,
+          "explanation": "Receivers close together create natural rubs and traffic for man defenders.",
+          "concept": "route-combination"
+        }
+      ]
+    }
+  ]
+}

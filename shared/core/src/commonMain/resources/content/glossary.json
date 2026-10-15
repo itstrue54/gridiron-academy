@@ -993,6 +993,27 @@
       "kid": "Man coverage with two deep safeties.",
       "full": "Man coverage underneath with two safeties splitting the deep field in halves, letting corners play tight.",
       "level": 6
+    },
+    {
+      "id": "bracket",
+      "term": "Bracket",
+      "kid": "Two defenders on one receiver.",
+      "full": "Doubling one receiver with an under and an over defender, often from a normal-looking shell.",
+      "level": 7
+    },
+    {
+      "id": "coverage-check",
+      "term": "Coverage check",
+      "kid": "Choosing the coverage at the line.",
+      "full": "Calling two coverages and picking one at the line from the formation or motion, sometimes with colour codes (red/green) or one-word calls against tempo.",
+      "level": 7
+    },
+    {
+      "id": "trap-coverage",
+      "term": "Trap coverage",
+      "kid": "A corner pretends to play deep, then jumps a short route.",
+      "full": "A corner shows deep-third depth, sinks at the snap to invite an outside throw, then drives on the flat or out with a safety covering deep behind him.",
+      "level": 7
     }
   ]
 }

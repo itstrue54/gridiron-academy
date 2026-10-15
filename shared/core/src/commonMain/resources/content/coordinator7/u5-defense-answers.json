@@ -1,0 +1,1297 @@
+{
+  "id": "coordinator7-u5",
+  "title": "The Defense's Answers",
+  "lessons": [
+    {
+      "id": "co7-defense",
+      "title": "The Defense's Answers",
+      "blurb": "Checks, match rules and communication.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "co7-defense-01",
+          "title": "Coverage checks",
+          "body": "A defense may call two coverages in the huddle and pick one at the line based on the formation or motion. Some systems color-code them: 'red' means one coverage, 'green' another.",
+          "concept": "coverage-check"
+        },
+        {
+          "type": "learn",
+          "id": "co7-defense-02",
+          "title": "Match rules",
+          "body": "Pattern-matching zones have rules for when a defender passes a receiver off and when he locks on. Disguised looks only work if every defender knows his rule after the rotation.",
+          "concept": "pattern-matching"
+        },
+        {
+          "type": "learn",
+          "id": "co7-defense-03",
+          "title": "Against tempo",
+          "body": "When the offense hurries, defenses use one-word calls and simple 'check-with-me' rules so they can line up fast without giving away the coverage.",
+          "concept": "coverage-check"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "co7-defense-04",
+          "prompt": "A defense calls 'red' or 'green' at the line after seeing the formation. What is that?",
+          "choices": [
+            "A coverage check",
+            "A snap count",
+            "A penalty",
+            "A timeout"
+          ],
+          "answer": 0,
+          "explanation": "It's a check: two coverages called, one chosen at the line.",
+          "concept": "coverage-check"
+        },
+        {
+          "type": "true_false",
+          "id": "co7-defense-05",
+          "statement": "Disguise only works if every defender knows his job after the rotation.",
+          "answer": true,
+          "explanation": "A rotation with one player out of position leaves a receiver wide open.",
+          "concept": "disguise"
+        }
+      ]
+    },
+    {
+      "id": "co7-film",
+      "title": "Coordinator's Film Session",
+      "blurb": "Everything from this level, mixed up.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "co7-film-01",
+          "title": "Watch it all",
+          "body": "Shells that lie, pressure that hides, coverage that fakes. Find the tell, commit, then watch the snap.",
+          "concept": "disguise"
+        },
+        {
+          "type": "read_defense",
+          "id": "co7-film-02",
+          "prompt": "Read it.",
+          "preSnap": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "h",
+                "label": "H",
+                "side": "OFFENSE",
+                "x": -7,
+                "y": -1
+              },
+              {
+                "id": "f",
+                "label": "F",
+                "side": "OFFENSE",
+                "x": 7,
+                "y": -1
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": 0
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 1.8,
+                "y": -5
+              },
+              {
+                "id": "de1",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": -4.5,
+                "y": 1
+              },
+              {
+                "id": "dt1",
+                "label": "DT",
+                "side": "DEFENSE",
+                "x": -1.2,
+                "y": 1
+              },
+              {
+                "id": "dt2",
+                "label": "DT",
+                "side": "DEFENSE",
+                "x": 1.2,
+                "y": 1
+              },
+              {
+                "id": "de2",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": 4.5,
+                "y": 1
+              },
+              {
+                "id": "cb1",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": -11.4,
+                "y": 1
+              },
+              {
+                "id": "cb2",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": 11.4,
+                "y": 1
+              },
+              {
+                "id": "fs",
+                "label": "FS",
+                "side": "DEFENSE",
+                "x": -7,
+                "y": 13
+              },
+              {
+                "id": "ss",
+                "label": "SS",
+                "side": "DEFENSE",
+                "x": 7,
+                "y": 13
+              },
+              {
+                "id": "w",
+                "label": "W",
+                "side": "DEFENSE",
+                "x": -6.5,
+                "y": 4
+              },
+              {
+                "id": "m",
+                "label": "M",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 4.5
+              },
+              {
+                "id": "s",
+                "label": "S",
+                "side": "DEFENSE",
+                "x": 6.5,
+                "y": 4
+              }
+            ]
+          },
+          "choices": [
+            "Cover 1",
+            "Quarters",
+            "Cover 3",
+            "Cover 2"
+          ],
+          "answer": 0,
+          "reveal": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "h",
+                "label": "H",
+                "side": "OFFENSE",
+                "x": -7,
+                "y": -1
+              },
+              {
+                "id": "f",
+                "label": "F",
+                "side": "OFFENSE",
+                "x": 7,
+                "y": -1
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": 0
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 1.8,
+                "y": -5
+              },
+              {
+                "id": "de1",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": -4.5,
+                "y": 1
+              },
+              {
+                "id": "dt1",
+                "label": "DT",
+                "side": "DEFENSE",
+                "x": -1.2,
+                "y": 1
+              },
+              {
+                "id": "dt2",
+                "label": "DT",
+                "side": "DEFENSE",
+                "x": 1.2,
+                "y": 1
+              },
+              {
+                "id": "de2",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": 4.5,
+                "y": 1
+              },
+              {
+                "id": "cb1",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": -11.4,
+                "y": 1
+              },
+              {
+                "id": "cb2",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": 11.4,
+                "y": 1
+              },
+              {
+                "id": "fs",
+                "label": "FS",
+                "side": "DEFENSE",
+                "x": -7,
+                "y": 13
+              },
+              {
+                "id": "ss",
+                "label": "SS",
+                "side": "DEFENSE",
+                "x": 7,
+                "y": 13
+              },
+              {
+                "id": "w",
+                "label": "W",
+                "side": "DEFENSE",
+                "x": -6.5,
+                "y": 4
+              },
+              {
+                "id": "m",
+                "label": "M",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 4.5
+              },
+              {
+                "id": "s",
+                "label": "S",
+                "side": "DEFENSE",
+                "x": 6.5,
+                "y": 4
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "ss",
+                "points": [
+                  {
+                    "x": 6,
+                    "y": 8
+                  }
+                ],
+                "kind": "rotate",
+                "label": "drops to the slot"
+              },
+              {
+                "playerId": "fs",
+                "points": [
+                  {
+                    "x": 0,
+                    "y": 20
+                  }
+                ],
+                "kind": "rotate",
+                "label": "deep middle"
+              },
+              {
+                "playerId": "cb1",
+                "points": [
+                  {
+                    "x": -12,
+                    "y": 9
+                  }
+                ],
+                "kind": "drop"
+              },
+              {
+                "playerId": "cb2",
+                "points": [
+                  {
+                    "x": 12,
+                    "y": 9
+                  }
+                ],
+                "kind": "drop"
+              },
+              {
+                "playerId": "w",
+                "points": [
+                  {
+                    "x": -7,
+                    "y": 8
+                  }
+                ],
+                "kind": "drop"
+              },
+              {
+                "playerId": "s",
+                "points": [
+                  {
+                    "x": 7,
+                    "y": 8
+                  }
+                ],
+                "kind": "drop"
+              },
+              {
+                "playerId": "m",
+                "points": [
+                  {
+                    "x": 2,
+                    "y": -2
+                  }
+                ],
+                "kind": "drop"
+              }
+            ]
+          },
+          "explanation": "Inside-leverage press corners under a two-high shell: man, Cover 1. A tell is a clue, not a guarantee.",
+          "disguised": true,
+          "concept": "rotation"
+        },
+        {
+          "type": "read_defense",
+          "id": "co7-film-03",
+          "prompt": "Read it.",
+          "preSnap": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "h",
+                "label": "H",
+                "side": "OFFENSE",
+                "x": -7,
+                "y": -1
+              },
+              {
+                "id": "f",
+                "label": "F",
+                "side": "OFFENSE",
+                "x": 7,
+                "y": -1
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": 0
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 1.8,
+                "y": -5
+              },
+              {
+                "id": "de1",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": -4.5,
+                "y": 1
+              },
+              {
+                "id": "dt1",
+                "label": "DT",
+                "side": "DEFENSE",
+                "x": -1.2,
+                "y": 1
+              },
+              {
+                "id": "dt2",
+                "label": "DT",
+                "side": "DEFENSE",
+                "x": 1.2,
+                "y": 1
+              },
+              {
+                "id": "de2",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": 4.5,
+                "y": 1
+              },
+              {
+                "id": "cb1",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": -13,
+                "y": 5
+              },
+              {
+                "id": "cb2",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": 13,
+                "y": 5
+              },
+              {
+                "id": "fs",
+                "label": "FS",
+                "side": "DEFENSE",
+                "x": -1,
+                "y": 14
+              },
+              {
+                "id": "ss",
+                "label": "SS",
+                "side": "DEFENSE",
+                "x": 8,
+                "y": 9
+              },
+              {
+                "id": "w",
+                "label": "W",
+                "side": "DEFENSE",
+                "x": -4,
+                "y": 4.5
+              },
+              {
+                "id": "m",
+                "label": "M",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 4.5
+              },
+              {
+                "id": "s",
+                "label": "S",
+                "side": "DEFENSE",
+                "x": 4,
+                "y": 4.5
+              }
+            ]
+          },
+          "choices": [
+            "Cover 2",
+            "Cover 1",
+            "Cover 3",
+            "Cover 0"
+          ],
+          "answer": 0,
+          "reveal": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "h",
+                "label": "H",
+                "side": "OFFENSE",
+                "x": -7,
+                "y": -1
+              },
+              {
+                "id": "f",
+                "label": "F",
+                "side": "OFFENSE",
+                "x": 7,
+                "y": -1
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": 0
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 1.8,
+                "y": -5
+              },
+              {
+                "id": "de1",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": -4.5,
+                "y": 1
+              },
+              {
+                "id": "dt1",
+                "label": "DT",
+                "side": "DEFENSE",
+                "x": -1.2,
+                "y": 1
+              },
+              {
+                "id": "dt2",
+                "label": "DT",
+                "side": "DEFENSE",
+                "x": 1.2,
+                "y": 1
+              },
+              {
+                "id": "de2",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": 4.5,
+                "y": 1
+              },
+              {
+                "id": "cb1",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": -13,
+                "y": 5
+              },
+              {
+                "id": "cb2",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": 13,
+                "y": 5
+              },
+              {
+                "id": "fs",
+                "label": "FS",
+                "side": "DEFENSE",
+                "x": -1,
+                "y": 14
+              },
+              {
+                "id": "ss",
+                "label": "SS",
+                "side": "DEFENSE",
+                "x": 8,
+                "y": 9
+              },
+              {
+                "id": "w",
+                "label": "W",
+                "side": "DEFENSE",
+                "x": -4,
+                "y": 4.5
+              },
+              {
+                "id": "m",
+                "label": "M",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 4.5
+              },
+              {
+                "id": "s",
+                "label": "S",
+                "side": "DEFENSE",
+                "x": 4,
+                "y": 4.5
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "ss",
+                "points": [
+                  {
+                    "x": 10,
+                    "y": 20
+                  }
+                ],
+                "kind": "rotate",
+                "label": "bails to a deep half"
+              },
+              {
+                "playerId": "fs",
+                "points": [
+                  {
+                    "x": -10,
+                    "y": 20
+                  }
+                ],
+                "kind": "rotate",
+                "label": "slides to a deep half"
+              },
+              {
+                "playerId": "cb1",
+                "points": [
+                  {
+                    "x": -14,
+                    "y": 6
+                  }
+                ],
+                "kind": "drop",
+                "label": "flat"
+              },
+              {
+                "playerId": "cb2",
+                "points": [
+                  {
+                    "x": 14,
+                    "y": 6
+                  }
+                ],
+                "kind": "drop",
+                "label": "flat"
+              },
+              {
+                "playerId": "w",
+                "points": [
+                  {
+                    "x": -6,
+                    "y": 10
+                  }
+                ],
+                "kind": "drop"
+              },
+              {
+                "playerId": "m",
+                "points": [
+                  {
+                    "x": 0,
+                    "y": 12
+                  }
+                ],
+                "kind": "drop"
+              },
+              {
+                "playerId": "s",
+                "points": [
+                  {
+                    "x": 6,
+                    "y": 10
+                  }
+                ],
+                "kind": "drop"
+              }
+            ]
+          },
+          "explanation": "The wide, deep-ish down safety bails: a spin to Cover 2. A tell is a clue, not a guarantee.",
+          "disguised": true,
+          "concept": "rotation"
+        },
+        {
+          "type": "read_defense",
+          "id": "co7-film-04",
+          "prompt": "Read it.",
+          "preSnap": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "h",
+                "label": "H",
+                "side": "OFFENSE",
+                "x": -7,
+                "y": -1
+              },
+              {
+                "id": "f",
+                "label": "F",
+                "side": "OFFENSE",
+                "x": 7,
+                "y": -1
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": 0
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 1.8,
+                "y": -5
+              },
+              {
+                "id": "de1",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": -4.5,
+                "y": 1
+              },
+              {
+                "id": "dt1",
+                "label": "DT",
+                "side": "DEFENSE",
+                "x": -1.2,
+                "y": 1
+              },
+              {
+                "id": "dt2",
+                "label": "DT",
+                "side": "DEFENSE",
+                "x": 1.2,
+                "y": 1
+              },
+              {
+                "id": "de2",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": 4.5,
+                "y": 1
+              },
+              {
+                "id": "cb1",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": -12,
+                "y": 7
+              },
+              {
+                "id": "cb2",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": 12,
+                "y": 7
+              },
+              {
+                "id": "fs",
+                "label": "FS",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 14
+              },
+              {
+                "id": "ss",
+                "label": "SS",
+                "side": "DEFENSE",
+                "x": 7,
+                "y": 6
+              },
+              {
+                "id": "w",
+                "label": "W",
+                "side": "DEFENSE",
+                "x": -4,
+                "y": 4.5
+              },
+              {
+                "id": "m",
+                "label": "M",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 4.5
+              },
+              {
+                "id": "s",
+                "label": "S",
+                "side": "DEFENSE",
+                "x": 4,
+                "y": 4.5
+              }
+            ]
+          },
+          "choices": [
+            "Simulated pressure",
+            "Double A-gap",
+            "Fire zone",
+            "Bluff: four rush, seven cover"
+          ],
+          "answer": 0,
+          "reveal": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "h",
+                "label": "H",
+                "side": "OFFENSE",
+                "x": -7,
+                "y": -1
+              },
+              {
+                "id": "f",
+                "label": "F",
+                "side": "OFFENSE",
+                "x": 7,
+                "y": -1
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": 0
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 1.8,
+                "y": -5
+              },
+              {
+                "id": "de1",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": -4.5,
+                "y": 1
+              },
+              {
+                "id": "dt1",
+                "label": "DT",
+                "side": "DEFENSE",
+                "x": -1.2,
+                "y": 1
+              },
+              {
+                "id": "dt2",
+                "label": "DT",
+                "side": "DEFENSE",
+                "x": 1.2,
+                "y": 1
+              },
+              {
+                "id": "de2",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": 4.5,
+                "y": 1
+              },
+              {
+                "id": "cb1",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": -12,
+                "y": 7
+              },
+              {
+                "id": "cb2",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": 12,
+                "y": 7
+              },
+              {
+                "id": "fs",
+                "label": "FS",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 14
+              },
+              {
+                "id": "ss",
+                "label": "SS",
+                "side": "DEFENSE",
+                "x": 7,
+                "y": 6
+              },
+              {
+                "id": "w",
+                "label": "W",
+                "side": "DEFENSE",
+                "x": -4,
+                "y": 4.5
+              },
+              {
+                "id": "m",
+                "label": "M",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 4.5
+              },
+              {
+                "id": "s",
+                "label": "S",
+                "side": "DEFENSE",
+                "x": 4,
+                "y": 4.5
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "ss",
+                "points": [
+                  {
+                    "x": 5,
+                    "y": -2
+                  }
+                ],
+                "kind": "blitz",
+                "label": "comes"
+              },
+              {
+                "playerId": "de2",
+                "points": [
+                  {
+                    "x": 7,
+                    "y": 7
+                  }
+                ],
+                "kind": "drop",
+                "label": "end drops"
+              },
+              {
+                "playerId": "fs",
+                "points": [
+                  {
+                    "x": 0,
+                    "y": 20
+                  }
+                ],
+                "kind": "rotate"
+              },
+              {
+                "playerId": "cb1",
+                "points": [
+                  {
+                    "x": -14,
+                    "y": 20
+                  }
+                ],
+                "kind": "drop"
+              },
+              {
+                "playerId": "cb2",
+                "points": [
+                  {
+                    "x": 14,
+                    "y": 20
+                  }
+                ],
+                "kind": "drop"
+              },
+              {
+                "playerId": "w",
+                "points": [
+                  {
+                    "x": -9,
+                    "y": 8
+                  }
+                ],
+                "kind": "drop"
+              },
+              {
+                "playerId": "m",
+                "points": [
+                  {
+                    "x": -2,
+                    "y": 10
+                  }
+                ],
+                "kind": "drop"
+              },
+              {
+                "playerId": "s",
+                "points": [
+                  {
+                    "x": 3,
+                    "y": 10
+                  }
+                ],
+                "kind": "drop"
+              }
+            ]
+          },
+          "explanation": "Safety in, end out: simulated pressure. A tell is a clue, not a guarantee.",
+          "disguised": true,
+          "concept": "simulated-pressure"
+        }
+      ]
+    }
+  ]
+}

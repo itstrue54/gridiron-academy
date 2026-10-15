@@ -254,4 +254,16 @@ class ScreenRenderTest {
         sharedShot("59-box6", AgeBand.AGE_18_PLUS, "p6-presnap-03", p)
         sharedShot("60-box8", AgeBand.AGE_18_PLUS, "p6-presnap-04", p)
     }
+
+    @Test fun levelSeven() {
+        val c = "coordinator-7"
+        val reveal: (Step) -> Answer = { Answer.Choice((it as ReadDefense).answer) }
+        listOf("co7-rotate-04", "co7-rotate-05", "co7-rotate-06", "co7-late-03", "co7-late-04", "co7-pressure-03", "co7-pressure-04", "co7-coverage-04", "co7-coverage-05", "co7-coverage-06")
+            .forEachIndexed { i, id -> sharedShot("${61 + i}-$id", AgeBand.AGE_18_PLUS, id, c, reveal) }
+        sharedShot("71-tap-the-tell", AgeBand.AGE_18_PLUS, "co7-rotate-03", c)
+    }
+
+    @Test fun postMotionBothPictures() {
+        sharedShot("72-post-motion-presnap", AgeBand.AGE_18_PLUS, "co7-late-04", "coordinator-7")
+    }
 }

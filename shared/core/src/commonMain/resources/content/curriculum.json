@@ -200,6 +200,30 @@
         "gameQuestions": 10,
         "gamePassPct": 70
       }
+    },
+    {
+      "id": "coordinator-7",
+      "number": 7,
+      "track": "shared",
+      "title": "Coordinator",
+      "tagline": "Disguises: shells that lie, pressure that hides, and how each side answers.",
+      "requires": [
+        "pro-6"
+      ],
+      "unitFiles": [
+        "coordinator7/u1-rotations.json",
+        "coordinator7/u2-pressure-disguises.json",
+        "coordinator7/u3-coverage-disguises.json",
+        "coordinator7/u4-beating-disguise.json",
+        "coordinator7/u5-defense-answers.json"
+      ],
+      "gate": {
+        "testPassPct": 80,
+        "testQuestions": 12,
+        "game": "read_defense",
+        "gameQuestions": 10,
+        "gamePassPct": 70
+      }
     }
   ]
 }

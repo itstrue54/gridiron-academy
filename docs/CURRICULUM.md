@@ -16,7 +16,7 @@ and validated, `preview` = exemplar content proving the model, `planned` = to be
 | 4 | Varsity | shared | both | Read the defense | **done** (`varsity-4`, coach review pending) |
 | 5 | College | shared | | Game day | **done** (`college-5`, coach review pending) |
 | 6 | Pro | shared | | Read the defense | **done** (`pro-6`, coach review pending) |
-| 7 | Coordinator | shared | | Read the defense | preview (disguise) |
+| 7 | Coordinator | shared | | Read the defense | **done** (`coordinator-7`, coach review pending) |
 | 8 | Architect | shared | | Game day | planned |
 
 Placement: an adult can take a short quiz per level and start at the first one they miss.
@@ -121,7 +121,17 @@ MOFO, count the box, alignment tells, motion tests (man vs zone). **QB process:*
 progressions, hots, sight adjusts, option routes, checking out of a play. **Rules:** the
 current NFL rulebook as of the season stamped in the content.
 
-## Level 7: Coordinator (disguise and counters)
+## Level 7: Coordinator (disguise and counters) (done; see `docs/content-review/level-7.md`)
+As written: 5 units, 7 drills, 41 steps, 14 disguised read-the-defense items. Rotations
+(two-high to Cover 3 or Cover 1, one-high spinning to Cover 2, walkdowns, rotating to
+motion); pressure that lies (bluff, sugar, creeper); coverage that lies (trap, fake man,
+fake zone, brackets); the offense's answers (motion, tempo, bunch and stack, alerts);
+the defense's answers (coverage checks, match rules, calls against tempo); and a mixed
+film session. "Tap the tell" questions make the learner find the defender who gives a
+disguise away before seeing it play out. Every explanation ends: a tell is a clue, not a
+guarantee.
+
+Originally planned:
 **Disguise techniques:** two-high shell rotating to Cover 3 (sky/buzz/cloud), one-high
 spinning to two-high, late safety rotation, creeping and walkdown, bluff blitz and
 sugar blitz, simulated pressure, trap coverage, fake man/fake zone, post-motion
