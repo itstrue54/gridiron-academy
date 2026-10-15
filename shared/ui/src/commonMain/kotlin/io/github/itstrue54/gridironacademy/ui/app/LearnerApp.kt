@@ -7,6 +7,8 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -63,8 +65,12 @@ fun LearnerApp(state: LearnerAppState, dark: Boolean, reducedMotion: Boolean = f
     // Before a profile exists there is no track; onboarding uses the Adult skin.
     val skin = if (state.profile == null) Skin.Adult else state.skin
     GridironTheme(skin = skin, dark = dark, reducedMotion = reducedMotion) {
+        // One readable column, centred: a landscape phone or a tablet gets margins of
+        // surface colour instead of screens stretched edge to edge.
+        Box(Modifier.fillMaxSize().background(Gridiron.colors.surface), contentAlignment = Alignment.TopCenter) {
         AnimatedContent(
             targetState = state.screen,
+            modifier = Modifier.widthIn(max = MAX_CONTENT_WIDTH).fillMaxSize(),
             transitionSpec = {
                 val ms = if (reducedMotion) CROSSFADE_MS else (STANDARD_MS * skin.motionScale).toInt()
                 fadeIn(tween(ms)) togetherWith fadeOut(tween(ms))
@@ -85,10 +91,12 @@ fun LearnerApp(state: LearnerAppState, dark: Boolean, reducedMotion: Boolean = f
                 is Screen.GateDone -> GateDoneScreen(state, screen)
             }
         }
+        }
     }
 }
 
 private const val STANDARD_MS = 220
+private val MAX_CONTENT_WIDTH = 600.dp
 private const val CROSSFADE_MS = 150
 
 /** Lesson complete (DESIGN 9.7): the verdict, stars, score and XP, then back to the level. */

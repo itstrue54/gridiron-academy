@@ -20,6 +20,12 @@ kotlin {
         namespace = "io.github.itstrue54.gridironacademy.ui"
         compileSdk = 37
         minSdk = 26
+        // Compose resources (fonts, strings) must land in the APK's assets on Android;
+        // without this the KMP library plugin packs them as Java resources and fonts
+        // silently fall back to the system font.
+        androidResources {
+            enable = true
+        }
         compilerOptions {
             jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
         }
