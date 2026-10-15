@@ -1,6 +1,7 @@
 [versions]
 agp = "9.2.1"
 kotlin = "2.2.10"
+composeMultiplatform = "1.9.3"
 kotlinxSerialization = "1.8.0"
 junitBom = "5.11.4"
 
@@ -10,6 +11,8 @@ kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 jupiter-bom = { group = "org.junit", name = "junit-bom", version.ref = "junitBom" }
 
 [plugins]
+compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 android-kmp-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

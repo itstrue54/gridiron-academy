@@ -742,7 +742,11 @@ Dependency direction: `apps -> ui -> data -> core`. Nothing depends on an app;
    android, so Android reads the content packaged in the library (no assets copy).
    `Math.round` became `roundToInt` (same rounding), and `Grader` now gives an empty
    step 0 credit instead of NaN. `core` stays free of Compose.
-2. **UI in Compose Multiplatform from day one** (not Jetpack-only APIs), so the same
+2. **Started (M1):** `:shared:ui` (Compose Multiplatform 1.9.3; jvm, android, iOS
+   declared) holds the design tokens (`theme/`: palette, skins incl. Little Huddle, type
+   scale, `GridironTheme`) and `FieldDiagram` with its pure, tested `FieldGeometry`.
+   `ContrastTest` asserts the DESIGN §3 contrast promises in code.
+   **UI in Compose Multiplatform from day one** (not Jetpack-only APIs), so the same
    screens run on iOS. Android-only concerns (TTS, WorkManager, billing, FCM,
    Families compliance) sit behind `expect`/`actual` interfaces in `data` or in the
    app shells.
@@ -816,6 +820,11 @@ offseason against the stamped `ruleSeason`. Release builds exclude unreviewed st
 debug builds show them with a "[review]" badge.
 
 ### 13.4 UI tests
+- `FieldRenderTest` (jvm) already renders real content diagrams headlessly to
+  `shared/ui/build/field-renders/`. Render tests run with a one-folder fontconfig
+  (DejaVu until the brand fonts are bundled): Skia's default font scan stalled for
+  10+ minutes on a machine with ~2,800 fonts, and a fixed font set makes PNGs
+  identical across machines.
 - Screenshot tests of the Design gallery (DESIGN §13) in both skins, both themes, at
   100% and 200% font scale, plus every step type and every `PathKind`.
 - Compose UI tests for the lesson player, each game, linking and assignment flows.

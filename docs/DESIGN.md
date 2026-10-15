@@ -211,9 +211,13 @@ Input is the engine's `Diagram`: x across in yards (0 = centre, left negative), 
 downfield from the line of scrimmage (offense moves up the screen). The renderer
 maps x:[-26.67, 26.67] and y:[-behind, +depth] onto the available rectangle.
 
-**Auto-fit.** Compute the tight bounds of all players, route points and zones, add a
-3-yard margin, and clamp to the field width. The scale is `min(w/xSpan, h/ySpan)`,
-and the picture is centred. A formation-only diagram (no routes) crops tighter than
+**Auto-fit** (`FieldGeometry`). Compute the tight bounds of all players, route points
+and zones, always including the line of scrimmage, add a 3-yard margin, widen to at
+least 20 x 10 yards (so one player is not a giant close-up), and clamp to the field
+width, shifting the window rather than squashing it. A diagram with nothing on it
+shows `-behind..depth` across the whole field. A zone spans `x..x+w` across and
+`y..y+h` downfield. The scale is `min(w/xSpan, h/ySpan)`,
+and the picture is centred; turf fills the whole canvas and the canvas clips. A formation-only diagram (no routes) crops tighter than
 a deep route concept. Aspect: the lesson card allows 4:3 to 3:4; the game screens
 let the diagram fill all remaining height.
 
@@ -241,6 +245,11 @@ ring gives 7.14:1 outlines and 3.75:1 or better paths, in both themes.
 
 - Every mark has a 2dp chalk ring. Labels are position letters or jersey numbers
   as authored.
+- **Marks shrink to fit.** A full-width formation on a 360dp phone puts linemen about
+  10dp apart. All marks share one size: the skin's size, shrunk so the closest two
+  players are 2dp apart, never below **18dp**; labels scale with them, never below
+  **9sp**. Players aligned within a yard of each other (DL on OL, QB under centre)
+  can still touch at phone width; tap questions then offer list mode (below).
 - **Touch target is 48dp (56dp Kid, 64dp Little Huddle) around the centre**
   regardless of the drawn size.
   Overlapping targets resolve to the nearest centre; if two centres are under 40dp
@@ -264,7 +273,12 @@ ring gives 7.14:1 outlines and 3.75:1 or better paths, in both themes.
 
 A route's points are waypoints after the player's start; corners are rounded with a
 radius of one yard so a "curl" reads as a hook and an "out" as an out. A route's
-`label` is drawn at its end, `label` style, in a 70%-opaque `surface` pill. A legend
+`label` is drawn at its end, `label` style, in a 70%-opaque `surface` pill.
+
+**Layer order**, back to front: turf and lines, zones, paths, zone and route labels,
+the LOS tag, players. A label never hides a player. The Adult "LOS" tag sits just
+under the line at the left end, moves to the right end if a player is there, and is
+left out if both ends are taken. A legend
 row (kind icon plus name) appears once in a lesson when the lesson introduces a
 path kind, then is dropped.
 

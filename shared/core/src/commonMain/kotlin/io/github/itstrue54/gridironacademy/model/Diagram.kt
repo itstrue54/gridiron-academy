@@ -60,7 +60,11 @@ data class DiagramRoute(
     val label: String = "",
 )
 
-/** A shaded rectangle: a coverage zone, a gap, the box. [x],[y] is the top-left. */
+/**
+ * A shaded rectangle: a coverage zone, a gap, the box. It spans [x] to [x]+[w] across
+ * and [y] to [y]+[h] downfield, so [x],[y] is the corner nearest the left sideline and
+ * the offense's own goal (the bottom-left as drawn, offense moving up the screen).
+ */
 @Serializable
 data class DiagramZone(
     val id: String,

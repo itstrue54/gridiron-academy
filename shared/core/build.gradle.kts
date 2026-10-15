@@ -43,8 +43,9 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(libs.kotlinx.serialization.core)
-            implementation(libs.kotlinx.serialization.json)
+            // api: models are @Serializable and ContentLoader.json is public.
+            api(libs.kotlinx.serialization.core)
+            api(libs.kotlinx.serialization.json)
         }
         commonTest.dependencies {
             implementation(kotlin("test"))

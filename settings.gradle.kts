@@ -24,3 +24,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "gridiron-academy"
 include(":shared:core")
+include(":shared:ui")
