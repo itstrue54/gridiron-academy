@@ -216,10 +216,7 @@ private fun StepBody(step: Step, controller: LessonController, pending: Answer?,
             OrderView(step, order, graded) { onAnswer(Answer.Ordering(it)) }
         }
         is Situation -> SituationView(step, (shown as? Answer.Choice)?.index, graded) { onAnswer(Answer.Choice(it)) }
-        is ReadDefense -> MultipleChoiceView(
-            step.prompt, if (graded) step.reveal else step.preSnap, step.choices, step.answer,
-            selected = (shown as? Answer.Choice)?.index, graded = graded,
-        ) { onAnswer(Answer.Choice(it)) }
+        is ReadDefense -> ReadDefenseView(step, (shown as? Answer.Choice)?.index, graded) { onAnswer(Answer.Choice(it)) }
     }
 }
 

@@ -3,6 +3,8 @@ package io.github.itstrue54.gridironacademy.ui.field
 import io.github.itstrue54.gridironacademy.model.Diagram
 import io.github.itstrue54.gridironacademy.model.DiagramPlayer
 import io.github.itstrue54.gridironacademy.model.DiagramZone
+import io.github.itstrue54.gridironacademy.model.PathKind
+import io.github.itstrue54.gridironacademy.model.Pt
 import kotlin.math.hypot
 import kotlin.math.max
 import kotlin.math.min
@@ -168,6 +170,40 @@ object FieldGeometry {
             closest = min(closest, hypot(t.x(players[i].x) - t.x(players[j].x), t.y(players[i].y) - t.y(players[j].y)))
         }
         return (closest - gapPx).coerceIn(minPx, preferredPx)
+    }
+
+    /** Paths a player travels along in the reveal (DESIGN 7.7); others are drawn, not driven. */
+    val REVEAL_KINDS = setOf(PathKind.ROTATE, PathKind.DROP, PathKind.BLITZ)
+    /** Each reveal path starts this long after the one before it, in `routes` order. */
+    const val REVEAL_STAGGER_MS = 60
+
+    /** The point [f] (0..1) of the way from ([x], [y]) through [points], by distance travelled. */
+    fun along(x: Float, y: Float, points: List<Pt>, f: Float): Pt {
+        val legs = (listOf(Pt(x, y)) + points).zipWithNext()
+        val total = legs.sumOf { (a, b) -> hypot(b.x - a.x, b.y - a.y).toDouble() }.toFloat()
+        if (total == 0f || f <= 0f) return Pt(x, y)
+        if (f >= 1f) return points.last()
+        var left = total * f
+        for ((a, b) in legs) {
+            val len = hypot(b.x - a.x, b.y - a.y)
+            if (left <= len) {
+                val k = if (len == 0f) 0f else left / len
+                return Pt(a.x + (b.x - a.x) * k, a.y + (b.y - a.y) * k)
+            }
+            left -= len
+        }
+        return points.last()
+    }
+
+    /**
+     * How far along path [i] of [n] is at overall reveal progress [p], when each path
+     * starts [staggerMs] after the last within [durationMs]. All finish together at p = 1.
+     */
+    fun staggered(p: Float, i: Int, n: Int, durationMs: Int, staggerMs: Int = REVEAL_STAGGER_MS): Float {
+        if (n <= 1) return p.coerceIn(0f, 1f)
+        val delay = (i * staggerMs).coerceAtMost(durationMs / 2)
+        val span = (durationMs - (n - 1) * staggerMs).coerceAtLeast(durationMs / 2)
+        return ((p * durationMs - delay) / span).coerceIn(0f, 1f)
     }
 
     /**

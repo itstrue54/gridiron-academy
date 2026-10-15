@@ -306,10 +306,16 @@ grades identically.
 `read_defense` steps show the pre-snap picture, take an answer, then animate the
 reveal: players travel along their `rotate`, `drop` and `blitz` paths over 900ms
 (630ms Adult), ease-in-out, staggered by 60ms in the order of the `routes` array so
-the *safeties* move first and the eye follows the rotation. The pre-snap alignment
-ghosts at 25% opacity at each player's start. Under **reduced motion** the picture
-cross-fades to the end state in 150ms and the ghosts remain. A **Replay** button
-(icon plus label) replays the reveal; **Show both** overlays the two states.
+the *safeties* move first and the eye follows the rotation; a player with several
+reveal paths (show blitz, then drop) travels them as one trip. The pre-snap alignment
+ghosts at 25% opacity at each player's start. Under **reduced motion** the end state
+appears at once (no Replay, nothing to replay) and the ghosts remain. A **Replay** chip at
+the field's bottom-left corner (opposite the zoom buttons, usually open turf behind
+the offense) replays the reveal (on the field, because the feedback
+sheet covers what is below it). The 25% ghosts already show the pre-snap and post-snap states
+together, so there is no separate "Show both" control. The pre-snap picture and the
+reveal share one window and one zoom (7.10), so the reveal plays exactly where the
+learner was looking. A disguised item shows a **Disguise** chip (9.4).
 
 ### 7.8 Film mode
 `film` and `spot_foul` steps (spec 4.2) play a whole play: every path animates from

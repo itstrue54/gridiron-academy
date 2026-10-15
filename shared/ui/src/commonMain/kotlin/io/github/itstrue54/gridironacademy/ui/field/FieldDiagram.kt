@@ -38,6 +38,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
@@ -107,6 +109,9 @@ enum class MarkState { SELECTED, CORRECT, WRONG, MISSED }
  * @param labels the words drawn on or around the field, localised by the caller.
  * @param zoom pinch-zoom state; one per diagram by default. To keep zoom across a
  *   read-the-defense pre-snap and its reveal, hoist it and pass the same [window].
+ * @param motion the reveal (DESIGN 7.7): null draws everyone where they stand; 0..1 moves
+ *   players along their rotate, drop and blitz paths, staggered, with a 25% ghost left
+ *   at each starting spot.
  * @param window the field area to fit; by default this diagram's own. Pass
  *   `FieldGeometry.window(preSnap, reveal)` so both pictures share one scale.
  */
@@ -122,6 +127,7 @@ fun FieldDiagram(
     labels: FieldLabels = FieldLabels(),
     zoom: FieldZoomState = rememberFieldZoomState(diagram),
     window: FieldWindow = remember(diagram) { FieldGeometry.window(diagram) },
+    motion: Float? = null,
 ) {
     val skin = Gridiron.skin
     val colors = Gridiron.colors
@@ -220,7 +226,30 @@ fun FieldDiagram(
                     val left = listOf(inset, size.width - inset - w).firstOrNull { free(it) }
                     if (left != null) drawPill(measurer, labels.los, tagStyle, pill, Offset(left, y), anchorLeft = true)
                 }
-                diagram.players.forEach { drawPlayer(it, t, markPx / 2, skin.helmets, marks[it.id], reducedMotion, measurer, markLabel) }
+                if (motion == null) {
+                    diagram.players.forEach { drawPlayer(it, t, markPx / 2, skin.helmets, marks[it.id], reducedMotion, measurer, markLabel) }
+                } else {
+                    // Each mover's reveal paths, chained in order (a show-blitz then a drop
+                    // is one trip), in the order the movers first appear in `routes`.
+                    val trips = diagram.routes.filter { it.kind in FieldGeometry.REVEAL_KINDS }
+                        .groupBy { it.playerId }
+                        .mapValues { (_, rs) -> rs.flatMap { it.points } }
+                    val order = trips.keys.toList()
+                    val movers = diagram.players.filter { it.id in trips }
+                    // The pre-snap spots stay as ghosts, all in one translucent layer.
+                    if (movers.isNotEmpty()) {
+                        drawContext.canvas.saveLayer(Rect(Offset.Zero, size), Paint().apply { alpha = GHOST_ALPHA })
+                        movers.forEach { drawPlayer(it, t, markPx / 2, skin.helmets, null, reducedMotion, measurer, markLabel) }
+                        drawContext.canvas.restore()
+                    }
+                    diagram.players.forEach { p ->
+                        val trip = trips[p.id]
+                        val at = if (trip == null) null else FieldGeometry.along(
+                            p.x, p.y, trip, FieldGeometry.staggered(motion, order.indexOf(p.id), order.size, skin.revealMillis),
+                        )
+                        drawPlayer(if (at == null) p else p.copy(x = at.x, y = at.y), t, markPx / 2, skin.helmets, marks[p.id], reducedMotion, measurer, markLabel)
+                    }
+                }
             }
             if (crowded || zoomed) {
                 ZoomButtons(
@@ -238,6 +267,7 @@ fun FieldDiagram(
 }
 
 private const val PILL_ALPHA = 0.7f
+private const val GHOST_ALPHA = 0.25f
 private const val ZOOM_BUTTON_INSET = 6
 private const val ZOOM_BUTTON_ALPHA = 0.92f
 private const val TEXT_CACHE = 64

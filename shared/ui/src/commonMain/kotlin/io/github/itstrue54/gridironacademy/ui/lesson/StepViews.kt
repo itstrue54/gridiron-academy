@@ -13,7 +13,15 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
@@ -33,6 +41,7 @@ import io.github.itstrue54.gridironacademy.model.Learn
 import io.github.itstrue54.gridironacademy.model.Match
 import io.github.itstrue54.gridironacademy.model.Order
 import io.github.itstrue54.gridironacademy.model.Quality
+import io.github.itstrue54.gridironacademy.model.ReadDefense
 import io.github.itstrue54.gridironacademy.model.Situation
 import io.github.itstrue54.gridironacademy.ui.components.AnswerButton
 import io.github.itstrue54.gridironacademy.ui.components.AnswerState
@@ -40,10 +49,13 @@ import io.github.itstrue54.gridironacademy.ui.components.Glyph
 import io.github.itstrue54.gridironacademy.ui.components.GlyphIcon
 import io.github.itstrue54.gridironacademy.ui.components.IconAction
 import io.github.itstrue54.gridironacademy.ui.field.FieldDiagram
+import io.github.itstrue54.gridironacademy.ui.field.FieldGeometry
+import io.github.itstrue54.gridironacademy.ui.field.rememberFieldZoomState
 import io.github.itstrue54.gridironacademy.ui.field.MarkState
 import io.github.itstrue54.gridironacademy.ui.resources.Res
 import io.github.itstrue54.gridironacademy.ui.resources.answer_false
 import io.github.itstrue54.gridironacademy.ui.resources.answer_true
+import io.github.itstrue54.gridironacademy.ui.resources.disguise
 import io.github.itstrue54.gridironacademy.ui.resources.down_1
 import io.github.itstrue54.gridironacademy.ui.resources.down_2
 import io.github.itstrue54.gridironacademy.ui.resources.down_3
@@ -59,6 +71,7 @@ import io.github.itstrue54.gridironacademy.ui.resources.option_letter
 import io.github.itstrue54.gridironacademy.ui.resources.order_hint
 import io.github.itstrue54.gridironacademy.ui.resources.own_yard_line
 import io.github.itstrue54.gridironacademy.ui.resources.quarter_clock
+import io.github.itstrue54.gridironacademy.ui.resources.replay
 import io.github.itstrue54.gridironacademy.ui.resources.score_down
 import io.github.itstrue54.gridironacademy.ui.resources.score_tied
 import io.github.itstrue54.gridironacademy.ui.resources.score_up
@@ -321,6 +334,71 @@ fun OrderView(step: Order, order: List<String>, graded: Boolean, onChange: (List
 }
 
 private fun <T> List<T>.swap(a: Int, b: Int): List<T> = toMutableList().also { val t = it[a]; it[a] = it[b]; it[b] = t }
+
+/**
+ * Read the defense (DESIGN 9.4, 7.7): the pre-snap picture and the choices; after Check
+ * the reveal plays the rotation. Both pictures share one window and one zoom, so the
+ * reveal happens exactly where the learner was looking. Replay plays it again.
+ */
+@Composable
+fun ReadDefenseView(step: ReadDefense, selected: Int?, graded: Boolean, onSelect: (Int) -> Unit) {
+    val skin = Gridiron.skin
+    val reduced = Gridiron.reducedMotion
+    val zoom = rememberFieldZoomState(step.id)
+    val window = remember(step.id) { FieldGeometry.window(step.preSnap, step.reveal) }
+    val progress = remember(step.id) { Animatable(0f) }
+    var replays by remember(step.id) { mutableStateOf(0) }
+    LaunchedEffect(graded, replays, reduced) {
+        if (graded) {
+            // Reduced motion: the end state appears at once; the ghosts show where everyone was.
+            if (reduced) progress.snapTo(1f)
+            else {
+                progress.snapTo(0f)
+                progress.animateTo(1f, tween(skin.revealMillis, easing = FastOutSlowInEasing))
+            }
+        }
+    }
+    Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
+        if (step.disguised) DisguiseChip()
+        Prompt(step.prompt)
+        if (!graded) {
+            FieldDiagram(step.preSnap, step.preSnap.spoken(), zoom = zoom, window = window, modifier = Modifier.fillMaxWidth())
+        } else {
+            // Replay sits on the field itself: the feedback sheet covers everything below it.
+            Box {
+                FieldDiagram(step.reveal, step.reveal.spoken(), zoom = zoom, window = window, motion = progress.value, modifier = Modifier.fillMaxWidth())
+                if (!reduced) ReplayChip(onClick = { replays++ }, modifier = Modifier.align(Alignment.BottomStart).padding(6.dp))
+            }
+        }
+        ChoiceList(step.choices, selected, graded, isRight = { it == step.answer }, onSelect = onSelect)
+    }
+}
+
+@Composable
+private fun ReplayChip(onClick: () -> Unit, modifier: Modifier) {
+    val c = Gridiron.colors
+    Surface(
+        onClick = onClick,
+        shape = Gridiron.skin.chipShape,
+        color = c.surfaceRaised.copy(alpha = 0.92f),
+        contentColor = c.ink,
+        border = BorderStroke(1.dp, c.line),
+        modifier = modifier.heightIn(min = Gridiron.skin.touchTarget),
+    ) {
+        Box(contentAlignment = Alignment.Center, modifier = Modifier.padding(horizontal = 12.dp)) {
+            Text(stringResource(Res.string.replay), style = Gridiron.type.label)
+        }
+    }
+}
+
+/** "Disguise" (DESIGN 9.4): the shell may lie, so the learner knows to look for the tell. */
+@Composable
+private fun DisguiseChip() {
+    val c = Gridiron.colors
+    Surface(shape = Gridiron.skin.chipShape, color = c.surfaceRaised, contentColor = c.defense, border = BorderStroke(1.5.dp, c.defense)) {
+        Text(stringResource(Res.string.disguise), style = Gridiron.type.label, modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp))
+    }
+}
 
 /** Game-state decision: the situation strip, then the options (DESIGN 9.5). */
 @Composable

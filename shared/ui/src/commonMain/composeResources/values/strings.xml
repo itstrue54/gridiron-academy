@@ -62,6 +62,8 @@
     <string name="tap_one_adult">Tap one.</string>
     <string name="tap_many">Tap every one that fits (%1$d).</string>
     <string name="match_hint">Tap one on the left, then its partner on the right.</string>
+    <string name="disguise">Disguise</string>
+    <string name="replay">Replay the snap</string>
     <string name="match_answer">Goes with: %1$s</string>
     <string name="order_hint">Use the arrows to put these in order.</string>
     <string name="move_up">Move %1$s up</string>

@@ -166,4 +166,27 @@ class FieldGeometryTest {
         assertEquals(r.xMax, both.xMax)
         assertEquals(minOf(FieldGeometry.window(pre).xMin, r.xMin), both.xMin)
     }
+
+    @Test
+    fun alongWalksTheRouteByDistance() {
+        val pts = listOf(Pt(0f, 10f), Pt(10f, 10f)) // 10 up, then 10 across: 20 yards
+        assertEquals(Pt(0f, 0f), FieldGeometry.along(0f, 0f, pts, 0f))
+        assertEquals(Pt(0f, 5f), FieldGeometry.along(0f, 0f, pts, 0.25f))
+        assertEquals(Pt(5f, 10f), FieldGeometry.along(0f, 0f, pts, 0.75f))
+        assertEquals(Pt(10f, 10f), FieldGeometry.along(0f, 0f, pts, 1f))
+        assertEquals(Pt(3f, 4f), FieldGeometry.along(3f, 4f, listOf(Pt(3f, 4f)), 0.5f), "a path with no length stays put")
+    }
+
+    @Test
+    fun revealPathsStartInTurnAndFinishTogether() {
+        val n = 4
+        val d = 900
+        assertEquals(0f, FieldGeometry.staggered(0f, 0, n, d))
+        // At 60ms the first path has started and the second hasn't.
+        val p60 = 60f / d
+        assertTrue(FieldGeometry.staggered(p60, 0, n, d) > 0f)
+        assertEquals(0f, FieldGeometry.staggered(p60, 1, n, d), 1e-4f)
+        // Everyone arrives at the end.
+        (0 until n).forEach { assertEquals(1f, FieldGeometry.staggered(1f, it, n, d)) }
+    }
 }

@@ -749,9 +749,8 @@ Dependency direction: `apps -> ui -> data -> core`. Nothing depends on an app;
    scale, `GridironTheme`) and `FieldDiagram` with its pure, tested `FieldGeometry`.
    `ContrastTest` asserts the DESIGN §3 contrast promises in code.
    **Learner flow (M1):** onboarding (nickname + age screen), Home drive map, level
-   screen, the lesson player for all v1 step types except `read_defense` (shown as
-   multiple choice with its reveal until the reveal animation lands), and lesson
-   complete, all in `:shared:ui`. The Checkpoint (with adult test-out), the Big Game
+   screen, the lesson player for all v1 step types (including `read_defense` with its
+   animated reveal, DESIGN 7.7), and lesson complete, all in `:shared:ui`. The Checkpoint (with adult test-out), the Big Game
    (the Speed round screen for speed-round levels, the step player for the others) and
    the result / level-complete screen close the level loop; Home's Continue leads
    through drills, Checkpoint and Big Game in turn. `LearnerAppState` holds the back stack, the save and

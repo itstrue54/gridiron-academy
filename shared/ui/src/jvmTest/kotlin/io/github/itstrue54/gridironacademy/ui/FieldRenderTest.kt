@@ -59,12 +59,13 @@ class FieldRenderTest {
         dark: Boolean,
         marks: Map<String, MarkState> = emptyMap(),
         zoom: FieldZoom = FieldZoom(),
+        motion: Float? = null,
     ): Rendered {
         val zoomState = FieldZoomState().apply { value = zoom }
         val image = ImageComposeScene(width = WIDTH_PX, height = 1000, density = Density(DENSITY)) {
             GridironTheme(skin = skin, dark = dark) {
                 Box(Modifier.fillMaxSize().background(Gridiron.colors.surface).padding(PAD_DP.dp)) {
-                    FieldDiagram(diagram, description = name, marks = marks, zoom = zoomState)
+                    FieldDiagram(diagram, description = name, marks = marks, zoom = zoomState, motion = motion)
                 }
             }
         }.use { it.render() }
@@ -182,5 +183,18 @@ class FieldRenderTest {
         const val DENSITY = 2f
         const val PAD_DP = 16
         const val PAD_PX = (PAD_DP * DENSITY).toInt()
+    }
+
+    @Test
+    fun theRevealMovesDefendersAndLeavesGhosts() {
+        val rd = steps().filterIsInstance<ReadDefense>().first()
+        val fs = rd.reveal.players.first { it.id == "fs" }
+        val end = rd.reveal.routes.first { it.playerId == "fs" }.points.last()
+        render("reveal-half-adult", rd.reveal, Skin.Adult, dark = false, motion = 0.5f)
+        val done = render("reveal-end-adult", rd.reveal, Skin.Adult, dark = false, motion = 1f)
+        assertNear(DiagramColors.defenseFill, done.at(end.x, end.y, dyPx = 14), "free safety arrived at the end of its rotation")
+        // The ghost at the start is a faded mark: neither the full fill nor bare turf.
+        val ghost = done.at(fs.x, fs.y, dyPx = 14)
+        assertTrue(ghost != DiagramColors.defenseFill && ghost != DiagramColors.turfA && ghost != DiagramColors.turfB, "ghost at the pre-snap spot, got $ghost")
     }
 }

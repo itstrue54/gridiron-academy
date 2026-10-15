@@ -172,4 +172,19 @@ class ScreenRenderTest {
             LearnerApp(drillsDone(AgeBand.AGE_18_PLUS).also { it.back() }, dark = true)
         }
     }
+
+    @Test fun readTheDefense() {
+        val unit = ContentLoader.json.decodeFromString(CourseUnit.serializer(), ClasspathContentSource().read("preview/l7-disguise.json")!!)
+        val step = unit.lessons.flatMap { it.steps }.filterIsInstance<ReadDefense>().first()
+        val state = appState(AgeBand.AGE_18_PLUS)
+        val level = state.levels.first()
+        val pre = LessonController(listOf(step))
+        shot("23-read-defense-presnap-adult") {
+            GridironTheme(skin = state.skin, dark = true) { LessonScreen(state, level.id, "preview", pre) }
+        }
+        val graded = LessonController(listOf(step)).also { it.submit(Answer.Choice(step.answer)) }
+        shot("24-read-defense-reveal-adult") {
+            GridironTheme(skin = state.skin, dark = true) { LessonScreen(state, level.id, "preview", graded) }
+        }
+    }
 }
