@@ -191,7 +191,7 @@
             "5"
           ],
           "answer": 0,
-          "explanation": "Count the linemen and linebackers near the line, inside the tight end: six.",
+          "explanation": "Count the linemen and linebackers near the line, from the end over the tight end inward: six.",
           "diagram": {
             "players": [
               {

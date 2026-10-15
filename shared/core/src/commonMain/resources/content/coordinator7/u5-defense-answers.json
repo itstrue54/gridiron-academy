@@ -395,12 +395,12 @@
                 "playerId": "ss",
                 "points": [
                   {
-                    "x": 6,
-                    "y": 8
+                    "x": 1,
+                    "y": 9
                   }
                 ],
                 "kind": "rotate",
-                "label": "drops to the slot"
+                "label": "rotates down to the hole"
               },
               {
                 "playerId": "fs",
@@ -1042,7 +1042,7 @@
             "Simulated pressure",
             "Double A-gap",
             "Fire zone",
-            "Bluff: four rush, seven cover"
+            "Bluff: shows pressure, the usual four rush"
           ],
           "answer": 0,
           "reveal": {

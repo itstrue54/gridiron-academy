@@ -62,7 +62,7 @@
         {
           "type": "match",
           "id": "k1-positions-06",
-          "prompt": "Who does what on defense?",
+          "prompt": "Who does what?",
           "pairs": [
             {
               "left": "DL",
@@ -81,7 +81,7 @@
               "right": "Blocks for the QB"
             }
           ],
-          "explanation": "OL is on offense, but they are the ones the defense must get past.",
+          "explanation": "DL, LB and CB play defense. OL play offense: they block for the QB.",
           "concept": "defense-positions"
         },
         {

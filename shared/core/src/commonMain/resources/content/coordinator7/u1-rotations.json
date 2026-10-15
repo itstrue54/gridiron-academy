@@ -1163,12 +1163,12 @@
                 "playerId": "ss",
                 "points": [
                   {
-                    "x": 6,
-                    "y": 8
+                    "x": 1,
+                    "y": 9
                   }
                 ],
                 "kind": "rotate",
-                "label": "drops to the slot"
+                "label": "rotates down to the hole"
               },
               {
                 "playerId": "fs",
@@ -1233,7 +1233,7 @@
               }
             ]
           },
-          "explanation": "Pressed corners with inside leverage are a man tell; one safety drops to the slot and the other takes the middle: Cover 1. A tell is a clue, not a guarantee.",
+          "explanation": "Pressed corners with inside leverage are a man tell; one safety rotates down into the hole as a robber and the other takes the middle: Cover 1. A tell is a clue, not a guarantee.",
           "disguised": true,
           "concept": "rotation"
         },
@@ -2470,7 +2470,7 @@
             "Safety blitz",
             "Cover 2",
             "Quarters",
-            "Bluff: four rush, seven cover"
+            "Bluff: shows pressure, the usual four rush"
           ],
           "answer": 0,
           "reveal": {

@@ -141,7 +141,7 @@
     <string name="score_up">Up %1$d</string>
     <string name="score_down">Down %1$d</string>
     <string name="score_tied">Tied</string>
-    <string name="timeouts_left">%1$d timeouts left</string>
+    <string name="timeouts_left">Your timeouts: %1$d</string>
 
     <!-- Lesson complete (DESIGN 9.7) -->
     <string name="done_kid">Touchdown!</string>

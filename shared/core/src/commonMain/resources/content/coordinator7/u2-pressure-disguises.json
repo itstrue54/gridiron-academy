@@ -661,7 +661,7 @@
             ]
           },
           "choices": [
-            "Bluff: four rush, seven cover",
+            "Bluff: shows pressure, the usual four rush",
             "Double A-gap",
             "Simulated pressure",
             "Fire zone"
@@ -1068,7 +1068,7 @@
           "choices": [
             "Simulated pressure",
             "Double A-gap",
-            "Bluff: four rush, seven cover",
+            "Bluff: shows pressure, the usual four rush",
             "Fire zone"
           ],
           "answer": 0,
@@ -1484,7 +1484,7 @@
           "choices": [
             "Simulated pressure",
             "Fire zone",
-            "Bluff: four rush, seven cover",
+            "Bluff: shows pressure, the usual four rush",
             "Double A-gap"
           ],
           "answer": 0,
