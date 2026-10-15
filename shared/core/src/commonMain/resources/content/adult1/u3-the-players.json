@@ -10,7 +10,7 @@
           "type": "learn",
           "id": "a1-positions-01",
           "title": "Offense",
-          "body": "The quarterback (QB) runs the offense. Running backs (RB) carry the ball. Receivers (WR) and tight ends (TE) catch passes. Five offensive linemen (LT, LG, C, RG, RT) block. Only the QB, RBs, WRs and TEs are eligible to catch forward passes.",
+          "body": "The quarterback (QB) runs the offense. Running backs (RB) carry the ball. Receivers (WR) and tight ends (TE) catch passes. Five offensive linemen (LT, LG, C, RG, RT) block. Who may catch a forward pass depends on where a player lines up, not just his position: the two players on the ends of the line and the players in the backfield.",
           "concept": "offensive-line"
         },
         {
@@ -116,21 +116,21 @@
                 "label": "TE",
                 "side": "OFFENSE",
                 "x": 4.8,
-                "y": 0.2
+                "y": 0.0
               },
               {
                 "id": "wr1",
                 "label": "WR",
                 "side": "OFFENSE",
                 "x": -20,
-                "y": 0.2
+                "y": 0.0
               },
               {
                 "id": "wr2",
                 "label": "WR",
                 "side": "OFFENSE",
                 "x": 17,
-                "y": 0.2
+                "y": -1.0
               },
               {
                 "id": "wr3",
@@ -212,21 +212,21 @@
                 "label": "TE",
                 "side": "OFFENSE",
                 "x": 4.8,
-                "y": 0.2
+                "y": 0.0
               },
               {
                 "id": "wr1",
                 "label": "WR",
                 "side": "OFFENSE",
                 "x": -20,
-                "y": 0.2
+                "y": 0.0
               },
               {
                 "id": "wr2",
                 "label": "WR",
                 "side": "OFFENSE",
                 "x": 17,
-                "y": 0.2
+                "y": -1.0
               },
               {
                 "id": "wr3",
@@ -239,14 +239,13 @@
             "caption": "Offense, labeled"
           },
           "targets": [
-            "qb",
             "rb",
             "te",
             "wr1",
             "wr2",
             "wr3"
           ],
-          "explanation": "QB, RB, TE and WRs may legally catch a forward pass. Linemen are ineligible downfield. (A QB catching a pass is rare but legal, e.g. on a trick play.)",
+          "explanation": "The receivers and back are eligible, and so is the tight end because he's on the end of the line. The five linemen are not. Neither is this quarterback: in the NFL a quarterback taking the snap under center can't catch a forward pass (from the shotgun he can, which is how trick plays to the quarterback work).",
           "concept": "eligible-receiver"
         },
         {
@@ -309,21 +308,21 @@
                 "label": "TE",
                 "side": "OFFENSE",
                 "x": 4.8,
-                "y": 0.2
+                "y": 0.0
               },
               {
                 "id": "wr1",
                 "label": "WR",
                 "side": "OFFENSE",
                 "x": -20,
-                "y": 0.2
+                "y": 0.0
               },
               {
                 "id": "wr2",
                 "label": "WR",
                 "side": "OFFENSE",
                 "x": 17,
-                "y": 0.2
+                "y": -1.0
               },
               {
                 "id": "wr3",

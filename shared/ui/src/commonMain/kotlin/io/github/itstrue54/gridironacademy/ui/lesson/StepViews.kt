@@ -257,7 +257,9 @@ fun MatchView(step: Match, rightOrder: List<String>, pairs: Map<String, String>,
                     }
                     MatchChip(LETTERS[i], left, state, paired = left in pairs) {
                         if (left in pairs) onPairs(pairs - left)
-                        onSelectLeft(if (selectedLeft == left) null else left)
+                        // Always select: the first item starts selected, and a toggle made the
+                        // natural first tap deselect it (found playing on a phone).
+                        onSelectLeft(left)
                     }
                     if (graded && pairs[left] != truth[left]) {
                         Text(stringResource(Res.string.match_answer, truth[left].orEmpty()), style = Gridiron.type.label, color = c.correct, modifier = Modifier.padding(start = 8.dp))
