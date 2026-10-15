@@ -1,11 +1,12 @@
 # Curriculum: Pee-wee to Architect
 
-Two tracks (kid, adult) that converge at Level 4. Every level ends with a **level test**
+Two tracks (kid, adult) that converge at Level 4, plus a kid-only Level 0 for pre-readers. Every level ends with a **level test**
 (12 questions, 80% to pass) and a **level game** (70% to pass). Status: `done` = shipped
 and validated, `preview` = exemplar content proving the model, `planned` = to be written.
 
 | # | Level | Track | Age/audience | Gate game | Status |
 |---|---|---|---|---|---|
+| 0 | Little Huddle | kid | 4-7, pre-readers | Picture Play (no test) | planned |
 | 1 | Pee-wee | kid | ~8 | Speed round | **done** (`kid-1`) |
 | 1 | Fan Starter | adult | new fans | Speed round | **done** (`adult-1`) |
 | 2 | Rookie | kid | ~9-10 | Speed round | planned |
@@ -20,6 +21,12 @@ and validated, `preview` = exemplar content proving the model, `planned` = to be
 
 Placement: an adult can take a short quiz per level and start at the first one they miss.
 Any level's test can be "tested out" of, with the game still to be played.
+
+## Level 0: Little Huddle (kid, ages 4-7)
+Audio-first, no reading, no timers, no test (SPEC 3.1, 4.4, 6.9). Units: The Ball; Two
+Teams; Go That Way!; Touchdown! (count to 6); Run, Throw, Catch, Kick; Flags and Tackles;
+The Referee (whistle, touchdown and stop signals); Good Sport (taking turns, safety gear).
+Every prompt and choice has a recorded audio clip; answers are pictures.
 
 ## Level 1: Pee-wee / Fan Starter (done)
 Field, yard lines, end zones; offense/defense/special teams; quarters; scoring (TD, extra
