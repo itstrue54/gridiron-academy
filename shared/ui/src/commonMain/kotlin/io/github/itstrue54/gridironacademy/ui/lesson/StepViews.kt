@@ -129,6 +129,7 @@ fun LearnView(step: Learn) {
 /** Multiple choice and situation options share this list (DESIGN 9.3). */
 @Composable
 fun ChoiceList(
+    stepId: String,
     choices: List<String>,
     selected: Int?,
     graded: Boolean,
@@ -136,15 +137,18 @@ fun ChoiceList(
     onSelect: (Int) -> Unit,
 ) {
     val selectedWord = stringResource(Res.string.selected)
+    val order = remember(stepId, choices) { choiceOrder(stepId, choices) }
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        choices.forEachIndexed { i, text ->
+        // Shown in a fixed per-step order; `i` stays the authored index for grading.
+        order.forEachIndexed { shown, i ->
+            val text = choices[i]
             val state = when {
                 !graded -> if (selected == i) AnswerState.SELECTED else AnswerState.REST
                 isRight(i) -> AnswerState.CORRECT
                 selected == i -> AnswerState.RETRY
                 else -> AnswerState.DISABLED
             }
-            val letter = LETTERS.getOrElse(i) { "${i + 1}" }
+            val letter = LETTERS.getOrElse(shown) { "${shown + 1}" }
             AnswerButton(
                 text = text,
                 state = state,
@@ -160,11 +164,11 @@ fun ChoiceList(
 }
 
 @Composable
-fun MultipleChoiceView(prompt: String, diagram: Diagram?, choices: List<String>, answer: Int, selected: Int?, graded: Boolean, onSelect: (Int) -> Unit) {
+fun MultipleChoiceView(stepId: String, prompt: String, diagram: Diagram?, choices: List<String>, answer: Int, selected: Int?, graded: Boolean, onSelect: (Int) -> Unit) {
     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
         Prompt(prompt)
         StepDiagram(diagram)
-        ChoiceList(choices, selected, graded, isRight = { it == answer }, onSelect = onSelect)
+        ChoiceList(stepId, choices, selected, graded, isRight = { it == answer }, onSelect = onSelect)
     }
 }
 
@@ -384,7 +388,7 @@ fun ReadDefenseView(step: ReadDefense, selected: Int?, graded: Boolean, onSelect
                 if (!reduced) ReplayChip(onClick = { replays++ }, modifier = Modifier.align(Alignment.BottomStart).padding(6.dp))
             }
         }
-        ChoiceList(step.choices, selected, graded, isRight = { it == step.answer }, onSelect = onSelect)
+        ChoiceList(step.id, step.choices, selected, graded, isRight = { it == step.answer }, onSelect = onSelect)
     }
 }
 
@@ -420,7 +424,7 @@ fun SituationView(step: Situation, selected: Int?, graded: Boolean, onSelect: (I
     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
         SituationStrip(step.state)
         Prompt(step.prompt)
-        ChoiceList(step.options.map { it.text }, selected, graded, isRight = { step.options[it].quality == Quality.BEST }, onSelect = onSelect)
+        ChoiceList(step.id, step.options.map { it.text }, selected, graded, isRight = { step.options[it].quality == Quality.BEST }, onSelect = onSelect)
     }
 }
 
@@ -464,6 +468,18 @@ fun SituationStrip(s: GameState) {
             }
         }
     }
+}
+
+/**
+ * The order to show a step's choices in, as authored indexes. Authors tend to put the
+ * right answer first, so every list is shuffled with a fixed per-step seed (the same
+ * order every time, in every screenshot). A list of plain numbers is sorted instead,
+ * because that is how numbers are read.
+ */
+fun choiceOrder(stepId: String, choices: List<String>): List<Int> {
+    val numbers = choices.map { it.trim().toDoubleOrNull() }
+    if (numbers.all { it != null }) return choices.indices.sortedBy { numbers[it] }
+    return stepShuffle("$stepId#choices", choices.indices.toList())
 }
 
 /** A fixed shuffle per step, so a retry and a screenshot show the same order (SPEC 4.3). */

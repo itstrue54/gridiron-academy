@@ -126,6 +126,31 @@
         "gameQuestions": 10,
         "gamePassPct": 70
       }
+    },
+    {
+      "id": "varsity-4",
+      "number": 4,
+      "track": "shared",
+      "title": "Varsity",
+      "tagline": "Personnel, fronts, the five coverages, run schemes and pass concepts.",
+      "requiresAny": [
+        "kid-3",
+        "adult-3"
+      ],
+      "unitFiles": [
+        "varsity4/u1-personnel-and-strength.json",
+        "varsity4/u2-fronts-and-techniques.json",
+        "varsity4/u3-the-five-coverages.json",
+        "varsity4/u4-run-schemes.json",
+        "varsity4/u5-pass-concepts-and-pressure.json"
+      ],
+      "gate": {
+        "testPassPct": 80,
+        "testQuestions": 12,
+        "game": "read_defense",
+        "gameQuestions": 10,
+        "gamePassPct": 70
+      }
     }
   ]
 }

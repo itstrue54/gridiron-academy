@@ -192,7 +192,7 @@ private fun StepBody(step: Step, controller: LessonController, pending: Answer?,
     when (step) {
         is Learn -> LearnView(step)
         is MultipleChoice -> MultipleChoiceView(
-            step.prompt, step.diagram, step.choices, step.answer,
+            step.id, step.prompt, step.diagram, step.choices, step.answer,
             selected = (shown as? Answer.Choice)?.index, graded = graded,
         ) { onAnswer(Answer.Choice(it)) }
         is TrueFalse -> TrueFalseView(step.statement, step.answer, (shown as? Answer.Bool)?.value, graded) { onAnswer(Answer.Bool(it)) }

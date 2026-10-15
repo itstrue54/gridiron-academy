@@ -1,0 +1,572 @@
+{
+  "id": "varsity4-u1",
+  "title": "Personnel and Strength",
+  "lessons": [
+    {
+      "id": "v4-personnel",
+      "title": "Personnel Groupings",
+      "blurb": "Two digits that name who's on the field.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "v4-personnel-01",
+          "title": "Two numbers",
+          "body": "Personnel is named with two digits: the first is running backs, the second is tight ends. Everyone else of the five skill players is a wide receiver.",
+          "concept": "personnel"
+        },
+        {
+          "type": "learn",
+          "id": "v4-personnel-02",
+          "title": "11 personnel",
+          "body": "One back, one tight end, three receivers. It is the most common grouping in the NFL.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "rb0",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 1.8,
+                "y": -5
+              },
+              {
+                "id": "te0",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              },
+              {
+                "id": "wr0",
+                "label": "WR",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "wr1",
+                "label": "WR",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": 0
+              },
+              {
+                "id": "wr2",
+                "label": "WR",
+                "side": "OFFENSE",
+                "x": -7,
+                "y": -1
+              }
+            ],
+            "caption": "11 personnel: 1 RB, 1 TE, 3 WR"
+          },
+          "concept": "personnel"
+        },
+        {
+          "type": "learn",
+          "id": "v4-personnel-03",
+          "title": "Heavy and light",
+          "body": "12 (one back, two tight ends) and 21 (two backs, one tight end) lean toward the run. 10 (one back, no tight end, four receivers) spreads the field to pass.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "rb0",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 1.8,
+                "y": -5
+              },
+              {
+                "id": "te0",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              },
+              {
+                "id": "te1",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": -4.8,
+                "y": 0
+              },
+              {
+                "id": "wr0",
+                "label": "WR",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "wr1",
+                "label": "WR",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": 0
+              }
+            ],
+            "caption": "12 personnel: 1 RB, 2 TE, 2 WR"
+          },
+          "concept": "personnel"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "v4-personnel-04",
+          "prompt": "How many wide receivers are in 12 personnel?",
+          "choices": [
+            "2",
+            "1",
+            "3",
+            "4"
+          ],
+          "answer": 0,
+          "explanation": "1 back + 2 tight ends = 3, so 5 - 3 = 2 receivers.",
+          "concept": "personnel"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "v4-personnel-05",
+          "prompt": "Name this personnel group.",
+          "choices": [
+            "21",
+            "12",
+            "11",
+            "22"
+          ],
+          "answer": 0,
+          "explanation": "Two backs and one tight end: 21 personnel, with two receivers.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "rb0",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 1.8,
+                "y": -5
+              },
+              {
+                "id": "rb1",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": -1.8,
+                "y": -5
+              },
+              {
+                "id": "te0",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              },
+              {
+                "id": "wr0",
+                "label": "WR",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "wr1",
+                "label": "WR",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": 0
+              }
+            ],
+            "caption": ""
+          },
+          "concept": "personnel"
+        },
+        {
+          "type": "match",
+          "id": "v4-personnel-06",
+          "prompt": "Match each grouping to its players.",
+          "pairs": [
+            {
+              "left": "11",
+              "right": "1 RB, 1 TE, 3 WR"
+            },
+            {
+              "left": "10",
+              "right": "1 RB, 0 TE, 4 WR"
+            },
+            {
+              "left": "13",
+              "right": "1 RB, 3 TE, 1 WR"
+            },
+            {
+              "left": "22",
+              "right": "2 RB, 2 TE, 1 WR"
+            }
+          ],
+          "explanation": "First digit backs, second digit tight ends, the rest receivers.",
+          "concept": "personnel"
+        },
+        {
+          "type": "true_false",
+          "id": "v4-personnel-07",
+          "statement": "In 20 personnel there are two running backs and three receivers.",
+          "answer": true,
+          "explanation": "2 backs, 0 tight ends, so 5 - 2 = 3 receivers.",
+          "concept": "personnel"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "v4-personnel-08",
+          "prompt": "The offense sends in 10 personnel. What do defenses usually do?",
+          "choices": [
+            "Add a defensive back (nickel or dime)",
+            "Add a lineman",
+            "Take out a cornerback",
+            "Nothing"
+          ],
+          "answer": 0,
+          "explanation": "Four receivers mean more defensive backs to match them.",
+          "concept": "nickel"
+        }
+      ]
+    },
+    {
+      "id": "v4-strength",
+      "title": "Formation Strength",
+      "blurb": "Which side the offense leans to.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "v4-strength-01",
+          "title": "The strong side",
+          "body": "The strong side is usually the tight end's side. Defenses set their front to it, because that is where an extra blocker is.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "rb0",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 1.8,
+                "y": -5
+              },
+              {
+                "id": "te0",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              },
+              {
+                "id": "wr0",
+                "label": "WR",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "wr1",
+                "label": "WR",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": 0
+              },
+              {
+                "id": "wr2",
+                "label": "WR",
+                "side": "OFFENSE",
+                "x": -7,
+                "y": -1
+              }
+            ],
+            "caption": "Strong side: right, where the tight end is"
+          },
+          "concept": "formation-strength"
+        },
+        {
+          "type": "learn",
+          "id": "v4-strength-02",
+          "title": "Passing strength",
+          "body": "Against spread formations, defenses often set to the side with more receivers instead. Three receivers to one side is 'trips'; two and two is '2x2'.",
+          "concept": "formation-strength"
+        },
+        {
+          "type": "diagram_tap",
+          "id": "v4-strength-03",
+          "prompt": "Tap the player who makes the right side the strong side.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "rb0",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 1.8,
+                "y": -5
+              },
+              {
+                "id": "te0",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              },
+              {
+                "id": "wr0",
+                "label": "WR",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "wr1",
+                "label": "WR",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": 0
+              },
+              {
+                "id": "wr2",
+                "label": "WR",
+                "side": "OFFENSE",
+                "x": -7,
+                "y": -1
+              }
+            ],
+            "caption": ""
+          },
+          "targets": [
+            "te0"
+          ],
+          "explanation": "The tight end is the extra blocker, so his side is the strong side.",
+          "concept": "formation-strength"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "v4-strength-04",
+          "prompt": "Three receivers line up on the left and one on the right. What is that called?",
+          "choices": [
+            "Trips left",
+            "Twins left",
+            "Empty",
+            "Pro set"
+          ],
+          "answer": 0,
+          "explanation": "Three to one side is trips; the side names where the three are.",
+          "concept": "formation-strength"
+        },
+        {
+          "type": "true_false",
+          "id": "v4-strength-05",
+          "statement": "Defenses often set their front toward the tight end.",
+          "answer": true,
+          "explanation": "The tight end adds a gap to fill, so the front usually sets to him.",
+          "concept": "formation-strength"
+        }
+      ]
+    }
+  ]
+}

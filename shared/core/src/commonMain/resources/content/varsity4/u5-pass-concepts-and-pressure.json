@@ -1,0 +1,1513 @@
+{
+  "id": "varsity4-u5",
+  "title": "Pass Concepts and Pressure",
+  "lessons": [
+    {
+      "id": "v4-quick",
+      "title": "Quick Concepts",
+      "blurb": "Curl-flat, stick and snag.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "v4-quick-01",
+          "title": "Curl-flat",
+          "body": "A curl outside with a flat route underneath: a high-low on the flat defender. If he widens, throw the curl; if he sits, throw the flat.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "h",
+                "label": "H",
+                "side": "OFFENSE",
+                "x": -7,
+                "y": -1
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": 0
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "x",
+                "points": [
+                  {
+                    "x": -12,
+                    "y": 12.0
+                  },
+                  {
+                    "x": -10.5,
+                    "y": 10.0
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "h",
+                "points": [
+                  {
+                    "x": -8.5,
+                    "y": 1
+                  },
+                  {
+                    "x": -13,
+                    "y": 2
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "z",
+                "points": [
+                  {
+                    "x": 12,
+                    "y": 12.0
+                  },
+                  {
+                    "x": 10.5,
+                    "y": 10.0
+                  }
+                ],
+                "kind": "pass"
+              }
+            ],
+            "caption": "Curl-Flat"
+          },
+          "concept": "curl-flat"
+        },
+        {
+          "type": "learn",
+          "id": "v4-quick-02",
+          "title": "Stick",
+          "body": "A receiver runs to about six yards and turns ('sticks'), with a flat route outside him. A quick, reliable throw against zone.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "f",
+                "label": "F",
+                "side": "OFFENSE",
+                "x": 7,
+                "y": -1
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": 0
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 1.8,
+                "y": -5
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "x",
+                "points": [
+                  {
+                    "x": -12,
+                    "y": 22
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "z",
+                "points": [
+                  {
+                    "x": 12,
+                    "y": 22
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "f",
+                "points": [
+                  {
+                    "x": 7,
+                    "y": 6
+                  },
+                  {
+                    "x": 6.5,
+                    "y": 6
+                  }
+                ],
+                "kind": "pass",
+                "label": "stick"
+              },
+              {
+                "playerId": "rb",
+                "points": [
+                  {
+                    "x": 6,
+                    "y": -3
+                  },
+                  {
+                    "x": 11,
+                    "y": -1
+                  }
+                ],
+                "kind": "pass"
+              }
+            ],
+            "caption": "Stick"
+          },
+          "concept": "curl-flat"
+        },
+        {
+          "type": "learn",
+          "id": "v4-quick-03",
+          "title": "Snag",
+          "body": "A triangle: a short snag route, a corner over it, and a flat under it. Three levels that one or two defenders can't cover.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "h",
+                "label": "H",
+                "side": "OFFENSE",
+                "x": -7,
+                "y": -1
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": 0
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 1.8,
+                "y": -5
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "x",
+                "points": [
+                  {
+                    "x": -12,
+                    "y": 5
+                  },
+                  {
+                    "x": -10,
+                    "y": 6
+                  }
+                ],
+                "kind": "pass",
+                "label": "snag"
+              },
+              {
+                "playerId": "h",
+                "points": [
+                  {
+                    "x": -7,
+                    "y": 11
+                  },
+                  {
+                    "x": -13,
+                    "y": 19
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "rb",
+                "points": [
+                  {
+                    "x": -2,
+                    "y": -4
+                  },
+                  {
+                    "x": -12,
+                    "y": -1
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "z",
+                "points": [
+                  {
+                    "x": 12,
+                    "y": 22
+                  }
+                ],
+                "kind": "pass"
+              }
+            ],
+            "caption": "Snag"
+          },
+          "concept": "route-combination"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "v4-quick-04",
+          "prompt": "Name this concept.",
+          "choices": [
+            "Curl-flat",
+            "Mesh",
+            "Four verticals",
+            "Smash"
+          ],
+          "answer": 0,
+          "explanation": "A curl outside with a flat route underneath it.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "h",
+                "label": "H",
+                "side": "OFFENSE",
+                "x": -7,
+                "y": -1
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": 0
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "x",
+                "points": [
+                  {
+                    "x": -12,
+                    "y": 12.0
+                  },
+                  {
+                    "x": -10.5,
+                    "y": 10.0
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "h",
+                "points": [
+                  {
+                    "x": -8.5,
+                    "y": 1
+                  },
+                  {
+                    "x": -13,
+                    "y": 2
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "z",
+                "points": [
+                  {
+                    "x": 12,
+                    "y": 12.0
+                  },
+                  {
+                    "x": 10.5,
+                    "y": 10.0
+                  }
+                ],
+                "kind": "pass"
+              }
+            ],
+            "caption": ""
+          },
+          "concept": "curl-flat"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "v4-quick-05",
+          "prompt": "In curl-flat, the flat defender runs wide with the flat route. Who is open?",
+          "choices": [
+            "The curl",
+            "The flat",
+            "Nobody",
+            "The quarterback"
+          ],
+          "answer": 0,
+          "explanation": "With the defender gone wide, the curl inside him is open.",
+          "concept": "curl-flat"
+        },
+        {
+          "type": "true_false",
+          "id": "v4-quick-06",
+          "statement": "Snag stretches defenders with three routes at three depths.",
+          "answer": true,
+          "explanation": "Flat, snag and corner form a triangle that's hard to cover with fewer defenders.",
+          "concept": "route-combination"
+        }
+      ]
+    },
+    {
+      "id": "v4-dropback",
+      "title": "Dropback Concepts",
+      "blurb": "Smash, mesh, four verticals, Y-cross.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "v4-dropback-01",
+          "title": "Smash",
+          "body": "A hitch outside with a corner route over it. The flat corner in Cover 2 can't take both.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "h",
+                "label": "H",
+                "side": "OFFENSE",
+                "x": -7,
+                "y": -1
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": 0
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "x",
+                "points": [
+                  {
+                    "x": -12,
+                    "y": 6.0
+                  },
+                  {
+                    "x": -11.5,
+                    "y": 5.0
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "h",
+                "points": [
+                  {
+                    "x": -7,
+                    "y": 11
+                  },
+                  {
+                    "x": -13,
+                    "y": 19
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "z",
+                "points": [
+                  {
+                    "x": 12,
+                    "y": 22
+                  }
+                ],
+                "kind": "pass"
+              }
+            ],
+            "caption": "Smash"
+          },
+          "concept": "smash"
+        },
+        {
+          "type": "learn",
+          "id": "v4-dropback-02",
+          "title": "Mesh",
+          "body": "Two shallow crossers passing close to each other. Man defenders get caught in the traffic; against zone, the crossers sit in the holes.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "h",
+                "label": "H",
+                "side": "OFFENSE",
+                "x": -7,
+                "y": -1
+              },
+              {
+                "id": "f",
+                "label": "F",
+                "side": "OFFENSE",
+                "x": 7,
+                "y": -1
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": 0
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "x",
+                "points": [
+                  {
+                    "x": -12,
+                    "y": 22
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "h",
+                "points": [
+                  {
+                    "x": -6,
+                    "y": 2
+                  },
+                  {
+                    "x": 8,
+                    "y": 5
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "f",
+                "points": [
+                  {
+                    "x": 6,
+                    "y": 2
+                  },
+                  {
+                    "x": -8,
+                    "y": 6
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "z",
+                "points": [
+                  {
+                    "x": 12,
+                    "y": 22
+                  }
+                ],
+                "kind": "pass"
+              }
+            ],
+            "caption": "Mesh"
+          },
+          "concept": "mesh"
+        },
+        {
+          "type": "learn",
+          "id": "v4-dropback-03",
+          "title": "Four verticals",
+          "body": "Four receivers go deep, two of them up the seams. Against three deep defenders, someone is open.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "h",
+                "label": "H",
+                "side": "OFFENSE",
+                "x": -7,
+                "y": -1
+              },
+              {
+                "id": "f",
+                "label": "F",
+                "side": "OFFENSE",
+                "x": 7,
+                "y": -1
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": 0
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "x",
+                "points": [
+                  {
+                    "x": -12,
+                    "y": 22
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "h",
+                "points": [
+                  {
+                    "x": -6,
+                    "y": 22
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "f",
+                "points": [
+                  {
+                    "x": 6,
+                    "y": 22
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "z",
+                "points": [
+                  {
+                    "x": 12,
+                    "y": 22
+                  }
+                ],
+                "kind": "pass"
+              }
+            ],
+            "caption": "Four Verticals"
+          },
+          "concept": "four-verticals"
+        },
+        {
+          "type": "learn",
+          "id": "v4-dropback-04",
+          "title": "Y-cross",
+          "body": "The Y receiver runs a deep crossing route behind the linebackers while a post and a go clear out the deep defenders. A classic Cover 3 beater.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "h",
+                "label": "H",
+                "side": "OFFENSE",
+                "x": -7,
+                "y": -1
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": 0
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "x",
+                "points": [
+                  {
+                    "x": -12,
+                    "y": 12.0
+                  },
+                  {
+                    "x": -6,
+                    "y": 22.0
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "h",
+                "points": [
+                  {
+                    "x": -6,
+                    "y": 8
+                  },
+                  {
+                    "x": 10,
+                    "y": 16
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "z",
+                "points": [
+                  {
+                    "x": 12,
+                    "y": 22
+                  }
+                ],
+                "kind": "pass"
+              }
+            ],
+            "caption": "Y-Cross"
+          },
+          "concept": "y-cross"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "v4-dropback-05",
+          "prompt": "Name this concept.",
+          "choices": [
+            "Mesh",
+            "Smash",
+            "Y-cross",
+            "Stick"
+          ],
+          "answer": 0,
+          "explanation": "Two shallow crossers meeting in the middle: mesh.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "h",
+                "label": "H",
+                "side": "OFFENSE",
+                "x": -7,
+                "y": -1
+              },
+              {
+                "id": "f",
+                "label": "F",
+                "side": "OFFENSE",
+                "x": 7,
+                "y": -1
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": 0
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "x",
+                "points": [
+                  {
+                    "x": -12,
+                    "y": 22
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "h",
+                "points": [
+                  {
+                    "x": -6,
+                    "y": 2
+                  },
+                  {
+                    "x": 8,
+                    "y": 5
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "f",
+                "points": [
+                  {
+                    "x": 6,
+                    "y": 2
+                  },
+                  {
+                    "x": -8,
+                    "y": 6
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "z",
+                "points": [
+                  {
+                    "x": 12,
+                    "y": 22
+                  }
+                ],
+                "kind": "pass"
+              }
+            ],
+            "caption": ""
+          },
+          "concept": "mesh"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "v4-dropback-06",
+          "prompt": "Name this concept.",
+          "choices": [
+            "Four verticals",
+            "Curl-flat",
+            "Snag",
+            "Smash"
+          ],
+          "answer": 0,
+          "explanation": "All four receivers going deep, two up the seams.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "h",
+                "label": "H",
+                "side": "OFFENSE",
+                "x": -7,
+                "y": -1
+              },
+              {
+                "id": "f",
+                "label": "F",
+                "side": "OFFENSE",
+                "x": 7,
+                "y": -1
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": 0
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "x",
+                "points": [
+                  {
+                    "x": -12,
+                    "y": 22
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "h",
+                "points": [
+                  {
+                    "x": -6,
+                    "y": 22
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "f",
+                "points": [
+                  {
+                    "x": 6,
+                    "y": 22
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "z",
+                "points": [
+                  {
+                    "x": 12,
+                    "y": 22
+                  }
+                ],
+                "kind": "pass"
+              }
+            ],
+            "caption": ""
+          },
+          "concept": "four-verticals"
+        },
+        {
+          "type": "diagram_tap",
+          "id": "v4-dropback-07",
+          "prompt": "Tap the receiver running the deep cross.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "h",
+                "label": "H",
+                "side": "OFFENSE",
+                "x": -7,
+                "y": -1
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": 0
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "x",
+                "points": [
+                  {
+                    "x": -12,
+                    "y": 12.0
+                  },
+                  {
+                    "x": -6,
+                    "y": 22.0
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "h",
+                "points": [
+                  {
+                    "x": -6,
+                    "y": 8
+                  },
+                  {
+                    "x": 10,
+                    "y": 16
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "z",
+                "points": [
+                  {
+                    "x": 12,
+                    "y": 22
+                  }
+                ],
+                "kind": "pass"
+              }
+            ],
+            "caption": ""
+          },
+          "targets": [
+            "h"
+          ],
+          "explanation": "H crosses the field at about 15 yards behind the linebackers.",
+          "concept": "y-cross"
+        },
+        {
+          "type": "match",
+          "id": "v4-dropback-08",
+          "prompt": "Match each concept to its idea.",
+          "pairs": [
+            {
+              "left": "Smash",
+              "right": "Hitch under a corner route"
+            },
+            {
+              "left": "Mesh",
+              "right": "Two shallow crossers"
+            },
+            {
+              "left": "Four verticals",
+              "right": "Four deep routes"
+            },
+            {
+              "left": "Y-cross",
+              "right": "Deep crosser behind clear-outs"
+            }
+          ],
+          "explanation": "Know the shape and the coverage it's built to beat.",
+          "concept": "coverage-family"
+        }
+      ]
+    },
+    {
+      "id": "v4-pressure",
+      "title": "Pressure Vocabulary",
+      "blurb": "Sacks, hits, blitzes and stunts.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "v4-pressure-01",
+          "title": "Sack, hit, hurry",
+          "body": "A sack is tackling the quarterback behind the line before he throws. A QB hit is contact as or after he throws. A hurry forces him to throw early or move. Together they are pressures.",
+          "concept": "sack"
+        },
+        {
+          "type": "learn",
+          "id": "v4-pressure-02",
+          "title": "Blitz and stunt",
+          "body": "A blitz sends five or more rushers, usually a linebacker or defensive back joining the line. A stunt (or twist) has linemen swap paths to confuse blockers.",
+          "concept": "blitz"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "v4-pressure-03",
+          "prompt": "The quarterback is tackled behind the line before he throws. What is it?",
+          "choices": [
+            "A sack",
+            "A hurry",
+            "A blitz",
+            "A stunt"
+          ],
+          "answer": 0,
+          "explanation": "A tackle of the passer behind the line is a sack.",
+          "concept": "sack"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "v4-pressure-04",
+          "prompt": "A linebacker joins the four linemen rushing the passer. What is that?",
+          "choices": [
+            "A blitz",
+            "A stunt",
+            "A sack",
+            "Zone coverage"
+          ],
+          "answer": 0,
+          "explanation": "Five or more rushers, with an extra defender joining in, is a blitz.",
+          "concept": "blitz"
+        },
+        {
+          "type": "true_false",
+          "id": "v4-pressure-05",
+          "statement": "In a stunt, two defensive linemen cross paths to confuse the blockers.",
+          "answer": true,
+          "explanation": "That's a stunt, or twist.",
+          "concept": "blitz"
+        }
+      ]
+    }
+  ]
+}

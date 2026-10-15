@@ -671,6 +671,153 @@
       "kid": "Each defender guards an area of the field.",
       "full": "Each defender is responsible for an area and covers whoever enters it, with eyes on the quarterback.",
       "level": 3
+    },
+    {
+      "id": "bear-front",
+      "term": "Bear front",
+      "kid": "A front that covers the center and both guards.",
+      "full": "A 0-technique nose and two 3-techniques (the front of the 46 defense), so no interior lineman can release cleanly to a linebacker.",
+      "level": 4
+    },
+    {
+      "id": "blitz",
+      "term": "Blitz",
+      "kid": "Sending extra rushers.",
+      "full": "Rushing five or more, typically adding a linebacker or defensive back; stunts (twists) swap linemen's paths instead.",
+      "level": 4
+    },
+    {
+      "id": "cover-0",
+      "term": "Cover 0",
+      "kid": "Man coverage with no deep safety.",
+      "full": "Every defender in coverage plays man with no deep help, usually with extra rushers; beaten by quick throws and hot routes.",
+      "level": 4
+    },
+    {
+      "id": "cover-1",
+      "term": "Cover 1",
+      "kid": "Man coverage with one deep safety.",
+      "full": "Man coverage underneath with a single free safety in the deep middle, often with a 'rat' or 'robber' defender; attacked with crossers and rubs.",
+      "level": 4
+    },
+    {
+      "id": "cover-2",
+      "term": "Cover 2",
+      "kid": "Two safeties split the deep field in halves.",
+      "full": "Two deep halves, corners squat in the flats, five underneath zones; weak in the deep middle and behind the corner (smash).",
+      "level": 4
+    },
+    {
+      "id": "cover-3",
+      "term": "Cover 3",
+      "kid": "Three defenders each guard a deep third.",
+      "full": "Corners and the free safety take deep thirds with four underneath; stressed by four verticals and seam routes.",
+      "level": 4
+    },
+    {
+      "id": "cover-4",
+      "term": "Cover 4 (quarters)",
+      "kid": "Four defenders each guard a deep quarter.",
+      "full": "Corners and safeties take deep quarters, with safeties reading the slot and fitting the run; softer underneath.",
+      "level": 4
+    },
+    {
+      "id": "coverage-family",
+      "term": "Coverage families",
+      "kid": "Groups of coverages that look alike.",
+      "full": "Man (Cover 0, 1) and zone (Cover 2, 3, 4) families, each with known weaknesses that pass concepts target.",
+      "level": 4
+    },
+    {
+      "id": "curl-flat",
+      "term": "Curl-flat",
+      "kid": "A curl with a flat route underneath.",
+      "full": "A high-low read on the flat defender; with the stick concept, a staple of the quick game.",
+      "level": 4
+    },
+    {
+      "id": "formation-strength",
+      "term": "Formation strength",
+      "kid": "The side the offense leans to.",
+      "full": "Usually the tight end's side (run strength); against spread sets, often the side with more receivers (passing strength). Fronts and coverages set to it.",
+      "level": 4
+    },
+    {
+      "id": "four-verticals",
+      "term": "Four verticals",
+      "kid": "Four receivers go deep.",
+      "full": "Four vertical routes, two up the seams, against three or fewer deep defenders.",
+      "level": 4
+    },
+    {
+      "id": "gap",
+      "term": "Gaps",
+      "kid": "The spaces between blockers.",
+      "full": "Lettered from the center out: A (center-guard), B (guard-tackle), C (tackle-tight end), D (outside the tight end).",
+      "level": 4
+    },
+    {
+      "id": "gap-run",
+      "term": "Gap run",
+      "kid": "A run aimed at one designed hole.",
+      "full": "Power, counter, trap and duo: down blocks, kick-outs, pullers or double teams build a specific hole.",
+      "level": 4
+    },
+    {
+      "id": "mesh",
+      "term": "Mesh",
+      "kid": "Two shallow crossers passing each other.",
+      "full": "Two receivers crossing at shallow depth to create traffic against man coverage and sit in zone holes.",
+      "level": 4
+    },
+    {
+      "id": "power",
+      "term": "Power",
+      "kid": "A gap run with a pulling guard.",
+      "full": "Playside down blocks, a kick-out on the end, and the backside guard pulling through the hole for the linebacker.",
+      "level": 4
+    },
+    {
+      "id": "sack",
+      "term": "Sack",
+      "kid": "Tackling the quarterback before he throws.",
+      "full": "A tackle of the passer behind the line of scrimmage on a pass play; with hits and hurries, part of 'pressure'.",
+      "level": 4
+    },
+    {
+      "id": "smash",
+      "term": "Smash",
+      "kid": "A hitch under a corner route.",
+      "full": "A high-low on the flat corner: hitch underneath, corner route over him; a classic Cover 2 beater.",
+      "level": 4
+    },
+    {
+      "id": "technique",
+      "term": "Technique",
+      "kid": "A number for where a lineman lines up.",
+      "full": "Alignment numbers: 0 head-up center, 1 shade on the center, 2 head-up guard, 3 guard's outside shoulder, 4 head-up tackle, 4i tackle's inside shoulder, 5 tackle's outside shoulder; numbers past 5 differ by system.",
+      "level": 4
+    },
+    {
+      "id": "wide-nine",
+      "term": "Wide-9",
+      "kid": "Defensive ends lined up very wide.",
+      "full": "Ends aligned well outside the tight ends for a running start at the passer, at the cost of wider interior running lanes.",
+      "level": 4
+    },
+    {
+      "id": "y-cross",
+      "term": "Y-cross",
+      "kid": "A deep crossing route behind clear-outs.",
+      "full": "The Y receiver runs a deep cross behind the linebackers while outside routes clear the deep defenders; a Cover 3 beater.",
+      "level": 4
+    },
+    {
+      "id": "zone-run",
+      "term": "Zone run",
+      "kid": "A run where linemen block areas and the back picks the hole.",
+      "full": "Inside and outside zone: linemen step together, combine and climb; the back reads the blocks to hit, bounce or cut back.",
+      "level": 4
     }
   ]
 }

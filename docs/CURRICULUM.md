@@ -13,7 +13,7 @@ and validated, `preview` = exemplar content proving the model, `planned` = to be
 | 2 | Season Ticket | adult | casual fans | Game day | **done** (`adult-2`, coach review pending) |
 | 3 | Junior Varsity | kid | ~11-12 | Diagram dash | **done** (`kid-3`, coach review pending) |
 | 3 | Armchair Coach | adult | fans | Diagram dash | **done** (`adult-3`, coach review pending) |
-| 4 | Varsity | shared | both | Read the defense | planned |
+| 4 | Varsity | shared | both | Read the defense | **done** (`varsity-4`, coach review pending) |
 | 5 | College | shared | | Game day | planned |
 | 6 | Pro | shared | | Read the defense | preview (personnel) |
 | 7 | Coordinator | shared | | Read the defense | preview (disguise) |
@@ -69,7 +69,15 @@ man vs zone coverage in plain language; run plays (dive, sweep, counter, draw, s
 basic blocking; 4-3 and 3-4 fronts; the 4th-down decision; two-minute drill basics;
 reading a defense for the first time ("count the safeties").
 
-## Level 4: Varsity (the tracks converge)
+## Level 4: Varsity (the tracks converge) (done; see `docs/content-review/level-4.md`)
+As written: 5 units, 14 drills, 92 steps, unlocked by passing either Kid L3 or Adult L3.
+Personnel and Strength; Fronts and Techniques (gaps, 0-5 techniques, Over, Under, Bear,
+Okie, Tite, Wide-9); The Five Coverages (Cover 0-4, each with its pre-snap tells and an
+animated reveal, 12 read-the-defense items for the level game); Run Schemes (inside and
+outside zone; power, counter, trap, duo); Pass Concepts and Pressure (curl-flat, stick,
+snag, smash, mesh, four verticals, Y-cross; sacks, hits, hurries, blitzes, stunts).
+
+Originally planned:
 Personnel numbering (11, 12, 21, 10, 13, 22, 20) and formation strength; defensive
 fronts (Over, Under, Bear, Okie, Tite, Wide-9, 46) and techniques (0-9); the five base
 coverages (Cover 0, 1, 2, 3, 4) and what beats each; zone-run schemes (inside zone,

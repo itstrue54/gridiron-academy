@@ -209,4 +209,24 @@ class ScreenRenderTest {
         lessonShot("35-counter-kid", AgeBand.AGE_10_12, dark = false, pick = { it.id == "k3-runs-06" })
         lessonShot("36-tree-tap-adult", AgeBand.AGE_18_PLUS, dark = true, pick = { it.id == "a3-tree-05" })
     }
+
+    private fun sharedShot(name: String, band: AgeBand, id: String, answer: ((Step) -> Answer)? = null) {
+        val state = appState(band)
+        val level = content.level("varsity-4")
+        val lesson = content.unitsOf(level).flatMap { it.lessons }.first { l -> l.steps.any { it.id == id } }
+        val controller = LessonController(listOf(lesson.steps.first { it.id == id }))
+        if (answer != null) controller.submit(answer(controller.step!!))
+        shot(name) { GridironTheme(skin = state.skin, dark = true) { LessonScreen(state, level.id, lesson.id, controller) } }
+    }
+
+    @Test fun levelFour() {
+        sharedShot("37-cover3-presnap-adult", AgeBand.AGE_18_PLUS, "v4-cover3-04")
+        sharedShot("38-cover3-reveal-adult", AgeBand.AGE_18_PLUS, "v4-cover3-04") { Answer.Choice((it as ReadDefense).answer) }
+        sharedShot("39-cover2-reveal-kid", AgeBand.AGE_10_12, "v4-cover2-04") { Answer.Choice((it as ReadDefense).answer) }
+        sharedShot("40-cover4-presnap-adult", AgeBand.AGE_18_PLUS, "v4-cover4-04")
+        sharedShot("41-front-bear-adult", AgeBand.AGE_18_PLUS, "v4-fronts-05")
+        sharedShot("42-power-tap-adult", AgeBand.AGE_18_PLUS, "v4-gap-05")
+        sharedShot("43-mesh-adult", AgeBand.AGE_18_PLUS, "v4-dropback-05")
+        sharedShot("44-gaps-tap-kid", AgeBand.AGE_10_12, "v4-gaps-04")
+    }
 }

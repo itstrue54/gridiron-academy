@@ -42,6 +42,7 @@ import io.github.itstrue54.gridironacademy.ui.components.Glyph
 import io.github.itstrue54.gridironacademy.ui.components.GlyphIcon
 import io.github.itstrue54.gridironacademy.ui.components.IconAction
 import io.github.itstrue54.gridironacademy.ui.lesson.Prompt
+import io.github.itstrue54.gridironacademy.ui.lesson.choiceOrder
 import io.github.itstrue54.gridironacademy.ui.resources.Res
 import io.github.itstrue54.gridironacademy.ui.resources.answer_false
 import io.github.itstrue54.gridironacademy.ui.resources.answer_true
@@ -115,8 +116,8 @@ fun SpeedRoundScreen(state: LearnerAppState, levelId: String, round: SpeedRoundC
                 when (val step = round.current) {
                     is MultipleChoice -> {
                         Prompt(step.prompt)
-                        step.choices.forEachIndexed { i, text ->
-                            AnswerButton(text, AnswerState.REST, onClick = { round.answer(Answer.Choice(i)) }, letter = LETTERS.getOrElse(i) { "${i + 1}" })
+                        choiceOrder(step.id, step.choices).forEachIndexed { shown, i ->
+                            AnswerButton(step.choices[i], AnswerState.REST, onClick = { round.answer(Answer.Choice(i)) }, letter = LETTERS.getOrElse(shown) { "${shown + 1}" })
                         }
                     }
                     is TrueFalse -> {

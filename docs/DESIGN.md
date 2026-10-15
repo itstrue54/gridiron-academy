@@ -492,6 +492,11 @@ and the last tile is **Picture Play** (spec 4.3).
  |  [ Check ]                     |  primary, appears after a selection
  +--------------------------------+
 ```
+Choices (multiple choice, read the defense, Game Day options, Speed round) are shown in
+a fixed per-step shuffled order (`choiceOrder`), so the right answer never settles into
+one letter; lists of plain numbers are shown in ascending order instead. A content-wide
+test fails if any level shows its answers in one position more than half the time.
+
 `learn` steps show the card and **Next**. `true_false` shows two large buttons,
 **True** and **False**, each with its icon. `match`, `order` and the tap steps use
 their components and a **Check** button. After Check, the FeedbackSheet rises. A step

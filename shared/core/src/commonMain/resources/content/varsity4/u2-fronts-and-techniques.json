@@ -1,0 +1,1071 @@
+{
+  "id": "varsity4-u2",
+  "title": "Fronts and Techniques",
+  "lessons": [
+    {
+      "id": "v4-gaps",
+      "title": "Gaps and Techniques",
+      "blurb": "The defense's address system.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "v4-gaps-01",
+          "title": "Gaps",
+          "body": "The spaces between blockers are lettered: A between the center and guard, B between guard and tackle, C between tackle and tight end, D outside the tight end.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              }
+            ],
+            "zones": [
+              {
+                "id": "la",
+                "label": "A",
+                "x": -1.4,
+                "y": 0.2,
+                "w": 1.2,
+                "h": 2.4
+              },
+              {
+                "id": "ra",
+                "label": "A",
+                "x": 0.2,
+                "y": 0.2,
+                "w": 1.2,
+                "h": 2.4
+              },
+              {
+                "id": "lb",
+                "label": "B",
+                "x": -3.0,
+                "y": 0.2,
+                "w": 1.2,
+                "h": 2.4
+              },
+              {
+                "id": "rb",
+                "label": "B",
+                "x": 1.8,
+                "y": 0.2,
+                "w": 1.2,
+                "h": 2.4
+              },
+              {
+                "id": "lc",
+                "label": "C",
+                "x": -4.6,
+                "y": 0.2,
+                "w": 1.2,
+                "h": 2.4
+              },
+              {
+                "id": "rc",
+                "label": "C",
+                "x": 3.4,
+                "y": 0.2,
+                "w": 1.2,
+                "h": 2.4
+              },
+              {
+                "id": "rd",
+                "label": "D",
+                "x": 5.2,
+                "y": 0.2,
+                "w": 1.2,
+                "h": 2.4
+              }
+            ],
+            "caption": "Gaps: A, B, C, D"
+          },
+          "concept": "gap"
+        },
+        {
+          "type": "learn",
+          "id": "v4-gaps-02",
+          "title": "Techniques",
+          "body": "A lineman's alignment is a number. 0 is head-up on the center, 1 shades the center, 2 is head-up on a guard, 3 is the guard's outside shoulder, 4 head-up on a tackle, 5 the tackle's outside shoulder. Numbers past 5 differ by system.",
+          "concept": "technique"
+        },
+        {
+          "type": "learn",
+          "id": "v4-gaps-03",
+          "title": "The famous ones",
+          "body": "A 3-technique lines up in the B gap and is often the best interior pass rusher. A 0- or 1-technique nose tackle plays the A gaps. A 4i sits on a tackle's inside shoulder.",
+          "concept": "technique"
+        },
+        {
+          "type": "diagram_tap",
+          "id": "v4-gaps-04",
+          "prompt": "Tap the B gap on the right side.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              }
+            ],
+            "zones": [
+              {
+                "id": "la",
+                "label": "A",
+                "x": -1.4,
+                "y": 0.2,
+                "w": 1.2,
+                "h": 2.4
+              },
+              {
+                "id": "ra",
+                "label": "A",
+                "x": 0.2,
+                "y": 0.2,
+                "w": 1.2,
+                "h": 2.4
+              },
+              {
+                "id": "lb",
+                "label": "B",
+                "x": -3.0,
+                "y": 0.2,
+                "w": 1.2,
+                "h": 2.4
+              },
+              {
+                "id": "rb",
+                "label": "B",
+                "x": 1.8,
+                "y": 0.2,
+                "w": 1.2,
+                "h": 2.4
+              },
+              {
+                "id": "lc",
+                "label": "C",
+                "x": -4.6,
+                "y": 0.2,
+                "w": 1.2,
+                "h": 2.4
+              },
+              {
+                "id": "rc",
+                "label": "C",
+                "x": 3.4,
+                "y": 0.2,
+                "w": 1.2,
+                "h": 2.4
+              },
+              {
+                "id": "rd",
+                "label": "D",
+                "x": 5.2,
+                "y": 0.2,
+                "w": 1.2,
+                "h": 2.4
+              }
+            ],
+            "caption": ""
+          },
+          "targets": [
+            "rb"
+          ],
+          "explanation": "The B gap is between the guard and the tackle.",
+          "concept": "gap"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "v4-gaps-05",
+          "prompt": "A defensive tackle lines up on the outside shoulder of a guard. What technique is that?",
+          "choices": [
+            "3",
+            "1",
+            "5",
+            "0"
+          ],
+          "answer": 0,
+          "explanation": "Outside shoulder of the guard is the 3-technique, in the B gap.",
+          "concept": "technique"
+        },
+        {
+          "type": "diagram_tap",
+          "id": "v4-gaps-06",
+          "prompt": "Tap the 3-technique in this front.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              },
+              {
+                "id": "de1",
+                "label": "E",
+                "side": "DEFENSE",
+                "x": -4.0,
+                "y": 1
+              },
+              {
+                "id": "dt1",
+                "label": "N",
+                "side": "DEFENSE",
+                "x": -0.6,
+                "y": 1
+              },
+              {
+                "id": "dt2",
+                "label": "T",
+                "side": "DEFENSE",
+                "x": 2.2,
+                "y": 1
+              },
+              {
+                "id": "de2",
+                "label": "E",
+                "side": "DEFENSE",
+                "x": 4.0,
+                "y": 1
+              }
+            ],
+            "caption": ""
+          },
+          "targets": [
+            "dt2"
+          ],
+          "explanation": "The tackle on the right guard's outside shoulder is the 3-technique.",
+          "concept": "technique"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "v4-gaps-07",
+          "prompt": "Which gap is between the center and a guard?",
+          "choices": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "answer": 0,
+          "explanation": "A gaps sit on either side of the center.",
+          "concept": "gap"
+        },
+        {
+          "type": "true_false",
+          "id": "v4-gaps-08",
+          "statement": "A 5-technique lines up on the outside shoulder of the tackle.",
+          "answer": true,
+          "explanation": "Yes, the 5 is the tackle's outside shoulder, in the C gap.",
+          "concept": "technique"
+        }
+      ]
+    },
+    {
+      "id": "v4-fronts",
+      "title": "Named Fronts",
+      "blurb": "Over, Under, Bear, Okie, Tite, Wide-9.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "v4-fronts-01",
+          "title": "Over and Under",
+          "body": "In a 4-3 Over, the 3-technique goes to the strong side and the nose shades the center on the weak side. In an Under, they flip: the 3-technique goes weak and the Sam steps up on the line strong.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              },
+              {
+                "id": "de1",
+                "label": "E",
+                "side": "DEFENSE",
+                "x": -4.0,
+                "y": 1
+              },
+              {
+                "id": "dt1",
+                "label": "N",
+                "side": "DEFENSE",
+                "x": -0.6,
+                "y": 1
+              },
+              {
+                "id": "dt2",
+                "label": "T",
+                "side": "DEFENSE",
+                "x": 2.2,
+                "y": 1
+              },
+              {
+                "id": "de2",
+                "label": "E",
+                "side": "DEFENSE",
+                "x": 4.0,
+                "y": 1
+              }
+            ],
+            "caption": "4-3 Over (strength right)"
+          },
+          "concept": "four-three"
+        },
+        {
+          "type": "learn",
+          "id": "v4-fronts-02",
+          "title": "Bear",
+          "body": "The Bear front, made famous by the 46 defense, puts a nose on the center and tackles in both 3-techniques: the center and both guards are covered, so they can't climb to linebackers.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              },
+              {
+                "id": "de1",
+                "label": "E",
+                "side": "DEFENSE",
+                "x": -4.0,
+                "y": 1
+              },
+              {
+                "id": "dt1",
+                "label": "T",
+                "side": "DEFENSE",
+                "x": -2.2,
+                "y": 1
+              },
+              {
+                "id": "nt",
+                "label": "N",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 1
+              },
+              {
+                "id": "dt2",
+                "label": "T",
+                "side": "DEFENSE",
+                "x": 2.2,
+                "y": 1
+              },
+              {
+                "id": "de2",
+                "label": "E",
+                "side": "DEFENSE",
+                "x": 4.0,
+                "y": 1
+              }
+            ],
+            "caption": "Bear front"
+          },
+          "concept": "bear-front"
+        },
+        {
+          "type": "learn",
+          "id": "v4-fronts-03",
+          "title": "Okie and Tite",
+          "body": "Two three-man looks. Okie: a 0-technique nose with 5-technique ends. Tite: a 0-technique nose with 4i ends, squeezing the interior against zone runs.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              },
+              {
+                "id": "de1",
+                "label": "E",
+                "side": "DEFENSE",
+                "x": -2.8,
+                "y": 1
+              },
+              {
+                "id": "nt",
+                "label": "N",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 1
+              },
+              {
+                "id": "de2",
+                "label": "E",
+                "side": "DEFENSE",
+                "x": 2.8,
+                "y": 1
+              }
+            ],
+            "caption": "Tite: 4i, 0, 4i"
+          },
+          "concept": "three-four"
+        },
+        {
+          "type": "learn",
+          "id": "v4-fronts-04",
+          "title": "Wide-9",
+          "body": "The ends line up well outside the tight ends to get a running start at the quarterback. Great for the pass rush, but it opens bigger running lanes inside.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              },
+              {
+                "id": "lte",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": -4.8,
+                "y": 0
+              },
+              {
+                "id": "de1",
+                "label": "E",
+                "side": "DEFENSE",
+                "x": -6.4,
+                "y": 1
+              },
+              {
+                "id": "dt1",
+                "label": "T",
+                "side": "DEFENSE",
+                "x": -2.2,
+                "y": 1
+              },
+              {
+                "id": "dt2",
+                "label": "T",
+                "side": "DEFENSE",
+                "x": 2.2,
+                "y": 1
+              },
+              {
+                "id": "de2",
+                "label": "E",
+                "side": "DEFENSE",
+                "x": 6.4,
+                "y": 1
+              }
+            ],
+            "caption": "Wide-9"
+          },
+          "concept": "wide-nine"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "v4-fronts-05",
+          "prompt": "Name this front.",
+          "choices": [
+            "Bear",
+            "Over",
+            "Tite",
+            "Wide-9"
+          ],
+          "answer": 0,
+          "explanation": "A nose over the center and tackles in both 3-techniques: Bear.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              },
+              {
+                "id": "de1",
+                "label": "E",
+                "side": "DEFENSE",
+                "x": -4.0,
+                "y": 1
+              },
+              {
+                "id": "dt1",
+                "label": "T",
+                "side": "DEFENSE",
+                "x": -2.2,
+                "y": 1
+              },
+              {
+                "id": "nt",
+                "label": "N",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 1
+              },
+              {
+                "id": "dt2",
+                "label": "T",
+                "side": "DEFENSE",
+                "x": 2.2,
+                "y": 1
+              },
+              {
+                "id": "de2",
+                "label": "E",
+                "side": "DEFENSE",
+                "x": 4.0,
+                "y": 1
+              }
+            ],
+            "caption": ""
+          },
+          "concept": "bear-front"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "v4-fronts-06",
+          "prompt": "Name this front.",
+          "choices": [
+            "Tite",
+            "Okie",
+            "Bear",
+            "Under"
+          ],
+          "answer": 0,
+          "explanation": "Three linemen: a 0 nose with the ends on the tackles' inside shoulders (4i). That is Tite.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              },
+              {
+                "id": "de1",
+                "label": "E",
+                "side": "DEFENSE",
+                "x": -2.8,
+                "y": 1
+              },
+              {
+                "id": "nt",
+                "label": "N",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 1
+              },
+              {
+                "id": "de2",
+                "label": "E",
+                "side": "DEFENSE",
+                "x": 2.8,
+                "y": 1
+              }
+            ],
+            "caption": ""
+          },
+          "concept": "three-four"
+        },
+        {
+          "type": "diagram_tap",
+          "id": "v4-fronts-07",
+          "prompt": "Tap the Sam linebacker on the line in this Under front.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              },
+              {
+                "id": "de1",
+                "label": "E",
+                "side": "DEFENSE",
+                "x": -4.0,
+                "y": 1
+              },
+              {
+                "id": "dt1",
+                "label": "T",
+                "side": "DEFENSE",
+                "x": -2.2,
+                "y": 1
+              },
+              {
+                "id": "dt2",
+                "label": "N",
+                "side": "DEFENSE",
+                "x": 0.6,
+                "y": 1
+              },
+              {
+                "id": "de2",
+                "label": "E",
+                "side": "DEFENSE",
+                "x": 4.0,
+                "y": 1
+              },
+              {
+                "id": "sam",
+                "label": "S",
+                "side": "DEFENSE",
+                "x": 6.2,
+                "y": 1
+              }
+            ],
+            "caption": ""
+          },
+          "targets": [
+            "sam"
+          ],
+          "explanation": "In the Under, the Sam walks up on the line outside the tight end.",
+          "concept": "four-three"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "v4-fronts-08",
+          "prompt": "What is the Wide-9's main weakness?",
+          "choices": [
+            "Bigger running lanes inside",
+            "No pass rush",
+            "Too many linebackers",
+            "It can't line up against a tight end"
+          ],
+          "answer": 0,
+          "explanation": "With the ends so wide, the interior gaps get bigger for the run.",
+          "concept": "wide-nine"
+        }
+      ]
+    }
+  ]
+}

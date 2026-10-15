@@ -1,0 +1,1134 @@
+{
+  "id": "varsity4-u4",
+  "title": "Run Schemes",
+  "lessons": [
+    {
+      "id": "v4-zone",
+      "title": "Zone Runs",
+      "blurb": "Block an area, let the back find the hole.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "v4-zone-01",
+          "title": "Zone blocking",
+          "body": "On a zone run every lineman steps the same way and blocks whoever enters his area, often with two linemen combining before one climbs to a linebacker. The back reads the blocks and picks the hole.",
+          "concept": "zone-run"
+        },
+        {
+          "type": "learn",
+          "id": "v4-zone-02",
+          "title": "Inside zone",
+          "body": "The line steps playside; the back aims inside and reads the first down lineman past the center. He can hit it front-side, bounce, or cut back.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -1.2
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -6.5
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "lt",
+                "points": [
+                  {
+                    "x": -2.2,
+                    "y": 1.5
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "lg",
+                "points": [
+                  {
+                    "x": -0.6000000000000001,
+                    "y": 1.5
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "c",
+                "points": [
+                  {
+                    "x": 1,
+                    "y": 1.5
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "rg",
+                "points": [
+                  {
+                    "x": 2.6,
+                    "y": 1.5
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "rt",
+                "points": [
+                  {
+                    "x": 4.2,
+                    "y": 1.5
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "rb",
+                "points": [
+                  {
+                    "x": 0.6,
+                    "y": -3
+                  },
+                  {
+                    "x": 1.4,
+                    "y": 4
+                  }
+                ],
+                "kind": "run"
+              }
+            ],
+            "caption": "Inside zone"
+          },
+          "concept": "zone-run"
+        },
+        {
+          "type": "learn",
+          "id": "v4-zone-03",
+          "title": "Outside zone",
+          "body": "Linemen take wide steps to reach the edge; the back presses outside. If the edge is sealed he cuts back, and that cutback is where the big runs come from.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -1.2
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -6.5
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "lt",
+                "points": [
+                  {
+                    "x": -1.4000000000000001,
+                    "y": 0.8
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "lg",
+                "points": [
+                  {
+                    "x": 0.19999999999999996,
+                    "y": 0.8
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "c",
+                "points": [
+                  {
+                    "x": 1.8,
+                    "y": 0.8
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "rg",
+                "points": [
+                  {
+                    "x": 3.4000000000000004,
+                    "y": 0.8
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "rt",
+                "points": [
+                  {
+                    "x": 5.0,
+                    "y": 0.8
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "rb",
+                "points": [
+                  {
+                    "x": 4,
+                    "y": -4.5
+                  },
+                  {
+                    "x": 7,
+                    "y": -1
+                  },
+                  {
+                    "x": 7.5,
+                    "y": 5
+                  }
+                ],
+                "kind": "run"
+              }
+            ],
+            "caption": "Outside zone"
+          },
+          "concept": "zone-run"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "v4-zone-04",
+          "prompt": "On a zone run, who decides which hole the back runs through?",
+          "choices": [
+            "The back, reading the blocks",
+            "The center, before the snap",
+            "The coach, in the huddle",
+            "Nobody: it's always the same hole"
+          ],
+          "answer": 0,
+          "explanation": "Zone runs give the back options; he reads how the defense reacts.",
+          "concept": "zone-run"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "v4-zone-05",
+          "prompt": "Name this run.",
+          "choices": [
+            "Outside zone",
+            "Inside zone",
+            "Power",
+            "Trap"
+          ],
+          "answer": 0,
+          "explanation": "Wide steps from the line and a back pressing the edge: outside zone.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -1.2
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -6.5
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "lt",
+                "points": [
+                  {
+                    "x": -1.4000000000000001,
+                    "y": 0.8
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "lg",
+                "points": [
+                  {
+                    "x": 0.19999999999999996,
+                    "y": 0.8
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "c",
+                "points": [
+                  {
+                    "x": 1.8,
+                    "y": 0.8
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "rg",
+                "points": [
+                  {
+                    "x": 3.4000000000000004,
+                    "y": 0.8
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "rt",
+                "points": [
+                  {
+                    "x": 5.0,
+                    "y": 0.8
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "rb",
+                "points": [
+                  {
+                    "x": 4,
+                    "y": -4.5
+                  },
+                  {
+                    "x": 7,
+                    "y": -1
+                  },
+                  {
+                    "x": 7.5,
+                    "y": 5
+                  }
+                ],
+                "kind": "run"
+              }
+            ],
+            "caption": ""
+          },
+          "concept": "zone-run"
+        },
+        {
+          "type": "true_false",
+          "id": "v4-zone-06",
+          "statement": "On zone runs, linemen often double-team a defender, then one climbs to a linebacker.",
+          "answer": true,
+          "explanation": "That combination block is the heart of zone blocking.",
+          "concept": "double-team"
+        }
+      ]
+    },
+    {
+      "id": "v4-gap",
+      "title": "Gap Runs",
+      "blurb": "Power, counter, trap and duo.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "v4-gap-01",
+          "title": "Gap blocking",
+          "body": "On a gap run the play has a designed hole. Linemen block down on the defenders inside it, and pullers or a fullback lead through.",
+          "concept": "gap-run"
+        },
+        {
+          "type": "learn",
+          "id": "v4-gap-02",
+          "title": "Power",
+          "body": "Playside linemen block down, a fullback kicks out the end, and the backside guard pulls through the hole for the linebacker.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -1.2
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -6.5
+              },
+              {
+                "id": "fb",
+                "label": "FB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -4
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "lg",
+                "points": [
+                  {
+                    "x": 0.5,
+                    "y": -1.5
+                  },
+                  {
+                    "x": 2.6,
+                    "y": 2.2
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "rg",
+                "points": [
+                  {
+                    "x": 0.6,
+                    "y": 1.2
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "rt",
+                "points": [
+                  {
+                    "x": 2.2,
+                    "y": 1.2
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "fb",
+                "points": [
+                  {
+                    "x": 5.2,
+                    "y": 0.6
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "rb",
+                "points": [
+                  {
+                    "x": 0.4,
+                    "y": -3.5
+                  },
+                  {
+                    "x": 2.6,
+                    "y": 4
+                  }
+                ],
+                "kind": "run"
+              }
+            ],
+            "caption": "Power"
+          },
+          "concept": "power"
+        },
+        {
+          "type": "learn",
+          "id": "v4-gap-03",
+          "title": "Counter",
+          "body": "The back steps away, then follows two pullers back: the guard kicks out the end and the tackle wraps up to the linebacker.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -1.2
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -6.5
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "lg",
+                "points": [
+                  {
+                    "x": 0.5,
+                    "y": -1.5
+                  },
+                  {
+                    "x": 5.4,
+                    "y": 0.6
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "lt",
+                "points": [
+                  {
+                    "x": -1,
+                    "y": -1.4
+                  },
+                  {
+                    "x": 3.2,
+                    "y": 2.6
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "rb",
+                "points": [
+                  {
+                    "x": -1.2,
+                    "y": -5.5
+                  },
+                  {
+                    "x": 1,
+                    "y": -3
+                  },
+                  {
+                    "x": 2.8,
+                    "y": 4
+                  }
+                ],
+                "kind": "run"
+              }
+            ],
+            "caption": "Counter (guard and tackle pull)"
+          },
+          "concept": "counter"
+        },
+        {
+          "type": "learn",
+          "id": "v4-gap-04",
+          "title": "Trap and duo",
+          "body": "Trap lets a lineman through, then a pulling guard blocks him from the side. Duo has no pullers: double teams drive the defenders straight back, and the back reads the linebacker.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -1.2
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -6.5
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "lg",
+                "points": [
+                  {
+                    "x": -0.8,
+                    "y": 2
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "c",
+                "points": [
+                  {
+                    "x": -0.8,
+                    "y": 2
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "rg",
+                "points": [
+                  {
+                    "x": 2.4,
+                    "y": 2
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "rt",
+                "points": [
+                  {
+                    "x": 2.4,
+                    "y": 2
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "rb",
+                "points": [
+                  {
+                    "x": 0.3,
+                    "y": -3
+                  },
+                  {
+                    "x": 0.8,
+                    "y": 4
+                  }
+                ],
+                "kind": "run"
+              }
+            ],
+            "caption": "Duo: double teams, no pullers"
+          },
+          "concept": "gap-run"
+        },
+        {
+          "type": "diagram_tap",
+          "id": "v4-gap-05",
+          "prompt": "Tap the pulling guard on this power run.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -1.2
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -6.5
+              },
+              {
+                "id": "fb",
+                "label": "FB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -4
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "lg",
+                "points": [
+                  {
+                    "x": 0.5,
+                    "y": -1.5
+                  },
+                  {
+                    "x": 2.6,
+                    "y": 2.2
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "rg",
+                "points": [
+                  {
+                    "x": 0.6,
+                    "y": 1.2
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "rt",
+                "points": [
+                  {
+                    "x": 2.2,
+                    "y": 1.2
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "fb",
+                "points": [
+                  {
+                    "x": 5.2,
+                    "y": 0.6
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "rb",
+                "points": [
+                  {
+                    "x": 0.4,
+                    "y": -3.5
+                  },
+                  {
+                    "x": 2.6,
+                    "y": 4
+                  }
+                ],
+                "kind": "run"
+              }
+            ],
+            "caption": ""
+          },
+          "targets": [
+            "lg"
+          ],
+          "explanation": "The backside (left) guard pulls through the hole to block the linebacker.",
+          "concept": "power"
+        },
+        {
+          "type": "diagram_tap",
+          "id": "v4-gap-06",
+          "prompt": "Tap both pullers on this counter.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -1.2
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -6.5
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "lg",
+                "points": [
+                  {
+                    "x": 0.5,
+                    "y": -1.5
+                  },
+                  {
+                    "x": 5.4,
+                    "y": 0.6
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "lt",
+                "points": [
+                  {
+                    "x": -1,
+                    "y": -1.4
+                  },
+                  {
+                    "x": 3.2,
+                    "y": 2.6
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "rb",
+                "points": [
+                  {
+                    "x": -1.2,
+                    "y": -5.5
+                  },
+                  {
+                    "x": 1,
+                    "y": -3
+                  },
+                  {
+                    "x": 2.8,
+                    "y": 4
+                  }
+                ],
+                "kind": "run"
+              }
+            ],
+            "caption": ""
+          },
+          "targets": [
+            "lg",
+            "lt"
+          ],
+          "explanation": "On counter the backside guard and tackle pull: one kicks out, one wraps up.",
+          "concept": "counter"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "v4-gap-07",
+          "prompt": "Which run has no pulling linemen and uses double teams to drive defenders back?",
+          "choices": [
+            "Duo",
+            "Power",
+            "Counter",
+            "Trap"
+          ],
+          "answer": 0,
+          "explanation": "Duo is all about two double teams and no pullers.",
+          "concept": "gap-run"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "v4-gap-08",
+          "prompt": "Zone or gap: which one has a single designed hole?",
+          "choices": [
+            "Gap",
+            "Zone",
+            "Both",
+            "Neither"
+          ],
+          "answer": 0,
+          "explanation": "Gap schemes target a hole; zone schemes let the back choose.",
+          "concept": "gap-run"
+        }
+      ]
+    }
+  ]
+}
