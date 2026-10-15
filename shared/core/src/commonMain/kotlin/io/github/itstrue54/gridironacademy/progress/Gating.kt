@@ -18,6 +18,10 @@ object Gating {
         return i == 0 || p.lessonPassed(ordered[i - 1].id)
     }
 
+    /** The first open lesson not yet passed, or null when every lesson is passed or the level is locked. */
+    fun nextLesson(level: Level, units: List<CourseUnit>, p: Progress): Lesson? =
+        units.flatMap { it.lessons }.firstOrNull { !p.lessonPassed(it.id) && lessonUnlocked(level, units, it.id, p) }
+
     fun allLessonsPassed(units: List<CourseUnit>, p: Progress): Boolean =
         units.flatMap { it.lessons }.all { p.lessonPassed(it.id) }
 

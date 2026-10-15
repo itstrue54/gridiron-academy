@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Learner app copy (DESIGN 11). Compose resource strings: write ' and % plainly (no
+  Android-style \' or %% escapes; they are shown literally). Kid and adult variants are separate keys ending in
+  _kid / _adult. Rules: never "wrong", "fail", "bad" or "incorrect" in Kid; no
+  exclamation marks in Adult except milestones.
+-->
+<resources>
+    <string name="app_name">Gridiron Academy</string>
+
+    <!-- Onboarding (DESIGN 9.8) -->
+    <string name="welcome_title">Learn football, one play at a time</string>
+    <string name="welcome_body">Short lessons, games and quizzes. Start with your first touchdown and work up to reading an NFL defense.</string>
+    <string name="welcome_start">Let's go</string>
+    <string name="who_title">Who's playing?</string>
+    <string name="nickname_label">Nickname</string>
+    <string name="nickname_hint">A nickname, not a real name</string>
+    <string name="age_title">How old is the player?</string>
+    <string name="age_band">%1$s years</string>
+    <string name="age_band_adult">18 or older</string>
+    <string name="start">Start</string>
+
+    <!-- Home (DESIGN 9.1) -->
+    <string name="home_title">Your drive</string>
+    <string name="level_n">Level %1$d</string>
+    <string name="streak_days">%1$d day streak</string>
+    <string name="streak_start_kid">Start a streak today!</string>
+    <string name="streak_start_adult">Start a streak</string>
+    <string name="continue_lesson">Continue: %1$s</string>
+    <string name="all_done_kid">You did every drill here! More levels are on the way.</string>
+    <string name="all_done_adult">Every drill here is done. More levels are on the way.</string>
+    <string name="level_state_locked">Locked</string>
+    <string name="level_state_open">Open</string>
+    <string name="level_state_passed">Passed</string>
+    <string name="level_progress">%1$d of %2$d drills</string>
+
+    <!-- Level (DESIGN 9.2) -->
+    <string name="back">Back</string>
+    <string name="drill_locked">Pass %1$s to unlock</string>
+    <string name="checkpoint">Checkpoint</string>
+    <string name="checkpoint_blurb">A %1$d-question test. Get %2$d% to pass.</string>
+    <string name="big_game">Big Game</string>
+    <string name="big_game_blurb">Play the level game. Get %1$d% to pass.</string>
+    <string name="coming_soon">Coming soon</string>
+    <string name="stars_label">%1$d of 3 stars</string>
+
+    <!-- Lesson player (DESIGN 9.3) -->
+    <string name="close_lesson">Close lesson</string>
+    <string name="step_of">Step %1$d of %2$d</string>
+    <string name="check">Check</string>
+    <string name="next">Next</string>
+    <string name="continue_">Continue</string>
+    <string name="answer_true">True</string>
+    <string name="answer_false">False</string>
+    <string name="option_letter">Option %1$s</string>
+    <string name="selected">selected</string>
+    <string name="not_selected">not selected</string>
+    <string name="tap_one_kid">Tap one.</string>
+    <string name="tap_one_adult">Tap one.</string>
+    <string name="tap_many">Tap every one that fits (%1$d).</string>
+    <string name="match_hint">Tap one on the left, then its partner on the right.</string>
+    <string name="match_answer">Goes with: %1$s</string>
+    <string name="order_hint">Use the arrows to put these in order.</string>
+    <string name="move_up">Move %1$s up</string>
+    <string name="move_down">Move %1$s down</string>
+
+    <!-- Feedback (DESIGN 11) -->
+    <string name="right_kid_1">Got it!</string>
+    <string name="right_kid_2">Nice read!</string>
+    <string name="right_kid_3">You nailed it!</string>
+    <string name="right_adult_1">Correct.</string>
+    <string name="right_adult_2">Right read.</string>
+    <string name="not_quite_kid">Not quite. Here's why.</string>
+    <string name="not_quite_adult">Not quite.</string>
+    <string name="not_quite_again_kid">That one is tricky. Let's look together.</string>
+    <string name="not_quite_again_adult">Review this one.</string>
+    <string name="partial_kid">Almost! You got some of it.</string>
+    <string name="partial_adult">Partly right.</string>
+    <string name="best_kid">Great call, Coach!</string>
+    <string name="best_adult">Best call.</string>
+    <string name="ok_kid">Reasonable. There was a better one.</string>
+    <string name="ok_adult">Reasonable.</string>
+    <string name="poor_kid">That one cost you. See why.</string>
+    <string name="poor_adult">Costly.</string>
+    <string name="best_was">Best call: %1$s</string>
+
+    <!-- Situation strip (DESIGN 8) -->
+    <string name="down_1">1st</string>
+    <string name="down_2">2nd</string>
+    <string name="down_3">3rd</string>
+    <string name="down_4">4th</string>
+    <string name="down_and_distance">%1$s &amp; %2$d</string>
+    <string name="down_and_goal">%1$s &amp; goal</string>
+    <string name="quarter_clock">Q%1$d %2$s</string>
+    <string name="own_yard_line">Own %1$d</string>
+    <string name="their_yard_line">Opp %1$d</string>
+    <string name="midfield">Midfield</string>
+    <string name="score_up">Up %1$d</string>
+    <string name="score_down">Down %1$d</string>
+    <string name="score_tied">Tied</string>
+    <string name="timeouts_left">%1$d timeouts left</string>
+
+    <!-- Lesson complete (DESIGN 9.7) -->
+    <string name="done_kid">Touchdown!</string>
+    <string name="done_adult">Lesson complete</string>
+    <string name="done_not_passed_kid">Good hustle!</string>
+    <string name="done_not_passed_adult">Lesson finished</string>
+    <string name="done_score">%1$d% on the first try</string>
+    <string name="done_passed_kid">You passed! The next drill is open.</string>
+    <string name="done_passed_adult">Passed. The next drill is open.</string>
+    <string name="done_try_again_kid">Get %1$d% to open the next drill. Try again any time!</string>
+    <string name="done_try_again_adult">%1$d% opens the next drill.</string>
+    <string name="done_review">The ones you missed come back in practice.</string>
+    <string name="done_xp">+%1$d XP</string>
+    <string name="back_to_level">Back to the level</string>
+    <string name="try_again">Try again</string>
+</resources>

@@ -136,6 +136,17 @@ class EngineTest {
     }
 
     // ---- Gating ----
+    @Test fun `next lesson is the first open one not yet passed`() {
+        val units = content.unitsOf(kid)
+        val lessons = units.flatMap { it.lessons }
+        assertEquals(lessons[0].id, Gating.nextLesson(kid, units, Progress())?.id)
+        val p = Progress().withLesson(lessons[0].id, 70)
+        assertEquals(lessons[1].id, Gating.nextLesson(kid, units, p)?.id)
+        val all = lessons.fold(Progress()) { acc, l -> acc.withLesson(l.id, 90) }
+        assertNull(Gating.nextLesson(kid, units, all))
+    }
+
+
     @Test fun `lessons unlock in order and the level gate flows lessons test game`() {
         val units = content.unitsOf(kid)
         val lessons = units.flatMap { it.lessons }

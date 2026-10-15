@@ -99,7 +99,7 @@ enum class MarkState { SELECTED, CORRECT, WRONG, MISSED }
  * dark-turf field in both themes (DESIGN §7). Every picture in the app goes through here.
  *
  * @param description the diagram as text for screen readers (DESIGN §7.6).
- * @param marks per player id, how to show it: selected, or graded.
+ * @param marks per player or zone id, how to show it: selected, or graded.
  * @param highlightZone with more than four zones, only this one is filled (DESIGN §7.5).
  * @param onTap called with the id of the tapped player, else the tapped zone.
  * @param fitToCard true: size to the diagram's own aspect, clamped to 3:4..4:3 (lesson
@@ -192,7 +192,7 @@ fun FieldDiagram(
                 // Back to front: field, zones, paths, labels, then players on top so no label
                 // ever hides a player (DESIGN 7.2-7.5).
                 drawTurf(t)
-                drawZones(diagram, t, highlightZone)
+                drawZones(diagram, t, highlightZone, marks)
                 diagram.routes.forEach { route ->
                     diagram.players.firstOrNull { it.id == route.playerId }?.let { drawRoute(route, it, t) }
                 }
@@ -361,14 +361,32 @@ private fun DrawScope.drawTurf(t: FieldTransform) {
 
 // ---- Zones (DESIGN §7.5) ----
 
-private fun DrawScope.drawZones(d: Diagram, t: FieldTransform, highlight: String?) {
+private fun DrawScope.drawZones(d: Diagram, t: FieldTransform, highlight: String?, marks: Map<String, MarkState>) {
     val fillAll = d.zones.size <= 4
     val edge = Stroke(width = 1.5.dp.toPx(), pathEffect = PathEffect.dashPathEffect(floatArrayOf(6.dp.toPx(), 4.dp.toPx())))
     d.zones.forEach { z ->
         val topLeft = Offset(t.x(z.x), t.y(z.y + z.h))
         val size = Size(z.w * t.scale, z.h * t.scale)
         if (fillAll || z.id == highlight) drawRect(DiagramColors.zoneFill, topLeft, size)
-        drawRect(DiagramColors.zoneEdge, topLeft, size, style = edge)
+        // A tapped or graded zone gets a solid 3dp edge in the mark's colour; missed is dashed.
+        val markColor = when (marks[z.id]) {
+            MarkState.SELECTED -> DiagramColors.select
+            MarkState.CORRECT, MarkState.MISSED -> DiagramColors.gradeCorrect
+            MarkState.WRONG -> DiagramColors.gradeRetry
+            null -> null
+        }
+        if (markColor == null) {
+            drawRect(DiagramColors.zoneEdge, topLeft, size, style = edge)
+        } else {
+            val inset = 1.5.dp.toPx()
+            val dashed = if (marks[z.id] == MarkState.MISSED) PathEffect.dashPathEffect(floatArrayOf(8.dp.toPx(), 5.dp.toPx())) else null
+            drawRect(
+                markColor,
+                topLeft + Offset(inset, inset),
+                Size(size.width - inset * 2, size.height - inset * 2),
+                style = Stroke(3.dp.toPx(), pathEffect = dashed),
+            )
+        }
     }
 }
 

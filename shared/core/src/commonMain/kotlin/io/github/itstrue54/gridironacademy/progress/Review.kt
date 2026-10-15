@@ -19,6 +19,14 @@ object Review {
         return p.copy(review = p.review + (stepId to card.copy(box = box, dueDay = today + intervalDays[box - 1])))
     }
 
+    /**
+     * A finished lesson: keep the best score, queue every first-try miss for review and
+     * count today toward the streak. [missed] maps step id to its concept.
+     */
+    fun afterLesson(p: Progress, lessonId: String, scorePct: Int, missed: Map<String, String?>, today: Long): Progress =
+        missed.entries.fold(p.withLesson(lessonId, scorePct)) { acc, (id, concept) -> miss(acc, id, concept, today) }
+            .touch(today)
+
     fun due(p: Progress, today: Long): List<ReviewCard> =
         p.review.values.filter { it.dueDay <= today }.sortedBy { it.dueDay }
 }
