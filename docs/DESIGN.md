@@ -220,12 +220,14 @@ with a stroke/fill switch. Mastery states each have their own glyph (section 8.1
 Launcher icon, store art and illustrations are generated with Nano Banana (via the
 `nanobanana` skill) and kept as source in `docs/play-store/assets/source/`.
 `tools/make-icons.py` builds every launcher density and the 512px store icon from
-`icon-source.png`, padding the art with its own green so the ball stays inside the
-adaptive icon's 66dp safe circle (minSdk 26, so adaptive icons only). The icon is a **gold football with a
-chalk play-diagram (an X and an arrow) in place of laces**, on a turf-green
-adaptive background. The **Coach app icon** is the same gold football on a
-`surface` Floodlight (`#0F1B16`) background with a small chalk clipboard clip at the
-top, so the two apps read as a family but are told apart at a glance. The Kid title
+`icon-source.png`: it shrinks the art onto a larger canvas and continues the art's own
+edges into the margin (stretched, then blurred), so the ball stays inside the adaptive
+icon's 66dp safe circle while the night sky and turf run to the edge (minSdk 26, so
+adaptive icons only). The icon (redrawn 2026-10-15 to match Prime Time, section 2.2) is
+the **gold football with a chalk play (an X and an arrow) in place of laces**, flying
+past a volt-green speed streak through a navy night sky under two stadium floodlights,
+over a rise of turf. The Coach app icon will reuse the ball on a plain Floodlight
+surface with a chalk clipboard clip, so the two apps read as a family. The Kid title
 art is Clip in a stadium at golden hour; the Adult title art is a night-game press-box
 view of an empty field under floodlights. Level 0 needs a picture set (ball, two
 teams, end zone, referee, flag belt, helmet, mouthguard, high-five) in the same flat
