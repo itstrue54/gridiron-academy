@@ -1,0 +1,19 @@
+{
+  "welcome": {
+    "description": "A play on the field: the quarterback throws to a receiver who runs past a defender toward the end zone.",
+    "diagram": {
+      "players": [
+        { "id": "qb", "label": "QB", "side": "OFFENSE", "x": 0, "y": -5 },
+        { "id": "c", "label": "C", "side": "OFFENSE", "x": 0, "y": 0 },
+        { "id": "x", "label": "X", "side": "OFFENSE", "x": -14, "y": 0 },
+        { "id": "z", "label": "Z", "side": "OFFENSE", "x": 14, "y": -1 },
+        { "id": "cb", "label": "CB", "side": "DEFENSE", "x": 13, "y": 6 },
+        { "id": "fs", "label": "FS", "side": "DEFENSE", "x": -2, "y": 13 }
+      ],
+      "routes": [
+        { "playerId": "z", "points": [{ "x": 14, "y": 6 }, { "x": 6, "y": 15 }], "kind": "pass" },
+        { "playerId": "x", "points": [{ "x": -14, "y": 12 }], "kind": "pass" }
+      ]
+    }
+  }
+}

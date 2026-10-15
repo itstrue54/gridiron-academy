@@ -36,12 +36,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import io.github.itstrue54.gridironacademy.model.Diagram
-import io.github.itstrue54.gridironacademy.model.DiagramPlayer
-import io.github.itstrue54.gridironacademy.model.DiagramRoute
-import io.github.itstrue54.gridironacademy.model.PathKind
-import io.github.itstrue54.gridironacademy.model.Pt
-import io.github.itstrue54.gridironacademy.model.Side
+import io.github.itstrue54.gridironacademy.model.Scene
 import io.github.itstrue54.gridironacademy.progress.AgeBand
 import io.github.itstrue54.gridironacademy.ui.components.PrimaryButton
 import io.github.itstrue54.gridironacademy.ui.field.FieldDiagram
@@ -60,25 +55,9 @@ import io.github.itstrue54.gridironacademy.ui.resources.who_title
 import io.github.itstrue54.gridironacademy.ui.theme.Gridiron
 import org.jetbrains.compose.resources.stringResource
 
-/** A touchdown pass, drawn by the app's own renderer: the welcome picture. */
-private val WelcomePlay = Diagram(
-    players = listOf(
-        DiagramPlayer("qb", "QB", Side.OFFENSE, 0f, -5f),
-        DiagramPlayer("c", "C", Side.OFFENSE, 0f, 0f),
-        DiagramPlayer("x", "X", Side.OFFENSE, -14f, 0f),
-        DiagramPlayer("z", "Z", Side.OFFENSE, 14f, -1f),
-        DiagramPlayer("cb", "CB", Side.DEFENSE, 13f, 6f),
-        DiagramPlayer("fs", "FS", Side.DEFENSE, -2f, 13f),
-    ),
-    routes = listOf(
-        DiagramRoute("z", listOf(Pt(14f, 6f), Pt(6f, 15f)), PathKind.PASS),
-        DiagramRoute("x", listOf(Pt(-14f, 12f)), PathKind.PASS),
-    ),
-)
-
 /** First launch (DESIGN 9.8): what this is, in one card, and one button. */
 @Composable
-fun WelcomeScreen(onStart: () -> Unit) {
+fun WelcomeScreen(scene: Scene, onStart: () -> Unit) {
     val c = Gridiron.colors
     val skin = Gridiron.skin
     Column(
@@ -88,7 +67,7 @@ fun WelcomeScreen(onStart: () -> Unit) {
         Column(Modifier.weight(1f).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(16.dp)) {
             Text(stringResource(Res.string.app_name), style = Gridiron.type.label, color = c.inkDim)
             Text(stringResource(Res.string.welcome_title), style = Gridiron.type.displayLarge, color = c.ink, modifier = Modifier.semantics { heading() })
-            FieldDiagram(WelcomePlay, description = "", modifier = Modifier.fillMaxWidth())
+            FieldDiagram(scene.diagram, description = scene.description, modifier = Modifier.fillMaxWidth())
             Text(stringResource(Res.string.welcome_body), style = Gridiron.type.body, color = c.ink)
         }
         PrimaryButton(stringResource(Res.string.welcome_start), onStart)

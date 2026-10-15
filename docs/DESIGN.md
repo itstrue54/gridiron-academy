@@ -192,7 +192,9 @@ with a stroke/fill switch. Mastery states each have their own glyph (section 8.1
 ### 6.3 Art production
 Launcher icon, store art and illustrations are generated with Nano Banana (via the
 `nanobanana` skill) and kept as source in `docs/play-store/assets/source/`.
-`draw-assets.py` builds every density from them. The icon is a **gold football with a
+`tools/make-icons.py` builds every launcher density and the 512px store icon from
+`icon-source.png`, padding the art with its own green so the ball stays inside the
+adaptive icon's 66dp safe circle (minSdk 26, so adaptive icons only). The icon is a **gold football with a
 chalk play-diagram (an X and an arrow) in place of laces**, on a turf-green
 adaptive background. The **Coach app icon** is the same gold football on a
 `surface` Floodlight (`#0F1B16`) background with a small chalk clipboard clip at the

@@ -27,6 +27,9 @@ object ContentValidator {
             if (it.kid.isBlank() || it.full.isBlank() || it.term.isBlank()) err("glossary ${it.id}", "blank field")
         }
 
+        diagram(c.scenes.welcome.diagram, "app/scenes welcome", ::err)
+        if (c.scenes.welcome.description.isBlank()) err("app/scenes welcome", "missing description")
+
         val allStepIds = mutableListOf<String>()
         val allLessonIds = mutableListOf<String>()
 

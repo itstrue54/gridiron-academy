@@ -82,3 +82,11 @@ data class GlossaryEntry(
 
 @Serializable
 data class Glossary(val entries: List<GlossaryEntry>)
+
+/** A picture the app shows outside lessons, with its screen-reader description. */
+@Serializable
+data class Scene(val diagram: Diagram, val description: String)
+
+/** App pictures that are content, not code (AGENTS rule 3): `app/scenes.json`. */
+@Serializable
+data class AppScenes(val welcome: Scene)

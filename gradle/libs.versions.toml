@@ -2,6 +2,8 @@
 agp = "9.2.1"
 kotlin = "2.2.10"
 composeMultiplatform = "1.9.3"
+activityCompose = "1.13.0"
+kotlinxCoroutines = "1.10.2"
 kotlinxSerialization = "1.8.0"
 junitBom = "5.11.4"
 
@@ -10,7 +12,11 @@ kotlinx-serialization-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
 jupiter-bom = { group = "org.junit", name = "junit-bom", version.ref = "junitBom" }
 
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
+kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
+
 [plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
 compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 android-kmp-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }

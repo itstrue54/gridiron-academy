@@ -92,6 +92,7 @@ class LearnerAppStateTest {
         val s = LearnerAppState(content, InMemoryLearnerStore()) { 300 }
         s.createProfile("Sam", AgeBand.AGE_18_PLUS)
         val (level, lesson) = s.nextLesson()!!
+        s.startLesson(level, lesson)
         val c = LessonController(lesson.steps)
         var missed: String? = null
         var retries = 0
@@ -129,5 +130,45 @@ class LearnerAppStateTest {
         while (!c.finished) { c.submit(perfect(c.step!!)); if (!c.finished && c.grade != null) c.next() }
         assertEquals(100, c.result.scorePct)
         assertEquals(3, LessonSession.stars(c.result.scorePct))
+    }
+
+    @Test
+    fun aLessonFinishesOnlyOnceAndKeepsItsControllerForTheExitFade() {
+        val s = LearnerAppState(content, InMemoryLearnerStore()) { 400 }
+        s.createProfile("Leo", AgeBand.AGE_8_9)
+        val (level, lesson) = s.nextLesson()!!
+        s.openLevel(level)
+        s.startLesson(level, lesson)
+        val c = s.lessonController(level.id, lesson.id)
+        while (!c.finished) { c.submit(perfect(c.step!!)); if (!c.finished && c.grade != null) c.next() }
+        s.finishLesson(level.id, lesson.id, c.result)
+        val xp = s.save.progress.xp
+        val stack = s.backStack
+        s.finishLesson(level.id, lesson.id, c.result) // a recomposed screen firing again
+        assertEquals(xp, s.save.progress.xp)
+        assertEquals(stack, s.backStack)
+        assertSame(c, s.lessonController(level.id, lesson.id), "the fading-out screen sees the finished lesson")
+        s.back()
+        s.startLesson(level, lesson)
+        assertNotSame(c, s.lessonController(level.id, lesson.id), "starting again is a fresh attempt")
+    }
+
+    @Test
+    fun theDraftAnswerLivesOnTheControllerAndClearsOnNext() {
+        val steps = content.unitsOf(content.level("adult-1")).flatMap { it.lessons }.flatMap { it.steps }
+        val mc = steps.filterIsInstance<MultipleChoice>().first()
+        val c = LessonController(listOf(mc, mc.copy(id = "again")))
+        c.draft = Answer.Choice(0)
+        c.matchDraft = mapOf("a" to "b")
+        c.submit(Answer.Choice(mc.answer))
+        c.next()
+        assertNull(c.draft)
+        assertTrue(c.matchDraft.isEmpty())
+    }
+
+    @Test
+    fun theWelcomeSceneComesFromContent() {
+        assertTrue(content.scenes.welcome.diagram.players.isNotEmpty())
+        assertTrue(content.scenes.welcome.description.isNotBlank())
     }
 }

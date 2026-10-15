@@ -68,7 +68,7 @@ fun LearnerApp(state: LearnerAppState, dark: Boolean, reducedMotion: Boolean = f
             label = "screen",
         ) { screen ->
             when (screen) {
-                Screen.Welcome -> WelcomeScreen(onStart = state::startOnboarding)
+                Screen.Welcome -> WelcomeScreen(state.content.scenes.welcome, onStart = state::startOnboarding)
                 Screen.Onboarding -> OnboardingScreen(onDone = state::createProfile)
                 Screen.Home -> HomeScreen(state)
                 is Screen.LevelDetail -> LevelScreen(state, state.content.level(screen.levelId))

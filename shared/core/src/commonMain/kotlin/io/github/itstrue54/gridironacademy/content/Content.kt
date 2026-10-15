@@ -16,6 +16,7 @@ class Content(
     val glossary: Glossary,
     /** level id -> its units, in order. */
     val unitsByLevel: Map<String, List<CourseUnit>>,
+    val scenes: AppScenes,
 ) {
     fun level(id: String): Level = curriculum.levels.first { it.id == id }
     fun unitsOf(level: Level): List<CourseUnit> = unitsByLevel.getValue(level.id)
@@ -46,6 +47,7 @@ object ContentLoader {
         val units = curriculum.levels.associate { lv ->
             lv.id to lv.unitFiles.map { f -> parse(f) { json.decodeFromString<CourseUnit>(it) } }
         }
-        return Content(curriculum, glossary, units)
+        val scenes = parse("app/scenes.json") { json.decodeFromString<AppScenes>(it) }
+        return Content(curriculum, glossary, units, scenes)
     }
 }

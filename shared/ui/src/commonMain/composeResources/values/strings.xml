@@ -20,6 +20,10 @@
     <string name="age_band_adult">18 or older</string>
     <string name="start">Start</string>
 
+    <!-- Load failure (DESIGN 9.11) -->
+    <string name="load_error_title">The lessons didn't load</string>
+    <string name="load_error_body">Something went wrong opening the lessons on this phone. Your progress is safe. Try again, and if it keeps happening, restart the app.</string>
+
     <!-- Home (DESIGN 9.1) -->
     <string name="home_title">Your drive</string>
     <string name="level_n">Level %1$d</string>

@@ -73,6 +73,18 @@ class LearnerAppState(
 
     val screen: Screen get() = backStack.last()
 
+    /**
+     * The lesson in progress lives here, not in composition, so it survives the screen
+     * being rebuilt (a phone rotation) as long as this state does.
+     */
+    private var activeLesson: Pair<String, LessonController>? = null
+
+    // A finished lesson's controller is kept until the next lesson starts: the outgoing
+    // screen is still drawn during the cross-fade and must not restart the lesson.
+    fun lessonController(levelId: String, lessonId: String): LessonController =
+        activeLesson?.takeIf { it.first == lessonId }?.second
+            ?: LessonController(lesson(levelId, lessonId).steps).also { activeLesson = lessonId to it }
+
     val profile: Profile? get() = save.profile
 
     /** Level 0 isn't written yet, so pre-readers get the Kid skin for now (SPEC 3.1). */
@@ -108,6 +120,7 @@ class LearnerAppState(
     /** Returns false at the root, so the platform can close the app. */
     fun back(): Boolean {
         if (backStack.size <= 1) return false
+        if (screen is Screen.LessonPlay) activeLesson = null // quitting drops the attempt
         backStack = backStack.dropLast(1)
         return true
     }
@@ -121,10 +134,16 @@ class LearnerAppState(
 
     fun openLevel(level: Level) = go(Screen.LevelDetail(level.id))
 
-    fun startLesson(level: Level, lesson: Lesson) = go(Screen.LessonPlay(level.id, lesson.id))
+    fun startLesson(level: Level, lesson: Lesson) {
+        activeLesson = null
+        go(Screen.LessonPlay(level.id, lesson.id))
+    }
 
     /** Records a finished lesson and replaces the player with its result screen. */
     fun finishLesson(levelId: String, lessonId: String, session: LessonSession) {
+        // Only the lesson on screen can finish, and only once: a recomposed screen must
+        // not award the lesson twice or pop the result screen.
+        if (screen != Screen.LessonPlay(levelId, lessonId)) return
         val steps = lesson(levelId, lessonId).steps.associateBy { it.id }
         val missed = session.missedIds.associateWith { steps[it]?.concept }
         val before = save.progress
@@ -173,6 +192,13 @@ class LessonController(steps: List<Step>) {
     /** Steps in the drive, growing when a miss is queued for a retry. */
     var total: Int by mutableStateOf(steps.size)
         private set
+    /**
+     * What the learner has picked but not checked, kept here (not in the screen) so a
+     * rotation doesn't clear it. [matchDraft] holds match pairs before all are paired.
+     */
+    var draft: Answer? by mutableStateOf(null)
+    var matchDraft: Map<String, String> by mutableStateOf(emptyMap())
+
     /** True when the current step was missed once already: its feedback is gentler. */
     var isRetry: Boolean by mutableStateOf(false)
         private set
@@ -194,6 +220,8 @@ class LessonController(steps: List<Step>) {
         done += 1
         grade = null
         answer = null
+        draft = null
+        matchDraft = emptyMap()
         step = session.current
         isRetry = step?.id in seen
         total = done + session.remaining

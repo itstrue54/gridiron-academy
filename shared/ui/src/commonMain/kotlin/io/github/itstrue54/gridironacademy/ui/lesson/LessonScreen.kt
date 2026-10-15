@@ -76,14 +76,15 @@ import org.jetbrains.compose.resources.stringResource
 /**
  * The drill player (DESIGN 9.3): DriveBar on top, one step, one primary at the bottom.
  * After Check the feedback sheet rises with the why; a first-try miss comes back once
- * at the end. [controller] is hoisted so a test can drive a lesson to any step.
+ * at the end. The controller comes from [state] so it outlives a rebuilt screen; a test
+ * can pass its own to show any step.
  */
 @Composable
 fun LessonScreen(
     state: LearnerAppState,
     levelId: String,
     lessonId: String,
-    controller: LessonController = remember(lessonId) { LessonController(state.lesson(levelId, lessonId).steps) },
+    controller: LessonController = state.lessonController(levelId, lessonId),
 ) {
     val c = Gridiron.colors
     val skin = Gridiron.skin
@@ -91,9 +92,8 @@ fun LessonScreen(
         if (controller.finished) state.finishLesson(levelId, lessonId, controller.result)
     }
     val step = controller.step ?: return
-    // Everything the learner has picked but not yet checked, reset for each step shown.
     val stepKey = "${step.id}#${controller.done}"
-    var pending by remember(stepKey) { mutableStateOf<Answer?>(null) }
+    val pending = controller.draft
 
     BoxWithConstraints(Modifier.fillMaxSize().background(c.surface).safeDrawingPadding()) {
         val sheetMax = maxHeight * SHEET_MAX_FRACTION
@@ -106,7 +106,7 @@ fun LessonScreen(
                 Modifier.weight(1f).fillMaxWidth().verticalScroll(rememberScrollState()).padding(horizontal = skin.gutter, vertical = 12.dp),
             ) {
                 key(stepKey) {
-                    StepBody(step, pending, controller.grade != null, controller.answer) { pending = it }
+                    StepBody(step, controller, pending, controller.grade != null, controller.answer) { controller.draft = it }
                 }
                 // Room so the feedback sheet never covers the end of the step.
                 if (controller.grade != null) Spacer(Modifier.height(sheetMax))
@@ -141,7 +141,7 @@ private const val SHEET_MAX_FRACTION = 0.45f
 
 /** Shows [step]; [submitted] is the checked answer once graded, else [pending] drives it. */
 @Composable
-private fun StepBody(step: Step, pending: Answer?, graded: Boolean, submitted: Answer?, onAnswer: (Answer?) -> Unit) {
+private fun StepBody(step: Step, controller: LessonController, pending: Answer?, graded: Boolean, submitted: Answer?, onAnswer: (Answer?) -> Unit) {
     val shown = if (graded) submitted else pending
     when (step) {
         is Learn -> LearnView(step)
@@ -156,11 +156,10 @@ private fun StepBody(step: Step, pending: Answer?, graded: Boolean, submitted: A
         is Match -> {
             val rightOrder = remember(step.id) { stepShuffle(step.id, step.pairs.map { it.right }) }
             var selectedLeft by remember(step.id) { mutableStateOf<String?>(step.pairs.first().left) }
-            // Pairs in progress live here; the answer exists only once every item is paired.
-            var working by remember(step.id) { mutableStateOf(emptyMap<String, String>()) }
-            val pairs = if (graded) (submitted as? Answer.Matches)?.pairs.orEmpty() else working
+            // Pairs in progress live on the controller; the answer exists once all are paired.
+            val pairs = if (graded) (submitted as? Answer.Matches)?.pairs.orEmpty() else controller.matchDraft
             MatchView(step, rightOrder, pairs, selectedLeft, graded, onSelectLeft = { selectedLeft = it }) { next ->
-                working = next
+                controller.matchDraft = next
                 onAnswer(Answer.Matches(next).takeIf { next.size == step.pairs.size })
             }
         }

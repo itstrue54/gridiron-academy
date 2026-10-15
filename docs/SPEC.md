@@ -746,6 +746,16 @@ Dependency direction: `apps -> ui -> data -> core`. Nothing depends on an app;
    declared) holds the design tokens (`theme/`: palette, skins incl. Little Huddle, type
    scale, `GridironTheme`) and `FieldDiagram` with its pure, tested `FieldGeometry`.
    `ContrastTest` asserts the DESIGN §3 contrast promises in code.
+   **Learner flow (M1):** onboarding (nickname + age screen), Home drive map, level
+   screen, the lesson player for all v1 step types except `read_defense` (shown as
+   multiple choice with its reveal until the reveal animation lands), and lesson
+   complete, all in `:shared:ui`. `LearnerAppState` holds the back stack, the save and
+   the lesson in progress, and calls `core` for every rule.
+   `:androidApp-learner` is the thin Android shell: ViewModel, `FileLearnerStore`
+   (one atomic JSON file, written off the main thread), BackHandler, system dark mode
+   and reduced motion. It has no INTERNET permission and Android backup is off
+   (`allowBackup=false` and data-extraction rules), so unlinked data stays on the
+   device (§5.4).
    **UI in Compose Multiplatform from day one** (not Jetpack-only APIs), so the same
    screens run on iOS. Android-only concerns (TTS, WorkManager, billing, FCM,
    Families compliance) sit behind `expect`/`actual` interfaces in `data` or in the
