@@ -9,10 +9,11 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticCompositionLocalOf
 
 val LocalGridironColors = staticCompositionLocalOf { Daylight }
-val LocalGridironType = staticCompositionLocalOf { AdultType }
+val LocalGridironType = staticCompositionLocalOf { adultType(GridironFontFamilies.System) }
 
 /** System animator scale 0 or the in-app setting (DESIGN §10): motion becomes cross-fades. */
 val LocalReducedMotion = staticCompositionLocalOf { false }
@@ -30,7 +31,8 @@ fun GridironTheme(
     content: @Composable () -> Unit,
 ) {
     val colors = if (dark) Floodlight else Daylight
-    val type = if (skin.voice == Voice.KID) KidType else AdultType
+    val fonts = rememberGridironFonts()
+    val type = remember(skin.voice, fonts) { if (skin.voice == Voice.KID) kidType(fonts) else adultType(fonts) }
     CompositionLocalProvider(
         LocalSkin provides skin,
         LocalGridironColors provides colors,

@@ -36,6 +36,7 @@ kotlin {
             api(compose.foundation)
             api(compose.material3)
             api(compose.ui)
+            implementation(compose.components.resources)
         }
         commonTest.dependencies {
             implementation(kotlin("test"))
@@ -48,33 +49,35 @@ kotlin {
     }
 }
 
+compose.resources {
+    packageOfResClass = "io.github.itstrue54.gridironacademy.ui.resources"
+    publicResClass = false
+}
+
 listOf("jvmTest", "check").forEach { name ->
     tasks.named(name) { dependsOn("compileCommonMainKotlinMetadata") }
 }
 
 tasks.named<Test>("jvmTest") {
     useJUnitPlatform()
-    // Headless renders get a one-folder fontconfig. Skia's default font manager scans
-    // every system font at startup, which stalled for 10+ minutes on a machine with ~2,800
-    // fonts, and a fixed font set keeps PNGs identical across machines (SPEC 13.4).
-    // DejaVu ships with Ubuntu and most Linux CI images; the brand fonts replace it once
-    // they are bundled (DESIGN 4).
+    // Headless renders get a fontconfig that sees only the bundled fonts. Skia's default
+    // font manager scans every system font at startup, which stalled for 10+ minutes on a
+    // machine with ~2,800 fonts; a fixed font set also keeps PNGs identical everywhere.
+    // FontFamily.Default (sans-serif) resolves to Atkinson so stock components render too.
     val fontsConf = layout.buildDirectory.file("test-fonts/fonts.conf")
-    val fontDir = "/usr/share/fonts/truetype/dejavu"
+    val fontDir = file("src/commonMain/composeResources/font").absolutePath
     outputs.file(fontsConf)
     doFirst {
-        if (File(fontDir).isDirectory) {
-            fontsConf.get().asFile.apply {
-                parentFile.mkdirs()
-                writeText(
-                    """<?xml version="1.0"?><!DOCTYPE fontconfig SYSTEM "fonts.dtd">
-                    |<fontconfig><dir>$fontDir</dir><cachedir>${parentFile.absolutePath}/cache</cachedir></fontconfig>
-                    |""".trimMargin(),
-                )
-            }
-            environment("FONTCONFIG_FILE", fontsConf.get().asFile.absolutePath)
-        } else {
-            logger.warn("$fontDir not found: render tests use the system fonts and may stall for minutes while Skia scans them. Install DejaVu (fonts-dejavu-core).")
+        fontsConf.get().asFile.apply {
+            parentFile.mkdirs()
+            writeText(
+                """<?xml version="1.0"?><!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+                |<fontconfig><dir>$fontDir</dir><cachedir>${parentFile.absolutePath}/cache</cachedir>
+                |<alias><family>sans-serif</family><prefer><family>Atkinson Hyperlegible</family></prefer></alias>
+                |</fontconfig>
+                |""".trimMargin(),
+            )
         }
+        environment("FONTCONFIG_FILE", fontsConf.get().asFile.absolutePath)
     }
 }

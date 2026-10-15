@@ -821,9 +821,9 @@ debug builds show them with a "[review]" badge.
 
 ### 13.4 UI tests
 - `FieldRenderTest` (jvm) already renders real content diagrams headlessly to
-  `shared/ui/build/field-renders/`. Render tests run with a one-folder fontconfig
-  (DejaVu until the brand fonts are bundled): Skia's default font scan stalled for
-  10+ minutes on a machine with ~2,800 fonts, and a fixed font set makes PNGs
+  `shared/ui/build/field-renders/`. Render tests run with a fontconfig that sees only
+  the bundled fonts (sans-serif aliased to Atkinson): Skia's default font scan stalled
+  for 10+ minutes on a machine with ~2,800 fonts, and a fixed font set makes PNGs
   identical across machines.
 - Screenshot tests of the Design gallery (DESIGN §13) in both skins, both themes, at
   100% and 200% font scale, plus every step type and every `PathKind`.

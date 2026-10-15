@@ -140,6 +140,9 @@ against turf, so a disc's *edge* is always legible even where its fill is not
   distinctness (it was designed for low vision and is kind to dyslexic readers).
   Regular and Bold.
 - **Display, Kid:** Fredoka W600. **Display, Adult:** Barlow Semi Condensed W700.
+- The fonts are bundled (OFL, `docs/licenses/fonts/`) as Compose resources in
+  `shared/ui`. Fredoka is the variable font with its weight axis pinned to 600.
+  Player labels on the field use Atkinson Hyperlegible Bold.
 - Tabular figures wherever a number is compared (`fontFeatureSettings = "tnum"`),
   so a scoreboard or a down-and-distance line never jitters.
 - All sizes are `sp` and scale with the system. **Nothing breaks at 200%** (section 12).

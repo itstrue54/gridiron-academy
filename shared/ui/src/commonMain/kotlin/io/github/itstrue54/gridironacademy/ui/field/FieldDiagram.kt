@@ -88,6 +88,7 @@ fun FieldDiagram(
     val labelStyle = type.label.copy(color = colors.ink)
     val tagStyle = labelStyle.copy(fontSize = type.label.fontSize * TAG_SCALE, lineHeight = type.label.lineHeight * TAG_SCALE)
     val baseLabelSp = if (skin.helmets) KID_MARK_LABEL_SP else ADULT_MARK_LABEL_SP
+    val bodyFamily = type.body.fontFamily
 
     Column(modifier) {
         val sized = if (fitToCard) Modifier.fillMaxWidth().aspectRatio(FieldGeometry.cardAspect(window)) else Modifier.fillMaxWidth().weight(1f)
@@ -117,7 +118,7 @@ fun FieldDiagram(
             // linemen ~10dp apart), but never below a size that holds a two-digit number.
             val markPx = FieldGeometry.markSize(diagram.players, t, skin.playerMark.toPx(), MIN_MARK.dp.toPx(), MARK_GAP.dp.toPx())
             val labelSp = (baseLabelSp * markPx / skin.playerMark.toPx()).coerceAtLeast(MIN_MARK_LABEL_SP)
-            val markLabel = TextStyle(color = DiagramColors.label, fontWeight = FontWeight.Bold, fontSize = labelSp.sp)
+            val markLabel = TextStyle(color = DiagramColors.label, fontFamily = bodyFamily, fontWeight = FontWeight.Bold, fontSize = labelSp.sp)
 
             // Back to front: field, zones, paths, labels, then players on top so no label
             // ever hides a player (DESIGN 7.2-7.5).
