@@ -2,6 +2,7 @@ package io.github.itstrue54.gridironacademy.ui
 
 import io.github.itstrue54.gridironacademy.model.*
 import io.github.itstrue54.gridironacademy.ui.field.FieldGeometry
+import io.github.itstrue54.gridironacademy.ui.field.FieldZoom
 import kotlin.test.*
 
 class FieldGeometryTest {
@@ -100,5 +101,69 @@ class FieldGeometryTest {
         val spacing = 1.6f * t2.scale
         assertEquals(spacing - 4f, FieldGeometry.markSize(line, t2, preferredPx = 44f, minPx = 10f, gapPx = 4f), 0.01f)
         assertEquals(36f, FieldGeometry.markSize(line, t2, preferredPx = 44f, minPx = 36f, gapPx = 4f))
+    }
+
+    @Test
+    fun pinchKeepsThePointUnderTheFingersStill() {
+        val z = FieldZoom().zoomAbout(2f, 300f, 200f, 600f, 400f)
+        assertEquals(2f, z.scale)
+        // Canvas point (300, 200) at 1x must still be drawn at (300, 200).
+        assertEquals(300f, 300f * z.scale + z.panX, 0.001f)
+        assertEquals(200f, 200f * z.scale + z.panY, 0.001f)
+    }
+
+    @Test
+    fun zoomStaysBetweenOneAndMaxAndNeverShowsPastTheEdge() {
+        assertEquals(FieldGeometry.MAX_ZOOM, FieldZoom().zoomAbout(10f, 0f, 0f, 600f, 400f).scale)
+        assertEquals(FieldZoom(), FieldZoom(2f, -300f, -200f).zoomAbout(0.1f, 50f, 50f, 600f, 400f))
+        val panned = FieldZoom(2f).panBy(500f, -5000f, 600f, 400f)
+        assertEquals(0f, panned.panX) // can't drag the field's left edge into view
+        assertEquals(-400f, panned.panY) // nor past its bottom: 400 * (1 - 2)
+        assertEquals(FieldZoom(), FieldZoom().panBy(-80f, 40f, 600f, 400f)) // 1x never pans
+    }
+
+    @Test
+    fun zoomedTransformMapsYardsThroughTheZoom() {
+        val w = FieldGeometry.window(Diagram(players = listOf(p("a", -10f, 0f), p("b", 10f, 10f))))
+        val base = FieldGeometry.transform(w, 520f, 520f)
+        val z = FieldZoom(2f, -260f, -100f)
+        val t = z.apply(base)
+        assertEquals(base.x(3f) * 2f - 260f, t.x(3f), 0.001f)
+        assertEquals(base.y(4f) * 2f - 100f, t.y(4f), 0.001f)
+        assertEquals(3f, t.xYards(t.x(3f)), 0.001f)
+    }
+
+    @Test
+    fun zoomingInThenOutLandsExactlyOnOneX() {
+        val z = FieldZoom().zoomAbout(FieldGeometry.ZOOM_STEP, 300f, 200f, 600f, 400f)
+            .zoomAbout(1f / FieldGeometry.ZOOM_STEP, 300f, 200f, 600f, 400f)
+        assertEquals(FieldZoom(), z)
+        assertFalse(z.zoomed)
+    }
+
+    @Test
+    fun resizingKeepsTheRelativeViewAndClamps() {
+        val z = FieldZoom(2f, -300f, -100f).resized(600f, 400f, 400f, 600f)
+        assertEquals(-200f, z.panX, 0.001f)
+        assertEquals(-150f, z.panY, 0.001f)
+        // A pan scaled with the canvas stays inside the field at the new size.
+        val shrunk = FieldZoom(4f, -1500f, 0f).resized(600f, 400f, 100f, 400f)
+        assertEquals(-250f, shrunk.panX, 0.001f)
+        assertTrue(shrunk.panX >= 100f * (1 - 4f))
+        // A first size (nothing to scale from) just clamps.
+        assertEquals(0f, FieldZoom(2f, 50f, 0f).resized(0f, 0f, 600f, 400f).panX)
+    }
+
+    @Test
+    fun aSharedWindowCoversPreSnapAndReveal() {
+        val pre = Diagram(players = listOf(p("fs", 0f, 12f, Side.DEFENSE)))
+        val reveal = Diagram(
+            players = pre.players,
+            routes = listOf(DiagramRoute("fs", listOf(Pt(14f, 16f)), PathKind.ROTATE)),
+        )
+        val both = FieldGeometry.window(pre, reveal)
+        val r = FieldGeometry.window(reveal)
+        assertEquals(r.xMax, both.xMax)
+        assertEquals(minOf(FieldGeometry.window(pre).xMin, r.xMin), both.xMin)
     }
 }

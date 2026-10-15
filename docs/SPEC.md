@@ -785,6 +785,7 @@ Paparazzi or Roborazzi for screenshots. minSdk 26, target latest.
 - ADR-003 KMP + Compose Multiplatform from the start (§11.3).
 - ADR-004 Backend choice (§8.2).
 - ADR-005 Level 0 has no test (§4.4).
+- ADR-007 Diagrams stay to scale; pinch zoom for crowding (written).
 - ADR-006 Recorded voice for Level 0 (§6.9).
 
 ---

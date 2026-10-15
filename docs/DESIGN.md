@@ -330,6 +330,28 @@ of continuous movement.
   after grading.
 - **Play editor** (Coach app, section 14.5) uses the same two interactions.
 
+### 7.10 Zoom
+Diagrams stay **to scale**: one uniform scale, never a stretched "box" (ADR-007).
+Where that makes a phone picture crowded, the learner zooms instead.
+- **Pinch** with two fingers zooms (1x to 4x) about the point between them and pans.
+  One finger pans **only once zoomed in**, so at 1x a drag still scrolls the lesson.
+- **Zoom buttons** (− and +, 1.5x a tap, about the centre) sit at the bottom-right of
+  the field whenever the fitted picture had to shrink its marks (7.3) or is zoomed.
+  They are the motor-accessible alternative to pinching (section 12) and use the
+  skin's touch target.
+- Zoomed in, marks grow back toward the skin's size because spacing grows; line
+  widths, labels and pills stay their dp size, so zoom adds room, not bigger text.
+- Taps, hit tests and grading go through the zoomed transform, so a tap means the
+  same player at any zoom.
+- Zoom resets with a new diagram. A read-the-defense step fits both pictures to one
+  window (`FieldGeometry.window(preSnap, reveal)`) and hoists its zoom state, so the
+  reveal plays at the same scale and zoom the learner chose for the pre-snap picture.
+- A zoom within 1% of 1x snaps to 1x. On resize (rotation, a sheet opening) the view
+  keeps its relative position. Pinned against an edge, a one-finger drag passes
+  through and scrolls the page.
+- Words on the field (the LOS tag, the button labels) come from the caller
+  (`FieldLabels`), never hard-coded, so they localise.
+
 ## 8. Components
 
 | Component | Spec |
@@ -617,7 +639,7 @@ sentences at most in Kid.
   scrolls instead; HUDs wrap to two lines.
 - **Colour:** never the only carrier (section 1.2). Retry is amber with a dash icon,
   not red.
-- **Motor:** 48dp / 56dp targets, no required drags (every drag has a tap
+- **Motor:** 48dp / 56dp targets, pinch zoom always has +/− buttons (7.10), no required drags (every drag has a tap
   alternative), no time pressure in lessons or games except the Speed round, which
   has an **Untimed** option (grown-up zone or per profile) that keeps the scoring but
   removes the clock.

@@ -26,6 +26,39 @@ data class FieldTransform(val window: FieldWindow, val scale: Float, val offsetX
     fun yYards(px: Float): Float = window.yMax - (px - offsetY) / scale
 }
 
+/**
+ * Pinch zoom over the fitted field (DESIGN §7.10). A canvas point `p` at 1x is drawn at
+ * `p * scale + pan`; [pan] is kept so the field always covers the canvas.
+ */
+data class FieldZoom(val scale: Float = 1f, val panX: Float = 0f, val panY: Float = 0f) {
+    val zoomed: Boolean get() = scale > 1f
+
+    /** Zoom by [factor] keeping the canvas point ([cx], [cy]) still, as a pinch does. */
+    fun zoomAbout(factor: Float, cx: Float, cy: Float, width: Float, height: Float): FieldZoom {
+        // Snap to exactly 1x: in then out by the same step can land on 1.0000001, which
+        // would leave the field "zoomed" and swallowing one-finger scrolls.
+        val s = (scale * factor).let { if (it < 1f + FieldGeometry.ZOOM_SNAP) 1f else it }.coerceAtMost(FieldGeometry.MAX_ZOOM)
+        val k = s / scale
+        return FieldZoom(s, cx - (cx - panX) * k, cy - (cy - panY) * k).clamped(width, height)
+    }
+
+    fun panBy(dx: Float, dy: Float, width: Float, height: Float): FieldZoom =
+        copy(panX = panX + dx, panY = panY + dy).clamped(width, height)
+
+    /** The canvas changed size (rotation, a sheet opening): keep the same relative view. */
+    fun resized(oldWidth: Float, oldHeight: Float, width: Float, height: Float): FieldZoom =
+        if (oldWidth <= 0f || oldHeight <= 0f) clamped(width, height)
+        else copy(panX = panX * width / oldWidth, panY = panY * height / oldHeight).clamped(width, height)
+
+    /** Never show past the canvas edge: at 1x pan is always zero. */
+    fun clamped(width: Float, height: Float): FieldZoom =
+        copy(panX = panX.coerceIn(width * (1 - scale), 0f), panY = panY.coerceIn(height * (1 - scale), 0f))
+
+    /** The fitted transform with this zoom applied; everything downstream just uses it. */
+    fun apply(t: FieldTransform): FieldTransform =
+        t.copy(scale = t.scale * scale, offsetX = t.offsetX * scale + panX, offsetY = t.offsetY * scale + panY)
+}
+
 /** Pure layout maths for [FieldDiagram] (DESIGN §7.1), kept out of Compose so it is unit-tested. */
 object FieldGeometry {
     /** Half of the 53.3-yard field width. */
@@ -40,6 +73,12 @@ object FieldGeometry {
     /** The lesson card allows 4:3 to 3:4 (DESIGN §7.1). */
     const val MIN_CARD_ASPECT = 3f / 4f
     const val MAX_CARD_ASPECT = 4f / 3f
+    /** Pinch zoom limit: 4x makes linemen 1.6 yards apart about 40dp apart on a phone. */
+    const val MAX_ZOOM = 4f
+    /** Each tap of the zoom buttons. */
+    const val ZOOM_STEP = 1.5f
+    /** A zoom within this of 1x is 1x. */
+    const val ZOOM_SNAP = 0.01f
     /** Corners of a route are rounded with a one-yard radius (DESIGN §7.4). */
     const val CORNER_RADIUS = 1f
 
@@ -72,6 +111,15 @@ object FieldGeometry {
         if (xMin < -HALF_WIDTH) { xMax = min(HALF_WIDTH, xMax + (-HALF_WIDTH - xMin)); xMin = -HALF_WIDTH }
         if (xMax > HALF_WIDTH) { xMin = max(-HALF_WIDTH, xMin - (xMax - HALF_WIDTH)); xMax = HALF_WIDTH }
         return FieldWindow(xMin, xMax, yMin, yMax)
+    }
+
+    /**
+     * One window covering several diagrams, e.g. a read-the-defense pre-snap and its
+     * reveal, so both draw at the same scale and a zoom means the same spot in each.
+     */
+    fun window(vararg diagrams: Diagram): FieldWindow {
+        val ws = diagrams.map { window(it) }
+        return FieldWindow(ws.minOf { it.xMin }, ws.maxOf { it.xMax }, ws.minOf { it.yMin }, ws.maxOf { it.yMax })
     }
 
     /** The aspect a lesson card should give the diagram: its own, clamped to 3:4..4:3. */

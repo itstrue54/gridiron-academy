@@ -20,6 +20,8 @@ import kotlinx.serialization.decodeFromString
 import io.github.itstrue54.gridironacademy.ui.field.FieldDiagram
 import io.github.itstrue54.gridironacademy.ui.field.FieldGeometry
 import io.github.itstrue54.gridironacademy.ui.field.FieldTransform
+import io.github.itstrue54.gridironacademy.ui.field.FieldZoom
+import io.github.itstrue54.gridironacademy.ui.field.FieldZoomState
 import io.github.itstrue54.gridironacademy.ui.theme.DiagramColors
 import io.github.itstrue54.gridironacademy.ui.field.MarkState
 import io.github.itstrue54.gridironacademy.ui.theme.Gridiron
@@ -44,24 +46,32 @@ class FieldRenderTest {
         ContentLoader.json.decodeFromString<CourseUnit>(ClasspathContentSource().read("preview/l7-disguise.json")!!).lessons.flatMap { it.steps }
 
     /** Reads the rendered colour at a field position in yards, nudged by pixels. */
-    private class Rendered(private val bitmap: Bitmap, private val t: FieldTransform) {
+    private class Rendered(private val bitmap: Bitmap, val t: FieldTransform) {
         fun at(x: Float, y: Float, dxPx: Int = 0, dyPx: Int = 0): Color =
             Color(bitmap.getColor(PAD_PX + t.x(x).toInt() + dxPx, PAD_PX + t.y(y).toInt() + dyPx))
     }
 
     @OptIn(ExperimentalComposeUiApi::class)
-    private fun render(name: String, diagram: Diagram, skin: Skin, dark: Boolean, marks: Map<String, MarkState> = emptyMap()): Rendered {
+    private fun render(
+        name: String,
+        diagram: Diagram,
+        skin: Skin,
+        dark: Boolean,
+        marks: Map<String, MarkState> = emptyMap(),
+        zoom: FieldZoom = FieldZoom(),
+    ): Rendered {
+        val zoomState = FieldZoomState().apply { value = zoom }
         val image = ImageComposeScene(width = WIDTH_PX, height = 1000, density = Density(DENSITY)) {
             GridironTheme(skin = skin, dark = dark) {
                 Box(Modifier.fillMaxSize().background(Gridiron.colors.surface).padding(PAD_DP.dp)) {
-                    FieldDiagram(diagram, description = name, marks = marks)
+                    FieldDiagram(diagram, description = name, marks = marks, zoom = zoomState)
                 }
             }
         }.use { it.render() }
         File(out, "$name.png").writeBytes(image.encodeToData(EncodedImageFormat.PNG)!!.bytes)
         val window = FieldGeometry.window(diagram)
         val w = (WIDTH_PX - 2 * PAD_PX).toFloat()
-        return Rendered(Bitmap.makeFromImage(image), FieldGeometry.transform(window, w, w / FieldGeometry.cardAspect(window)))
+        return Rendered(Bitmap.makeFromImage(image), zoom.apply(FieldGeometry.transform(window, w, w / FieldGeometry.cardAspect(window))))
     }
 
     private fun assertNear(expected: Color, actual: Color, what: String) {
@@ -122,6 +132,27 @@ class FieldRenderTest {
         assertNear(DiagramColors.routeRun, r.at(2f, -4.5f), "RB run path")
         val turf = r.at(20f, -3f)
         assertTrue(turf == DiagramColors.turfA || turf == DiagramColors.turfB, "open turf, got $turf")
+    }
+
+    @Test
+    fun zoomingInSeparatesACrowdedLine() {
+        // Five linemen 1.6 yards apart with receivers at the sidelines: crowded on a phone.
+        val ol = listOf(-3.2f, -1.6f, 0f, 1.6f, 3.2f).mapIndexed { i, x -> DiagramPlayer("ol$i", "${70 + i}", Side.OFFENSE, x, 0f) }
+        val wide = listOf(DiagramPlayer("x", "X", Side.OFFENSE, -24f, 0f), DiagramPlayer("z", "Z", Side.OFFENSE, 24f, 0f))
+        val d = Diagram(ol + wide)
+
+        val flat = render("crowded-line-1x", d, Skin.Adult, dark = false)
+        // At 1x the marks overlap, so halfway between two linemen is a mark, not turf.
+        val between = flat.at(0.8f, 0f, dyPx = 8)
+        assertTrue(between != DiagramColors.turfA && between != DiagramColors.turfB, "at 1x linemen overlap, got turf")
+
+        val w = (WIDTH_PX - 2 * PAD_PX).toFloat()
+        val base = FieldGeometry.transform(FieldGeometry.window(d), w, w / FieldGeometry.cardAspect(FieldGeometry.window(d)))
+        val zoom = FieldZoom().zoomAbout(3f, base.x(0f), base.y(0f), w, w / FieldGeometry.cardAspect(FieldGeometry.window(d)))
+        val near = render("crowded-line-3x", d, Skin.Adult, dark = false, zoom = zoom)
+        val gap = near.at(0.8f, 0f, dyPx = 8)
+        assertTrue(gap == DiagramColors.turfA || gap == DiagramColors.turfB, "at 3x linemen have turf between them, got $gap")
+        assertNear(DiagramColors.offenseFill, near.at(0f, 0f, dyPx = 14), "centre's fill at 3x")
     }
 
     @Test

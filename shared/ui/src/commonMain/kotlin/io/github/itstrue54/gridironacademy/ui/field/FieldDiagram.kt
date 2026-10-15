@@ -1,6 +1,30 @@
 package io.github.itstrue54.gridironacademy.ui.field
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.gestures.awaitEachGesture
+import androidx.compose.foundation.gestures.awaitFirstDown
+import androidx.compose.foundation.gestures.calculateCentroid
+import androidx.compose.foundation.gestures.calculatePan
+import androidx.compose.foundation.gestures.calculateZoom
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Surface
+import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.Stable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.input.pointer.PointerInputScope
+import androidx.compose.ui.input.pointer.positionChanged
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.IntSize
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
@@ -24,6 +48,7 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextMeasurer
@@ -48,6 +73,24 @@ import kotlin.math.hypot
 import kotlin.math.min
 import kotlin.math.sin
 
+/** Words the field draws or announces, supplied by the caller in the learner's language. */
+@Immutable
+data class FieldLabels(
+    /** The Adult skin's line-of-scrimmage tag. */
+    val los: String = "LOS",
+    val zoomIn: String = "Zoom in",
+    val zoomOut: String = "Zoom out",
+)
+
+/** Hoistable zoom for one diagram: reset by giving a new key (DESIGN §7.10). */
+@Stable
+class FieldZoomState {
+    var value by mutableStateOf(FieldZoom())
+}
+
+@Composable
+fun rememberFieldZoomState(key: Any?): FieldZoomState = remember(key) { FieldZoomState() }
+
 /** How a player mark is shown after a tap or grading (DESIGN §7.3). */
 enum class MarkState { SELECTED, CORRECT, WRONG, MISSED }
 
@@ -61,7 +104,11 @@ enum class MarkState { SELECTED, CORRECT, WRONG, MISSED }
  * @param onTap called with the id of the tapped player, else the tapped zone.
  * @param fitToCard true: size to the diagram's own aspect, clamped to 3:4..4:3 (lesson
  *   card); false: fill the height the caller gives it (game screens).
- * @param losTag the Adult skin's line-of-scrimmage tag, localised by the caller.
+ * @param labels the words drawn on or around the field, localised by the caller.
+ * @param zoom pinch-zoom state; one per diagram by default. To keep zoom across a
+ *   read-the-defense pre-snap and its reveal, hoist it and pass the same [window].
+ * @param window the field area to fit; by default this diagram's own. Pass
+ *   `FieldGeometry.window(preSnap, reveal)` so both pictures share one scale.
  */
 @Composable
 fun FieldDiagram(
@@ -72,7 +119,9 @@ fun FieldDiagram(
     highlightZone: String? = null,
     onTap: ((String) -> Unit)? = null,
     fitToCard: Boolean = true,
-    losTag: String = "LOS",
+    labels: FieldLabels = FieldLabels(),
+    zoom: FieldZoomState = rememberFieldZoomState(diagram),
+    window: FieldWindow = remember(diagram) { FieldGeometry.window(diagram) },
 ) {
     val skin = Gridiron.skin
     val colors = Gridiron.colors
@@ -83,75 +132,104 @@ fun FieldDiagram(
     val measurer = rememberTextMeasurer(cacheSize = TEXT_CACHE)
     val currentOnTap = rememberUpdatedState(onTap)
     val tapRadius = rememberUpdatedState(skin.touchTarget)
-    val window = remember(diagram) { FieldGeometry.window(diagram) }
     val pill = remember(colors) { colors.surface.copy(alpha = PILL_ALPHA) }
     val labelStyle = type.label.copy(color = colors.ink)
     val tagStyle = labelStyle.copy(fontSize = type.label.fontSize * TAG_SCALE, lineHeight = type.label.lineHeight * TAG_SCALE)
     val baseLabelSp = if (skin.helmets) KID_MARK_LABEL_SP else ADULT_MARK_LABEL_SP
     val bodyFamily = type.body.fontFamily
 
+    var canvasSize by remember { mutableStateOf(IntSize.Zero) }
+    val density = LocalDensity.current
+    // Zoom controls appear only when the fitted picture had to shrink its marks.
+    val crowded = remember(diagram, window, canvasSize, skin.playerMark, density) {
+        canvasSize.width > 0 && with(density) {
+            val base = FieldGeometry.transform(window, canvasSize.width.toFloat(), canvasSize.height.toFloat())
+            FieldGeometry.markSize(diagram.players, base, skin.playerMark.toPx(), 0f, MARK_GAP.dp.toPx()) < skin.playerMark.toPx()
+        }
+    }
+    // Read through derivedStateOf so a pinch redraws the canvas without recomposing this.
+    val zoomed by remember(zoom) { derivedStateOf { zoom.value.zoomed } }
+
     Column(modifier) {
         val sized = if (fitToCard) Modifier.fillMaxWidth().aspectRatio(FieldGeometry.cardAspect(window)) else Modifier.fillMaxWidth().weight(1f)
-        Canvas(
-            sized
-                .clipToBounds()
-                .semantics { contentDescription = description }
-                .then(
-                    if (onTap == null) Modifier
-                    else Modifier.pointerInput(window, diagram) {
-                        detectTapGestures { tap ->
-                            if (size.width <= 0 || size.height <= 0) return@detectTapGestures
-                            val t = FieldGeometry.transform(window, size.width.toFloat(), size.height.toFloat())
-                            val radius = tapRadius.value.toPx() / 2
-                            val id = FieldGeometry.hitTest(diagram.players, t, tap.x, tap.y, radius)?.id
-                                ?: FieldGeometry.zoneAt(diagram.zones, t, tap.x, tap.y)?.id
-                            if (id != null) currentOnTap.value?.invoke(id)
+        Box(sized) {
+            Canvas(
+                Modifier.fillMaxSize()
+                    .onSizeChanged { new ->
+                        val old = canvasSize
+                        if (zoom.value.zoomed) {
+                            zoom.value = zoom.value.resized(old.width.toFloat(), old.height.toFloat(), new.width.toFloat(), new.height.toFloat())
                         }
-                    },
-                ),
-        ) {
-            // A zero-size canvas (no height left on a game screen) would make the scale 0
-            // and every yards-from-pixels conversion infinite.
-            if (size.width <= 0f || size.height <= 0f) return@Canvas
-            val t = FieldGeometry.transform(window, size.width, size.height)
-            // Marks shrink to the tightest spacing (a full-width formation on a phone puts
-            // linemen ~10dp apart), but never below a size that holds a two-digit number.
-            val markPx = FieldGeometry.markSize(diagram.players, t, skin.playerMark.toPx(), MIN_MARK.dp.toPx(), MARK_GAP.dp.toPx())
-            val labelSp = (baseLabelSp * markPx / skin.playerMark.toPx()).coerceAtLeast(MIN_MARK_LABEL_SP)
-            val markLabel = TextStyle(color = DiagramColors.label, fontFamily = bodyFamily, fontWeight = FontWeight.Bold, fontSize = labelSp.sp)
+                        canvasSize = new
+                    }
+                    .clipToBounds()
+                    .semantics { contentDescription = description }
+                    .pointerInput(window, zoom) { detectZoom(zoom) }
+                    .then(
+                        if (onTap == null) Modifier
+                        else Modifier.pointerInput(window, diagram) {
+                            detectTapGestures { tap ->
+                                if (size.width <= 0 || size.height <= 0) return@detectTapGestures
+                                val t = zoom.value.apply(FieldGeometry.transform(window, size.width.toFloat(), size.height.toFloat()))
+                                val radius = tapRadius.value.toPx() / 2
+                                val id = FieldGeometry.hitTest(diagram.players, t, tap.x, tap.y, radius)?.id
+                                    ?: FieldGeometry.zoneAt(diagram.zones, t, tap.x, tap.y)?.id
+                                if (id != null) currentOnTap.value?.invoke(id)
+                            }
+                        },
+                    ),
+            ) {
+                // A zero-size canvas (no height left on a game screen) would make the scale 0
+                // and every yards-from-pixels conversion infinite.
+                if (size.width <= 0f || size.height <= 0f) return@Canvas
+                val t = zoom.value.apply(FieldGeometry.transform(window, size.width, size.height))
+                // Marks shrink to the tightest spacing (a full-width formation on a phone puts
+                // linemen ~10dp apart), but never below a size that holds a two-digit number.
+                val markPx = FieldGeometry.markSize(diagram.players, t, skin.playerMark.toPx(), MIN_MARK.dp.toPx(), MARK_GAP.dp.toPx())
+                val labelSp = (baseLabelSp * markPx / skin.playerMark.toPx()).coerceAtLeast(MIN_MARK_LABEL_SP)
+                val markLabel = TextStyle(color = DiagramColors.label, fontFamily = bodyFamily, fontWeight = FontWeight.Bold, fontSize = labelSp.sp)
 
-            // Back to front: field, zones, paths, labels, then players on top so no label
-            // ever hides a player (DESIGN 7.2-7.5).
-            drawTurf(t)
-            drawZones(diagram, t, highlightZone)
-            diagram.routes.forEach { route ->
-                diagram.players.firstOrNull { it.id == route.playerId }?.let { drawRoute(route, it, t) }
-            }
-            diagram.zones.forEach { z ->
-                if (z.label.isNotEmpty()) {
-                    drawPill(measurer, z.label, labelStyle, pill, Offset(t.x(z.x + z.w / 2), t.y(z.y + z.h / 2)))
+                // Back to front: field, zones, paths, labels, then players on top so no label
+                // ever hides a player (DESIGN 7.2-7.5).
+                drawTurf(t)
+                drawZones(diagram, t, highlightZone)
+                diagram.routes.forEach { route ->
+                    diagram.players.firstOrNull { it.id == route.playerId }?.let { drawRoute(route, it, t) }
                 }
-            }
-            diagram.routes.filter { it.label.isNotEmpty() && it.points.isNotEmpty() }.forEach { r ->
-                val end = r.points.last()
-                drawPill(measurer, r.label, labelStyle, pill, Offset(t.x(end.x), t.y(end.y) - ROUTE_LABEL_LIFT.dp.toPx()))
-            }
-            if (skin.losTag) {
-                // Just under the line at whichever end has no player on it; none if both do.
-                val tag = measurer.measure(losTag, tagStyle)
-                val w = tag.size.width + 12.dp.toPx()
-                val h = tag.size.height + 4.dp.toPx()
-                val y = t.y(0f) + LOS_TAG_DROP.dp.toPx()
-                val inset = LOS_TAG_INSET.dp.toPx()
-                val clearance = markPx / 2
-                fun free(left: Float) = diagram.players.none { pl ->
-                    val px = t.x(pl.x); val py = t.y(pl.y)
-                    px + clearance > left && px - clearance < left + w && py + clearance > y - h / 2 && py - clearance < y + h / 2
+                diagram.zones.forEach { z ->
+                    if (z.label.isNotEmpty()) {
+                        drawPill(measurer, z.label, labelStyle, pill, Offset(t.x(z.x + z.w / 2), t.y(z.y + z.h / 2)))
+                    }
                 }
-                val left = listOf(inset, size.width - inset - w).firstOrNull { free(it) }
-                if (left != null) drawPill(measurer, losTag, tagStyle, pill, Offset(left, y), anchorLeft = true)
+                diagram.routes.filter { it.label.isNotEmpty() && it.points.isNotEmpty() }.forEach { r ->
+                    val end = r.points.last()
+                    drawPill(measurer, r.label, labelStyle, pill, Offset(t.x(end.x), t.y(end.y) - ROUTE_LABEL_LIFT.dp.toPx()))
+                }
+                if (skin.losTag) {
+                    // Just under the line at whichever end has no player on it; none if both do.
+                    val tag = measurer.measure(labels.los, tagStyle)
+                    val w = tag.size.width + 12.dp.toPx()
+                    val h = tag.size.height + 4.dp.toPx()
+                    val y = t.y(0f) + LOS_TAG_DROP.dp.toPx()
+                    val inset = LOS_TAG_INSET.dp.toPx()
+                    val clearance = markPx / 2
+                    fun free(left: Float) = diagram.players.none { pl ->
+                        val px = t.x(pl.x); val py = t.y(pl.y)
+                        px + clearance > left && px - clearance < left + w && py + clearance > y - h / 2 && py - clearance < y + h / 2
+                    }
+                    val left = listOf(inset, size.width - inset - w).firstOrNull { free(it) }
+                    if (left != null) drawPill(measurer, labels.los, tagStyle, pill, Offset(left, y), anchorLeft = true)
+                }
+                diagram.players.forEach { drawPlayer(it, t, markPx / 2, skin.helmets, marks[it.id], reducedMotion, measurer, markLabel) }
             }
-            diagram.players.forEach { drawPlayer(it, t, markPx / 2, skin.helmets, marks[it.id], reducedMotion, measurer, markLabel) }
+            if (crowded || zoomed) {
+                ZoomButtons(
+                    zoom = zoom,
+                    size = canvasSize,
+                    labels = labels,
+                    modifier = Modifier.align(Alignment.BottomEnd).padding(ZOOM_BUTTON_INSET.dp),
+                )
+            }
         }
         if (diagram.caption.isNotEmpty()) {
             Text(diagram.caption, style = type.label, color = colors.inkDim, modifier = Modifier.padding(top = 8.dp))
@@ -160,6 +238,8 @@ fun FieldDiagram(
 }
 
 private const val PILL_ALPHA = 0.7f
+private const val ZOOM_BUTTON_INSET = 6
+private const val ZOOM_BUTTON_ALPHA = 0.92f
 private const val TEXT_CACHE = 64
 private const val ROUTE_LABEL_LIFT = 14
 private const val LOS_TAG_INSET = 6
@@ -176,6 +256,67 @@ private const val MINOR_LINE_ALPHA = 0.35f
 private const val MAJOR_LINE_ALPHA = 0.6f
 private const val HASH_ALPHA = 0.4f
 private const val SELECTED_SCALE = 1.15f
+
+// ---- Zoom (DESIGN §7.10) ----
+
+/**
+ * Two fingers pinch and pan. One finger pans only once zoomed in, and only while the
+ * view can still move that way: at 1x, or pinned against an edge, a drag passes through
+ * and scrolls the lesson card.
+ */
+private suspend fun PointerInputScope.detectZoom(zoom: FieldZoomState) = awaitEachGesture {
+    awaitFirstDown(requireUnconsumed = false)
+    do {
+        val event = awaitPointerEvent()
+        val fingers = event.changes.count { it.pressed }
+        val current = zoom.value
+        if (fingers >= 2 || current.zoomed) {
+            val factor = event.calculateZoom()
+            val pan = event.calculatePan()
+            if (factor != 1f || pan != Offset.Zero) {
+                val c = event.calculateCentroid(useCurrent = true)
+                val w = size.width.toFloat()
+                val h = size.height.toFloat()
+                val next = current.zoomAbout(factor, c.x, c.y, w, h).panBy(pan.x, pan.y, w, h)
+                if (fingers >= 2 || next != current) {
+                    zoom.value = next
+                    event.changes.forEach { if (it.positionChanged()) it.consume() }
+                }
+            }
+        }
+    } while (event.changes.any { it.pressed })
+}
+
+/** The accessible alternative to pinching (DESIGN §12): zoom out, zoom in, about the centre. */
+@Composable
+private fun ZoomButtons(zoom: FieldZoomState, size: IntSize, labels: FieldLabels, modifier: Modifier) {
+    val skin = Gridiron.skin
+    val colors = Gridiron.colors
+    val w = size.width.toFloat()
+    val h = size.height.toFloat()
+    Row(modifier, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        listOf(
+            Triple("−", labels.zoomOut, 1f / FieldGeometry.ZOOM_STEP),
+            Triple("+", labels.zoomIn, FieldGeometry.ZOOM_STEP),
+        ).forEach { (glyph, label, factor) ->
+            val enabled = if (factor < 1f) zoom.value.zoomed else zoom.value.scale < FieldGeometry.MAX_ZOOM
+            Surface(
+                onClick = { zoom.value = zoom.value.zoomAbout(factor, w / 2, h / 2, w, h) },
+                enabled = enabled,
+                shape = skin.buttonShape,
+                color = colors.surfaceRaised.copy(alpha = ZOOM_BUTTON_ALPHA),
+                contentColor = if (enabled) colors.ink else colors.line,
+                border = BorderStroke(1.dp, colors.line),
+                modifier = Modifier.size(skin.touchTarget).semantics { contentDescription = label },
+            ) {
+                Box(contentAlignment = Alignment.Center) {
+                    // The label says it; the glyph is decoration for screen readers.
+                    Text(glyph, style = Gridiron.type.title, modifier = Modifier.clearAndSetSemantics {})
+                }
+            }
+        }
+    }
+}
 
 // ---- Field dressing (DESIGN §7.2) ----
 
