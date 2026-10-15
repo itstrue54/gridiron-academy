@@ -33,6 +33,9 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import io.github.itstrue54.gridironacademy.model.Level
 import io.github.itstrue54.gridironacademy.ui.app.LearnerAppState
+import io.github.itstrue54.gridironacademy.ui.app.NextUp
+import io.github.itstrue54.gridironacademy.ui.resources.big_game
+import io.github.itstrue54.gridironacademy.ui.resources.checkpoint
 import io.github.itstrue54.gridironacademy.ui.components.Glyph
 import io.github.itstrue54.gridironacademy.ui.components.GlyphIcon
 import io.github.itstrue54.gridironacademy.ui.components.PrimaryButton
@@ -63,7 +66,7 @@ fun HomeScreen(state: LearnerAppState) {
     val c = Gridiron.colors
     val skin = Gridiron.skin
     val kid = skin.voice == Voice.KID
-    val next = state.nextLesson()
+    val next = state.nextUp()
     Column(Modifier.fillMaxSize().background(c.surface).safeDrawingPadding().padding(skin.gutter)) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(state.profile?.nickname.orEmpty(), style = Gridiron.type.title, color = c.ink, modifier = Modifier.weight(1f))
@@ -77,7 +80,18 @@ fun HomeScreen(state: LearnerAppState) {
         }
         Spacer(Modifier.size(16.dp))
         if (next != null) {
-            PrimaryButton(stringResource(Res.string.continue_lesson, next.second.title), onClick = { state.startLesson(next.first, next.second) })
+            val title = when (next) {
+                is NextUp.Drill -> next.lesson.title
+                is NextUp.Checkpoint -> stringResource(Res.string.checkpoint)
+                is NextUp.BigGame -> stringResource(Res.string.big_game)
+            }
+            PrimaryButton(stringResource(Res.string.continue_lesson, title), onClick = {
+                when (next) {
+                    is NextUp.Drill -> state.startLesson(next.level, next.lesson)
+                    is NextUp.Checkpoint -> { state.openLevel(next.level); state.startCheckpoint(next.level) }
+                    is NextUp.BigGame -> { state.openLevel(next.level); state.startBigGame(next.level) }
+                }
+            })
         } else {
             Text(
                 stringResource(if (kid) Res.string.all_done_kid else Res.string.all_done_adult),

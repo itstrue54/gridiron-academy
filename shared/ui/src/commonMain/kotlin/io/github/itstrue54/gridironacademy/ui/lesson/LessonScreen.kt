@@ -26,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import io.github.itstrue54.gridironacademy.engine.Answer
 import io.github.itstrue54.gridironacademy.engine.Grade
+import io.github.itstrue54.gridironacademy.engine.LessonSession
 import io.github.itstrue54.gridironacademy.model.DiagramTap
 import io.github.itstrue54.gridironacademy.model.Learn
 import io.github.itstrue54.gridironacademy.model.Match
@@ -49,6 +50,8 @@ import io.github.itstrue54.gridironacademy.ui.resources.best_adult
 import io.github.itstrue54.gridironacademy.ui.resources.best_kid
 import io.github.itstrue54.gridironacademy.ui.resources.best_was
 import io.github.itstrue54.gridironacademy.ui.resources.check
+import io.github.itstrue54.gridironacademy.ui.resources.close_checkpoint
+import io.github.itstrue54.gridironacademy.ui.resources.close_game
 import io.github.itstrue54.gridironacademy.ui.resources.close_lesson
 import io.github.itstrue54.gridironacademy.ui.resources.continue_
 import io.github.itstrue54.gridironacademy.ui.resources.next
@@ -84,12 +87,54 @@ fun LessonScreen(
     state: LearnerAppState,
     levelId: String,
     lessonId: String,
-    controller: LessonController = state.lessonController(levelId, lessonId),
+    controller: LessonController? = state.lessonControllerOrNull(levelId, lessonId),
+) {
+    if (controller == null) return // a quit lesson fading out
+    StepPlayer(
+        controller = controller,
+        closeLabel = stringResource(Res.string.close_lesson),
+        onClose = { state.back() },
+        onFinished = { state.finishLesson(levelId, lessonId, it) },
+    )
+}
+
+/** The level test (DESIGN 9.2): the same player, each question asked once. */
+@Composable
+fun CheckpointScreen(state: LearnerAppState, levelId: String, testOut: Boolean) {
+    StepPlayer(
+        controller = state.checkpointControllerOrNull(levelId, testOut) ?: return,
+        closeLabel = stringResource(Res.string.close_checkpoint),
+        onClose = { state.back() },
+        onFinished = { state.finishCheckpoint(levelId, testOut, it) },
+    )
+}
+
+/** A level game that isn't a Speed round (Game day, Read the defense, Diagram dash). */
+@Composable
+fun StepGameScreen(state: LearnerAppState, levelId: String) {
+    StepPlayer(
+        controller = state.gameControllerOrNull(levelId) ?: return,
+        closeLabel = stringResource(Res.string.close_game),
+        onClose = { state.back() },
+        onFinished = { state.finishBigGame(levelId, it) },
+    )
+}
+
+/**
+ * Plays any list of steps: lessons, the Checkpoint and step-based games. [onFinished]
+ * runs once the last step is done; the caller records the result.
+ */
+@Composable
+fun StepPlayer(
+    controller: LessonController,
+    closeLabel: String,
+    onClose: () -> Unit,
+    onFinished: (LessonSession) -> Unit,
 ) {
     val c = Gridiron.colors
     val skin = Gridiron.skin
     LaunchedEffect(controller.finished) {
-        if (controller.finished) state.finishLesson(levelId, lessonId, controller.result)
+        if (controller.finished) onFinished(controller.result)
     }
     val step = controller.step ?: return
     val stepKey = "${step.id}#${controller.done}"
@@ -99,7 +144,7 @@ fun LessonScreen(
         val sheetMax = maxHeight * SHEET_MAX_FRACTION
         Column(Modifier.fillMaxSize()) {
             Row(Modifier.padding(start = 4.dp, end = skin.gutter), verticalAlignment = Alignment.CenterVertically) {
-                IconAction(Glyph.CLOSE, stringResource(Res.string.close_lesson), onClick = { state.back() })
+                IconAction(Glyph.CLOSE, closeLabel, onClick = onClose)
                 DriveBar(controller.done, controller.total, stringResource(Res.string.step_of, controller.done + 1, controller.total), Modifier.weight(1f))
             }
             Column(

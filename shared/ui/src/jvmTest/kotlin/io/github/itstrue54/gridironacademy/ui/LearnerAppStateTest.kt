@@ -9,6 +9,7 @@ import io.github.itstrue54.gridironacademy.progress.AgeBand
 import io.github.itstrue54.gridironacademy.ui.app.InMemoryLearnerStore
 import io.github.itstrue54.gridironacademy.ui.app.LearnerAppState
 import io.github.itstrue54.gridironacademy.ui.app.LessonController
+import io.github.itstrue54.gridironacademy.ui.app.NextUp
 import io.github.itstrue54.gridironacademy.ui.app.Screen
 import io.github.itstrue54.gridironacademy.ui.theme.Skin
 import kotlin.test.*
@@ -170,5 +171,142 @@ class LearnerAppStateTest {
     fun theWelcomeSceneComesFromContent() {
         assertTrue(content.scenes.welcome.diagram.players.isNotEmpty())
         assertTrue(content.scenes.welcome.description.isNotBlank())
+    }
+
+    private fun playPerfect(c: LessonController) {
+        while (!c.finished) { c.submit(perfect(c.step!!)); if (!c.finished && c.grade != null) c.next() }
+    }
+
+    private fun passAllDrills(s: LearnerAppState, level: Level) {
+        content.unitsOf(level).flatMap { it.lessons }.forEach { lesson ->
+            s.startLesson(level, lesson)
+            val c = s.lessonController(level.id, lesson.id)
+            playPerfect(c)
+            s.finishLesson(level.id, lesson.id, c.result)
+            s.back()
+        }
+    }
+
+    @Test
+    fun aKidPassesLevelOneThroughDrillsCheckpointAndSpeedRound() {
+        val s = LearnerAppState(content, InMemoryLearnerStore()) { 600 }
+        s.createProfile("Leo", AgeBand.AGE_8_9)
+        val level = s.levels.first()
+        s.openLevel(level)
+        assertFalse(s.checkpointOpen(level))
+        assertFalse(s.canTestOut(level), "only adults test out")
+        passAllDrills(s, level)
+        assertEquals(NextUp.Checkpoint(level), s.nextUp())
+
+        s.startCheckpoint(level)
+        val test = s.checkpointController(level.id, testOut = false)
+        assertEquals(level.gate.testQuestions, test.total)
+        playPerfect(test)
+        s.finishCheckpoint(level.id, false, test.result)
+        val cp = s.screen as Screen.GateDone
+        assertTrue(cp.passed && !cp.levelPassed)
+        assertEquals(NextUp.BigGame(level), s.nextUp())
+
+        s.back()
+        s.startBigGame(level)
+        assertTrue(s.bigGameIsSpeedRound(level.id))
+        val round = s.speedRoundController(level.id)
+        var t = 0L
+        while (!round.over) {
+            t += 1_000
+            round.tick(t)
+            round.current?.let { round.answer(perfect(it)) }
+        }
+        s.finishSpeedRound(level.id, round)
+        val game = s.screen as Screen.GateDone
+        assertEquals(100, game.scorePct)
+        assertTrue(game.passed && game.levelPassed)
+        assertTrue(level.id in s.save.progress.levelsPassed)
+        assertNull(s.nextUp(), "nothing left on this track until Level 2 is written")
+    }
+
+    @Test
+    fun theSpeedRoundClockEndsTheGameAndCountsWhatWasLeft() {
+        val s = LearnerAppState(content, InMemoryLearnerStore()) { 700 }
+        s.createProfile("Sam", AgeBand.AGE_18_PLUS)
+        val level = s.levels.first()
+        s.startBigGame(level)
+        val round = s.speedRoundController(level.id)
+        round.current?.let { round.answer(perfect(it)) }
+        round.tick(61_000)
+        assertTrue(round.over)
+        assertEquals(100 / level.gate.gameQuestions, round.scorePct)
+        val before = round.points
+        round.current?.let { round.answer(perfect(it)) }
+        assertEquals(before, round.points, "no answers after the whistle")
+    }
+
+    @Test
+    fun anAdultCanTestOutAndTheDrillsCountAsPassed() {
+        val s = LearnerAppState(content, InMemoryLearnerStore()) { 800 }
+        s.createProfile("Sam", AgeBand.AGE_18_PLUS)
+        val level = s.levels.first()
+        s.openLevel(level)
+        assertTrue(s.canTestOut(level))
+        s.startCheckpoint(level, testOut = true)
+        val test = s.checkpointController(level.id, testOut = true)
+        playPerfect(test)
+        s.finishCheckpoint(level.id, true, test.result)
+        val done = s.screen as Screen.GateDone
+        assertTrue(done.passed && done.testOut)
+        assertEquals(s.lessonCount(level), s.lessonsPassed(level))
+        assertTrue(s.bigGameOpen(level))
+    }
+
+    @Test
+    fun aFailedCheckpointQueuesMissesAndKeepsTheGameLocked() {
+        val s = LearnerAppState(content, InMemoryLearnerStore()) { 900 }
+        s.createProfile("Leo", AgeBand.AGE_10_12)
+        val level = s.levels.first()
+        passAllDrills(s, level)
+        s.startCheckpoint(level)
+        val test = s.checkpointController(level.id, testOut = false)
+        while (!test.finished) { test.submit(Answer.Choice(-1)); if (!test.finished) test.next() }
+        assertEquals(level.gate.testQuestions, test.done, "a test asks each question once")
+        s.finishCheckpoint(level.id, false, test.result)
+        assertFalse((s.screen as Screen.GateDone).passed)
+        assertFalse(s.bigGameOpen(level))
+        assertTrue(s.save.progress.review.isNotEmpty())
+    }
+
+    @Test
+    fun aRetakeDrawsDifferentQuestions() {
+        val s = LearnerAppState(content, InMemoryLearnerStore()) { 1_000 }
+        s.createProfile("Sam", AgeBand.AGE_18_PLUS)
+        val level = s.levels.first()
+        s.openLevel(level)
+        fun drawn(): List<String> {
+            s.startCheckpoint(level, testOut = true)
+            val c = s.checkpointController(level.id, true)
+            val ids = mutableListOf<String>()
+            while (!c.finished) { ids += c.step!!.id; c.submit(Answer.Choice(-1)); c.next() }
+            s.back()
+            return ids
+        }
+        val first = drawn()
+        val second = drawn()
+        assertEquals(level.gate.testQuestions, first.size)
+        assertNotEquals(first, second, "a retake is a new draw, not the same 12 again")
+    }
+
+    @Test
+    fun aScreenThatIsNotOnTopNeverStartsANewAttempt() {
+        val s = LearnerAppState(content, InMemoryLearnerStore()) { 1_100 }
+        s.createProfile("Leo", AgeBand.AGE_8_9)
+        val level = s.levels.first()
+        val lesson = s.nextLesson()!!.second
+        s.openLevel(level)
+        assertNull(s.lessonControllerOrNull(level.id, lesson.id))
+        assertNull(s.speedRoundControllerOrNull(level.id))
+        assertNull(s.checkpointControllerOrNull(level.id, false))
+        s.startLesson(level, lesson)
+        assertNotNull(s.lessonControllerOrNull(level.id, lesson.id))
+        s.back() // quit: the fading-out lesson screen asks again
+        assertNull(s.lessonControllerOrNull(level.id, lesson.id))
     }
 }

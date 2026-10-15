@@ -50,4 +50,13 @@ class SpeedRound(
     }
 
     val accuracyPct: Int get() = if (index == 0) 0 else (100f * correct / index).roundToInt()
+
+    /**
+     * The gate score: right answers out of every question in the round, so questions the
+     * clock cut off count as missed. Accuracy alone would let one right answer and a
+     * wait pass the Big Game.
+     */
+    val scorePct: Int get() = if (questions.isEmpty()) 100 else (100f * correct / questions.size).roundToInt()
+
+    val questionCount: Int get() = questions.size
 }

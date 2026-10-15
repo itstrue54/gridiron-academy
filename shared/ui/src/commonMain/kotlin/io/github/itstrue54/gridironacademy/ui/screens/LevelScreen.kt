@@ -24,6 +24,7 @@ import io.github.itstrue54.gridironacademy.ui.components.Card
 import io.github.itstrue54.gridironacademy.ui.components.Glyph
 import io.github.itstrue54.gridironacademy.ui.components.GlyphIcon
 import io.github.itstrue54.gridironacademy.ui.components.IconAction
+import io.github.itstrue54.gridironacademy.ui.components.SecondaryButton
 import io.github.itstrue54.gridironacademy.ui.components.StarRow
 import io.github.itstrue54.gridironacademy.ui.resources.Res
 import io.github.itstrue54.gridironacademy.ui.resources.back
@@ -31,7 +32,13 @@ import io.github.itstrue54.gridironacademy.ui.resources.big_game
 import io.github.itstrue54.gridironacademy.ui.resources.big_game_blurb
 import io.github.itstrue54.gridironacademy.ui.resources.checkpoint
 import io.github.itstrue54.gridironacademy.ui.resources.checkpoint_blurb
-import io.github.itstrue54.gridironacademy.ui.resources.coming_soon
+import io.github.itstrue54.gridironacademy.ui.resources.best_score
+import io.github.itstrue54.gridironacademy.ui.resources.big_game_locked
+import io.github.itstrue54.gridironacademy.ui.resources.checkpoint_locked
+import io.github.itstrue54.gridironacademy.ui.resources.play_big_game
+import io.github.itstrue54.gridironacademy.ui.resources.start_checkpoint
+import io.github.itstrue54.gridironacademy.ui.resources.test_out
+import io.github.itstrue54.gridironacademy.ui.resources.test_out_blurb
 import io.github.itstrue54.gridironacademy.ui.resources.drill_locked
 import io.github.itstrue54.gridironacademy.ui.resources.level_n
 import io.github.itstrue54.gridironacademy.ui.resources.level_progress
@@ -99,28 +106,73 @@ fun LevelScreen(state: LearnerAppState, level: Level) {
             }
             item {
                 Spacer(Modifier.size(8.dp))
-                GateCard(stringResource(Res.string.checkpoint), stringResource(Res.string.checkpoint_blurb, level.gate.testQuestions, level.gate.testPassPct))
+                val best = state.save.progress.levelTests[level.id]
+                GateCard(
+                    title = stringResource(Res.string.checkpoint),
+                    blurb = stringResource(Res.string.checkpoint_blurb, level.gate.testQuestions, level.gate.testPassPct),
+                    open = state.checkpointOpen(level),
+                    passed = (best ?: -1) >= level.gate.testPassPct,
+                    best = best,
+                    lockedReason = stringResource(Res.string.checkpoint_locked),
+                    action = stringResource(Res.string.start_checkpoint),
+                    onStart = { state.startCheckpoint(level) },
+                    testOut = if (state.canTestOut(level)) ({ state.startCheckpoint(level, testOut = true) }) else null,
+                )
             }
             item {
-                GateCard(stringResource(Res.string.big_game), stringResource(Res.string.big_game_blurb, level.gate.gamePassPct))
+                val best = state.save.progress.levelGames[level.id]
+                GateCard(
+                    title = stringResource(Res.string.big_game),
+                    blurb = stringResource(Res.string.big_game_blurb, level.gate.gamePassPct),
+                    open = state.bigGameOpen(level),
+                    passed = (best ?: -1) >= level.gate.gamePassPct,
+                    best = best,
+                    lockedReason = stringResource(Res.string.big_game_locked),
+                    action = stringResource(Res.string.play_big_game),
+                    onStart = { state.startBigGame(level) },
+                )
             }
         }
     }
 }
 
-/** The level test and level game: shown so the path is visible, opened in a later step of M1. */
+/**
+ * The Checkpoint or Big Game card (DESIGN 9.2): locked with its reason, or open with its
+ * best score. An adult can test out of a level from a locked Checkpoint.
+ */
 @Composable
-private fun GateCard(title: String, blurb: String) {
+private fun GateCard(
+    title: String,
+    blurb: String,
+    open: Boolean,
+    passed: Boolean,
+    best: Int?,
+    lockedReason: String,
+    action: String,
+    onStart: () -> Unit,
+    testOut: (() -> Unit)? = null,
+) {
     val c = Gridiron.colors
-    Card(edge = c.line) {
-        Column {
+    Card(edge = if (passed) c.correct else if (open) c.gold else c.line, onClick = if (open) onStart else null) {
+        Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(title, style = Gridiron.type.title, color = c.inkDim, modifier = Modifier.weight(1f))
-                GlyphIcon(Glyph.LOCK, c.inkDim, size = 20.dp)
+                Text(title, style = Gridiron.type.title, color = if (open) c.ink else c.inkDim, modifier = Modifier.weight(1f))
+                when {
+                    passed -> GlyphIcon(Glyph.CHECK, c.correct, size = 20.dp)
+                    !open -> GlyphIcon(Glyph.LOCK, c.inkDim, size = 20.dp)
+                }
             }
             Text(blurb, style = Gridiron.type.label, color = c.inkDim)
-            Spacer(Modifier.width(4.dp))
-            Text(stringResource(Res.string.coming_soon), style = Gridiron.type.label, color = c.ink)
+            when {
+                best != null -> Text(stringResource(Res.string.best_score, best), style = Gridiron.type.label, color = c.ink)
+                !open -> Text(lockedReason, style = Gridiron.type.label, color = c.ink)
+                else -> Text(action, style = Gridiron.type.label, color = c.link)
+            }
+            if (testOut != null) {
+                Spacer(Modifier.size(6.dp))
+                Text(stringResource(Res.string.test_out_blurb), style = Gridiron.type.label, color = c.inkDim)
+                SecondaryButton(stringResource(Res.string.test_out), onClick = testOut)
+            }
         }
     }
 }

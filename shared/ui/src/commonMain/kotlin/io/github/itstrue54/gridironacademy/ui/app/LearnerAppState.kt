@@ -9,6 +9,9 @@ import io.github.itstrue54.gridironacademy.engine.Grade
 import io.github.itstrue54.gridironacademy.engine.Answer
 import io.github.itstrue54.gridironacademy.engine.Grader
 import io.github.itstrue54.gridironacademy.engine.LessonSession
+import io.github.itstrue54.gridironacademy.engine.LevelTest
+import io.github.itstrue54.gridironacademy.model.GameType
+import io.github.itstrue54.gridironacademy.progress.Progress
 import io.github.itstrue54.gridironacademy.model.Lesson
 import io.github.itstrue54.gridironacademy.model.Level
 import io.github.itstrue54.gridironacademy.model.Step
@@ -27,6 +30,26 @@ sealed interface Screen {
     data object Home : Screen
     data class LevelDetail(val levelId: String) : Screen
     data class LessonPlay(val levelId: String, val lessonId: String) : Screen
+    /** The level test (DESIGN 9.2). [testOut]: an adult skipping the level's drills. */
+    data class CheckpointPlay(val levelId: String, val testOut: Boolean) : Screen
+    /** The level game (Speed round for Level 1). */
+    data class BigGamePlay(val levelId: String) : Screen
+    /** The result of a Checkpoint or Big Game, and the level-complete moment. */
+    data class GateDone(
+        val levelId: String,
+        val gate: Gate,
+        val scorePct: Int,
+        val passPct: Int,
+        val passed: Boolean,
+        /** True only when this result is the one that passed the level (DESIGN 9.7). */
+        val levelPassed: Boolean,
+        val testOut: Boolean = false,
+        /** Speed round extras; zero for other games. */
+        val points: Int = 0,
+        val bestStreak: Int = 0,
+        /** What to look at again: the questions missed, with their answers. */
+        val review: List<ReviewItem> = emptyList(),
+    ) : Screen
     data class LessonDone(
         val levelId: String,
         val lessonId: String,
@@ -36,6 +59,22 @@ sealed interface Screen {
         val passed: Boolean,
         val missedCount: Int,
     ) : Screen
+}
+
+enum class Gate { CHECKPOINT, BIG_GAME }
+
+/**
+ * A missed question shown after a game: what was asked, the answer, and why. A true/false
+ * answer is kept as [answerTrue] so the screen words it in the learner's language.
+ */
+data class ReviewItem(val question: String, val why: String, val answerText: String? = null, val answerTrue: Boolean? = null)
+
+/** What Home's Continue opens next (DESIGN 9.1). */
+sealed interface NextUp {
+    val level: Level
+    data class Drill(override val level: Level, val lesson: Lesson) : NextUp
+    data class Checkpoint(override val level: Level) : NextUp
+    data class BigGame(override val level: Level) : NextUp
 }
 
 /**
@@ -81,9 +120,66 @@ class LearnerAppState(
 
     // A finished lesson's controller is kept until the next lesson starts: the outgoing
     // screen is still drawn during the cross-fade and must not restart the lesson.
-    fun lessonController(levelId: String, lessonId: String): LessonController =
+    /**
+     * The controller for a lesson. It is created only while that lesson is the screen on
+     * top: an outgoing screen still drawn during the cross-fade gets the existing one, or
+     * null after a quit, and never starts a new attempt behind the learner's back.
+     */
+    fun lessonControllerOrNull(levelId: String, lessonId: String): LessonController? =
         activeLesson?.takeIf { it.first == lessonId }?.second
-            ?: LessonController(lesson(levelId, lessonId).steps).also { activeLesson = lessonId to it }
+            ?: if (screen == Screen.LessonPlay(levelId, lessonId)) {
+                LessonController(lesson(levelId, lessonId).steps).also { activeLesson = lessonId to it }
+            } else null
+
+    fun lessonController(levelId: String, lessonId: String): LessonController =
+        checkNotNull(lessonControllerOrNull(levelId, lessonId)) { "lesson $lessonId is not on screen" }
+
+    /** The Checkpoint or Big Game in progress, keyed by its screen, like [activeLesson]. */
+    private var activeGate: Pair<Screen, Any>? = null
+
+    /** Gate attempts this session, so every retake draws a new set of questions. */
+    private var gateAttempts = 0
+
+    /**
+     * A seed per level, day and attempt. The attempt count makes a same-day retake ask
+     * different questions (it can't be learned from the last try's feedback); the level
+     * and day keep a single attempt reproducible.
+     */
+    private fun gateSeed(level: Level): Long =
+        (level.id.hashCode().toLong() * SEED_MIX + today()) * SEED_MIX + gateAttempts
+
+    private inline fun <reified T : Any> gate(key: Screen, make: () -> T): T? {
+        (activeGate?.takeIf { it.first == key }?.second as? T)?.let { return it }
+        if (screen != key) return null
+        return make().also { activeGate = key to it }
+    }
+
+    fun checkpointControllerOrNull(levelId: String, testOut: Boolean): LessonController? =
+        gate(Screen.CheckpointPlay(levelId, testOut)) {
+            val level = content.level(levelId)
+            LessonController(LevelTest.test(content.unitsOf(level), level.gate, gateSeed(level)), retryMisses = false)
+        }
+
+    fun checkpointController(levelId: String, testOut: Boolean): LessonController =
+        checkNotNull(checkpointControllerOrNull(levelId, testOut)) { "checkpoint $levelId is not on screen" }
+
+    /** Speed round levels get the timed game; other games play through the lesson player. */
+    fun bigGameIsSpeedRound(levelId: String): Boolean = content.level(levelId).gate.game == GameType.SPEED_ROUND
+
+    fun speedRoundControllerOrNull(levelId: String): SpeedRoundController? =
+        gate(Screen.BigGamePlay(levelId)) {
+            val level = content.level(levelId)
+            SpeedRoundController(LevelTest.gamePool(content.unitsOf(level), level.gate, gateSeed(level)), SPEED_ROUND_MILLIS)
+        }
+
+    fun speedRoundController(levelId: String): SpeedRoundController =
+        checkNotNull(speedRoundControllerOrNull(levelId)) { "big game $levelId is not on screen" }
+
+    fun gameControllerOrNull(levelId: String): LessonController? =
+        gate(Screen.BigGamePlay(levelId)) {
+            val level = content.level(levelId)
+            LessonController(LevelTest.gamePool(content.unitsOf(level), level.gate, gateSeed(level)), retryMisses = false)
+        }
 
     val profile: Profile? get() = save.profile
 
@@ -106,6 +202,25 @@ class LearnerAppState(
     fun nextLesson(): Pair<Level, Lesson>? =
         levels.firstNotNullOfOrNull { level -> Gating.nextLesson(level, content.unitsOf(level), save.progress)?.let { level to it } }
 
+    fun checkpointOpen(level: Level): Boolean = Gating.testUnlocked(level, content.unitsOf(level), save.progress)
+
+    fun bigGameOpen(level: Level): Boolean = Gating.gameUnlocked(level, save.progress)
+
+    /** Adults may take the Checkpoint before the drills to skip them (DESIGN 9.2, SPEC 4.5). */
+    fun canTestOut(level: Level): Boolean =
+        profile?.ageBand?.track == Track.ADULT && levelUnlocked(level) && !checkpointOpen(level) &&
+            level.id !in save.progress.levelsPassed
+
+    fun nextUp(): NextUp? {
+        for (level in levels) {
+            if (!levelUnlocked(level) || level.id in save.progress.levelsPassed) continue
+            Gating.nextLesson(level, content.unitsOf(level), save.progress)?.let { return NextUp.Drill(level, it) }
+            if (!bigGameOpen(level)) return if (checkpointOpen(level)) NextUp.Checkpoint(level) else null
+            return NextUp.BigGame(level)
+        }
+        return null
+    }
+
     fun lessonsPassed(level: Level): Int = content.unitsOf(level).flatMap { it.lessons }.count { save.progress.lessonPassed(it.id) }
 
     fun lessonCount(level: Level): Int = content.unitsOf(level).sumOf { it.lessons.size }
@@ -121,6 +236,7 @@ class LearnerAppState(
     fun back(): Boolean {
         if (backStack.size <= 1) return false
         if (screen is Screen.LessonPlay) activeLesson = null // quitting drops the attempt
+        if (screen is Screen.CheckpointPlay || screen is Screen.BigGamePlay) activeGate = null
         backStack = backStack.dropLast(1)
         return true
     }
@@ -138,6 +254,61 @@ class LearnerAppState(
         activeLesson = null
         go(Screen.LessonPlay(level.id, lesson.id))
     }
+
+    fun startCheckpoint(level: Level, testOut: Boolean = false) {
+        activeGate = null
+        gateAttempts++
+        go(Screen.CheckpointPlay(level.id, testOut))
+    }
+
+    fun startBigGame(level: Level) {
+        activeGate = null
+        gateAttempts++
+        go(Screen.BigGamePlay(level.id))
+    }
+
+    /** Records a Checkpoint; a test-out that passes also marks the level's drills passed. */
+    fun finishCheckpoint(levelId: String, testOut: Boolean, session: LessonSession) {
+        if (screen != Screen.CheckpointPlay(levelId, testOut)) return
+        val level = content.level(levelId)
+        val units = content.unitsOf(level)
+        val steps = session.missedIds
+        val missed = units.flatMap { u -> u.lessons.flatMap { it.steps } }.filter { it.id in steps }.associate { it.id to it.concept }
+        val before = save.progress
+        val recorded = if (testOut) Gating.testOut(level, units, before, session.scorePct) else Gating.recordTest(level, before, session.scorePct)
+        val after = missed.entries.fold(recorded) { acc, (id, concept) -> Review.miss(acc, id, concept, today()) }.touch(today())
+        commit(save.copy(progress = after))
+        replaceTop(gateDone(level, Gate.CHECKPOINT, session.scorePct, level.gate.testPassPct, before, after).copy(testOut = testOut))
+    }
+
+    /** Records a Big Game played through the lesson player (non-speed-round games). */
+    fun finishBigGame(levelId: String, session: LessonSession) {
+        if (screen != Screen.BigGamePlay(levelId)) return
+        recordGame(content.level(levelId), session.scorePct, review = emptyList())
+    }
+
+    fun finishSpeedRound(levelId: String, round: SpeedRoundController) {
+        if (screen != Screen.BigGamePlay(levelId)) return
+        recordGame(content.level(levelId), round.scorePct, round.review, round.points, round.bestStreak)
+    }
+
+    private fun recordGame(level: Level, pct: Int, review: List<ReviewItem>, points: Int = 0, bestStreak: Int = 0) {
+        val before = save.progress
+        val after = Gating.recordGame(level, before, pct).touch(today())
+        commit(save.copy(progress = after))
+        replaceTop(gateDone(level, Gate.BIG_GAME, pct, level.gate.gamePassPct, before, after).copy(points = points, bestStreak = bestStreak, review = review))
+    }
+
+    private fun gateDone(level: Level, gate: Gate, pct: Int, passPct: Int, before: Progress, after: Progress) = Screen.GateDone(
+        levelId = level.id,
+        gate = gate,
+        scorePct = pct,
+        passPct = passPct,
+        passed = pct >= passPct,
+        levelPassed = level.id in after.levelsPassed && level.id !in before.levelsPassed,
+    )
+
+    private fun replaceTop(s: Screen) { backStack = backStack.dropLast(1) + s }
 
     /** Records a finished lesson and replaces the player with its result screen. */
     fun finishLesson(levelId: String, lessonId: String, session: LessonSession) {
@@ -168,6 +339,9 @@ class LearnerAppState(
 
     private companion object {
         const val DEFAULT_NICKNAME = "Player"
+        const val SEED_MIX = 1_000_003L
+        /** DESIGN 9.6: a one-minute round. The Untimed option arrives with profile settings. */
+        const val SPEED_ROUND_MILLIS = 60_000L
     }
 }
 
@@ -176,8 +350,8 @@ class LearnerAppState(
  * the source of truth; this mirrors what the screen reads.
  */
 @Stable
-class LessonController(steps: List<Step>) {
-    private val session = LessonSession(steps)
+class LessonController(steps: List<Step>, retryMisses: Boolean = true) {
+    private val session = LessonSession(steps, retryMisses)
     private val seen = mutableSetOf<String>()
 
     var step: Step? by mutableStateOf(session.current)

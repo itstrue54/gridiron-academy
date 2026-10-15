@@ -23,7 +23,11 @@ import androidx.compose.ui.unit.dp
 import io.github.itstrue54.gridironacademy.ui.components.PrimaryButton
 import io.github.itstrue54.gridironacademy.ui.components.SecondaryButton
 import io.github.itstrue54.gridironacademy.ui.components.StarRow
+import io.github.itstrue54.gridironacademy.ui.games.SpeedRoundScreen
+import io.github.itstrue54.gridironacademy.ui.lesson.CheckpointScreen
 import io.github.itstrue54.gridironacademy.ui.lesson.LessonScreen
+import io.github.itstrue54.gridironacademy.ui.lesson.StepGameScreen
+import io.github.itstrue54.gridironacademy.ui.screens.GateDoneScreen
 import io.github.itstrue54.gridironacademy.ui.resources.Res
 import io.github.itstrue54.gridironacademy.ui.resources.back_to_level
 import io.github.itstrue54.gridironacademy.ui.resources.done_adult
@@ -74,6 +78,11 @@ fun LearnerApp(state: LearnerAppState, dark: Boolean, reducedMotion: Boolean = f
                 is Screen.LevelDetail -> LevelScreen(state, state.content.level(screen.levelId))
                 is Screen.LessonPlay -> LessonScreen(state, screen.levelId, screen.lessonId)
                 is Screen.LessonDone -> LessonDoneScreen(state, screen)
+                is Screen.CheckpointPlay -> CheckpointScreen(state, screen.levelId, screen.testOut)
+                is Screen.BigGamePlay ->
+                    if (state.bigGameIsSpeedRound(screen.levelId)) SpeedRoundScreen(state, screen.levelId)
+                    else StepGameScreen(state, screen.levelId)
+                is Screen.GateDone -> GateDoneScreen(state, screen)
             }
         }
     }

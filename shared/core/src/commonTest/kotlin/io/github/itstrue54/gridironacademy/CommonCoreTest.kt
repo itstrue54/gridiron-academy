@@ -95,4 +95,28 @@ class CommonCoreTest {
         )
         assertEquals("Defense: W, right of the middle, 5 yards off the ball. W rushes: 5 back and 3 to the left.", DiagramDescriber.describe(d))
     }
+
+    @Test
+    fun aTestSessionAsksEachQuestionOnce() {
+        val qs = (1..3).map { TrueFalse("t$it", "s", answer = true, explanation = "e") }
+        val test = LessonSession(qs, retryMisses = false)
+        var asked = 0
+        while (!test.finished) { asked++; test.submit(Answer.Bool(false)); test.next() }
+        assertEquals(3, asked)
+        assertEquals(0, test.scorePct)
+        val lesson = LessonSession(qs)
+        asked = 0
+        while (!lesson.finished) { asked++; lesson.submit(Answer.Bool(false)); lesson.next() }
+        assertEquals(6, asked, "a lesson brings each miss back once")
+    }
+
+    @Test
+    fun speedRoundGateScoreCountsQuestionsTheClockCutOff() {
+        val qs = (1..10).map { TrueFalse("t$it", "s", answer = true, explanation = "e") }
+        val r = SpeedRound(qs, limitMillis = 1_000)
+        r.answer(Answer.Bool(true), nowMillis = 100)
+        assertNull(r.answer(Answer.Bool(true), nowMillis = 1_000), "time is up")
+        assertEquals(100, r.accuracyPct)
+        assertEquals(10, r.scorePct)
+    }
 }

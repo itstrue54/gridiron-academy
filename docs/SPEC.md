@@ -327,7 +327,7 @@ in the engine, unit-tested.
 | Game | Mechanic | Levels |
 |---|---|---|
 | **Picture Play** | 6 untimed `picture_choice`/`drag_to` rounds, sticker reward | 0 |
-| **Speed round** | Timed MC/TF, streak of 3 doubles points; **Untimed** option keeps scoring without a clock (DESIGN §12) | 1-3, review |
+| **Speed round** | Timed MC/TF (60s), streak of 3 doubles points; the gate score is right answers out of *all* the round's questions, so ones the clock cuts off count as missed (accuracy alone would let one answer and a wait pass). **Untimed** option keeps scoring without a clock (DESIGN §12) | 1-3, review |
 | **Diagram dash** | Run of `diagram_tap`/`align` | 3+ |
 | **Read the defense** | Run of `read_defense`, disguise flag at L7 | 4, 6, 7 |
 | **Game day** | A simulated game of `situation`/`call_it` decisions; coach points (BEST 1, OK 0.5, POOR 0) | 2, 5, 8 |
@@ -342,8 +342,10 @@ number), so a replay of the same attempt is identical (principle 1.5.4).
 ### 4.4 Gates
 - Lessons open in order; pass = 60% first-attempt score.
 - Checkpoint (level test) opens when every lesson is passed; 12 questions; 80% to
-  pass. Drawn from the level's graded steps, weighted toward concepts with low
-  mastery, never repeating within an attempt.
+  pass. Drawn from the level's graded steps (seeded by level, day and attempt, so every
+  retake is a new draw that can't be learned from the last try's feedback; weighting
+  toward low-mastery concepts comes with §4.6), each asked once with feedback but no
+  retry. Misses go to review. The Speed round clock doesn't count time the app is away.
 - Big Game opens after the checkpoint; 70% to pass.
 - Passing both passes the level. Stars per DESIGN (95/80/60).
 - **Level 0 has no test.** Finishing every lesson and one Picture Play passes it, so
@@ -749,7 +751,10 @@ Dependency direction: `apps -> ui -> data -> core`. Nothing depends on an app;
    **Learner flow (M1):** onboarding (nickname + age screen), Home drive map, level
    screen, the lesson player for all v1 step types except `read_defense` (shown as
    multiple choice with its reveal until the reveal animation lands), and lesson
-   complete, all in `:shared:ui`. `LearnerAppState` holds the back stack, the save and
+   complete, all in `:shared:ui`. The Checkpoint (with adult test-out), the Big Game
+   (the Speed round screen for speed-round levels, the step player for the others) and
+   the result / level-complete screen close the level loop; Home's Continue leads
+   through drills, Checkpoint and Big Game in turn. `LearnerAppState` holds the back stack, the save and
    the lesson in progress, and calls `core` for every rule.
    `:androidApp-learner` is the thin Android shell: ViewModel, `FileLearnerStore`
    (one atomic JSON file, written off the main thread), BackHandler, system dark mode

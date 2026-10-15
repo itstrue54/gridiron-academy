@@ -45,7 +45,6 @@
     <string name="checkpoint_blurb">A %1$d-question test. Get %2$d% to pass.</string>
     <string name="big_game">Big Game</string>
     <string name="big_game_blurb">Play the level game. Get %1$d% to pass.</string>
-    <string name="coming_soon">Coming soon</string>
     <string name="stars_label">%1$d of 3 stars</string>
 
     <!-- Lesson player (DESIGN 9.3) -->
@@ -87,6 +86,42 @@
     <string name="poor_kid">That one cost you. See why.</string>
     <string name="poor_adult">Costly.</string>
     <string name="best_was">Best call: %1$s</string>
+
+    <string name="close_checkpoint">Leave the Checkpoint</string>
+    <string name="close_game">Leave the game</string>
+
+    <!-- Checkpoint and Big Game (DESIGN 9.2, 9.6, 9.7) -->
+    <string name="test_out">Test out</string>
+    <string name="test_out_blurb">Know this already? Pass the Checkpoint to skip the drills.</string>
+    <string name="best_score">Best: %1$d%</string>
+    <string name="start_checkpoint">Start the Checkpoint</string>
+    <string name="play_big_game">Play the Big Game</string>
+    <string name="checkpoint_locked">Pass every drill to open it.</string>
+    <string name="big_game_locked">Pass the Checkpoint to open it.</string>
+    <string name="speed_round">Speed round</string>
+    <string name="speed_points">%1$d pts</string>
+    <string name="speed_streak">%1$d in a row</string>
+    <string name="speed_seconds_left">%1$d seconds left</string>
+    <string name="speed_question_of">Question %1$d of %2$d</string>
+    <string name="checkpoint_passed_kid">Checkpoint cleared! The Big Game is open.</string>
+    <string name="checkpoint_passed_adult">Checkpoint passed. The Big Game is open.</string>
+    <string name="testout_passed_kid">You tested out! The Big Game is open.</string>
+    <string name="testout_passed_adult">Tested out. The drills are marked done and the Big Game is open.</string>
+    <string name="checkpoint_not_yet_kid">So close! Get %1$d% to pass. Practice and try again.</string>
+    <string name="checkpoint_not_yet_adult">%1$d% passes the Checkpoint. Review and try again.</string>
+    <string name="game_won_kid">You won the Big Game!</string>
+    <string name="game_won_adult">Big Game won.</string>
+    <string name="game_not_yet_kid">Get %1$d% to win the Big Game. You can play again any time!</string>
+    <string name="game_not_yet_adult">%1$d% wins the Big Game.</string>
+    <string name="level_done_kid">Touchdown! Level %1$d done!</string>
+    <string name="level_done_adult">Level %1$d complete</string>
+    <string name="level_done_body_kid">You finished %1$s. Your next level opens as soon as it's written.</string>
+    <string name="level_done_body_adult">%1$s is done. The next level opens as soon as it's published.</string>
+    <string name="your_score">%1$d%</string>
+    <string name="speed_summary">%1$d pts, best streak %2$d</string>
+    <string name="review_title">Look again</string>
+    <string name="review_answer">Answer: %1$s</string>
+    <string name="play_again">Play again</string>
 
     <!-- Situation strip (DESIGN 8) -->
     <string name="down_1">1st</string>

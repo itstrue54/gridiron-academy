@@ -6,9 +6,10 @@ import kotlin.math.roundToInt
 /**
  * Drives one lesson (or level test, or game round) over a list of steps.
  * Missed items come back once at the end so the learner finishes on a win;
- * only the first attempt counts toward the score.
+ * only the first attempt counts toward the score. A level test sets
+ * [retryMisses] false: it asks each question once (SPEC 4.4).
  */
-class LessonSession(steps: List<Step>) {
+class LessonSession(steps: List<Step>, private val retryMisses: Boolean = true) {
     private val queue = ArrayDeque(steps)
     private val retried = mutableSetOf<String>()
     private val firstTry = mutableMapOf<String, Float>()
@@ -37,7 +38,7 @@ class LessonSession(steps: List<Step>) {
         lastGrade = grade
         if (Grader.isGraded(step)) {
             if (step.id !in firstTry) firstTry[step.id] = grade.credit
-            if (!grade.correct && retried.add(step.id)) queue.addLast(step)
+            if (retryMisses && !grade.correct && retried.add(step.id)) queue.addLast(step)
         }
         return grade
     }

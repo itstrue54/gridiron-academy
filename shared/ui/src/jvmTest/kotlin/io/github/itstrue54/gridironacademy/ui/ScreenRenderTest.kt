@@ -14,6 +14,7 @@ import io.github.itstrue54.gridironacademy.ui.app.InMemoryLearnerStore
 import io.github.itstrue54.gridironacademy.ui.app.LearnerApp
 import io.github.itstrue54.gridironacademy.ui.app.LearnerAppState
 import io.github.itstrue54.gridironacademy.ui.app.LessonController
+import io.github.itstrue54.gridironacademy.ui.games.SpeedRoundScreen
 import io.github.itstrue54.gridironacademy.ui.lesson.LessonScreen
 import io.github.itstrue54.gridironacademy.ui.theme.GridironTheme
 import io.github.itstrue54.gridironacademy.ui.theme.Skin
@@ -28,8 +29,8 @@ class ScreenRenderTest {
     private val allSteps = content.curriculum.levels.flatMap { l -> content.unitsOf(l).flatMap { u -> u.lessons.map { l to it } } }
 
     @OptIn(ExperimentalComposeUiApi::class)
-    private fun shot(name: String, ui: @Composable () -> Unit) {
-        val bytes = ImageComposeScene(width = 720, height = 1520, density = Density(2f)) { ui() }.use { scene ->
+    private fun shot(name: String, height: Int = 1520, ui: @Composable () -> Unit) {
+        val bytes = ImageComposeScene(width = 720, height = height, density = Density(2f)) { ui() }.use { scene ->
             scene.render(0)
             scene.render(1_000_000_000L) // let effects and transitions settle
             scene.render(2_000_000_000L).encodeToData(EncodedImageFormat.PNG)!!.bytes
@@ -103,5 +104,72 @@ class ScreenRenderTest {
         while (!c.finished) { c.submit(Answer.Seen.takeIf { c.step is Learn } ?: Answer.Choice(-1)); if (!c.finished && c.grade != null) c.next() }
         s.finishLesson(level.id, lesson.id, c.result)
         shot("15-done-kid-retry") { LearnerApp(s, dark = false) }
+    }
+
+    private fun perfect(step: Step): Answer = when (step) {
+        is Learn -> Answer.Seen
+        is MultipleChoice -> Answer.Choice(step.answer)
+        is ReadDefense -> Answer.Choice(step.answer)
+        is TrueFalse -> Answer.Bool(step.answer)
+        is Match -> Answer.Matches(step.pairs.associate { it.left to it.right })
+        is Order -> Answer.Ordering(step.items)
+        is DiagramTap -> Answer.Taps(step.targets)
+        is Situation -> Answer.Choice(step.options.indexOfFirst { it.quality == Quality.BEST })
+    }
+
+    private fun drillsDone(band: AgeBand): LearnerAppState {
+        val s = appState(band)
+        val level = s.levels.first()
+        s.openLevel(level)
+        content.unitsOf(level).flatMap { it.lessons }.forEach { lesson ->
+            s.startLesson(level, lesson)
+            val c = s.lessonController(level.id, lesson.id)
+            while (!c.finished) { c.submit(perfect(c.step!!)); if (!c.finished && c.grade != null) c.next() }
+            s.finishLesson(level.id, lesson.id, c.result)
+            s.back()
+        }
+        return s
+    }
+
+    @Test fun gates() {
+        val adult = appState(AgeBand.AGE_18_PLUS).also { it.openLevel(it.levels.first()) }
+        shot("16-level-adult-testout", height = 3400) { LearnerApp(adult, dark = false) }
+
+        val kid = drillsDone(AgeBand.AGE_8_9)
+        shot("17-level-kid-checkpoint-open", height = 3800) { LearnerApp(kid, dark = false) }
+
+        val level = kid.levels.first()
+        kid.startCheckpoint(level)
+        val test = kid.checkpointController(level.id, false)
+        while (!test.finished) { test.submit(perfect(test.step!!)); if (!test.finished) test.next() }
+        kid.finishCheckpoint(level.id, false, test.result)
+        shot("18-checkpoint-passed-kid") { LearnerApp(kid, dark = false) }
+
+        kid.back()
+        kid.startBigGame(level)
+        val round = kid.speedRoundController(level.id)
+        repeat(3) { round.tick(4_000L * (it + 1)); round.answer(perfect(round.current!!)) }
+        round.tick(51_500)
+        shot("19-speed-round-kid") {
+            GridironTheme(skin = kid.skin, dark = false) { SpeedRoundScreen(kid, level.id, round, clock = false) }
+        }
+
+        // Miss two, then let the clock run out: a loss with a review list.
+        round.answer(Answer.Bool(round.current.let { (it as? TrueFalse)?.answer?.not() ?: false }).takeIf { round.current is TrueFalse } ?: Answer.Choice(-1))
+        round.answer(Answer.Choice(-1).takeIf { round.current is MultipleChoice } ?: Answer.Bool(!(round.current as TrueFalse).answer))
+        round.tick(60_000)
+        kid.finishSpeedRound(level.id, round)
+        shot("20-big-game-lost-kid") { LearnerApp(kid, dark = false) }
+
+        kid.back()
+        kid.startBigGame(level)
+        val win = kid.speedRoundController(level.id)
+        var t = 0L
+        while (!win.over) { t += 1_000; win.tick(t); win.current?.let { win.answer(perfect(it)) } }
+        kid.finishSpeedRound(level.id, win)
+        shot("21-level-complete-kid") { LearnerApp(kid, dark = false) }
+        shot("22-home-level-passed-adult-dark") {
+            LearnerApp(drillsDone(AgeBand.AGE_18_PLUS).also { it.back() }, dark = true)
+        }
     }
 }

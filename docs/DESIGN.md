@@ -497,8 +497,9 @@ calls, and the single decision that cost the most, replayed.
 ### 9.6 Speed round
 Timer ring, streak chip, a score counter, and one question at a time with two to four
 answer buttons. Answers advance immediately with no sheet; the explanation for a miss
-is collected and shown in a review list at the end. Ends with accuracy, best streak and
-points.
+is collected and shown in a review list at the end. Ends with the score (right answers
+out of the round's questions), best streak, points, and the "Look again" list of misses
+with their answers.
 
 ### 9.6.1 Other games
 - **Picture Play** (Level 0): six Little Huddle rounds; each right answer puts a
