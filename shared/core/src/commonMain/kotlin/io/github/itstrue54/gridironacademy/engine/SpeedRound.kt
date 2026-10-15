@@ -1,6 +1,7 @@
 package io.github.itstrue54.gridironacademy.engine
 
 import io.github.itstrue54.gridironacademy.model.*
+import kotlin.math.roundToInt
 
 /**
  * Timed rapid-fire game. Time is injected (millis since the round began), never read
@@ -48,5 +49,5 @@ class SpeedRound(
         return grade
     }
 
-    val accuracyPct: Int get() = if (index == 0) 0 else Math.round(100f * correct / index)
+    val accuracyPct: Int get() = if (index == 0) 0 else (100f * correct / index).roundToInt()
 }

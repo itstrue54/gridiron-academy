@@ -27,6 +27,13 @@ object Grader {
 
     fun isGraded(step: Step): Boolean = step !is Learn
 
+    /**
+     * [hits] out of [of] as credit. An empty step (which the validator rejects, but
+     * playbook-generated or downloaded content could still carry) earns 0 rather than
+     * NaN, which would poison the whole lesson's score.
+     */
+    private fun share(hits: Int, of: Int): Float = if (of == 0) 0f else hits.toFloat() / of
+
     fun grade(step: Step, answer: Answer): Grade = when (step) {
         is Learn -> Grade(1f, "")
         is MultipleChoice -> choice(answer, step.answer, step.explanation)
@@ -38,21 +45,21 @@ object Grader {
         is Match -> {
             val a = answer as? Answer.Matches
             val right = a?.pairs?.count { (l, r) -> step.pairs.any { it.left == l && it.right == r } } ?: 0
-            Grade(right.toFloat() / step.pairs.size, step.explanation)
+            Grade(share(right, step.pairs.size), step.explanation)
         }
         is Order -> {
             val a = answer as? Answer.Ordering
             val hits = a?.items?.zip(step.items)?.count { (x, y) -> x == y } ?: 0
             // All-or-nothing on order is too harsh for long sequences, but a partly
             // right order must still be retried, hence credit < 1 until perfect.
-            Grade(hits.toFloat() / step.items.size, step.explanation)
+            Grade(share(hits, step.items.size), step.explanation)
         }
         is DiagramTap -> {
             val a = answer as? Answer.Taps
             val credit = if (a == null) 0f else {
                 val hits = a.ids.count { it in step.targets }
                 val wrong = a.ids.size - hits
-                ((hits - wrong).coerceAtLeast(0)).toFloat() / step.targets.size
+                share((hits - wrong).coerceAtLeast(0), step.targets.size)
             }
             Grade(credit, step.explanation)
         }

@@ -1,6 +1,7 @@
 package io.github.itstrue54.gridironacademy.engine
 
 import io.github.itstrue54.gridironacademy.model.Step
+import kotlin.math.roundToInt
 
 /**
  * Drives one lesson (or level test, or game round) over a list of steps.
@@ -26,7 +27,7 @@ class LessonSession(steps: List<Step>) {
 
     /** 0..100 over graded steps seen on their first attempt; 100 if none are graded. */
     val scorePct: Int
-        get() = if (firstTry.isEmpty()) 100 else Math.round(100f * totalCredit / firstTry.size)
+        get() = if (firstTry.isEmpty()) 100 else (100f * totalCredit / firstTry.size).roundToInt()
 
     val missedIds: Set<String> get() = firstTry.filterValues { it < 1f }.keys
 

@@ -9,11 +9,6 @@ fun interface ContentSource {
     fun read(path: String): String?
 }
 
-class ClasspathContentSource(private val root: String = "content") : ContentSource {
-    override fun read(path: String): String? =
-        javaClass.classLoader.getResourceAsStream("$root/$path")?.bufferedReader()?.use { it.readText() }
-}
-
 class ContentException(message: String) : Exception(message)
 
 class Content(

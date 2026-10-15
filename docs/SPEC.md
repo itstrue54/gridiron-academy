@@ -242,8 +242,11 @@ validated acyclic in CI. It drives prerequisite primers for assignments (§7.4),
 the mastery map (§4.6) and placement (§4.5).
 
 ### 3.3 Content format, validation, load failure
-- Content is JSON under `content/` (today `engine/src/main/resources/content`, after
-  the KMP move `shared/core/src/commonMain/composeResources/files/content`, §11.3).
+- Content is JSON under `shared/core/src/commonMain/resources/content`, packaged as
+  Java resources into the JVM jar and the Android library, so there is one copy.
+  `commonMain` only defines the `ContentSource` interface; `ClasspathContentSource` in
+  the `jvmShared` source set (jvm + android) reads the packaged files. iOS gets its own
+  reader at M5 (§11.3).
 - Files: `curriculum.json` (levels and gates), one file per unit, `glossary.json`,
   `concepts.json` (§3.2 catalogue + graph), `packs.json` (scheme packs, §7.4),
   `voice/<locale>.json` (feedback copy, DESIGN §11), `audio/` (Level 0 recordings).
@@ -728,17 +731,22 @@ Dependency direction: `apps -> ui -> data -> core`. Nothing depends on an app;
 - `Rng`: injected, seeded; the only source of randomness.
 
 ### 11.3 Multiplatform plan
-1. **Now (M1):** convert `:engine` into `shared/core` with the Kotlin Multiplatform
-   plugin, targets `jvm()` (tests, tools) and `androidTarget()`; iOS targets are
-   declared but not built in CI until M5. The code is already pure Kotlin; the work
-   is: `ClasspathContentSource` moves to `jvmMain`, a Compose Resources-backed
-   `ContentSource` goes in `commonMain`; any `java.*` use (e.g. `String.format`,
-   `java.time`) is replaced with common code or `kotlinx-datetime`.
+1. **Done (M1):** `:engine` is now `:shared:core`, a Kotlin Multiplatform module
+   with targets `jvm()` (tests, tools), `android {}` (the AGP KMP library plugin) and
+   `iosArm64()`/`iosSimulatorArm64()`. The iOS targets are declared now, though they
+   only link on macOS, because with only JVM-family targets Kotlin skips compiling
+   `commonMain` on its own and `java.*` calls would slip into common code unnoticed
+   (ADR-003). `jvmTest` depends on that common compile and on `checkDeterminism`
+   (§11.5 rule 2), so `./gradlew :shared:core:jvmTest` enforces both rules.
+   `ClasspathContentSource` lives in a `jvmShared` source set used by both jvm and
+   android, so Android reads the content packaged in the library (no assets copy).
+   `Math.round` became `roundToInt` (same rounding), and `Grader` now gives an empty
+   step 0 credit instead of NaN. `core` stays free of Compose.
 2. **UI in Compose Multiplatform from day one** (not Jetpack-only APIs), so the same
    screens run on iOS. Android-only concerns (TTS, WorkManager, billing, FCM,
    Families compliance) sit behind `expect`/`actual` interfaces in `data` or in the
    app shells.
-3. **iOS (M5):** add `iosArm64`/`iosSimulatorArm64`, SwiftUI shell hosting the
+3. **iOS (M5):** build the already-declared iOS targets on a macOS CI runner, SwiftUI shell hosting the
    Compose UI, AVSpeechSynthesizer for TTS, APNs for push, StoreKit for the coach app.
 4. **Web coach (M5):** Compose for Web (Wasm) for the dashboard, or a small web client
    over the same Supabase views if Wasm is not ready [open].
@@ -756,7 +764,9 @@ Paparazzi or Roborazzi for screenshots. minSdk 26, target latest.
 ### 11.5 Code rules (AGENTS.md is the short version)
 1. `shared/core` has no platform imports, no `java.*` outside `jvmMain`.
 2. No `Math.random`, `java.util.Random`, `Random.Default`, wall-clock or UUID calls in
-   `core`; randomness from `Rng`, time and ids passed in. A CI grep check enforces it.
+   `core`; randomness from `Rng`, time and ids passed in. The `checkDeterminism` Gradle
+   task fails the build on `Random`, `kotlin.random`, `Clock.System`, `TimeSource` or
+   `Uuid.random` in `commonMain`; the common-only compile rejects `java.*`.
 3. Lesson text, voice lines, schemes, packs and glossary are content JSON, never
    Kotlin.
 4. Models are immutable `data class`es with `val` only.

@@ -1,6 +1,7 @@
 package io.github.itstrue54.gridironacademy.engine
 
 import io.github.itstrue54.gridironacademy.model.*
+import kotlin.math.roundToInt
 
 /**
  * A "game" of situational decisions. Each [Situation] is a snap or a call; the
@@ -25,5 +26,5 @@ class GameDay(private val situations: List<Situation>) {
         return g
     }
 
-    val scorePct: Int get() = if (situations.isEmpty()) 100 else Math.round(100f * coachPoints / situations.size)
+    val scorePct: Int get() = if (situations.isEmpty()) 100 else (100f * coachPoints / situations.size).roundToInt()
 }
