@@ -266,4 +266,12 @@ class ScreenRenderTest {
     @Test fun postMotionBothPictures() {
         sharedShot("72-post-motion-presnap", AgeBand.AGE_18_PLUS, "co7-late-04", "coordinator-7")
     }
+
+    @Test fun levelEight() {
+        val a = "architect-8"
+        sharedShot("73-widezone-system", AgeBand.AGE_18_PLUS, "ar8-offense-05", a)
+        sharedShot("74-game-opening", AgeBand.AGE_18_PLUS, "ar8-game-02", a, answer = { Answer.Choice(0) })
+        sharedShot("75-game-weather", AgeBand.AGE_18_PLUS, "ar8-game-09", a)
+        sharedShot("76-success-rate", AgeBand.AGE_10_12, "ar8-analytics-05", a)
+    }
 }

@@ -1,0 +1,711 @@
+{
+  "id": "architect8-u2",
+  "title": "Defensive Systems",
+  "lessons": [
+    {
+      "id": "ar8-defense",
+      "title": "Defensive Systems",
+      "blurb": "How whole defenses are built.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "ar8-defense-01",
+          "title": "Two-high, light box",
+          "body": "A modern style (often linked to Vic Fangio) that shows two deep safeties on most snaps, rotates late, and dares offenses to run into lighter boxes while taking away explosive passes.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "h",
+                "label": "H",
+                "side": "OFFENSE",
+                "x": -7,
+                "y": -1
+              },
+              {
+                "id": "f",
+                "label": "F",
+                "side": "OFFENSE",
+                "x": 7,
+                "y": -1
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": 0
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 1.8,
+                "y": -5
+              },
+              {
+                "id": "de1",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": -4.5,
+                "y": 1
+              },
+              {
+                "id": "dt1",
+                "label": "DT",
+                "side": "DEFENSE",
+                "x": -1.2,
+                "y": 1
+              },
+              {
+                "id": "dt2",
+                "label": "DT",
+                "side": "DEFENSE",
+                "x": 1.2,
+                "y": 1
+              },
+              {
+                "id": "de2",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": 4.5,
+                "y": 1
+              },
+              {
+                "id": "cb1",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": -12,
+                "y": 8
+              },
+              {
+                "id": "cb2",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": 12,
+                "y": 8
+              },
+              {
+                "id": "ss",
+                "label": "SS",
+                "side": "DEFENSE",
+                "x": -6,
+                "y": 10
+              },
+              {
+                "id": "fs",
+                "label": "FS",
+                "side": "DEFENSE",
+                "x": 6,
+                "y": 10
+              },
+              {
+                "id": "w",
+                "label": "W",
+                "side": "DEFENSE",
+                "x": -4,
+                "y": 4.5
+              },
+              {
+                "id": "m",
+                "label": "M",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 4.5
+              },
+              {
+                "id": "s",
+                "label": "S",
+                "side": "DEFENSE",
+                "x": 4,
+                "y": 4.5
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "cb1",
+                "points": [
+                  {
+                    "x": -14,
+                    "y": 20
+                  }
+                ],
+                "kind": "drop"
+              },
+              {
+                "playerId": "cb2",
+                "points": [
+                  {
+                    "x": 14,
+                    "y": 20
+                  }
+                ],
+                "kind": "drop"
+              },
+              {
+                "playerId": "ss",
+                "points": [
+                  {
+                    "x": -5,
+                    "y": 20
+                  }
+                ],
+                "kind": "rotate"
+              },
+              {
+                "playerId": "fs",
+                "points": [
+                  {
+                    "x": 5,
+                    "y": 20
+                  }
+                ],
+                "kind": "rotate"
+              },
+              {
+                "playerId": "w",
+                "points": [
+                  {
+                    "x": -10,
+                    "y": 7
+                  }
+                ],
+                "kind": "drop"
+              },
+              {
+                "playerId": "m",
+                "points": [
+                  {
+                    "x": 0,
+                    "y": 9
+                  }
+                ],
+                "kind": "drop"
+              },
+              {
+                "playerId": "s",
+                "points": [
+                  {
+                    "x": 10,
+                    "y": 7
+                  }
+                ],
+                "kind": "drop"
+              }
+            ],
+            "caption": "Two-high shell"
+          },
+          "concept": "defensive-system"
+        },
+        {
+          "type": "learn",
+          "id": "ar8-defense-02",
+          "title": "Pattern-match quarters",
+          "body": "Zone shells that turn into man as routes declare, with detailed rules for every route combination. Hard to learn, hard to beat.",
+          "concept": "pattern-matching"
+        },
+        {
+          "type": "learn",
+          "id": "ar8-defense-03",
+          "title": "Single-high Cover 3",
+          "body": "A simple, aggressive style built on one deep safety, long corners who play deep thirds, and an eighth defender near the box for the run.",
+          "concept": "cover-3"
+        },
+        {
+          "type": "learn",
+          "id": "ar8-defense-04",
+          "title": "Tampa 2",
+          "body": "Cover 2 with a fast middle linebacker carrying the deep middle, four-man pressure, and everyone rallying to the ball.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "h",
+                "label": "H",
+                "side": "OFFENSE",
+                "x": -7,
+                "y": -1
+              },
+              {
+                "id": "f",
+                "label": "F",
+                "side": "OFFENSE",
+                "x": 7,
+                "y": -1
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": 0
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 1.8,
+                "y": -5
+              },
+              {
+                "id": "de1",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": -4.5,
+                "y": 1
+              },
+              {
+                "id": "dt1",
+                "label": "DT",
+                "side": "DEFENSE",
+                "x": -1.2,
+                "y": 1
+              },
+              {
+                "id": "dt2",
+                "label": "DT",
+                "side": "DEFENSE",
+                "x": 1.2,
+                "y": 1
+              },
+              {
+                "id": "de2",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": 4.5,
+                "y": 1
+              },
+              {
+                "id": "cb1",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": -13,
+                "y": 5
+              },
+              {
+                "id": "cb2",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": 13,
+                "y": 5
+              },
+              {
+                "id": "ss",
+                "label": "SS",
+                "side": "DEFENSE",
+                "x": -8,
+                "y": 13
+              },
+              {
+                "id": "fs",
+                "label": "FS",
+                "side": "DEFENSE",
+                "x": 8,
+                "y": 13
+              },
+              {
+                "id": "w",
+                "label": "W",
+                "side": "DEFENSE",
+                "x": -4,
+                "y": 4.5
+              },
+              {
+                "id": "m",
+                "label": "M",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 4.5
+              },
+              {
+                "id": "s",
+                "label": "S",
+                "side": "DEFENSE",
+                "x": 4,
+                "y": 4.5
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "cb1",
+                "points": [
+                  {
+                    "x": -14,
+                    "y": 6
+                  }
+                ],
+                "kind": "drop",
+                "label": "flat"
+              },
+              {
+                "playerId": "cb2",
+                "points": [
+                  {
+                    "x": 14,
+                    "y": 6
+                  }
+                ],
+                "kind": "drop",
+                "label": "flat"
+              },
+              {
+                "playerId": "ss",
+                "points": [
+                  {
+                    "x": -11,
+                    "y": 20
+                  }
+                ],
+                "kind": "rotate"
+              },
+              {
+                "playerId": "fs",
+                "points": [
+                  {
+                    "x": 11,
+                    "y": 20
+                  }
+                ],
+                "kind": "rotate"
+              },
+              {
+                "playerId": "w",
+                "points": [
+                  {
+                    "x": -6,
+                    "y": 10
+                  }
+                ],
+                "kind": "drop"
+              },
+              {
+                "playerId": "s",
+                "points": [
+                  {
+                    "x": 6,
+                    "y": 10
+                  }
+                ],
+                "kind": "drop"
+              },
+              {
+                "playerId": "m",
+                "points": [
+                  {
+                    "x": 0,
+                    "y": 18
+                  }
+                ],
+                "kind": "drop",
+                "label": "Mike runs the middle"
+              }
+            ],
+            "caption": "Tampa 2"
+          },
+          "concept": "tampa-2"
+        },
+        {
+          "type": "learn",
+          "id": "ar8-defense-05",
+          "title": "46, Wide-9 and 3-3-5",
+          "body": "The 46 crowds the line with a Bear front to wreck runs and protections. Wide-9 aligns ends far outside to rush. The 3-3-5 stacks linebackers behind three linemen with five defensive backs to match spread offenses.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              },
+              {
+                "id": "de1",
+                "label": "E",
+                "side": "DEFENSE",
+                "x": -4.0,
+                "y": 1
+              },
+              {
+                "id": "dt1",
+                "label": "T",
+                "side": "DEFENSE",
+                "x": -2.2,
+                "y": 1
+              },
+              {
+                "id": "nt",
+                "label": "N",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 1
+              },
+              {
+                "id": "dt2",
+                "label": "T",
+                "side": "DEFENSE",
+                "x": 2.2,
+                "y": 1
+              },
+              {
+                "id": "de2",
+                "label": "E",
+                "side": "DEFENSE",
+                "x": 4.0,
+                "y": 1
+              }
+            ],
+            "caption": "46 defense: the Bear front"
+          },
+          "concept": "defensive-system"
+        },
+        {
+          "type": "match",
+          "id": "ar8-defense-06",
+          "prompt": "Match each defense to its idea.",
+          "pairs": [
+            {
+              "left": "Two-high, light box",
+              "right": "Take away big plays, invite the run"
+            },
+            {
+              "left": "Tampa 2",
+              "right": "Mike carries the deep middle"
+            },
+            {
+              "left": "46",
+              "right": "Overload the line with a Bear front"
+            },
+            {
+              "left": "3-3-5",
+              "right": "Five defensive backs, three stacked linebackers"
+            }
+          ],
+          "explanation": "Defenses, too, choose what to give up.",
+          "concept": "defensive-system"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "ar8-defense-07",
+          "prompt": "A two-high, light-box defense is daring the offense to do what?",
+          "choices": [
+            "Run the ball",
+            "Throw deep",
+            "Punt",
+            "Kick field goals"
+          ],
+          "answer": 0,
+          "explanation": "Fewer defenders near the line makes running more attractive, which is the trade it accepts.",
+          "concept": "defensive-system"
+        }
+      ]
+    },
+    {
+      "id": "ar8-matchups",
+      "title": "Scheme vs Scheme",
+      "blurb": "When systems collide.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "ar8-matchups-01",
+          "title": "Every scheme has a price",
+          "body": "Each system takes something away and gives something up. Game planning is finding where their price meets your strength.",
+          "concept": "defensive-system"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "ar8-matchups-02",
+          "prompt": "Your offense runs wide zone. The opponent plays Wide-9. Where should you attack?",
+          "choices": [
+            "Inside, through the wider interior lanes",
+            "Only the deep sideline",
+            "Kneel every down",
+            "Directly at the ends"
+          ],
+          "answer": 0,
+          "explanation": "With the ends that wide, the interior gaps are bigger; cutbacks and inside runs get room.",
+          "concept": "wide-nine"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "ar8-matchups-03",
+          "prompt": "The opponent plays the 46 with a Bear front. What is it most vulnerable to?",
+          "choices": [
+            "Quick throws to the outside",
+            "Inside runs",
+            "Quarterback sneaks",
+            "Short field goals"
+          ],
+          "answer": 0,
+          "explanation": "It loads the middle to stop runs and pressure the quarterback; quick throws outside beat it before the rush arrives.",
+          "concept": "bear-front"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "ar8-matchups-04",
+          "prompt": "Against a two-high, light-box defense, what does a smart offense often do more of?",
+          "choices": [
+            "Run the ball",
+            "Throw deep every play",
+            "Punt earlier",
+            "Use max protect"
+          ],
+          "answer": 0,
+          "explanation": "That defense invites the run; good offenses accept the invitation.",
+          "concept": "defensive-system"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "ar8-matchups-05",
+          "prompt": "Your Air Raid offense faces a lot of man coverage. Which staple concept fits?",
+          "choices": [
+            "Mesh",
+            "Four verticals against Cover 3",
+            "Inside zone",
+            "Kneel down"
+          ],
+          "answer": 0,
+          "explanation": "Mesh's crossing routes rub man defenders off their receivers.",
+          "concept": "mesh"
+        }
+      ]
+    }
+  ]
+}

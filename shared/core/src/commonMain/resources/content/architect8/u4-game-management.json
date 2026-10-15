@@ -1,0 +1,70 @@
+{
+  "id": "architect8-u4",
+  "title": "Game Management",
+  "lessons": [
+    {
+      "id": "ar8-management",
+      "title": "Running a Game",
+      "blurb": "Clock, field, weather and the roster.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "ar8-management-01",
+          "title": "Clock management",
+          "body": "Timeouts, the two-minute warning, spikes, kneels and out-of-bounds throws are resources. Use free stoppages before timeouts, and think a full drive ahead.",
+          "concept": "game-clock"
+        },
+        {
+          "type": "learn",
+          "id": "ar8-management-02",
+          "title": "Home field and weather",
+          "body": "Home-field advantage is real but smaller than it used to be. Wind hurts passing and kicking more than cold or rain, which can change 4th-down and field-goal choices.",
+          "concept": "game-management"
+        },
+        {
+          "type": "learn",
+          "id": "ar8-management-03",
+          "title": "Roster and the cap",
+          "body": "Each NFL team has a hard salary cap. Players on rookie contracts are cheap for their value, which is why a good young quarterback lets a team spend more around him. Releasing a player can still leave 'dead money' on the cap.",
+          "concept": "salary-cap"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "ar8-management-04",
+          "prompt": "Strong wind is blowing straight across the field. Which plays get riskier?",
+          "choices": [
+            "Long passes and long field goals",
+            "Inside runs",
+            "Kneel downs",
+            "Handoffs"
+          ],
+          "answer": 0,
+          "explanation": "Wind pushes deep balls and long kicks; the run game barely notices.",
+          "concept": "game-management"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "ar8-management-05",
+          "prompt": "Why is a quarterback on a rookie contract such an advantage?",
+          "choices": [
+            "His low salary leaves cap room to build the roster",
+            "Rookies can't be sacked",
+            "The cap doesn't apply to them",
+            "They play more downs"
+          ],
+          "answer": 0,
+          "explanation": "A cheap starting quarterback frees money for the rest of the team.",
+          "concept": "salary-cap"
+        },
+        {
+          "type": "true_false",
+          "id": "ar8-management-06",
+          "statement": "Releasing a player can still count against the salary cap.",
+          "answer": true,
+          "explanation": "Guaranteed money already paid or owed becomes dead money on the cap.",
+          "concept": "salary-cap"
+        }
+      ]
+    }
+  ]
+}

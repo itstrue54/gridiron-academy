@@ -17,7 +17,7 @@ and validated, `preview` = exemplar content proving the model, `planned` = to be
 | 5 | College | shared | | Game day | **done** (`college-5`, coach review pending) |
 | 6 | Pro | shared | | Read the defense | **done** (`pro-6`, coach review pending) |
 | 7 | Coordinator | shared | | Read the defense | **done** (`coordinator-7`, coach review pending) |
-| 8 | Architect | shared | | Game day | planned |
+| 8 | Architect | shared | | Game day | **done** (`architect-8`, coach review pending) |
 
 Placement: an adult can take a short quiz per level and start at the first one they miss.
 Any level's test can be "tested out" of, with the game still to be played.
@@ -141,7 +141,18 @@ pre-snap shifts, tempo to prevent rotation, reading corners' leverage, post-snap
 reads and the "alert" system. **Defense answers:** checks, calls, "match" rules, red/green
 coverage-check systems. Every item is a **read-defense** step with a pre-snap and reveal.
 
-## Level 8: Architect (scheme families, analytics, strategy)
+## Level 8: Architect (scheme families, analytics, strategy) (done; see `docs/content-review/level-8.md`)
+As written: 5 units, 7 drills, 53 steps. Offensive systems (West Coast, Air Coryell,
+Erhardt-Perkins, Air Raid, run-and-shoot, wide zone with play-action, spread and RPO,
+option and Wing-T roots); defensive systems (two-high light box, pattern-match quarters,
+single-high Cover 3, Tampa 2, the 46, Wide-9, 3-3-5) and scheme-vs-scheme matchups;
+analytics (expected points and EPA, success rate, pass rate over expected, 4th-down
+models, two-point math); game management (clock, home field, weather, roster and cap);
+and "The Architect's Game": one fictional game (Harbor City Gulls vs Ridgeview Foxes)
+played in order through 11 decisions, which also feed the Game Day gate. System names
+that come from coaches or teams are used only as the common labels for the systems.
+
+Originally planned:
 **Offenses:** West Coast, Air Raid, Erhardt-Perkins, Coryell (Air Coryell), Shanahan/Kubiak
 wide zone and play-action, spread and RPO, Pistol, run-and-shoot, Wing-T and option history.
 **Defenses:** Fangio/Vic, Belichick-Saban pattern match, Seattle Cover 3, Tampa 2, 3-3-5

@@ -1,0 +1,383 @@
+{
+  "id": "architect8-u5",
+  "title": "The Architect's Game",
+  "lessons": [
+    {
+      "id": "ar8-game",
+      "title": "The Architect's Game",
+      "blurb": "One game, every call yours.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "ar8-game-01",
+          "title": "Kickoff",
+          "body": "You're the head coach of the Harbor City Gulls against the Ridgeview Foxes. The cards run in order through one game. Make every call; the explanation follows each one.",
+          "concept": "game-situation"
+        },
+        {
+          "type": "situation",
+          "id": "ar8-game-02",
+          "state": {
+            "quarter": 1,
+            "clock": 840,
+            "down": 4,
+            "toGo": 1,
+            "yardLine": 34,
+            "scoreDiff": 0,
+            "timeouts": 3
+          },
+          "prompt": "Opening drive. 4th and 1 at your own 34, first quarter, tied.",
+          "options": [
+            {
+              "text": "Go for it",
+              "quality": "best",
+              "why": "Short-yardage conversions are likely, and modern 4th-down models favour going even in your own territory."
+            },
+            {
+              "text": "Punt",
+              "quality": "ok",
+              "why": "Conservative but defensible this early."
+            },
+            {
+              "text": "Fake punt",
+              "quality": "poor",
+              "why": "A trick play where a normal conversion would do."
+            }
+          ],
+          "explanation": "Short yardage is worth a lot more than coaches used to think.",
+          "concept": "fourth-down"
+        },
+        {
+          "type": "situation",
+          "id": "ar8-game-03",
+          "state": {
+            "quarter": 1,
+            "clock": 380,
+            "down": 2,
+            "toGo": 10,
+            "yardLine": 45,
+            "scoreDiff": 0,
+            "timeouts": 3
+          },
+          "prompt": "Their defense shows two high safeties and only six in the box. 2nd and 10 at your 45.",
+          "options": [
+            {
+              "text": "Run the ball",
+              "quality": "best",
+              "why": "Six in the box against your blockers is a numbers advantage."
+            },
+            {
+              "text": "Deep shot",
+              "quality": "poor",
+              "why": "Two deep safeties are there to stop exactly that."
+            },
+            {
+              "text": "Screen",
+              "quality": "ok",
+              "why": "Fine, but the run is the clearer edge."
+            }
+          ],
+          "explanation": "Take what the shell gives you.",
+          "concept": "box-count"
+        },
+        {
+          "type": "situation",
+          "id": "ar8-game-04",
+          "state": {
+            "quarter": 1,
+            "clock": 120,
+            "down": 1,
+            "toGo": 10,
+            "yardLine": 82,
+            "scoreDiff": 0,
+            "timeouts": 3
+          },
+          "prompt": "1st and 10 at their 18. They're in single-high Cover 3 with a loaded box.",
+          "options": [
+            {
+              "text": "Four verticals or a seam shot",
+              "quality": "best",
+              "why": "Three deep defenders can't carry four vertical routes, even in the red zone."
+            },
+            {
+              "text": "Run into the eight-man box",
+              "quality": "ok",
+              "why": "Possible, but the numbers favour them."
+            },
+            {
+              "text": "Field goal now",
+              "quality": "poor",
+              "why": "Way too early in the drive."
+            }
+          ],
+          "explanation": "Attack the coverage's known weakness.",
+          "concept": "four-verticals"
+        },
+        {
+          "type": "situation",
+          "id": "ar8-game-05",
+          "state": {
+            "quarter": 2,
+            "clock": 600,
+            "down": 1,
+            "toGo": 15,
+            "yardLine": 85,
+            "scoreDiff": 6,
+            "timeouts": 3
+          },
+          "prompt": "Touchdown. You lead 6-0 in the second quarter. The try?",
+          "options": [
+            {
+              "text": "Kick the extra point",
+              "quality": "best",
+              "why": "Early on, the kick and two-point try are worth about the same; take the near-certain point."
+            },
+            {
+              "text": "Go for two",
+              "quality": "ok",
+              "why": "About equal value, more variance."
+            },
+            {
+              "text": "Decline the try",
+              "quality": "poor",
+              "why": "No reason to give up a free shot at points."
+            }
+          ],
+          "explanation": "Early in the game, it's close: most choose the kick.",
+          "concept": "two-point"
+        },
+        {
+          "type": "situation",
+          "id": "ar8-game-06",
+          "state": {
+            "quarter": 2,
+            "clock": 45,
+            "down": 1,
+            "toGo": 10,
+            "yardLine": 30,
+            "scoreDiff": 7,
+            "timeouts": 2
+          },
+          "prompt": "45 seconds left in the half, you lead by 7, ball at your 30, two timeouts.",
+          "options": [
+            {
+              "text": "Try a quick drive with sideline throws",
+              "quality": "best",
+              "why": "With two timeouts you can reach field-goal range; just avoid risky middle throws."
+            },
+            {
+              "text": "Kneel out the half",
+              "quality": "ok",
+              "why": "Safe and reasonable, but leaves likely points on the table."
+            },
+            {
+              "text": "Hand off three times",
+              "quality": "poor",
+              "why": "Runs the clock without a real chance to score."
+            }
+          ],
+          "explanation": "With timeouts in hand, take a low-risk shot at points.",
+          "concept": "two-minute-drill"
+        },
+        {
+          "type": "situation",
+          "id": "ar8-game-07",
+          "state": {
+            "quarter": 3,
+            "clock": 520,
+            "down": 4,
+            "toGo": 2,
+            "yardLine": 62,
+            "scoreDiff": 7,
+            "timeouts": 3
+          },
+          "prompt": "Third quarter, up 7. 4th and 2 at their 38. Your kicker's range ends around 50 yards.",
+          "options": [
+            {
+              "text": "Go for it",
+              "quality": "best",
+              "why": "A 55-yard try is out of range, and two yards converts often."
+            },
+            {
+              "text": "Punt",
+              "quality": "ok",
+              "why": "Pins them deep, but likely a worse choice."
+            },
+            {
+              "text": "Long field goal",
+              "quality": "poor",
+              "why": "Outside your kicker's range, and a miss gives them great field position."
+            }
+          ],
+          "explanation": "Know your kicker's range before the drive starts.",
+          "concept": "fourth-down"
+        },
+        {
+          "type": "situation",
+          "id": "ar8-game-08",
+          "state": {
+            "quarter": 3,
+            "clock": 200,
+            "down": 3,
+            "toGo": 6,
+            "yardLine": 50,
+            "scoreDiff": 7,
+            "timeouts": 3
+          },
+          "prompt": "3rd and 6 at midfield. They walk a safety down and mug the A gaps: pressure is coming.",
+          "options": [
+            {
+              "text": "Hot throw to the open slot",
+              "quality": "best",
+              "why": "With more rushers than blockers, the ball has to come out to the space the blitz leaves."
+            },
+            {
+              "text": "Seven-step drop",
+              "quality": "poor",
+              "why": "No time against a big blitz."
+            },
+            {
+              "text": "Run into the pressure",
+              "quality": "ok",
+              "why": "Can catch an over-pursuing blitz, but risky."
+            }
+          ],
+          "explanation": "Recognise the pressure, then throw hot.",
+          "concept": "hot-route"
+        },
+        {
+          "type": "situation",
+          "id": "ar8-game-09",
+          "state": {
+            "quarter": 4,
+            "clock": 600,
+            "down": 1,
+            "toGo": 10,
+            "yardLine": 25,
+            "scoreDiff": 0,
+            "timeouts": 3
+          },
+          "prompt": "Fourth quarter, tied. The wind has picked up to 25 mph straight down the field, in your face.",
+          "options": [
+            {
+              "text": "Lean on the run and short passes",
+              "quality": "best",
+              "why": "A strong headwind ruins deep throws and long kicks."
+            },
+            {
+              "text": "Deep shots",
+              "quality": "poor",
+              "why": "Into the wind, deep balls hang and die."
+            },
+            {
+              "text": "Plan on long field goals",
+              "quality": "poor",
+              "why": "A headwind shortens your kicker's range."
+            }
+          ],
+          "explanation": "Weather changes the plan.",
+          "concept": "game-management"
+        },
+        {
+          "type": "situation",
+          "id": "ar8-game-10",
+          "state": {
+            "quarter": 4,
+            "clock": 150,
+            "down": 4,
+            "toGo": 3,
+            "yardLine": 72,
+            "scoreDiff": -3,
+            "timeouts": 2
+          },
+          "prompt": "Down 3 with 2:30 left. 4th and 3 at their 28; you have two timeouts.",
+          "options": [
+            {
+              "text": "Kick the 45-yard field goal to tie",
+              "quality": "best",
+              "why": "A makeable kick ties it, and you keep two timeouts to get the ball back."
+            },
+            {
+              "text": "Go for it",
+              "quality": "ok",
+              "why": "Defensible, but a miss loses almost all your chance."
+            },
+            {
+              "text": "Punt",
+              "quality": "poor",
+              "why": "Punting from their 28 throws away a good kick."
+            }
+          ],
+          "explanation": "Take the high-percentage tie when time and timeouts remain.",
+          "concept": "field-goal"
+        },
+        {
+          "type": "situation",
+          "id": "ar8-game-11",
+          "state": {
+            "quarter": 4,
+            "clock": 65,
+            "down": 2,
+            "toGo": 10,
+            "yardLine": 30,
+            "scoreDiff": 0,
+            "timeouts": 1
+          },
+          "prompt": "Tied, 1:05 left, 2nd and 10 at your 30, one timeout. Your receiver can catch it over the middle for 15 or at the sideline for 8. Which throw?",
+          "options": [
+            {
+              "text": "The sideline for 8, stepping out",
+              "quality": "best",
+              "why": "Out of bounds stops the clock and saves your last timeout for later."
+            },
+            {
+              "text": "The middle for 15",
+              "quality": "ok",
+              "why": "More yards, but the clock keeps running or costs your last timeout."
+            },
+            {
+              "text": "A deep shot into double coverage",
+              "quality": "poor",
+              "why": "Low odds, and an interception ends it."
+            }
+          ],
+          "explanation": "Late in a half, yards that stop the clock are worth more than yards that don't.",
+          "concept": "two-minute-drill"
+        },
+        {
+          "type": "situation",
+          "id": "ar8-game-12",
+          "state": {
+            "quarter": 4,
+            "clock": 25,
+            "down": 1,
+            "toGo": 10,
+            "yardLine": 67,
+            "scoreDiff": 0,
+            "timeouts": 0
+          },
+          "prompt": "Tied, 25 seconds left, 1st and 10 at their 33, no timeouts. What's the call?",
+          "options": [
+            {
+              "text": "Sideline throw, then spike if needed and kick",
+              "quality": "best",
+              "why": "Gain a few yards out of bounds, then kick a field goal for the win."
+            },
+            {
+              "text": "Run up the middle",
+              "quality": "poor",
+              "why": "Without timeouts the clock may run out."
+            },
+            {
+              "text": "Kick a 50-yarder now",
+              "quality": "ok",
+              "why": "Reasonable for a strong kicker, but a few more yards help."
+            }
+          ],
+          "explanation": "Get closer, stop the clock, then kick.",
+          "concept": "two-minute-drill"
+        }
+      ]
+    }
+  ]
+}

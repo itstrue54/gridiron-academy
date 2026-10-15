@@ -1014,6 +1014,55 @@
       "kid": "A corner pretends to play deep, then jumps a short route.",
       "full": "A corner shows deep-third depth, sinks at the snap to invite an outside throw, then drives on the flat or out with a safety covering deep behind him.",
       "level": 7
+    },
+    {
+      "id": "defensive-system",
+      "term": "Defensive systems",
+      "kid": "The big ideas whole defenses are built on.",
+      "full": "Families such as two-high light-box, pattern-match quarters, single-high Cover 3, Tampa 2, the 46, Wide-9 and the 3-3-5, each choosing what to take away and what to give up.",
+      "level": 8
+    },
+    {
+      "id": "epa",
+      "term": "EPA",
+      "kid": "How much a play changed a team's expected points.",
+      "full": "Expected points added: expected points after the play minus before it, where expected points come from historical outcomes for each down, distance and field position.",
+      "level": 8
+    },
+    {
+      "id": "game-management",
+      "term": "Game management",
+      "kid": "Using the clock, field and conditions to win.",
+      "full": "Clock decisions, home-field effects, weather (wind matters most for passing and kicking) and other situational choices.",
+      "level": 8
+    },
+    {
+      "id": "offensive-system",
+      "term": "Offensive systems",
+      "kid": "The big ideas whole offenses are built on.",
+      "full": "Families such as West Coast, Air Coryell, Erhardt-Perkins, Air Raid, run-and-shoot, wide-zone play-action and spread/RPO, each built around what it wants to be great at.",
+      "level": 8
+    },
+    {
+      "id": "proe",
+      "term": "PROE",
+      "kid": "How much more a team passes than expected.",
+      "full": "Pass rate over expected: actual pass rate minus a model's expected rate for the same down, distance, score and time.",
+      "level": 8
+    },
+    {
+      "id": "salary-cap",
+      "term": "Salary cap",
+      "kid": "The limit on what a team can spend on players.",
+      "full": "The NFL's hard cap on player spending; rookie contracts are cheap for their value, and released players can leave dead money on the cap.",
+      "level": 8
+    },
+    {
+      "id": "success-rate",
+      "term": "Success rate",
+      "kid": "How often plays keep an offense on schedule.",
+      "full": "Usually: 40% of the yards to go on 1st down, 60% on 2nd, 100% on 3rd and 4th. Some analysts use slightly different cut-offs.",
+      "level": 8
     }
   ]
 }

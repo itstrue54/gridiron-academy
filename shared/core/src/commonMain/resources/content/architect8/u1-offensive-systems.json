@@ -1,0 +1,254 @@
+{
+  "id": "architect8-u1",
+  "title": "Offensive Systems",
+  "lessons": [
+    {
+      "id": "ar8-offense",
+      "title": "Offensive Systems",
+      "blurb": "How whole offenses are built.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "ar8-offense-01",
+          "title": "West Coast",
+          "body": "Short, timed throws used like an extension of the run game. The quarterback's drop is matched to the route depth, and receivers are expected to run after the catch.",
+          "concept": "offensive-system"
+        },
+        {
+          "type": "learn",
+          "id": "ar8-offense-02",
+          "title": "Air Coryell",
+          "body": "A vertical passing attack built on a numbered route tree, pushing the ball downfield with deep and intermediate routes timed to longer drops.",
+          "concept": "offensive-system"
+        },
+        {
+          "type": "learn",
+          "id": "ar8-offense-03",
+          "title": "Erhardt-Perkins",
+          "body": "Plays named by concept, not formation, so the same concept can be called from any personnel or alignment. Easy to adapt week to week.",
+          "concept": "offensive-system"
+        },
+        {
+          "type": "learn",
+          "id": "ar8-offense-04",
+          "title": "Air Raid and run-and-shoot",
+          "body": "Air Raid spreads the field and repeats a small set of pass concepts (mesh, Y-cross, four verticals) until they're perfect. Run-and-shoot lets receivers adjust routes to the coverage after the snap.",
+          "concept": "offensive-system"
+        },
+        {
+          "type": "learn",
+          "id": "ar8-offense-05",
+          "title": "Wide zone and play-action",
+          "body": "An outside-zone run game that stretches the defense sideways, paired with bootlegs and play-action that look identical to the run.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -1.2
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -6.5
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "lt",
+                "points": [
+                  {
+                    "x": -1.4000000000000001,
+                    "y": 0.8
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "lg",
+                "points": [
+                  {
+                    "x": 0.19999999999999996,
+                    "y": 0.8
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "c",
+                "points": [
+                  {
+                    "x": 1.8,
+                    "y": 0.8
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "rg",
+                "points": [
+                  {
+                    "x": 3.4000000000000004,
+                    "y": 0.8
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "rt",
+                "points": [
+                  {
+                    "x": 5.0,
+                    "y": 0.8
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "rb",
+                "points": [
+                  {
+                    "x": 4,
+                    "y": -4.5
+                  },
+                  {
+                    "x": 7,
+                    "y": -1
+                  },
+                  {
+                    "x": 7.5,
+                    "y": 5
+                  }
+                ],
+                "kind": "run"
+              },
+              {
+                "playerId": "qb",
+                "points": [
+                  {
+                    "x": -3,
+                    "y": -5
+                  },
+                  {
+                    "x": -8,
+                    "y": -3
+                  }
+                ],
+                "kind": "run",
+                "label": "boot"
+              }
+            ],
+            "caption": "Outside zone, with the boot going the other way"
+          },
+          "concept": "offensive-system"
+        },
+        {
+          "type": "learn",
+          "id": "ar8-offense-06",
+          "title": "Spread, option and the roots",
+          "body": "Spread offenses add quarterback runs and RPOs to make defenders choose. Before them came the option offenses (flexbone, triple option) and misdirection systems like the Wing-T, still common in youth and high school football.",
+          "concept": "offensive-system"
+        },
+        {
+          "type": "match",
+          "id": "ar8-offense-07",
+          "prompt": "Match each system to its core idea.",
+          "pairs": [
+            {
+              "left": "West Coast",
+              "right": "Short timed throws as an extension of the run"
+            },
+            {
+              "left": "Erhardt-Perkins",
+              "right": "Concepts named the same from any formation"
+            },
+            {
+              "left": "Air Raid",
+              "right": "A few spread pass concepts repeated to perfection"
+            },
+            {
+              "left": "Run-and-shoot",
+              "right": "Receivers adjust routes to the coverage"
+            }
+          ],
+          "explanation": "Each system answers one question: what will we be great at?",
+          "concept": "offensive-system"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "ar8-offense-08",
+          "prompt": "Why does the wide-zone system pair so naturally with bootlegs?",
+          "choices": [
+            "The boot looks exactly like the run, so defenders chase the wrong way",
+            "Bootlegs are always touchdowns",
+            "It doesn't need linemen",
+            "It only works in the rain"
+          ],
+          "answer": 0,
+          "explanation": "The run and the boot start the same; when defenders flow with the run, the quarterback rolls the other way.",
+          "concept": "play-action"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "ar8-offense-09",
+          "prompt": "Which system lets receivers change their route after the snap based on coverage?",
+          "choices": [
+            "Run-and-shoot",
+            "Wing-T",
+            "West Coast",
+            "Flexbone"
+          ],
+          "answer": 0,
+          "explanation": "Run-and-shoot is built on receivers and the quarterback reading the same coverage and adjusting together.",
+          "concept": "offensive-system"
+        }
+      ]
+    }
+  ]
+}

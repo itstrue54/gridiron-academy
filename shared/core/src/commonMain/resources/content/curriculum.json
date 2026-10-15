@@ -224,6 +224,30 @@
         "gameQuestions": 10,
         "gamePassPct": 70
       }
+    },
+    {
+      "id": "architect-8",
+      "number": 8,
+      "track": "shared",
+      "title": "Architect",
+      "tagline": "Scheme families, the numbers, game management, and a whole game of calls.",
+      "requires": [
+        "coordinator-7"
+      ],
+      "unitFiles": [
+        "architect8/u1-offensive-systems.json",
+        "architect8/u2-defensive-systems.json",
+        "architect8/u3-analytics.json",
+        "architect8/u4-game-management.json",
+        "architect8/u5-the-architects-game.json"
+      ],
+      "gate": {
+        "testPassPct": 80,
+        "testQuestions": 12,
+        "game": "game_day",
+        "gameQuestions": 10,
+        "gamePassPct": 70
+      }
     }
   ]
 }

@@ -1,0 +1,155 @@
+{
+  "id": "architect8-u3",
+  "title": "Analytics",
+  "lessons": [
+    {
+      "id": "ar8-analytics",
+      "title": "The Numbers",
+      "blurb": "Expected points, success rate and pass rate over expected.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "ar8-analytics-01",
+          "title": "Expected points (EP)",
+          "body": "Every down, distance and spot on the field is worth some points on average, based on what happened in thousands of past drives. 1st and 10 near the opponent's goal is worth far more than at your own 5.",
+          "concept": "epa"
+        },
+        {
+          "type": "learn",
+          "id": "ar8-analytics-02",
+          "title": "EPA",
+          "body": "Expected points added is how much a play changed the expected points. A 5-yard gain on 3rd and 4 adds a lot; the same 5 yards on 3rd and 10 can lose value, because you'll probably punt.",
+          "concept": "epa"
+        },
+        {
+          "type": "learn",
+          "id": "ar8-analytics-03",
+          "title": "Success rate",
+          "body": "A play is usually counted a success if it gains 40% of the yards needed on 1st down, 60% on 2nd, and all of them on 3rd or 4th. It rewards staying on schedule.",
+          "concept": "success-rate"
+        },
+        {
+          "type": "learn",
+          "id": "ar8-analytics-04",
+          "title": "Pass rate over expected",
+          "body": "Given the down, distance, score and clock, a model predicts how often a typical team would pass. Pass rate over expected (PROE) is how much more or less a team actually passes.",
+          "concept": "proe"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "ar8-analytics-05",
+          "prompt": "A 4-yard gain on 1st and 10. Under the usual success-rate rule, is it a success?",
+          "choices": [
+            "Yes: 4 of 10 is 40%",
+            "No: it needed 10",
+            "Only in the red zone",
+            "Only for a run"
+          ],
+          "answer": 0,
+          "explanation": "On 1st down the bar is 40% of the yards to go.",
+          "concept": "success-rate"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "ar8-analytics-06",
+          "prompt": "A 6-yard gain on 3rd and 10. Why is its EPA usually negative?",
+          "choices": [
+            "It falls short of the first down, so you'll probably punt",
+            "Six yards is never good",
+            "EPA ignores 3rd down",
+            "Because it was a pass"
+          ],
+          "answer": 0,
+          "explanation": "Yards only count for what they lead to; short of the sticks on 3rd down, the drive likely ends.",
+          "concept": "epa"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "ar8-analytics-07",
+          "prompt": "A team's PROE is strongly positive. What does that mean?",
+          "choices": [
+            "It passes more than a typical team would in the same situations",
+            "It runs more than expected",
+            "It scores more",
+            "It punts less"
+          ],
+          "answer": 0,
+          "explanation": "Positive PROE means more passing than the situation predicts.",
+          "concept": "proe"
+        },
+        {
+          "type": "true_false",
+          "id": "ar8-analytics-08",
+          "statement": "The same yards can be worth different amounts depending on down and distance.",
+          "answer": true,
+          "explanation": "That's the whole idea behind EPA.",
+          "concept": "epa"
+        }
+      ]
+    },
+    {
+      "id": "ar8-fourth",
+      "title": "4th Downs and Two-Point Tries",
+      "blurb": "Decisions by the numbers.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "ar8-fourth-01",
+          "title": "4th-down models",
+          "body": "A model compares the win probability after each choice: go for it (times the chance of converting), punt, or kick. Models say to go for it far more often than coaches used to, especially on 4th and short.",
+          "concept": "fourth-down"
+        },
+        {
+          "type": "learn",
+          "id": "ar8-fourth-02",
+          "title": "Extra point or two?",
+          "body": "NFL extra points are made about 94% of the time; two-point tries succeed a little under half the time. That's close to the same expected points, so the score and the clock decide.",
+          "concept": "two-point"
+        },
+        {
+          "type": "learn",
+          "id": "ar8-fourth-03",
+          "title": "The charts",
+          "body": "Two-point charts list the score differences where going for two makes sense, usually to tie or take a lead that a field goal can't erase. Late in games, the math gets very specific.",
+          "concept": "two-point"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "ar8-fourth-04",
+          "prompt": "Why do modern models favour going for it on many 4th and shorts?",
+          "choices": [
+            "Converting keeps the drive alive, worth more than the punt's field position",
+            "Punting is illegal",
+            "Kickers never miss",
+            "Defenses are always tired"
+          ],
+          "answer": 0,
+          "explanation": "Short conversions succeed often, and a fresh set of downs is worth a lot of expected points.",
+          "concept": "fourth-down"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "ar8-fourth-05",
+          "prompt": "An extra point is about 94% and a two-point try about 48%. Early in a game, which is worth more on average?",
+          "choices": [
+            "About the same",
+            "The extra point by far",
+            "The two-point try by far",
+            "Neither scores"
+          ],
+          "answer": 0,
+          "explanation": "0.94 x 1 is about 0.94; 0.48 x 2 is about 0.96. Close enough that the situation decides.",
+          "concept": "two-point"
+        },
+        {
+          "type": "true_false",
+          "id": "ar8-fourth-06",
+          "statement": "Down 14, a team scores a touchdown late. Many analysts say going for two now is the better choice.",
+          "answer": true,
+          "explanation": "Make it and a later touchdown plus a kick wins; miss it and you still have a later two-point try to tie. Knowing early helps.",
+          "concept": "two-point"
+        }
+      ]
+    }
+  ]
+}
