@@ -24,6 +24,7 @@ import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.dp
+import io.github.itstrue54.gridironacademy.engine.DiagramDescriber
 import io.github.itstrue54.gridironacademy.engine.Rng
 import io.github.itstrue54.gridironacademy.model.Diagram
 import io.github.itstrue54.gridironacademy.model.DiagramTap
@@ -76,21 +77,24 @@ import org.jetbrains.compose.resources.stringResource
 
 private val LETTERS = listOf("A", "B", "C", "D", "E", "F")
 
+/** What a screen reader says for a diagram: its caption, then the picture in words (DESIGN 7.6). */
+fun Diagram.spoken(): String = listOf(caption, DiagramDescriber.describe(this)).filter { it.isNotBlank() }.joinToString(". ")
+
 @Composable
 fun Prompt(text: String) {
     Text(text, style = Gridiron.type.body, color = Gridiron.colors.ink, modifier = Modifier.semantics { heading() })
 }
 
 @Composable
-private fun StepDiagram(diagram: Diagram?, description: String) {
-    if (diagram != null) FieldDiagram(diagram, description = description, modifier = Modifier.fillMaxWidth())
+private fun StepDiagram(diagram: Diagram?) {
+    if (diagram != null) FieldDiagram(diagram, description = diagram.spoken(), modifier = Modifier.fillMaxWidth())
 }
 
 @Composable
 fun LearnView(step: Learn) {
     Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
         Text(step.title, style = Gridiron.type.headline, color = Gridiron.colors.ink, modifier = Modifier.semantics { heading() })
-        StepDiagram(step.diagram, step.diagram?.caption?.ifEmpty { step.title } ?: "")
+        StepDiagram(step.diagram)
         Text(step.body, style = Gridiron.type.body, color = Gridiron.colors.ink)
     }
 }
@@ -132,7 +136,7 @@ fun ChoiceList(
 fun MultipleChoiceView(prompt: String, diagram: Diagram?, choices: List<String>, answer: Int, selected: Int?, graded: Boolean, onSelect: (Int) -> Unit) {
     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
         Prompt(prompt)
-        StepDiagram(diagram, diagram?.caption?.ifEmpty { prompt } ?: "")
+        StepDiagram(diagram)
         ChoiceList(choices, selected, graded, isRight = { it == answer }, onSelect = onSelect)
     }
 }
@@ -184,7 +188,7 @@ fun DiagramTapView(step: DiagramTap, tapped: Set<String>, graded: Boolean, onCha
         )
         FieldDiagram(
             step.diagram,
-            description = step.diagram.caption.ifEmpty { step.prompt },
+            description = step.diagram.spoken(),
             marks = marks,
             onTap = if (graded) null else { id ->
                 onChange(

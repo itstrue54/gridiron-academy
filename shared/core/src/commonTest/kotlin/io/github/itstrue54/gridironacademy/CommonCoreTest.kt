@@ -2,8 +2,8 @@ package io.github.itstrue54.gridironacademy
 
 import io.github.itstrue54.gridironacademy.content.ContentLoader
 import io.github.itstrue54.gridironacademy.engine.*
-import io.github.itstrue54.gridironacademy.progress.*
 import io.github.itstrue54.gridironacademy.model.*
+import io.github.itstrue54.gridironacademy.progress.*
 import kotlin.test.*
 
 /**
@@ -65,5 +65,34 @@ class CommonCoreTest {
         val text = ContentLoader.json.encodeToString(LearnerSave.serializer(), save)
         assertTrue("\"8-9\"" in text, "age band is stored by its label: $text")
         assertEquals(save, ContentLoader.json.decodeFromString(LearnerSave.serializer(), text))
+    }
+
+    @Test
+    fun describerSaysWhoIsWhereAndWhoGoesWhere() {
+        val d = Diagram(
+            players = listOf(
+                DiagramPlayer("qb", "QB", Side.OFFENSE, 0f, -5f),
+                DiagramPlayer("x", "X", Side.OFFENSE, -18f, 0f),
+                DiagramPlayer("fs", "FS", Side.DEFENSE, 1f, 12f),
+            ),
+            routes = listOf(DiagramRoute("x", listOf(Pt(-18f, 10f), Pt(-12f, 10f)), PathKind.PASS, "Dig")),
+            zones = listOf(DiagramZone("ez", "End zone", -26.5f, 10f, 53f, 4.5f)),
+        )
+        assertEquals(
+            "Offense: X, wide left, on the line; QB, in the middle, 5 yards behind the line. " +
+                "Defense: FS, in the middle, 12 yards off the ball. " +
+                "X runs a route (Dig): 10 up the field, then 6 to the right. " +
+                "Shaded area End zone, from 10 yards up the field to 15 yards up the field.",
+            DiagramDescriber.describe(d),
+        )
+    }
+
+    @Test
+    fun describerHandlesDiagonalsAndRepeatedPoints() {
+        val d = Diagram(
+            players = listOf(DiagramPlayer("w", "W", Side.DEFENSE, 4f, 5f)),
+            routes = listOf(DiagramRoute("w", listOf(Pt(4f, 5f), Pt(1f, 0f)), PathKind.BLITZ)),
+        )
+        assertEquals("Defense: W, right of the middle, 5 yards off the ball. W rushes: 5 back and 3 to the left.", DiagramDescriber.describe(d))
     }
 }
