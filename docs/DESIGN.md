@@ -226,8 +226,7 @@ icon's 66dp safe circle while the night sky and turf run to the edge (minSdk 26,
 adaptive icons only). The icon (redrawn 2026-10-15 to match Prime Time, section 2.2) is
 the **gold football with a chalk play (an X and an arrow) in place of laces**, flying
 past a volt-green speed streak through a navy night sky under two stadium floodlights,
-over a rise of turf. The Coach app icon will reuse the ball on a plain Floodlight
-surface with a chalk clipboard clip, so the two apps read as a family. The Kid title
+over a rise of turf. The Coach app icon (`coach-icon-source.png`, `make-icons.py coach`) is its sibling: the same night sky, floodlights and turf, with a **gold clipboard carrying a chalk play and a whistle** in place of the ball, so the two sit together on a phone yet never get mistaken for each other. The Kid title
 art is Clip in a stadium at golden hour; the Adult title art is a night-game press-box
 view of an empty field under floodlights. Level 0 needs a picture set (ball, two
 teams, end zone, referee, flag belt, helmet, mouthguard, high-five) in the same flat

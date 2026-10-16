@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Builds the learner app's launcher icon from the Nano Banana source art (DESIGN 6.3).
+"""Builds an app's launcher icon from its Nano Banana source art (DESIGN 6.3).
 
-Usage: python3 tools/make-icons.py   (from the repo root; needs Pillow)
+Usage: python3 tools/make-icons.py [learner|coach]   (from the repo root; needs Pillow)
 
 The source is a full-bleed square. Android adaptive icons crop a 108dp layer to a mask
 and only promise the middle 66dp, so the art is shrunk onto a larger canvas (PAD) to
@@ -11,13 +11,17 @@ glows (the Prime Time night sky, the turf at the bottom) continues without a sea
 minSdk is 26, so only adaptive icons are needed: one foreground PNG per density, a
 background colour, and the 512px Play Store icon.
 """
+import sys
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFilter
 
 ROOT = Path(__file__).resolve().parent.parent
-SOURCE = ROOT / "docs/play-store/assets/source/icon-source.png"
-RES = ROOT / "androidApp-learner/src/main/res"
-STORE = ROOT / "docs/play-store/assets/icon-512.png"
+ASSETS = ROOT / "docs/play-store/assets"
+# app -> (source art, Android res dir, 512px Play Store icon)
+APPS = {
+    "learner": (ASSETS / "source/icon-source.png", ROOT / "androidApp-learner/src/main/res", ASSETS / "icon-512.png"),
+    "coach": (ASSETS / "source/coach-icon-source.png", ROOT / "androidApp-coach/src/main/res", ASSETS / "coach-icon-512.png"),
+}
 
 # Source edge -> canvas edge. At 1.4 the ball (about 0.38 of the source from the centre)
 # lands about 0.27 from the centre of the layer, inside the 0.305 safe radius.
@@ -50,6 +54,8 @@ def extend(src: Image.Image, side: int) -> Image.Image:
 
 
 def main():
+    app = sys.argv[1] if len(sys.argv) > 1 else "learner"
+    SOURCE, RES, STORE = APPS[app]
     src = Image.open(SOURCE).convert("RGB")
     canvas = extend(src, round(src.width * PAD))
 
@@ -82,7 +88,7 @@ def main():
     # Play Store: 512px, 32-bit PNG, full bleed (Play applies its own rounded mask).
     STORE.parent.mkdir(parents=True, exist_ok=True)
     src.resize((512, 512), Image.LANCZOS).convert("RGBA").save(STORE, optimize=True)
-    print("icons written; background", hexcolor)
+    print(app, "icons written; background", hexcolor)
 
 
 if __name__ == "__main__":

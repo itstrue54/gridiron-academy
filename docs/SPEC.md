@@ -370,6 +370,8 @@ Each concept id has a per-profile mastery record derived from attempts:
   10 graded attempts (weight 0.8^age), partial credit counts proportionally.
 - `MASTERED`: score >= 80, at least 3 correct first attempts, on at least 2 distinct
   days, and the last attempt correct.
+- `PRACTICED`: score >= 60 and not mastered; `LEARNING`: attempted, score below 60;
+  `NEW`: no attempts. "3 to work on" lists concepts with at least 2 first tries.
 - `RUSTY`: was MASTERED and either 30+ days without an attempt or a review miss.
 - All thresholds are named constants in `MasteryRules`; time is passed in as epoch
   day. Pure function `Mastery.of(events, conceptId, today)`, deterministic.
@@ -555,8 +557,11 @@ One adult account can hold several roles (a parent who coaches).
 
 ### 7.4 Assignments and scheme packs
 A **scheme pack** is a curated, versioned bundle defined in `packs.json`:
-`{id, title, side: offense|defense|special|rules, level, concepts[], lessons[],
-games[], check: {questions, passPct}}`. Examples:
+`{id, title, blurb, side: offense|defense|special|rules, level, lessons[], games[],
+check: {questions, passPct}}`. A pack's concepts are exactly its lessons' concepts
+(derived, so they can't drift); the validator checks every lesson exists and the check
+has enough graded steps. Packs only point at lessons that exist, so the examples below
+without content yet (Wing-T, youth 5-2, flag 5v5) arrive with their lessons. Examples:
 - *Youth 5-2 defense with Cover 3*, *4-3 Over + Cover 2/Tampa 2*, *3-4 with fire-zone
   pressures*, *Quarters (MOD/Palms)*, *Disguise: two-high rotations*.
 - *Wing-T base (buck sweep, trap, waggle)*, *Inside/outside zone with boot action*,
@@ -761,6 +766,13 @@ Dependency direction: `apps -> ui -> data -> core`. Nothing depends on an app;
    and reduced motion. It has no INTERNET permission and Android backup is off
    (`allowBackup=false` and data-extraction rules), so unlinked data stays on the
    device (§5.4).
+   **Coach app (M3, started):** `core` has `AttemptEvent`/`AssignmentEvent`, `Mastery`
+   (§4.6, thresholds in `MasteryRules`; Learning below 60, Practiced from 60), scheme
+   packs (`packs.json`, §7.4) and `AssignmentPlanner`; `:shared:data` holds
+   `CoachRepository`, `CoachDashboard` (every dashboard number) and the demo account
+   (ADR-009); `:shared:ui` `coach/` has Players, the learner card, the team heat map and
+   the four-step Assign; `:androidApp-coach` is the shell. Not yet: accounts, linking
+   and VPC, sync, the learner-side event log and inbox, the tablet rail layout.
    **UI in Compose Multiplatform from day one** (not Jetpack-only APIs), so the same
    screens run on iOS. Android-only concerns (TTS, WorkManager, billing, FCM,
    Families compliance) sit behind `expect`/`actual` interfaces in `data` or in the

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- The window behind Compose: Daylight surface, so launch never flashes white. -->
+    <style name="Theme.GridironCoach" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/surface</item>
+    </style>
+    <color name="surface">#F7F4EB</color>
+</resources>

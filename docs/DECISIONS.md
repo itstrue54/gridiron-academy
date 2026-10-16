@@ -60,3 +60,21 @@ kid look is unchanged.
 "Daylight for adults" setting can return with profile settings if people ask. The
 field diagrams keep their turf, so content and the renderer are untouched; contrast is
 re-measured and tested for the new palette.
+
+## ADR-009: Build the Coach app against a repository seam and a demo account (2026-10-16)
+
+**Context.** M3's Coach app needs a backend (SPEC 8.2: Supabase or Firebase, still
+open), accounts and verifiable parental consent (SPEC 5.4: vendor is a legal decision).
+None of those are decided, but the dashboards, the planner and the assign flow are.
+
+**Decision.** The coach screens read a `CoachRepository` (in a new `:shared:data`
+module) that exposes one `CoachSnapshot` of synced events, and compute every number
+with the shared engine (`CoachDashboard`). Until the backend exists the app runs on
+`DemoCoachRepository`: a deterministic, fictional parent-who-coaches with a
+high-school team, generated from a seed and the date. The app says it is a demo on
+Players and More, and has no INTERNET permission.
+
+**Consequences.** The backend choice only adds a second repository; screens and engine
+don't change. Mastery in the coach app needs per-question attempt events, which the
+learner app doesn't record yet: that is the next learner change, with a save
+migration (SPEC 9). Prerequisite warm-ups wait for the concept graph.
