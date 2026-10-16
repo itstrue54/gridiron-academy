@@ -37,7 +37,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            api(project(":shared:core"))
+            api(project(":shared:data"))
             api(compose.runtime)
             api(compose.foundation)
             api(compose.material3)
