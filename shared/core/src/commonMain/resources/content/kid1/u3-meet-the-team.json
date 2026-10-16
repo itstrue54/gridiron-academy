@@ -158,7 +158,7 @@
                 "label": "84",
                 "side": "OFFENSE",
                 "x": 17,
-                "y": 0.0
+                "y": -1
               },
               {
                 "id": "wr3",
@@ -250,7 +250,7 @@
                 "label": "84",
                 "side": "OFFENSE",
                 "x": 17,
-                "y": 0.0
+                "y": -1
               },
               {
                 "id": "wr3",
@@ -342,7 +342,7 @@
                 "label": "84",
                 "side": "OFFENSE",
                 "x": 17,
-                "y": 0.0
+                "y": -1
               },
               {
                 "id": "wr3",
@@ -435,7 +435,7 @@
                 "label": "84",
                 "side": "OFFENSE",
                 "x": 17,
-                "y": 0.0
+                "y": -1
               },
               {
                 "id": "wr3",
@@ -549,7 +549,7 @@
         {
           "type": "multiple_choice",
           "id": "k1-refs-05",
-          "prompt": "A player moves too early, before the snap. What penalty is that?",
+          "prompt": "A player on offense moves too early, before the snap. What penalty is that?",
           "choices": [
             "Fumble",
             "False start",

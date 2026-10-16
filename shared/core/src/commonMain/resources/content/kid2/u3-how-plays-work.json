@@ -154,6 +154,13 @@
                 "side": "OFFENSE",
                 "x": 11,
                 "y": -1
+              },
+              {
+                "id": "wr3",
+                "label": "83",
+                "side": "OFFENSE",
+                "x": -7,
+                "y": -1
               }
             ],
             "caption": "The offensive line: 70, 66, 55, 67, 71"
@@ -241,6 +248,13 @@
                 "label": "84",
                 "side": "OFFENSE",
                 "x": 11,
+                "y": -1
+              },
+              {
+                "id": "wr3",
+                "label": "83",
+                "side": "OFFENSE",
+                "x": -7,
                 "y": -1
               }
             ],
@@ -330,6 +344,13 @@
                 "label": "84",
                 "side": "OFFENSE",
                 "x": 11,
+                "y": -1
+              },
+              {
+                "id": "wr3",
+                "label": "83",
+                "side": "OFFENSE",
+                "x": -7,
                 "y": -1
               }
             ],

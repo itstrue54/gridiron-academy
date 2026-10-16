@@ -540,6 +540,26 @@
             ],
             "routes": [
               {
+                "playerId": "c",
+                "points": [
+                  {
+                    "x": -1.4,
+                    "y": 1.2
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "te",
+                "points": [
+                  {
+                    "x": 3.6,
+                    "y": 1.2
+                  }
+                ],
+                "kind": "block"
+              },
+              {
                 "playerId": "lg",
                 "points": [
                   {
@@ -913,6 +933,26 @@
               }
             ],
             "routes": [
+              {
+                "playerId": "c",
+                "points": [
+                  {
+                    "x": -1.4,
+                    "y": 1.2
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "te",
+                "points": [
+                  {
+                    "x": 3.6,
+                    "y": 1.2
+                  }
+                ],
+                "kind": "block"
+              },
               {
                 "playerId": "lg",
                 "points": [

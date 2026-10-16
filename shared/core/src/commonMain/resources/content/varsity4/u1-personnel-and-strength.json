@@ -89,7 +89,7 @@
                 "label": "WR",
                 "side": "OFFENSE",
                 "x": 12,
-                "y": 0
+                "y": -1
               },
               {
                 "id": "wr2",
@@ -178,14 +178,14 @@
                 "label": "WR",
                 "side": "OFFENSE",
                 "x": -12,
-                "y": 0
+                "y": -1
               },
               {
                 "id": "wr1",
                 "label": "WR",
                 "side": "OFFENSE",
                 "x": 12,
-                "y": 0
+                "y": -1
               }
             ],
             "caption": "12 personnel: 1 RB, 2 TE, 2 WR"
@@ -295,7 +295,7 @@
                 "label": "WR",
                 "side": "OFFENSE",
                 "x": 12,
-                "y": 0
+                "y": -1
               }
             ],
             "caption": ""
@@ -431,7 +431,7 @@
                 "label": "WR",
                 "side": "OFFENSE",
                 "x": 12,
-                "y": 0
+                "y": -1
               },
               {
                 "id": "wr2",
@@ -526,7 +526,7 @@
                 "label": "WR",
                 "side": "OFFENSE",
                 "x": 12,
-                "y": 0
+                "y": -1
               },
               {
                 "id": "wr2",

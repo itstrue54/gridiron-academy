@@ -980,7 +980,7 @@
               },
               {
                 "id": "h",
-                "label": "H",
+                "label": "Y",
                 "side": "OFFENSE",
                 "x": -7,
                 "y": -1
@@ -1364,7 +1364,7 @@
               },
               {
                 "id": "h",
-                "label": "H",
+                "label": "Y",
                 "side": "OFFENSE",
                 "x": -7,
                 "y": -1
@@ -1422,7 +1422,7 @@
           "targets": [
             "h"
           ],
-          "explanation": "H crosses the field at about 15 yards behind the linebackers.",
+          "explanation": "Y crosses the field at about 15 yards behind the linebackers.",
           "concept": "y-cross"
         },
         {

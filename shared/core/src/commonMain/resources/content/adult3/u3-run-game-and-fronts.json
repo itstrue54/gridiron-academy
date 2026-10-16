@@ -1513,7 +1513,7 @@
           "type": "learn",
           "id": "a3-twominute-02",
           "title": "Out of bounds, late",
-          "body": "Late in each half, the clock stays stopped after a runner goes out of bounds until the next snap. Earlier in the game it restarts once the ball is spotted.",
+          "body": "In the last two minutes of the first half and the last five minutes of the game, the clock stays stopped after a runner goes out of bounds until the next snap. Otherwise it restarts once the ball is spotted.",
           "concept": "game-clock"
         },
         {

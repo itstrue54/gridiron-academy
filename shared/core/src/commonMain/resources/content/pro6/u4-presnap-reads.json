@@ -96,7 +96,7 @@
                 "label": "Z",
                 "side": "OFFENSE",
                 "x": 12,
-                "y": 0
+                "y": -1
               },
               {
                 "id": "de1",
@@ -269,7 +269,7 @@
                 "label": "Z",
                 "side": "OFFENSE",
                 "x": 12,
-                "y": 0
+                "y": -1
               },
               {
                 "id": "de1",
@@ -442,7 +442,7 @@
                 "label": "Z",
                 "side": "OFFENSE",
                 "x": 12,
-                "y": 0
+                "y": -1
               },
               {
                 "id": "de1",

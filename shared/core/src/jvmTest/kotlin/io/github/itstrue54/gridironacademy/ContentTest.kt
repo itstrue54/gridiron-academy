@@ -44,6 +44,16 @@ class ContentTest {
         assertTrue(errs.any { "exactly one BEST" in it })
     }
 
+    @Test fun `validator catches an illegal formation`() {
+        fun offense(onLine: Int) = (0 until 11).map { i ->
+            DiagramPlayer("o$i", "O", Side.OFFENSE, i * 2f - 10f, if (i < onLine) 0f else -1f)
+        }
+        fun errs(onLine: Int) = ContentValidator.validateUnit(CourseUnit("u", "u", listOf(Lesson("l", "l", steps = listOf(
+            Learn("a", "t", "b", diagram = Diagram(players = offense(onLine))))))), false, emptySet())
+        assertTrue(errs(6).any { "illegal formation" in it }, errs(6).joinToString("\n"))
+        assertTrue(errs(7).none { "illegal formation" in it }, errs(7).joinToString("\n"))
+    }
+
     @Test fun `kid text limits are enforced`() {
         val long = (1..60).joinToString(" ") { "word" }
         val u = CourseUnit("u", "u", listOf(Lesson("l", "l", steps = listOf(

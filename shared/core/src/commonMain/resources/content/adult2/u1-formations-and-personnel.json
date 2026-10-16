@@ -687,7 +687,7 @@
           "type": "learn",
           "id": "a2-eligibility-02",
           "title": "Who is eligible",
-          "body": "The two players at the ends of the line, and every player in the backfield, are eligible to catch a forward pass. The interior linemen are not.",
+          "body": "The two players at the ends of the line, and every player in the backfield, are eligible to catch a forward pass. The interior linemen are not, and in the NFL neither is a quarterback taking the snap under center.",
           "concept": "eligible-receiver"
         },
         {
@@ -772,6 +772,13 @@
                 "side": "OFFENSE",
                 "x": 12,
                 "y": -1
+              },
+              {
+                "id": "h",
+                "label": "H",
+                "side": "OFFENSE",
+                "x": -7,
+                "y": -1
               }
             ],
             "caption": "Shotgun, one tight end"
@@ -783,7 +790,7 @@
             "rg",
             "rt"
           ],
-          "explanation": "The five interior linemen are ineligible. The tight end and X are on the ends of the line, and Z, the running back and the quarterback are in the backfield, so all of them are eligible.",
+          "explanation": "The five interior linemen are ineligible. The tight end and X are on the ends of the line, and Z, H, the running back and the shotgun quarterback are in the backfield, so all of them are eligible.",
           "concept": "ineligible-receiver"
         },
         {

@@ -256,7 +256,8 @@ the mastery map (§4.6) and placement (§4.5).
   v1 §4 (unique ids; answers in range; no duplicate choices; one BEST per situation;
   diagram targets exist; routes reference real players; read-defense pre/reveal show
   the same players; disguised reveals contain movement; every concept is in the
-  glossary; every gate is playable; kid text limits) plus: concept graph acyclic and
+  glossary; every gate is playable; kid text limits; no diagram has more than 11 a
+  side, and a full 11-man offense has at least 7 on the line) plus: concept graph acyclic and
   complete; every pack resolves; Level 0 steps have audio for every prompt and choice
   and no text-only choice; every `[review]`-flagged step is excluded from release
   builds unless signed off (§13.3).

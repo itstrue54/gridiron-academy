@@ -2,6 +2,7 @@ package io.github.itstrue54.gridironacademy.content
 
 import io.github.itstrue54.gridironacademy.engine.LevelTest
 import io.github.itstrue54.gridironacademy.model.*
+import kotlin.math.abs
 
 /**
  * Every content mistake that would otherwise surface as a wrong answer key or a
@@ -138,7 +139,21 @@ object ContentValidator {
             if (r.points.isEmpty()) err(w, "empty route for '${r.playerId}'")
         }
         d.players.forEach { if (it.x !in -27f..27f) err(w, "player ${it.id} off the field (x=${it.x})") }
+        // Football legality: never more than 11 a side, and a full offense has seven on the
+        // line at the snap. A partial offense (a whiteboard concept drawing) is fine.
+        for (side in Side.entries) {
+            val n = d.players.count { it.side == side }
+            if (n > 11) err(w, "$n ${side.name.lowercase()} players on the diagram (11 is the limit)")
+        }
+        val offense = d.players.filter { it.side == Side.OFFENSE }
+        if (offense.size == 11) {
+            val onLine = offense.count { abs(it.y) < ON_THE_LINE }
+            if (onLine < 7) err(w, "illegal formation: $onLine offensive players on the line, 7 required")
+        }
     }
+
+    /** How far from y = 0 a player still counts as on the line (diagrams nudge some to 0.2). */
+    private const val ON_THE_LINE = 0.5f
 
     private fun <T> dupes(l: List<T>): Set<T> = l.groupingBy { it }.eachCount().filterValues { it > 1 }.keys
 }
