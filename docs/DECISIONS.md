@@ -78,3 +78,21 @@ Players and More, and has no INTERNET permission.
 don't change. Mastery in the coach app needs per-question attempt events, which the
 learner app doesn't record yet: that is the next learner change, with a save
 migration (SPEC 9). Prerequisite warm-ups wait for the concept graph.
+
+## ADR-004: Supabase for the backend (2026-10-16)
+
+**Context.** The Coach app needs accounts, linking, an event log readable by parents and
+coaches, and team aggregates (SPEC 8). SPEC 8.2 recommended Supabase over Firebase.
+
+**Decision.** Supabase, chosen by the product owner. Postgres row-level security carries
+every access rule (SPEC 5.4, 8.5) in `backend/supabase/migrations/`, so a bug in an app
+can't widen access. The rules are tested on PGlite, real Postgres in Node, against a
+small stand-in for Supabase's `auth` schema (`backend/test/`, `npm test`), because the
+local Supabase stack needs Docker.
+
+**Consequences.** Team reports can be SQL views. The app clients use supabase-kt (KMP)
+behind `CoachRepository`. Learner devices without an account (children) authenticate
+with a token scoped to one learner (`learner_id` claim) minted at linking by an edge
+function. Team membership has a status the coach can't set: the parent (or a teen) approves
+through `set_membership`, which refuses a child without consent on file. The consent
+method itself (VPC vendor) is still a legal decision.

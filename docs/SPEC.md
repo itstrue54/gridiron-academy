@@ -643,13 +643,12 @@ AssignmentEvent(... assignmentId, type: opened|completed|check_result)
   `(epochDay, at, deviceId, seq)`, so the result is deterministic and conflict-free.
 - Content tombstones (§3.4) keep old events foldable.
 
-### 8.2 Backend [open, recommendation]
+### 8.2 Backend (decided: Supabase, ADR-004)
 Recommended: **Supabase** (Postgres + row-level security + auth + edge functions),
 because RLS expresses "parent sees their child; coach sees team-scoped events" in the
 database, SQL makes team reports cheap, it has a Kotlin Multiplatform client, and it
-is self-hostable if needed. Alternative: Firebase (Auth + Firestore + FCM, GitLive
-KMP SDK) - simpler auth and push, weaker for cross-learner aggregate queries. Either
-way FCM is used for Android push. Record the choice as an ADR.
+is self-hostable if needed. Firebase was the alternative. FCM is still used for Android
+push. Schema, policies and their tests live in `backend/` (ADR-004).
 
 ### 8.3 Server data model (outline)
 `account(id, email, roles, created)`, `learner(id, nickname, avatar, age_band,
@@ -661,6 +660,12 @@ device_id, seq, payload jsonb, received_at)` (PK learner_id, device_id, seq),
 `assignment(id, version, team_id?, created_by, target, pack_ids, items, options,
 due)`, `playbook_play(id, team_id, version, diagram jsonb, jobs jsonb, items
 jsonb)`, `report_subscription`, `moderation_report`.
+
+Built so far (`backend/supabase/migrations/20261016000000_init.sql`): `account`,
+`learner`, `consent`, `team`, `staff`, `team_member` (with `status`
+pending/approved/revoked: a coach's view of a learner needs an approved membership, and
+only the parent or the learner approves, via `set_membership`), `event`, `assignment`,
+`assignment_target`. Playbook, reports and moderation tables come with M4.
 
 ### 8.4 Sync protocol
 - Client keeps `lastSeqUploaded` per (learner, device). Upload is idempotent (PK

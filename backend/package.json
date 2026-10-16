@@ -1,0 +1,12 @@
+{
+  "name": "gridiron-academy-backend",
+  "private": true,
+  "type": "module",
+  "description": "Supabase schema and row-level security for Gridiron Academy, tested on PGlite (real Postgres, no Docker).",
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "0.5.8"
+  }
+}
