@@ -138,6 +138,20 @@ test('assignments: staff send to approved players only, and notes stay clean', a
   await fails(user(EVE), send, [gulls, EVE, ''])
 })
 
+test('send_assignment is all or nothing', async () => {
+  const call = 'select send_assignment($1, $2, $3, $4, $5, $6, $7, $8) as id'
+  const ok = (await rows(user(RAY), call, [gulls, 'Coach Ray', ['def-quarters'], 20007, 80, '', 20000,
+    JSON.stringify([{ learner_id: mia, lessons_at_send: 2 }])]))[0].id
+  assert.equal((await rows(user(RAY), 'select count(*)::int as n from assignment_target where assignment_id = $1', [ok]))[0].n, 1)
+  const before = (await rows(user(RAY), 'select count(*)::int as n from assignment'))[0].n
+  // One target Ray can't see: the whole send fails and leaves no assignment behind.
+  const stranger = (await rows(user(EVE), `insert into learner (nickname, age_band, track, managed_by) values ('Z', '8-9', 'kid', $1) returning id`, [EVE]))[0].id
+  await fails(user(RAY), call, [gulls, 'Coach Ray', ['def-quarters'], null, 80, '', 20000,
+    JSON.stringify([{ learner_id: mia }, { learner_id: stranger }])])
+  await fails(user(RAY), call, [gulls, 'Coach Ray', ['def-quarters'], null, 80, '', 20000, '[]'], /at least one/)
+  assert.equal((await rows(user(RAY), 'select count(*)::int as n from assignment'))[0].n, before)
+})
+
 test('deleting a child removes all their cloud data', async () => {
   await as(user(RAY), 'delete from learner where id = $1', [leo])
   await db.exec('reset role')

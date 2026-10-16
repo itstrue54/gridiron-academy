@@ -8,6 +8,8 @@ import io.github.itstrue54.gridironacademy.content.ClasspathContentSource
 import io.github.itstrue54.gridironacademy.content.ContentLoader
 import io.github.itstrue54.gridironacademy.content.ContentValidator
 import io.github.itstrue54.gridironacademy.data.DemoCoachRepository
+import io.github.itstrue54.gridironacademy.data.supabase.SupabaseConfig
+import io.github.itstrue54.gridironacademy.data.supabase.supabaseCoach
 import io.github.itstrue54.gridironacademy.ui.coach.CoachAppState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,8 +26,8 @@ sealed interface Load {
 
 /**
  * Holds the coach app across rotations. Content loads off the main thread; a failure is
- * a retry screen, never a crash (SPEC 3.3). The repository is the demo until the
- * backend lands (SPEC 8.2).
+ * a retry screen, never a crash (SPEC 3.3). With a Supabase project configured the app
+ * signs in to it; without one it runs on the demo account (ADR-009).
  */
 class CoachViewModel(app: Application) : AndroidViewModel(app) {
     private val _load = MutableStateFlow<Load>(Load.Loading)
@@ -43,13 +45,24 @@ class CoachViewModel(app: Application) : AndroidViewModel(app) {
         viewModelScope.launch {
             _load.value = try {
                 val today = LocalDate.now().toEpochDay()
-                val (content, repo) = withContext(Dispatchers.IO) {
+                val content = withContext(Dispatchers.IO) {
                     val content = ContentLoader.load(ClasspathContentSource())
                     val problems = ContentValidator.validate(content)
                     check(problems.isEmpty()) { "content failed validation: ${problems.take(5)}" }
-                    content to DemoCoachRepository(content, today, sent = store.read(), onSent = { all -> viewModelScope.launch(Dispatchers.IO) { store.write(all) } })
+                    content
                 }
-                Load.Ready(CoachAppState(content, repo, today, viewModelScope))
+                val config = SupabaseConfig(BuildConfig.SUPABASE_URL, BuildConfig.SUPABASE_ANON_KEY)
+                if (config.url.isNotBlank() && config.anonKey.isNotBlank()) {
+                    // A real account (ADR-004): sign-in, then the dashboards over synced data.
+                    val repo = supabaseCoach(config, content, { LocalDate.now().toEpochDay() }, viewModelScope)
+                    Load.Ready(CoachAppState(content, repo, today, viewModelScope, auth = repo, setup = repo))
+                } else {
+                    val sent = withContext(Dispatchers.IO) { store.read() }
+                    val repo = DemoCoachRepository(content, today, sent = sent, onSent = { all ->
+                        viewModelScope.launch(Dispatchers.IO) { store.write(all) }
+                    })
+                    Load.Ready(CoachAppState(content, repo, today, viewModelScope))
+                }
             } catch (e: Exception) {
                 Log.e(TAG, "coach app failed to load", e)
                 Load.Failed

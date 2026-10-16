@@ -61,3 +61,28 @@ data class AssignmentEvent(
 /** The fold order (SPEC 8.1): deterministic and the same on every device. */
 val AttemptOrder: Comparator<AttemptEvent> =
     compareBy<AttemptEvent>({ it.epochDay }, { it.at }, { it.deviceId }, { it.seq })
+
+/**
+ * What one row of the server's event log carries in `payload` (SPEC 8.1): a learner
+ * device uploads these and every adult's app folds them, so both sides share this one
+ * definition. The row's (learner, device, seq) key repeats the event's own identity.
+ */
+@Serializable
+sealed interface EventPayload {
+    @Serializable
+    @SerialName("attempt")
+    data class Attempt(val event: AttemptEvent) : EventPayload
+
+    @Serializable
+    @SerialName("assignment")
+    data class Assignment(val event: AssignmentEvent) : EventPayload
+
+    companion object {
+        /** The wire format: `{"type": "attempt", "event": {...}}`. Unknown fields are ignored. */
+        val json = kotlinx.serialization.json.Json {
+            classDiscriminator = "type"
+            ignoreUnknownKeys = true
+            encodeDefaults = false
+        }
+    }
+}

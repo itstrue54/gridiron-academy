@@ -2,10 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
-      No INTERNET permission yet: until the backend (SPEC 8.2) is chosen this build runs
-      on the built-in demo team, and nothing leaves the phone. Backup stays off because
-      a coach's view holds other people's children's progress (SPEC 5.4).
+      INTERNET for the Supabase backend (ADR-004). The coach app is adults-only; the
+      learner app still has no INTERNET permission. Backup stays off because a coach's
+      view holds other people's children's progress (SPEC 5.4).
     -->
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"

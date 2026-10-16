@@ -6,6 +6,10 @@ activityCompose = "1.13.0"
 kotlinxCoroutines = "1.10.2"
 kotlinxSerialization = "1.8.0"
 junitBom = "5.11.4"
+# supabase-kt 3.6.0 is the newest built with Kotlin 2.3, which our 2.2 compiler can read.
+supabase = "3.6.0"
+# The Ktor line supabase-kt 3.6.0 was built against.
+ktor = "3.4.3"
 
 [libraries]
 kotlinx-serialization-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core", version.ref = "kotlinxSerialization" }
@@ -15,6 +19,11 @@ jupiter-bom = { group = "org.junit", name = "junit-bom", version.ref = "junitBom
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
+supabase-bom = { group = "io.github.jan-tennert.supabase", name = "bom", version.ref = "supabase" }
+supabase-postgrest = { group = "io.github.jan-tennert.supabase", name = "postgrest-kt" }
+supabase-auth = { group = "io.github.jan-tennert.supabase", name = "auth-kt" }
+ktor-client-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktor" }
+ktor-client-darwin = { group = "io.ktor", name = "ktor-client-darwin", version.ref = "ktor" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

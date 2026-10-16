@@ -31,7 +31,14 @@ kotlin {
         commonMain.dependencies {
             api(project(":shared:core"))
             api(libs.kotlinx.coroutines.core)
+            implementation(project.dependencies.platform(libs.supabase.bom))
+            implementation(libs.supabase.postgrest)
+            implementation(libs.supabase.auth)
         }
+        // supabase-kt finds its HTTP engine per platform.
+        jvmMain.dependencies { implementation(libs.ktor.client.okhttp) }
+        androidMain.dependencies { implementation(libs.ktor.client.okhttp) }
+        iosMain.dependencies { implementation(libs.ktor.client.darwin) }
         commonTest.dependencies {
             implementation(kotlin("test"))
         }

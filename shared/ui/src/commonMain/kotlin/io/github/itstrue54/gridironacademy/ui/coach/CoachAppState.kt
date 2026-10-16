@@ -5,9 +5,13 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import io.github.itstrue54.gridironacademy.content.Content
+import io.github.itstrue54.gridironacademy.data.AuthResult
+import io.github.itstrue54.gridironacademy.data.CoachAuth
 import io.github.itstrue54.gridironacademy.data.CoachDashboard
 import io.github.itstrue54.gridironacademy.data.CoachRepository
+import io.github.itstrue54.gridironacademy.data.CoachSetup
 import io.github.itstrue54.gridironacademy.data.SendResult
+import io.github.itstrue54.gridironacademy.progress.AgeBand
 import io.github.itstrue54.gridironacademy.model.PackSide
 import io.github.itstrue54.gridironacademy.progress.AssignmentRules
 import io.github.itstrue54.gridironacademy.progress.NoteRules
@@ -24,6 +28,8 @@ sealed interface CoachScreen {
     data object Assign : CoachScreen
     data object Playbook : CoachScreen
     data object More : CoachScreen
+    data object AddChild : CoachScreen
+    data object CreateTeam : CoachScreen
 }
 
 enum class AssignStep { WHAT, WHO, OPTIONS, PREVIEW }
@@ -62,6 +68,9 @@ class CoachAppState(
     val repository: CoachRepository,
     val today: Long,
     private val scope: CoroutineScope,
+    /** Sign-in and account setup: present for a real backend, null for the demo. */
+    val auth: CoachAuth? = null,
+    val setup: CoachSetup? = null,
 ) {
     var tab by mutableStateOf(CoachTab.PLAYERS)
         private set
@@ -135,6 +144,67 @@ class CoachAppState(
 
     fun clearSent() {
         sent = null
+    }
+
+    /** True while a network call the screen waits on is running. */
+    var working by mutableStateOf(false)
+        private set
+
+    /** The last problem or notice to show (sign-in, add child, create team). */
+    var notice by mutableStateOf<String?>(null)
+        private set
+
+    /** Set after sign-up when the account waits on the emailed link. */
+    var checkEmail by mutableStateOf(false)
+        private set
+
+    fun clearNotice() {
+        notice = null
+    }
+
+    private fun busy(block: suspend () -> Unit) {
+        if (working) return
+        working = true
+        notice = null
+        scope.launch {
+            try { block() } finally { working = false }
+        }
+    }
+
+    fun signIn(email: String, password: String) = busy {
+        val a = auth ?: return@busy
+        when (val r = a.signIn(email, password)) {
+            AuthResult.Ok -> { checkEmail = false; select(CoachTab.PLAYERS) }
+            AuthResult.CheckEmail -> checkEmail = true
+            is AuthResult.Failed -> notice = r.message
+        }
+    }
+
+    fun signUp(email: String, password: String, name: String) = busy {
+        val a = auth ?: return@busy
+        when (val r = a.signUp(email, password, name)) {
+            AuthResult.Ok -> select(CoachTab.PLAYERS)
+            AuthResult.CheckEmail -> checkEmail = true
+            is AuthResult.Failed -> notice = r.message
+        }
+    }
+
+    fun signOut() = busy {
+        auth?.signOut()
+        draft = AssignDraft()
+        select(CoachTab.PLAYERS)
+    }
+
+    fun refresh() = busy { repository.refresh() }
+
+    fun addChild(nickname: String, band: AgeBand) = busy {
+        val problem = setup?.addChild(nickname, band)
+        if (problem == null) back() else notice = problem
+    }
+
+    fun createTeam(name: String, variant: String, ageGroup: String, season: String) = busy {
+        val problem = setup?.createTeam(name, variant, ageGroup, season)
+        if (problem == null) back() else notice = problem
     }
 
     private fun root(t: CoachTab): CoachScreen = when (t) {

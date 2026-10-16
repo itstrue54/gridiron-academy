@@ -6,6 +6,7 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -13,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import io.github.itstrue54.gridironacademy.data.CoachDashboard
+import io.github.itstrue54.gridironacademy.data.Session
 import io.github.itstrue54.gridironacademy.ui.components.Glyph
 import io.github.itstrue54.gridironacademy.ui.components.GlyphIcon
 import io.github.itstrue54.gridironacademy.ui.resources.*
@@ -30,6 +32,20 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun CoachApp(state: CoachAppState, dark: Boolean, reducedMotion: Boolean = false) {
     GridironTheme(skin = Skin.Coach, dark = dark, reducedMotion = reducedMotion) {
+        val auth = state.auth
+        if (auth != null) {
+            val session by auth.session.collectAsState()
+            when (session) {
+                Session.Loading -> { Box(Modifier.fillMaxSize().screenBackground()); return@GridironTheme }
+                Session.SignedOut -> {
+                    Box(Modifier.fillMaxSize().screenBackground().safeDrawingPadding(), contentAlignment = Alignment.TopCenter) {
+                        Box(Modifier.widthIn(max = MAX_CONTENT_WIDTH)) { SignInScreen(state) }
+                    }
+                    return@GridironTheme
+                }
+                is Session.SignedIn -> LaunchedEffect(session) { state.refresh() }
+            }
+        }
         val snapshot by state.repository.snapshot.collectAsState()
         val dash = remember(snapshot) { CoachDashboard(snapshot, state.content, state.today) }
         val tabs = CoachTab.entries.filter { it != CoachTab.PLAYBOOK || snapshot.account.isCoach }
@@ -42,7 +58,9 @@ fun CoachApp(state: CoachAppState, dark: Boolean, reducedMotion: Boolean = false
                         is CoachScreen.TeamView -> TeamScreen(state, dash, s.teamId)
                         CoachScreen.Assign -> AssignScreen(state, dash)
                         CoachScreen.Playbook -> PlaybookScreen()
-                        CoachScreen.More -> MoreScreen(dash)
+                        CoachScreen.More -> MoreScreen(state, dash)
+                        CoachScreen.AddChild -> AddChildScreen(state)
+                        CoachScreen.CreateTeam -> CreateTeamScreen(state)
                     }
                 }
             }

@@ -37,7 +37,7 @@ fun PlaybookScreen() {
 
 /** Account, roles and what this build is (DESIGN 14.1 More). */
 @Composable
-fun MoreScreen(dash: CoachDashboard) {
+fun MoreScreen(state: CoachAppState, dash: CoachDashboard) {
     val c = Gridiron.colors
     val a = dash.snapshot.account
     Column(
@@ -67,6 +67,9 @@ fun MoreScreen(dash: CoachDashboard) {
                     Text(stringResource(Res.string.demo_more), style = Gridiron.type.body, color = c.inkDim)
                 }
             }
+        }
+        if (state.auth != null) {
+            io.github.itstrue54.gridironacademy.ui.components.SecondaryButton(stringResource(Res.string.sign_out), onClick = { state.signOut() })
         }
         SectionTitle(stringResource(Res.string.section_coming))
         Card {

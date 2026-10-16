@@ -77,4 +77,7 @@ interface CoachRepository {
 
     /** Assign a new id, stamp the send day, and deliver to the targets. */
     suspend fun send(draft: Assignment): SendResult
+
+    /** Fetch again (pull to refresh, after sign-in). The demo has nothing to fetch. */
+    suspend fun refresh() {}
 }

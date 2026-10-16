@@ -60,3 +60,17 @@ class MasteryTest {
         assertEquals(MasteryState.NEW, m.getValue("c2").state)
     }
 }
+
+class EventPayloadTest {
+    @Test fun `attempts round-trip through the wire format`() {
+        val a = AttemptEvent("l", "d", 3, "s1", AttemptContext.REVIEW, 0.5f, answer = "Cover 3", epochDay = 9, at = 10)
+        val text = EventPayload.json.encodeToString(EventPayload.serializer(), EventPayload.Attempt(a))
+        assertTrue(text.startsWith("{\"type\":\"attempt\""), text)
+        assertEquals(EventPayload.Attempt(a), EventPayload.json.decodeFromString(EventPayload.serializer(), text))
+    }
+
+    @Test fun `a newer app's extra fields don't break an older reader`() {
+        val text = """{"type":"attempt","event":{"learnerId":"l","deviceId":"d","seq":1,"stepId":"s","context":"lesson","pct":1.0,"epochDay":1,"at":2,"newField":7}}"""
+        assertIs<EventPayload.Attempt>(EventPayload.json.decodeFromString(EventPayload.serializer(), text))
+    }
+}

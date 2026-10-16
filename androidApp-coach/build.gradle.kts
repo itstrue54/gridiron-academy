@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
@@ -5,6 +7,16 @@ plugins {
 
 // The Android Coach & Parent app (SPEC 1.2, 7): a thin shell around :shared:ui's
 // CoachApp. Adults only; a separate listing from the learner app (ADR-001).
+
+// The Supabase project (ADR-004) comes from local.properties, which is never committed:
+//   supabase.url=https://<project>.supabase.co
+//   supabase.anonKey=<the project's anon public key>
+// Without them the app runs on the built-in demo account. The anon key is public by
+// design; row-level security protects the data. Never put the service-role key here.
+val localProps = Properties().apply {
+    rootProject.file("local.properties").takeIf { it.exists() }?.inputStream()?.use { load(it) }
+}
+fun quoted(key: String) = "\"" + (localProps.getProperty(key) ?: "").replace("\"", "") + "\""
 
 android {
     namespace = "io.github.itstrue54.gridironacademy.coach"
@@ -19,6 +31,8 @@ android {
         targetSdk = 36
         versionCode = 1
         versionName = "0.1.0"
+        buildConfigField("String", "SUPABASE_URL", quoted("supabase.url"))
+        buildConfigField("String", "SUPABASE_ANON_KEY", quoted("supabase.anonKey"))
     }
 
     buildTypes {
@@ -37,6 +51,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 

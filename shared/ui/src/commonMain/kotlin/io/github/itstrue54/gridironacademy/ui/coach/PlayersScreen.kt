@@ -51,6 +51,10 @@ fun PlayersScreen(state: CoachAppState, dash: CoachDashboard) {
             item { SectionTitle(stringResource(Res.string.section_teams)) }
             items(snap.teams, key = { "team-" + it.id }) { t -> TeamRow(t, dash) { state.open(CoachScreen.TeamView(t.id)) } }
         }
+        if (state.setup != null) {
+            item { SectionTitle(stringResource(if (kids.isEmpty() && snap.teams.isEmpty()) Res.string.section_get_started else Res.string.section_add)) }
+            item { Column(verticalArrangement = Arrangement.spacedBy(10.dp)) { SetupCards(state) } }
+        }
     }
 }
 
