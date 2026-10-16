@@ -23,7 +23,7 @@ import kotlin.math.sin
  * cleanly and need no image assets. Decorative: callers give the meaning in text or
  * semantics, never by the glyph alone.
  */
-enum class Glyph { CHECK, DASH, CLOSE, BACK, LOCK, STAR, FLAME, UP, DOWN }
+enum class Glyph { CHECK, DASH, CLOSE, BACK, LOCK, STAR, FLAME, UP, DOWN, PEOPLE, ASSIGN, PLAYBOOK, MORE }
 
 @Composable
 fun GlyphIcon(glyph: Glyph, color: Color, modifier: Modifier = Modifier, size: Dp = 24.dp, filled: Boolean = true) {
@@ -48,6 +48,26 @@ fun GlyphIcon(glyph: Glyph, color: Color, modifier: Modifier = Modifier, size: D
             Glyph.LOCK -> lock(u, color)
             Glyph.STAR -> drawPath(star(u), color, style = if (filled) Fill else Stroke(2f * u, join = StrokeJoin.Round))
             Glyph.FLAME -> drawPath(flame(u), color, style = if (filled) Fill else stroke)
+            // Coach app tabs (DESIGN 14.1).
+            Glyph.PEOPLE -> {
+                drawCircle(color, 3.4f * u, Offset(9f * u, 8f * u), style = stroke)
+                drawPath(p(3f, 20f, 3.6f, 16.5f, 6f, 14.2f, 12f, 14.2f, 14.4f, 16.5f, 15f, 20f), color, style = stroke)
+                drawCircle(color, 2.8f * u, Offset(16.5f * u, 7f * u), style = stroke)
+                drawPath(p(16.5f, 12.4f, 19.6f, 12.8f, 21f, 15.5f, 21.4f, 19f), color, style = stroke)
+            }
+            Glyph.ASSIGN -> {
+                drawRoundRect(color, Offset(5f * u, 4f * u), androidx.compose.ui.geometry.Size(14f * u, 17f * u), androidx.compose.ui.geometry.CornerRadius(2f * u), style = stroke)
+                drawLine(color, Offset(9f * u, 4f * u), Offset(15f * u, 4f * u), 4f * u, StrokeCap.Round)
+                drawPath(p(8.5f, 13f, 11f, 15.5f, 15.5f, 10f), color, style = stroke)
+            }
+            Glyph.PLAYBOOK -> {
+                drawLine(color, Offset(4f * u, 4f * u), Offset(10f * u, 10f * u), 2.4f * u, StrokeCap.Round)
+                drawLine(color, Offset(10f * u, 4f * u), Offset(4f * u, 10f * u), 2.4f * u, StrokeCap.Round)
+                drawCircle(color, 3.2f * u, Offset(16.5f * u, 16.5f * u), style = stroke)
+                drawPath(p(8f, 14f, 8f, 20f, 13f, 20f), color, style = stroke)
+                drawPath(p(14f, 4f, 20f, 4f, 20f, 10f), color, style = stroke)
+            }
+            Glyph.MORE -> listOf(5f, 12f, 19f).forEach { drawCircle(color, 1.9f * u, Offset(it * u, 12f * u)) }
         }
     }
 }

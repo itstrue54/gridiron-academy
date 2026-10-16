@@ -8,6 +8,8 @@ import io.github.itstrue54.gridironacademy.progress.*
 object DashboardRules {
     /** "3 to work on". */
     const val WEAKEST_COUNT = 3
+    /** One miss isn't a weakness: a concept needs this many first tries to be listed. */
+    const val MIN_ATTEMPTS_FOR_WEAKEST = 2
     const val ACTIVITY_DAYS = 7
     const val MOST_MISSED_ITEMS = 3
     /** A step needs this many first tries before its miss rate means anything. */
@@ -60,7 +62,7 @@ class CoachDashboard(val snapshot: CoachSnapshot, private val content: Content, 
     /** "3 to work on": touched but not secure, lowest score first; ties by concept id. */
     fun weakest(learnerId: String): List<ConceptMastery> =
         mastery(learnerId).values
-            .filter { it.attempts > 0 && !it.secure }
+            .filter { it.attempts >= DashboardRules.MIN_ATTEMPTS_FOR_WEAKEST && !it.secure }
             .sortedWith(compareBy<ConceptMastery>({ it.state == MasteryState.RUSTY }, { it.score }, { it.concept }))
             .take(DashboardRules.WEAKEST_COUNT)
 
@@ -94,6 +96,12 @@ class CoachDashboard(val snapshot: CoachSnapshot, private val content: Content, 
     fun lines(learnerId: String): List<AssignmentLine> =
         snapshot.assignmentsFor(learnerId).map { line(it, learnerId) }
             .sortedWith(compareBy({ it.status == AssignmentStatus.DONE }, { it.assignment.dueDay ?: Long.MAX_VALUE }))
+
+    /** Team assignments still open, with how many members have passed the check. */
+    fun teamProgress(teamId: String): List<Pair<Assignment, Int>> =
+        snapshot.assignments.filter { it.teamId == teamId }.map { a ->
+            a to a.targets.count { AssignmentProgress.done(a, it.learnerId, snapshot.assignmentEvents) }
+        }
 
     /** The status pill on a roster row: the worst open assignment, or Done, or none. */
     fun overallStatus(learnerId: String): AssignmentStatus? {

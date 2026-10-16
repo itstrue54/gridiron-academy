@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   Learner app copy (DESIGN 11). Compose resource strings: write ' and % plainly (no
-  Android-style \' or %% escapes; they are shown literally). Kid and adult variants are separate keys ending in
+  Android-style \' or % escapes; they are shown literally). Kid and adult variants are separate keys ending in
   _kid / _adult. Rules: never "wrong", "fail", "bad" or "incorrect" in Kid; no
   exclamation marks in Adult except milestones.
 -->
@@ -159,4 +159,119 @@
     <string name="done_xp">+%1$d XP</string>
     <string name="back_to_level">Back to the level</string>
     <string name="try_again">Try again</string>
+    <!-- Coach & Parent app (DESIGN 14). Adult voice, plain words for parents. -->
+    <string name="tab_players">Players</string>
+    <string name="tab_my_kids">My kids</string>
+    <string name="tab_assign">Assign</string>
+    <string name="tab_playbook">Playbook</string>
+    <string name="tab_more">More</string>
+    <string name="players_hello">Hi, %1$s</string>
+    <string name="section_my_kids">MY KIDS</string>
+    <string name="section_teams">TEAMS</string>
+    <string name="demo_title">You're looking at a demo team</string>
+    <string name="demo_body">The Harbor City Gulls and their players are made up, so you can try everything. Your real players appear once you sign in and link them.</string>
+    <string name="demo_more">Accounts, linking a child's device and parental consent arrive with the online service. Until then this build runs on a made-up team. Nothing you do here leaves the phone.</string>
+    <string name="ok">OK</string>
+    <string name="send_failed">Not sent: %1$s</string>
+    <string name="learner_subline">Level %1$d · %2$d-day streak · %3$s</string>
+    <string name="active_today">active today</string>
+    <string name="active_yesterday">active yesterday</string>
+    <string name="active_days_ago">active %1$d days ago</string>
+    <string name="active_never">not started</string>
+    <string name="team_subline">%1$s · %2$s · %3$s</string>
+    <string name="status_on_track">On track</string>
+    <string name="status_behind">Behind</string>
+    <string name="status_done">Done</string>
+    <string name="percent_done">%1$d percent done</string>
+    <string name="level_named">Level %1$d, %2$s</string>
+    <string name="stat_streak">day streak</string>
+    <string name="stat_minutes_week">minutes this week</string>
+    <string name="stat_mastered">concepts mastered</string>
+    <string name="section_assignments">ASSIGNMENTS</string>
+    <string name="no_assignments">Nothing assigned yet.</string>
+    <string name="assign_to">Assign to %1$s</string>
+    <string name="plan_left">%1$d drills left, about %2$d min</string>
+    <string name="section_work_on">3 TO WORK ON</string>
+    <string name="concept_score">%1$s · %2$d out of 100</string>
+    <string name="assign_practice">Assign practice</string>
+    <string name="section_mastery">LEVEL %1$d CONCEPTS</string>
+    <string name="section_activity">THIS WEEK</string>
+    <string name="activity_day">%1$s: %2$d answers, %3$d minutes</string>
+    <string name="mastery_new">New</string>
+    <string name="mastery_learning">Learning</string>
+    <string name="mastery_practiced">Practiced</string>
+    <string name="mastery_mastered">Mastered</string>
+    <string name="mastery_rusty">Needs a refresher</string>
+    <string name="section_pack">WHAT TO CHECK</string>
+    <string name="all_positions">All positions</string>
+    <string name="section_heat_map">WHO KNOWS WHAT</string>
+    <string name="view_grid">Grid</string>
+    <string name="view_table">Table</string>
+    <string name="heat_map_hint">Tap a concept to see the questions the team misses most.</string>
+    <string name="show_most_missed">show most-missed questions</string>
+    <string name="section_most_missed">MOST MISSED: %1$s</string>
+    <string name="nothing_missed">Nobody has missed these yet.</string>
+    <string name="missed_rate">Missed %1$d% of %2$d first tries</string>
+    <string name="common_wrong_answer">Usual wrong answer: %1$s</string>
+    <string name="section_roster">ROSTER, LEAST READY FIRST</string>
+    <string name="readiness">ready</string>
+    <string name="assign_title">Assign</string>
+    <string name="assign_step">Step %1$d of %2$d: %3$s</string>
+    <string name="step_what">What</string>
+    <string name="step_who">Who</string>
+    <string name="step_options">Options</string>
+    <string name="step_preview">Preview</string>
+    <string name="side_all">All</string>
+    <string name="side_offense">Offense</string>
+    <string name="side_defense">Defense</string>
+    <string name="side_special">Special teams</string>
+    <string name="side_rules">Rules</string>
+    <string name="pack_meta">%1$s · Level %2$d · %3$d drills · %4$d concepts</string>
+    <string name="whole_team">Whole team: %1$s</string>
+    <string name="individuals">INDIVIDUALS</string>
+    <string name="due">DUE</string>
+    <string name="check_score">SCORE TO PASS THE CHECK: %1$d%</string>
+    <string name="note">NOTE (OPTIONAL)</string>
+    <string name="note_hint">For example: Know these before Thursday's practice.</string>
+    <string name="note_count">%1$d / %2$d</string>
+    <string name="note_no_links">Notes can't contain links.</string>
+    <string name="note_no_contact">Notes can't contain phone numbers or email addresses.</string>
+    <string name="preview_meta">%1$s · pass at %2$d%</string>
+    <string name="plan_line">%1$s: %2$d drills + check, about %3$d min</string>
+    <string name="plan_well_above">More than two levels above Level %1$d</string>
+    <string name="send">Send</string>
+    <string name="due_none">No due date</string>
+    <string name="due_past">Past due</string>
+    <string name="due_today">Due today</string>
+    <string name="due_tomorrow">Due tomorrow</string>
+    <string name="due_weekday">Due %1$s</string>
+    <string name="due_in_days">Due in %1$d days</string>
+    <string name="weekday_mon">Monday</string>
+    <string name="weekday_tue">Tuesday</string>
+    <string name="weekday_wed">Wednesday</string>
+    <string name="weekday_thu">Thursday</string>
+    <string name="weekday_fri">Friday</string>
+    <string name="weekday_sat">Saturday</string>
+    <string name="weekday_sun">Sunday</string>
+    <string name="playbook_title">Your team's playbook</string>
+    <string name="playbook_body">Draw your own plays, give every position its job, and the app turns them into quizzes for your players. Coming in the next release.</string>
+    <string name="section_account">ACCOUNT</string>
+    <string name="role_parent">Parent</string>
+    <string name="role_coach">Coach</string>
+    <string name="section_about">ABOUT THIS BUILD</string>
+    <string name="section_coming">COMING NEXT</string>
+    <string name="coming_list">Sign-in and linking with parental consent · the play editor · weekly email reports · plans</string>
+    <plurals name="players_count">
+        <item quantity="one">%1$d player</item>
+        <item quantity="other">%1$d players</item>
+    </plurals>
+    <plurals name="team_behind">
+        <item quantity="one">%1$d player behind on an assignment</item>
+        <item quantity="other">%1$d players behind on an assignment</item>
+    </plurals>
+    <string name="team_assignment_done">%1$s: %2$d of %3$d done</string>
+    <plurals name="sent_to">
+        <item quantity="one">Sent to %1$d player.</item>
+        <item quantity="other">Sent to %1$d players.</item>
+    </plurals>
 </resources>

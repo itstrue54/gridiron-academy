@@ -84,6 +84,12 @@ data class Skin(
             soundByDefault = false,
         )
 
+        /**
+         * The Coach & Parent app (DESIGN 14): the Adult skin in Film Room colours that
+         * follow the phone. Prime Time stays a learner look.
+         */
+        val Coach = Adult.copy(primeTime = false)
+
         /** Level 0 only. A 4-7 profile that moves on to Kid L1 gets [Kid]. */
         val LittleHuddle = Kid.copy(
             littleHuddle = true,

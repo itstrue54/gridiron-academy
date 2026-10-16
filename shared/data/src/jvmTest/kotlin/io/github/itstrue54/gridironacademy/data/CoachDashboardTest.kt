@@ -15,7 +15,7 @@ class CoachDashboardTest {
     @Test fun `weakest are touched, not secure, lowest first`() {
         val w = d.weakest("tank")
         assertTrue(w.size in 1..DashboardRules.WEAKEST_COUNT)
-        assertTrue(w.all { it.attempts > 0 && !it.secure })
+        assertTrue(w.all { it.attempts >= DashboardRules.MIN_ATTEMPTS_FOR_WEAKEST && !it.secure })
         assertEquals(w.sortedBy { it.score }.map { it.score }, w.filter { it.state != MasteryState.RUSTY }.map { it.score } + w.filter { it.state == MasteryState.RUSTY }.map { it.score })
     }
 
