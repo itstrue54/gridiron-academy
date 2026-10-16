@@ -31,6 +31,9 @@ class CoachViewModel(app: Application) : AndroidViewModel(app) {
     private val _load = MutableStateFlow<Load>(Load.Loading)
     val load: StateFlow<Load> = _load
 
+    /** What the coach sent on the demo account, kept across launches. */
+    private val store = SentAssignmentsStore(app.filesDir)
+
     init { start() }
 
     fun retry() { if (_load.value == Load.Failed) start() }
@@ -44,7 +47,7 @@ class CoachViewModel(app: Application) : AndroidViewModel(app) {
                     val content = ContentLoader.load(ClasspathContentSource())
                     val problems = ContentValidator.validate(content)
                     check(problems.isEmpty()) { "content failed validation: ${problems.take(5)}" }
-                    content to DemoCoachRepository(content, today)
+                    content to DemoCoachRepository(content, today, sent = store.read(), onSent = { all -> viewModelScope.launch(Dispatchers.IO) { store.write(all) } })
                 }
                 Load.Ready(CoachAppState(content, repo, today, viewModelScope))
             } catch (e: Exception) {

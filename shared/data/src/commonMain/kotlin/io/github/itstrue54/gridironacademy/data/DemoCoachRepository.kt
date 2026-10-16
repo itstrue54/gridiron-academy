@@ -13,15 +13,19 @@ import kotlinx.coroutines.flow.update
  * A believable account to build and demo the Coach app against before the backend
  * exists (SPEC 8.2 is still open): a parent who also coaches a high-school team.
  * Every name is fictional. Generated from [seed] and [today] only, so the same day
- * always shows the same dashboard and tests can pin numbers.
+ * always shows the same dashboard and tests can pin numbers. What the coach sends is
+ * theirs: [sent] restores it and [onSent] hands the full list to the shell to keep.
  */
 class DemoCoachRepository(
     private val content: Content,
     private val today: Long,
     seed: Long = DEMO_SEED,
+    sent: List<Assignment> = emptyList(),
+    private val onSent: (List<Assignment>) -> Unit = {},
 ) : CoachRepository {
 
-    private val state = MutableStateFlow(build(Rng(seed)))
+    private val built = build(Rng(seed))
+    private val state = MutableStateFlow(built.copy(assignments = built.assignments + sent))
     override val snapshot: StateFlow<CoachSnapshot> = state.asStateFlow()
 
     override suspend fun send(draft: Assignment): SendResult {
@@ -34,6 +38,7 @@ class DemoCoachRepository(
             sent = a
             s.copy(assignments = s.assignments + a)
         }
+        onSent(state.value.assignments.drop(built.assignments.size))
         return SendResult.Sent(sent!!)
     }
 

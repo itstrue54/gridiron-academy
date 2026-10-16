@@ -53,4 +53,13 @@ class DemoCoachRepositoryTest {
         assertIs<SendResult.Rejected>(repo.send(draft.copy(note = "call me 555 123 4567")))
         assertEquals(2, repo.snapshot.value.assignments.size)
     }
+
+    @Test fun `sent assignments are handed out to keep and come back on restart`() = runBlocking {
+        var kept = emptyList<Assignment>()
+        val repo = DemoCoachRepository(content, today, onSent = { kept = it })
+        repo.send(Assignment("", fromName = "", packIds = listOf("def-quarters"), targets = listOf(AssignmentTarget("ace", 2)), sentDay = 0))
+        assertEquals(listOf("a2"), kept.map { it.id })
+        val again = DemoCoachRepository(content, today, sent = kept)
+        assertEquals(listOf("a1", "a2"), again.snapshot.value.assignments.map { it.id })
+    }
 }
