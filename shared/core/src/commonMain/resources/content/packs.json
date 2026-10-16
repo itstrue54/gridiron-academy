@@ -1,0 +1,262 @@
+{
+  "version": 1,
+  "packs": [
+    {
+      "id": "rules-youth-basics",
+      "title": "Game basics for young players",
+      "blurb": "The field, scoring, downs, moving the ball and the referees, in kid words.",
+      "side": "rules",
+      "level": 1,
+      "lessons": [
+        "k1-field",
+        "k1-scoring",
+        "k1-downs",
+        "k1-moving",
+        "k1-refs"
+      ],
+      "check": {
+        "questions": 10,
+        "passPct": 80
+      }
+    },
+    {
+      "id": "rules-game-basics",
+      "title": "How a game works",
+      "blurb": "Scoring, downs, the clock and the common flags: enough to follow any game.",
+      "side": "rules",
+      "level": 1,
+      "lessons": [
+        "a1-basics",
+        "a1-scoring",
+        "a1-downs",
+        "a1-clock"
+      ],
+      "check": {
+        "questions": 10,
+        "passPct": 80
+      }
+    },
+    {
+      "id": "special-youth-kicking",
+      "title": "The kicking game (youth)",
+      "blurb": "Kickoffs, onside kicks, punts and fair catches.",
+      "side": "special",
+      "level": 2,
+      "lessons": [
+        "k2-kickoff",
+        "k2-onside",
+        "k2-punts"
+      ],
+      "check": {
+        "questions": 10,
+        "passPct": 80
+      }
+    },
+    {
+      "id": "off-youth-routes",
+      "title": "Routes and coverage (youth)",
+      "blurb": "The basic routes, how they work together, and man versus zone.",
+      "side": "offense",
+      "level": 3,
+      "lessons": [
+        "k3-routes",
+        "k3-moreroutes",
+        "k3-combos",
+        "k3-man",
+        "k3-zone"
+      ],
+      "check": {
+        "questions": 10,
+        "passPct": 80
+      }
+    },
+    {
+      "id": "def-fronts-gaps",
+      "title": "Fronts, gaps and techniques",
+      "blurb": "Gap letters, technique numbers, and the Over, Under, Bear, Okie and Tite fronts.",
+      "side": "defense",
+      "level": 4,
+      "lessons": [
+        "v4-gaps",
+        "v4-fronts"
+      ],
+      "check": {
+        "questions": 9,
+        "passPct": 80
+      }
+    },
+    {
+      "id": "def-coverage-0-4",
+      "title": "Cover 0 to Cover 4",
+      "blurb": "Read and play the five base coverages from the pre-snap shell.",
+      "side": "defense",
+      "level": 4,
+      "lessons": [
+        "v4-man",
+        "v4-cover2",
+        "v4-cover3",
+        "v4-cover4",
+        "v4-readdefense"
+      ],
+      "games": [
+        "read_defense"
+      ],
+      "check": {
+        "questions": 10,
+        "passPct": 80
+      }
+    },
+    {
+      "id": "off-zone-gap",
+      "title": "Zone and gap runs",
+      "blurb": "Inside and outside zone, power, counter, trap and duo.",
+      "side": "offense",
+      "level": 4,
+      "lessons": [
+        "v4-zone",
+        "v4-gap"
+      ],
+      "check": {
+        "questions": 7,
+        "passPct": 80
+      }
+    },
+    {
+      "id": "off-air-raid-core",
+      "title": "Air Raid core",
+      "blurb": "Curl-flat, stick, snag, smash, mesh, four verticals and Y-cross.",
+      "side": "offense",
+      "level": 4,
+      "lessons": [
+        "v4-quick",
+        "v4-dropback"
+      ],
+      "check": {
+        "questions": 7,
+        "passPct": 80
+      }
+    },
+    {
+      "id": "off-option-rpo",
+      "title": "Option and RPO starter",
+      "blurb": "Zone read, speed option and the run-pass option's conflict defender.",
+      "side": "offense",
+      "level": 5,
+      "lessons": [
+        "c5-option",
+        "c5-rpo"
+      ],
+      "check": {
+        "questions": 8,
+        "passPct": 80
+      }
+    },
+    {
+      "id": "off-protection",
+      "title": "Protection and hot throws",
+      "blurb": "Slide protection, the Mike ID, hot throws, and the blitz families they answer.",
+      "side": "offense",
+      "level": 5,
+      "lessons": [
+        "c5-protect",
+        "c5-pressure"
+      ],
+      "check": {
+        "questions": 9,
+        "passPct": 80
+      }
+    },
+    {
+      "id": "def-43-tampa",
+      "title": "4-3 Over with Cover 2 and Tampa 2",
+      "blurb": "The Over front with Cover 2 behind it, and the Tampa 2 Mike run.",
+      "side": "defense",
+      "level": 6,
+      "lessons": [
+        "v4-fronts",
+        "v4-cover2",
+        "p6-tampa"
+      ],
+      "games": [
+        "read_defense"
+      ],
+      "check": {
+        "questions": 10,
+        "passPct": 80
+      }
+    },
+    {
+      "id": "def-cover3-family",
+      "title": "Cover 3: sky, buzz and cloud",
+      "blurb": "The base Cover 3 and its three rotations.",
+      "side": "defense",
+      "level": 6,
+      "lessons": [
+        "v4-cover3",
+        "p6-cover3"
+      ],
+      "games": [
+        "read_defense"
+      ],
+      "check": {
+        "questions": 6,
+        "passPct": 80
+      }
+    },
+    {
+      "id": "def-quarters",
+      "title": "Quarters and Cover 6",
+      "blurb": "Quarters, Palms and Cover 6: the two-high match coverages.",
+      "side": "defense",
+      "level": 6,
+      "lessons": [
+        "v4-cover4",
+        "p6-quarters"
+      ],
+      "games": [
+        "read_defense"
+      ],
+      "check": {
+        "questions": 7,
+        "passPct": 80
+      }
+    },
+    {
+      "id": "def-pressure-disguise",
+      "title": "Pressure that lies",
+      "blurb": "Fire zones, sim pressure, sugar and bluffs.",
+      "side": "defense",
+      "level": 7,
+      "lessons": [
+        "c5-pressure",
+        "co7-pressure"
+      ],
+      "games": [
+        "read_defense"
+      ],
+      "check": {
+        "questions": 9,
+        "passPct": 80
+      }
+    },
+    {
+      "id": "def-disguise-rotations",
+      "title": "Disguise: rotations and late movement",
+      "blurb": "Two-high to one-high rotations, walkdowns and coverage that lies.",
+      "side": "defense",
+      "level": 7,
+      "lessons": [
+        "co7-rotate",
+        "co7-late",
+        "co7-coverage"
+      ],
+      "games": [
+        "read_defense"
+      ],
+      "check": {
+        "questions": 10,
+        "passPct": 80
+      }
+    }
+  ]
+}

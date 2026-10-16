@@ -48,6 +48,17 @@ object ContentValidator {
         }
         dupes(allStepIds).forEach { err("content", "duplicate step id $it") }
         dupes(allLessonIds).forEach { err("content", "duplicate lesson id $it") }
+
+        dupes(c.packs.map { it.id }).forEach { err("packs", "duplicate pack id $it") }
+        for (p in c.packs) {
+            val where = "pack ${p.id}"
+            if (p.title.isBlank() || p.blurb.isBlank()) err(where, "blank title or blurb")
+            if (p.lessons.isEmpty()) err(where, "has no lessons")
+            p.lessons.forEach { if (c.lesson(it) == null) err(where, "unknown lesson '$it'") }
+            if (p.check.passPct !in 1..100) err(where, "check passPct must be 1-100")
+            val graded = p.lessons.mapNotNull { c.lesson(it) }.sumOf { l -> l.steps.count { it !is Learn } }
+            if (graded < p.check.questions) err(where, "check needs ${p.check.questions} questions, lessons have $graded")
+        }
         return errs
     }
 
