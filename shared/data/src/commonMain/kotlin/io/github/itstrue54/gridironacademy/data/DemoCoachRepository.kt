@@ -87,7 +87,7 @@ class DemoCoachRepository(
                 val right = rng.nextInt(100) < (r.skill * 100).toInt()
                 out += AttemptEvent(r.id, "demo-${r.id}", seq++, step.id, AttemptContext.LESSON,
                     pct = if (right) 1f else partial(step, rng), answer = if (right) null else wrongAnswer(step, rng),
-                    epochDay = day, at = day * DAY_MS + seq)
+                    msSpent = MIN_MS + rng.nextInt(SPREAD_MS), epochDay = day, at = day * DAY_MS + seq)
                 // Strong players have been reviewing: a second right answer on a later day.
                 if (right && r.skill >= REVIEW_SKILL && rng.nextInt(2) == 0) {
                     val later = (day + 1 + rng.nextInt(3)).coerceAtMost(today - r.idleDays)
@@ -134,6 +134,9 @@ class DemoCoachRepository(
         /** Players at or above this skill have passed the demo assignment's check. */
         const val DONE_SKILL = 0.85
         const val REVIEW_SKILL = 0.7
+        /** Time on a question: 8 to 38 seconds. */
+        const val MIN_MS = 8_000
+        const val SPREAD_MS = 30_000
 
         val ROSTER = listOf(
             // The coach's own children: one too young for the team, one on it.
