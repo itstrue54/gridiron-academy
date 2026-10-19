@@ -21,6 +21,8 @@ import io.github.itstrue54.gridironacademy.progress.AgeBand
 import io.github.itstrue54.gridironacademy.progress.AttemptContext
 import io.github.itstrue54.gridironacademy.progress.AttemptEvent
 import io.github.itstrue54.gridironacademy.progress.Attempts
+import io.github.itstrue54.gridironacademy.progress.DailyPractice
+import io.github.itstrue54.gridironacademy.progress.Practice
 import io.github.itstrue54.gridironacademy.progress.Gating
 import io.github.itstrue54.gridironacademy.progress.LearnerSave
 import io.github.itstrue54.gridironacademy.progress.Profile
@@ -38,6 +40,9 @@ sealed interface Screen {
     data class CheckpointPlay(val levelId: String, val testOut: Boolean) : Screen
     /** The level game (Speed round for Level 1). */
     data class BigGamePlay(val levelId: String) : Screen
+    /** Today's practice (SPEC 6.4). */
+    data object PracticePlay : Screen
+    data class PracticeDone(val scorePct: Int, val count: Int, val xpGained: Int) : Screen
     /** The result of a Checkpoint or Big Game, and the level-complete moment. */
     data class GateDone(
         val levelId: String,
@@ -224,6 +229,52 @@ class LearnerAppState(
                 now = now, onGraded = recorder(AttemptContext.GAME))
         }
 
+    /** The practice in progress, created once so its questions don't change mid-way. */
+    private var activePractice: Pair<List<Step>, LessonController>? = null
+
+    /** The level the learner is working on: the next thing to do, or the highest open level. */
+    val currentLevel: Level? get() = nextUp()?.level ?: levels.lastOrNull { levelUnlocked(it) }
+
+    /** Today's practice: the same set all day for this profile (SPEC 6.4). */
+    fun practice(): Practice =
+        DailyPractice.pick(save.progress, save.attempts, content, currentLevel, today(), save.learnerId.hashCode().toLong())
+
+    val practiceDoneToday: Boolean get() = DailyPractice.doneToday(save.attempts, today())
+
+    fun startPractice() {
+        activePractice = null
+        go(Screen.PracticePlay)
+    }
+
+    fun practiceControllerOrNull(): LessonController? =
+        activePractice?.second ?: if (screen == Screen.PracticePlay) {
+            val steps = practice().steps
+            if (steps.isEmpty()) null
+            else LessonController(steps, retryMisses = false, now = now, onGraded = recorder(AttemptContext.REVIEW))
+                .also { activePractice = steps to it }
+        } else null
+
+    /**
+     * Records practice: a review card answered right moves up a box, one missed goes back
+     * to box 1, and a practice miss that wasn't a card becomes one. Counts for the streak.
+     */
+    fun finishPractice(session: LessonSession) {
+        if (screen != Screen.PracticePlay) return
+        val steps = activePractice?.first ?: return
+        val before = save.progress
+        val reviewed = steps.fold(before) { p, s ->
+            val right = s.id !in session.missedIds
+            when {
+                s.id in p.review -> Review.answered(p, s.id, right, today())
+                !right -> Review.miss(p, s.id, s.concept, today())
+                else -> p
+            }
+        }
+        val after = reviewed.copy(xp = reviewed.xp + session.scorePct / XP_DIVISOR).touch(today())
+        commit(save.copy(progress = after))
+        replaceTop(Screen.PracticeDone(session.scorePct, steps.size, after.xp - before.xp))
+    }
+
     val profile: Profile? get() = save.profile
 
     /** Level 0 isn't written yet, so pre-readers get the Kid skin for now (SPEC 3.1). */
@@ -394,6 +445,8 @@ class LearnerAppState(
         /** DESIGN 9.6: a one-minute round. The Untimed option arrives with profile settings. */
         const val SPEED_ROUND_MILLIS = 60_000L
         const val MILLIS_PER_DAY = 86_400_000L
+        /** Practice XP, the same rate as a lesson: a tenth of the score. */
+        const val XP_DIVISOR = 10
     }
 }
 

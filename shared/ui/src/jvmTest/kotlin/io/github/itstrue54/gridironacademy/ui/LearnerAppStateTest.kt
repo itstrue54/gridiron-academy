@@ -205,6 +205,49 @@ class LearnerAppStateTest {
     }
 
     @Test
+    fun aMissComesBackAsTomorrowsPracticeAndMovesUpABox() {
+        var day = 500L
+        val store = InMemoryLearnerStore()
+        val s = LearnerAppState(content, store) { day }
+        s.createProfile("Sam", AgeBand.AGE_18_PLUS)
+        val (level, lesson) = s.nextLesson()!!
+        s.startLesson(level, lesson)
+        val c = s.lessonController(level.id, lesson.id)
+        var missed: String? = null
+        while (!c.finished) {
+            val step = c.step!!
+            val answer = if (missed == null && step is MultipleChoice) {
+                missed = step.id; Answer.Choice((step.answer + 1) % step.choices.size)
+            } else perfect(step)
+            c.submit(answer)
+            if (!c.finished && c.grade != null) c.next()
+        }
+        s.finishLesson(level.id, lesson.id, c.result)
+        s.back()
+        assertFalse(s.practice().urgent, "not due the same day")
+
+        day = 501
+        val practice = s.practice()
+        assertTrue(practice.urgent)
+        assertEquals(missed, practice.steps.first().id)
+        assertFalse(s.practiceDoneToday)
+        s.startPractice()
+        val p = s.practiceControllerOrNull()!!
+        playPerfect(p)
+        s.finishPractice(p.result)
+        val done = s.screen as Screen.PracticeDone
+        assertEquals(100, done.scorePct)
+        assertTrue(done.xpGained > 0)
+        assertEquals(2, s.save.progress.review.getValue(missed!!).box, "a right review moves the card up")
+        assertEquals(503L, s.save.progress.review.getValue(missed!!).dueDay)
+        assertEquals(2, s.save.progress.streakDays, "practice counts for the streak")
+        assertTrue(s.practiceDoneToday)
+        assertTrue(store.load()!!.attempts.any { it.context == AttemptContext.REVIEW && it.stepId == missed })
+        s.back()
+        assertEquals(Screen.Home, s.screen)
+    }
+
+    @Test
     fun learnStepsAdvanceWithoutAGrade() {
         val steps = content.unitsOf(content.level("kid-1")).first().lessons.first().steps
         val c = LessonController(steps)

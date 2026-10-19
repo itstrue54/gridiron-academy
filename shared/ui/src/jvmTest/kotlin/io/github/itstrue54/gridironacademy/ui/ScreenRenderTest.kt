@@ -63,6 +63,40 @@ class ScreenRenderTest {
         shot("02-onboarding-dark") { LearnerApp(s, dark = true) }
     }
 
+    /** A learner who missed a question yesterday: practice leads Home. */
+    private fun withPracticeDue(band: AgeBand): LearnerAppState {
+        var day = 500L
+        val s = LearnerAppState(content, InMemoryLearnerStore()) { day }
+        s.createProfile(if (band.child) "Leo" else "Sam", band)
+        val (level, lesson) = s.nextLesson()!!
+        s.startLesson(level, lesson)
+        val c = s.lessonController(level.id, lesson.id)
+        var missed = false
+        while (!c.finished) {
+            val step = c.step!!
+            val a = if (!missed && step is MultipleChoice) { missed = true; Answer.Choice((step.answer + 1) % step.choices.size) }
+                else when (step) {
+                    is Learn -> Answer.Seen
+                    is MultipleChoice -> Answer.Choice(step.answer)
+                    is TrueFalse -> Answer.Bool(step.answer)
+                    is Match -> Answer.Matches(step.pairs.associate { it.left to it.right })
+                    is Order -> Answer.Ordering(step.items)
+                    is DiagramTap -> Answer.Taps(step.targets)
+                    is ReadDefense -> Answer.Choice(step.answer)
+                    is Situation -> Answer.Choice(step.options.indexOfFirst { it.quality == Quality.BEST })
+                }
+            c.submit(a); if (!c.finished && c.grade != null) c.next()
+        }
+        s.finishLesson(level.id, lesson.id, c.result); s.back()
+        day = 501
+        return s
+    }
+
+    @Test fun homeWithPracticeDue() {
+        shot("03b-home-practice-kid") { LearnerApp(withPracticeDue(AgeBand.AGE_8_9), dark = false) }
+        shot("04b-home-practice-adult") { LearnerApp(withPracticeDue(AgeBand.AGE_18_PLUS), dark = true) }
+    }
+
     @Test fun homeAndLevelBothSkins() {
         val kid = appState(AgeBand.AGE_8_9)
         shot("03-home-kid-light") { LearnerApp(kid, dark = false) }
