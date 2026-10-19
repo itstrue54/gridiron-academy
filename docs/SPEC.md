@@ -694,6 +694,15 @@ Penetration test and a privacy review before M3 public release.
 - Backup export: a JSON file `{schemaVersion, profiles, events}` (DESIGN §9.9).
   Import validates and refuses newer schema versions with a clear message.
 - Unlinked -> linked: local events upload; nothing is lost.
+- **Now (schema 2):** the save is still one JSON file (`FileLearnerStore`); SQLDelight
+  replaces it when sync arrives. Schema 2 adds the attempt log (`attempts`, every graded
+  answer as an `AttemptEvent` with its context, credit, first try or retry, the answer
+  text and time spent), `deviceId` and a local `learnerId` (UUIDs from the platform) and
+  `nextSeq`. Answers are saved with the lesson or gate result, or when the learner leaves
+  part-way: an answer counts even if the lesson doesn't. `SaveMigrations` (in
+  `shared/data/migration`) reads every version: schema 1 never wrote its version (it was
+  the default), so a save without one is schema 1, and from schema 2 the version is
+  always written. Fixtures: a hand-made v1 save and a real one from a phone.
 
 ---
 
@@ -776,8 +785,9 @@ Dependency direction: `apps -> ui -> data -> core`. Nothing depends on an app;
    packs (`packs.json`, §7.4) and `AssignmentPlanner`; `:shared:data` holds
    `CoachRepository`, `CoachDashboard` (every dashboard number) and the demo account
    (ADR-009); `:shared:ui` `coach/` has Players, the learner card, the team heat map and
-   the four-step Assign; `:androidApp-coach` is the shell. Not yet: accounts, linking
-   and VPC, sync, the learner-side event log and inbox, the tablet rail layout.
+   the four-step Assign; `:androidApp-coach` is the shell. The learner app now keeps the
+   attempt log on the device (save schema 2, SPEC 9). Not yet: linking and VPC, upload
+   (sync), the learner's assignment inbox, the tablet rail layout.
    **UI in Compose Multiplatform from day one** (not Jetpack-only APIs), so the same
    screens run on iOS. Android-only concerns (TTS, WorkManager, billing, FCM,
    Families compliance) sit behind `expect`/`actual` interfaces in `data` or in the

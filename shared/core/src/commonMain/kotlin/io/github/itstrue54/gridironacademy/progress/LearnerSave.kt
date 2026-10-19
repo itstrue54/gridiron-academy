@@ -1,6 +1,8 @@
 package io.github.itstrue54.gridironacademy.progress
 
 import io.github.itstrue54.gridironacademy.model.Track
+import kotlinx.serialization.EncodeDefault
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -39,15 +41,31 @@ data class Profile(
 
 /**
  * Everything the learner app keeps on the device for one profile. [schemaVersion] is
- * bumped with every format change, each with a migration (SPEC 9).
+ * bumped with every format change, each with a migration in `shared/data/migration`
+ * (SPEC 9).
+ *
+ * Version 2 adds the attempt log (SPEC 8.1): every graded answer, the raw material for
+ * mastery, the Coach app and, once linked, sync. Ids come from the platform, never from
+ * the engine.
  */
 @Serializable
 data class LearnerSave(
+    // Always written: version 1 left it out (it was the default), so a save without it is
+    // version 1, and every later version must say which it is.
+    @OptIn(ExperimentalSerializationApi::class)
+    @EncodeDefault(EncodeDefault.Mode.ALWAYS)
     val schemaVersion: Int = CURRENT_SCHEMA,
     val profile: Profile? = null,
     val progress: Progress = Progress(),
+    /** This install, made once by the platform: events are identified by (deviceId, seq). */
+    val deviceId: String = "",
+    /** The profile's local id; linking replaces it with the server's learner id. */
+    val learnerId: String = "",
+    /** The next event's sequence number on this device. */
+    val nextSeq: Long = 0,
+    val attempts: List<AttemptEvent> = emptyList(),
 ) {
     companion object {
-        const val CURRENT_SCHEMA = 1
+        const val CURRENT_SCHEMA = 2
     }
 }

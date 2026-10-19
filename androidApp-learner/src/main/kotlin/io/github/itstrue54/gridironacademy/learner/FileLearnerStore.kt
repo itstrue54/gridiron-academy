@@ -2,7 +2,8 @@ package io.github.itstrue54.gridironacademy.learner
 
 import android.util.AtomicFile
 import android.util.Log
-import io.github.itstrue54.gridironacademy.content.ContentLoader
+import io.github.itstrue54.gridironacademy.data.migration.SaveMigrations
+import io.github.itstrue54.gridironacademy.data.migration.SaveTooNew
 import io.github.itstrue54.gridironacademy.progress.LearnerSave
 import io.github.itstrue54.gridironacademy.ui.app.LearnerStore
 import java.io.File
@@ -11,15 +12,22 @@ import java.util.concurrent.Executors
 /**
  * The save as one JSON file in app-private storage. Writes are atomic (a crash mid-write
  * keeps the previous save) and run on one background thread, in order, so the UI never
- * waits on disk. Format changes bump [LearnerSave.schemaVersion] with a migration (SPEC 9).
+ * waits on disk. Every load goes through [SaveMigrations], so an older save is upgraded
+ * and a newer app's save is set aside, never misread or overwritten (SPEC 9).
  */
-class FileLearnerStore(dir: File) : LearnerStore {
+class FileLearnerStore(dir: File, private val newId: () -> String) : LearnerStore {
     private val file = AtomicFile(File(dir, FILE_NAME))
     private val writer = Executors.newSingleThreadExecutor { r -> Thread(r, "learner-save").apply { isDaemon = true } }
 
     override fun load(): LearnerSave? = try {
         if (!file.baseFile.exists()) null
-        else ContentLoader.json.decodeFromString(LearnerSave.serializer(), file.readFully().decodeToString())
+        else SaveMigrations.decode(file.readFully().decodeToString(), newId)
+    } catch (e: SaveTooNew) {
+        // Written by a newer version of the app (a downgrade). Keep it whole for when the
+        // newer app returns; start fresh meanwhile.
+        Log.w(TAG, e.message ?: "save from a newer app; keeping it aside")
+        file.baseFile.renameTo(File(file.baseFile.parentFile, "$FILE_NAME.v${e.version}-${System.currentTimeMillis()}"))
+        null
     } catch (e: Exception) {
         // A save we can't read must not crash the app or be silently overwritten.
         Log.e(TAG, "unreadable save; keeping it aside", e)
@@ -28,7 +36,7 @@ class FileLearnerStore(dir: File) : LearnerStore {
     }
 
     override fun save(save: LearnerSave) {
-        val text = ContentLoader.json.encodeToString(LearnerSave.serializer(), save)
+        val text = SaveMigrations.encode(save)
         writer.execute {
             val out = file.startWrite()
             try {

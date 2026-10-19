@@ -5,6 +5,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import io.github.itstrue54.gridironacademy.engine.Answer
+import io.github.itstrue54.gridironacademy.engine.Grade
 import io.github.itstrue54.gridironacademy.engine.SpeedRound
 import io.github.itstrue54.gridironacademy.model.MultipleChoice
 import io.github.itstrue54.gridironacademy.model.Step
@@ -16,7 +17,13 @@ import io.github.itstrue54.gridironacademy.model.TrueFalse
  * deterministic and a test can play it without a clock.
  */
 @Stable
-class SpeedRoundController(questions: List<Step>, val limitMillis: Long) {
+class SpeedRoundController(
+    questions: List<Step>,
+    val limitMillis: Long,
+    /** Told about every answer: step, grade, answer, first try (always), time on the question. */
+    private val onGraded: ((Step, Grade, Answer, Boolean, Long) -> Unit)? = null,
+) {
+    private var shownAtElapsed = 0L
     private val round = SpeedRound(questions, limitMillis)
     private val missed = mutableListOf<ReviewItem>()
 
@@ -53,6 +60,8 @@ class SpeedRoundController(questions: List<Step>, val limitMillis: Long) {
         val step = current ?: return
         val grade = round.answer(a, elapsedMillis)
         if (grade == null) { over = true; return }
+        onGraded?.invoke(step, grade, a, true, elapsedMillis - shownAtElapsed)
+        shownAtElapsed = elapsedMillis
         if (!grade.correct) missed += reviewItem(step, grade.feedback)
         lastRight = grade.correct
         points = round.points
