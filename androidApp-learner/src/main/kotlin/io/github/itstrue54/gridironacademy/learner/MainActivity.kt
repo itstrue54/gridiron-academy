@@ -20,6 +20,9 @@ import io.github.itstrue54.gridironacademy.ui.screens.LoadErrorScreen
 class MainActivity : ComponentActivity() {
     private val model: LearnerViewModel by viewModels()
 
+    /** File pickers for backups; registered here, before the activity starts. */
+    private val platform = AndroidLearnerPlatform(this)
+
     /** System "Remove animations" (animator scale 0), kept live while the app is open (DESIGN 10). */
     private val reducedMotion = mutableStateOf(false)
     private val animationScaleObserver = object : ContentObserver(Handler(Looper.getMainLooper())) {
@@ -37,7 +40,7 @@ class MainActivity : ComponentActivity() {
                 Load.Failed -> LoadErrorScreen(dark, onRetry = model::retry)
                 is Load.Ready -> {
                     BackHandler(enabled = l.app.backStack.size > 1) { l.app.back() }
-                    LearnerApp(l.app, dark = dark, reducedMotion = reducedMotion.value)
+                    LearnerApp(l.app, dark = dark, reducedMotion = reducedMotion.value, platform = platform)
                 }
             }
         }

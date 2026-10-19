@@ -12,6 +12,7 @@ import io.github.itstrue54.gridironacademy.ui.app.LearnerAppState
 import io.github.itstrue54.gridironacademy.ui.app.LessonController
 import io.github.itstrue54.gridironacademy.ui.app.NextUp
 import io.github.itstrue54.gridironacademy.ui.app.Screen
+import io.github.itstrue54.gridironacademy.ui.app.RestoreResult
 import io.github.itstrue54.gridironacademy.ui.theme.Skin
 import kotlin.test.*
 
@@ -276,6 +277,54 @@ class LearnerAppStateTest {
         assertEquals(quiz.size, store.load()!!.attempts.size)
         s.back()
         assertEquals(Screen.Glossary, s.screen)
+    }
+
+    @Test
+    fun theGrownUpZoneRenamesChangesAgeAndBacksUp() {
+        var ids = 0
+        val store = InMemoryLearnerStore()
+        val s = LearnerAppState(content, store, newId = { "id-${ids++}" }) { 800 }
+        s.createProfile("Leo", AgeBand.AGE_8_9)
+        s.openGrownUpGate()
+        s.enterGrownUpZone()
+        assertEquals(listOf(Screen.Home, Screen.GrownUpZone), s.backStack, "the zone replaces the gate")
+
+        s.renameProfile("  Leo J  ")
+        assertEquals("Leo J", s.profile!!.nickname)
+        s.renameProfile("   ")
+        assertEquals("Leo J", s.profile!!.nickname, "a blank name is ignored")
+        s.changeAgeBand(AgeBand.AGE_13_17)
+        assertEquals(Track.ADULT, s.profile!!.ageBand.track)
+        assertTrue(s.levels.none { it.track == Track.KID })
+
+        val (level, lesson) = s.nextLesson()!!
+        s.startLesson(level, lesson)
+        val c = s.lessonController(level.id, lesson.id)
+        playPerfect(c)
+        s.finishLesson(level.id, lesson.id, c.result)
+        val backup = s.backupText()
+        val oldDevice = s.save.deviceId
+
+        // Restore onto a fresh install: everything comes back under a new device id.
+        val other = LearnerAppState(content, InMemoryLearnerStore(), newId = { "new-${ids++}" }) { 801 }
+        other.createProfile("Someone", AgeBand.AGE_18_PLUS)
+        assertEquals(RestoreResult.Restored, other.restoreBackup(backup))
+        assertEquals("Leo J", other.profile!!.nickname)
+        assertTrue(other.save.progress.lessonPassed(lesson.id))
+        assertEquals(s.save.attempts, other.save.attempts)
+        assertNotEquals(oldDevice, other.save.deviceId)
+        assertEquals(0, other.save.nextSeq)
+        assertEquals(s.save.learnerId, other.save.learnerId, "the same learner")
+
+        val before = other.save
+        assertEquals(RestoreResult.TooNew, other.restoreBackup(backup.replace("\"schemaVersion\":2", "\"schemaVersion\":9")))
+        assertEquals(RestoreResult.NotABackup, other.restoreBackup("hello"))
+        assertEquals(RestoreResult.NotABackup, other.restoreBackup("{}"), "no profile, no restore")
+        assertEquals(before, other.save, "a refused file changes nothing")
+
+        val report = s.progressReport()
+        assertEquals(s.levels.size, report.size)
+        assertEquals(1, report.first().drillsPassed)
     }
 
     @Test

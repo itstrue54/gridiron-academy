@@ -23,7 +23,7 @@ import kotlin.math.sin
  * cleanly and need no image assets. Decorative: callers give the meaning in text or
  * semantics, never by the glyph alone.
  */
-enum class Glyph { CHECK, DASH, CLOSE, BACK, LOCK, STAR, FLAME, UP, DOWN, PEOPLE, ASSIGN, PLAYBOOK, MORE, GLOSSARY }
+enum class Glyph { CHECK, DASH, CLOSE, BACK, LOCK, STAR, FLAME, UP, DOWN, PEOPLE, ASSIGN, PLAYBOOK, MORE, GLOSSARY, SETTINGS }
 
 @Composable
 fun GlyphIcon(glyph: Glyph, color: Color, modifier: Modifier = Modifier, size: Dp = 24.dp, filled: Boolean = true) {
@@ -68,6 +68,16 @@ fun GlyphIcon(glyph: Glyph, color: Color, modifier: Modifier = Modifier, size: D
                 drawPath(p(14f, 4f, 20f, 4f, 20f, 10f), color, style = stroke)
             }
             Glyph.MORE -> listOf(5f, 12f, 19f).forEach { drawCircle(color, 1.9f * u, Offset(it * u, 12f * u)) }
+            // A gear: the way into the grown-up zone (DESIGN 6.2 "settings").
+            Glyph.SETTINGS -> {
+                drawCircle(color, 3.2f * u, Offset(12f * u, 12f * u), style = stroke)
+                drawCircle(color, 6.8f * u, Offset(12f * u, 12f * u), style = stroke)
+                for (i in 0 until 8) {
+                    val a = i * PI / 4
+                    val (cx, cy) = cos(a).toFloat() to sin(a).toFloat()
+                    drawLine(color, Offset((12f + 7f * cx) * u, (12f + 7f * cy) * u), Offset((12f + 9.6f * cx) * u, (12f + 9.6f * cy) * u), 2.6f * u, StrokeCap.Round)
+                }
+            }
             // An open book: two pages from a spine (DESIGN 6.2 "glossary").
             Glyph.GLOSSARY -> {
                 drawPath(p(12f, 6.5f, 8f, 5f, 3.5f, 5.5f, 3.5f, 18.5f, 8f, 18f, 12f, 19.5f), color, style = stroke)
