@@ -472,6 +472,13 @@ Game Day uses fictional teams (`TeamMark`).
   LEARNING concepts from the current level, then assignment items; capped by the
   profile's daily limit. Selection is deterministic from (profile, epoch day).
 - Practice counts toward the streak.
+- **Built** (`DailyPractice`, `PracticeRules`): one question per concept, only steps the
+  learner has already seen, 10 at most; topped up with Learning concepts of the current
+  level when fewer than 5. Home leads with it (the one primary, DESIGN 9.1) only when
+  cards are due or a concept is Rusty; otherwise it's a card above Continue. Answers are
+  logged as `review` attempts; a right answer moves a card up a box, a miss sends it (or
+  a new card) to box 1. Any review answer today marks practice done for the day.
+  Assignment items join when the inbox exists.
 
 ### 6.5 Assignments inbox
 - Shows each active assignment: title, from (coach/parent display name), due date,

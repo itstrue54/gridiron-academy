@@ -289,6 +289,18 @@
     <string name="field_variant">Level of play (for example, High school)</string>
     <string name="field_age_group">Age group (for example, Varsity)</string>
     <string name="field_season">Season (for example, Fall)</string>
+    <string name="close_practice">Leave practice</string>
+    <string name="practice_done_kid">Nice practice!</string>
+    <string name="practice_done_adult">Practice done</string>
+    <string name="practice_done_body">Anything you missed comes back in a day or two.</string>
+    <string name="practice_done_today">Practice done for today</string>
+    <string name="practice_hint_kid">A few quick questions to keep it fresh.</string>
+    <string name="practice_hint_adult">A few questions on what you've learned, so it sticks.</string>
+    <string name="back_home">Back home</string>
+    <plurals name="practice_cta">
+        <item quantity="one">Today's practice: %1$d question</item>
+        <item quantity="other">Today's practice: %1$d questions</item>
+    </plurals>
     <plurals name="players_count">
         <item quantity="one">%1$d player</item>
         <item quantity="other">%1$d players</item>

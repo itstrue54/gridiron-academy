@@ -65,6 +65,14 @@ import io.github.itstrue54.gridironacademy.ui.theme.Gridiron
 import io.github.itstrue54.gridironacademy.ui.theme.screenBackground
 import io.github.itstrue54.gridironacademy.ui.theme.Voice
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.runtime.remember
+import org.jetbrains.compose.resources.pluralStringResource
+import io.github.itstrue54.gridironacademy.ui.components.SecondaryButton
+import io.github.itstrue54.gridironacademy.ui.components.Card
+import io.github.itstrue54.gridironacademy.ui.resources.practice_cta
+import io.github.itstrue54.gridironacademy.ui.resources.practice_done_today
+import io.github.itstrue54.gridironacademy.ui.resources.practice_hint_kid
+import io.github.itstrue54.gridironacademy.ui.resources.practice_hint_adult
 
 /**
  * Home: the drive map (DESIGN 9.1). Levels are nodes on a strip of turf, the highest at
@@ -96,25 +104,58 @@ fun HomeScreen(state: LearnerAppState) {
             }
         }
         Spacer(Modifier.size(16.dp))
+        // Today's practice (SPEC 6.4). It leads Home only when cards are due or a concept
+        // needs a refresher (DESIGN 9.1); otherwise it waits as a card above Continue.
+        val practice = remember(state.save) { if (state.practiceDoneToday) null else state.practice().takeIf { it.steps.isNotEmpty() } }
+        val practiceLeads = practice?.urgent == true
+        if (practice != null) {
+            val label = pluralStringResource(Res.plurals.practice_cta, practice.steps.size, practice.steps.size)
+            if (practiceLeads) {
+                PrimaryButton(label, onClick = state::startPractice)
+                Spacer(Modifier.size(10.dp))
+            } else {
+                PracticeCard(label, kid, onClick = state::startPractice)
+                Spacer(Modifier.size(10.dp))
+            }
+        } else if (state.practiceDoneToday) {
+            Text(stringResource(Res.string.practice_done_today), style = Gridiron.type.label, color = c.correct,
+                modifier = Modifier.padding(bottom = 8.dp))
+        }
         if (next != null) {
             val title = when (next) {
                 is NextUp.Drill -> next.lesson.title
                 is NextUp.Checkpoint -> stringResource(Res.string.checkpoint)
                 is NextUp.BigGame -> stringResource(Res.string.big_game)
             }
-            PrimaryButton(stringResource(Res.string.continue_lesson, title), onClick = {
+            val go = {
                 when (next) {
                     is NextUp.Drill -> state.startLesson(next.level, next.lesson)
                     is NextUp.Checkpoint -> { state.openLevel(next.level); state.startCheckpoint(next.level) }
                     is NextUp.BigGame -> { state.openLevel(next.level); state.startBigGame(next.level) }
                 }
-            })
+            }
+            // One primary per screen: when practice leads, Continue steps back.
+            if (practiceLeads) SecondaryButton(stringResource(Res.string.continue_lesson, title), onClick = go)
+            else PrimaryButton(stringResource(Res.string.continue_lesson, title), onClick = go)
         } else {
             Text(
                 stringResource(if (kid) Res.string.all_done_kid else Res.string.all_done_adult),
                 style = Gridiron.type.body,
                 color = c.inkDim,
             )
+        }
+    }
+}
+
+/** Practice when it isn't urgent: a card, so Continue stays the one primary. */
+@Composable
+private fun PracticeCard(label: String, kid: Boolean, onClick: () -> Unit) {
+    val c = Gridiron.colors
+    Card(onClick = onClick, edge = c.xp) {
+        Column {
+            Text(label, style = Gridiron.type.answer, color = c.ink)
+            Text(stringResource(if (kid) Res.string.practice_hint_kid else Res.string.practice_hint_adult),
+                style = Gridiron.type.label, color = c.inkDim)
         }
     }
 }

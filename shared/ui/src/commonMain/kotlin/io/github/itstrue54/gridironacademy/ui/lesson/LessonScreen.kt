@@ -76,6 +76,7 @@ import io.github.itstrue54.gridironacademy.ui.theme.screenBackground
 import io.github.itstrue54.gridironacademy.ui.theme.Voice
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
+import io.github.itstrue54.gridironacademy.ui.resources.close_practice
 
 /**
  * The drill player (DESIGN 9.3): DriveBar on top, one step, one primary at the bottom.
@@ -107,6 +108,17 @@ fun CheckpointScreen(state: LearnerAppState, levelId: String, testOut: Boolean) 
         closeLabel = stringResource(Res.string.close_checkpoint),
         onClose = { state.back() },
         onFinished = { state.finishCheckpoint(levelId, testOut, it) },
+    )
+}
+
+/** Today's practice (SPEC 6.4): the same player, each question asked once. */
+@Composable
+fun PracticeScreen(state: LearnerAppState) {
+    StepPlayer(
+        controller = state.practiceControllerOrNull() ?: return,
+        closeLabel = stringResource(Res.string.close_practice),
+        onClose = { state.back() },
+        onFinished = { state.finishPractice(it) },
     )
 }
 

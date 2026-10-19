@@ -28,6 +28,7 @@ import io.github.itstrue54.gridironacademy.ui.components.StarRow
 import io.github.itstrue54.gridironacademy.ui.games.SpeedRoundScreen
 import io.github.itstrue54.gridironacademy.ui.lesson.CheckpointScreen
 import io.github.itstrue54.gridironacademy.ui.lesson.LessonScreen
+import io.github.itstrue54.gridironacademy.ui.lesson.PracticeScreen
 import io.github.itstrue54.gridironacademy.ui.lesson.StepGameScreen
 import io.github.itstrue54.gridironacademy.ui.screens.GateDoneScreen
 import io.github.itstrue54.gridironacademy.ui.resources.Res
@@ -56,6 +57,10 @@ import io.github.itstrue54.gridironacademy.ui.theme.GridironTheme
 import io.github.itstrue54.gridironacademy.ui.theme.Skin
 import io.github.itstrue54.gridironacademy.ui.theme.Voice
 import org.jetbrains.compose.resources.stringResource
+import io.github.itstrue54.gridironacademy.ui.resources.practice_done_kid
+import io.github.itstrue54.gridironacademy.ui.resources.practice_done_adult
+import io.github.itstrue54.gridironacademy.ui.resources.practice_done_body
+import io.github.itstrue54.gridironacademy.ui.resources.back_home
 
 /**
  * The learner app, shared by every platform. The shell supplies the content, the store,
@@ -90,6 +95,8 @@ fun LearnerApp(state: LearnerAppState, dark: Boolean, reducedMotion: Boolean = f
                     if (state.bigGameIsSpeedRound(screen.levelId)) SpeedRoundScreen(state, screen.levelId)
                     else StepGameScreen(state, screen.levelId)
                 is Screen.GateDone -> GateDoneScreen(state, screen)
+                Screen.PracticePlay -> PracticeScreen(state)
+                is Screen.PracticeDone -> PracticeDoneScreen(state, screen)
             }
         }
         }
@@ -99,6 +106,32 @@ fun LearnerApp(state: LearnerAppState, dark: Boolean, reducedMotion: Boolean = f
 private const val STANDARD_MS = 220
 private val MAX_CONTENT_WIDTH = 600.dp
 private const val CROSSFADE_MS = 150
+
+/** Practice done: the score, the XP, and back home. Kind about misses: they come back. */
+@Composable
+fun PracticeDoneScreen(state: LearnerAppState, done: Screen.PracticeDone) {
+    val c = Gridiron.colors
+    val kid = Gridiron.skin.voice == Voice.KID
+    Column(
+        Modifier.fillMaxSize().screenBackground().safeDrawingPadding().padding(Gridiron.skin.gutter),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
+    ) {
+        Text(
+            stringResource(if (kid) Res.string.practice_done_kid else Res.string.practice_done_adult),
+            style = Gridiron.type.displayLarge,
+            color = if (Gridiron.skin.primeTime) c.gold else c.ink,
+            textAlign = androidx.compose.ui.text.style.TextAlign.Center,
+            modifier = Modifier.semantics { heading() },
+        )
+        Text(stringResource(Res.string.done_score, done.scorePct), style = Gridiron.type.title, color = c.ink)
+        if (done.xpGained > 0) Text(stringResource(Res.string.done_xp, done.xpGained), style = Gridiron.type.answer, color = c.xp)
+        Text(stringResource(Res.string.practice_done_body), style = Gridiron.type.body, color = c.ink,
+            textAlign = androidx.compose.ui.text.style.TextAlign.Center)
+        Spacer(Modifier.size(8.dp))
+        PrimaryButton(stringResource(Res.string.back_home), onClick = { state.back() })
+    }
+}
 
 /** Lesson complete (DESIGN 9.7): the verdict, stars, score and XP, then back to the level. */
 @Composable
