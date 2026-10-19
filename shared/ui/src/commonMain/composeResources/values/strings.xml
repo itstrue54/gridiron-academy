@@ -301,6 +301,17 @@
         <item quantity="one">Today's practice: %1$d question</item>
         <item quantity="other">Today's practice: %1$d questions</item>
     </plurals>
+    <string name="glossary">Glossary</string>
+    <string name="glossary_search">Search a word</string>
+    <string name="glossary_a_z">A to Z</string>
+    <string name="glossary_by_level">By level</string>
+    <string name="glossary_none">No word matches "%1$s".</string>
+    <string name="glossary_full">Full definition</string>
+    <string name="glossary_less">Show less</string>
+    <string name="glossary_learned">Taught in Level %1$d: %2$s</string>
+    <string name="glossary_quiz">Quiz me</string>
+    <string name="close_quiz">Leave the quiz</string>
+    <string name="back_to_glossary">Back to the glossary</string>
     <plurals name="players_count">
         <item quantity="one">%1$d player</item>
         <item quantity="other">%1$d players</item>

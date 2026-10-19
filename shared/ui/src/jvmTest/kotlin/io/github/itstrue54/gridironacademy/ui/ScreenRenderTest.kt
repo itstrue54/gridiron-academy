@@ -92,6 +92,13 @@ class ScreenRenderTest {
         return s
     }
 
+    @Test fun glossary() {
+        val kid = appState(AgeBand.AGE_8_9).also { it.openGlossary() }
+        shot("40-glossary-kid") { LearnerApp(kid, dark = false) }
+        val adult = appState(AgeBand.AGE_18_PLUS).also { it.openGlossary() }
+        shot("41-glossary-adult") { LearnerApp(adult, dark = true) }
+    }
+
     @Test fun homeWithPracticeDue() {
         shot("03b-home-practice-kid") { LearnerApp(withPracticeDue(AgeBand.AGE_8_9), dark = false) }
         shot("04b-home-practice-adult") { LearnerApp(withPracticeDue(AgeBand.AGE_18_PLUS), dark = true) }
