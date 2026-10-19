@@ -104,8 +104,13 @@ fun LearnerApp(state: LearnerAppState, dark: Boolean, reducedMotion: Boolean = f
                 Screen.PracticePlay -> PracticeScreen(state)
                 is Screen.PracticeDone -> PracticeDoneScreen(state, screen)
                 Screen.Glossary -> GlossaryScreen(state)
-                Screen.GrownUpGate -> GrownUpGateScreen(state, seed = remember { state.clockMillis })
-                Screen.GrownUpZone -> GrownUpZoneScreen(state, platform)
+                // For the grown-up whatever the profile: the Coach app's look (DESIGN 9.9).
+                Screen.GrownUpGate -> GridironTheme(skin = Skin.Coach, dark = dark, reducedMotion = reducedMotion) {
+                    GrownUpGateScreen(state, seed = remember { state.clockMillis })
+                }
+                Screen.GrownUpZone -> GridironTheme(skin = Skin.Coach, dark = dark, reducedMotion = reducedMotion) {
+                    GrownUpZoneScreen(state, platform)
+                }
                 is Screen.GlossaryQuizPlay -> GlossaryQuizScreen(state, screen.concept)
                 is Screen.QuizDone -> QuizDoneScreen(state, screen)
             }
