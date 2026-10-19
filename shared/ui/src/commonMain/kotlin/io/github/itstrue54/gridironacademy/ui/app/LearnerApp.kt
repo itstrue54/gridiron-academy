@@ -67,6 +67,12 @@ import io.github.itstrue54.gridironacademy.ui.screens.GlossaryScreen
 import io.github.itstrue54.gridironacademy.ui.screens.GrownUpGateScreen
 import io.github.itstrue54.gridironacademy.ui.screens.GrownUpZoneScreen
 import androidx.compose.runtime.remember
+import io.github.itstrue54.gridironacademy.ui.resources.leave_title
+import io.github.itstrue54.gridironacademy.ui.resources.leave_body
+import io.github.itstrue54.gridironacademy.ui.resources.leave_gate_title
+import io.github.itstrue54.gridironacademy.ui.resources.leave_gate_body
+import io.github.itstrue54.gridironacademy.ui.resources.keep_going
+import io.github.itstrue54.gridironacademy.ui.resources.leave
 
 /**
  * The learner app, shared by every platform. The shell supplies the content, the store,
@@ -116,7 +122,25 @@ fun LearnerApp(state: LearnerAppState, dark: Boolean, reducedMotion: Boolean = f
             }
         }
         }
+        LeaveDialog(state)
     }
+}
+
+/**
+ * Leaving a player part-way (DESIGN 9.3): once something's been answered, ✕ and Back ask
+ * first, and say what's lost. Before the first answer they just leave.
+ */
+@Composable
+private fun LeaveDialog(state: LearnerAppState) {
+    if (!state.confirmingLeave) return
+    val gate = state.screen is Screen.CheckpointPlay || state.screen is Screen.BigGamePlay
+    androidx.compose.material3.AlertDialog(
+        onDismissRequest = state::keepGoing,
+        title = { Text(stringResource(if (gate) Res.string.leave_gate_title else Res.string.leave_title)) },
+        text = { Text(stringResource(if (gate) Res.string.leave_gate_body else Res.string.leave_body)) },
+        confirmButton = { androidx.compose.material3.TextButton(onClick = state::keepGoing) { Text(stringResource(Res.string.keep_going)) } },
+        dismissButton = { androidx.compose.material3.TextButton(onClick = state::confirmLeave) { Text(stringResource(Res.string.leave)) } },
+    )
 }
 
 private const val STANDARD_MS = 220

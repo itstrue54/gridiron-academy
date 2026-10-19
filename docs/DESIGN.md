@@ -379,6 +379,12 @@ Where that makes a phone picture crowded, the learner zooms instead.
   widths, labels and pills stay their dp size, so zoom adds room, not bigger text.
 - Taps, hit tests and grading go through the zoomed transform, so a tap means the
   same player at any zoom.
+- **Nobody vanishes.** On a portrait phone the wide receivers and corners already sit at
+  the edge at 1x (measured over every read-the-defense picture: any zoom, even 1.15x,
+  pushes someone out). So while zoomed, every player out of view gets a marker on the
+  nearest edge: a pill in their side's colour with their label (players close together
+  share one) and an arrow pointing out, level with where they are. Zoom in to separate
+  the line and the corner's alignment is still there, with the way to pan.
 - Zoom resets with a new diagram. A read-the-defense step fits both pictures to one
   window (`FieldGeometry.window(preSnap, reveal)`) and hoists its zoom state, so the
   reveal plays at the same scale and zoom the learner chose for the pre-snap picture.
@@ -519,6 +525,13 @@ The v2 step types (spec 4.2) use the same frame:
 
 A VariantChip sits under the prompt when the step's rules variant matters.
 
+
+**Leaving part-way.** Before the first answer, ✕ and the system Back just leave. After
+it, they ask first, because a misclick shouldn't throw away a Checkpoint: "Leave this try?
+This try won't count" for a Checkpoint or Big Game, "Leave this drill? You'll start it
+again next time; your answers still count toward practice" for a lesson, practice or a
+quiz. **Keep going** is the default; **Leave** leaves. Reading a learn card isn't an
+answer.
 ### 9.4 Read the defense
 Pre-snap picture fills the screen under a one-line prompt and the choices (the choices
 are a horizontal chip row of up to four, or a two-by-two grid in Kid). After Check the

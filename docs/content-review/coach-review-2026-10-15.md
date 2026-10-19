@@ -71,8 +71,8 @@ players the concept uses (9-10 on offense), which is how coaches draw on a white
 
 - A human coach should still sign off the per-level lists in `level-2.md` … `level-8.md`.
 - Product notes from the run:
-  - Zoomed in one step, the corners leave the frame, though their depth is a key tell;
-    consider a first zoom step that keeps the whole secondary in view.
-  - One tap on ✕ leaves a 12-question Checkpoint without asking (by design for
-    adults, DESIGN §2); a confirm after the first answer would save a misclick.
+  - ~~Zoomed in one step, the corners leave the frame.~~ Done 2026-10-19: no zoom step
+    can keep them (measured); players out of view now get edge markers (DESIGN 7.10).
+  - ~~One tap on ✕ leaves a 12-question Checkpoint without asking.~~ Done 2026-10-19:
+    ✕ and Back ask once something's been answered (DESIGN 9.3).
   - A glossary screen, daily review, Level 0, and the Coach & Parent app.

@@ -2,6 +2,7 @@ package io.github.itstrue54.gridironacademy.ui
 
 import io.github.itstrue54.gridironacademy.model.*
 import io.github.itstrue54.gridironacademy.ui.field.FieldGeometry
+import io.github.itstrue54.gridironacademy.ui.field.Edge
 import io.github.itstrue54.gridironacademy.ui.field.FieldZoom
 import kotlin.test.*
 
@@ -188,5 +189,42 @@ class FieldGeometryTest {
         assertEquals(0f, FieldGeometry.staggered(p60, 1, n, d), 1e-4f)
         // Everyone arrives at the end.
         (0 until n).forEach { assertEquals(1f, FieldGeometry.staggered(1f, it, n, d)) }
+    }
+
+    @Test fun offscreenPlayersGetEdgeMarkersGroupedBySideAndPlace() {
+        val players = listOf(
+            DiagramPlayer("cb1", "CB", Side.DEFENSE, -14f, 7f),
+            DiagramPlayer("x", "X", Side.OFFENSE, -14f, 0f),
+            DiagramPlayer("cb2", "CB", Side.DEFENSE, 14f, 7f),
+            DiagramPlayer("fs", "FS", Side.DEFENSE, 0f, 14f),
+            DiagramPlayer("c", "C", Side.OFFENSE, 0f, 0f),
+        )
+        val window = FieldGeometry.window(Diagram(players = players))
+        val w = 300f; val h = 300f
+        val base = FieldGeometry.transform(window, w, h)
+        assertEquals(emptyList(), FieldGeometry.offscreen(players, base, w, h, 10f, 40f), "nothing is off-screen at 1x")
+
+        val t = FieldZoom().zoomAbout(2f, w / 2, h / 2, w, h).apply(base)
+        val m = FieldGeometry.offscreen(players, t, w, h, 10f, 40f)
+        // The centre and the deep safety stay in view (the card has height to spare); both
+        // corners and X go off the sides.
+        assertTrue(m.none { "C" in it.labels || "FS" in it.labels })
+        assertEquals(setOf(Edge.LEFT, Edge.RIGHT), m.map { it.edge }.toSet())
+        // Left: offense and defense get their own markers (different colours).
+        assertEquals(setOf(Side.OFFENSE, Side.DEFENSE), m.filter { it.edge == Edge.LEFT }.map { it.side }.toSet())
+        assertTrue(m.all { it.along in 10f..290f }, "markers stay inside the corners")
+    }
+
+    @Test fun nearbyPlayersOffTheSameEdgeShareOneMarker() {
+        val players = listOf(
+            DiagramPlayer("cb", "CB", Side.DEFENSE, 30f, 6f),
+            DiagramPlayer("s", "S", Side.DEFENSE, 30f, 6.5f),
+            DiagramPlayer("fs", "FS", Side.DEFENSE, 30f, 25f),
+        )
+        val t = FieldGeometry.transform(io.github.itstrue54.gridironacademy.ui.field.FieldWindow(-10f, 10f, -5f, 30f), 200f, 350f)
+        val m = FieldGeometry.offscreen(players, t, 200f, 350f, 10f, 40f)
+        assertEquals(2, m.size)
+        // Screen order, top to bottom: the slightly deeper S sits higher.
+        assertEquals(listOf("S", "CB"), m.first { it.labels.size == 2 }.labels)
     }
 }
