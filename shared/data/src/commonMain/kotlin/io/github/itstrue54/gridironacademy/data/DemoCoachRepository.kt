@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.update
 
 /**
  * A believable account to build and demo the Coach app against before the backend
- * exists (SPEC 8.2 is still open): a parent who also coaches a high-school team.
+ * is connected (ADR-004, ADR-009): a parent who also coaches a high-school team.
  * Every name is fictional. Generated from [seed] and [today] only, so the same day
  * always shows the same dashboard and tests can pin numbers. What the coach sends is
  * theirs: [sent] restores it and [onSent] hands the full list to the shell to keep.

@@ -70,7 +70,7 @@ sealed interface SendResult {
 /**
  * The Coach app's data (SPEC 8.4). Screens read [snapshot] and compute every number with
  * the shared engine, so the learner app and the coach app always agree. The backend
- * (SPEC 8.2, still open) plugs in here; until then [DemoCoachRepository] stands in.
+ * plugs in here (Supabase, ADR-004); the built-in demo is [DemoCoachRepository].
  */
 interface CoachRepository {
     val snapshot: StateFlow<CoachSnapshot>
