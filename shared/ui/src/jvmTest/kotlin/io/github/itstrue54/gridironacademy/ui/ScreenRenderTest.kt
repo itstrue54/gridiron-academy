@@ -99,6 +99,13 @@ class ScreenRenderTest {
         shot("41-glossary-adult") { LearnerApp(adult, dark = true) }
     }
 
+    @Test fun grownUpZone() {
+        val kid = appState(AgeBand.AGE_8_9).also { it.openGrownUpGate() }
+        shot("42-grown-up-gate") { LearnerApp(kid, dark = false) }
+        kid.enterGrownUpZone()
+        shot("43-grown-up-zone", height = 3000) { LearnerApp(kid, dark = false) }
+    }
+
     @Test fun homeWithPracticeDue() {
         shot("03b-home-practice-kid") { LearnerApp(withPracticeDue(AgeBand.AGE_8_9), dark = false) }
         shot("04b-home-practice-adult") { LearnerApp(withPracticeDue(AgeBand.AGE_18_PLUS), dark = true) }

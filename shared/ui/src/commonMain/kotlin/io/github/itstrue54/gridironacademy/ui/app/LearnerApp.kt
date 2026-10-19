@@ -64,13 +64,16 @@ import io.github.itstrue54.gridironacademy.ui.resources.back_home
 import io.github.itstrue54.gridironacademy.ui.resources.back_to_glossary
 import io.github.itstrue54.gridironacademy.ui.lesson.GlossaryQuizScreen
 import io.github.itstrue54.gridironacademy.ui.screens.GlossaryScreen
+import io.github.itstrue54.gridironacademy.ui.screens.GrownUpGateScreen
+import io.github.itstrue54.gridironacademy.ui.screens.GrownUpZoneScreen
+import androidx.compose.runtime.remember
 
 /**
  * The learner app, shared by every platform. The shell supplies the content, the store,
  * the clock and the theme choice; back handling calls [LearnerAppState.back].
  */
 @Composable
-fun LearnerApp(state: LearnerAppState, dark: Boolean, reducedMotion: Boolean = false) {
+fun LearnerApp(state: LearnerAppState, dark: Boolean, reducedMotion: Boolean = false, platform: LearnerPlatform = NoPlatform) {
     // Before a profile exists there is no track; onboarding uses the Adult skin.
     val skin = if (state.profile == null) Skin.Adult else state.skin
     GridironTheme(skin = skin, dark = dark, reducedMotion = reducedMotion) {
@@ -101,6 +104,8 @@ fun LearnerApp(state: LearnerAppState, dark: Boolean, reducedMotion: Boolean = f
                 Screen.PracticePlay -> PracticeScreen(state)
                 is Screen.PracticeDone -> PracticeDoneScreen(state, screen)
                 Screen.Glossary -> GlossaryScreen(state)
+                Screen.GrownUpGate -> GrownUpGateScreen(state, seed = remember { state.clockMillis })
+                Screen.GrownUpZone -> GrownUpZoneScreen(state, platform)
                 is Screen.GlossaryQuizPlay -> GlossaryQuizScreen(state, screen.concept)
                 is Screen.QuizDone -> QuizDoneScreen(state, screen)
             }

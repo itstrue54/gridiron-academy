@@ -529,6 +529,16 @@ code shown in the Coach app), **Linked adults** (list, and for 13+ the option to
 leave a team) and content-update status. The privacy statement reads "nothing
 leaves this device unless a parent links it" (DESIGN §9.9).
 
+**Built so far** (gear icon on Home): the gate (type the product of two factors from 6
+to 9, then hold for two seconds; screen readers get a tap for the hold, the question is
+the lock; a wrong answer gets a new question). Inside: rename, change the age band
+(progress kept, track and skin follow), a progress report per level (drills passed,
+concepts mastered) with minutes this week, **Backup** (save and restore the save file
+through the system pickers; a newer app's file or a non-save is refused and nothing
+changes; a restore continues under a new device id so `(deviceId, seq)` stays unique),
+the privacy statement and About. Still to come: more profiles, time limit, read-aloud,
+sound, theme, text size, linking, linked adults, content updates.
+
 ---
 
 ## 7. Coach & Parent app

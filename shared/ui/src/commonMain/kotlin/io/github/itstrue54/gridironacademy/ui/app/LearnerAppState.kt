@@ -23,12 +23,37 @@ import io.github.itstrue54.gridironacademy.progress.AttemptEvent
 import io.github.itstrue54.gridironacademy.progress.Attempts
 import io.github.itstrue54.gridironacademy.progress.DailyPractice
 import io.github.itstrue54.gridironacademy.progress.GlossaryQuiz
+import io.github.itstrue54.gridironacademy.progress.LevelReport
+import io.github.itstrue54.gridironacademy.progress.ProgressReport
+import io.github.itstrue54.gridironacademy.data.migration.SaveTooNew
 import io.github.itstrue54.gridironacademy.progress.Practice
 import io.github.itstrue54.gridironacademy.progress.Gating
 import io.github.itstrue54.gridironacademy.progress.LearnerSave
 import io.github.itstrue54.gridironacademy.progress.Profile
 import io.github.itstrue54.gridironacademy.progress.Review
 import io.github.itstrue54.gridironacademy.ui.theme.Skin
+
+enum class RestoreResult { Restored, TooNew, NotABackup }
+
+/**
+ * What only the platform can do for the learner app: files. Android uses the system's
+ * save and open pickers, so a backup goes where the parent chooses, never to a cloud by
+ * itself (SPEC 5.4).
+ */
+interface LearnerPlatform {
+    /** Ask where to save [text] as [fileName]; report whether it was written. */
+    fun exportBackup(text: String, fileName: String, done: (Boolean) -> Unit)
+    /** Ask for a backup file; hand back its text, or null if cancelled or unreadable. */
+    fun pickBackup(done: (String?) -> Unit)
+    val appVersion: String
+}
+
+/** For tests and previews: no files. */
+object NoPlatform : LearnerPlatform {
+    override fun exportBackup(text: String, fileName: String, done: (Boolean) -> Unit) = done(false)
+    override fun pickBackup(done: (String?) -> Unit) = done(null)
+    override val appVersion: String = "dev"
+}
 
 /** Where the learner is. The back stack is a plain list so it is easy to test and restore. */
 sealed interface Screen {
@@ -44,6 +69,9 @@ sealed interface Screen {
     /** Today's practice (SPEC 6.4). */
     data object PracticePlay : Screen
     data class PracticeDone(val scorePct: Int, val count: Int, val xpGained: Int) : Screen
+    /** The grown-up zone (DESIGN 9.9) and the gate in front of it. */
+    data object GrownUpGate : Screen
+    data object GrownUpZone : Screen
     /** The glossary (DESIGN 9.10) and its "Quiz me" mini-drill. */
     data object Glossary : Screen
     data class GlossaryQuizPlay(val concept: String) : Screen
@@ -315,6 +343,58 @@ class LearnerAppState(
         replaceTop(Screen.QuizDone(concept, session.scorePct, steps.size))
     }
 
+    fun openGrownUpGate() = go(Screen.GrownUpGate)
+
+    /** The platform clock, for seeding the gate's question (UI only, never the engine). */
+    val clockMillis: Long get() = now()
+
+    /** The gate was passed: the zone takes its place, so Back from the zone goes Home. */
+    fun enterGrownUpZone() {
+        if (screen == Screen.GrownUpGate) replaceTop(Screen.GrownUpZone)
+    }
+
+    fun renameProfile(nickname: String) {
+        val p = profile ?: return
+        commit(save.copy(profile = p.copy(nickname = nickname.trim().take(NICKNAME_MAX).ifEmpty { p.nickname })))
+    }
+
+    /** Behind the gate (SPEC 5.2). Progress stays; the band changes the track and skin. */
+    fun changeAgeBand(band: AgeBand) {
+        val p = profile ?: return
+        commit(save.copy(profile = p.copy(ageBand = band)))
+    }
+
+    fun progressReport(): List<LevelReport> =
+        ProgressReport.levels(content, levels, save.progress, save.attempts, today())
+
+    fun minutesThisWeek(): Int = ProgressReport.minutes(save.attempts, today())
+
+    /** The whole save as a backup file (SPEC 9), with anything not yet saved. */
+    fun backupText(): String {
+        if (pending.isNotEmpty()) commit(save)
+        return SaveMigrations.encode(save)
+    }
+
+    /**
+     * Restores a backup over this profile. A file from a newer app or not a save at all
+     * is refused with the reason, and nothing changes. The restored log continues under a
+     * new device id, so (device, seq) stays unique if the old device is still in use.
+     */
+    fun restoreBackup(text: String): RestoreResult {
+        val restored = try {
+            SaveMigrations.decode(text, newId)
+        } catch (e: SaveTooNew) {
+            return RestoreResult.TooNew
+        } catch (e: Exception) {
+            return RestoreResult.NotABackup
+        }
+        if (restored.profile == null) return RestoreResult.NotABackup
+        pending.clear()
+        activeLesson = null; activeGate = null; activePractice = null; activeQuiz = null
+        commit(restored.copy(deviceId = newId(), nextSeq = 0))
+        return RestoreResult.Restored
+    }
+
     val profile: Profile? get() = save.profile
 
     /** Level 0 isn't written yet, so pre-readers get the Kid skin for now (SPEC 3.1). */
@@ -485,6 +565,7 @@ class LearnerAppState(
         /** DESIGN 9.6: a one-minute round. The Untimed option arrives with profile settings. */
         const val SPEED_ROUND_MILLIS = 60_000L
         const val MILLIS_PER_DAY = 86_400_000L
+        const val NICKNAME_MAX = 20
         /** Practice XP, the same rate as a lesson: a tenth of the score. */
         const val XP_DIVISOR = 10
     }

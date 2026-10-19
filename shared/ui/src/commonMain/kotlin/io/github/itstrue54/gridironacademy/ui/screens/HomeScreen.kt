@@ -75,6 +75,7 @@ import io.github.itstrue54.gridironacademy.ui.resources.practice_hint_kid
 import io.github.itstrue54.gridironacademy.ui.resources.practice_hint_adult
 import io.github.itstrue54.gridironacademy.ui.resources.glossary
 import io.github.itstrue54.gridironacademy.ui.components.IconAction
+import io.github.itstrue54.gridironacademy.ui.resources.grown_up_zone
 
 /**
  * Home: the drive map (DESIGN 9.1). Levels are nodes on a strip of turf, the highest at
@@ -91,6 +92,7 @@ fun HomeScreen(state: LearnerAppState) {
             Text(state.profile?.nickname.orEmpty(), style = Gridiron.type.title, color = c.ink, modifier = Modifier.weight(1f))
             // Two taps from Home (DESIGN 1): the glossary is one.
             IconAction(Glyph.GLOSSARY, stringResource(Res.string.glossary), onClick = state::openGlossary)
+            IconAction(Glyph.SETTINGS, stringResource(Res.string.grown_up_zone), onClick = state::openGrownUpGate)
             StreakChip(state.save.progress.streakDays, kid)
         }
         Spacer(Modifier.size(12.dp))
