@@ -23,7 +23,7 @@ import kotlin.math.sin
  * cleanly and need no image assets. Decorative: callers give the meaning in text or
  * semantics, never by the glyph alone.
  */
-enum class Glyph { CHECK, DASH, CLOSE, BACK, LOCK, STAR, FLAME, UP, DOWN, PEOPLE, ASSIGN, PLAYBOOK, MORE }
+enum class Glyph { CHECK, DASH, CLOSE, BACK, LOCK, STAR, FLAME, UP, DOWN, PEOPLE, ASSIGN, PLAYBOOK, MORE, GLOSSARY }
 
 @Composable
 fun GlyphIcon(glyph: Glyph, color: Color, modifier: Modifier = Modifier, size: Dp = 24.dp, filled: Boolean = true) {
@@ -68,6 +68,12 @@ fun GlyphIcon(glyph: Glyph, color: Color, modifier: Modifier = Modifier, size: D
                 drawPath(p(14f, 4f, 20f, 4f, 20f, 10f), color, style = stroke)
             }
             Glyph.MORE -> listOf(5f, 12f, 19f).forEach { drawCircle(color, 1.9f * u, Offset(it * u, 12f * u)) }
+            // An open book: two pages from a spine (DESIGN 6.2 "glossary").
+            Glyph.GLOSSARY -> {
+                drawPath(p(12f, 6.5f, 8f, 5f, 3.5f, 5.5f, 3.5f, 18.5f, 8f, 18f, 12f, 19.5f), color, style = stroke)
+                drawPath(p(12f, 6.5f, 16f, 5f, 20.5f, 5.5f, 20.5f, 18.5f, 16f, 18f, 12f, 19.5f), color, style = stroke)
+                drawLine(color, Offset(12f * u, 6.5f * u), Offset(12f * u, 19.5f * u), 2.4f * u, StrokeCap.Round)
+            }
         }
     }
 }

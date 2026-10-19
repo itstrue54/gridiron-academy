@@ -61,6 +61,9 @@ import io.github.itstrue54.gridironacademy.ui.resources.practice_done_kid
 import io.github.itstrue54.gridironacademy.ui.resources.practice_done_adult
 import io.github.itstrue54.gridironacademy.ui.resources.practice_done_body
 import io.github.itstrue54.gridironacademy.ui.resources.back_home
+import io.github.itstrue54.gridironacademy.ui.resources.back_to_glossary
+import io.github.itstrue54.gridironacademy.ui.lesson.GlossaryQuizScreen
+import io.github.itstrue54.gridironacademy.ui.screens.GlossaryScreen
 
 /**
  * The learner app, shared by every platform. The shell supplies the content, the store,
@@ -97,6 +100,9 @@ fun LearnerApp(state: LearnerAppState, dark: Boolean, reducedMotion: Boolean = f
                 is Screen.GateDone -> GateDoneScreen(state, screen)
                 Screen.PracticePlay -> PracticeScreen(state)
                 is Screen.PracticeDone -> PracticeDoneScreen(state, screen)
+                Screen.Glossary -> GlossaryScreen(state)
+                is Screen.GlossaryQuizPlay -> GlossaryQuizScreen(state, screen.concept)
+                is Screen.QuizDone -> QuizDoneScreen(state, screen)
             }
         }
         }
@@ -130,6 +136,26 @@ fun PracticeDoneScreen(state: LearnerAppState, done: Screen.PracticeDone) {
             textAlign = androidx.compose.ui.text.style.TextAlign.Center)
         Spacer(Modifier.size(8.dp))
         PrimaryButton(stringResource(Res.string.back_home), onClick = { state.back() })
+    }
+}
+
+/** Quiz me finished: the score on that term, then back to the glossary. */
+@Composable
+fun QuizDoneScreen(state: LearnerAppState, done: Screen.QuizDone) {
+    val c = Gridiron.colors
+    val term = state.content.glossary.entries.firstOrNull { it.id == done.concept }?.term ?: done.concept
+    Column(
+        Modifier.fillMaxSize().screenBackground().safeDrawingPadding().padding(Gridiron.skin.gutter),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
+    ) {
+        Text(term, style = Gridiron.type.displayLarge, color = if (Gridiron.skin.primeTime) c.gold else c.ink,
+            textAlign = androidx.compose.ui.text.style.TextAlign.Center, modifier = Modifier.semantics { heading() })
+        Text(stringResource(Res.string.done_score, done.scorePct), style = Gridiron.type.title, color = c.ink)
+        Text(stringResource(Res.string.practice_done_body), style = Gridiron.type.body, color = c.ink,
+            textAlign = androidx.compose.ui.text.style.TextAlign.Center)
+        Spacer(Modifier.size(8.dp))
+        PrimaryButton(stringResource(Res.string.back_to_glossary), onClick = { state.back() })
     }
 }
 

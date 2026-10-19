@@ -500,6 +500,14 @@ DESIGN §9.10, plus the **Playbook map**: the concept graph as a skill tree, col
 by mastery state (with icons, not colour alone), searchable, each node opening its
 glossary entry and a "Quiz me".
 
+**Glossary built** (book icon on Home): A to Z or by level, searchable across the term
+and both definitions. "Taught in Level N: lesson" links to the first lesson on the
+profile's own ladder (kid and adult differ). **Quiz me** draws up to 5 of the term's
+graded steps (`GlossaryQuiz`) only from levels the learner can open, so it never asks
+about something unreachable; misses become review cards and it counts for the streak.
+Every one of the 152 terms is taught by some lesson (tested). The Playbook map waits
+for the concept graph.
+
 ### 6.8 Offline and multi-device
 Everything works offline. Unlinked progress lives on one device (with manual
 export/import backup, DESIGN §9.9). Linked progress syncs across devices through the

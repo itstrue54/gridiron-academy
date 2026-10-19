@@ -22,6 +22,7 @@ import io.github.itstrue54.gridironacademy.progress.AttemptContext
 import io.github.itstrue54.gridironacademy.progress.AttemptEvent
 import io.github.itstrue54.gridironacademy.progress.Attempts
 import io.github.itstrue54.gridironacademy.progress.DailyPractice
+import io.github.itstrue54.gridironacademy.progress.GlossaryQuiz
 import io.github.itstrue54.gridironacademy.progress.Practice
 import io.github.itstrue54.gridironacademy.progress.Gating
 import io.github.itstrue54.gridironacademy.progress.LearnerSave
@@ -43,6 +44,10 @@ sealed interface Screen {
     /** Today's practice (SPEC 6.4). */
     data object PracticePlay : Screen
     data class PracticeDone(val scorePct: Int, val count: Int, val xpGained: Int) : Screen
+    /** The glossary (DESIGN 9.10) and its "Quiz me" mini-drill. */
+    data object Glossary : Screen
+    data class GlossaryQuizPlay(val concept: String) : Screen
+    data class QuizDone(val concept: String, val scorePct: Int, val count: Int) : Screen
     /** The result of a Checkpoint or Big Game, and the level-complete moment. */
     data class GateDone(
         val levelId: String,
@@ -273,6 +278,41 @@ class LearnerAppState(
         val after = reviewed.copy(xp = reviewed.xp + session.scorePct / XP_DIVISOR).touch(today())
         commit(save.copy(progress = after))
         replaceTop(Screen.PracticeDone(session.scorePct, steps.size, after.xp - before.xp))
+    }
+
+    /** The quiz in progress: its term, its questions and its controller, made once. */
+    private var activeQuiz: Triple<String, List<Step>, LessonController>? = null
+
+    fun openGlossary() = go(Screen.Glossary)
+
+    /** Where a term is first taught on this profile's ladder ("Where you learned it"). */
+    fun learnedIn(concept: String): Pair<Level, Lesson>? = GlossaryQuiz.firstLesson(content, concept, levels)
+
+    /** The quiz for a term, only from levels this learner can open. Empty means no Quiz me. */
+    fun quizFor(concept: String): List<Step> =
+        GlossaryQuiz.quiz(content, concept, levels.filter { levelUnlocked(it) }, concept.hashCode().toLong() * SEED_MIX + today())
+
+    fun startQuiz(concept: String) {
+        activeQuiz = null
+        go(Screen.GlossaryQuizPlay(concept))
+    }
+
+    fun quizControllerOrNull(concept: String): LessonController? =
+        activeQuiz?.takeIf { it.first == concept }?.third ?: if (screen == Screen.GlossaryQuizPlay(concept)) {
+            val steps = quizFor(concept)
+            if (steps.isEmpty()) null
+            else LessonController(steps, retryMisses = false, now = now, onGraded = recorder(AttemptContext.LESSON))
+                .also { activeQuiz = Triple(concept, steps, it) }
+        } else null
+
+    /** A quiz feeds review like a lesson: misses become cards. It counts for the streak. */
+    fun finishQuiz(concept: String, session: LessonSession) {
+        if (screen != Screen.GlossaryQuizPlay(concept)) return
+        val steps = activeQuiz?.takeIf { it.first == concept }?.second ?: return
+        val missed = steps.filter { it.id in session.missedIds }
+        val after = missed.fold(save.progress) { p, s -> Review.miss(p, s.id, s.concept, today()) }.touch(today())
+        commit(save.copy(progress = after))
+        replaceTop(Screen.QuizDone(concept, session.scorePct, steps.size))
     }
 
     val profile: Profile? get() = save.profile

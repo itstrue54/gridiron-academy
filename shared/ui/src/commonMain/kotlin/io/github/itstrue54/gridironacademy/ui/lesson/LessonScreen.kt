@@ -77,6 +77,7 @@ import io.github.itstrue54.gridironacademy.ui.theme.Voice
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 import io.github.itstrue54.gridironacademy.ui.resources.close_practice
+import io.github.itstrue54.gridironacademy.ui.resources.close_quiz
 
 /**
  * The drill player (DESIGN 9.3): DriveBar on top, one step, one primary at the bottom.
@@ -119,6 +120,17 @@ fun PracticeScreen(state: LearnerAppState) {
         closeLabel = stringResource(Res.string.close_practice),
         onClose = { state.back() },
         onFinished = { state.finishPractice(it) },
+    )
+}
+
+/** A glossary term's Quiz me (DESIGN 9.10): a short drill from that term's questions. */
+@Composable
+fun GlossaryQuizScreen(state: LearnerAppState, concept: String) {
+    StepPlayer(
+        controller = state.quizControllerOrNull(concept) ?: return,
+        closeLabel = stringResource(Res.string.close_quiz),
+        onClose = { state.back() },
+        onFinished = { state.finishQuiz(concept, it) },
     )
 }
 
