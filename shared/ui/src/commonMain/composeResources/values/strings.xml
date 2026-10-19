@@ -325,6 +325,7 @@
     <string name="zone_report">Progress report</string>
     <string name="report_minutes">%1$d minutes of practice this week</string>
     <string name="level_named_title">Level %1$d: %2$s</string>
+    <string name="report_mastery_note">A concept counts as mastered after several right answers on at least two days. Answers given before this version of the app aren't counted, so drills can be passed with concepts still to master.</string>
     <string name="report_line">%1$d of %2$d drills passed · %3$d of %4$d concepts mastered</string>
     <string name="zone_backup">Backup</string>
     <string name="backup_body">Save a copy of all progress to a file you choose, and restore it on this or another device.</string>
