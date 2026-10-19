@@ -376,6 +376,12 @@ Each concept id has a per-profile mastery record derived from attempts:
 - All thresholds are named constants in `MasteryRules`; time is passed in as epoch
   day. Pure function `Mastery.of(events, conceptId, today)`, deterministic.
 
+**The concept graph** is content: each glossary term lists the terms to know first
+(`requires` in glossary.json, direct parents only; 227 links over the 152 terms). The
+validator rejects an unknown or self prerequisite, any cycle, a prerequisite first taught
+at a later level than the concept that needs it, and a glossary `level` that isn't the
+level where the term is first taught (five were wrong and are fixed).
+
 Mastery drives: the coach dashboard (§7.3), the checkpoint weighting, daily practice
 selection, and the learner's **Playbook map** (the concept graph rendered as a
 skill tree that fills in).
@@ -603,6 +609,13 @@ without content yet (Wing-T, youth 5-2, flag 5v5) arrive with their lessons. Exa
    each learner's mastery, the ordered list of prerequisite primers (only missing
    ones), lessons, games and the check. A learner who already has MASTERED concepts
    gets a shorter plan.
+   **Built:** warm-ups are the prerequisites of the pack concepts still to learn that
+   the learner hasn't mastered **and** that are taught at or above the learner's
+   current level (a Level 6 player is past what Level 2 taught, ADR-010); nearest
+   first, each as the lesson that first teaches it on the learner's own track, at most
+   4 (`MAX_WARMUP_LESSONS`), played first in curriculum order. The preview says how
+   many more were left out. The switch is stored with the assignment (`include_warmups`)
+   so every app computes the same plan.
 
 **Rules:** an assignment can unlock lessons above a learner's level but shows a
 warning when more than two levels above (e.g. a 9-year-old assigned Level 7

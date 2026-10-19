@@ -49,6 +49,26 @@ object ContentValidator {
         dupes(allStepIds).forEach { err("content", "duplicate step id $it") }
         dupes(allLessonIds).forEach { err("content", "duplicate lesson id $it") }
 
+        // The concept graph (SPEC 4.6): real ids, no cycles, a prerequisite never taught
+        // after the concept that needs it, and every term taught where the glossary says.
+        for (e in c.glossary.entries) {
+            val where = "glossary ${e.id}"
+            e.requires.forEach { r ->
+                if (r !in glossaryIds) err(where, "requires unknown concept '$r'")
+                if (r == e.id) err(where, "requires itself")
+            }
+            val taught = c.firstTaughtLevel(e.id)
+            if (taught == null) err(where, "no lesson teaches it")
+            else {
+                if (taught != e.level) err(where, "level says ${e.level} but it's first taught in Level $taught")
+                e.requires.forEach { r ->
+                    val rl = c.firstTaughtLevel(r)
+                    if (rl != null && rl > taught) err(where, "needs '$r', which isn't taught until Level $rl")
+                }
+            }
+        }
+        c.graph.cycles().forEach { err("glossary", "concept cycle: ${it.joinToString(" -> ")}") }
+
         dupes(c.packs.map { it.id }).forEach { err("packs", "duplicate pack id $it") }
         for (p in c.packs) {
             val where = "pack ${p.id}"

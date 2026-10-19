@@ -357,6 +357,16 @@
     <string name="leave_gate_body">This try won't count. You can start it again whenever you're ready.</string>
     <string name="keep_going">Keep going</string>
     <string name="leave">Leave</string>
+    <string name="include_warmups">Include warm-ups for missing basics</string>
+    <string name="include_warmups_body">Players who haven't mastered what this builds on get those lessons first.</string>
+    <plurals name="plan_line_warmups">
+        <item quantity="one">%1$s: %2$d warm-up + %3$d drills + check, about %4$d min</item>
+        <item quantity="other">%1$s: %2$d warm-ups + %3$d drills + check, about %4$d min</item>
+    </plurals>
+    <plurals name="warmups_left_out">
+        <item quantity="one">%1$d more basic lesson left out to keep it short</item>
+        <item quantity="other">%1$d more basic lessons left out to keep it short</item>
+    </plurals>
     <plurals name="players_count">
         <item quantity="one">%1$d player</item>
         <item quantity="other">%1$d players</item>

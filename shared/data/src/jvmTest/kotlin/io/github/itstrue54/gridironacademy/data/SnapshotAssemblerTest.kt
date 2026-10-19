@@ -67,6 +67,9 @@ class SnapshotAssemblerTest {
         assertEquals(3, s.attempts.getValue("mia").size)
         assertEquals(1, s.assignmentEvents.size)
         assertEquals(listOf(AssignmentTarget("mia", 2)), s.assignments.single().targets)
+        assertTrue(s.assignments.single().includeWarmups, "warm-ups default on")
+        val off = SnapshotAssembler.assemble(rows.copy(assignments = rows.assignments.map { it.copy(includeWarmups = false) }), content, today)
+        assertFalse(off.assignments.single().includeWarmups)
         assertEquals(1, s.learner("leo")!!.level)
     }
 

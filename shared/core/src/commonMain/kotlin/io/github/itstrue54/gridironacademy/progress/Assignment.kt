@@ -3,7 +3,9 @@ package io.github.itstrue54.gridironacademy.progress
 import io.github.itstrue54.gridironacademy.content.Content
 import io.github.itstrue54.gridironacademy.model.GameType
 import io.github.itstrue54.gridironacademy.model.Learn
+import io.github.itstrue54.gridironacademy.model.Lesson
 import io.github.itstrue54.gridironacademy.model.SchemePack
+import io.github.itstrue54.gridironacademy.model.Track
 import kotlinx.serialization.Serializable
 
 /** Every assignment threshold (SPEC 7.4, 11.5 rule 6). */
@@ -17,6 +19,8 @@ object AssignmentRules {
     const val MINUTES_PER_GAME = 3
     /** Inside this many days of the due date with under half the plan done: Behind. */
     const val BEHIND_DAYS_BEFORE_DUE = 2
+    /** Warm-up lessons for missing basics in one plan, nearest prerequisites first. */
+    const val MAX_WARMUP_LESSONS = 4
     /** Share of the progress ring the lessons fill; passing the check fills the rest. */
     const val LESSONS_SHARE = 0.9f
 }
@@ -42,6 +46,8 @@ data class Assignment(
     val passPct: Int = AssignmentRules.DEFAULT_PASS_PCT,
     val note: String = "",
     val sentDay: Long,
+    /** Add warm-up lessons for prerequisites a learner hasn't mastered (SPEC 7.4, default on). */
+    val includeWarmups: Boolean = true,
 )
 
 enum class NoteProblem { TOO_LONG, LINK, CONTACT }
@@ -62,12 +68,12 @@ object NoteRules {
     }
 }
 
-enum class StopKind { LESSON, GAME, CHECK }
+enum class StopKind { WARMUP, LESSON, GAME, CHECK }
 
 /** One stop on a learner's plan, as the inbox's DriveBar shows it (DESIGN 9.12). */
 data class PlanStop(
     val kind: StopKind,
-    /** The lesson for [StopKind.LESSON]. */
+    /** The lesson for [StopKind.LESSON] and [StopKind.WARMUP]. */
     val lessonId: String? = null,
     /** The game for [StopKind.GAME]. */
     val game: GameType? = null,
@@ -77,8 +83,14 @@ data class PlanStop(
     val wellAboveLevel: Boolean = false,
 )
 
-data class AssignmentPlan(val stops: List<PlanStop>) {
-    val lessons: Int get() = stops.count { it.kind == StopKind.LESSON }
+data class AssignmentPlan(
+    val stops: List<PlanStop>,
+    /** Warm-up lessons left out to keep the plan short ("and N more basics"). */
+    val warmupsLeftOut: Int = 0,
+) {
+    /** Lessons to play, warm-ups included: this is what shrinks as concepts are mastered. */
+    val lessons: Int get() = stops.count { it.kind == StopKind.LESSON || it.kind == StopKind.WARMUP }
+    val warmups: Int get() = stops.count { it.kind == StopKind.WARMUP }
     val wellAboveLevel: Boolean get() = stops.any { it.wellAboveLevel }
 
     /** A rough length for the preview: "about 35 min". */
@@ -90,11 +102,10 @@ data class AssignmentPlan(val stops: List<PlanStop>) {
 }
 
 /**
- * The per-learner plan for an assignment (SPEC 7.4): the packs' lessons in curriculum
- * order, minus any whose concepts the learner has all mastered, then the packs' games,
- * then the check. A learner who already knows the material gets a shorter plan.
- *
- * Prerequisite warm-ups arrive with the concept graph; until then the plan is the packs.
+ * The per-learner plan for an assignment (SPEC 7.4): warm-ups for missing basics, then
+ * the packs' lessons in curriculum order minus any whose concepts the learner has all
+ * mastered, then the packs' games, then the check. A learner who already knows the
+ * material gets a shorter plan; one missing the basics gets them first.
  */
 object AssignmentPlanner {
 
@@ -103,8 +114,11 @@ object AssignmentPlanner {
         content: Content,
         mastery: Map<String, ConceptMastery>,
         learnerLevel: Int,
+        track: Track? = null,
+        includeWarmups: Boolean = true,
     ): AssignmentPlan {
         val wanted = packs.flatMap { it.lessons }.toSet()
+        val (warmups, leftOut) = if (includeWarmups) warmups(packs, content, mastery, learnerLevel, track, wanted) else emptyList<Lesson>() to 0
         val lessons = content.lessons.filter { it.id in wanted }.filter { l ->
             content.conceptsOf(l).any { mastery[it]?.secure != true }
         }
@@ -117,9 +131,41 @@ object AssignmentPlanner {
                 wellAboveLevel = level - learnerLevel > AssignmentRules.LEVELS_ABOVE_WARNING,
             )
         }
+        val warmupStops = warmups.map { l -> PlanStop(StopKind.WARMUP, lessonId = l.id, steps = l.steps.size) }
         val games = packs.flatMap { it.games }.distinct().map { PlanStop(StopKind.GAME, game = it) }
         val check = PlanStop(StopKind.CHECK, steps = packs.maxOfOrNull { it.check.questions } ?: 0)
-        return AssignmentPlan(lessonStops + games + check)
+        return AssignmentPlan(warmupStops + lessonStops + games + check, leftOut)
+    }
+
+    /**
+     * Lessons for the prerequisites of the pack concepts still to learn, where the learner
+     * hasn't mastered them and isn't past the level that teaches them: for each missing concept, nearest first, the lesson that first teaches it on the learner's own track.
+     * At most [AssignmentRules.MAX_WARMUP_LESSONS], played in curriculum order.
+     */
+    private fun warmups(
+        packs: List<SchemePack>,
+        content: Content,
+        mastery: Map<String, ConceptMastery>,
+        learnerLevel: Int,
+        track: Track?,
+        packLessons: Set<String>,
+    ): Pair<List<Lesson>, Int> {
+        // Only what's still to learn needs its basics: a pack already mastered needs no warm-ups.
+        val packConcepts = packs.flatMap { content.conceptsOf(it) }.distinct().filter { mastery[it]?.secure != true }
+        val ladder = content.curriculum.levels
+            .filter { track == null || it.track == track || it.track == Track.SHARED }
+            .sortedBy { it.number }
+        // Known: mastered, or taught on a level the learner is already past. "Mastered" needs
+        // right answers on two days, so a Level 6 player who passed Level 2 before the answer
+        // log existed (or just hasn't been quizzed twice) still knows what a gap is.
+        val missing = content.graph.prerequisites(packConcepts).filter { c ->
+            mastery[c]?.secure != true && (content.firstTaughtLevel(c) ?: 0) >= learnerLevel
+        }
+        val lessons = missing.mapNotNull { c -> GlossaryQuiz.firstLesson(content, c, ladder)?.second }
+            .filter { it.id !in packLessons }
+            .distinctBy { it.id }
+        val kept = lessons.take(AssignmentRules.MAX_WARMUP_LESSONS).map { it.id }.toSet()
+        return content.lessons.filter { it.id in kept } to (lessons.size - kept.size)
     }
 
     /** The graded steps an assignment check draws from. */

@@ -53,6 +53,7 @@ object SnapshotAssembler {
                 id = a.id, version = a.version, teamId = a.teamId, fromName = a.fromName, packIds = a.packIds,
                 targets = targets[a.id].orEmpty().map { AssignmentTarget(it.learnerId, it.lessonsAtSend) },
                 dueDay = a.dueDay, passPct = a.passPct, note = a.note, sentDay = a.sentDay,
+                includeWarmups = a.includeWarmups,
             )
         }.sortedWith(compareBy({ it.sentDay }, { it.id }))
 

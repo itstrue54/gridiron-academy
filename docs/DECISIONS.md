@@ -96,3 +96,19 @@ with a token scoped to one learner (`learner_id` claim) minted at linking by an 
 function. Team membership has a status the coach can't set: the parent (or a teen) approves
 through `set_membership`, which refuses a child without consent on file. The consent
 method itself (VPC vendor) is still a legal decision.
+
+## ADR-010: A prerequisite below the learner's level counts as known (2026-10-19)
+
+**Context.** Assignment warm-ups (SPEC 7.4) add lessons for prerequisites a learner hasn't
+mastered. "Mastered" is strict (several right first tries on two days), and the answer
+log only began with save schema 2, so a Level 6 quarterback, or anyone whose progress
+predates the log, showed as missing Level 1 to 3 basics and got warm-ups for them.
+
+**Decision.** A prerequisite is known if it's mastered, or if it's first taught at a level
+below the learner's current level. Warm-ups cover only basics at or above where the
+learner is, capped at four lessons, with the rest counted in the preview.
+
+**Consequences.** Experienced players get no busywork; a beginner assigned an advanced
+pack still gets the nearest basics first, and the coach sees how many more exist and the
+"more than two levels above" warning. If passing a level ever stops implying its basics
+(test-outs are already gated by an 80% Checkpoint), this rule would need revisiting.

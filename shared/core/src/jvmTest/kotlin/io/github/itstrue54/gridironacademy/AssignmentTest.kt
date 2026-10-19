@@ -42,7 +42,8 @@ class AssignmentTest {
 
     @Test fun `combined packs keep curriculum order without duplicates`() {
         val tampa = content.pack("def-43-tampa")!!
-        val ids = AssignmentPlanner.plan(listOf(tampa, coverage), content, emptyMap(), 4).stops.mapNotNull { it.lessonId }
+        // Warm-ups go first by design; the pack lessons themselves follow the curriculum.
+        val ids = AssignmentPlanner.plan(listOf(tampa, coverage), content, emptyMap(), 4).stops.filter { it.kind == StopKind.LESSON }.mapNotNull { it.lessonId }
         assertEquals(ids.distinct(), ids)
         assertEquals(content.lessons.map { it.id }.filter { it in ids }, ids)
     }
@@ -70,5 +71,48 @@ class AssignmentTest {
         assertEquals(AssignmentStatus.DONE, st(111, ev = listOf(pass)))
         assertEquals(AssignmentStatus.BEHIND, st(111, ev = listOf(fail)))
         assertEquals(1f, AssignmentProgress.fraction(a, "l1", full, listOf(pass)))
+    }
+}
+
+class WarmupTest {
+    private val content = ContentLoader.load(ClasspathContentSource())
+    private val coverage = content.pack("def-coverage-0-4")!!
+    private val disguise = content.pack("def-disguise-rotations")!!
+    private fun mastered(cs: Collection<String>) = cs.associateWith { ConceptMastery(it, MasteryState.MASTERED, 100, 5, 1) }
+
+    @Test fun `a new learner gets warm-ups for missing basics, first and capped`() {
+        val plan = AssignmentPlanner.plan(listOf(disguise), content, emptyMap(), 1, io.github.itstrue54.gridironacademy.model.Track.KID)
+        assertTrue(plan.warmups in 1..AssignmentRules.MAX_WARMUP_LESSONS)
+        assertTrue(plan.warmupsLeftOut > 0, "a Level 7 pack for a beginner leaves basics out and says so")
+        val kinds = plan.stops.map { it.kind }
+        assertEquals(kinds.sortedBy { it.ordinal }, kinds, "warm-ups, then lessons, then games, then the check")
+        // Warm-ups come from the learner's own track.
+        assertTrue(plan.stops.filter { it.kind == StopKind.WARMUP }.all { s ->
+            content.levelOfLesson(s.lessonId!!)!!.track != io.github.itstrue54.gridironacademy.model.Track.ADULT
+        })
+    }
+
+    @Test fun `mastered basics need no warm-up, and the switch turns them off`() {
+        val basics = content.graph.prerequisites(content.conceptsOf(coverage))
+        val plan = AssignmentPlanner.plan(listOf(coverage), content, mastered(basics), 4)
+        assertEquals(0, plan.warmups)
+        val off = AssignmentPlanner.plan(listOf(coverage), content, emptyMap(), 4, includeWarmups = false)
+        assertEquals(0, off.warmups)
+        assertEquals(0, off.warmupsLeftOut)
+    }
+
+    @Test fun `a player past the basics' levels gets no warm-ups for them`() {
+        // Cover 0-4 builds on Levels 1-3; a Level 6 player is past all of it.
+        val plan = AssignmentPlanner.plan(listOf(coverage), content, emptyMap(), 6, io.github.itstrue54.gridironacademy.model.Track.ADULT)
+        assertEquals(0, plan.warmups)
+        assertEquals(0, plan.warmupsLeftOut)
+    }
+
+    @Test fun `warm-ups count toward the plan and never repeat a pack lesson`() {
+        val plan = AssignmentPlanner.plan(listOf(coverage), content, emptyMap(), 1, io.github.itstrue54.gridironacademy.model.Track.ADULT)
+        assertTrue(plan.warmups > 0)
+        val ids = plan.stops.mapNotNull { it.lessonId }
+        assertEquals(ids.distinct(), ids)
+        assertEquals(plan.stops.count { it.kind == StopKind.LESSON || it.kind == StopKind.WARMUP }, plan.lessons)
     }
 }

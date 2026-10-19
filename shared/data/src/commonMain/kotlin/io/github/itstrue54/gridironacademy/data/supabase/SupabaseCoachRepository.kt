@@ -98,6 +98,7 @@ class SupabaseCoachRepository(
                 put("pass_pct", draft.passPct)
                 put("note", draft.note)
                 put("sent_day", today())
+                put("include_warmups", draft.includeWarmups)
                 putJsonArray("targets") {
                     draft.targets.forEach { t ->
                         addJsonObject { put("learner_id", t.learnerId); put("lessons_at_send", t.lessonsAtSend) }

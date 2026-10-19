@@ -37,6 +37,18 @@ class Content(
     }
 
     fun lesson(id: String): Lesson? = lessonById[id]
+
+    val graph: ConceptGraph by lazy { ConceptGraph(glossary.entries) }
+
+    /** The lowest level number of any lesson that teaches [concept]; null if none does. */
+    fun firstTaughtLevel(concept: String): Int? = firstLevelByConcept[concept]
+    private val firstLevelByConcept by lazy {
+        val m = mutableMapOf<String, Int>()
+        curriculum.levels.forEach { lv ->
+            unitsOf(lv).forEach { u -> u.lessons.forEach { l -> conceptsOf(l).forEach { c -> m[c] = minOf(m[c] ?: lv.number, lv.number) } } }
+        }
+        m
+    }
     fun pack(id: String): SchemePack? = packs.firstOrNull { it.id == id }
 
     /** The concept a step teaches, for folding attempts into mastery. */

@@ -45,6 +45,8 @@ data class AssignDraft(
     val dueInDays: Int? = DEFAULT_DUE_DAYS,
     val passPct: Int = AssignmentRules.DEFAULT_PASS_PCT,
     val note: String = "",
+    /** "Include warm-ups for missing basics" (DESIGN 14.4), on by default (SPEC 7.4). */
+    val includeWarmups: Boolean = true,
 ) {
     val noteOk: Boolean get() = NoteRules.problems(note).isEmpty()
     val canContinue: Boolean get() = when (step) {
@@ -129,7 +131,7 @@ class CoachAppState(
         if (sending) return
         val d = draft
         val packs = d.packIds.mapNotNull { content.pack(it) }
-        val a = dashboard.draft(packs, d.learnerIds, d.dueInDays?.let { today + it }, d.passPct, d.note, d.teamId)
+        val a = dashboard.draft(packs, d.learnerIds, d.dueInDays?.let { today + it }, d.passPct, d.note, d.teamId, d.includeWarmups)
         sending = true
         scope.launch {
             val result = repository.send(a)

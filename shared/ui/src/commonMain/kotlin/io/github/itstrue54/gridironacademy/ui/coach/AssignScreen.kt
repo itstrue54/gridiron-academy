@@ -187,6 +187,19 @@ private fun OptionsStep(state: CoachAppState) {
                 colors = SliderDefaults.colors(thumbColor = c.gold, activeTrackColor = c.gold),
             )
         }
+        item {
+            Row(
+                Modifier.fillMaxWidth().toggleable(d.includeWarmups, role = Role.Switch, onValueChange = { v -> state.edit { it.copy(includeWarmups = v) } }),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Column(Modifier.weight(1f)) {
+                    Text(stringResource(Res.string.include_warmups), style = Gridiron.type.answer, color = c.ink)
+                    Text(stringResource(Res.string.include_warmups_body), style = Gridiron.type.label, color = c.inkDim)
+                }
+                Switch(checked = d.includeWarmups, onCheckedChange = null,
+                    colors = SwitchDefaults.colors(checkedTrackColor = c.gold, checkedThumbColor = c.onGold))
+            }
+        }
         item { SectionTitle(stringResource(Res.string.note)) }
         item {
             val problems = NoteRules.problems(d.note)
@@ -216,7 +229,7 @@ private fun PreviewStep(state: CoachAppState, dash: CoachDashboard) {
     val c = Gridiron.colors
     val d = state.draft
     val packs = d.packIds.mapNotNull { state.content.pack(it) }
-    val plans = dash.preview(packs, d.learnerIds)
+    val plans = dash.preview(packs, d.learnerIds, d.includeWarmups)
     LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         item {
             Card {
@@ -228,18 +241,26 @@ private fun PreviewStep(state: CoachAppState, dash: CoachDashboard) {
                 }
             }
         }
-        items(plans, key = { it.first.id }) { (l, plan) -> PlanRow(l, plan.lessons, plan.minutes, plan.wellAboveLevel) }
+        items(plans, key = { it.first.id }) { (l, plan) -> PlanRow(l, plan) }
     }
 }
 
 @Composable
-private fun PlanRow(l: LinkedLearner, lessons: Int, minutes: Int, warn: Boolean) {
+private fun PlanRow(l: LinkedLearner, plan: io.github.itstrue54.gridironacademy.progress.AssignmentPlan) {
     val c = Gridiron.colors
+    val warn = plan.wellAboveLevel
     Card(edge = if (warn) c.retry else null) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             Monogram(l.nickname, size = 36.dp)
             Column(Modifier.weight(1f)) {
-                Text(stringResource(Res.string.plan_line, l.nickname, lessons, minutes), style = Gridiron.type.answer, color = c.ink)
+                Text(
+                    if (plan.warmups > 0) pluralStringResource(Res.plurals.plan_line_warmups, plan.warmups, l.nickname, plan.warmups, plan.lessons - plan.warmups, plan.minutes)
+                    else stringResource(Res.string.plan_line, l.nickname, plan.lessons, plan.minutes),
+                    style = Gridiron.type.answer, color = c.ink,
+                )
+                if (plan.warmupsLeftOut > 0) {
+                    Text(pluralStringResource(Res.plurals.warmups_left_out, plan.warmupsLeftOut, plan.warmupsLeftOut), style = Gridiron.type.label, color = c.inkDim)
+                }
                 if (warn) {
                     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                         GlyphIcon(Glyph.DASH, c.retry, size = 14.dp)
