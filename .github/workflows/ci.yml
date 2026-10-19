@@ -1,0 +1,66 @@
+# Every push to main and every pull request (AGENTS.md: "CI fails on these").
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  kotlin:
+    name: Engine, content, UI and both apps
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - uses: gradle/actions/setup-gradle@v4
+      # core: content validation, determinism check and the common-only compile run with
+      # jvmTest (SPEC 11.5). ui: headless screen renders. The iOS targets are declared
+      # but can't link on Linux; Gradle skips them here until the M5 macOS runner.
+      - name: Test
+        run: ./gradlew :shared:core:jvmTest :shared:data:jvmTest :shared:ui:jvmTest --continue
+      - name: Build the learner and coach apps
+        run: ./gradlew :androidApp-learner:assembleDebug :androidApp-coach:assembleDebug
+      - name: Keep the screen renders for review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screen-renders
+          path: |
+            shared/ui/build/screen-renders/
+            shared/ui/build/coach-renders/
+          if-no-files-found: ignore
+      - name: Keep test reports on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports
+          path: shared/*/build/reports/tests/
+
+  backend:
+    name: Supabase schema and row-level security
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+      - run: npm ci
+      - run: npm test
