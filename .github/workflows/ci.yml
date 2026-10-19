@@ -1,6 +1,7 @@
 # Every push to main and every pull request (AGENTS.md: "CI fails on these").
 name: CI
 
+# Runners are pinned: ubuntu-latest moves to Ubuntu 26 from 2026-10-19.
 on:
   push:
     branches: [main]
@@ -16,7 +17,7 @@ permissions:
 jobs:
   kotlin:
     name: Engine, content, UI and both apps
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
@@ -50,7 +51,7 @@ jobs:
 
   backend:
     name: Supabase schema and row-level security
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     defaults:
       run:
