@@ -23,6 +23,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import io.github.itstrue54.gridironacademy.engine.Rng
+import io.github.itstrue54.gridironacademy.model.Track
 import io.github.itstrue54.gridironacademy.progress.AgeBand
 import io.github.itstrue54.gridironacademy.ui.app.LearnerAppState
 import io.github.itstrue54.gridironacademy.ui.app.LearnerPlatform
@@ -118,6 +119,8 @@ fun GrownUpZoneScreen(state: LearnerAppState, platform: LearnerPlatform) {
     var name by remember(profile.nickname) { mutableStateOf(profile.nickname) }
     var note by remember { mutableStateOf<String?>(null) }
     var confirmImport by remember { mutableStateOf(false) }
+    /** An age that moves the profile to the other track waits for a yes. */
+    var pendingBand by remember { mutableStateOf<AgeBand?>(null) }
     val saved = stringResource(Res.string.backup_saved)
     val notSaved = stringResource(Res.string.backup_not_saved)
     val restored = stringResource(Res.string.backup_restored)
@@ -147,7 +150,8 @@ fun GrownUpZoneScreen(state: LearnerAppState, platform: LearnerPlatform) {
             FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 AgeBand.entries.forEach { band ->
                     FilterChip(
-                        selected = profile.ageBand == band, onClick = { state.changeAgeBand(band) },
+                        selected = profile.ageBand == band,
+                        onClick = { if (state.trackChangeFor(band) == null) state.changeAgeBand(band) else pendingBand = band },
                         label = { Text(band.label, style = Gridiron.type.body) },
                         colors = FilterChipDefaults.filterChipColors(selectedContainerColor = c.gold, selectedLabelColor = c.onGold, labelColor = c.ink),
                     )
@@ -184,6 +188,27 @@ fun GrownUpZoneScreen(state: LearnerAppState, platform: LearnerPlatform) {
             Text(stringResource(Res.string.about_line, platform.appVersion, state.content.curriculum.version),
                 style = Gridiron.type.label, color = c.inkDim)
         }
+    }
+    pendingBand?.let { band ->
+        val change = state.trackChangeFor(band)
+        if (change == null) { pendingBand = null; return@let }
+        val toKid = change.to == Track.KID
+        AlertDialog(
+            onDismissRequest = { pendingBand = null },
+            title = { Text(stringResource(Res.string.track_change_title, profile.nickname)) },
+            text = {
+                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Text(stringResource(if (toKid) Res.string.track_change_to_kid else Res.string.track_change_to_adult, profile.nickname, band.label))
+                    Text(stringResource(Res.string.track_change_early, change.earlyLevelsNew, change.earlyPassedNew))
+                    if (change.earlyPassedOld > 0) Text(stringResource(Res.string.track_change_kept, change.earlyPassedOld))
+                    Text(stringResource(if (change.sharedOpen) Res.string.track_change_shared_open else Res.string.track_change_shared_closed))
+                }
+            },
+            confirmButton = {
+                TextButton(onClick = { state.changeAgeBand(band); pendingBand = null }) { Text(stringResource(Res.string.track_change_confirm)) }
+            },
+            dismissButton = { TextButton(onClick = { pendingBand = null }) { Text(stringResource(Res.string.cancel)) } },
+        )
     }
     if (confirmImport) {
         AlertDialog(

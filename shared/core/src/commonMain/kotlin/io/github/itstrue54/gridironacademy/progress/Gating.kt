@@ -59,3 +59,44 @@ object Gating {
         return recordTest(level, skipped, pct)
     }
 }
+
+/**
+ * What changing a profile's track does, so the grown-up zone can say so before it
+ * happens. Each track has its own Levels 1 to 3; the shared levels from 4 up are the
+ * same on both and stay as they are.
+ */
+data class TrackChange(
+    val from: Track,
+    val to: Track,
+    /** Early levels passed on the track being left (they stay recorded, just not shown). */
+    val earlyPassedOld: Int,
+    /** Early levels already passed on the new track. */
+    val earlyPassedNew: Int,
+    /** Early levels on the new track. */
+    val earlyLevelsNew: Int,
+    /** Shared levels (4+) passed; they carry over unchanged. */
+    val sharedPassed: Int,
+    /** Whether Level 4 is open now; switching never closes it. */
+    val sharedOpen: Boolean,
+)
+
+object TrackSwitch {
+    fun preview(
+        levels: List<Level>,
+        p: Progress,
+        from: Track,
+        to: Track,
+    ): TrackChange {
+        fun on(t: Track) = levels.filter { it.track == t }
+        val shared = on(Track.SHARED)
+        return TrackChange(
+            from = from,
+            to = to,
+            earlyPassedOld = on(from).count { it.id in p.levelsPassed },
+            earlyPassedNew = on(to).count { it.id in p.levelsPassed },
+            earlyLevelsNew = on(to).size,
+            sharedPassed = shared.count { it.id in p.levelsPassed },
+            sharedOpen = shared.minByOrNull { it.number }?.let { Gating.levelUnlocked(it, p) } ?: false,
+        )
+    }
+}

@@ -25,6 +25,8 @@ import io.github.itstrue54.gridironacademy.progress.DailyPractice
 import io.github.itstrue54.gridironacademy.progress.GlossaryQuiz
 import io.github.itstrue54.gridironacademy.progress.LevelReport
 import io.github.itstrue54.gridironacademy.progress.ProgressReport
+import io.github.itstrue54.gridironacademy.progress.TrackChange
+import io.github.itstrue54.gridironacademy.progress.TrackSwitch
 import io.github.itstrue54.gridironacademy.data.migration.SaveTooNew
 import io.github.itstrue54.gridironacademy.progress.Practice
 import io.github.itstrue54.gridironacademy.progress.Gating
@@ -362,6 +364,13 @@ class LearnerAppState(
     fun changeAgeBand(band: AgeBand) {
         val p = profile ?: return
         commit(save.copy(profile = p.copy(ageBand = band)))
+    }
+
+    /** What changing to [band] would do to the track, or null if the track stays the same. */
+    fun trackChangeFor(band: AgeBand): TrackChange? {
+        val from = profile?.ageBand?.track ?: return null
+        if (band.track == from) return null
+        return TrackSwitch.preview(content.curriculum.levels, save.progress, from, band.track)
     }
 
     fun progressReport(): List<LevelReport> =

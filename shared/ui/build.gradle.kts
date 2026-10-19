@@ -49,6 +49,9 @@ kotlin {
         }
         jvmTest.dependencies {
             implementation(compose.desktop.currentOs)
+            // Drives real screens in tests: type, tap, read what's shown.
+            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+            implementation(compose.uiTest)
             implementation(project.dependencies.platform(libs.jupiter.bom))
             runtimeOnly("org.junit.platform:junit-platform-launcher")
         }

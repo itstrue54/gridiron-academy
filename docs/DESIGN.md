@@ -584,6 +584,13 @@ updates** (current content version and rule season), **Privacy** (a plain statem
 "Nothing about this player leaves this device unless a parent links it in the Coach
 app." Once linked: what is shared and with whom), **About**.
 
+The gate and the zone use the **Coach app's look** (Adult skin in Film Room colours,
+following the phone; section 14) on every profile, kid or adult: the person there is a
+parent, and the change of look tells a child they've left their part of the app.
+Changing the age to one on the other track first shows what will happen: that track's
+Levels 1 to 3 and how many are passed there, that the early levels passed on the current
+track are kept, and that Level 4 and up stay as they are.
+
 There is **no Purchases screen** in the learner app (spec 5.3). Where a paid level
 would be, the learner sees "Ask a grown-up" with no price; the grown-up zone explains
 that plans are managed in the Coach app.

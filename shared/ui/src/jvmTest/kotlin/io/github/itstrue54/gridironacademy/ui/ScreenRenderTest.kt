@@ -104,6 +104,7 @@ class ScreenRenderTest {
         shot("42-grown-up-gate") { LearnerApp(kid, dark = false) }
         kid.enterGrownUpZone()
         shot("43-grown-up-zone", height = 3000) { LearnerApp(kid, dark = false) }
+        shot("44-grown-up-zone-dark") { LearnerApp(kid, dark = true) }
     }
 
     @Test fun homeWithPracticeDue() {

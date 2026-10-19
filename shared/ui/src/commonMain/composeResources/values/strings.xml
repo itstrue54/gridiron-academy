@@ -343,6 +343,14 @@
     <string name="privacy_statement">Nothing about this player leaves this device unless a parent links it in the Coach app. There are no ads and no tracking.</string>
     <string name="zone_about">About</string>
     <string name="about_line">Gridiron Academy %1$s · lessons version %2$d</string>
+    <string name="track_change_title">Change %1$s's lessons?</string>
+    <string name="track_change_to_kid">At %2$s, %1$s moves to the kids' lessons: simpler words, bigger pictures, read-aloud.</string>
+    <string name="track_change_to_adult">At %2$s, %1$s moves to the teen and adult lessons: the same football, in more depth.</string>
+    <string name="track_change_early">Levels 1 to 3 have their own lessons on that track: %2$d of %1$d passed there so far.</string>
+    <string name="track_change_kept">The %1$d early levels passed on the current track are kept and come back if you switch again.</string>
+    <string name="track_change_shared_open">Level 4 and up stay open, with all their progress.</string>
+    <string name="track_change_shared_closed">Level 4 and up are the same on both tracks.</string>
+    <string name="track_change_confirm">Change lessons</string>
     <plurals name="players_count">
         <item quantity="one">%1$d player</item>
         <item quantity="other">%1$d players</item>
