@@ -16,7 +16,11 @@ import io.github.itstrue54.gridironacademy.model.Lesson
 import io.github.itstrue54.gridironacademy.model.Level
 import io.github.itstrue54.gridironacademy.model.Step
 import io.github.itstrue54.gridironacademy.model.Track
+import io.github.itstrue54.gridironacademy.data.migration.SaveMigrations
 import io.github.itstrue54.gridironacademy.progress.AgeBand
+import io.github.itstrue54.gridironacademy.progress.AttemptContext
+import io.github.itstrue54.gridironacademy.progress.AttemptEvent
+import io.github.itstrue54.gridironacademy.progress.Attempts
 import io.github.itstrue54.gridironacademy.progress.Gating
 import io.github.itstrue54.gridironacademy.progress.LearnerSave
 import io.github.itstrue54.gridironacademy.progress.Profile
@@ -97,15 +101,50 @@ class InMemoryLearnerStore(private var saved: LearnerSave? = null) : LearnerStor
  *
  * @param today the current epoch day, from the platform clock. Passed in so tests can
  *   pick the day and `core` stays clock-free.
+ * @param nowMillis epoch milliseconds, for attempt times and time spent.
+ * @param newId a fresh unique id (the device's, the profile's), from the platform.
  */
 @Stable
 class LearnerAppState(
     val content: Content,
     private val store: LearnerStore,
+    nowMillis: (() -> Long)? = null,
+    private val newId: () -> String = { "local" },
+    // Last, so `LearnerAppState(content, store) { day }` keeps reading as "today is day".
     private val today: () -> Long,
 ) {
-    var save: LearnerSave by mutableStateOf(store.load() ?: LearnerSave())
+    /** Epoch millis; tests that don't care get the start of [today]. */
+    private val now: () -> Long = nowMillis ?: { today() * MILLIS_PER_DAY }
+
+    var save: LearnerSave by mutableStateOf(SaveMigrations.withIds(store.load() ?: LearnerSave(), newId))
         private set
+
+    /**
+     * Answers graded since the last save. They go to disk with the lesson or gate result,
+     * or when the learner leaves part-way: an answer counts even if the lesson doesn't.
+     */
+    private val pending = mutableListOf<AttemptEvent>()
+
+    private fun recorder(context: AttemptContext) = { step: Step, grade: Grade, answer: Answer, firstTry: Boolean, ms: Long ->
+        if (Grader.isGraded(step)) {
+            pending += AttemptEvent(
+                learnerId = save.learnerId,
+                deviceId = save.deviceId,
+                seq = save.nextSeq + pending.size,
+                stepId = step.id,
+                context = context,
+                pct = grade.credit,
+                firstTry = firstTry,
+                answer = Attempts.answerText(step, answer),
+                msSpent = ms.coerceIn(0, Int.MAX_VALUE.toLong()).toInt(),
+                epochDay = today(),
+                at = now(),
+            )
+        }
+    }
+
+    /** Attempts waiting to be saved; for tests. */
+    val unsavedAttempts: Int get() = pending.size
 
     var backStack: List<Screen> by mutableStateOf(listOf(if (save.profile == null) Screen.Welcome else Screen.Home))
         private set
@@ -128,7 +167,8 @@ class LearnerAppState(
     fun lessonControllerOrNull(levelId: String, lessonId: String): LessonController? =
         activeLesson?.takeIf { it.first == lessonId }?.second
             ?: if (screen == Screen.LessonPlay(levelId, lessonId)) {
-                LessonController(lesson(levelId, lessonId).steps).also { activeLesson = lessonId to it }
+                LessonController(lesson(levelId, lessonId).steps, now = now, onGraded = recorder(AttemptContext.LESSON))
+                    .also { activeLesson = lessonId to it }
             } else null
 
     fun lessonController(levelId: String, lessonId: String): LessonController =
@@ -157,7 +197,8 @@ class LearnerAppState(
     fun checkpointControllerOrNull(levelId: String, testOut: Boolean): LessonController? =
         gate(Screen.CheckpointPlay(levelId, testOut)) {
             val level = content.level(levelId)
-            LessonController(LevelTest.test(content.unitsOf(level), level.gate, gateSeed(level)), retryMisses = false)
+            LessonController(LevelTest.test(content.unitsOf(level), level.gate, gateSeed(level)), retryMisses = false,
+                now = now, onGraded = recorder(AttemptContext.CHECK))
         }
 
     fun checkpointController(levelId: String, testOut: Boolean): LessonController =
@@ -169,7 +210,8 @@ class LearnerAppState(
     fun speedRoundControllerOrNull(levelId: String): SpeedRoundController? =
         gate(Screen.BigGamePlay(levelId)) {
             val level = content.level(levelId)
-            SpeedRoundController(LevelTest.gamePool(content.unitsOf(level), level.gate, gateSeed(level)), SPEED_ROUND_MILLIS)
+            SpeedRoundController(LevelTest.gamePool(content.unitsOf(level), level.gate, gateSeed(level)), SPEED_ROUND_MILLIS,
+                onGraded = recorder(AttemptContext.GAME))
         }
 
     fun speedRoundController(levelId: String): SpeedRoundController =
@@ -178,7 +220,8 @@ class LearnerAppState(
     fun gameControllerOrNull(levelId: String): LessonController? =
         gate(Screen.BigGamePlay(levelId)) {
             val level = content.level(levelId)
-            LessonController(LevelTest.gamePool(content.unitsOf(level), level.gate, gateSeed(level)), retryMisses = false)
+            LessonController(LevelTest.gamePool(content.unitsOf(level), level.gate, gateSeed(level)), retryMisses = false,
+                now = now, onGraded = recorder(AttemptContext.GAME))
         }
 
     val profile: Profile? get() = save.profile
@@ -235,7 +278,9 @@ class LearnerAppState(
     /** Returns false at the root, so the platform can close the app. */
     fun back(): Boolean {
         if (backStack.size <= 1) return false
-        if (screen is Screen.LessonPlay) activeLesson = null // quitting drops the attempt
+        // Quitting drops the lesson's result, but the answers given still count.
+        if (pending.isNotEmpty()) commit(save)
+        if (screen is Screen.LessonPlay) activeLesson = null
         if (screen is Screen.CheckpointPlay || screen is Screen.BigGamePlay) activeGate = null
         backStack = backStack.dropLast(1)
         return true
@@ -332,9 +377,15 @@ class LearnerAppState(
         backStack = backStack.dropLast(1) + done
     }
 
+    /** Saves [next] with any answers graded since the last save. */
     private fun commit(next: LearnerSave) {
-        save = next
-        store.save(next)
+        val withLog = if (pending.isEmpty()) next else next.copy(
+            attempts = next.attempts + pending,
+            nextSeq = next.nextSeq + pending.size,
+        )
+        pending.clear()
+        save = withLog
+        store.save(withLog)
     }
 
     private companion object {
@@ -342,6 +393,7 @@ class LearnerAppState(
         const val SEED_MIX = 1_000_003L
         /** DESIGN 9.6: a one-minute round. The Untimed option arrives with profile settings. */
         const val SPEED_ROUND_MILLIS = 60_000L
+        const val MILLIS_PER_DAY = 86_400_000L
     }
 }
 
@@ -350,9 +402,16 @@ class LearnerAppState(
  * the source of truth; this mirrors what the screen reads.
  */
 @Stable
-class LessonController(steps: List<Step>, retryMisses: Boolean = true) {
+class LessonController(
+    steps: List<Step>,
+    retryMisses: Boolean = true,
+    private val now: () -> Long = { 0L },
+    /** Told about every submitted answer: the step, its grade, the answer, first try or retry, time on the step. */
+    private val onGraded: ((Step, Grade, Answer, Boolean, Long) -> Unit)? = null,
+) {
     private val session = LessonSession(steps, retryMisses)
     private val seen = mutableSetOf<String>()
+    private var shownAt = now()
 
     var step: Step? by mutableStateOf(session.current)
         private set
@@ -382,8 +441,10 @@ class LessonController(steps: List<Step>, retryMisses: Boolean = true) {
 
     fun submit(a: Answer) {
         val s = step ?: return
-        grade = session.submit(a)
+        val g = session.submit(a)
+        grade = g
         answer = a
+        onGraded?.invoke(s, g, a, s.id !in seen, now() - shownAt)
         total = done + session.remaining
         if (!Grader.isGraded(s)) next()
     }
@@ -399,5 +460,6 @@ class LessonController(steps: List<Step>, retryMisses: Boolean = true) {
         step = session.current
         isRetry = step?.id in seen
         total = done + session.remaining
+        shownAt = now()
     }
 }

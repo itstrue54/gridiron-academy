@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.time.LocalDate
+import java.util.UUID
 
 sealed interface Load {
     data object Loading : Load
@@ -42,8 +43,10 @@ class LearnerViewModel(app: Application) : AndroidViewModel(app) {
                     val content = ContentLoader.load(ClasspathContentSource())
                     val problems = ContentValidator.validate(content)
                     check(problems.isEmpty()) { "content failed validation: ${problems.take(5)}" }
-                    val store = FileLearnerStore(getApplication<Application>().filesDir)
-                    Load.Ready(LearnerAppState(content, store, today = { LocalDate.now().toEpochDay() }))
+                    // Ids are the platform's job (SPEC 8.1): a random UUID per install and per profile.
+                    val newId = { UUID.randomUUID().toString() }
+                    val store = FileLearnerStore(getApplication<Application>().filesDir, newId)
+                    Load.Ready(LearnerAppState(content, store, nowMillis = System::currentTimeMillis, newId = newId) { LocalDate.now().toEpochDay() })
                 }
             } catch (e: Exception) {
                 Log.e(TAG, "lessons failed to load", e)

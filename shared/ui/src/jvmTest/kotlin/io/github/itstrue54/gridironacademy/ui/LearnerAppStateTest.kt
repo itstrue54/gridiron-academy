@@ -6,6 +6,7 @@ import io.github.itstrue54.gridironacademy.engine.Answer
 import io.github.itstrue54.gridironacademy.engine.LessonSession
 import io.github.itstrue54.gridironacademy.model.*
 import io.github.itstrue54.gridironacademy.progress.AgeBand
+import io.github.itstrue54.gridironacademy.progress.AttemptContext
 import io.github.itstrue54.gridironacademy.ui.app.InMemoryLearnerStore
 import io.github.itstrue54.gridironacademy.ui.app.LearnerAppState
 import io.github.itstrue54.gridironacademy.ui.app.LessonController
@@ -119,6 +120,88 @@ class LearnerAppStateTest {
         s.finishLesson(level.id, lesson.id, c.result)
         assertTrue(missed!! in s.save.progress.review, "first-try miss goes to review")
         assertTrue((s.screen as Screen.LessonDone).scorePct < 100)
+    }
+
+    @Test
+    fun everyGradedAnswerIsLoggedWithItsContextTimeAndRetries() {
+        var clock = 1_000_000L
+        var ids = 0
+        val store = InMemoryLearnerStore()
+        val s = LearnerAppState(content, store, nowMillis = { clock }, newId = { "id-${ids++}" }) { 300 }
+        s.createProfile("Sam", AgeBand.AGE_18_PLUS)
+        val (level, lesson) = s.nextLesson()!!
+        s.startLesson(level, lesson)
+        val c = s.lessonController(level.id, lesson.id)
+        var missed: String? = null
+        while (!c.finished) {
+            val step = c.step!!
+            clock += 4_000 // four seconds on every step
+            val answer = if (missed == null && step is MultipleChoice) {
+                missed = step.id
+                Answer.Choice((step.answer + 1) % step.choices.size)
+            } else perfect(step)
+            c.submit(answer)
+            if (!c.finished && c.grade != null) c.next()
+        }
+        s.finishLesson(level.id, lesson.id, c.result)
+
+        val log = store.load()!!.attempts
+        val graded = lesson.steps.count { it !is Learn }
+        assertEquals(graded + 1, log.size, "every graded step once, plus the retry")
+        assertTrue(log.all { it.context == AttemptContext.LESSON && it.epochDay == 300L && it.msSpent == 4_000 })
+        assertEquals((0L until log.size).toList(), log.map { it.seq })
+        assertEquals(listOf("id-0"), log.map { it.deviceId }.distinct())
+        assertEquals(listOf("id-1"), log.map { it.learnerId }.distinct())
+        val tries = log.filter { it.stepId == missed }
+        assertEquals(listOf(true to 0f, false to 1f), tries.map { it.firstTry to it.pct })
+        assertNotNull(tries.first().answer, "the wrong choice is kept for the coach's view")
+        assertEquals(log.size.toLong(), store.load()!!.nextSeq)
+    }
+
+    @Test
+    fun answersCountEvenWhenTheLearnerQuitsPartWay() {
+        val store = InMemoryLearnerStore()
+        val s = LearnerAppState(content, store) { 310 }
+        s.createProfile("Sam", AgeBand.AGE_18_PLUS)
+        val (level, lesson) = s.nextLesson()!!
+        s.startLesson(level, lesson)
+        val c = s.lessonController(level.id, lesson.id)
+        var answered = 0
+        while (answered < 2) {
+            val step = c.step!!
+            c.submit(perfect(step))
+            if (step !is Learn) answered++
+            c.next()
+        }
+        assertEquals(2, s.unsavedAttempts)
+        s.back()
+        assertEquals(2, store.load()!!.attempts.size)
+        assertFalse(store.load()!!.progress.lessonPassed(lesson.id), "the lesson itself doesn't count")
+        assertEquals(0, s.unsavedAttempts)
+    }
+
+    @Test
+    fun gatesLogTheirAnswersAsCheckAndGame() {
+        val store = InMemoryLearnerStore()
+        val s = LearnerAppState(content, store) { 320 }
+        s.createProfile("Leo", AgeBand.AGE_8_9)
+        val level = s.levels.first()
+        passAllDrills(s, level)
+        s.startCheckpoint(level)
+        val test = s.checkpointController(level.id, testOut = false)
+        playPerfect(test)
+        s.finishCheckpoint(level.id, false, test.result)
+        s.back()
+        s.startBigGame(level)
+        val round = s.speedRoundController(level.id)
+        var t = 0L
+        while (!round.over) { t += 1_000; round.tick(t); round.current?.let { round.answer(perfect(it)) } }
+        s.finishSpeedRound(level.id, round)
+        val byContext = store.load()!!.attempts.groupingBy { it.context }.eachCount()
+        assertEquals(level.gate.testQuestions, byContext[AttemptContext.CHECK])
+        assertEquals(round.answered, byContext[AttemptContext.GAME])
+        val seqs = store.load()!!.attempts.map { it.seq }
+        assertEquals(seqs.indices.map { it.toLong() }, seqs, "one unbroken sequence per device")
     }
 
     @Test
