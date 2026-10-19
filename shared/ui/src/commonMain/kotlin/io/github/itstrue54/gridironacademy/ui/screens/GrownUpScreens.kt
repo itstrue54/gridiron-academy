@@ -113,7 +113,9 @@ private fun HoldButton(label: String, enabled: Boolean, onHeld: () -> Unit) {
 fun GrownUpZoneScreen(state: LearnerAppState, platform: LearnerPlatform) {
     val c = Gridiron.colors
     val profile = state.profile ?: return
-    var name by remember { mutableStateOf(profile.nickname) }
+    // Follows the profile: after a restore or a save the box shows the name now in effect,
+    // so "Save name" can't quietly undo a restore (found on the phone).
+    var name by remember(profile.nickname) { mutableStateOf(profile.nickname) }
     var note by remember { mutableStateOf<String?>(null) }
     var confirmImport by remember { mutableStateOf(false) }
     val saved = stringResource(Res.string.backup_saved)
@@ -155,6 +157,7 @@ fun GrownUpZoneScreen(state: LearnerAppState, platform: LearnerPlatform) {
 
             Section(stringResource(Res.string.zone_report))
             Text(stringResource(Res.string.report_minutes, state.minutesThisWeek()), style = Gridiron.type.body, color = c.ink)
+            Text(stringResource(Res.string.report_mastery_note), style = Gridiron.type.label, color = c.inkDim)
             state.progressReport().forEach { r ->
                 Card(edge = if (r.passed) c.correct else null) {
                     Column {
