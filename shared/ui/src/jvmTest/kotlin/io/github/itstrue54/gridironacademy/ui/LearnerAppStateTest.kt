@@ -248,6 +248,37 @@ class LearnerAppStateTest {
     }
 
     @Test
+    fun theGlossaryQuizzesOnlyReachableTermsAndQueuesMisses() {
+        val store = InMemoryLearnerStore()
+        val s = LearnerAppState(content, store) { 700 }
+        s.createProfile("Sam", AgeBand.AGE_18_PLUS)
+        s.openGlossary()
+        assertEquals(Screen.Glossary, s.screen)
+        // Level 4's personnel isn't open to a new adult: no Quiz me, but it says where it's taught.
+        assertEquals(emptyList(), s.quizFor("personnel"))
+        assertEquals(4, s.learnedIn("personnel")!!.first.number)
+        // A Level 1 term is.
+        val concept = content.unitsOf(s.levels.first()).flatMap { it.lessons }.flatMap { it.steps }.first { it !is Learn && it.concept != null }.concept!!
+        val quiz = s.quizFor(concept)
+        assertTrue(quiz.isNotEmpty() && quiz.size <= 5)
+        s.startQuiz(concept)
+        val c = s.quizControllerOrNull(concept)!!
+        var first = true
+        while (!c.finished) {
+            val step = c.step!!
+            val a = if (first && step is MultipleChoice) { first = false; Answer.Choice((step.answer + 1) % step.choices.size) } else perfect(step)
+            c.submit(a); if (!c.finished && c.grade != null) c.next()
+        }
+        s.finishQuiz(concept, c.result)
+        val done = s.screen as Screen.QuizDone
+        assertEquals(concept, done.concept)
+        if (!first) assertTrue(s.save.progress.review.keys.any { k -> quiz.any { it.id == k } }, "a quiz miss becomes a review card")
+        assertEquals(quiz.size, store.load()!!.attempts.size)
+        s.back()
+        assertEquals(Screen.Glossary, s.screen)
+    }
+
+    @Test
     fun learnStepsAdvanceWithoutAGrade() {
         val steps = content.unitsOf(content.level("kid-1")).first().lessons.first().steps
         val c = LessonController(steps)
