@@ -32,6 +32,11 @@ class ConceptGraphTest {
         return ContentValidator.validate(Content(content.curriculum, g, content.unitsByLevel, content.scenes, content.packs))
     }
 
+    @Test fun `the validator catches a prerequisite another one implies`() {
+        val errs = validateWith { if (it.id == "route") it.copy(requires = it.requires + "receivers") else it }
+        assertTrue(errs.any { "requires 'receivers', which 'pass-play' already needs" in it }, errs.joinToString())
+    }
+
     @Test fun `the validator catches a cycle`() {
         val errs = validateWith { if (it.id == "down") it.copy(requires = it.requires + "fourth-down") else it }
         assertTrue(errs.any { "concept cycle" in it }, errs.joinToString())

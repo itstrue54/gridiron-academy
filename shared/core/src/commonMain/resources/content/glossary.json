@@ -5,7 +5,8 @@
       "term": "Field",
       "kid": "The football field is 100 yards long, with an end zone at each end.",
       "full": "100 yards between the goal lines, plus a 10-yard end zone at each end; 53 1/3 yards wide.",
-      "level": 1
+      "level": 1,
+      "side": "rules"
     },
     {
       "id": "endzone",
@@ -13,6 +14,7 @@
       "kid": "The place where you score a touchdown.",
       "full": "The 10-yard scoring area beyond each goal line.",
       "level": 1,
+      "side": "rules",
       "requires": [
         "field"
       ]
@@ -23,6 +25,7 @@
       "kid": "Lines painted every 5 yards to show how far the ball has gone.",
       "full": "Field markings every 5 yards, numbered every 10, with the 50-yard line at midfield.",
       "level": 1,
+      "side": "rules",
       "requires": [
         "field"
       ]
@@ -32,28 +35,32 @@
       "term": "Offense",
       "kid": "The team with the ball. It tries to score.",
       "full": "The team in possession, trying to advance the ball and score.",
-      "level": 1
+      "level": 1,
+      "side": "offense"
     },
     {
       "id": "defense",
       "term": "Defense",
       "kid": "The team without the ball. It tries to stop the other team.",
       "full": "The team not in possession, trying to stop the offense and take the ball away.",
-      "level": 1
+      "level": 1,
+      "side": "defense"
     },
     {
       "id": "quarter",
       "term": "Quarter",
       "kid": "One of the 4 parts of a game.",
       "full": "One of four periods of a game; 15 minutes in the NFL and college, 12 in most high schools.",
-      "level": 1
+      "level": 1,
+      "side": "rules"
     },
     {
       "id": "referee",
       "term": "Referee",
       "kid": "The official who makes sure everyone follows the rules.",
       "full": "The lead official; with the rest of the crew enforces the rules and signals calls.",
-      "level": 1
+      "level": 1,
+      "side": "rules"
     },
     {
       "id": "touchdown",
@@ -61,6 +68,7 @@
       "kid": "Getting the ball into the end zone. Worth 6 points!",
       "full": "Possession of the ball in or over the opponent's goal line; 6 points.",
       "level": 1,
+      "side": "offense",
       "requires": [
         "endzone",
         "offense"
@@ -72,6 +80,7 @@
       "kid": "A kick after a touchdown for 1 extra point.",
       "full": "A try after a touchdown: a 1-point kick (NFL: 33 yards, from the 15) .",
       "level": 1,
+      "side": "special",
       "requires": [
         "touchdown"
       ]
@@ -82,6 +91,7 @@
       "kid": "A run or pass after a touchdown for 2 points.",
       "full": "A try from the 2-yard line (NFL) worth 2 points instead of the kick's 1.",
       "level": 1,
+      "side": "offense",
       "requires": [
         "extra-point"
       ]
@@ -92,6 +102,7 @@
       "kid": "A kick through the posts. Worth 3 points.",
       "full": "A placekick through the uprights; 3 points.",
       "level": 1,
+      "side": "special",
       "requires": [
         "endzone",
         "special-teams"
@@ -103,6 +114,7 @@
       "kid": "When the defense tackles the offense in its own end zone. Worth 2 points.",
       "full": "A 2-point score for the defense when the ball carrier is down in his own end zone, among other situations.",
       "level": 1,
+      "side": "defense",
       "requires": [
         "endzone",
         "tackle"
@@ -114,6 +126,7 @@
       "kid": "One of the offense's 4 tries to go 10 yards.",
       "full": "One play in a series of four; the offense must gain 10 yards in four downs to earn a new series.",
       "level": 1,
+      "side": "offense",
       "requires": [
         "offense"
       ]
@@ -124,6 +137,7 @@
       "kid": "When the offense goes 10 yards and gets 4 new tries.",
       "full": "The first play of a new series, earned by gaining the necessary yardage.",
       "level": 1,
+      "side": "offense",
       "requires": [
         "down",
         "yard-line"
@@ -135,6 +149,7 @@
       "kid": "How many tries are left and how far you still need to go.",
       "full": "The situation: which down it is and how many yards remain for a first down (e.g. 3rd and 4).",
       "level": 1,
+      "side": "offense",
       "requires": [
         "first-down"
       ]
@@ -145,6 +160,7 @@
       "kid": "The last try. Punt, kick, or go for it.",
       "full": "The last down; teams punt, kick a field goal or go for it depending on the situation.",
       "level": 1,
+      "side": "offense",
       "requires": [
         "down-and-distance"
       ]
@@ -155,6 +171,7 @@
       "kid": "A long kick to give the ball to the other team.",
       "full": "A kick dropped and kicked before it hits the ground, usually on 4th down, to improve field position.",
       "level": 1,
+      "side": "special",
       "requires": [
         "fourth-down",
         "special-teams"
@@ -166,6 +183,7 @@
       "kid": "The center passes the ball back to start the play.",
       "full": "The backward pass from the center that begins each down.",
       "level": 1,
+      "side": "offense",
       "requires": [
         "line-of-scrimmage"
       ]
@@ -176,6 +194,7 @@
       "kid": "The QB hands the ball to a runner.",
       "full": "A direct exchange of the ball from the quarterback to another back.",
       "level": 1,
+      "side": "offense",
       "requires": [
         "quarterback",
         "running-back"
@@ -187,6 +206,7 @@
       "kid": "A pass nobody caught. The play is over.",
       "full": "A forward pass that hits the ground or goes out of bounds; the ball returns to the previous spot.",
       "level": 1,
+      "side": "offense",
       "requires": [
         "quarterback",
         "receivers"
@@ -198,6 +218,7 @@
       "kid": "Bringing the runner to the ground.",
       "full": "Stopping a ball carrier by bringing him to the ground; in flag football, pulling the flag.",
       "level": 1,
+      "side": "defense",
       "requires": [
         "defense"
       ]
@@ -208,6 +229,7 @@
       "kid": "When the defense takes the ball away.",
       "full": "A change of possession by interception or fumble recovery (or on downs).",
       "level": 1,
+      "side": "defense",
       "requires": [
         "offense",
         "defense"
@@ -219,6 +241,7 @@
       "kid": "When a defender catches the QB's pass.",
       "full": "A forward pass caught by a defender, giving his team possession.",
       "level": 1,
+      "side": "defense",
       "requires": [
         "turnover",
         "quarterback"
@@ -230,6 +253,7 @@
       "kid": "When the runner drops the ball.",
       "full": "A loose ball after a carrier loses possession; either team may recover.",
       "level": 1,
+      "side": "defense",
       "requires": [
         "turnover"
       ]
@@ -240,6 +264,7 @@
       "kid": "The leader of the offense. Throws passes and hands off.",
       "full": "The player who takes the snap and throws or hands off the ball; calls the offense's plays on the field.",
       "level": 1,
+      "side": "offense",
       "requires": [
         "offense"
       ]
@@ -250,6 +275,7 @@
       "kid": "Players who catch passes: wide receivers and tight ends.",
       "full": "Wide receivers and tight ends, the primary targets of forward passes.",
       "level": 1,
+      "side": "offense",
       "requires": [
         "offense"
       ]
@@ -260,6 +286,7 @@
       "kid": "The player who runs with the ball.",
       "full": "A back lined up behind or beside the quarterback; carries the ball and catches passes.",
       "level": 1,
+      "side": "offense",
       "requires": [
         "offense"
       ]
@@ -270,6 +297,7 @@
       "kid": "The lineman who snaps the ball.",
       "full": "The middle offensive lineman, who snaps the ball to the quarterback.",
       "level": 1,
+      "side": "offense",
       "requires": [
         "snap",
         "offensive-line"
@@ -281,6 +309,7 @@
       "kid": "Five big players who block.",
       "full": "Five linemen (LT, LG, C, RG, RT) who block for runs and pass protection.",
       "level": 1,
+      "side": "offense",
       "requires": [
         "offense"
       ]
@@ -291,6 +320,7 @@
       "kid": "Linemen rush, linebackers tackle, cornerbacks and safeties guard receivers.",
       "full": "DL rush and stop runs; LB tackle, rush and cover; CB cover receivers; S defend deep and support.",
       "level": 1,
+      "side": "defense",
       "requires": [
         "defense"
       ]
@@ -301,6 +331,7 @@
       "kid": "A game with no tackling. You pull a flag.",
       "full": "A non-contact variant where defenders pull a flag from the ball carrier's belt.",
       "level": 1,
+      "side": "rules",
       "requires": [
         "tackle"
       ]
@@ -311,6 +342,7 @@
       "kid": "A broken rule, shown by a yellow flag.",
       "full": "A foul called by officials, enforced by yardage and sometimes loss of down.",
       "level": 1,
+      "side": "rules",
       "requires": [
         "referee"
       ]
@@ -321,6 +353,7 @@
       "kid": "Moving too early on offense.",
       "full": "An offensive player moving illegally before the snap: 5 yards.",
       "level": 1,
+      "side": "rules",
       "requires": [
         "penalty",
         "snap"
@@ -331,7 +364,8 @@
       "term": "Special teams",
       "kid": "Kicking plays: kickoffs, punts, field goals.",
       "full": "The units that handle kickoffs, punts, field goals and returns.",
-      "level": 1
+      "level": 1,
+      "side": "special"
     },
     {
       "id": "line-of-scrimmage",
@@ -339,6 +373,7 @@
       "kid": "The imaginary line where the ball is.",
       "full": "The line parallel to the goal lines through the ball's forward point; teams are on opposite sides at the snap.",
       "level": 1,
+      "side": "rules",
       "requires": [
         "yard-line"
       ]
@@ -349,6 +384,7 @@
       "kid": "A player allowed to catch a forward pass.",
       "full": "QB, RB, WR and TE by number and position; linemen are ineligible downfield.",
       "level": 1,
+      "side": "offense",
       "requires": [
         "receivers",
         "line-of-scrimmage"
@@ -360,6 +396,7 @@
       "kid": "The clock for each quarter. It stops for some things.",
       "full": "Stops on incompletions, out of bounds, timeouts and most penalties; first downs do not stop it in the NFL.",
       "level": 1,
+      "side": "rules",
       "requires": [
         "quarter"
       ]
@@ -370,6 +407,7 @@
       "kid": "The timer for how fast the offense must snap.",
       "full": "40 seconds (25 after some stoppages); delay of game is 5 yards.",
       "level": 1,
+      "side": "rules",
       "requires": [
         "game-clock"
       ]
@@ -380,6 +418,7 @@
       "kid": "An automatic timeout at 2:00 in each half.",
       "full": "An automatic stoppage at 2:00 of the second and fourth quarters.",
       "level": 1,
+      "side": "rules",
       "requires": [
         "game-clock"
       ]
@@ -390,6 +429,7 @@
       "kid": "When a ball stops in the end zone. The team starts at the 20.",
       "full": "A dead ball in the end zone after a punt, or an interception there: placed at the 20.",
       "level": 1,
+      "side": "special",
       "requires": [
         "endzone",
         "special-teams"
@@ -401,6 +441,7 @@
       "kid": "The mix of players on the field, named by two digits.",
       "full": "Number of RBs then TEs; WRs fill the remaining skill spots. 11 = 1 RB, 1 TE, 3 WR.",
       "level": 4,
+      "side": "offense",
       "requires": [
         "formation"
       ]
@@ -411,6 +452,7 @@
       "kid": "A defense with five defensive backs.",
       "full": "A sub package of 4 DL, 2 LB, 5 DB (a 4-2-5), the usual answer to 11 personnel.",
       "level": 4,
+      "side": "defense",
       "requires": [
         "defense-positions"
       ]
@@ -421,6 +463,7 @@
       "kid": "One safety deep in the middle.",
       "full": "A single-high safety look; Cover 1 and Cover 3 are the usual coverages from it.",
       "level": 3,
+      "side": "defense",
       "requires": [
         "safety-position"
       ]
@@ -431,6 +474,7 @@
       "kid": "Two safeties deep, split.",
       "full": "Two-high safeties; Cover 2, Cover 4 and Cover 6 live here.",
       "level": 3,
+      "side": "defense",
       "requires": [
         "safety-position"
       ]
@@ -441,6 +485,7 @@
       "kid": "Hiding what the defense will really do.",
       "full": "Showing a look pre-snap that differs from the coverage or pressure actually played.",
       "level": 3,
+      "side": "defense",
       "requires": [
         "mofc",
         "mofo"
@@ -452,6 +497,7 @@
       "kid": "Safeties moving after the snap.",
       "full": "Post-snap movement of safeties (and sometimes corners) into the final coverage.",
       "level": 7,
+      "side": "defense",
       "requires": [
         "disguise"
       ]
@@ -462,6 +508,7 @@
       "kid": "A long kick that starts each half and comes after touchdowns and field goals.",
       "full": "A free kick from the kicking team's 35 (NFL) that starts each half and follows touchdowns and field goals. Since 2024 the NFL uses a format with the coverage team aligned close to the returners.",
       "level": 2,
+      "side": "special",
       "requires": [
         "special-teams"
       ]
@@ -472,6 +519,7 @@
       "kid": "The player who catches a kick and runs it back.",
       "full": "The receiving team's player who fields a kickoff or punt and returns it.",
       "level": 2,
+      "side": "special",
       "requires": [
         "kickoff"
       ]
@@ -482,6 +530,7 @@
       "kid": "A short kick the kicking team tries to get back.",
       "full": "A short kickoff the kicking team may recover after it travels 10 yards (or is touched by the receiving team). In the NFL it must be declared in advance.",
       "level": 2,
+      "side": "special",
       "requires": [
         "kickoff"
       ]
@@ -492,6 +541,7 @@
       "kid": "Wave one arm, catch the ball, and nobody may tackle you.",
       "full": "The returner signals by extending and waving one arm overhead; he may not be hit and may not advance the ball after the catch.",
       "level": 2,
+      "side": "special",
       "requires": [
         "punt",
         "kick-returner"
@@ -503,8 +553,8 @@
       "kid": "How referees show what happened, using their arms.",
       "full": "Standard arm signals: both arms up for a score, arm forward for a first down, arms crossed in front for an incomplete pass, and many more for each foul.",
       "level": 2,
+      "side": "rules",
       "requires": [
-        "referee",
         "penalty"
       ]
     },
@@ -514,6 +564,7 @@
       "kid": "A defender is across the line when the ball is snapped.",
       "full": "A defender in the neutral zone at the snap: 5 yards. Contact before the snap is encroachment.",
       "level": 2,
+      "side": "rules",
       "requires": [
         "penalty",
         "line-of-scrimmage"
@@ -525,6 +576,7 @@
       "kid": "Grabbing a player to stop them.",
       "full": "Illegally restricting an opponent with the hands or arms. Offensive holding is 10 yards; defensive holding is 5 yards and an automatic first down in the NFL.",
       "level": 2,
+      "side": "rules",
       "requires": [
         "penalty",
         "offensive-line"
@@ -536,6 +588,7 @@
       "kid": "Stopping a catch by pushing or grabbing.",
       "full": "Illegal contact that restricts a player's chance to catch a forward pass once it is in the air. NFL defensive PI is a spot foul with an automatic first down; offensive PI is 10 yards.",
       "level": 2,
+      "side": "rules",
       "requires": [
         "penalty",
         "receivers"
@@ -547,6 +600,7 @@
       "kid": "The play clock runs out before the snap.",
       "full": "Failing to snap the ball before the play clock expires (and some other delays): 5 yards.",
       "level": 2,
+      "side": "rules",
       "requires": [
         "penalty",
         "play-clock"
@@ -558,6 +612,7 @@
       "kid": "A break that stops the clock.",
       "full": "A stoppage a team calls to stop the clock. NFL teams get three per half; youth and flag leagues vary.",
       "level": 2,
+      "side": "rules",
       "requires": [
         "game-clock"
       ]
@@ -568,6 +623,7 @@
       "kid": "The ball is handed off and carried forward.",
       "full": "A play in which the ball is advanced by running, usually after a handoff or pitch from the quarterback.",
       "level": 2,
+      "side": "offense",
       "requires": [
         "handoff"
       ]
@@ -578,6 +634,7 @@
       "kid": "The quarterback throws the ball to a receiver.",
       "full": "A play built around a forward pass to an eligible receiver.",
       "level": 2,
+      "side": "offense",
       "requires": [
         "quarterback",
         "receivers"
@@ -589,6 +646,7 @@
       "kid": "Shows the score, the time and the down.",
       "full": "Displays the score, quarter, game clock, timeouts, down, distance and the ball's yard line.",
       "level": 2,
+      "side": "rules",
       "requires": [
         "down-and-distance",
         "quarter"
@@ -600,6 +658,7 @@
       "kid": "Where the offense lines up before the snap.",
       "full": "The alignment of the 11 offensive players, named mostly by the backfield (I, singleback, shotgun, pistol, empty) and receiver sets (twins, trips, bunch).",
       "level": 2,
+      "side": "offense",
       "requires": [
         "offense",
         "line-of-scrimmage"
@@ -611,6 +670,7 @@
       "kid": "A fullback and a tailback lined up behind the quarterback.",
       "full": "Quarterback under center with a fullback and tailback aligned in a line behind him: a power-running formation.",
       "level": 2,
+      "side": "offense",
       "requires": [
         "formation",
         "running-back"
@@ -622,6 +682,7 @@
       "kid": "One running back behind the quarterback.",
       "full": "Quarterback under center with a single running back about 7 yards deep; also called Ace.",
       "level": 2,
+      "side": "offense",
       "requires": [
         "formation",
         "running-back"
@@ -633,6 +694,7 @@
       "kid": "The quarterback stands a few yards back to get the snap.",
       "full": "Quarterback aligned about 5 yards behind the center, usually with a back beside him, for a better view and more time to throw.",
       "level": 2,
+      "side": "offense",
       "requires": [
         "formation",
         "quarterback"
@@ -644,6 +706,7 @@
       "kid": "The quarterback is a few yards back with the runner right behind him.",
       "full": "Quarterback about 4 yards deep with the running back directly behind, combining a downhill run game with shotgun vision.",
       "level": 2,
+      "side": "offense",
       "requires": [
         "shotgun"
       ]
@@ -654,6 +717,7 @@
       "kid": "No running backs: everyone spreads out to catch.",
       "full": "A formation with no backs besides the quarterback, usually five receivers.",
       "level": 2,
+      "side": "offense",
       "requires": [
         "formation"
       ]
@@ -664,6 +728,7 @@
       "kid": "A player who isn't allowed to catch a forward pass.",
       "full": "Interior linemen (NFL numbers 50 to 79) may not catch a forward pass unless they report as eligible and align at an eligible spot; they may not go more than a yard downfield before a pass beyond the line.",
       "level": 2,
+      "side": "offense",
       "requires": [
         "eligible-receiver"
       ]
@@ -674,6 +739,7 @@
       "kid": "One player moving before the snap.",
       "full": "One offensive player may be moving at the snap, parallel to or away from the line of scrimmage.",
       "level": 2,
+      "side": "offense",
       "requires": [
         "formation",
         "snap"
@@ -685,6 +751,7 @@
       "kid": "Players changing spots before the snap.",
       "full": "Offensive players changing positions before the snap; afterwards all must be set for a full second.",
       "level": 2,
+      "side": "offense",
       "requires": [
         "motion"
       ]
@@ -695,6 +762,7 @@
       "kid": "A defender bumps a receiver too far downfield before the pass.",
       "full": "NFL: contact by a defender beyond 5 yards from the line before the ball is thrown; 5 yards and an automatic first down.",
       "level": 2,
+      "side": "rules",
       "requires": [
         "pass-interference"
       ]
@@ -705,6 +773,7 @@
       "kid": "Hitting the quarterback after he throws.",
       "full": "Late, high or full-weight hits on a passer: 15 yards and an automatic first down.",
       "level": 2,
+      "side": "rules",
       "requires": [
         "penalty",
         "quarterback"
@@ -716,6 +785,7 @@
       "kid": "An extra, dangerous hit.",
       "full": "Excessive or late contact, such as hitting a player who is down or out of bounds: 15 yards.",
       "level": 2,
+      "side": "rules",
       "requires": [
         "penalty"
       ]
@@ -726,6 +796,7 @@
       "kid": "A college rule against hits to the head.",
       "full": "College football foul for forcible contact to the head or neck area, or with the crown of the helmet: 15 yards and an ejection after review.",
       "level": 2,
+      "side": "rules",
       "requires": [
         "unnecessary-roughness"
       ]
@@ -736,6 +807,7 @@
       "kid": "A coach asks for a play to be looked at again.",
       "full": "An NFL coach's request, by red flag, for a replay review. Two per game, a third if both succeed; a lost challenge costs a timeout.",
       "level": 2,
+      "side": "rules",
       "requires": [
         "replay-review"
       ]
@@ -746,6 +818,7 @@
       "kid": "Officials watch video to check a call.",
       "full": "Video review of a play. Scoring plays and turnovers are reviewed automatically; late in halves and in overtime, the replay booth starts reviews.",
       "level": 2,
+      "side": "rules",
       "requires": [
         "referee"
       ]
@@ -756,6 +829,7 @@
       "kid": "Extra time when the game is tied.",
       "full": "An extra period played when regulation ends tied. NFL rules change over time; content states the season it describes.",
       "level": 2,
+      "side": "rules",
       "requires": [
         "quarter"
       ]
@@ -766,6 +840,7 @@
       "kid": "The name of the play the team will run.",
       "full": "The huddle call: formation, motion, the play itself and the snap count, worded differently in each system.",
       "level": 2,
+      "side": "offense",
       "requires": [
         "run-play",
         "pass-play"
@@ -777,6 +852,7 @@
       "kid": "Changing the play at the line.",
       "full": "A change of play called at the line of scrimmage after reading the defense.",
       "level": 2,
+      "side": "offense",
       "requires": [
         "play-call"
       ]
@@ -787,6 +863,7 @@
       "kid": "Throwing the ball at the ground to stop the clock.",
       "full": "An intentional incompletion right after the snap to stop the clock; it costs a down.",
       "level": 2,
+      "side": "offense",
       "requires": [
         "incomplete",
         "game-clock"
@@ -798,6 +875,7 @@
       "kid": "The quarterback kneels to keep the clock running.",
       "full": "Ending a play immediately with a kneel to run the clock safely, usually when protecting a lead.",
       "level": 2,
+      "side": "offense",
       "requires": [
         "game-clock"
       ]
@@ -808,8 +886,8 @@
       "kid": "A real game moment to make a call on.",
       "full": "A decision point defined by down, distance, field position, score, clock and timeouts.",
       "level": 2,
+      "side": "rules",
       "requires": [
-        "down-and-distance",
         "scoreboard"
       ]
     },
@@ -819,6 +897,7 @@
       "kid": "A run that starts one way, then cuts back.",
       "full": "A misdirection run: the back steps away from the play, then cuts back behind pulling linemen.",
       "level": 3,
+      "side": "offense",
       "requires": [
         "run-play",
         "pull-block"
@@ -830,6 +909,7 @@
       "kid": "Two blockers on one defender.",
       "full": "Two linemen combining on one defender to move him, one usually climbing off to a linebacker.",
       "level": 3,
+      "side": "offense",
       "requires": [
         "offensive-line"
       ]
@@ -840,6 +920,7 @@
       "kid": "A run that looks like a pass at first.",
       "full": "The offense shows pass protection to draw the rush upfield, then hands off underneath it.",
       "level": 3,
+      "side": "offense",
       "requires": [
         "run-play",
         "pass-play"
@@ -851,6 +932,7 @@
       "kid": "4 linemen and 3 linebackers.",
       "full": "A front with four down linemen and three linebackers (Will, Mike, Sam); linemen usually attack single gaps.",
       "level": 3,
+      "side": "defense",
       "requires": [
         "defense-positions"
       ]
@@ -861,6 +943,7 @@
       "kid": "Which side of a receiver a defender lines up on.",
       "full": "A defender's alignment inside or outside the receiver, which takes away routes that way and concedes the other side.",
       "level": 3,
+      "side": "defense",
       "requires": [
         "man-coverage"
       ]
@@ -871,6 +954,7 @@
       "kid": "Each defender follows one receiver.",
       "full": "Each defender is assigned a specific receiver and travels with him; usually paired with a free safety (Cover 1) or no deep help (Cover 0).",
       "level": 3,
+      "side": "defense",
       "requires": [
         "defense-positions",
         "receivers"
@@ -882,6 +966,7 @@
       "kid": "A lineman leaves his spot to block elsewhere.",
       "full": "A lineman steps back and runs along the line to block at the point of attack, leading a sweep or kicking out an edge player on a counter or trap.",
       "level": 3,
+      "side": "offense",
       "requires": [
         "offensive-line"
       ]
@@ -892,8 +977,8 @@
       "kid": "The path a receiver runs on a pass play.",
       "full": "The path a receiver runs: a stem upfield, then a break at a set depth and angle, timed to the quarterback's drop.",
       "level": 3,
+      "side": "offense",
       "requires": [
-        "receivers",
         "pass-play"
       ]
     },
@@ -903,6 +988,7 @@
       "kid": "Routes that work together so one defender can't cover both.",
       "full": "Routes paired to stretch a defender high-low or across the field, so the quarterback reads one conflict defender and throws away from him.",
       "level": 3,
+      "side": "offense",
       "requires": [
         "route"
       ]
@@ -913,6 +999,7 @@
       "kid": "A numbered list of routes.",
       "full": "A numbered menu of routes. In one common tree: 1 flat, 2 slant, 3 comeback, 4 curl, 5 out, 6 dig, 7 corner, 8 post, 9 go; odd break outside, even inside. Numbering differs by system.",
       "level": 3,
+      "side": "offense",
       "requires": [
         "route"
       ]
@@ -923,6 +1010,7 @@
       "kid": "The deepest defenders.",
       "full": "The two deepest defenders, free and strong safety. How many sit deep in the middle before the snap is the first clue to the coverage.",
       "level": 3,
+      "side": "defense",
       "requires": [
         "defense-positions"
       ]
@@ -933,6 +1021,7 @@
       "kid": "A short pass with blockers out in front.",
       "full": "Linemen let rushers through, then release downfield to block for a short throw behind the rush.",
       "level": 3,
+      "side": "offense",
       "requires": [
         "pass-play",
         "offensive-line"
@@ -944,6 +1033,7 @@
       "kid": "A run wide around the end.",
       "full": "A perimeter run to the edge, often with pulling linemen leading the back.",
       "level": 3,
+      "side": "offense",
       "requires": [
         "run-play",
         "pull-block"
@@ -955,6 +1045,7 @@
       "kid": "3 linemen and 4 linebackers.",
       "full": "A front with three down linemen (nose and two ends) and four linebackers; the outside linebackers are usually the edge rushers.",
       "level": 3,
+      "side": "defense",
       "requires": [
         "four-three"
       ]
@@ -965,6 +1056,7 @@
       "kid": "Hurrying to score before time runs out.",
       "full": "The offense's hurry-up mode at the end of a half: quick plays, sideline throws, timeouts and spikes to stop the clock.",
       "level": 3,
+      "side": "rules",
       "requires": [
         "two-minute-warning",
         "timeout",
@@ -977,6 +1069,7 @@
       "kid": "Each defender guards an area of the field.",
       "full": "Each defender is responsible for an area and covers whoever enters it, with eyes on the quarterback.",
       "level": 3,
+      "side": "defense",
       "requires": [
         "defense-positions"
       ]
@@ -987,6 +1080,7 @@
       "kid": "A front that covers the center and both guards.",
       "full": "A 0-technique nose and two 3-techniques (the front of the 46 defense), so no interior lineman can release cleanly to a linebacker.",
       "level": 4,
+      "side": "defense",
       "requires": [
         "four-three",
         "technique"
@@ -998,6 +1092,7 @@
       "kid": "Sending extra rushers.",
       "full": "Rushing five or more, typically adding a linebacker or defensive back; stunts (twists) swap linemen's paths instead.",
       "level": 4,
+      "side": "defense",
       "requires": [
         "defense-positions",
         "sack"
@@ -1009,6 +1104,7 @@
       "kid": "Man coverage with no deep safety.",
       "full": "Every defender in coverage plays man with no deep help, usually with extra rushers; beaten by quick throws and hot routes.",
       "level": 4,
+      "side": "defense",
       "requires": [
         "man-coverage",
         "blitz"
@@ -1020,6 +1116,7 @@
       "kid": "Man coverage with one deep safety.",
       "full": "Man coverage underneath with a single free safety in the deep middle, often with a 'rat' or 'robber' defender; attacked with crossers and rubs.",
       "level": 4,
+      "side": "defense",
       "requires": [
         "man-coverage",
         "safety-position"
@@ -1031,6 +1128,7 @@
       "kid": "Two safeties split the deep field in halves.",
       "full": "Two deep halves, corners squat in the flats, five underneath zones; weak in the deep middle and behind the corner (smash).",
       "level": 4,
+      "side": "defense",
       "requires": [
         "zone-coverage",
         "safety-position"
@@ -1042,6 +1140,7 @@
       "kid": "Three defenders each guard a deep third.",
       "full": "Corners and the free safety take deep thirds with four underneath; stressed by four verticals and seam routes.",
       "level": 4,
+      "side": "defense",
       "requires": [
         "zone-coverage",
         "safety-position"
@@ -1053,6 +1152,7 @@
       "kid": "Four defenders each guard a deep quarter.",
       "full": "Corners and safeties take deep quarters, with safeties reading the slot and fitting the run; softer underneath.",
       "level": 4,
+      "side": "defense",
       "requires": [
         "zone-coverage",
         "safety-position"
@@ -1064,6 +1164,7 @@
       "kid": "Groups of coverages that look alike.",
       "full": "Man (Cover 0, 1) and zone (Cover 2, 3, 4) families, each with known weaknesses that pass concepts target.",
       "level": 4,
+      "side": "defense",
       "requires": [
         "man-coverage",
         "zone-coverage"
@@ -1075,6 +1176,7 @@
       "kid": "A curl with a flat route underneath.",
       "full": "A high-low read on the flat defender; with the stick concept, a staple of the quick game.",
       "level": 4,
+      "side": "offense",
       "requires": [
         "route-combination"
       ]
@@ -1085,6 +1187,7 @@
       "kid": "The side the offense leans to.",
       "full": "Usually the tight end's side (run strength); against spread sets, often the side with more receivers (passing strength). Fronts and coverages set to it.",
       "level": 4,
+      "side": "offense",
       "requires": [
         "formation"
       ]
@@ -1095,6 +1198,7 @@
       "kid": "Four receivers go deep.",
       "full": "Four vertical routes, two up the seams, against three or fewer deep defenders.",
       "level": 4,
+      "side": "offense",
       "requires": [
         "route-combination",
         "cover-3"
@@ -1106,6 +1210,7 @@
       "kid": "The spaces between blockers.",
       "full": "Lettered from the center out: A (center-guard), B (guard-tackle), C (tackle-tight end), D (outside the tight end).",
       "level": 4,
+      "side": "offense",
       "requires": [
         "offensive-line"
       ]
@@ -1116,6 +1221,7 @@
       "kid": "A run aimed at one designed hole.",
       "full": "Power, counter, trap and duo: down blocks, kick-outs, pullers or double teams build a specific hole.",
       "level": 4,
+      "side": "offense",
       "requires": [
         "gap",
         "pull-block"
@@ -1127,6 +1233,7 @@
       "kid": "Two shallow crossers passing each other.",
       "full": "Two receivers crossing at shallow depth to create traffic against man coverage and sit in zone holes.",
       "level": 4,
+      "side": "offense",
       "requires": [
         "route-combination",
         "man-coverage"
@@ -1138,6 +1245,7 @@
       "kid": "A gap run with a pulling guard.",
       "full": "Playside down blocks, a kick-out on the end, and the backside guard pulling through the hole for the linebacker.",
       "level": 4,
+      "side": "offense",
       "requires": [
         "gap-run",
         "double-team"
@@ -1149,6 +1257,7 @@
       "kid": "Tackling the quarterback before he throws.",
       "full": "A tackle of the passer behind the line of scrimmage on a pass play; with hits and hurries, part of 'pressure'.",
       "level": 4,
+      "side": "defense",
       "requires": [
         "quarterback",
         "tackle"
@@ -1160,6 +1269,7 @@
       "kid": "A hitch under a corner route.",
       "full": "A high-low on the flat corner: hitch underneath, corner route over him; a classic Cover 2 beater.",
       "level": 4,
+      "side": "offense",
       "requires": [
         "route-combination",
         "cover-2"
@@ -1171,6 +1281,7 @@
       "kid": "A number for where a lineman lines up.",
       "full": "Alignment numbers: 0 head-up center, 1 shade on the center, 2 head-up guard, 3 guard's outside shoulder, 4 head-up tackle, 4i tackle's inside shoulder, 5 tackle's outside shoulder; numbers past 5 differ by system.",
       "level": 4,
+      "side": "defense",
       "requires": [
         "gap"
       ]
@@ -1181,6 +1292,7 @@
       "kid": "Defensive ends lined up very wide.",
       "full": "Ends aligned well outside the tight ends for a running start at the passer, at the cost of wider interior running lanes.",
       "level": 4,
+      "side": "defense",
       "requires": [
         "technique"
       ]
@@ -1191,6 +1303,7 @@
       "kid": "A deep crossing route behind clear-outs.",
       "full": "The Y receiver runs a deep cross behind the linebackers while outside routes clear the deep defenders; a Cover 3 beater.",
       "level": 4,
+      "side": "offense",
       "requires": [
         "route-combination",
         "cover-3"
@@ -1202,6 +1315,7 @@
       "kid": "A run where linemen block areas and the back picks the hole.",
       "full": "Inside and outside zone: linemen step together, combine and climb; the back reads the blocks to hit, bounce or cut back.",
       "level": 4,
+      "side": "offense",
       "requires": [
         "gap",
         "double-team"
@@ -1213,6 +1327,7 @@
       "kid": "Linebackers blitzing through the gaps beside the center.",
       "full": "Double A-gap mugs and cross dogs: linebackers threatening or attacking the interior gaps to collapse the pocket.",
       "level": 5,
+      "side": "defense",
       "requires": [
         "blitz",
         "gap"
@@ -1224,6 +1339,7 @@
       "kid": "A defense with six defensive backs.",
       "full": "Six defensive backs, typically against four receivers or on long passing downs; package names beyond dime vary by staff.",
       "level": 5,
+      "side": "defense",
       "requires": [
         "nickel"
       ]
@@ -1234,6 +1350,7 @@
       "kid": "A five-man blitz with zone coverage behind it.",
       "full": "Five rushers with three deep and three underneath zones, often with a lineman dropping into coverage.",
       "level": 5,
+      "side": "defense",
       "requires": [
         "blitz",
         "zone-coverage"
@@ -1245,6 +1362,7 @@
       "kid": "Plays from just outside the end zone.",
       "full": "Short-yardage situations at the goal line, usually with heavy personnel on both sides.",
       "level": 5,
+      "side": "rules",
       "requires": [
         "red-zone"
       ]
@@ -1255,6 +1373,7 @@
       "kid": "A quick throw when a blitzer is unblocked.",
       "full": "When rushers outnumber blockers, the quarterback throws quickly to a receiver breaking into the space the blitzer left.",
       "level": 5,
+      "side": "offense",
       "requires": [
         "blitz",
         "route"
@@ -1266,6 +1385,7 @@
       "kid": "A receiver running across the formation before the snap.",
       "full": "Jet motion crosses in front of the quarterback at full speed at the snap; orbit motion loops behind him.",
       "level": 5,
+      "side": "offense",
       "requires": [
         "motion"
       ]
@@ -1276,6 +1396,7 @@
       "kid": "Keeping extra players in to block.",
       "full": "Seven or eight blockers with two or three receivers in the route: more time, fewer targets.",
       "level": 5,
+      "side": "offense",
       "requires": [
         "offensive-line",
         "pass-play"
@@ -1287,6 +1408,7 @@
       "kid": "Naming the middle linebacker to set blocking.",
       "full": "The pre-snap identification of a 'Mike' that sets every blocker's assignment in pass protection.",
       "level": 5,
+      "side": "defense",
       "requires": [
         "blitz",
         "four-three"
@@ -1298,9 +1420,9 @@
       "kid": "The quarterback reads a defender instead of blocking him.",
       "full": "Plays that leave one defender unblocked and let the quarterback choose (give, keep, pitch) based on what he does: zone read, speed option, triple option.",
       "level": 5,
+      "side": "offense",
       "requires": [
-        "run-play",
-        "quarterback"
+        "run-play"
       ]
     },
     {
@@ -1309,6 +1431,7 @@
       "kid": "Faking a run before passing.",
       "full": "A run fake that draws linebackers and safeties forward before a pass behind them; includes bootlegs that roll away from the fake.",
       "level": 5,
+      "side": "offense",
       "requires": [
         "run-play",
         "pass-play"
@@ -1320,6 +1443,7 @@
       "kid": "Inside the opponent's 20-yard line.",
       "full": "The area inside the opponent's 20, where the field is compressed and scoring touchdowns rather than field goals decides games.",
       "level": 5,
+      "side": "rules",
       "requires": [
         "endzone",
         "yard-line"
@@ -1331,6 +1455,7 @@
       "kid": "A run play with a quick pass option.",
       "full": "Run-pass option: the line run-blocks while the quarterback reads a conflict defender after the snap and hands off or throws a quick route.",
       "level": 5,
+      "side": "offense",
       "requires": [
         "option",
         "zone-run",
@@ -1343,6 +1468,7 @@
       "kid": "Blitzes that out-number one side or hide who's rushing.",
       "full": "An overload sends more rushers to one side than it can block; a creeper (simulated pressure) rushes four from unexpected spots while dropping a lineman.",
       "level": 5,
+      "side": "defense",
       "requires": [
         "fire-zone"
       ]
@@ -1353,8 +1479,8 @@
       "kid": "The line slides one way to block.",
       "full": "Linemen block zones by sliding together to one side while a back takes the edge rusher on the other.",
       "level": 5,
+      "side": "offense",
       "requires": [
-        "offensive-line",
         "gap"
       ]
     },
@@ -1364,6 +1490,7 @@
       "kid": "How far apart players line up.",
       "full": "The spacing between linemen or receivers; wide splits stretch a defense, tight splits create traffic, rubs and blocking angles.",
       "level": 5,
+      "side": "offense",
       "requires": [
         "formation"
       ]
@@ -1374,6 +1501,7 @@
       "kid": "Snapping the ball fast without a huddle.",
       "full": "No-huddle speed that limits defensive substitution, disguise and complex calls; also a clock tool.",
       "level": 5,
+      "side": "offense",
       "requires": [
         "play-call"
       ]
@@ -1384,6 +1512,7 @@
       "kid": "Hand off or keep, based on one unblocked defender.",
       "full": "Inside zone with the backside end left unblocked; if he crashes on the back, the quarterback keeps; if he stays, the quarterback gives.",
       "level": 5,
+      "side": "offense",
       "requires": [
         "option",
         "zone-run"
@@ -1395,6 +1524,7 @@
       "kid": "How many defenders are near the line.",
       "full": "The number of defenders in the box compared with the offense's blockers; more blockers favours the run, more defenders the pass.",
       "level": 6,
+      "side": "defense",
       "requires": [
         "gap",
         "defense-positions"
@@ -1406,6 +1536,7 @@
       "kid": "Quarters to one side, Cover 2 to the other.",
       "full": "Quarter-quarter-half: quarters to one side of the formation and halves (Cover 2) to the other.",
       "level": 6,
+      "side": "defense",
       "requires": [
         "cover-2",
         "cover-4"
@@ -1417,6 +1548,7 @@
       "kid": "A route the receiver chooses after the snap.",
       "full": "A route that breaks away from man leverage or settles in a zone window, read by both the receiver and the quarterback.",
       "level": 6,
+      "side": "offense",
       "requires": [
         "route",
         "man-coverage",
@@ -1429,6 +1561,7 @@
       "kid": "Zone coverage that turns into man as routes develop.",
       "full": "Zone rules that convert to man once routes declare; quarters (with variations such as palms) is the classic example. Rules and names vary by staff.",
       "level": 6,
+      "side": "defense",
       "requires": [
         "cover-4"
       ]
@@ -1439,6 +1572,7 @@
       "kid": "Rules that differ between the pros and college.",
       "full": "Examples: two feet in for an NFL catch (one in college); NFL runners must be touched down; narrower NFL hash marks; NFL pass interference is a spot foul (college: up to 15 yards).",
       "level": 6,
+      "side": "rules",
       "requires": [
         "penalty"
       ]
@@ -1449,6 +1583,7 @@
       "kid": "The order a quarterback reads his receivers.",
       "full": "The sequence of reads on a pass play: hot (against a blitz), first, second and third reads, then the checkdown.",
       "level": 6,
+      "side": "offense",
       "requires": [
         "route-combination"
       ]
@@ -1459,6 +1594,7 @@
       "kid": "Cover 2 with the middle linebacker running deep.",
       "full": "Cover 2 in which the Mike linebacker carries the deep middle, closing the hole between the safeties.",
       "level": 6,
+      "side": "defense",
       "requires": [
         "cover-2"
       ]
@@ -1469,6 +1605,7 @@
       "kid": "Man coverage with two deep safeties.",
       "full": "Man coverage underneath with two safeties splitting the deep field in halves, letting corners play tight.",
       "level": 6,
+      "side": "defense",
       "requires": [
         "cover-2",
         "man-coverage"
@@ -1480,6 +1617,7 @@
       "kid": "Two defenders on one receiver.",
       "full": "Doubling one receiver with an under and an over defender, often from a normal-looking shell.",
       "level": 7,
+      "side": "defense",
       "requires": [
         "man-coverage",
         "zone-coverage"
@@ -1491,6 +1629,7 @@
       "kid": "Choosing the coverage at the line.",
       "full": "Calling two coverages and picking one at the line from the formation or motion, sometimes with colour codes (red/green) or one-word calls against tempo.",
       "level": 7,
+      "side": "defense",
       "requires": [
         "formation-strength",
         "coverage-family"
@@ -1502,6 +1641,7 @@
       "kid": "A corner pretends to play deep, then jumps a short route.",
       "full": "A corner shows deep-third depth, sinks at the snap to invite an outside throw, then drives on the flat or out with a safety covering deep behind him.",
       "level": 7,
+      "side": "defense",
       "requires": [
         "cover-2",
         "disguise"
@@ -1513,9 +1653,9 @@
       "kid": "The big ideas whole defenses are built on.",
       "full": "Families such as two-high light-box, pattern-match quarters, single-high Cover 3, Tampa 2, the 46, Wide-9 and the 3-3-5, each choosing what to take away and what to give up.",
       "level": 8,
+      "side": "defense",
       "requires": [
         "coverage-family",
-        "four-three",
         "three-four"
       ]
     },
@@ -1525,6 +1665,7 @@
       "kid": "How much a play changed a team's expected points.",
       "full": "Expected points added: expected points after the play minus before it, where expected points come from historical outcomes for each down, distance and field position.",
       "level": 8,
+      "side": "rules",
       "requires": [
         "game-situation"
       ]
@@ -1535,9 +1676,9 @@
       "kid": "Using the clock, field and conditions to win.",
       "full": "Clock decisions, home-field effects, weather (wind matters most for passing and kicking) and other situational choices.",
       "level": 8,
+      "side": "rules",
       "requires": [
         "two-minute-drill",
-        "timeout",
         "fourth-down"
       ]
     },
@@ -1547,6 +1688,7 @@
       "kid": "The big ideas whole offenses are built on.",
       "full": "Families such as West Coast, Air Coryell, Erhardt-Perkins, Air Raid, run-and-shoot, wide-zone play-action and spread/RPO, each built around what it wants to be great at.",
       "level": 8,
+      "side": "offense",
       "requires": [
         "route-tree",
         "zone-run",
@@ -1559,6 +1701,7 @@
       "kid": "How much more a team passes than expected.",
       "full": "Pass rate over expected: actual pass rate minus a model's expected rate for the same down, distance, score and time.",
       "level": 8,
+      "side": "rules",
       "requires": [
         "epa",
         "pass-play"
@@ -1569,7 +1712,8 @@
       "term": "Salary cap",
       "kid": "The limit on what a team can spend on players.",
       "full": "The NFL's hard cap on player spending; rookie contracts are cheap for their value, and released players can leave dead money on the cap.",
-      "level": 8
+      "level": 8,
+      "side": "rules"
     },
     {
       "id": "success-rate",
@@ -1577,6 +1721,7 @@
       "kid": "How often plays keep an offense on schedule.",
       "full": "Usually: 40% of the yards to go on 1st down, 60% on 2nd, 100% on 3rd and 4th. Some analysts use slightly different cut-offs.",
       "level": 8,
+      "side": "rules",
       "requires": [
         "down-and-distance"
       ]

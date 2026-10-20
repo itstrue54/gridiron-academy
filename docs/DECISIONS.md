@@ -112,3 +112,21 @@ learner is, capped at four lessons, with the rest counted in the preview.
 pack still gets the nearest basics first, and the coach sees how many more exist and the
 "more than two levels above" warning. If passing a level ever stops implying its basics
 (test-outs are already gated by an 80% Checkpoint), this rule would need revisiting.
+
+## ADR-011: The Playbook map lays out by depth, one tab per side (2026-10-20)
+
+**Context.** DESIGN 9.14 asks for the concept graph as a vertical skill tree. The graph
+has 152 concepts and 220 links, and some depths hold 17 concepts; a general graph layout
+on a phone is a tangle.
+
+**Decision.** Each glossary term carries a `side` (content). A tab draws only its side:
+a concept's row is one below its deepest same-side prerequisite, a row holds at most four
+nodes (wider depths wrap), and order within a depth follows the prerequisites' positions.
+Cross-side prerequisites are named in the concept's sheet instead of drawn. Lines are
+faint until a node is tapped. The validator forbids a prerequisite that another direct
+prerequisite already implies, so no line is drawn twice.
+
+**Consequences.** The layout is pure, deterministic and tested in core; it needs no graph
+library. Long hub edges (Offense to everything) still cross rows, which is why lines stay
+faint and List mode exists. A side changes only in glossary.json.
+

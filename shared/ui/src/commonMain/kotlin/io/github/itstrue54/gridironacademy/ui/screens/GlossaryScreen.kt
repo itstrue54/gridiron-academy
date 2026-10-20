@@ -45,7 +45,9 @@ fun GlossaryScreen(state: LearnerAppState) {
     Column(Modifier.fillMaxSize().screenBackground().safeDrawingPadding()) {
         Row(Modifier.padding(horizontal = 8.dp), verticalAlignment = Alignment.CenterVertically) {
             IconAction(Glyph.BACK, stringResource(Res.string.back), onClick = { state.back() })
-            Text(stringResource(Res.string.glossary), style = Gridiron.type.headline, color = c.ink, modifier = Modifier.semantics { heading() })
+            Text(stringResource(Res.string.glossary), style = Gridiron.type.headline, color = c.ink,
+                modifier = Modifier.weight(1f).semantics { heading() })
+            IconAction(Glyph.PLAYBOOK, stringResource(Res.string.playbook_map), onClick = state::openPlaybookMap)
         }
         Column(Modifier.padding(horizontal = Gridiron.skin.gutter), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             OutlinedTextField(
@@ -80,7 +82,7 @@ fun GlossaryScreen(state: LearnerAppState) {
 }
 
 @Composable
-private fun TermCard(state: LearnerAppState, e: GlossaryEntry) {
+internal fun TermCard(state: LearnerAppState, e: GlossaryEntry) {
     val c = Gridiron.colors
     val kid = Gridiron.skin.voice == Voice.KID
     var full by rememberSaveable(e.id) { mutableStateOf(false) }

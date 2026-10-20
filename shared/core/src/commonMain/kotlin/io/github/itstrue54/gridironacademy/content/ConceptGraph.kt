@@ -33,6 +33,17 @@ class ConceptGraph(entries: List<GlossaryEntry>) {
     /** Concepts that list [concept] as a prerequisite. */
     fun unlocks(concept: String): List<String> = parents.filterValues { concept in it }.keys.sorted()
 
+    /**
+     * Direct prerequisites another one already implies, as (concept, redundant, via):
+     * "route" needing "receivers" when it needs "pass-play", which needs "receivers".
+     */
+    fun redundant(): List<Triple<String, String, String>> = parents.keys.sorted().flatMap { c ->
+        val direct = requires(c)
+        direct.mapNotNull { r ->
+            direct.firstOrNull { other -> other != r && r in prerequisites(listOf(other)) }?.let { Triple(c, r, it) }
+        }
+    }
+
     /** Any cycle, as the path that closes it; empty when the graph is acyclic. */
     fun cycles(): List<List<String>> {
         val state = mutableMapOf<String, Int>()

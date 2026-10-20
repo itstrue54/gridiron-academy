@@ -68,6 +68,10 @@ object ContentValidator {
             }
         }
         c.graph.cycles().forEach { err("glossary", "concept cycle: ${it.joinToString(" -> ")}") }
+        // Direct parents only (SPEC 4.6): a line the map would draw twice.
+        if (c.graph.cycles().isEmpty()) c.graph.redundant().forEach { (concept, r, via) ->
+            err("glossary $concept", "requires '$r', which '$via' already needs")
+        }
 
         dupes(c.packs.map { it.id }).forEach { err("packs", "duplicate pack id $it") }
         for (p in c.packs) {

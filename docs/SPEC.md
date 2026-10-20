@@ -377,8 +377,10 @@ Each concept id has a per-profile mastery record derived from attempts:
   day. Pure function `Mastery.of(events, conceptId, today)`, deterministic.
 
 **The concept graph** is content: each glossary term lists the terms to know first
-(`requires` in glossary.json, direct parents only; 227 links over the 152 terms). The
-validator rejects an unknown or self prerequisite, any cycle, a prerequisite first taught
+(`requires` in glossary.json, direct parents only; 220 links over the 152 terms) and its
+`side` (offense, defense, special, rules: the Playbook map's tabs). The
+validator rejects an unknown or self prerequisite, any cycle, a prerequisite another
+direct prerequisite already implies (seven were removed), a prerequisite first taught
 at a later level than the concept that needs it, and a glossary `level` that isn't the
 level where the term is first taught (five were wrong and are fixed).
 
@@ -511,8 +513,20 @@ and both definitions. "Taught in Level N: lesson" links to the first lesson on t
 profile's own ladder (kid and adult differ). **Quiz me** draws up to 5 of the term's
 graded steps (`GlossaryQuiz`) only from levels the learner can open, so it never asks
 about something unreachable; misses become review cards and it counts for the streak.
-Every one of the 152 terms is taught by some lesson (tested). The Playbook map waits
-for the concept graph.
+Every one of the 152 terms is taught by some lesson (tested).
+
+**Playbook map built** (map icon on the Glossary): four tabs, Offense, Defense, Special
+teams, Game and rules. Each concept sits one row below its deepest prerequisite on the same
+tab, rows wrap at four across, and lines are faint until a concept is tapped. A
+prerequisite on another tab gets no line; the concept's card names it under "From
+Defense" and the like, one tap away. Search lights matches and moves to the tab that has
+them; **List** shows the same order as rows for TalkBack. Tapping a concept opens its
+glossary card (Quiz me, where it's taught), what to learn first and what it leads to.
+Mastery shows as the DESIGN 8.1 glyphs, with a key. A concept no graded step on the profile's
+own ladder is tagged with shows "Not on your course yet" and is left out of the "N of M
+mastered" count: today about 23 terms on the adult ladder (quarterback, pass play,
+offside...) and about 35 on the kid ladder (formation, shotgun, screen...) are taught in
+prose but never tagged, a content gap to close by tagging steps.
 
 ### 6.8 Offline and multi-device
 Everything works offline. Unlinked progress lives on one device (with manual
