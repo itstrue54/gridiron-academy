@@ -69,6 +69,7 @@ data class AssignmentRow(
     @SerialName("pass_pct") val passPct: Int = 80,
     val note: String = "",
     @SerialName("sent_day") val sentDay: Long,
+    @SerialName("include_warmups") val includeWarmups: Boolean = true,
 )
 
 @Serializable

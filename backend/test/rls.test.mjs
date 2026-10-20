@@ -149,7 +149,12 @@ test('send_assignment is all or nothing', async () => {
   await fails(user(RAY), call, [gulls, 'Coach Ray', ['def-quarters'], null, 80, '', 20000,
     JSON.stringify([{ learner_id: mia }, { learner_id: stranger }])])
   await fails(user(RAY), call, [gulls, 'Coach Ray', ['def-quarters'], null, 80, '', 20000, '[]'], /at least one/)
-  assert.equal((await rows(user(RAY), 'select count(*)::int as n from assignment'))[0].n, before)
+  // Warm-ups default on; a coach can turn them off and it's remembered.
+  const off = (await rows(user(RAY), 'select send_assignment($1, $2, $3, $4, $5, $6, $7, $8, false) as id', [gulls, 'Coach Ray', ['def-quarters'], null, 80, '', 20000,
+    JSON.stringify([{ learner_id: mia }])]))[0].id
+  const flags = await rows(user(RAY), 'select id, include_warmups from assignment where id in ($1, $2)', [ok, off])
+  assert.deepEqual(Object.fromEntries(flags.map(r => [r.id, r.include_warmups])), { [ok]: true, [off]: false })
+  assert.equal((await rows(user(RAY), 'select count(*)::int as n from assignment'))[0].n, before + 1)
 })
 
 test('deleting a child removes all their cloud data', async () => {

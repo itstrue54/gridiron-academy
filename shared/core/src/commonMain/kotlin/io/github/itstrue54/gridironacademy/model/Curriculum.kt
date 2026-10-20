@@ -76,8 +76,10 @@ data class GlossaryEntry(
     /** Plain, short, read-aloud-friendly. */
     val kid: String,
     val full: String,
-    /** Level number where the term is first taught. */
+    /** Level number where the term is first taught (checked against the lessons). */
     val level: Int,
+    /** The concept graph (SPEC 4.6): concepts to know first. Direct parents only. */
+    val requires: List<String> = emptyList(),
 )
 
 @Serializable

@@ -84,7 +84,7 @@ class CoachDashboard(val snapshot: CoachSnapshot, private val content: Content, 
 
     fun line(a: Assignment, learnerId: String): AssignmentLine {
         val learner = snapshot.learner(learnerId)
-        val plan = AssignmentPlanner.plan(packsOf(a), content, mastery(learnerId), learner?.level ?: 1)
+        val plan = AssignmentPlanner.plan(packsOf(a), content, mastery(learnerId), learner?.level ?: 1, learner?.track, a.includeWarmups)
         return AssignmentLine(
             a, learnerId,
             AssignmentProgress.status(a, learnerId, plan, snapshot.assignmentEvents, today),
@@ -147,16 +147,16 @@ class CoachDashboard(val snapshot: CoachSnapshot, private val content: Content, 
     }
 
     /** The per-learner preview before Send (DESIGN 14.4). */
-    fun preview(packs: List<SchemePack>, learnerIds: List<String>): List<Pair<LinkedLearner, AssignmentPlan>> =
+    fun preview(packs: List<SchemePack>, learnerIds: List<String>, includeWarmups: Boolean = true): List<Pair<LinkedLearner, AssignmentPlan>> =
         learnerIds.mapNotNull { snapshot.learner(it) }.map { l ->
-            l to AssignmentPlanner.plan(packs, content, mastery(l.id), l.level)
+            l to AssignmentPlanner.plan(packs, content, mastery(l.id), l.level, l.track, includeWarmups)
         }
 
     /** Turn a draft into what [CoachRepository.send] takes, with each plan's size. */
-    fun draft(packs: List<SchemePack>, learnerIds: List<String>, dueDay: Long?, passPct: Int, note: String, teamId: String?) =
+    fun draft(packs: List<SchemePack>, learnerIds: List<String>, dueDay: Long?, passPct: Int, note: String, teamId: String?, includeWarmups: Boolean = true) =
         Assignment(
             id = "", teamId = teamId, fromName = snapshot.account.displayName, packIds = packs.map { it.id },
-            targets = preview(packs, learnerIds).map { (l, plan) -> AssignmentTarget(l.id, plan.lessons) },
-            dueDay = dueDay, passPct = passPct, note = note.trim(), sentDay = today,
+            targets = preview(packs, learnerIds, includeWarmups).map { (l, plan) -> AssignmentTarget(l.id, plan.lessons) },
+            dueDay = dueDay, passPct = passPct, note = note.trim(), sentDay = today, includeWarmups = includeWarmups,
         )
 }

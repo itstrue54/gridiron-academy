@@ -63,7 +63,7 @@ class DemoCoachRepository(
                 id = "a1", teamId = team.id, fromName = account.displayName, packIds = listOf(coverage.id),
                 targets = members.map { r ->
                     val m = Mastery.forLearner(attempts.getValue(r.id), content::conceptOfStep, today - 6)
-                    AssignmentTarget(r.id, AssignmentPlanner.plan(listOf(coverage), content, m, r.level).lessons)
+                    AssignmentTarget(r.id, AssignmentPlanner.plan(listOf(coverage), content, m, r.level, r.band.track).lessons)
                 },
                 dueDay = today + 3, note = "Know these before Thursday's practice.", sentDay = today - 6,
             )

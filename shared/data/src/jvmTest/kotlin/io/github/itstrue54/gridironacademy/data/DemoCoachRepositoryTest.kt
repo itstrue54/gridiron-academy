@@ -26,7 +26,7 @@ class DemoCoachRepositoryTest {
         val a = s.assignments.single()
         val statuses = a.targets.map { t ->
             val m = Mastery.forLearner(s.attempts.getValue(t.learnerId), content::conceptOfStep, today)
-            val plan = AssignmentPlanner.plan(a.packIds.map { content.pack(it)!! }, content, m, s.learner(t.learnerId)!!.level)
+            val plan = AssignmentPlanner.plan(a.packIds.map { content.pack(it)!! }, content, m, s.learner(t.learnerId)!!.level, s.learner(t.learnerId)!!.track)
             AssignmentProgress.status(a, t.learnerId, plan, s.assignmentEvents, today)
         }.toSet()
         // A demo is only useful if the dashboard shows more than one kind of player.
