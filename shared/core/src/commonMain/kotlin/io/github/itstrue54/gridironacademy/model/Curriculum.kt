@@ -78,6 +78,8 @@ data class GlossaryEntry(
     val full: String,
     /** Level number where the term is first taught (checked against the lessons). */
     val level: Int,
+    /** Which tab of the Playbook map it sits on (DESIGN 9.14). */
+    val side: PackSide,
     /** The concept graph (SPEC 4.6): concepts to know first. Direct parents only. */
     val requires: List<String> = emptyList(),
 )

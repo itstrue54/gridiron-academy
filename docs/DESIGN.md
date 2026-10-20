@@ -640,6 +640,11 @@ Special teams, Rules), MasteryNodes joined by chalk lines to their prerequisites
 pinch-zoomable, with a search field and a list-mode alternative for TalkBack. Tapping a
 node opens its glossary sheet with **Quiz me**.
 
+Built: opened from the Glossary's header. Rows are concept depth, wrapped at four nodes
+so a phone fits a row at 1x; zoom runs 0.5x to 2.5x. Lines are `line` at half strength;
+the tapped node's lines turn gold. The sheet is capped at 55% of the map. Prerequisites
+from another tab are listed in the sheet, not drawn (ADR-011).
+
 ## 10. Motion, haptics, sound
 
 - Motion teaches or confirms; it never decorates. A **correct** answer fills its

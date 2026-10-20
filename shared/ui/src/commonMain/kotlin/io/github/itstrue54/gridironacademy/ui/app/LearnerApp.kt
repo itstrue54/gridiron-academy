@@ -64,6 +64,7 @@ import io.github.itstrue54.gridironacademy.ui.resources.back_home
 import io.github.itstrue54.gridironacademy.ui.resources.back_to_glossary
 import io.github.itstrue54.gridironacademy.ui.lesson.GlossaryQuizScreen
 import io.github.itstrue54.gridironacademy.ui.screens.GlossaryScreen
+import io.github.itstrue54.gridironacademy.ui.screens.PlaybookMapScreen
 import io.github.itstrue54.gridironacademy.ui.screens.GrownUpGateScreen
 import io.github.itstrue54.gridironacademy.ui.screens.GrownUpZoneScreen
 import androidx.compose.runtime.remember
@@ -110,6 +111,7 @@ fun LearnerApp(state: LearnerAppState, dark: Boolean, reducedMotion: Boolean = f
                 Screen.PracticePlay -> PracticeScreen(state)
                 is Screen.PracticeDone -> PracticeDoneScreen(state, screen)
                 Screen.Glossary -> GlossaryScreen(state)
+                Screen.PlaybookMap -> PlaybookMapScreen(state)
                 // For the grown-up whatever the profile: the Coach app's look (DESIGN 9.9).
                 Screen.GrownUpGate -> GridironTheme(skin = Skin.Coach, dark = dark, reducedMotion = reducedMotion) {
                     GrownUpGateScreen(state, seed = remember { state.clockMillis })

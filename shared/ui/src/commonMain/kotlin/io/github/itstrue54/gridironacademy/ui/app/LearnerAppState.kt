@@ -24,6 +24,8 @@ import io.github.itstrue54.gridironacademy.progress.Attempts
 import io.github.itstrue54.gridironacademy.progress.DailyPractice
 import io.github.itstrue54.gridironacademy.progress.GlossaryQuiz
 import io.github.itstrue54.gridironacademy.progress.LevelReport
+import io.github.itstrue54.gridironacademy.progress.ConceptMastery
+import io.github.itstrue54.gridironacademy.progress.Mastery
 import io.github.itstrue54.gridironacademy.progress.ProgressReport
 import io.github.itstrue54.gridironacademy.progress.TrackChange
 import io.github.itstrue54.gridironacademy.progress.TrackSwitch
@@ -76,6 +78,8 @@ sealed interface Screen {
     data object GrownUpZone : Screen
     /** The glossary (DESIGN 9.10) and its "Quiz me" mini-drill. */
     data object Glossary : Screen
+    /** The concept graph as a skill tree (DESIGN 9.14). */
+    data object PlaybookMap : Screen
     data class GlossaryQuizPlay(val concept: String) : Screen
     data class QuizDone(val concept: String, val scorePct: Int, val count: Int) : Screen
     /** The result of a Checkpoint or Big Game, and the level-complete moment. */
@@ -314,6 +318,11 @@ class LearnerAppState(
     private var activeQuiz: Triple<String, List<Step>, LessonController>? = null
 
     fun openGlossary() = go(Screen.Glossary)
+
+    fun openPlaybookMap() = go(Screen.PlaybookMap)
+
+    /** Each answered concept's mastery (SPEC 4.6); a concept missing from it is New. */
+    fun conceptMastery(): Map<String, ConceptMastery> = Mastery.forLearner(save.attempts, content::conceptOfStep, today())
 
     /** Where a term is first taught on this profile's ladder ("Where you learned it"). */
     fun learnedIn(concept: String): Pair<Level, Lesson>? = GlossaryQuiz.firstLesson(content, concept, levels)
