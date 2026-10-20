@@ -325,6 +325,97 @@
           "answer": 0,
           "explanation": "A sharp, sudden cut can leave the defender a step behind.",
           "concept": "man-coverage"
+        },
+        {
+          "type": "learn",
+          "id": "k3-man-06",
+          "title": "Leverage",
+          "body": "Look where the defender stands. If he's inside the receiver, closer to the middle, a route toward the sideline is easier. If he's outside, a route to the middle is easier. That's leverage.",
+          "concept": "leverage"
+        },
+        {
+          "type": "diagram_tap",
+          "id": "k3-man-07",
+          "prompt": "Tap the receiver who has the easier route toward the sideline.",
+          "explanation": "Yes. X's defender stands inside him, guarding the middle, so going toward the sideline is easier.",
+          "targets": [
+            "x"
+          ],
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 12,
+                "y": 0
+              },
+              {
+                "id": "cb1",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": -10.8,
+                "y": 5
+              },
+              {
+                "id": "cb2",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": 13.2,
+                "y": 5
+              }
+            ]
+          },
+          "concept": "leverage"
         }
       ]
     },

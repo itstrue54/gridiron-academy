@@ -11,7 +11,7 @@
           "type": "learn",
           "id": "a2-pi-01",
           "title": "Both have a right to the ball",
-          "body": "Once a forward pass is in the air, the receiver and the defender both have a right to play the ball. Neither may push, grab or cut off the other to stop a catch.",
+          "body": "Once a forward pass is in the air, the receiver and the defender both have a right to play the ball. Neither may push, grab or cut off the other to stop a catch. After any foul, the referee gives the hand signal and announces the foul and the player's number.",
           "concept": "pass-interference"
         },
         {
@@ -70,6 +70,34 @@
           "answer": 0,
           "explanation": "Pushing off to create separation is offensive pass interference: 10 yards.",
           "concept": "pass-interference"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a2-pi-08",
+          "prompt": "How many yards is offensive holding?",
+          "choices": [
+            "10 yards",
+            "5 yards",
+            "15 yards",
+            "Loss of down only"
+          ],
+          "answer": 0,
+          "explanation": "10 yards. Defensive holding is 5 yards plus an automatic first down.",
+          "concept": "holding"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a2-pi-09",
+          "prompt": "After a foul, how does the referee tell everyone what was called?",
+          "choices": [
+            "A hand signal and an announcement",
+            "A red flag",
+            "A long whistle",
+            "It appears only on TV"
+          ],
+          "answer": 0,
+          "explanation": "Every foul has its own hand signal, and the referee announces the foul and the player's number.",
+          "concept": "referee-signal"
         }
       ]
     },
@@ -145,6 +173,20 @@
           ],
           "explanation": "The most dangerous fouls carry the biggest penalties.",
           "concept": "penalty"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a2-protect-07",
+          "prompt": "After the whistle, a defender shoves a ball carrier who is already out of bounds. What is the call?",
+          "choices": [
+            "Unnecessary roughness, 15 yards",
+            "Roughing the passer",
+            "Holding, 10 yards",
+            "No foul after the whistle"
+          ],
+          "answer": 0,
+          "explanation": "Late or extra hits are unnecessary roughness: 15 yards.",
+          "concept": "unnecessary-roughness"
         }
       ]
     },
@@ -209,6 +251,20 @@
           "answer": 0,
           "explanation": "Inside two minutes of each half, reviews come from the replay booth, not the coach.",
           "concept": "replay-review"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a2-replay-07",
+          "prompt": "NFL regular season: the team that gets the ball first in overtime kicks a field goal. What happens?",
+          "choices": [
+            "The other team gets a possession",
+            "The game ends",
+            "Sudden death from the next play",
+            "The game ends in a tie"
+          ],
+          "answer": 0,
+          "explanation": "Both teams get a possession unless the defense scores on the first one. After that, the next score wins.",
+          "concept": "overtime"
         }
       ]
     }

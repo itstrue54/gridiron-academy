@@ -25,7 +25,7 @@
           "type": "learn",
           "id": "a2-special-03",
           "title": "The modern kickoff",
-          "body": "Since 2024 the NFL kickoff lines the coverage players up close to the returners, and nobody moves until the ball lands or is caught. The aim is more returns with fewer high-speed collisions.",
+          "body": "Since 2024 the NFL kickoff lines the coverage players up close to the returners, and nobody moves until the ball lands or is caught. The aim is more returns with fewer high-speed collisions. On a punt, a returner who waves one arm overhead before the catch calls a fair catch: nobody may hit him, he may not run, and his team takes the ball where he caught it.",
           "concept": "kickoff"
         },
         {
@@ -63,6 +63,34 @@
           "answer": true,
           "explanation": "Under the kickoff rules adopted in 2024, onside kicks must be declared in advance.",
           "concept": "onside-kick"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a2-special-07",
+          "prompt": "On a kickoff, what is the kick returner's job?",
+          "choices": [
+            "Catch the kick and run it back",
+            "Hold the ball for the kicker",
+            "Snap the ball",
+            "Block the kicker"
+          ],
+          "answer": 0,
+          "explanation": "The returner fields the kick and tries to gain as many yards as he can.",
+          "concept": "kick-returner"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a2-special-08",
+          "prompt": "A punt returner waves one arm above his head before the catch. What has he signaled?",
+          "choices": [
+            "A fair catch: he won't run, and nobody may hit him",
+            "A timeout",
+            "That he will let it bounce",
+            "A touchback"
+          ],
+          "answer": 0,
+          "explanation": "A fair catch trades the return for safety: his team takes the ball where he caught it.",
+          "concept": "fair-catch"
         }
       ]
     },
@@ -126,6 +154,34 @@
           "answer": true,
           "explanation": "Yes. A spike stops the clock but counts as an incomplete pass.",
           "concept": "spike"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a2-calls-07",
+          "prompt": "The play clock hits zero before the snap. What is the call?",
+          "choices": [
+            "Delay of game, 5 yards",
+            "False start, 5 yards",
+            "Loss of down",
+            "A timeout is charged"
+          ],
+          "answer": 0,
+          "explanation": "Delay of game: 5 yards, and the down is replayed.",
+          "concept": "delay-of-game"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a2-calls-08",
+          "prompt": "Which kind of play usually keeps the game clock running?",
+          "choices": [
+            "A run that ends in bounds",
+            "An incomplete pass",
+            "A spike",
+            "A play that goes out of bounds"
+          ],
+          "answer": 0,
+          "explanation": "A run tackled in bounds keeps the clock going, which is why a team protecting a lead runs the ball.",
+          "concept": "run-play"
         }
       ]
     },
@@ -138,7 +194,7 @@
           "type": "learn",
           "id": "a2-gameday-01",
           "title": "You're the coach",
-          "body": "Each card is a real game moment: down, distance, clock, score and timeouts. Pick the call. \"Best\" is what most modern coaches and win-probability models would choose.",
+          "body": "Each card is a real game moment: down, distance, clock, score and timeouts. Pick the call. \"Best\" is what most modern coaches and win-probability models would choose. Read the scoreboard first: the score, the quarter, the clock, the down and distance, and each team's timeouts.",
           "concept": "game-situation"
         },
         {
@@ -503,6 +559,42 @@
           ],
           "explanation": "Make them use their timeouts, and protect the ball.",
           "concept": "game-clock"
+        },
+        {
+          "type": "true_false",
+          "id": "a2-gameday-13",
+          "statement": "The right call on 4th and 1 can change with the score and the time left.",
+          "answer": true,
+          "explanation": "Correct. Down and distance start the decision; score, clock and timeouts finish it. Together they are the game situation.",
+          "concept": "game-situation"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a2-gameday-14",
+          "prompt": "How many timeouts does each team get per half?",
+          "choices": [
+            "Three",
+            "Two",
+            "Four",
+            "One"
+          ],
+          "answer": 0,
+          "explanation": "Three per half. Unused first-half timeouts don't carry over.",
+          "concept": "timeout"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a2-gameday-15",
+          "prompt": "The scoreboard reads '3rd & 8'. What does that tell you?",
+          "choices": [
+            "Third down, 8 yards to go for a first down",
+            "Third quarter, 8 minutes left",
+            "The ball is on the 8-yard line",
+            "Trailing by 3, 8 plays left"
+          ],
+          "answer": 0,
+          "explanation": "Down and distance: third down, 8 yards still needed.",
+          "concept": "scoreboard"
         }
       ]
     }

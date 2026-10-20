@@ -19,6 +19,16 @@ class GlossaryQuizTest {
         assertEquals(emptyList(), untaught, "terms no lesson teaches")
     }
 
+    @Test fun `every term has a graded step on both ladders, so it can be mastered on either`() {
+        val kidLadder = content.curriculum.levels.filter { it.track != Track.ADULT }
+        for ((name, ladder) in listOf("kid" to kidLadder, "adult" to adultLadder)) {
+            val graded = ladder.flatMap { lv -> content.unitsOf(lv).flatMap { u -> u.lessons.flatMap { it.steps } } }
+                .filter { it !is Learn }.mapNotNull { it.concept }.toSet()
+            // Found on the phone: an adult's "Pass play" could never leave New.
+            assertEquals(emptyList(), content.glossary.entries.map { it.id }.filter { it !in graded }, "$name ladder")
+        }
+    }
+
     @Test fun `first lesson is the earliest on the ladder`() {
         val (lv, lesson) = GlossaryQuiz.firstLesson(content, "personnel", adultLadder)!!
         assertEquals(4, lv.number)

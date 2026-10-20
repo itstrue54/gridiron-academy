@@ -2,7 +2,11 @@ package io.github.itstrue54.gridironacademy.ui
 
 import androidx.compose.ui.test.*
 import io.github.itstrue54.gridironacademy.content.ClasspathContentSource
+import io.github.itstrue54.gridironacademy.content.Content
 import io.github.itstrue54.gridironacademy.content.ContentLoader
+import io.github.itstrue54.gridironacademy.model.Glossary
+import io.github.itstrue54.gridironacademy.model.GlossaryEntry
+import io.github.itstrue54.gridironacademy.model.PackSide
 import io.github.itstrue54.gridironacademy.progress.AgeBand
 import io.github.itstrue54.gridironacademy.ui.app.InMemoryLearnerStore
 import io.github.itstrue54.gridironacademy.ui.app.LearnerApp
@@ -49,12 +53,16 @@ class PlaybookMapUiTest {
 
     @Test
     fun aConceptThisLadderNeverTeachesIsMarkedNotCounted() = runComposeUiTest {
-        val state = map().also { it.openPlaybookMap() }
+        // Shipped content tags every term on both ladders (GlossaryQuizTest), so add one no step teaches.
+        val extra = GlossaryEntry("wildcat", "Wildcat", "A trick set.", "A direct snap to a running back.", level = 1, side = PackSide.OFFENSE)
+        val withExtra = Content(content.curriculum, Glossary(content.glossary.entries + extra), content.unitsByLevel, content.scenes, content.packs)
+        val state = LearnerAppState(withExtra, InMemoryLearnerStore()) { 800 }.also {
+            it.createProfile("Sam", AgeBand.AGE_18_PLUS); it.openGlossary(); it.openPlaybookMap()
+        }
         setContent { LearnerApp(state, dark = false) }
-        // No adult-ladder step is tagged "quarterback" yet, so it can't be mastered here.
-        onNodeWithContentDescription("Quarterback, Not on your course yet").assertExists()
-        val countable = runOnIdle { state.ladderConcepts().count { id -> state.content.glossary.entries.first { it.id == id }.side.name == "OFFENSE" } }
-        onNodeWithText("0 of $countable mastered").assertExists()
+        onNodeWithContentDescription("Wildcat, Not on your course yet").assertExists()
+        val offense = content.glossary.entries.count { it.side == PackSide.OFFENSE }
+        onNodeWithText("0 of $offense mastered").assertExists()
     }
 
     @Test

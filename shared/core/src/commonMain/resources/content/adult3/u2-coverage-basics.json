@@ -843,6 +843,20 @@
           "answer": false,
           "explanation": "Defenses disguise by rotating at the snap. The shell is a strong clue, not a guarantee.",
           "concept": "disguise"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a3-shells-07",
+          "prompt": "Which defenders usually line up deepest, as the last line against a long pass?",
+          "choices": [
+            "The safeties",
+            "The defensive tackles",
+            "The linebackers",
+            "The defensive ends"
+          ],
+          "answer": 0,
+          "explanation": "Safeties play deep, behind the linebackers and corners.",
+          "concept": "safety-position"
         }
       ]
     },

@@ -565,6 +565,255 @@
           "answer": true,
           "explanation": "Yes. The defense drops back for a pass, then the runner takes off.",
           "concept": "draw"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k3-runs-09",
+          "prompt": "What happens on a screen pass?",
+          "choices": [
+            "Defenders are let through, then a short pass goes to a player behind blockers",
+            "The quarterback kneels down",
+            "Every receiver runs deep",
+            "The center punts the ball"
+          ],
+          "answer": 0,
+          "explanation": "Yes. The linemen let the rushers in, then get in front of the catcher to block.",
+          "concept": "screen"
+        },
+        {
+          "type": "learn",
+          "id": "k3-runs-10",
+          "title": "Pulling",
+          "body": "On some runs, a guard leaves his spot at the snap and runs sideways along the line to block in front of the runner. That's called pulling.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -1.2
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -6
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "rb",
+                "points": [
+                  {
+                    "x": 7,
+                    "y": -4
+                  },
+                  {
+                    "x": 10,
+                    "y": 0
+                  },
+                  {
+                    "x": 11,
+                    "y": 6
+                  }
+                ],
+                "kind": "run"
+              },
+              {
+                "playerId": "lg",
+                "points": [
+                  {
+                    "x": 2,
+                    "y": -1.5
+                  },
+                  {
+                    "x": 6.5,
+                    "y": -1
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "rg",
+                "points": [
+                  {
+                    "x": 4,
+                    "y": -1.2
+                  },
+                  {
+                    "x": 8,
+                    "y": 1
+                  }
+                ],
+                "kind": "block"
+              }
+            ],
+            "caption": "Both guards pull on a sweep"
+          },
+          "concept": "pull-block"
+        },
+        {
+          "type": "diagram_tap",
+          "id": "k3-runs-11",
+          "prompt": "Tap the two guards pulling on this sweep.",
+          "explanation": "Yes. Both guards run toward the sideline to block for the runner.",
+          "targets": [
+            "lg",
+            "rg"
+          ],
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -1.2
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -6
+              },
+              {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "rb",
+                "points": [
+                  {
+                    "x": 7,
+                    "y": -4
+                  },
+                  {
+                    "x": 10,
+                    "y": 0
+                  },
+                  {
+                    "x": 11,
+                    "y": 6
+                  }
+                ],
+                "kind": "run"
+              },
+              {
+                "playerId": "lg",
+                "points": [
+                  {
+                    "x": 2,
+                    "y": -1.5
+                  },
+                  {
+                    "x": 6.5,
+                    "y": -1
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "rg",
+                "points": [
+                  {
+                    "x": 4,
+                    "y": -1.2
+                  },
+                  {
+                    "x": 8,
+                    "y": 1
+                  }
+                ],
+                "kind": "block"
+              }
+            ]
+          },
+          "concept": "pull-block"
         }
       ]
     },
@@ -1262,6 +1511,14 @@
           "answer": 0,
           "explanation": "A receiver who catches it near the sideline can step out of bounds, which stops the clock.",
           "concept": "two-minute-drill"
+        },
+        {
+          "type": "true_false",
+          "id": "k3-smarts-07",
+          "statement": "The best play can change with the score and the time left.",
+          "answer": true,
+          "explanation": "Yes. Coaches look at the down, the distance, the score and the clock. All of that together is the game situation.",
+          "concept": "game-situation"
         }
       ]
     }

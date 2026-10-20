@@ -574,6 +574,20 @@
           "answer": 0,
           "explanation": "The draw invites the rush, then runs right past it.",
           "concept": "draw"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a3-runs-07",
+          "prompt": "Which run attacks the edge, often behind pulling guards?",
+          "choices": [
+            "Sweep",
+            "Dive",
+            "Draw",
+            "Quarterback sneak"
+          ],
+          "answer": 0,
+          "explanation": "A sweep runs wide; a dive hits quickly between the tackles.",
+          "concept": "sweep"
         }
       ]
     },

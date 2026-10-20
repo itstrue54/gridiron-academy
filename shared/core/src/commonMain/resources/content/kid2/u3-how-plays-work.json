@@ -453,6 +453,20 @@
           "answer": true,
           "explanation": "Yes. It is the yard line where the next play starts.",
           "concept": "yard-line"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k2-scoreboard-07",
+          "prompt": "What can you read on the scoreboard?",
+          "choices": [
+            "The score, the time and the down",
+            "The weather",
+            "The coach's plays",
+            "Who is hurt"
+          ],
+          "answer": 0,
+          "explanation": "Yes. The scoreboard tells you the score, the quarter, the clock, the down and the timeouts left.",
+          "concept": "scoreboard"
         }
       ]
     }
