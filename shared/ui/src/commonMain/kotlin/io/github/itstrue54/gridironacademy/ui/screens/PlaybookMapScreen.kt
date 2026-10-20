@@ -51,6 +51,7 @@ import io.github.itstrue54.gridironacademy.ui.coach.MasteryGlyph
 import io.github.itstrue54.gridironacademy.ui.coach.masteryWord
 import io.github.itstrue54.gridironacademy.ui.components.Card
 import io.github.itstrue54.gridironacademy.ui.components.Glyph
+import io.github.itstrue54.gridironacademy.ui.components.GlyphIcon
 import io.github.itstrue54.gridironacademy.ui.components.IconAction
 import io.github.itstrue54.gridironacademy.ui.resources.*
 import io.github.itstrue54.gridironacademy.ui.theme.Gridiron
@@ -77,6 +78,8 @@ fun PlaybookMapScreen(state: LearnerAppState) {
     var showKey by rememberSaveable { mutableStateOf(false) }
     val layout = remember(entries, side) { PlaybookMap.layout(entries, side) }
     val mastery = remember(state.save) { state.conceptMastery() }
+    // A concept no step on this ladder teaches can't be mastered here: shown, not counted.
+    val onLadder = remember(state.save.profile) { state.ladderConcepts() }
     fun stateOf(id: String) = mastery[id]?.state ?: MasteryState.NEW
 
     val q = query.trim().lowercase()
@@ -120,9 +123,10 @@ fun PlaybookMapScreen(state: LearnerAppState) {
                     )
                 }
             }
-            val done = layout.nodes.count { stateOf(it.entry.id) == MasteryState.MASTERED }
+            val countable = layout.nodes.filter { it.entry.id in onLadder }
+            val done = countable.count { stateOf(it.entry.id) == MasteryState.MASTERED }
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(stringResource(Res.string.map_progress, done, layout.nodes.size), style = Gridiron.type.label, color = c.inkDim,
+                Text(stringResource(Res.string.map_progress, done, countable.size), style = Gridiron.type.label, color = c.inkDim,
                     modifier = Modifier.weight(1f))
                 TextButton(onClick = { showKey = !showKey }) {
                     Text(stringResource(if (showKey) Res.string.map_key_hide else Res.string.map_key), style = Gridiron.type.label, color = c.link)
@@ -132,10 +136,10 @@ fun PlaybookMapScreen(state: LearnerAppState) {
         }
         BoxWithConstraints(Modifier.fillMaxSize()) {
             val sheetMax = maxHeight * SHEET_SHARE
-            if (listMode) MapList(layout, byId, matches, q.isNotEmpty(), ::stateOf, ::open)
-            else MapCanvas(layout, matches, q.isNotEmpty(), selected, ::stateOf, onTap = { selected = it })
+            if (listMode) MapList(layout, byId, matches, q.isNotEmpty(), onLadder, ::stateOf, ::open)
+            else MapCanvas(layout, matches, q.isNotEmpty(), selected, onLadder, ::stateOf, onTap = { selected = it })
             selected?.let { byId[it] }?.let { e ->
-                ConceptSheet(state, e, entries, layout, stateOf(e.id), Modifier.align(Alignment.BottomCenter).heightIn(max = sheetMax),
+                ConceptSheet(state, e, entries, layout, stateOf(e.id), e.id in onLadder, Modifier.align(Alignment.BottomCenter).heightIn(max = sheetMax),
                     onOpen = ::open, onClose = { selected = null })
             }
         }
@@ -148,6 +152,7 @@ private fun MapCanvas(
     matches: Set<String>,
     searching: Boolean,
     selected: String?,
+    onLadder: Set<String>,
     stateOf: (String) -> MasteryState,
     onTap: (String) -> Unit,
 ) {
@@ -169,12 +174,13 @@ private fun MapCanvas(
         return Offset(axis(t.x, contentW, view.width.toFloat(), centre = true), axis(t.y, contentH, view.height.toFloat(), centre = false))
     }
 
-    // Search: bring the first match into view.
-    LaunchedEffect(matches, view) {
-        val first = layout.nodes.firstOrNull { it.entry.id in matches } ?: return@LaunchedEffect
-        val y = with(density) { (TOP_PAD + rowH * first.row).toPx() } * scale
-        pan = clamp(Offset(pan.x, -y + view.height / 4f), scale)
+    fun show(n: MapNode) {
+        val y = with(density) { (TOP_PAD + rowH * n.row).toPx() } * scale
+        pan = clamp(Offset(pan.x, -y + view.height / 8f), scale)
     }
+    // Search: bring the first match into view. A tapped concept moves above its card.
+    LaunchedEffect(matches, view) { layout.nodes.firstOrNull { it.entry.id in matches }?.let(::show) }
+    LaunchedEffect(selected, view) { selected?.let { layout.byId[it] }?.let(::show) }
 
     Box(
         Modifier.fillMaxSize().clipToBounds().onSizeChanged { view = it }
@@ -227,6 +233,7 @@ private fun MapCanvas(
                     n.entry, stateOf(id),
                     highlighted = id in matches || id == selected,
                     dimmed = searching && id !in matches,
+                    offLadder = id !in onLadder,
                     modifier = Modifier
                         .offset(x = colW * n.x.toFloat(), y = TOP_PAD + rowH * n.row)
                         .width(colW),
@@ -248,11 +255,13 @@ private fun MasteryNode(
     mastery: MasteryState,
     highlighted: Boolean,
     dimmed: Boolean,
+    offLadder: Boolean,
     modifier: Modifier,
     onClick: () -> Unit,
 ) {
     val c = Gridiron.colors
-    val desc = stringResource(Res.string.map_node, entry.term, stringResource(masteryWord(mastery)))
+    val word = stringResource(if (offLadder) Res.string.map_off_course else masteryWord(mastery))
+    val desc = stringResource(Res.string.map_node, entry.term, word)
     Column(
         modifier.alpha(if (dimmed) DIMMED else 1f).clickable(onClick = onClick).padding(horizontal = 2.dp)
             .clearAndSetSemantics { contentDescription = desc },
@@ -262,7 +271,7 @@ private fun MasteryNode(
             Modifier.size(NODE).background(c.surfaceRaised, CircleShape)
                 .border(if (highlighted) 3.dp else 1.dp, if (highlighted) c.gold else c.line, CircleShape),
             contentAlignment = Alignment.Center,
-        ) { MasteryGlyph(mastery, size = GLYPH) }
+        ) { if (!offLadder) MasteryGlyph(mastery, size = GLYPH) else GlyphIcon(Glyph.DASH, c.inkDim, size = GLYPH) }
         // A long word shrinks rather than breaking mid-word ("Quarterbac / k").
         val style = Gridiron.type.label
         val long = entry.term.split(' ', '-').maxOf { it.length } > LONG_WORD
@@ -278,6 +287,7 @@ private fun MapList(
     byId: Map<String, GlossaryEntry>,
     matches: Set<String>,
     searching: Boolean,
+    onLadder: Set<String>,
     stateOf: (String) -> MasteryState,
     onOpen: (String) -> Unit,
 ) {
@@ -293,10 +303,11 @@ private fun MapList(
             val m = stateOf(e.id)
             Card(onClick = { onOpen(e.id) }) {
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                    MasteryGlyph(m, size = 28.dp)
+                    val on = e.id in onLadder
+                    if (on) MasteryGlyph(m, size = 28.dp) else GlyphIcon(Glyph.DASH, c.inkDim, size = 28.dp)
                     Column(Modifier.weight(1f)) {
                         Text(e.term, style = Gridiron.type.answer, color = c.ink)
-                        Text(stringResource(masteryWord(m)), style = Gridiron.type.label, color = c.inkDim)
+                        Text(stringResource(if (on) masteryWord(m) else Res.string.map_off_course), style = Gridiron.type.label, color = c.inkDim)
                         val needs = e.requires.mapNotNull { byId[it]?.term }
                         if (needs.isNotEmpty()) {
                             Text(stringResource(Res.string.map_needs, needs.joinToString()), style = Gridiron.type.label, color = c.inkDim)
@@ -316,6 +327,7 @@ private fun ConceptSheet(
     entries: List<GlossaryEntry>,
     layout: MapLayout,
     mastery: MasteryState,
+    onLadder: Boolean,
     modifier: Modifier,
     onOpen: (String) -> Unit,
     onClose: () -> Unit,
@@ -331,8 +343,8 @@ private fun ConceptSheet(
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            MasteryGlyph(mastery, size = 24.dp)
-            Text(stringResource(masteryWord(mastery)), style = Gridiron.type.label, color = c.inkDim, modifier = Modifier.weight(1f))
+            if (onLadder) MasteryGlyph(mastery, size = 24.dp) else GlyphIcon(Glyph.DASH, c.inkDim, size = 24.dp)
+            Text(stringResource(if (onLadder) masteryWord(mastery) else Res.string.map_off_course), style = Gridiron.type.label, color = c.inkDim, modifier = Modifier.weight(1f))
             IconAction(Glyph.CLOSE, stringResource(Res.string.map_close), onClick = onClose)
         }
         TermCard(state, e)
@@ -367,6 +379,10 @@ private fun Legend() {
                 MasteryGlyph(m, size = 16.dp)
                 Text(stringResource(masteryWord(m)), style = Gridiron.type.label, color = c.inkDim)
             }
+        }
+        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+            GlyphIcon(Glyph.DASH, c.inkDim, size = 16.dp)
+            Text(stringResource(Res.string.map_off_course), style = Gridiron.type.label, color = c.inkDim)
         }
     }
 }

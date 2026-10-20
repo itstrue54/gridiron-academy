@@ -323,6 +323,7 @@
     <string name="map_leads_to">Leads to</string>
     <string name="map_close">Close</string>
     <string name="map_key">Key</string>
+    <string name="map_off_course">Not on your course yet</string>
     <string name="map_key_hide">Hide key</string>
     <string name="map_node">%1$s, %2$s</string>
     <string name="map_progress">%1$d of %2$d mastered</string>

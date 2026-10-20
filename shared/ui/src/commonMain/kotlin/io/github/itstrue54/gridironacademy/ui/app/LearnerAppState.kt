@@ -322,6 +322,10 @@ class LearnerAppState(
     fun openPlaybookMap() = go(Screen.PlaybookMap)
 
     /** Each answered concept's mastery (SPEC 4.6); a concept missing from it is New. */
+    /** Concepts some graded step on this profile's ladder teaches: the ones it can master. */
+    fun ladderConcepts(): Set<String> =
+        levels.flatMap { lv -> content.unitsOf(lv).flatMap { u -> u.lessons.flatMap { content.conceptsOf(it) } } }.toSet()
+
     fun conceptMastery(): Map<String, ConceptMastery> = Mastery.forLearner(save.attempts, content::conceptOfStep, today())
 
     /** Where a term is first taught on this profile's ladder ("Where you learned it"). */

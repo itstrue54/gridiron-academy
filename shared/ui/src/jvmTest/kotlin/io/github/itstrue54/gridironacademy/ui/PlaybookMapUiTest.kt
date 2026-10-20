@@ -48,6 +48,16 @@ class PlaybookMapUiTest {
     }
 
     @Test
+    fun aConceptThisLadderNeverTeachesIsMarkedNotCounted() = runComposeUiTest {
+        val state = map().also { it.openPlaybookMap() }
+        setContent { LearnerApp(state, dark = false) }
+        // No adult-ladder step is tagged "quarterback" yet, so it can't be mastered here.
+        onNodeWithContentDescription("Quarterback, Not on your course yet").assertExists()
+        val countable = runOnIdle { state.ladderConcepts().count { id -> state.content.glossary.entries.first { it.id == id }.side.name == "OFFENSE" } }
+        onNodeWithText("0 of $countable mastered").assertExists()
+    }
+
+    @Test
     fun listModeReadsTheTreeAsRows() = runComposeUiTest {
         val state = map().also { it.openPlaybookMap() }
         setContent { LearnerApp(state, dark = false) }
