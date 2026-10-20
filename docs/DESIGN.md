@@ -219,14 +219,17 @@ with a stroke/fill switch. Mastery states each have their own glyph (section 8.1
 ### 6.3 Art production
 Launcher icon, store art and illustrations are generated with Nano Banana (via the
 `nanobanana` skill) and kept as source in `docs/play-store/assets/source/`.
-`tools/make-icons.py` builds every launcher density and the 512px store icon from
-`icon-source.png`: it shrinks the art onto a larger canvas and continues the art's own
-edges into the margin (stretched, then blurred), so the ball stays inside the adaptive
-icon's 66dp safe circle while the night sky and turf run to the edge (minSdk 26, so
-adaptive icons only). The icon (redrawn 2026-10-15 to match Prime Time, section 2.2) is
-the **gold football with a chalk play (an X and an arrow) in place of laces**, flying
-past a volt-green speed streak through a navy night sky under two stadium floodlights,
-over a rise of turf. The Coach app icon (`coach-icon-source.png`, `make-icons.py coach`) is its sibling: the same night sky, floodlights and turf, with a **gold clipboard carrying a chalk play and a whistle** in place of the ball, so the two sit together on a phone yet never get mistaken for each other. The Kid title
+`tools/make-icons.py` builds every launcher density and the 512px store icon (the
+launcher's visible 72dp, so the subject is as large in the store) from `icon-source.png`.
+Full-bleed art is shrunk onto a larger canvas whose margin continues the art's own edges;
+art already framed for the 108dp layer is used as is (minSdk 26, so adaptive icons only).
+The icons were redrawn on 2026-10-20 to stand out on a home screen: one bold shape, flat
+colour, high contrast. The learner icon is a **volt-green shield badge holding a navy
+football whose laces form a rising arrow**, on a navy-to-royal-blue gradient: "earn your
+badge". The Coach app icon (`coach-icon-source.png`, `make-icons.py coach`) is its
+sibling: a **volt-green clipboard with a chalk play and a whistle** on navy with an orange
+glow, so the two read as a set (volt on navy) but never get mistaken for each other
+(blue against orange, shield against clipboard). The Kid title
 art is Clip in a stadium at golden hour; the Adult title art is a night-game press-box
 view of an empty field under floodlights. Level 0 needs a picture set (ball, two
 teams, end zone, referee, flag belt, helmet, mouthguard, high-five) in the same flat
