@@ -4,10 +4,10 @@
 Usage: python3 tools/make-icons.py [learner|coach]   (from the repo root; needs Pillow)
 
 The source is a full-bleed square. Android adaptive icons crop a 108dp layer to a mask
-and only promise the middle 66dp, so the art is shrunk onto a larger canvas (PAD) to
-keep the ball inside that safe circle. The new margin is filled by stretching the art's
-own edge rows and columns outward and blurring them, so a background with gradients and
-glows (the Prime Time night sky, the turf at the bottom) continues without a seam.
+and only promise the middle 66dp. Art drawn edge to edge is shrunk onto a larger canvas
+(PAD) to keep its subject inside that safe circle; the new margin is filled by stretching
+the art's own edge rows and columns outward and blurring them, so gradients and glows
+continue without a seam. Art already framed for the whole 108dp layer uses a PAD of 1.
 minSdk is 26, so only adaptive icons are needed: one foreground PNG per density, a
 background colour, and the 512px Play Store icon.
 """
@@ -23,9 +23,11 @@ APPS = {
     "coach": (ASSETS / "source/coach-icon-source.png", ROOT / "androidApp-coach/src/main/res", ASSETS / "coach-icon-512.png"),
 }
 
-# Source edge -> canvas edge. At 1.4 the ball (about 0.38 of the source from the centre)
-# lands about 0.27 from the centre of the layer, inside the 0.305 safe radius.
-PAD = 1.4
+# Source edge -> canvas edge. Both sources (2026-10-20) are framed for the full layer: the
+# shield and the clipboard reach about 0.28 from the centre, inside the 0.305 safe radius.
+PAD = {"learner": 1.0, "coach": 1.0}
+# The part of the 108dp layer a launcher shows; the store icon is that same view.
+VISIBLE = 72 / 108
 DENSITIES = {"mdpi": 1, "hdpi": 1.5, "xhdpi": 2, "xxhdpi": 3, "xxxhdpi": 4}
 
 
@@ -57,7 +59,8 @@ def main():
     app = sys.argv[1] if len(sys.argv) > 1 else "learner"
     SOURCE, RES, STORE = APPS[app]
     src = Image.open(SOURCE).convert("RGB")
-    canvas = extend(src, round(src.width * PAD))
+    side = round(src.width * PAD[app])
+    canvas = extend(src, side) if side > src.width else src
 
     for name, scale in DENSITIES.items():
         px = round(108 * scale)
@@ -85,9 +88,12 @@ def main():
     for name in ("ic_launcher.xml", "ic_launcher_round.xml"):
         (RES / "mipmap-anydpi-v26" / name).write_text(adaptive)
 
-    # Play Store: 512px, 32-bit PNG, full bleed (Play applies its own rounded mask).
+    # Play Store: 512px, 32-bit PNG, full bleed (Play applies its own rounded mask), showing
+    # what a launcher shows, so the subject is as big in the store as on the phone.
     STORE.parent.mkdir(parents=True, exist_ok=True)
-    src.resize((512, 512), Image.LANCZOS).convert("RGBA").save(STORE, optimize=True)
+    cut = round(canvas.width * (1 - VISIBLE) / 2)
+    view = canvas.crop((cut, cut, canvas.width - cut, canvas.width - cut))
+    view.resize((512, 512), Image.LANCZOS).convert("RGBA").save(STORE, optimize=True)
     print(app, "icons written; background", hexcolor)
 
 
