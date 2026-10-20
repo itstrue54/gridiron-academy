@@ -5,6 +5,7 @@ import io.github.itstrue54.gridironacademy.model.DiagramPlayer
 import io.github.itstrue54.gridironacademy.model.DiagramZone
 import io.github.itstrue54.gridironacademy.model.PathKind
 import io.github.itstrue54.gridironacademy.model.Pt
+import io.github.itstrue54.gridironacademy.model.Side
 import kotlin.math.hypot
 import kotlin.math.max
 import kotlin.math.min
@@ -60,6 +61,15 @@ data class FieldZoom(val scale: Float = 1f, val panX: Float = 0f, val panY: Floa
     fun apply(t: FieldTransform): FieldTransform =
         t.copy(scale = t.scale * scale, offsetX = t.offsetX * scale + panX, offsetY = t.offsetY * scale + panY)
 }
+
+enum class Edge { LEFT, RIGHT, TOP, BOTTOM }
+
+/**
+ * Players out of view while zoomed, shown as one marker on the nearest edge (DESIGN 7.10):
+ * the learner can zoom in on the line and still know the corner is out there, and which way
+ * to pan. [along] is the marker's position along that edge, in canvas pixels.
+ */
+data class EdgeMarker(val edge: Edge, val along: Float, val side: Side, val labels: List<String>)
 
 /** Pure layout maths for [FieldDiagram] (DESIGN §7.1), kept out of Compose so it is unit-tested. */
 object FieldGeometry {
@@ -122,6 +132,44 @@ object FieldGeometry {
     fun window(vararg diagrams: Diagram): FieldWindow {
         val ws = diagrams.map { window(it) }
         return FieldWindow(ws.minOf { it.xMin }, ws.maxOf { it.xMax }, ws.minOf { it.yMin }, ws.maxOf { it.yMax })
+    }
+
+    /**
+     * Markers for every player outside a [width] x [height] canvas under [t]. Players off
+     * the same edge, on the same side, within [groupPx] of each other share a marker;
+     * markers stay [insetPx] from the corners. Empty when everyone is in view.
+     */
+    fun offscreen(players: List<DiagramPlayer>, t: FieldTransform, width: Float, height: Float, insetPx: Float, groupPx: Float): List<EdgeMarker> {
+        data class Off(val edge: Edge, val along: Float, val side: Side, val label: String)
+        val off = players.mapNotNull { p ->
+            val x = t.x(p.x)
+            val y = t.y(p.y)
+            val edge = when {
+                x < 0f -> Edge.LEFT
+                x > width -> Edge.RIGHT
+                y < 0f -> Edge.TOP
+                y > height -> Edge.BOTTOM
+                else -> return@mapNotNull null
+            }
+            val along = if (edge == Edge.LEFT || edge == Edge.RIGHT) y.coerceIn(insetPx, height - insetPx) else x.coerceIn(insetPx, width - insetPx)
+            Off(edge, along, p.side, p.label)
+        }
+        val markers = mutableListOf<EdgeMarker>()
+        off.groupBy { it.edge to it.side }.forEach { (key, group) ->
+            var current = mutableListOf<Off>()
+            fun flush() {
+                if (current.isNotEmpty()) {
+                    markers += EdgeMarker(key.first, current.map { it.along }.average().toFloat(), key.second, current.map { it.label }.distinct())
+                }
+                current = mutableListOf()
+            }
+            group.sortedBy { it.along }.forEach { o ->
+                if (current.isNotEmpty() && o.along - current.first().along > groupPx) flush()
+                current += o
+            }
+            flush()
+        }
+        return markers.sortedWith(compareBy({ it.edge }, { it.along }))
     }
 
     /** The aspect a lesson card should give the diagram: its own, clamped to 3:4..4:3. */

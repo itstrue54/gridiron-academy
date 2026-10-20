@@ -351,6 +351,12 @@
     <string name="track_change_shared_open">Level 4 and up stay open, with all their progress.</string>
     <string name="track_change_shared_closed">Level 4 and up are the same on both tracks.</string>
     <string name="track_change_confirm">Change lessons</string>
+    <string name="leave_title">Leave this drill?</string>
+    <string name="leave_body">You'll start it again next time. The answers you've given still count toward your practice.</string>
+    <string name="leave_gate_title">Leave this try?</string>
+    <string name="leave_gate_body">This try won't count. You can start it again whenever you're ready.</string>
+    <string name="keep_going">Keep going</string>
+    <string name="leave">Leave</string>
     <plurals name="players_count">
         <item quantity="one">%1$d player</item>
         <item quantity="other">%1$d players</item>

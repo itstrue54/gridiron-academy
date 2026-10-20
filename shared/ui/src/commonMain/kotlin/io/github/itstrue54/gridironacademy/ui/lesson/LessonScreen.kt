@@ -96,7 +96,7 @@ fun LessonScreen(
     StepPlayer(
         controller = controller,
         closeLabel = stringResource(Res.string.close_lesson),
-        onClose = { state.back() },
+        onClose = { state.requestBack() },
         onFinished = { state.finishLesson(levelId, lessonId, it) },
     )
 }
@@ -107,7 +107,7 @@ fun CheckpointScreen(state: LearnerAppState, levelId: String, testOut: Boolean) 
     StepPlayer(
         controller = state.checkpointControllerOrNull(levelId, testOut) ?: return,
         closeLabel = stringResource(Res.string.close_checkpoint),
-        onClose = { state.back() },
+        onClose = { state.requestBack() },
         onFinished = { state.finishCheckpoint(levelId, testOut, it) },
     )
 }
@@ -118,7 +118,7 @@ fun PracticeScreen(state: LearnerAppState) {
     StepPlayer(
         controller = state.practiceControllerOrNull() ?: return,
         closeLabel = stringResource(Res.string.close_practice),
-        onClose = { state.back() },
+        onClose = { state.requestBack() },
         onFinished = { state.finishPractice(it) },
     )
 }
@@ -129,7 +129,7 @@ fun GlossaryQuizScreen(state: LearnerAppState, concept: String) {
     StepPlayer(
         controller = state.quizControllerOrNull(concept) ?: return,
         closeLabel = stringResource(Res.string.close_quiz),
-        onClose = { state.back() },
+        onClose = { state.requestBack() },
         onFinished = { state.finishQuiz(concept, it) },
     )
 }
@@ -140,7 +140,7 @@ fun StepGameScreen(state: LearnerAppState, levelId: String) {
     StepPlayer(
         controller = state.gameControllerOrNull(levelId) ?: return,
         closeLabel = stringResource(Res.string.close_game),
-        onClose = { state.back() },
+        onClose = { state.requestBack() },
         onFinished = { state.finishBigGame(levelId, it) },
     )
 }

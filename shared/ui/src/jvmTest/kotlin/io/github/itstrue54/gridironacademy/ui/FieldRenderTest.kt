@@ -46,7 +46,7 @@ class FieldRenderTest {
         ContentLoader.json.decodeFromString<CourseUnit>(ClasspathContentSource().read("preview/l7-disguise.json")!!).lessons.flatMap { it.steps }
 
     /** Reads the rendered colour at a field position in yards, nudged by pixels. */
-    private class Rendered(private val bitmap: Bitmap, val t: FieldTransform) {
+    private class Rendered(val bitmap: Bitmap, val t: FieldTransform) {
         fun at(x: Float, y: Float, dxPx: Int = 0, dyPx: Int = 0): Color =
             Color(bitmap.getColor(PAD_PX + t.x(x).toInt() + dxPx, PAD_PX + t.y(y).toInt() + dyPx))
     }
@@ -154,6 +154,16 @@ class FieldRenderTest {
         val gap = near.at(0.8f, 0f, dyPx = 8)
         assertTrue(gap == DiagramColors.turfA || gap == DiagramColors.turfB, "at 3x linemen have turf between them, got $gap")
         assertNear(DiagramColors.offenseFill, near.at(0f, 0f, dyPx = 14), "centre's fill at 3x")
+
+        // X and Z are off the sides at 3x: each gets an offense-coloured marker on its edge,
+        // level with the line, instead of vanishing (DESIGN 7.10).
+        val lineY = near.t.y(0f).toInt() + PAD_PX
+        val inPx = (14 * DENSITY).toInt() // inside the pill, past the arrow
+        assertNear(DiagramColors.offenseFill, Color(near.bitmap.getColor(PAD_PX + inPx, lineY)), "left edge marker for X")
+        assertNear(DiagramColors.offenseFill, Color(near.bitmap.getColor(WIDTH_PX - PAD_PX - inPx, lineY)), "right edge marker for Z")
+        // At 1x everyone is in view: no marker over the turf at the edge.
+        val edge1x = Color(flat.bitmap.getColor(PAD_PX + inPx, flat.t.y(0f).toInt() + PAD_PX - (20 * DENSITY).toInt()))
+        assertTrue(edge1x == DiagramColors.turfA || edge1x == DiagramColors.turfB, "no marker at 1x, got $edge1x")
     }
 
     @Test

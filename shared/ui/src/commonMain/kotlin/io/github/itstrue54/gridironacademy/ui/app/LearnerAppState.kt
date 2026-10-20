@@ -455,6 +455,36 @@ class LearnerAppState(
 
     fun go(screen: Screen) { backStack = backStack + screen }
 
+    /** Set while "Leave? This try won't count" is on screen. */
+    var confirmingLeave: Boolean by mutableStateOf(false)
+        private set
+
+    /** Answers given on the player on screen, so leaving can ask first once there are any. */
+    private fun answeredHere(): Int = when (val s = screen) {
+        is Screen.LessonPlay -> activeLesson?.takeIf { it.first == s.lessonId }?.second?.graded ?: 0
+        is Screen.CheckpointPlay, is Screen.BigGamePlay -> when (val g = activeGate?.second) {
+            is LessonController -> g.graded
+            is SpeedRoundController -> g.answered
+            else -> 0
+        }
+        Screen.PracticePlay -> activePractice?.second?.graded ?: 0
+        is Screen.GlossaryQuizPlay -> activeQuiz?.third?.graded ?: 0
+        else -> 0
+    }
+
+    /**
+     * ✕ or the system Back. On a player with answers given it asks first (a misclick
+     * mid-Checkpoint shouldn't throw the try away); anywhere else it's [back].
+     */
+    fun requestBack(): Boolean {
+        if (answeredHere() > 0) { confirmingLeave = true; return true }
+        return back()
+    }
+
+    fun confirmLeave() { confirmingLeave = false; back() }
+
+    fun keepGoing() { confirmingLeave = false }
+
     /** Returns false at the root, so the platform can close the app. */
     fun back(): Boolean {
         if (backStack.size <= 1) return false
@@ -615,6 +645,10 @@ class LessonController(
     var draft: Answer? by mutableStateOf(null)
     var matchDraft: Map<String, String> by mutableStateOf(emptyMap())
 
+    /** Graded answers submitted so far (learn cards don't count). */
+    var graded: Int by mutableStateOf(0)
+        private set
+
     /** True when the current step was missed once already: its feedback is gentler. */
     var isRetry: Boolean by mutableStateOf(false)
         private set
@@ -625,6 +659,7 @@ class LessonController(
     fun submit(a: Answer) {
         val s = step ?: return
         val g = session.submit(a)
+        if (Grader.isGraded(s)) graded += 1
         grade = g
         answer = a
         onGraded?.invoke(s, g, a, s.id !in seen, now() - shownAt)

@@ -250,6 +250,12 @@ fun FieldDiagram(
                         drawPlayer(if (at == null) p else p.copy(x = at.x, y = at.y), t, markPx / 2, skin.helmets, marks[p.id], reducedMotion, measurer, markLabel)
                     }
                 }
+                // Zoomed in, nobody vanishes: players out of view get a marker on that edge
+                // (DESIGN 7.10), so a corner's alignment is still known and where to pan.
+                if (zoom.value.zoomed) {
+                    FieldGeometry.offscreen(diagram.players, t, size.width, size.height, EDGE_INSET.dp.toPx(), EDGE_GROUP.dp.toPx())
+                        .forEach { drawEdgeMarker(it, measurer, markLabel) }
+                }
             }
         }
         // Under the field, beside the caption: zoom buttons on the field covered players
@@ -264,6 +270,9 @@ fun FieldDiagram(
     }
 }
 
+/** Edge markers keep this far from the canvas corners, and group players this close. */
+private const val EDGE_INSET = 18
+private const val EDGE_GROUP = 28
 private const val PILL_ALPHA = 0.7f
 private const val GHOST_ALPHA = 0.25f
 private const val ZOOM_BUTTON_ALPHA = 0.92f
@@ -583,6 +592,36 @@ private fun DrawScope.drawBadge(c: Offset, half: Float, color: Color, check: Boo
 }
 
 /** A label on a 70%-opaque surface pill, centred on [at] (or starting at it). */
+/** A side-coloured pill with the off-screen players' labels and an arrow pointing out. */
+private fun DrawScope.drawEdgeMarker(m: EdgeMarker, measurer: TextMeasurer, style: TextStyle) {
+    val layout = measurer.measure(m.labels.joinToString(" "), style)
+    val pad = 5.dp.toPx()
+    val arrow = 6.dp.toPx()
+    val w = layout.size.width + pad * 2
+    val h = layout.size.height + pad
+    val gap = 3.dp.toPx()
+    val (left, top) = when (m.edge) {
+        Edge.LEFT -> (arrow + gap) to (m.along - h / 2)
+        Edge.RIGHT -> (size.width - arrow - gap - w) to (m.along - h / 2)
+        Edge.TOP -> (m.along - w / 2) to (arrow + gap)
+        Edge.BOTTOM -> (m.along - w / 2) to (size.height - arrow - gap - h)
+    }
+    val fill = if (m.side == Side.OFFENSE) DiagramColors.offenseFill else DiagramColors.defenseFill
+    drawRoundRect(fill, Offset(left, top), Size(w, h), CornerRadius(h / 2))
+    drawRoundRect(DiagramColors.chalk, Offset(left, top), Size(w, h), CornerRadius(h / 2), style = Stroke(1.5.dp.toPx()))
+    drawText(layout, topLeft = Offset(left + pad, top + pad / 2))
+    val tri = Path().apply {
+        when (m.edge) {
+            Edge.LEFT -> { moveTo(gap, m.along); lineTo(gap + arrow, m.along - arrow); lineTo(gap + arrow, m.along + arrow) }
+            Edge.RIGHT -> { moveTo(size.width - gap, m.along); lineTo(size.width - gap - arrow, m.along - arrow); lineTo(size.width - gap - arrow, m.along + arrow) }
+            Edge.TOP -> { moveTo(m.along, gap); lineTo(m.along - arrow, gap + arrow); lineTo(m.along + arrow, gap + arrow) }
+            Edge.BOTTOM -> { moveTo(m.along, size.height - gap); lineTo(m.along - arrow, size.height - gap - arrow); lineTo(m.along + arrow, size.height - gap - arrow) }
+        }
+        close()
+    }
+    drawPath(tri, DiagramColors.chalk)
+}
+
 private fun DrawScope.drawPill(measurer: TextMeasurer, text: String, style: TextStyle, bg: Color, at: Offset, anchorLeft: Boolean = false) {
     val layout = measurer.measure(text, style)
     val padX = 6.dp.toPx()

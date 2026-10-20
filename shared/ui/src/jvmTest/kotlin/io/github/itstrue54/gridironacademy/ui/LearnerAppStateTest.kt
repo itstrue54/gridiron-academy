@@ -328,6 +328,47 @@ class LearnerAppStateTest {
     }
 
     @Test
+    fun leavingAPlayerAsksOnlyOnceSomethingWasAnswered() {
+        val s = LearnerAppState(content, InMemoryLearnerStore()) { 900 }
+        s.createProfile("Sam", AgeBand.AGE_18_PLUS)
+        val level = s.levels.first()
+        // Nothing answered yet: Back just leaves.
+        s.openLevel(level)
+        s.startCheckpoint(level, testOut = true)
+        s.checkpointController(level.id, testOut = true)
+        assertTrue(s.requestBack())
+        assertFalse(s.confirmingLeave)
+        assertEquals(Screen.LevelDetail(level.id), s.screen)
+
+        // One answer in: Back asks.
+        s.startCheckpoint(level, testOut = true)
+        val c = s.checkpointController(level.id, testOut = true)
+        c.submit(perfect(c.step!!))
+        assertTrue(s.requestBack())
+        assertTrue(s.confirmingLeave)
+        assertEquals(Screen.CheckpointPlay(level.id, true), s.screen, "still in the test")
+        s.keepGoing()
+        assertFalse(s.confirmingLeave)
+        assertEquals(Screen.CheckpointPlay(level.id, true), s.screen)
+        s.requestBack(); s.confirmLeave()
+        assertEquals(Screen.LevelDetail(level.id), s.screen)
+        assertFalse(s.confirmingLeave)
+    }
+
+    @Test
+    fun aLearnCardIsNotAnAnswer() {
+        val s = LearnerAppState(content, InMemoryLearnerStore()) { 910 }
+        s.createProfile("Sam", AgeBand.AGE_18_PLUS)
+        val (level, lesson) = s.nextLesson()!!
+        s.startLesson(level, lesson)
+        val c = s.lessonController(level.id, lesson.id)
+        assertTrue(c.step is Learn, "lessons open on a learn card")
+        c.submit(Answer.Seen)
+        s.requestBack()
+        assertFalse(s.confirmingLeave, "reading a card isn't progress worth asking about")
+    }
+
+    @Test
     fun learnStepsAdvanceWithoutAGrade() {
         val steps = content.unitsOf(content.level("kid-1")).first().lessons.first().steps
         val c = LessonController(steps)

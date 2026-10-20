@@ -76,3 +76,26 @@ class AgeChangeUiTest {
         runOnIdle { assertEquals(AgeBand.AGE_10_12, state.profile!!.ageBand) }
     }
 }
+
+@OptIn(ExperimentalTestApi::class)
+class LeaveDialogUiTest {
+    private val content = ContentLoader.load(ClasspathContentSource())
+
+    @Test
+    fun closingACheckpointAfterAnAnswerAsksAndLeaveLeaves() = runComposeUiTest {
+        val state = LearnerAppState(content, InMemoryLearnerStore()) { 920 }.also { it.createProfile("Sam", AgeBand.AGE_18_PLUS) }
+        val level = state.levels.first()
+        state.openLevel(level)
+        state.startCheckpoint(level, testOut = true)
+        setContent { LearnerApp(state, dark = false) }
+        val c = runOnIdle { state.checkpointController(level.id, testOut = true) }
+        runOnIdle { c.submit(io.github.itstrue54.gridironacademy.engine.Answer.Choice(0)) }
+        onNodeWithContentDescription("Leave the Checkpoint").performClick()
+        onNodeWithText("Leave this try?").assertExists()
+        onNodeWithText("Keep going").performClick()
+        onAllNodesWithText("Leave this try?").assertCountEquals(0)
+        onNodeWithContentDescription("Leave the Checkpoint").performClick()
+        onNodeWithText("Leave").performClick()
+        runOnIdle { assertEquals(io.github.itstrue54.gridironacademy.ui.app.Screen.LevelDetail(level.id), state.screen) }
+    }
+}

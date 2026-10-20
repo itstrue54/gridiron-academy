@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
                 Load.Loading -> Unit // the window background is the theme surface
                 Load.Failed -> LoadErrorScreen(dark, onRetry = model::retry)
                 is Load.Ready -> {
-                    BackHandler(enabled = l.app.backStack.size > 1) { l.app.back() }
+                    BackHandler(enabled = l.app.backStack.size > 1) { l.app.requestBack() }
                     LearnerApp(l.app, dark = dark, reducedMotion = reducedMotion.value, platform = platform)
                 }
             }
