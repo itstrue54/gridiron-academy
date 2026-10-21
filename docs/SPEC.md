@@ -920,8 +920,12 @@ dates or fingerprints; `ReviewLogTest` fails when a signed step has been edited 
 so an edit sends it back for review. Debug builds show "[review] <step id>" above every
 unsigned step. `tools/review.py` exports a queue (with pre-read notes), builds the review
 page from `tools/review-page.html`, and turns approvals into sign-offs; a flag never
-signs. Not built yet: release builds dropping unsigned steps (nothing is released, and
-until the first levels are signed it would empty them).
+signs. Release gating is built and off: building with `-Pgridiron.reviewedOnly=true`
+makes both apps ship `Content.reviewedOnly()`, only levels whose every step is signed
+(a level that needs a dropped one goes too, and so do packs using dropped lessons). Turn
+it on once the first levels on each track are signed; with nothing signed it ships no
+levels. Review pages for all 748 steps (kid 1-3, adult 1-3, Levels 4-8) are published
+privately for the owner, each with a coach's pre-read.
 
 ### 13.4 UI tests
 - `FieldRenderTest` (jvm) already renders real content diagrams headlessly to

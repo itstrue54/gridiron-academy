@@ -25,8 +25,12 @@ android {
         debug {
             // A development build installs beside the store one, not over it.
             applicationIdSuffix = ".debug"
+            buildConfigField("boolean", "REVIEWED_ONLY", "false")
         }
         release {
+            // SPEC 13.3: ship only coach-signed levels. Off until the course is signed:
+            // build with -Pgridiron.reviewedOnly=true to turn it on.
+            buildConfigField("boolean", "REVIEWED_ONLY", (findProperty("gridiron.reviewedOnly") ?: "false").toString())
             optimization {
                 enable = false
             }
@@ -38,6 +42,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 

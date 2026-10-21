@@ -268,7 +268,7 @@
         {
           "type": "read_defense",
           "id": "co7-coverage-04",
-          "prompt": "Cover 3 look, corners off at 7. Watch the right corner after the snap.",
+          "prompt": "Cover 3 look, corners off at 7. Watch the right corner after the snap: what is he playing?",
           "preSnap": {
             "players": [
               {
@@ -429,7 +429,7 @@
           },
           "choices": [
             "Trap coverage",
-            "Cover 3",
+            "A deep third",
             "Quarters",
             "Cover 1"
           ],

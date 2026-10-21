@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import io.github.itstrue54.gridironacademy.content.ClasspathContentSource
 import io.github.itstrue54.gridironacademy.content.ContentLoader
 import io.github.itstrue54.gridironacademy.content.ContentValidator
+import io.github.itstrue54.gridironacademy.content.reviewedOnly
 import io.github.itstrue54.gridironacademy.ui.app.LearnerAppState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -41,9 +42,10 @@ class LearnerViewModel(app: Application) : AndroidViewModel(app) {
             _load.value = try {
                 withContext(Dispatchers.IO) {
                     // The content JSON ships inside :shared:core as Java resources.
-                    val content = ContentLoader.load(ClasspathContentSource())
-                    val problems = ContentValidator.validate(content)
+                    val all = ContentLoader.load(ClasspathContentSource())
+                    val problems = ContentValidator.validate(all)
                     check(problems.isEmpty()) { "content failed validation: ${problems.take(5)}" }
+                    val content = if (BuildConfig.REVIEWED_ONLY) all.reviewedOnly() else all
                     // Ids are the platform's job (SPEC 8.1): a random UUID per install and per profile.
                     val newId = { UUID.randomUUID().toString() }
                     val store = FileLearnerStore(getApplication<Application>().filesDir, newId)
