@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import io.github.itstrue54.gridironacademy.content.ClasspathContentSource
 import io.github.itstrue54.gridironacademy.content.ContentLoader
 import io.github.itstrue54.gridironacademy.content.ContentValidator
+import io.github.itstrue54.gridironacademy.content.reviewedOnly
 import io.github.itstrue54.gridironacademy.data.DemoCoachRepository
 import io.github.itstrue54.gridironacademy.data.supabase.SupabaseConfig
 import io.github.itstrue54.gridironacademy.data.supabase.supabaseCoach
@@ -49,7 +50,8 @@ class CoachViewModel(app: Application) : AndroidViewModel(app) {
                     val content = ContentLoader.load(ClasspathContentSource())
                     val problems = ContentValidator.validate(content)
                     check(problems.isEmpty()) { "content failed validation: ${problems.take(5)}" }
-                    content
+                    // Same course as the learner app, so nothing unreviewed can be assigned.
+                    if (BuildConfig.REVIEWED_ONLY) content.reviewedOnly() else content
                 }
                 val config = SupabaseConfig(BuildConfig.SUPABASE_URL, BuildConfig.SUPABASE_ANON_KEY)
                 if (config.url.isNotBlank() && config.anonKey.isNotBlank()) {

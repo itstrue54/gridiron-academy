@@ -68,7 +68,7 @@ h3 { font-size: 1.15rem; color: var(--dim); margin-block: 20px 8px; font-weight:
 .tag { padding: 1px 8px; border-radius: 999px; font-size: 0.75rem; letter-spacing: 0.03em; text-transform: uppercase; border: 1px solid currentColor; }
 .tag.new { color: var(--info); }
 .tag.fixed { color: var(--ok); }
-.tag.simplified, .tag.rule { color: var(--flag); }
+.tag.simplified, .tag.rule, .tag.judgement { color: var(--flag); }
 .title { font-weight: 700; }
 .q { font-size: 1.05rem; margin: 0; }
 .answers { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; }
@@ -80,7 +80,7 @@ h3 { font-size: 1.15rem; color: var(--dim); margin-block: 20px 8px; font-weight:
 .notes { display: grid; gap: 6px; }
 .note { padding: 6px 10px; border-radius: 6px; font-size: 0.9rem; }
 .note.fixed { background: var(--ok-soft); }
-.note.simplified, .note.rule { background: var(--flag-soft); }
+.note.simplified, .note.rule, .note.judgement { background: var(--flag-soft); }
 .field { max-width: 100%; overflow-x: auto; }
 .field svg { display: block; width: 100%; max-width: 30rem; height: auto; border-radius: 6px; }
 .cap { font-size: 0.8rem; color: var(--dim); }
@@ -135,7 +135,7 @@ textarea { width: 100%; min-height: 4.5rem; font: inherit; padding: 8px 10px; bo
   if (META.title) { document.getElementById("page-title").textContent = META.title; }
 
   const TYPE = { learn: "Teaching card", multiple_choice: "Multiple choice", true_false: "True or false", match: "Match", order: "Order", diagram_tap: "Tap the diagram", situation: "Game situation", read_defense: "Read the defense" };
-  const NOTE_LABEL = { fixed: "Changed in pre-read", simplified: "Deliberate simplification", rule: "Rule check" };
+  const NOTE_LABEL = { fixed: "Changed in pre-read", simplified: "Deliberate simplification", rule: "Rule check", judgement: "Close call" };
 
   function decisionOf(q) {
     const d = decisions[q.step];
@@ -143,8 +143,8 @@ textarea { width: 100%; min-height: 4.5rem; font: inherit; padding: 8px 10px; bo
     return d.hash === q.hash ? d : null;   // a decision on an older version doesn't count
   }
 
-  function field(q) {
-    const d = q.diagram; if (!d) return "";
+  function field(q, d = q.diagram, title = "") {
+    if (!d) return "";
     const depth = d.depth ?? 15, behind = d.behind ?? 6, k = 10, W = 54 * k, H = (depth + behind) * k;
     const X = x => (x + 27) * k, Y = y => (depth - y) * k;
     const targets = new Set((q.targetIds || []));
@@ -163,6 +163,7 @@ textarea { width: 100%; min-height: 4.5rem; font: inherit; padding: 8px 10px; bo
       const pts = [[p.x, p.y], ...r.points.map(t => [t.x, t.y])].map(([x, y]) => `${X(x)},${Y(y)}`).join(" ");
       const [c, w, dash] = KIND[r.kind || "pass"] || KIND.pass;
       s += `<polyline points="${pts}" fill="none" stroke="${c}" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="round" ${dash ? `stroke-dasharray="${dash}"` : ""}/>`;
+      if (r.label) { const e = r.points[r.points.length - 1]; s += `<text x="${X(e.x)}" y="${Y(e.y) - 8}" fill="#FFFFFF" font-size="12" text-anchor="middle" font-family="sans-serif" paint-order="stroke" stroke="#1F5A3A" stroke-width="3">${esc(r.label)}</text>`; }
     }
     for (const p of d.players || []) {
       const hit = targets.has(p.id), off = p.side === "OFFENSE";
@@ -171,7 +172,7 @@ textarea { width: 100%; min-height: 4.5rem; font: inherit; padding: 8px 10px; bo
       s += `<text x="${X(p.x)}" y="${Y(p.y)}" fill="#FFFFFF" font-size="${p.label.length > 2 ? 9 : 11}" font-weight="700" text-anchor="middle" dominant-baseline="central" font-family="sans-serif">${esc(p.label)}</text>`;
     }
     s += `</svg>`;
-    return `<div class="field">${s}</div>${d.caption ? `<div class="cap">Caption shown: ${esc(d.caption)}</div>` : ""}${targets.size ? `<div class="cap">Gold rings mark the correct taps.</div>` : ""}`;
+    return `${title ? `<div class="cap"><strong>${esc(title)}</strong></div>` : ""}<div class="field">${s}</div>${d.caption ? `<div class="cap">Caption shown: ${esc(d.caption)}</div>` : ""}${targets.size ? `<div class="cap">Gold rings mark the correct taps.</div>` : ""}`;
   }
 
   function body(q) {
@@ -179,7 +180,7 @@ textarea { width: 100%; min-height: 4.5rem; font: inherit; padding: 8px 10px; bo
     if (q.title) h += `<div class="title">${esc(q.title)}</div>`;
     const prompt = q.body || q.prompt || q.statement;
     if (prompt) h += `<p class="q">${esc(prompt)}</p>`;
-    if (q.type === "multiple_choice" && q.choices) {
+    if ((q.type === "multiple_choice" || q.type === "read_defense") && q.choices) {
       h += `<ul class="answers">${q.choices.map((c, i) => `<li class="${i === q.answer ? "right" : ""}">${esc(c)}${i === q.answer ? `<span class="q-tag">answer</span>` : ""}</li>`).join("")}</ul>`;
     } else if (q.type === "true_false") {
       h += `<ul class="answers"><li class="right">${q.answer ? "True" : "False"}<span class="q-tag">answer</span></li></ul>`;
@@ -194,6 +195,11 @@ textarea { width: 100%; min-height: 4.5rem; font: inherit; padding: 8px 10px; bo
       h += `<ul class="answers">${[...q.options].sort((a, b) => (order[a.quality] ?? 3) - (order[b.quality] ?? 3)).map(o => `<li class="${o.quality === "best" ? "right" : ""}">${esc(o.text)}<span class="q-tag">${esc(o.quality)}</span>${o.why ? `<div class="cap">${esc(o.why)}</div>` : ""}</li>`).join("")}</ul>`;
     }
     h += field(q);
+    if (q.type === "read_defense") {
+      h += field(q, q.preSnap, "Before the snap (what the learner reads)");
+      h += field(q, q.reveal, "After the snap (the reveal)");
+      if (q.disguised) h += `<div class="cap">Marked as a disguise: the shell rotates at the snap.</div>`;
+    }
     if (q.explanation) h += `<div class="feedback"><strong>Feedback:</strong> ${esc(q.explanation)}</div>`;
     return h;
   }

@@ -87,8 +87,12 @@ def text(step):
         zones = {z["id"]: z.get("label", z["id"]) for z in step["diagram"].get("zones", [])}
         out["targets"] = [labels.get(x) or zones.get(x) or x for x in step["targets"]]
         out["targetIds"] = step["targets"]
-    elif t in ("situation", "read_defense"):
-        for k in ("options", "choices", "answer", "situation"):
+    elif t == "situation":
+        for k in ("options", "situation"):
+            if k in step:
+                out[k] = step[k]
+    elif t == "read_defense":
+        for k in ("choices", "answer", "disguised", "preSnap", "reveal"):
             if k in step:
                 out[k] = step[k]
     if "diagram" in step:
