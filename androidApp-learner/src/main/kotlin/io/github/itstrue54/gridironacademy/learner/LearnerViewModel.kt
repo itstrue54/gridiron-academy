@@ -1,6 +1,7 @@
 package io.github.itstrue54.gridironacademy.learner
 
 import android.app.Application
+import android.content.pm.ApplicationInfo
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
@@ -46,7 +47,9 @@ class LearnerViewModel(app: Application) : AndroidViewModel(app) {
                     // Ids are the platform's job (SPEC 8.1): a random UUID per install and per profile.
                     val newId = { UUID.randomUUID().toString() }
                     val store = FileLearnerStore(getApplication<Application>().filesDir, newId)
-                    Load.Ready(LearnerAppState(content, store, nowMillis = System::currentTimeMillis, newId = newId) { LocalDate.now().toEpochDay() })
+                    // Debug builds mark steps no coach has signed off yet (SPEC 13.3).
+                    val debuggable = getApplication<Application>().applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE != 0
+                    Load.Ready(LearnerAppState(content, store, nowMillis = System::currentTimeMillis, newId = newId, showReviewBadges = debuggable) { LocalDate.now().toEpochDay() })
                 }
             } catch (e: Exception) {
                 Log.e(TAG, "lessons failed to load", e)

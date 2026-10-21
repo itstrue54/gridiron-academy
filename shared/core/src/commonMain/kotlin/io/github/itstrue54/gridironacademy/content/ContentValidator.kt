@@ -67,6 +67,15 @@ object ContentValidator {
                 }
             }
         }
+        // Sign-offs (SPEC 13.3): real steps, one each, a named reviewer and a real date.
+        val stepIds = c.lessons.flatMap { l -> l.steps.map { it.id } }.toSet()
+        dupes(c.review.signoffs.map { it.step }).forEach { err("review", "signed off twice: $it") }
+        c.review.signoffs.forEach {
+            if (it.step !in stepIds) err("review ${it.step}", "no such step")
+            if (it.reviewer.isBlank()) err("review ${it.step}", "no reviewer")
+            if (!ISO_DATE.matches(it.date)) err("review ${it.step}", "date '${it.date}' is not YYYY-MM-DD")
+            if (!HASH.matches(it.hash)) err("review ${it.step}", "hash '${it.hash}' is not 16 hex digits")
+        }
         c.graph.cycles().forEach { err("glossary", "concept cycle: ${it.joinToString(" -> ")}") }
         // Direct parents only (SPEC 4.6): a line the map would draw twice.
         if (c.graph.cycles().isEmpty()) c.graph.redundant().forEach { (concept, r, via) ->
@@ -189,6 +198,8 @@ object ContentValidator {
 
     /** How far from y = 0 a player still counts as on the line (diagrams nudge some to 0.2). */
     private const val ON_THE_LINE = 0.5f
+    private val ISO_DATE = Regex("""\d{4}-\d{2}-\d{2}""")
+    private val HASH = Regex("[0-9a-f]{16}")
 
     private fun <T> dupes(l: List<T>): Set<T> = l.groupingBy { it }.eachCount().filterValues { it > 1 }.keys
 }

@@ -21,6 +21,7 @@ import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -70,6 +71,7 @@ import io.github.itstrue54.gridironacademy.ui.resources.right_adult_2
 import io.github.itstrue54.gridironacademy.ui.resources.right_kid_1
 import io.github.itstrue54.gridironacademy.ui.resources.right_kid_2
 import io.github.itstrue54.gridironacademy.ui.resources.right_kid_3
+import io.github.itstrue54.gridironacademy.ui.resources.review_badge
 import io.github.itstrue54.gridironacademy.ui.resources.step_of
 import io.github.itstrue54.gridironacademy.ui.theme.Gridiron
 import io.github.itstrue54.gridironacademy.ui.theme.screenBackground
@@ -175,6 +177,7 @@ fun StepPlayer(
             Column(
                 Modifier.weight(1f).fillMaxWidth().verticalScroll(rememberScrollState()).padding(horizontal = skin.gutter, vertical = 12.dp),
             ) {
+                if (LocalReviewBadge.current(step.id)) ReviewBadge(step.id)
                 key(stepKey) {
                     StepBody(step, controller, pending, controller.grade != null, controller.answer) { controller.draft = it }
                 }
@@ -208,6 +211,16 @@ fun StepPlayer(
 }
 
 private const val SHEET_MAX_FRACTION = 0.45f
+
+/** True for a step that should wear the ReviewBadge; provided by LearnerApp in debug builds. */
+val LocalReviewBadge = staticCompositionLocalOf<(String) -> Boolean> { { false } }
+
+/** DESIGN 8, ReviewBadge: debug builds only, "[review]" and the id to quote back. */
+@Composable
+private fun ReviewBadge(stepId: String) {
+    Text(stringResource(Res.string.review_badge, stepId), style = Gridiron.type.label, color = Gridiron.colors.retry,
+        modifier = Modifier.padding(bottom = 6.dp))
+}
 
 /** Shows [step]; [submitted] is the checked answer once graded, else [pending] drives it. */
 @Composable

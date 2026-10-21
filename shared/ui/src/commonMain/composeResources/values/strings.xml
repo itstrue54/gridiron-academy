@@ -322,6 +322,7 @@
     <string name="map_from_side">From %1$s</string>
     <string name="map_leads_to">Leads to</string>
     <string name="map_close">Close</string>
+    <string name="review_badge">[review] %1$s</string>
     <string name="map_key">Key</string>
     <string name="map_off_course">Not on your course yet</string>
     <string name="map_key_hide">Hide key</string>

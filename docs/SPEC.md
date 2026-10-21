@@ -913,6 +913,16 @@ experience before release (kid-facing first). Rule-dependent steps re-reviewed e
 offseason against the stamped `ruleSeason`. Release builds exclude unreviewed steps;
 debug builds show them with a "[review]" badge.
 
+**Built (2026-10-21):** `content/review.json` holds one entry per signed step: reviewer,
+date, `ruleSeason` and a fingerprint (SHA-256 of the step's canonical JSON, 16 hex
+digits). The validator rejects unknown steps, duplicates, a blank reviewer and malformed
+dates or fingerprints; `ReviewLogTest` fails when a signed step has been edited since,
+so an edit sends it back for review. Debug builds show "[review] <step id>" above every
+unsigned step. `tools/review.py` exports a queue (with pre-read notes), builds the review
+page from `tools/review-page.html`, and turns approvals into sign-offs; a flag never
+signs. Not built yet: release builds dropping unsigned steps (nothing is released, and
+until the first levels are signed it would empty them).
+
 ### 13.4 UI tests
 - `FieldRenderTest` (jvm) already renders real content diagrams headlessly to
   `shared/ui/build/field-renders/`. Render tests run with a fontconfig that sees only
