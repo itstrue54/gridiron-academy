@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.heading
@@ -64,6 +65,7 @@ import io.github.itstrue54.gridironacademy.ui.resources.back_home
 import io.github.itstrue54.gridironacademy.ui.resources.back_to_glossary
 import io.github.itstrue54.gridironacademy.ui.lesson.GlossaryQuizScreen
 import io.github.itstrue54.gridironacademy.ui.screens.GlossaryScreen
+import io.github.itstrue54.gridironacademy.ui.lesson.LocalReviewBadge
 import io.github.itstrue54.gridironacademy.ui.screens.PlaybookMapScreen
 import io.github.itstrue54.gridironacademy.ui.screens.GrownUpGateScreen
 import io.github.itstrue54.gridironacademy.ui.screens.GrownUpZoneScreen
@@ -83,6 +85,10 @@ import io.github.itstrue54.gridironacademy.ui.resources.leave
 fun LearnerApp(state: LearnerAppState, dark: Boolean, reducedMotion: Boolean = false, platform: LearnerPlatform = NoPlatform) {
     // Before a profile exists there is no track; onboarding uses the Adult skin.
     val skin = if (state.profile == null) Skin.Adult else state.skin
+    val badge: (String) -> Boolean = remember(state) {
+        if (state.showReviewBadges) { id -> !state.content.signedOff(id) } else { _ -> false }
+    }
+    CompositionLocalProvider(LocalReviewBadge provides badge) {
     GridironTheme(skin = skin, dark = dark, reducedMotion = reducedMotion) {
         // One readable column, centred: a landscape phone or a tablet gets margins of
         // surface colour instead of screens stretched edge to edge.
@@ -125,6 +131,7 @@ fun LearnerApp(state: LearnerAppState, dark: Boolean, reducedMotion: Boolean = f
         }
         }
         LeaveDialog(state)
+    }
     }
 }
 

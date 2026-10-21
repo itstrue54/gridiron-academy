@@ -1,0 +1,351 @@
+<title>Kid Course Sign-off</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Barlow+Semi+Condensed:wght@600;700&display=swap">
+<style>
+/* Layout: one reading column of step cards, grouped by level then lesson, under a sticky progress bar. */
+:root {
+  --bg: #F2F4F1;
+  --raised: #FFFFFF;
+  --ink: #142019;
+  --dim: #56635B;
+  --line: #D5DCD6;
+  --accent: #1F5A3A;
+  --on-accent: #FFFFFF;
+  --ok: #176B3A;
+  --ok-soft: #DDEFE3;
+  --flag: #8A5A00;
+  --flag-soft: #F6EBD3;
+  --info: #1D4ED8;
+  --info-soft: #E2E9FB;
+  --display: "Barlow Semi Condensed", "Arial Narrow", system-ui, sans-serif;
+  --body: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0A1020; --raised: #151E33; --ink: #F2F5FA; --dim: #A3AFC4; --line: #2A3550;
+    --accent: #CCF53A; --on-accent: #0A1020; --ok: #3DDC97; --ok-soft: #15372C;
+    --flag: #FFC857; --flag-soft: #3A2F14; --info: #79AEFF; --info-soft: #1A2A4A;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0A1020; --raised: #151E33; --ink: #F2F5FA; --dim: #A3AFC4; --line: #2A3550;
+  --accent: #CCF53A; --on-accent: #0A1020; --ok: #3DDC97; --ok-soft: #15372C;
+  --flag: #FFC857; --flag-soft: #3A2F14; --info: #79AEFF; --info-soft: #1A2A4A;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 16px/1.5 var(--body); }
+.wrap { max-width: 46rem; margin: 0 auto; padding-inline: 16px; padding-block: 20px 64px; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; letter-spacing: 0.01em; }
+h1 { font-size: 2rem; line-height: 1.1; }
+h2 { font-size: 1.5rem; margin-block: 32px 4px; }
+h3 { font-size: 1.15rem; color: var(--dim); margin-block: 20px 8px; font-weight: 600; }
+.lede { color: var(--dim); max-width: 60ch; margin: 6px 0 0; }
+.banner { margin-top: 14px; padding: 10px 14px; border: 1px solid var(--flag); background: var(--flag-soft); border-radius: 8px; }
+
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 12px; border-bottom: 1px solid var(--line); margin-top: 16px; display: grid; gap: 10px; }
+.levels { display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); gap: 8px; }
+.lv { display: grid; gap: 4px; font-size: 0.85rem; }
+.lv b { font-family: var(--display); font-size: 1rem; }
+.meter { height: 8px; border-radius: 4px; background: var(--line); display: flex; overflow: hidden; }
+.meter i { display: block; height: 100%; }
+.meter .m-ok { background: var(--ok); }
+.meter .m-flag { background: var(--flag); }
+.nums { color: var(--dim); font-variant-numeric: tabular-nums; }
+.filters { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: inherit; font-size: 0.85rem; padding: 4px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--raised); color: var(--ink); cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.chip:focus-visible, .btn:focus-visible, textarea:focus-visible { outline: 3px solid var(--info); outline-offset: 2px; }
+
+.step { background: var(--raised); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; display: grid; gap: 10px; margin-bottom: 10px; }
+.step.is-ok { border-color: var(--ok); }
+.step.is-flag { border-color: var(--flag); }
+.head { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; font-size: 0.8rem; color: var(--dim); }
+.id { font-family: var(--mono); color: var(--ink); font-size: 0.85rem; }
+.tag { padding: 1px 8px; border-radius: 999px; font-size: 0.75rem; letter-spacing: 0.03em; text-transform: uppercase; border: 1px solid currentColor; }
+.tag.new { color: var(--info); }
+.tag.fixed { color: var(--ok); }
+.tag.simplified, .tag.rule { color: var(--flag); }
+.title { font-weight: 700; }
+.q { font-size: 1.05rem; margin: 0; }
+.answers { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; }
+.answers li { padding: 4px 10px; border-radius: 6px; border: 1px solid var(--line); min-width: 0; overflow-wrap: anywhere; }
+.answers li.right { border-color: var(--ok); background: var(--ok-soft); font-weight: 700; }
+.answers li .q-tag { font-size: 0.75rem; color: var(--dim); font-weight: 400; margin-left: 6px; text-transform: uppercase; letter-spacing: 0.03em; }
+.feedback { border-left: 3px solid var(--line); padding-left: 10px; color: var(--dim); }
+.feedback strong { color: var(--ink); font-weight: 700; }
+.notes { display: grid; gap: 6px; }
+.note { padding: 6px 10px; border-radius: 6px; font-size: 0.9rem; }
+.note.fixed { background: var(--ok-soft); }
+.note.simplified, .note.rule { background: var(--flag-soft); }
+.field { max-width: 100%; overflow-x: auto; }
+.field svg { display: block; width: 100%; max-width: 30rem; height: auto; border-radius: 6px; }
+.cap { font-size: 0.8rem; color: var(--dim); }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.btn { font: inherit; font-weight: 700; padding: 8px 16px; border-radius: 8px; border: 1px solid var(--line); background: var(--raised); color: var(--ink); cursor: pointer; }
+.btn.approve { background: var(--ok); border-color: var(--ok); color: var(--on-accent); }
+.btn.flag { border-color: var(--flag); color: var(--flag); }
+.btn.quiet { border-color: transparent; color: var(--dim); font-weight: 400; padding-inline: 8px; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.verdict { font-weight: 700; }
+.verdict.ok { color: var(--ok); }
+.verdict.flag { color: var(--flag); }
+.flagged-note { font-size: 0.9rem; padding: 6px 10px; border-radius: 6px; background: var(--flag-soft); overflow-wrap: anywhere; }
+textarea { width: 100%; min-height: 4.5rem; font: inherit; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); }
+.lesson-foot { display: flex; justify-content: flex-end; margin-block: -2px 8px; }
+.empty { color: var(--dim); padding: 24px 0; }
+@media (prefers-reduced-motion: no-preference) { .step { transition: border-color 120ms; } }
+</style>
+
+<div class="wrap">
+  <h1 id="page-title">Kid Course Sign-off</h1>
+  <p class="lede" id="lede">Read each step as a coach. Approve it if the football is right and the words suit the age, or flag it with a note. Approvals are recorded against the step exactly as written; if it changes later, it comes back here.</p>
+  <div class="banner" id="nodb" hidden>Decisions can't be saved in this view. Open this page in claude.ai while signed in as its owner.</div>
+  <div class="bar">
+    <div class="levels" id="levels"></div>
+    <div class="filters" role="group" aria-label="Show">
+      <button class="chip" type="button" data-f="todo" aria-pressed="true">To review</button>
+      <button class="chip" type="button" data-f="all" aria-pressed="false">All</button>
+      <button class="chip" type="button" data-f="notes" aria-pressed="false">With my notes</button>
+      <button class="chip" type="button" data-f="new" aria-pressed="false">New</button>
+      <button class="chip" type="button" data-f="flag" aria-pressed="false">Flagged</button>
+      <button class="chip" type="button" data-f="ok" aria-pressed="false">Approved</button>
+    </div>
+  </div>
+  <div id="list"></div>
+</div>
+
+<script type="application/json" id="queue">/*QUEUE*/</script>
+<script type="application/json" id="meta">/*META*/</script>
+<script>
+(() => {
+  const QUEUE = JSON.parse(document.getElementById("queue").textContent);
+  const META = JSON.parse(document.getElementById("meta").textContent);
+  const decisions = {};           // step id -> {decision, note, hash}
+  let db = null, filter = "todo";
+  const flagOpen = new Set();     // steps with the flag box open
+  const drafts = {};              // unsaved flag notes, kept across re-renders
+  const armed = new Set();        // lessons whose bulk approve was tapped once
+  const listEl = document.getElementById("list");
+  const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+  if (META.title) { document.getElementById("page-title").textContent = META.title; }
+
+  const TYPE = { learn: "Teaching card", multiple_choice: "Multiple choice", true_false: "True or false", match: "Match", order: "Order", diagram_tap: "Tap the diagram", situation: "Game situation", read_defense: "Read the defense" };
+  const NOTE_LABEL = { fixed: "Changed in pre-read", simplified: "Deliberate simplification", rule: "Rule check" };
+
+  function decisionOf(q) {
+    const d = decisions[q.step];
+    if (!d) return null;
+    return d.hash === q.hash ? d : null;   // a decision on an older version doesn't count
+  }
+
+  function field(q) {
+    const d = q.diagram; if (!d) return "";
+    const depth = d.depth ?? 15, behind = d.behind ?? 6, k = 10, W = 54 * k, H = (depth + behind) * k;
+    const X = x => (x + 27) * k, Y = y => (depth - y) * k;
+    const targets = new Set((q.targetIds || []));
+    let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(d.caption || "Field diagram")}"><rect width="${W}" height="${H}" fill="#1F5A3A"/>`;
+    for (let y = -Math.floor(behind / 5) * 5; y <= depth; y += 5) s += `<line x1="0" x2="${W}" y1="${Y(y)}" y2="${Y(y)}" stroke="#F3F0E7" stroke-opacity="0.25" stroke-width="1"/>`;
+    s += `<line x1="0" x2="${W}" y1="${Y(0)}" y2="${Y(0)}" stroke="#F3F0E7" stroke-width="2"/>`;
+    for (const z of d.zones || []) {
+      const hit = targets.has(z.id);
+      s += `<rect x="${X(z.x)}" y="${Y(z.y + z.h)}" width="${z.w * k}" height="${z.h * k}" fill="${hit ? "#E8B400" : "#FFFFFF"}" fill-opacity="${hit ? 0.35 : 0.12}" stroke="#FFFFFF" stroke-dasharray="6 4"/>`;
+      if (z.label) s += `<text x="${X(z.x + z.w / 2)}" y="${Y(z.y + z.h / 2)}" fill="#FFFFFF" font-size="14" text-anchor="middle" dominant-baseline="middle">${esc(z.label)}</text>`;
+    }
+    const pos = Object.fromEntries((d.players || []).map(p => [p.id, p]));
+    const KIND = { pass: ["#F3F0E7", 2.5, ""], run: ["#F3F0E7", 4, ""], motion: ["#F3F0E7", 2, "6 5"], block: ["#F3F0E7", 3, ""], blitz: ["#FF6B6B", 3, ""], rotate: ["#FFC857", 2.5, "8 5"], drop: ["#9AD0FF", 2.5, "3 4"] };
+    for (const r of d.routes || []) {
+      const p = pos[r.playerId]; if (!p) continue;
+      const pts = [[p.x, p.y], ...r.points.map(t => [t.x, t.y])].map(([x, y]) => `${X(x)},${Y(y)}`).join(" ");
+      const [c, w, dash] = KIND[r.kind || "pass"] || KIND.pass;
+      s += `<polyline points="${pts}" fill="none" stroke="${c}" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="round" ${dash ? `stroke-dasharray="${dash}"` : ""}/>`;
+    }
+    for (const p of d.players || []) {
+      const hit = targets.has(p.id), off = p.side === "OFFENSE";
+      if (hit) s += `<circle cx="${X(p.x)}" cy="${Y(p.y)}" r="17" fill="none" stroke="#E8B400" stroke-width="4"/>`;
+      s += `<circle cx="${X(p.x)}" cy="${Y(p.y)}" r="12" fill="${off ? "#1D4ED8" : "#B4410F"}" stroke="#F3F0E7" stroke-width="2"/>`;
+      s += `<text x="${X(p.x)}" y="${Y(p.y)}" fill="#FFFFFF" font-size="${p.label.length > 2 ? 9 : 11}" font-weight="700" text-anchor="middle" dominant-baseline="central" font-family="sans-serif">${esc(p.label)}</text>`;
+    }
+    s += `</svg>`;
+    return `<div class="field">${s}</div>${d.caption ? `<div class="cap">Caption shown: ${esc(d.caption)}</div>` : ""}${targets.size ? `<div class="cap">Gold rings mark the correct taps.</div>` : ""}`;
+  }
+
+  function body(q) {
+    let h = "";
+    if (q.title) h += `<div class="title">${esc(q.title)}</div>`;
+    const prompt = q.body || q.prompt || q.statement;
+    if (prompt) h += `<p class="q">${esc(prompt)}</p>`;
+    if (q.type === "multiple_choice" && q.choices) {
+      h += `<ul class="answers">${q.choices.map((c, i) => `<li class="${i === q.answer ? "right" : ""}">${esc(c)}${i === q.answer ? `<span class="q-tag">answer</span>` : ""}</li>`).join("")}</ul>`;
+    } else if (q.type === "true_false") {
+      h += `<ul class="answers"><li class="right">${q.answer ? "True" : "False"}<span class="q-tag">answer</span></li></ul>`;
+    } else if (q.type === "match" && q.pairs) {
+      h += `<ul class="answers">${q.pairs.map(p => `<li>${esc(p.left)} → <strong>${esc(p.right)}</strong></li>`).join("")}</ul>`;
+    } else if (q.type === "order" && q.items) {
+      h += `<ul class="answers">${q.items.map((it, i) => `<li>${i + 1}. ${esc(it)}</li>`).join("")}</ul>`;
+    } else if (q.type === "diagram_tap" && q.targets) {
+      h += `<ul class="answers"><li class="right">Tap: ${q.targets.map(esc).join(", ")}<span class="q-tag">answer</span></li></ul>`;
+    } else if (q.type === "situation" && q.options) {
+      const order = { best: 0, ok: 1, poor: 2 };
+      h += `<ul class="answers">${[...q.options].sort((a, b) => (order[a.quality] ?? 3) - (order[b.quality] ?? 3)).map(o => `<li class="${o.quality === "best" ? "right" : ""}">${esc(o.text)}<span class="q-tag">${esc(o.quality)}</span>${o.why ? `<div class="cap">${esc(o.why)}</div>` : ""}</li>`).join("")}</ul>`;
+    }
+    h += field(q);
+    if (q.explanation) h += `<div class="feedback"><strong>Feedback:</strong> ${esc(q.explanation)}</div>`;
+    return h;
+  }
+
+  function card(q) {
+    const d = decisionOf(q);
+    const cls = d ? (d.decision === "approve" ? "is-ok" : "is-flag") : "";
+    const tags = [q.new ? `<span class="tag new">New</span>` : "", ...[...new Set(q.note.map(n => n.kind))].map(k => `<span class="tag ${k}">${esc(NOTE_LABEL[k] || k)}</span>`)].join("");
+    const notes = q.note.length ? `<div class="notes">${q.note.map(n => `<div class="note ${n.kind}"><strong>${esc(NOTE_LABEL[n.kind] || n.kind)}.</strong> ${esc(n.text)}</div>`).join("")}</div>` : "";
+    let act;
+    const off = db ? "" : "disabled";
+    if (d && d.decision === "approve") {
+      act = `<span class="verdict ok">Approved</span><button class="btn quiet" type="button" data-act="undo" ${off}>Undo</button>`;
+    } else if (d && d.decision === "flag" && !flagOpen.has(q.step)) {
+      act = `<span class="verdict flag">Flagged</span><button class="btn quiet" type="button" data-act="edit" ${off}>Edit note</button><button class="btn quiet" type="button" data-act="undo" ${off}>Undo</button>`;
+    } else if (flagOpen.has(q.step)) {
+      act = `<label class="cap" for="note-${esc(q.step)}">What's wrong, and what should it say?</label>
+        <textarea id="note-${esc(q.step)}" data-draft="${esc(q.step)}">${esc(drafts[q.step] ?? d?.note ?? "")}</textarea>
+        <button class="btn flag" type="button" data-act="saveflag" ${off}>Save flag</button><button class="btn quiet" type="button" data-act="cancel">Cancel</button>`;
+    } else {
+      act = `<button class="btn approve" type="button" data-act="approve" ${off}>Approve</button><button class="btn flag" type="button" data-act="flag" ${off}>Flag</button>`;
+    }
+    const flagged = d && d.decision === "flag" && d.note && !flagOpen.has(q.step) ? `<div class="flagged-note">${esc(d.note)}</div>` : "";
+    return `<article class="step ${cls}" data-step="${esc(q.step)}">
+      <div class="head"><span class="id">${esc(q.step)}</span><span>${esc(TYPE[q.type] || q.type)}</span>${q.concept ? `<span>concept: ${esc(q.concept)}</span>` : ""}${tags}</div>
+      ${body(q)}${notes}${flagged}
+      <div class="actions">${act}</div></article>`;
+  }
+
+  function shown(q) {
+    const d = decisionOf(q);
+    switch (filter) {
+      case "todo": return !d || flagOpen.has(q.step);
+      case "notes": return q.note.length > 0;
+      case "new": return q.new;
+      case "flag": return d?.decision === "flag";
+      case "ok": return d?.decision === "approve";
+      default: return true;
+    }
+  }
+
+  function renderBars() {
+    const byLevel = {};
+    for (const q of QUEUE) {
+      const l = byLevel[q.level] ??= { title: q.levelTitle, n: 0, ok: 0, flag: 0 };
+      l.n++; const d = decisionOf(q);
+      if (d?.decision === "approve") l.ok++; else if (d?.decision === "flag") l.flag++;
+    }
+    document.getElementById("levels").innerHTML = Object.entries(byLevel).map(([id, l]) => `<div class="lv">
+      <b>${esc(l.title)}</b>
+      <div class="meter" role="img" aria-label="${l.ok} approved, ${l.flag} flagged, ${l.n - l.ok - l.flag} to review"><i class="m-ok" style="width:${100 * l.ok / l.n}%"></i><i class="m-flag" style="width:${100 * l.flag / l.n}%"></i></div>
+      <span class="nums">${l.ok} approved · ${l.flag} flagged · ${l.n - l.ok - l.flag} left</span></div>`).join("");
+  }
+
+  function render() {
+    renderBars();
+    let h = "", lastLevel = "", lastLesson = "", lessonQ = [];
+    const visible = QUEUE.filter(shown);
+    const flush = () => {
+      if (!lessonQ.length) return;
+      const left = lessonQ.filter(q => !decisionOf(q));
+      if (filter === "todo" && left.length > 1 && db) {
+        const key = lessonQ[0].lesson;
+        h += `<div class="lesson-foot"><button class="btn quiet" type="button" data-bulk="${esc(key)}">${armed.has(key) ? `Tap again to approve all ${left.length}` : `Approve the ${left.length} above`}</button></div>`;
+      }
+      lessonQ = [];
+    };
+    for (const q of visible) {
+      if (q.level !== lastLevel) { flush(); h += `<h2>${esc(q.levelTitle)}</h2>`; lastLevel = q.level; lastLesson = ""; }
+      if (q.lesson !== lastLesson) { flush(); h += `<h3>${esc(q.lessonTitle)}</h3>`; lastLesson = q.lesson; }
+      h += card(q); lessonQ.push(q);
+    }
+    flush();
+    listEl.innerHTML = h || `<p class="empty">${filter === "todo" ? "Nothing left to review here. Every step is approved or flagged." : "No steps match this filter."}</p>`;
+  }
+
+  async function write(q, decision, note) {
+    const prev = decisions[q.step];
+    decisions[q.step] = { decision, note: note || "", hash: q.hash };
+    render();
+    try {
+      await db.collection("decisions").doc(q.step).set({ step: q.step, hash: q.hash, decision, note: note || "", at: new Date().toISOString() });
+    } catch (e) {
+      if (prev) decisions[q.step] = prev; else delete decisions[q.step];
+      render();
+      showError(e);
+    }
+  }
+  async function undo(q) {
+    const prev = decisions[q.step];
+    delete decisions[q.step]; render();
+    try { await db.collection("decisions").doc(q.step).delete(); }
+    catch (e) { decisions[q.step] = prev; render(); showError(e); }
+  }
+  function showError(e) {
+    const b = document.getElementById("nodb");
+    b.textContent = e?.code === "quota_exceeded" ? "The decision store is full. Tell Claude so it can collect what's saved." : "That decision wasn't saved. Check your connection and try again.";
+    b.hidden = false;
+  }
+
+  listEl.addEventListener("click", async ev => {
+    const bulk = ev.target.closest("[data-bulk]");
+    if (bulk) {
+      const key = bulk.dataset.bulk;
+      if (!armed.has(key)) { armed.add(key); render(); return; }
+      armed.delete(key);
+      for (const q of QUEUE.filter(q => q.lesson === key && !decisionOf(q))) await write(q, "approve", "");
+      return;
+    }
+    const btn = ev.target.closest("[data-act]"); if (!btn) return;
+    const q = QUEUE.find(x => x.step === btn.closest("[data-step]").dataset.step);
+    switch (btn.dataset.act) {
+      case "approve": await write(q, "approve", ""); break;
+      case "flag": case "edit": flagOpen.add(q.step); render(); document.getElementById("note-" + q.step)?.focus(); break;
+      case "cancel": flagOpen.delete(q.step); delete drafts[q.step]; render(); break;
+      case "saveflag": {
+        const note = document.getElementById("note-" + q.step).value.trim();
+        flagOpen.delete(q.step); delete drafts[q.step];
+        await write(q, "flag", note);
+        break;
+      }
+      case "undo": await undo(q); break;
+    }
+  });
+
+  listEl.addEventListener("input", ev => {
+    const t = ev.target.closest("[data-draft]"); if (t) drafts[t.dataset.draft] = t.value;
+  });
+
+  document.querySelector(".filters").addEventListener("click", ev => {
+    const c = ev.target.closest(".chip"); if (!c) return;
+    filter = c.dataset.f; armed.clear();
+    document.querySelectorAll(".chip").forEach(x => x.setAttribute("aria-pressed", String(x === c)));
+    try { localStorage.setItem("signoff-filter", filter); } catch {}
+    render();
+  });
+  try {
+    const f = localStorage.getItem("signoff-filter");
+    if (f && document.querySelector(`.chip[data-f="${f}"]`)) document.querySelector(`.chip[data-f="${f}"]`).click();
+  } catch {}
+
+  render();
+
+  (async () => {
+    db = await window.claude?.use?.("db") ?? null;
+    if (!db) { document.getElementById("nodb").hidden = false; render(); return; }
+    render();
+    db.collection("decisions").onSnapshot(snap => {
+      for (const k of Object.keys(decisions)) delete decisions[k];
+      for (const doc of snap.docs) { const v = doc.data(); if (v) decisions[doc.id] = { decision: v.decision, note: v.note, hash: v.hash }; }
+      render();
+    }, e => showError(e));
+  })();
+})();
+</script>

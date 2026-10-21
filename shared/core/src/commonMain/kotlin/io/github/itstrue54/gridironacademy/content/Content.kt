@@ -19,7 +19,14 @@ class Content(
     val scenes: AppScenes,
     /** Scheme packs for assignments (SPEC 7.4). */
     val packs: List<SchemePack> = emptyList(),
+    /** Football sign-offs (SPEC 13.3). */
+    val review: ReviewLog = ReviewLog(),
 ) {
+    private val signed: Set<String> by lazy { review.signoffs.map { it.step }.toSet() }
+
+    /** True once a coach has signed this step off (DESIGN 8: no ReviewBadge). */
+    fun signedOff(stepId: String): Boolean = stepId in signed
+
     fun level(id: String): Level = curriculum.levels.first { it.id == id }
     fun unitsOf(level: Level): List<CourseUnit> = unitsByLevel.getValue(level.id)
     fun levelOfLesson(lessonId: String): Level? = levelByLesson[lessonId]
@@ -87,6 +94,7 @@ object ContentLoader {
         }
         val scenes = parse("app/scenes.json") { json.decodeFromString<AppScenes>(it) }
         val packs = parse("packs.json") { json.decodeFromString<Packs>(it) }.packs
-        return Content(curriculum, glossary, units, scenes, packs)
+        val review = parse("review.json") { json.decodeFromString<ReviewLog>(it) }
+        return Content(curriculum, glossary, units, scenes, packs, review)
     }
 }

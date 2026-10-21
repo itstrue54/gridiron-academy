@@ -154,6 +154,8 @@ class LearnerAppState(
     private val store: LearnerStore,
     nowMillis: (() -> Long)? = null,
     private val newId: () -> String = { "local" },
+    /** Debug builds: mark steps no coach has signed off (DESIGN 8, ReviewBadge). */
+    val showReviewBadges: Boolean = false,
     // Last, so `LearnerAppState(content, store) { day }` keeps reading as "today is day".
     private val today: () -> Long,
 ) {
