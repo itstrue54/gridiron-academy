@@ -38,9 +38,11 @@ class ReleaseContentTest {
         assertEquals(listOf("kid-1", "kid-2", "kid-3", "varsity-4"), kidSide)
     }
 
-    @Test fun `the shipped sign-offs open both tracks through Level 3`() {
-        // review.json: itstrue54 signed kid and adult Levels 1-3 on 2026-10-21.
-        assertEquals(listOf("kid-1", "adult-1", "kid-2", "adult-2", "kid-3", "adult-3"), content.reviewedOnly().levelIds())
+    @Test fun `the shipped sign-offs open the whole course`() {
+        // review.json: itstrue54 signed all 748 steps on 2026-10-21.
+        val shipped = content.reviewedOnly()
+        assertEquals(content.levelIds(), shipped.levelIds())
+        assertEquals(content.packs, shipped.packs)
     }
 
     @Test fun `everything signed ships the whole course, and it still validates`() {

@@ -923,9 +923,10 @@ page from `tools/review-page.html`, and turns approvals into sign-offs; a flag n
 signs. Release gating is built and off: building with `-Pgridiron.reviewedOnly=true`
 makes both apps ship `Content.reviewedOnly()`, only levels whose every step is signed
 (a level that needs a dropped one goes too, and so do packs using dropped lessons). Turn
-it on once the first levels on each track are signed; with nothing signed it ships no
-levels. Review pages for all 748 steps (kid 1-3, adult 1-3, Levels 4-8) are published
-privately for the owner, each with a coach's pre-read.
+it on for a release; with it on, a level with any unsigned step is held back whole. As
+of 2026-10-21 every one of the 748 steps is signed (itstrue54, rule season 2026, after a
+coach's pre-read that fixed 17 steps), so a gated release ships the whole course. New or
+edited steps go back through `tools/review.py export`/`page`/`apply`.
 
 ### 13.4 UI tests
 - `FieldRenderTest` (jvm) already renders real content diagrams headlessly to
