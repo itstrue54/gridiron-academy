@@ -405,7 +405,7 @@
       "id": "play-clock",
       "term": "Play clock",
       "kid": "The timer for how fast the offense must snap.",
-      "full": "40 seconds (25 after some stoppages); delay of game is 5 yards.",
+      "full": "In the NFL, 40 seconds (25 after some stoppages); many high school and youth leagues use 25. Delay of game is 5 yards.",
       "level": 1,
       "side": "rules",
       "requires": [
@@ -793,8 +793,8 @@
     {
       "id": "targeting",
       "term": "Targeting",
-      "kid": "A college rule against hits to the head.",
-      "full": "College football foul for forcible contact to the head or neck area, or with the crown of the helmet: 15 yards and an ejection after review.",
+      "kid": "A high school and college rule against hits to the head.",
+      "full": "College and high school foul for forcible contact to the head or neck area, or with the crown of the helmet: 15 yards; in college, also an ejection after review.",
       "level": 2,
       "side": "rules",
       "requires": [

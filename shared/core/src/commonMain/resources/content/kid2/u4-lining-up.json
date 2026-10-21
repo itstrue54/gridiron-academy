@@ -25,7 +25,7 @@
             "Next to the coach"
           ],
           "answer": 0,
-          "explanation": "Yes. The ball goes where the last play ended. That spot is the new line of scrimmage.",
+          "explanation": "Yes. The ball is placed where the last play ended, or back where it started after an incomplete pass. That spot is the new line of scrimmage.",
           "concept": "line-of-scrimmage"
         },
         {
@@ -343,7 +343,7 @@
           "type": "learn",
           "id": "k2-sets-01",
           "title": "Under center or shotgun",
-          "body": "The quarterback can stand right behind the center (under center) or about five steps back. Standing back is called the shotgun. It gives him more time to see the defense.",
+          "body": "The quarterback can stand right behind the center (under center) or about five yards back. Standing back is called the shotgun. It gives him more time to see the defense.",
           "diagram": {
             "players": [
               {
@@ -521,7 +521,7 @@
           "type": "learn",
           "id": "k2-sets-03",
           "title": "Singleback and pistol",
-          "body": "Singleback has one running back behind a quarterback under center. In the pistol, the quarterback stands a few steps back and the running back stands right behind him.",
+          "body": "Singleback has one running back behind a quarterback under center. In the pistol, the quarterback stands about four yards back and the running back stands right behind him.",
           "diagram": {
             "players": [
               {
@@ -706,7 +706,7 @@
             "Singleback"
           ],
           "answer": 0,
-          "explanation": "Yes. The quarterback is five steps back with a running back beside him: shotgun.",
+          "explanation": "Yes. The quarterback is about five yards back with a running back beside him: shotgun.",
           "diagram": {
             "players": [
               {
@@ -991,7 +991,7 @@
             "Empty"
           ],
           "answer": 0,
-          "explanation": "Yes. The quarterback is a few steps back and the running back is right behind him: the pistol.",
+          "explanation": "Yes. The quarterback is a few yards back and the running back is right behind him: the pistol.",
           "diagram": {
             "players": [
               {
