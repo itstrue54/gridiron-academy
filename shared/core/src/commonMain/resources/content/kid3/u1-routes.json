@@ -1084,6 +1084,27 @@
           "answer": true,
           "explanation": "Yes. It aims for the goal posts, in the middle.",
           "concept": "route"
+        },
+        {
+          "type": "learn",
+          "id": "k3-moreroutes-08",
+          "title": "The route tree",
+          "body": "Many teams give each route a number, like 2 for a slant or 9 for a go, so the play call is short. Draw all the routes together and they look like the branches of a tree.",
+          "concept": "route-tree"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k3-moreroutes-09",
+          "prompt": "Why do many teams give their routes numbers?",
+          "choices": [
+            "So a play call can name them fast",
+            "So fans can count them",
+            "Because referees need them",
+            "To make the routes longer"
+          ],
+          "answer": 0,
+          "explanation": "Yes. A short number in the huddle tells a receiver exactly what to run.",
+          "concept": "route-tree"
         }
       ]
     },

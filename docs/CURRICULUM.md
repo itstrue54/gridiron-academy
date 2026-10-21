@@ -45,6 +45,13 @@ overtime; Special Teams and Calls: tries and kicks, reading a play call, and 11 
 situations for the level game), 65 steps. Kids' scoreboard and timeout rules say "in the
 NFL" and point to their own league for youth and flag rules.
 
+Added 2026-10-20 so kids reach Level 4 knowing what it builds on (formation is a
+prerequisite of personnel): Kid unit 4, Lining Up (the line of scrimmage, formations,
+eligible and ineligible receivers; shotgun, I, singleback, pistol, empty and shifts), and
+a Playing Safe drill in Referees and Rules (late hits, roughing the passer, targeting,
+illegal contact). Adult drills gained a question each for terms they taught in prose but
+never asked about (quarterback, pass play, offside, holding, fair catch...).
+
 Originally planned:
 Kids: kicking game (kickoff, onside, return), more penalties and referee signals, the
 clock, timeouts, why teams pick run vs pass, offensive line jobs, reading a scoreboard,
@@ -62,6 +69,10 @@ Basics: man or zone clues, one-high vs two-high shells, leverage; Run Game and F
 five runs, blocking basics, how 4-3 and 3-4 play, the two-minute drill), 57 steps,
 12 taps. Every route, front and run is drawn from one set of diagram builders so the
 pictures are consistent across tracks.
+
+Added 2026-10-20: Kid unit 4, Clock, Calls and Replay (the play call, the play clock, the
+two-minute warning, spike and kneel; replay, the red flag and overtime), plus leverage,
+the route tree and pulling guards in the existing kid drills.
 
 Originally planned:
 Route tree 0-9 (flat, slant, comeback, curl, out, dig, corner, post, go) drawn on diagrams;

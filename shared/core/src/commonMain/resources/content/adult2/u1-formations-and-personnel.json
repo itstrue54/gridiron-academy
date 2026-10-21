@@ -668,6 +668,42 @@
           ],
           "explanation": "Read the backfield first: where the quarterback stands and where the backs are names the formation.",
           "concept": "formation"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a2-formations-09",
+          "prompt": "Which set puts the quarterback about five yards back with a running back beside him?",
+          "choices": [
+            "Shotgun",
+            "Pistol",
+            "I formation",
+            "Singleback"
+          ],
+          "answer": 0,
+          "explanation": "Shotgun: beside him. In the pistol the back is directly behind him.",
+          "concept": "shotgun"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a2-formations-10",
+          "prompt": "The quarterback is under center with one running back behind him. Which formation?",
+          "choices": [
+            "Singleback",
+            "I formation",
+            "Empty",
+            "Pistol"
+          ],
+          "answer": 0,
+          "explanation": "Singleback: one back. The I formation stacks two.",
+          "concept": "singleback"
+        },
+        {
+          "type": "true_false",
+          "id": "a2-formations-11",
+          "statement": "In an empty formation, the quarterback has no running backs beside or behind him.",
+          "answer": true,
+          "explanation": "Correct. Five receivers spread out, but nobody stays in to block an extra rusher.",
+          "concept": "empty-backfield"
         }
       ]
     },
@@ -828,6 +864,22 @@
           "answer": 0,
           "explanation": "Seven must be on the line. Six is an illegal formation.",
           "concept": "line-of-scrimmage"
+        },
+        {
+          "type": "true_false",
+          "id": "a2-eligibility-08",
+          "statement": "A team may throw only one forward pass per play, and only from behind the line of scrimmage.",
+          "answer": true,
+          "explanation": "Correct. Backward passes (laterals) are allowed anywhere, any number of times.",
+          "concept": "pass-play"
+        },
+        {
+          "type": "true_false",
+          "id": "a2-eligibility-09",
+          "statement": "Offside is called when a defender is across the line of scrimmage as the ball is snapped.",
+          "answer": true,
+          "explanation": "Correct: 5 yards. A defender who gets back before the snap without contact has no foul.",
+          "concept": "offside"
         }
       ]
     },

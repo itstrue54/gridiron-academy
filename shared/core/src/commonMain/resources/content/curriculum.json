@@ -51,7 +51,8 @@
       "unitFiles": [
         "kid2/u1-kicking-plays.json",
         "kid2/u2-referees-and-rules.json",
-        "kid2/u3-how-plays-work.json"
+        "kid2/u3-how-plays-work.json",
+        "kid2/u4-lining-up.json"
       ],
       "gate": {
         "testPassPct": 80,
@@ -95,7 +96,8 @@
       "unitFiles": [
         "kid3/u1-routes.json",
         "kid3/u2-man-and-zone.json",
-        "kid3/u3-runs-and-fronts.json"
+        "kid3/u3-runs-and-fronts.json",
+        "kid3/u4-clock-calls-and-replay.json"
       ],
       "gate": {
         "testPassPct": 80,

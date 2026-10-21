@@ -446,6 +446,70 @@
           "answer": 1,
           "explanation": "At least seven (five linemen plus two others, often a TE and WR).",
           "concept": "line-of-scrimmage"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a1-positions-10",
+          "prompt": "Who runs the offense and throws most of its passes?",
+          "choices": [
+            "The quarterback",
+            "The center",
+            "The tight end",
+            "The fullback"
+          ],
+          "answer": 0,
+          "explanation": "The quarterback takes the snap, hands off or throws, and often changes the play at the line.",
+          "concept": "quarterback"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a1-positions-11",
+          "prompt": "Whose main job is catching passes?",
+          "choices": [
+            "Wide receivers and tight ends",
+            "Offensive linemen",
+            "Linebackers",
+            "Cornerbacks"
+          ],
+          "answer": 0,
+          "explanation": "Receivers and tight ends catch passes; tight ends also block.",
+          "concept": "receivers"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a1-positions-12",
+          "prompt": "Which player most often takes the handoff and carries the ball?",
+          "choices": [
+            "The running back",
+            "The center",
+            "The wide receiver",
+            "The safety"
+          ],
+          "answer": 0,
+          "explanation": "The running back is the main ball carrier on run plays.",
+          "concept": "running-back"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a1-positions-13",
+          "prompt": "On a run play, how does the running back usually get the ball?",
+          "choices": [
+            "The quarterback hands it to him",
+            "A forward pass",
+            "Straight from the center",
+            "A lateral from a lineman"
+          ],
+          "answer": 0,
+          "explanation": "A handoff: the quarterback takes the snap and puts the ball in the back's hands.",
+          "concept": "handoff"
+        },
+        {
+          "type": "true_false",
+          "id": "a1-positions-14",
+          "statement": "Every play from scrimmage starts with a snap from the center.",
+          "answer": true,
+          "explanation": "Correct. The center passes the ball back to the quarterback (or the holder or punter), and the play is live.",
+          "concept": "snap"
         }
       ],
       "blurb": "Who lines up where."
@@ -517,6 +581,20 @@
           "answer": 1,
           "explanation": "A field goal is worth 3.",
           "concept": "field-goal"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a1-turnovers-07",
+          "prompt": "A defender catches a pass thrown by the quarterback. What is it?",
+          "choices": [
+            "An interception",
+            "A fumble",
+            "A touchback",
+            "A sack"
+          ],
+          "answer": 0,
+          "explanation": "An interception: the defense takes the ball and becomes the offense.",
+          "concept": "interception"
         }
       ],
       "blurb": "How possession changes."

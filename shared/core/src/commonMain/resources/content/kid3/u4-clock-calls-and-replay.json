@@ -1,0 +1,169 @@
+{
+  "id": "kid3-u4",
+  "title": "Clock, Calls and Replay",
+  "lessons": [
+    {
+      "id": "k3-calls",
+      "title": "Calling the Play",
+      "blurb": "The huddle, the clock and the last minutes.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "k3-calls-01",
+          "title": "The play call",
+          "body": "Before each play, the coach picks a play and the quarterback tells the team in the huddle. That's the play call. It says the formation and what each player does.",
+          "concept": "play-call"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k3-calls-02",
+          "prompt": "Who usually picks the play before the snap?",
+          "choices": [
+            "The coach, and the quarterback tells the team",
+            "The referee",
+            "The other team",
+            "The fans"
+          ],
+          "answer": 0,
+          "explanation": "Yes. The coach sends in the call, and the quarterback calls it in the huddle.",
+          "concept": "play-call"
+        },
+        {
+          "type": "learn",
+          "id": "k3-calls-03",
+          "title": "The play clock",
+          "body": "After each play, the offense has 40 seconds to snap the ball. A play clock counts down. If it reaches zero first, that's delay of game.",
+          "concept": "play-clock"
+        },
+        {
+          "type": "true_false",
+          "id": "k3-calls-04",
+          "statement": "If the play clock reaches zero before the snap, the offense gets a penalty.",
+          "answer": true,
+          "explanation": "Yes. Delay of game costs 5 yards.",
+          "concept": "play-clock"
+        },
+        {
+          "type": "learn",
+          "id": "k3-calls-05",
+          "title": "The two-minute warning",
+          "body": "In the NFL, when two minutes are left in each half, the clock stops for the two-minute warning. Teams use the break to plan their last plays.",
+          "concept": "two-minute-warning"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k3-calls-06",
+          "prompt": "When does the two-minute warning happen?",
+          "choices": [
+            "With 2 minutes left in each half",
+            "After every touchdown",
+            "At the start of the game",
+            "When a team has 2 timeouts left"
+          ],
+          "answer": 0,
+          "explanation": "Yes. It happens near the end of the first half and the end of the game.",
+          "concept": "two-minute-warning"
+        },
+        {
+          "type": "learn",
+          "id": "k3-calls-07",
+          "title": "Spike and kneel",
+          "body": "To stop the clock fast, the quarterback can spike the ball into the ground right after the snap. To let the clock run, a team that is winning has the quarterback kneel down.",
+          "concept": "spike"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k3-calls-08",
+          "prompt": "Your team is behind with 10 seconds left, the clock is running and you have no timeouts. How can you stop the clock?",
+          "choices": [
+            "Spike the ball",
+            "Kneel down",
+            "Punt",
+            "Run up the middle"
+          ],
+          "answer": 0,
+          "explanation": "Yes. A spike is an incomplete pass on purpose, so the clock stops. It uses up a down.",
+          "concept": "spike"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k3-calls-09",
+          "prompt": "Your team is winning near the end, and the other team has no timeouts. What can the quarterback do to run out the clock?",
+          "choices": [
+            "Kneel down",
+            "Spike the ball",
+            "Throw deep",
+            "Call a timeout"
+          ],
+          "answer": 0,
+          "explanation": "Yes. He kneels, the play ends safely, and the clock keeps running.",
+          "concept": "kneel-down"
+        }
+      ]
+    },
+    {
+      "id": "k3-replay",
+      "title": "Replay and Overtime",
+      "blurb": "Checking the call, and breaking a tie.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "k3-replay-01",
+          "title": "Replay",
+          "body": "Officials can watch a video replay to check a call. In the NFL, every score and every turnover is checked.",
+          "concept": "replay-review"
+        },
+        {
+          "type": "learn",
+          "id": "k3-replay-02",
+          "title": "The red flag",
+          "body": "An NFL coach who thinks a call was wrong can throw a red flag to challenge it. If the call stands, his team loses a timeout.",
+          "concept": "challenge"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k3-replay-03",
+          "prompt": "A coach throws a red flag onto the field. What does he want?",
+          "choices": [
+            "The officials to check the call on replay",
+            "A timeout for his kicker",
+            "A penalty on his own team",
+            "The game to end"
+          ],
+          "answer": 0,
+          "explanation": "Yes. That's a challenge. The officials look at the replay and decide.",
+          "concept": "challenge"
+        },
+        {
+          "type": "true_false",
+          "id": "k3-replay-04",
+          "statement": "Officials can use video replay to check whether a touchdown really was a touchdown.",
+          "answer": true,
+          "explanation": "Yes. In the NFL every scoring play is reviewed.",
+          "concept": "replay-review"
+        },
+        {
+          "type": "learn",
+          "id": "k3-replay-05",
+          "title": "Overtime",
+          "body": "If the score is tied when the fourth quarter ends, the game goes to overtime: an extra period to find a winner.",
+          "concept": "overtime"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k3-replay-06",
+          "prompt": "The score is tied when the fourth quarter ends. What happens next in the NFL?",
+          "choices": [
+            "Overtime",
+            "The home team wins",
+            "A kicking contest",
+            "The game is replayed next week"
+          ],
+          "answer": 0,
+          "explanation": "Yes. Both teams get a chance to score in overtime. In the regular season it can still end in a tie.",
+          "concept": "overtime"
+        }
+      ]
+    }
+  ]
+}

@@ -204,6 +204,20 @@
           ],
           "explanation": "These four words are used on almost every play.",
           "concept": "snap"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k1-moving-09",
+          "prompt": "How do you stop the ball carrier in tackle football?",
+          "choices": [
+            "Tackle him to the ground",
+            "Pull his flag",
+            "Tag him with one hand",
+            "Yell stop"
+          ],
+          "answer": 0,
+          "explanation": "Yes. In tackle football the play ends when the runner is tackled. In flag football you pull a flag.",
+          "concept": "tackle"
         }
       ],
       "blurb": "Two ways to move the ball."

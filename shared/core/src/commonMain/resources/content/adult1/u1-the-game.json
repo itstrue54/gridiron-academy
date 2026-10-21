@@ -17,7 +17,7 @@
           "type": "learn",
           "id": "a1-basics-02",
           "title": "Offense, defense, special teams",
-          "body": "The team with the ball is the offense; the other is the defense. Each puts 11 players on the field. Kicking plays (kickoffs, punts, field goals) are run by special teams.",
+          "body": "The team with the ball is the offense; the other is the defense. Each puts 11 players on the field. Kicking plays (kickoffs, punts, field goals) are run by special teams. Flag football, played from youth leagues up to the 2028 Olympics, replaces tackling with pulling a flag off the ball carrier's belt.",
           "concept": "offense"
         },
         {
@@ -84,6 +84,50 @@
           "answer": true,
           "explanation": "It sits 50 yards from each goal line.",
           "concept": "yard-line"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a1-basics-09",
+          "prompt": "Where does the offense have to get the ball to score a touchdown?",
+          "choices": [
+            "The opponent's end zone",
+            "Past midfield",
+            "Inside the 10-yard line",
+            "Through the uprights"
+          ],
+          "answer": 0,
+          "explanation": "A touchdown is the ball in the opponent's end zone, carried across the goal line or caught there. Through the uprights is a kick.",
+          "concept": "endzone"
+        },
+        {
+          "type": "true_false",
+          "id": "a1-basics-10",
+          "statement": "The defense is the team without the ball.",
+          "answer": true,
+          "explanation": "Correct. The offense has the ball; the defense tries to stop it and take it away.",
+          "concept": "defense"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a1-basics-11",
+          "prompt": "How does a running play usually end?",
+          "choices": [
+            "The ball carrier is tackled, goes out of bounds, or scores",
+            "After 10 seconds",
+            "When the quarterback calls it off",
+            "After 5 yards"
+          ],
+          "answer": 0,
+          "explanation": "A play is over when the runner is down (tackled), out of bounds, or in the end zone.",
+          "concept": "tackle"
+        },
+        {
+          "type": "true_false",
+          "id": "a1-basics-12",
+          "statement": "In flag football, you stop the ball carrier by pulling a flag from his belt.",
+          "answer": true,
+          "explanation": "Correct. Pulling the flag ends the play, so there is no tackling.",
+          "concept": "flag-football"
         }
       ],
       "blurb": "Field, teams, clock."

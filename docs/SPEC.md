@@ -524,9 +524,8 @@ them; **List** shows the same order as rows for TalkBack. Tapping a concept open
 glossary card (Quiz me, where it's taught), what to learn first and what it leads to.
 Mastery shows as the DESIGN 8.1 glyphs, with a key. A concept no graded step on the profile's
 own ladder is tagged with shows "Not on your course yet" and is left out of the "N of M
-mastered" count: today about 23 terms on the adult ladder (quarterback, pass play,
-offside...) and about 35 on the kid ladder (formation, shotgun, screen...) are taught in
-prose but never tagged, a content gap to close by tagging steps.
+mastered" count. Shipped content has none: every term has a graded step on both ladders
+(tested), after 2026-10-20 added 33 adult questions and 5 kid drills (CURRICULUM.md).
 
 ### 6.8 Offline and multi-device
 Everything works offline. Unlinked progress lives on one device (with manual

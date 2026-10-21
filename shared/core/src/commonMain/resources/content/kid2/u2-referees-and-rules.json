@@ -243,6 +243,85 @@
           "concept": "timeout"
         }
       ]
+    },
+    {
+      "id": "k2-safety",
+      "title": "Playing Safe",
+      "blurb": "Rules that protect players.",
+      "steps": [
+        {
+          "type": "learn",
+          "id": "k2-safety-01",
+          "title": "No late hits",
+          "body": "When the whistle blows, the play is over. Hitting a player after that is unnecessary roughness: a 15-yard penalty.",
+          "concept": "unnecessary-roughness"
+        },
+        {
+          "type": "learn",
+          "id": "k2-safety-02",
+          "title": "Protect the quarterback",
+          "body": "Defenders may not hit the quarterback after he has thrown the ball, or hit him in the head. That's roughing the passer: 15 yards and a first down.",
+          "concept": "roughing-the-passer"
+        },
+        {
+          "type": "learn",
+          "id": "k2-safety-03",
+          "title": "Head up",
+          "body": "Never hit with the top of your helmet or aim at someone's head. In college football that's called targeting, and the player is sent out of the game.",
+          "concept": "targeting"
+        },
+        {
+          "type": "learn",
+          "id": "k2-safety-04",
+          "title": "Hands off receivers",
+          "body": "In the NFL, once a receiver is 5 yards past the line, a defender may not push or grab him before the ball is thrown. That's illegal contact.",
+          "concept": "illegal-contact"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k2-safety-05",
+          "prompt": "A defender hits the quarterback after he already threw the ball. What's the call?",
+          "choices": [
+            "Roughing the passer",
+            "A touchdown",
+            "Offside",
+            "A fair catch"
+          ],
+          "answer": 0,
+          "explanation": "Yes. That's 15 yards and an automatic first down.",
+          "concept": "roughing-the-passer"
+        },
+        {
+          "type": "true_false",
+          "id": "k2-safety-06",
+          "statement": "It's fine to tackle a player after the whistle if he still has the ball.",
+          "answer": false,
+          "explanation": "Not quite. After the whistle the play is over. A late hit is unnecessary roughness.",
+          "concept": "unnecessary-roughness"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k2-safety-07",
+          "prompt": "Why is hitting with the top of your helmet against the rules?",
+          "choices": [
+            "It can hurt the head and neck",
+            "It's too slow",
+            "Only kickers may do it",
+            "It makes the ball fly away"
+          ],
+          "answer": 0,
+          "explanation": "Yes. Keep your head up and see what you hit. In college it's targeting, and the player is sent off.",
+          "concept": "targeting"
+        },
+        {
+          "type": "true_false",
+          "id": "k2-safety-08",
+          "statement": "In the NFL, a defender may grab a receiver 20 yards downfield before the ball is thrown.",
+          "answer": false,
+          "explanation": "Not quite. Past 5 yards, that's illegal contact: 5 yards and an automatic first down.",
+          "concept": "illegal-contact"
+        }
+      ]
     }
   ]
 }

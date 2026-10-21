@@ -121,6 +121,20 @@
           ],
           "explanation": "When a field goal cannot win the game, only a touchdown helps. Always compare the score to what each option is worth.",
           "concept": "fourth-down"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a1-downs-08",
+          "prompt": "How many downs does an NFL offense get to gain 10 yards?",
+          "choices": [
+            "Four",
+            "Three",
+            "Two",
+            "Five"
+          ],
+          "answer": 0,
+          "explanation": "Four downs. Most teams punt or kick on 4th down instead of risking it.",
+          "concept": "down"
         }
       ],
       "blurb": "The heart of the sport."
@@ -147,7 +161,7 @@
           "type": "learn",
           "id": "a1-clock-03",
           "title": "Common penalties",
-          "body": "False start (offense moves early) is 5 yards. Offside (defense across the line early) is 5. Offensive holding is 10. Defensive holding is 5 plus an automatic first down. Facemask and roughing the passer are 15.",
+          "body": "False start (offense moves early) is 5 yards. Offside (defense across the line early) is 5. Offensive holding is 10. Defensive holding is 5 plus an automatic first down. Facemask and roughing the passer are 15. An official throws a yellow flag to mark a foul.",
           "concept": "penalty"
         },
         {
@@ -224,6 +238,62 @@
           "answer": 1,
           "explanation": "Delay of game is a 5-yard penalty.",
           "concept": "play-clock"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a1-clock-09",
+          "prompt": "After a normal play ends, how long does the offense have to snap the ball?",
+          "choices": [
+            "40 seconds",
+            "25 seconds",
+            "60 seconds",
+            "15 seconds"
+          ],
+          "answer": 0,
+          "explanation": "40 seconds from the end of the previous play, 25 after some stoppages. Run out and it's delay of game.",
+          "concept": "play-clock"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a1-clock-10",
+          "prompt": "An offensive lineman flinches before the snap. What is the call?",
+          "choices": [
+            "False start, 5 yards",
+            "Offside, 5 yards",
+            "Holding, 10 yards",
+            "Nothing if he stops"
+          ],
+          "answer": 0,
+          "explanation": "A set offensive player who moves before the snap commits a false start: 5 yards, and the play never starts.",
+          "concept": "false-start"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a1-clock-11",
+          "prompt": "A pass bounces off the turf before the receiver secures it. What is it?",
+          "choices": [
+            "Incomplete: the down is used and the ball goes back",
+            "A fumble the defense can recover",
+            "A catch, if he holds on after",
+            "A turnover"
+          ],
+          "answer": 0,
+          "explanation": "A pass that hits the ground is incomplete: the down is used, the ball returns to the previous spot, and the clock stops.",
+          "concept": "incomplete"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a1-clock-12",
+          "prompt": "Who throws the yellow flag when a foul happens?",
+          "choices": [
+            "An official",
+            "The head coach",
+            "The quarterback",
+            "The replay booth"
+          ],
+          "answer": 0,
+          "explanation": "Officials throw yellow flags for fouls. A coach's red flag is a challenge, not a foul.",
+          "concept": "referee"
         }
       ],
       "blurb": "Stoppages and penalties."
