@@ -19,7 +19,7 @@ class ReleaseContentTest {
     private fun Content.levelIds() = curriculum.levels.map { it.id }
 
     @Test fun `nothing signed ships nothing`() {
-        val shipped = content.reviewedOnly()
+        val shipped = signed().reviewedOnly()
         assertEquals(emptyList(), shipped.levelIds())
         assertEquals(emptyList(), shipped.packs)
     }
@@ -36,6 +36,11 @@ class ReleaseContentTest {
     @Test fun `shared levels open from either track`() {
         val kidSide = signed("kid-1", "kid-2", "kid-3", "varsity-4").reviewedOnly().levelIds()
         assertEquals(listOf("kid-1", "kid-2", "kid-3", "varsity-4"), kidSide)
+    }
+
+    @Test fun `the shipped sign-offs open the whole kid course`() {
+        // review.json: itstrue54 signed kid Levels 1-3 on 2026-10-21.
+        assertEquals(listOf("kid-1", "kid-2", "kid-3"), content.reviewedOnly().levelIds())
     }
 
     @Test fun `everything signed ships the whole course, and it still validates`() {
