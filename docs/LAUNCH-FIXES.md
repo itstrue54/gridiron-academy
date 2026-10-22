@@ -37,7 +37,8 @@ fingerprint changes) and goes back through `tools/review.py`.
       "So close!" only when close.
 
 Phase 1 status (2026-10-22): done in the `launch-fixes-content` PR. 110 edited steps lost
-their sign-off and are queued for re-review.
+their sign-off; phase 6 edits and the coach read brought the queue to 167. itstrue54 signed
+all 167 on 2026-10-22, so every level ships again.
 
 ## Phase 2. A learner app that matches its privacy promise
 
