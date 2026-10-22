@@ -29,6 +29,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.foundation.relocation.BringIntoViewRequester
+import androidx.compose.foundation.relocation.bringIntoViewRequester
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
@@ -89,24 +93,28 @@ fun HomeScreen(state: LearnerAppState) {
     val next = state.nextUp()
     Column(Modifier.fillMaxSize().screenBackground().safeDrawingPadding().padding(skin.gutter)) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(state.profile?.nickname.orEmpty(), style = Gridiron.type.title, color = c.ink, modifier = Modifier.weight(1f))
+            // One line, always: squeezed beside the chip it used to break a letter per line.
+            Text(state.profile?.nickname.orEmpty(), style = Gridiron.type.title, color = c.ink,
+                maxLines = 1, overflow = TextOverflow.Ellipsis, modifier = Modifier.weight(1f))
             // Two taps from Home (DESIGN 1): the glossary is one.
             IconAction(Glyph.GLOSSARY, stringResource(Res.string.glossary), onClick = state::openGlossary)
             IconAction(Glyph.SETTINGS, stringResource(Res.string.grown_up_zone), onClick = state::openGrownUpGate)
-            StreakChip(state.save.progress.streakDays, kid)
         }
+        StreakChip(state.save.progress.streakDays, kid)
         Spacer(Modifier.size(12.dp))
+        // Home opens scrolled to the level being played, not to the top of the list.
+        val current = next?.level?.id ?: state.levels.lastOrNull { state.levelUnlocked(it) }?.id
         if (skin.primeTime) {
             SeasonHeader(state.save.progress.xp)
             Spacer(Modifier.size(14.dp))
             Column(Modifier.weight(1f).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                state.levels.forEach { SeasonCard(state, it) }
+                state.levels.forEach { SeasonCard(state, it, Modifier.scrolledToOnce(it.id == current)) }
             }
         } else {
             Text(stringResource(Res.string.home_title), style = Gridiron.type.headline, color = c.ink, modifier = Modifier.semantics { heading() })
             Spacer(Modifier.size(12.dp))
             Column(Modifier.weight(1f).verticalScroll(rememberScrollState())) {
-                DriveMap(state)
+                DriveMap(state, current)
             }
         }
         Spacer(Modifier.size(16.dp))
@@ -182,7 +190,7 @@ private fun StreakChip(days: Int, kid: Boolean) {
 
 /** The levels on turf, top to bottom from the highest, with the goal line at the bottom. */
 @Composable
-private fun DriveMap(state: LearnerAppState) {
+private fun DriveMap(state: LearnerAppState, current: String?) {
     val skin = Gridiron.skin
     Box(
         Modifier
@@ -203,15 +211,26 @@ private fun DriveMap(state: LearnerAppState) {
             drawLine(DiagramColors.chalk, Offset(0f, size.height - 2.dp.toPx()), Offset(size.width, size.height - 2.dp.toPx()), 3.dp.toPx())
         }
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(20.dp)) {
-            state.levels.sortedByDescending { it.number }.forEach { level -> LevelRow(state, level) }
+            state.levels.sortedByDescending { it.number }.forEach { level ->
+                LevelRow(state, level, Modifier.scrolledToOnce(level.id == current))
+            }
         }
     }
+}
+
+/** Scrolls its parent to show this element once, when Home opens. */
+@Composable
+private fun Modifier.scrolledToOnce(target: Boolean): Modifier {
+    if (!target) return this
+    val requester = remember { BringIntoViewRequester() }
+    LaunchedEffect(Unit) { requester.bringIntoView() }
+    return bringIntoViewRequester(requester)
 }
 
 private enum class NodeState { LOCKED, OPEN, PASSED }
 
 @Composable
-private fun LevelRow(state: LearnerAppState, level: Level) {
+private fun LevelRow(state: LearnerAppState, level: Level, modifier: Modifier = Modifier) {
     val c = Gridiron.colors
     val unlocked = state.levelUnlocked(level)
     val passedCount = state.lessonsPassed(level)
@@ -236,7 +255,7 @@ private fun LevelRow(state: LearnerAppState, level: Level) {
         shape = Gridiron.skin.cardShape,
         color = c.surfaceRaised.copy(alpha = 0.94f),
         contentColor = c.ink,
-        modifier = Modifier.fillMaxWidth().clearAndSetSemantics {
+        modifier = modifier.fillMaxWidth().clearAndSetSemantics {
             contentDescription = "$levelLabel, ${level.title}. $stateWord. $progressLabel"
         },
     ) {
@@ -306,7 +325,7 @@ private fun SeasonHeader(xp: Int) {
  * drills passed. Passed is volt with a check; the open level is magenta; locked is grey.
  */
 @Composable
-private fun SeasonCard(state: LearnerAppState, level: Level) {
+private fun SeasonCard(state: LearnerAppState, level: Level, modifier: Modifier = Modifier) {
     val c = Gridiron.colors
     val unlocked = state.levelUnlocked(level)
     val passed = level.id in state.save.progress.levelsPassed
@@ -334,7 +353,7 @@ private fun SeasonCard(state: LearnerAppState, level: Level) {
         color = glass(),
         contentColor = c.ink,
         border = BorderStroke(if (nodeState == NodeState.OPEN) 1.5.dp else 1.dp, if (nodeState == NodeState.OPEN) c.rank else c.line),
-        modifier = Modifier.fillMaxWidth().clearAndSetSemantics {
+        modifier = modifier.fillMaxWidth().clearAndSetSemantics {
             contentDescription = "$levelLabel, ${level.title}. $stateWord. $progressLabel"
         },
     ) {
