@@ -204,6 +204,10 @@ class ScreenRenderTest {
         kid.back()
         kid.startBigGame(level)
         val round = kid.speedRoundController(level.id)
+        shot("19a-speed-round-rules-kid") {
+            GridironTheme(skin = kid.skin, dark = false) { SpeedRoundScreen(kid, level.id, round, clock = false) }
+        }
+        round.start(timed = true)
         repeat(3) { round.tick(4_000L * (it + 1)); round.answer(perfect(round.current!!)) }
         round.tick(51_500)
         shot("19-speed-round-kid") {

@@ -55,6 +55,28 @@ import io.github.itstrue54.gridironacademy.ui.resources.speed_streak
 import io.github.itstrue54.gridironacademy.ui.theme.Gridiron
 import io.github.itstrue54.gridironacademy.ui.theme.screenBackground
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.selection.toggleable
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.semantics
+import io.github.itstrue54.gridironacademy.ui.components.PrimaryButton
+import io.github.itstrue54.gridironacademy.ui.resources.speed_clock
+import io.github.itstrue54.gridironacademy.ui.resources.speed_clock_off
+import io.github.itstrue54.gridironacademy.ui.resources.speed_clock_on
+import io.github.itstrue54.gridironacademy.ui.resources.speed_rules_adult
+import io.github.itstrue54.gridironacademy.ui.resources.speed_rules_kid
+import io.github.itstrue54.gridironacademy.ui.resources.speed_rules_win_adult
+import io.github.itstrue54.gridironacademy.ui.resources.speed_rules_win_kid
+import io.github.itstrue54.gridironacademy.ui.resources.speed_start
+import io.github.itstrue54.gridironacademy.ui.theme.Voice
+import kotlin.math.roundToInt
 
 private val LETTERS = listOf("A", "B", "C", "D")
 
@@ -72,17 +94,32 @@ fun SpeedRoundScreen(state: LearnerAppState, levelId: String, round: SpeedRoundC
         LaunchedEffect(round) {
             // Time adds up frame by frame from the round's own elapsed time, so a rebuilt
             // screen resumes where it was. A gap longer than MAX_FRAME_GAP is the app
-            // being away (a call, the home button): that time doesn't count.
+            // being away (a call, the home button): that time doesn't count. Nor does time
+            // on the rules screen or under the Leave dialog.
             var last = withFrameMillis { it }
             while (!round.over) {
                 withFrameMillis { now ->
-                    round.tick(round.elapsedMillis + (now - last).coerceIn(0, MAX_FRAME_GAP_MS))
+                    val paused = !round.started || state.confirmingLeave
+                    if (!paused) round.tick(round.elapsedMillis + (now - last).coerceIn(0, MAX_FRAME_GAP_MS))
                     last = now
                 }
             }
         }
     }
     LaunchedEffect(round.over) { if (round.over) state.finishSpeedRound(levelId, round) }
+
+    if (!round.started) {
+        val level = state.content.level(levelId)
+        SpeedRoundRules(
+            questions = round.questionCount,
+            toWin = rightToPass(round.questionCount, level.gate.gamePassPct),
+            seconds = (round.limitMillis / 1000).toInt(),
+            untimedByDefault = remember(round) { state.speedRoundUntimedByDefault() },
+            onClose = { state.requestBack() },
+            onStart = round::start,
+        )
+        return
+    }
 
     Column(Modifier.fillMaxSize().screenBackground().safeDrawingPadding()) {
         Row(Modifier.padding(start = 4.dp, end = skin.gutter), verticalAlignment = Alignment.CenterVertically) {
@@ -95,8 +132,10 @@ fun SpeedRoundScreen(state: LearnerAppState, levelId: String, round: SpeedRoundC
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                TimerRing(round.millisLeft, round.limitMillis)
-                Spacer(Modifier.width(16.dp))
+                if (round.timed) {
+                    TimerRing(round.millisLeft, round.limitMillis)
+                    Spacer(Modifier.width(16.dp))
+                }
                 Column {
                     Text(
                         stringResource(Res.string.speed_question_of, (round.answered + 1).coerceAtMost(round.questionCount), round.questionCount),
@@ -132,6 +171,61 @@ fun SpeedRoundScreen(state: LearnerAppState, levelId: String, round: SpeedRoundC
         }
     }
 }
+
+/**
+ * Before the first question (DESIGN 9.6): what the round is, how to win, and the clock
+ * switch. Nothing is timed until Start.
+ */
+@Composable
+private fun SpeedRoundRules(
+    questions: Int,
+    toWin: Int,
+    seconds: Int,
+    untimedByDefault: Boolean,
+    onClose: () -> Unit,
+    onStart: (timed: Boolean) -> Unit,
+) {
+    val c = Gridiron.colors
+    val skin = Gridiron.skin
+    val kid = skin.voice == Voice.KID
+    var timed by rememberSaveable { mutableStateOf(!untimedByDefault) }
+    Column(Modifier.fillMaxSize().screenBackground().safeDrawingPadding()) {
+        Row(Modifier.padding(start = 4.dp, end = skin.gutter), verticalAlignment = Alignment.CenterVertically) {
+            IconAction(Glyph.CLOSE, stringResource(Res.string.close_game), onClick = onClose)
+        }
+        Column(
+            Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(horizontal = skin.gutter),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+        ) {
+            Text(stringResource(Res.string.speed_round), style = Gridiron.type.displayLarge,
+                color = if (skin.primeTime) c.gold else c.ink, modifier = Modifier.semantics { heading() })
+            Text(stringResource(if (kid) Res.string.speed_rules_kid else Res.string.speed_rules_adult, questions),
+                style = Gridiron.type.body, color = c.ink)
+            Text(stringResource(if (kid) Res.string.speed_rules_win_kid else Res.string.speed_rules_win_adult, toWin, questions),
+                style = Gridiron.type.body, color = c.ink)
+            Row(
+                Modifier.fillMaxWidth().toggleable(timed, role = Role.Switch, onValueChange = { timed = it }).padding(vertical = 8.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Column(Modifier.weight(1f)) {
+                    Text(stringResource(Res.string.speed_clock), style = Gridiron.type.answer, color = c.ink)
+                    Text(
+                        if (timed) stringResource(Res.string.speed_clock_on, seconds) else stringResource(Res.string.speed_clock_off),
+                        style = Gridiron.type.label, color = c.inkDim,
+                    )
+                }
+                Switch(checked = timed, onCheckedChange = null,
+                    colors = SwitchDefaults.colors(checkedTrackColor = c.gold, checkedThumbColor = c.onGold))
+            }
+        }
+        PrimaryButton(stringResource(Res.string.speed_start), onClick = { onStart(timed) },
+            modifier = Modifier.fillMaxWidth().padding(skin.gutter))
+    }
+}
+
+/** The fewest right answers whose score reaches [passPct], as [SpeedRound.scorePct] rounds it. */
+internal fun rightToPass(questions: Int, passPct: Int): Int =
+    (0..questions).firstOrNull { k -> questions == 0 || (100f * k / questions).roundToInt() >= passPct } ?: questions
 
 @Composable
 private fun Chip(text: String) {

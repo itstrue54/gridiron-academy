@@ -15,6 +15,10 @@ import io.github.itstrue54.gridironacademy.model.TrueFalse
  * A Speed round (DESIGN 9.6) made observable. The engine's [SpeedRound] keeps score;
  * time comes in through [tick] as milliseconds since the round began, so the round is
  * deterministic and a test can play it without a clock.
+ *
+ * The round waits on its rules screen until [start]. An untimed round (DESIGN 12) keeps the
+ * points and the streak but has no clock: time still adds up, for the attempt log, but
+ * never ends the round.
  */
 @Stable
 class SpeedRoundController(
@@ -28,6 +32,11 @@ class SpeedRoundController(
     private val missed = mutableListOf<ReviewItem>()
 
     var elapsedMillis: Long by mutableStateOf(0L)
+        private set
+    /** False while the rules screen is up. */
+    var started: Boolean by mutableStateOf(false)
+        private set
+    var timed: Boolean by mutableStateOf(true)
         private set
     var current: Step? by mutableStateOf(round.current)
         private set
@@ -50,15 +59,23 @@ class SpeedRoundController(
     val millisLeft: Long get() = (limitMillis - elapsedMillis).coerceAtLeast(0)
     val review: List<ReviewItem> get() = missed.toList()
 
+    fun start(timed: Boolean) {
+        this.timed = timed
+        started = true
+    }
+
+    /** What the engine's clock reads: frozen at zero when untimed. */
+    private val gameMillis: Long get() = if (timed) elapsedMillis else 0L
+
     fun tick(elapsed: Long) {
         if (over) return
         elapsedMillis = elapsed
-        if (round.isOver(elapsed)) over = true
+        if (round.isOver(gameMillis)) over = true
     }
 
     fun answer(a: Answer) {
         val step = current ?: return
-        val grade = round.answer(a, elapsedMillis)
+        val grade = round.answer(a, gameMillis)
         if (grade == null) { over = true; return }
         onGraded?.invoke(step, grade, a, true, elapsedMillis - shownAtElapsed)
         shownAtElapsed = elapsedMillis
@@ -69,7 +86,7 @@ class SpeedRoundController(
         bestStreak = round.bestStreak
         answered = round.index
         current = round.current
-        if (round.isOver(elapsedMillis)) over = true
+        if (round.isOver(gameMillis)) over = true
     }
 
     private fun reviewItem(step: Step, why: String): ReviewItem = when (step) {

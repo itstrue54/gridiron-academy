@@ -328,7 +328,7 @@ in the engine, unit-tested.
 | Game | Mechanic | Levels |
 |---|---|---|
 | **Picture Play** | 6 untimed `picture_choice`/`drag_to` rounds, sticker reward | 0 |
-| **Speed round** | Timed MC/TF (60s), streak of 3 doubles points; the gate score is right answers out of *all* the round's questions, so ones the clock cuts off count as missed (accuracy alone would let one answer and a wait pass). **Untimed** option keeps scoring without a clock (DESIGN §12) | 1-3, review |
+| **Speed round** | Timed MC/TF (60s), streak of 3 doubles points; the gate score is right answers out of *all* the round's questions, so ones the clock cuts off count as missed (accuracy alone would let one answer and a wait pass). **Untimed** option keeps scoring without a clock (DESIGN §12): a rules screen before the first question has the Clock switch, off by default for ages 8-9 and when a screen reader is on | 1-3, review |
 | **Diagram dash** | Run of `diagram_tap`/`align` | 3+ |
 | **Read the defense** | Run of `read_defense`, disguise flag at L7 | 4, 6, 7 |
 | **Game day** | A simulated game of `situation`/`call_it` decisions; coach points (BEST 1, OK 0.5, POOR 0) | 2, 5, 8 |
@@ -346,7 +346,7 @@ number), so a replay of the same attempt is identical (principle 1.5.4).
   pass. Drawn from the level's graded steps (seeded by level, day and attempt, so every
   retake is a new draw that can't be learned from the last try's feedback; weighting
   toward low-mastery concepts comes with §4.6), each asked once with feedback but no
-  retry. Misses go to review. The Speed round clock doesn't count time the app is away.
+  retry. Misses go to review. The Speed round clock doesn't count time the app is away, on the rules screen, or under the Leave dialog; any screen change closes that dialog.
 - Big Game opens after the checkpoint; 70% to pass.
 - Passing both passes the level. Stars per DESIGN (95/80/60).
 - **Level 0 has no test.** Finishing every lesson and one Picture Play passes it, so
