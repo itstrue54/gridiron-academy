@@ -60,7 +60,7 @@
           "id": "k1-downs-06",
           "statement": "When a team gets a first down, it gets 4 new tries.",
           "answer": true,
-          "explanation": "Yes! That is why first downs are so important.",
+          "explanation": "That is why first downs are so important.",
           "concept": "first-down"
         },
         {
@@ -141,7 +141,7 @@
           "type": "learn",
           "id": "k1-moving-04",
           "title": "Tackle",
-          "body": "The defense stops a runner by tackling: bringing them to the ground. In flag football, they pull a flag instead.",
+          "body": "The defense stops a runner by tackling: bringing them to the ground. In flag football, they pull a flag instead. In youth and high school football, a runner is down as soon as a knee touches the ground.",
           "concept": "tackle"
         },
         {
@@ -175,7 +175,7 @@
         {
           "type": "true_false",
           "id": "k1-moving-07",
-          "statement": "If a pass hits the ground, the play is over.",
+          "statement": "If a forward pass hits the ground, the play is over.",
           "answer": true,
           "explanation": "That is an incomplete pass. The ball goes back and the team tries again.",
           "concept": "incomplete"
@@ -216,7 +216,7 @@
             "Yell stop"
           ],
           "answer": 0,
-          "explanation": "Yes. In tackle football the play ends when the runner is tackled. In flag football you pull a flag.",
+          "explanation": "In tackle football the play ends when the runner is tackled. In flag football you pull a flag.",
           "concept": "tackle"
         }
       ],

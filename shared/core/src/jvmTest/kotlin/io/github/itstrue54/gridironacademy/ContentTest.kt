@@ -44,6 +44,17 @@ class ContentTest {
         assertTrue(errs.any { "exactly one BEST" in it })
     }
 
+    @Test fun `validator rejects an explanation that gives its own verdict`() {
+        // Found in review: "Not quite. Here's why." followed by "Yes! Get the ball..."
+        val unit = CourseUnit("u", "u", listOf(Lesson("l", "l", steps = listOf(
+            TrueFalse("a", "s", true, "Yes! The end zone is where you score."),
+            TrueFalse("b", "s", false, "Not quite. It's short."),
+            TrueFalse("c", "s", true, "No deep safety means Cover 0."),
+        ))))
+        val errs = ContentValidator.validateUnit(unit, false, emptySet())
+        assertEquals(2, errs.count { "opens with a verdict" in it }, errs.joinToString())
+    }
+
     @Test fun `validator catches an illegal formation`() {
         fun offense(onLine: Int) = (0 until 11).map { i ->
             DiagramPlayer("o$i", "O", Side.OFFENSE, i * 2f - 10f, if (i < onLine) 0f else -1f)

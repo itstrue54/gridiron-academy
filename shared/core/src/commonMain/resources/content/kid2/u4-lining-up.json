@@ -25,7 +25,7 @@
             "Next to the coach"
           ],
           "answer": 0,
-          "explanation": "Yes. The ball is placed where the last play ended, or back where it started after an incomplete pass. That spot is the new line of scrimmage.",
+          "explanation": "The ball is placed where the last play ended, or back where it started after an incomplete pass. That spot is the new line of scrimmage.",
           "concept": "line-of-scrimmage"
         },
         {
@@ -122,21 +122,21 @@
           "id": "k2-line-04",
           "statement": "A formation is how the offense lines up before the snap.",
           "answer": true,
-          "explanation": "Yes. Coaches pick a formation to help the play work.",
+          "explanation": "Coaches pick a formation to help the play work.",
           "concept": "formation"
         },
         {
           "type": "learn",
           "id": "k2-line-05",
           "title": "Who can catch a pass?",
-          "body": "Players at the ends of the line and players in the backfield can catch a forward pass. They are eligible receivers. The five linemen in the middle are not.",
+          "body": "Players at the ends of the line and players in the backfield can catch a forward pass. They are eligible receivers. The five linemen in the middle are not. In high school, players wearing 50 to 79 can never catch one.",
           "concept": "eligible-receiver"
         },
         {
           "type": "diagram_tap",
           "id": "k2-line-06",
           "prompt": "Tap every player who can catch a pass.",
-          "explanation": "Yes. The receivers, the tight end and the running back can. The five linemen can't, and neither can a quarterback taking the snap under center.",
+          "explanation": "The receivers, the tight end and the running back can. The five linemen can't, and neither can a quarterback taking the snap under center.",
           "targets": [
             "rb",
             "te",
@@ -233,14 +233,14 @@
           "id": "k2-line-07",
           "statement": "The center and the guards are allowed to catch a forward pass.",
           "answer": false,
-          "explanation": "Not quite. The linemen in the middle are ineligible receivers. Their job is to block.",
+          "explanation": "The linemen in the middle are ineligible receivers. Their job is to block.",
           "concept": "ineligible-receiver"
         },
         {
           "type": "diagram_tap",
           "id": "k2-line-08",
           "prompt": "Tap every player who is NOT allowed to catch a pass.",
-          "explanation": "Yes. The five linemen in the middle can't catch a pass. Everyone else here can.",
+          "explanation": "The five linemen in the middle can't catch a pass. Everyone else here can.",
           "targets": [
             "lt",
             "lg",
@@ -706,7 +706,7 @@
             "Singleback"
           ],
           "answer": 0,
-          "explanation": "Yes. The quarterback is about five yards back with a running back beside him: shotgun.",
+          "explanation": "The quarterback is about five yards back with a running back beside him: shotgun.",
           "diagram": {
             "players": [
               {
@@ -801,7 +801,7 @@
             "Pistol"
           ],
           "answer": 0,
-          "explanation": "Yes. Two running backs in a line behind the quarterback make an I.",
+          "explanation": "Two running backs in a line behind the quarterback make an I.",
           "diagram": {
             "players": [
               {
@@ -896,7 +896,7 @@
             "Shotgun"
           ],
           "answer": 0,
-          "explanation": "Yes. One running back behind a quarterback under center is singleback.",
+          "explanation": "One running back behind a quarterback under center is singleback.",
           "diagram": {
             "players": [
               {
@@ -991,7 +991,7 @@
             "Empty"
           ],
           "answer": 0,
-          "explanation": "Yes. The quarterback is a few yards back and the running back is right behind him: the pistol.",
+          "explanation": "The quarterback is a few yards back and the running back is right behind him: the pistol.",
           "diagram": {
             "players": [
               {
@@ -1080,7 +1080,7 @@
           "id": "k2-sets-09",
           "statement": "In an empty formation, there are no running backs in the backfield.",
           "answer": true,
-          "explanation": "Yes. Everyone who can catch a pass spreads out.",
+          "explanation": "Everyone who can catch a pass spreads out.",
           "concept": "empty-backfield"
         },
         {
@@ -1101,7 +1101,7 @@
             "A timeout"
           ],
           "answer": 0,
-          "explanation": "Yes. A shift changes the formation to make the defense adjust.",
+          "explanation": "A shift changes the formation to make the defense adjust.",
           "concept": "shift"
         }
       ]

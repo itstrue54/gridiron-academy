@@ -103,7 +103,7 @@
           "type": "learn",
           "id": "ar8-fourth-02",
           "title": "Extra point or two?",
-          "body": "NFL extra points are made about 94% of the time; two-point tries succeed a little under half the time. That's close to the same expected points, so the score and the clock decide.",
+          "body": "NFL extra points are made about 95% of the time; two-point tries succeed a little under half the time. That's close to the same expected points, so the score and the clock decide.",
           "concept": "two-point"
         },
         {
@@ -116,7 +116,7 @@
         {
           "type": "multiple_choice",
           "id": "ar8-fourth-04",
-          "prompt": "Why do modern models favour going for it on many 4th and shorts?",
+          "prompt": "Why do modern models favor going for it on many 4th and shorts?",
           "choices": [
             "Converting keeps the drive alive, worth more than the punt's field position",
             "Punting is illegal",
@@ -130,7 +130,7 @@
         {
           "type": "multiple_choice",
           "id": "ar8-fourth-05",
-          "prompt": "An extra point is about 94% and a two-point try about 48%. Early in a game, which is worth more on average?",
+          "prompt": "An extra point is about 95% and a two-point try about 48%. Early in a game, which is worth more on average?",
           "choices": [
             "About the same",
             "The extra point by far",
@@ -138,7 +138,7 @@
             "Neither scores"
           ],
           "answer": 0,
-          "explanation": "0.94 x 1 is about 0.94; 0.48 x 2 is about 0.96. Close enough that the situation decides.",
+          "explanation": "0.95 x 1 is 0.95; 0.48 x 2 is 0.96. Close enough that the situation decides.",
           "concept": "two-point"
         },
         {

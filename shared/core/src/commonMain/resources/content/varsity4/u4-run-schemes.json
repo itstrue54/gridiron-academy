@@ -152,7 +152,7 @@
           "type": "learn",
           "id": "v4-zone-03",
           "title": "Outside zone",
-          "body": "Linemen take wide steps to reach the edge; the back presses outside. If the edge is sealed he cuts back, and that cutback is where the big runs come from.",
+          "body": "Linemen take wide steps to reach the edge; the back presses outside. If the blockers seal the edge defender inside, he bounces outside; if the defense sets a hard edge, he cuts back, and that cutback is where the big runs come from.",
           "diagram": {
             "players": [
               {
@@ -567,7 +567,7 @@
                     "y": -1.5
                   },
                   {
-                    "x": 2.6,
+                    "x": 4.4,
                     "y": 2.2
                   }
                 ],
@@ -611,7 +611,7 @@
                     "y": -3.5
                   },
                   {
-                    "x": 2.6,
+                    "x": 4.4,
                     "y": 4
                   }
                 ],
@@ -961,7 +961,7 @@
                     "y": -1.5
                   },
                   {
-                    "x": 2.6,
+                    "x": 4.4,
                     "y": 2.2
                   }
                 ],
@@ -1005,7 +1005,7 @@
                     "y": -3.5
                   },
                   {
-                    "x": 2.6,
+                    "x": 4.4,
                     "y": 4
                   }
                 ],

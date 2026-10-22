@@ -25,7 +25,7 @@
             "The fans"
           ],
           "answer": 0,
-          "explanation": "Yes. The coach sends in the call, and the quarterback calls it in the huddle.",
+          "explanation": "The coach sends in the call, and the quarterback calls it in the huddle.",
           "concept": "play-call"
         },
         {
@@ -40,7 +40,7 @@
           "id": "k3-calls-04",
           "statement": "If the play clock reaches zero before the snap, the offense gets a penalty.",
           "answer": true,
-          "explanation": "Yes. Delay of game costs 5 yards.",
+          "explanation": "Delay of game costs 5 yards.",
           "concept": "play-clock"
         },
         {
@@ -53,7 +53,7 @@
         {
           "type": "multiple_choice",
           "id": "k3-calls-06",
-          "prompt": "When does the two-minute warning happen?",
+          "prompt": "In the NFL, when does the two-minute warning happen?",
           "choices": [
             "With 2 minutes left in each half",
             "After every touchdown",
@@ -61,7 +61,7 @@
             "When a team has 2 timeouts left"
           ],
           "answer": 0,
-          "explanation": "Yes. It happens near the end of the first half and the end of the game.",
+          "explanation": "It happens near the end of the first half and the end of the game. High school games don't have one.",
           "concept": "two-minute-warning"
         },
         {
@@ -82,7 +82,7 @@
             "Run up the middle"
           ],
           "answer": 0,
-          "explanation": "Yes. A spike is an incomplete pass on purpose, so the clock stops. It uses up a down.",
+          "explanation": "A spike is an incomplete pass on purpose, so the clock stops. It uses up a down.",
           "concept": "spike"
         },
         {
@@ -96,7 +96,7 @@
             "Call a timeout"
           ],
           "answer": 0,
-          "explanation": "Yes. He kneels, the play ends safely, and the clock keeps running.",
+          "explanation": "He kneels, the play ends safely, and the clock keeps running.",
           "concept": "kneel-down"
         }
       ]
@@ -131,7 +131,7 @@
             "The game to end"
           ],
           "answer": 0,
-          "explanation": "Yes. That's a challenge. The officials look at the replay and decide.",
+          "explanation": "That's a challenge. The officials look at the replay and decide.",
           "concept": "challenge"
         },
         {
@@ -139,14 +139,14 @@
           "id": "k3-replay-04",
           "statement": "Officials can use video replay to check whether a touchdown really was a touchdown.",
           "answer": true,
-          "explanation": "Yes. In the NFL every scoring play is reviewed.",
+          "explanation": "In the NFL every scoring play is reviewed.",
           "concept": "replay-review"
         },
         {
           "type": "learn",
           "id": "k3-replay-05",
           "title": "Overtime",
-          "body": "If the score is tied when the fourth quarter ends, the game goes to overtime: an extra period to find a winner.",
+          "body": "If the score is tied when the fourth quarter ends, the game goes to overtime. In the NFL that's an extra period. In high school and college, each team gets a turn with the ball near the end zone.",
           "concept": "overtime"
         },
         {
@@ -160,7 +160,7 @@
             "The game is replayed next week"
           ],
           "answer": 0,
-          "explanation": "Yes. Both teams get a chance to score in overtime. In the regular season it can still end in a tie.",
+          "explanation": "Both teams get a chance to score in overtime. In the regular season it can still end in a tie.",
           "concept": "overtime"
         }
       ]

@@ -458,10 +458,11 @@
                 "points": [
                   {
                     "x": 2,
-                    "y": -2
+                    "y": 3
                   }
                 ],
-                "kind": "drop"
+                "kind": "drop",
+                "label": "on the back"
               }
             ]
           },

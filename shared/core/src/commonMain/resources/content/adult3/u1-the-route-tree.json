@@ -18,7 +18,7 @@
           "type": "learn",
           "id": "a3-tree-02",
           "title": "Odd out, even in",
-          "body": "In that tree the odd numbers break toward the sideline and the even numbers break toward the middle. The higher the number, the deeper the route.",
+          "body": "In that tree the odd numbers break toward the sideline and the even numbers break toward the middle. Higher numbers are usually deeper, though the comeback (3) runs deeper than the curl (4).",
           "concept": "route-tree"
         },
         {
@@ -529,7 +529,7 @@
           "id": "a3-timing-05",
           "statement": "Deep routes like the post usually need more time than the quick game.",
           "answer": true,
-          "explanation": "Yes. Deeper routes take longer to develop, so they pair with longer drops or play-action.",
+          "explanation": "Deeper routes take longer to develop, so they pair with longer drops or play-action.",
           "concept": "route"
         }
       ]

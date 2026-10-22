@@ -77,8 +77,8 @@
     {
       "id": "extra-point",
       "term": "Extra point",
-      "kid": "A kick after a touchdown for 1 extra point.",
-      "full": "A try after a touchdown: a 1-point kick (NFL: 33 yards, from the 15) .",
+      "kid": "A try after a touchdown. In high school and the NFL a kick is worth 1 point; some youth leagues give 2 for a kick.",
+      "full": "A try after a touchdown: a 1-point kick (NFL: 33 yards, from the 15).",
       "level": 1,
       "side": "special",
       "requires": [
@@ -111,7 +111,7 @@
     {
       "id": "safety-score",
       "term": "Safety (scoring)",
-      "kid": "When the defense tackles the offense in its own end zone. Worth 2 points.",
+      "kid": "When the defense tackles the ball carrier in his own end zone. Worth 2 points.",
       "full": "A 2-point score for the defense when the ball carrier is down in his own end zone, among other situations.",
       "level": 1,
       "side": "defense",
@@ -147,7 +147,7 @@
       "id": "down-and-distance",
       "term": "Down and distance",
       "kid": "How many tries are left and how far you still need to go.",
-      "full": "The situation: which down it is and how many yards remain for a first down (e.g. 3rd and 4).",
+      "full": "The situation: which down it is and how many yards remain for a first down, for example 3rd and 4.",
       "level": 1,
       "side": "offense",
       "requires": [
@@ -370,7 +370,7 @@
     {
       "id": "line-of-scrimmage",
       "term": "Line of scrimmage",
-      "kid": "The imaginary line where the ball is.",
+      "kid": "The invisible line where the ball sits before a play.",
       "full": "The line parallel to the goal lines through the ball's forward point; teams are on opposite sides at the snap.",
       "level": 1,
       "side": "rules",
@@ -405,7 +405,7 @@
       "id": "play-clock",
       "term": "Play clock",
       "kid": "The timer for how fast the offense must snap.",
-      "full": "In the NFL, 40 seconds (25 after some stoppages); many high school and youth leagues use 25. Delay of game is 5 yards.",
+      "full": "40 seconds after most plays and 25 after some stoppages, in the NFL and in high school (since 2019). Delay of game is 5 yards.",
       "level": 1,
       "side": "rules",
       "requires": [
@@ -1465,7 +1465,7 @@
     {
       "id": "simulated-pressure",
       "term": "Overload and creeper",
-      "kid": "Blitzes that out-number one side or hide who's rushing.",
+      "kid": "An overload sends extra rushers to one side; a creeper rushes four from surprising spots.",
       "full": "An overload sends more rushers to one side than it can block; a creeper (simulated pressure) rushes four from unexpected spots while dropping a lineman.",
       "level": 5,
       "side": "defense",
@@ -1522,7 +1522,7 @@
       "id": "box-count",
       "term": "Box count",
       "kid": "How many defenders are near the line.",
-      "full": "The number of defenders in the box compared with the offense's blockers; more blockers favours the run, more defenders the pass.",
+      "full": "The number of defenders in the box compared with the offense's blockers; more blockers favors the run, more defenders the pass.",
       "level": 6,
       "side": "defense",
       "requires": [
@@ -1627,7 +1627,7 @@
       "id": "coverage-check",
       "term": "Coverage check",
       "kid": "Choosing the coverage at the line.",
-      "full": "Calling two coverages and picking one at the line from the formation or motion, sometimes with colour codes (red/green) or one-word calls against tempo.",
+      "full": "Calling two coverages and picking one at the line from the formation or motion, sometimes with color codes (red/green) or one-word calls against tempo.",
       "level": 7,
       "side": "defense",
       "requires": [

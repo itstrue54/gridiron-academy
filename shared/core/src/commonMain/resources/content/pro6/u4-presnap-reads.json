@@ -18,7 +18,7 @@
           "type": "learn",
           "id": "p6-presnap-02",
           "title": "Count the box",
-          "body": "Compare box defenders with blockers. If the offense has more blockers than the defense has box defenders, run; if the defense out-numbers the blockers, throw.",
+          "body": "Compare box defenders with blockers. If the offense has more blockers than the defense has box defenders, run; if the defense outnumbers the blockers, throw.",
           "diagram": {
             "players": [
               {
@@ -948,10 +948,11 @@
                 "points": [
                   {
                     "x": 2,
-                    "y": -2
+                    "y": 3
                   }
                 ],
-                "kind": "drop"
+                "kind": "drop",
+                "label": "on the back"
               },
               {
                 "playerId": "ss",

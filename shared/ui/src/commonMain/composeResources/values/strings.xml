@@ -112,6 +112,7 @@
     <string name="testout_passed_kid">You tested out! The Big Game is open.</string>
     <string name="testout_passed_adult">Tested out. The drills are marked done and the Big Game is open.</string>
     <string name="checkpoint_not_yet_kid">So close! Get %1$d% to pass. Practice and try again.</string>
+    <string name="checkpoint_not_yet_far_kid">Not yet! Get %1$d% to pass. Play the drills again, then try.</string>
     <string name="checkpoint_not_yet_adult">%1$d% passes the Checkpoint. Review and try again.</string>
     <string name="game_won_kid">You won the Big Game!</string>
     <string name="game_won_adult">Big Game won.</string>
@@ -155,7 +156,7 @@
     <string name="done_passed_adult">Passed. The next drill is open.</string>
     <string name="done_try_again_kid">Get %1$d% to open the next drill. Try again any time!</string>
     <string name="done_try_again_adult">%1$d% opens the next drill.</string>
-    <string name="done_review">The ones you missed come back in practice.</string>
+    <string name="done_review">Tricky ones come back in practice.</string>
     <string name="done_xp">+%1$d XP</string>
     <string name="back_to_level">Back to the level</string>
     <string name="try_again">Try again</string>
@@ -292,7 +293,7 @@
     <string name="close_practice">Leave practice</string>
     <string name="practice_done_kid">Nice practice!</string>
     <string name="practice_done_adult">Practice done</string>
-    <string name="practice_done_body">Anything you missed comes back in a day or two.</string>
+    <string name="practice_done_body">Tricky ones come back in a day or two.</string>
     <string name="practice_done_today">Practice done for today</string>
     <string name="practice_hint_kid">A few quick questions to keep it fresh.</string>
     <string name="practice_hint_adult">A few questions on what you've learned, so it sticks.</string>

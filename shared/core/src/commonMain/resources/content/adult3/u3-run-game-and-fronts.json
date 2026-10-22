@@ -749,7 +749,7 @@
           "id": "a3-blocking-05",
           "statement": "A pulling guard leaves his spot to block elsewhere.",
           "answer": true,
-          "explanation": "Yes. Pulling gets an extra blocker to the point of attack.",
+          "explanation": "Pulling gets an extra blocker to the point of attack.",
           "concept": "pull-block"
         }
       ]
@@ -1615,7 +1615,7 @@
           "id": "a3-twominute-06",
           "statement": "Spiking the ball stops the clock but uses up a down.",
           "answer": true,
-          "explanation": "Yes, so spike only when the down is cheaper than the seconds.",
+          "explanation": "A spike costs a down, so spike only when the down is cheaper than the seconds.",
           "concept": "spike"
         }
       ]

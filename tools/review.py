@@ -13,6 +13,9 @@
       Approvals whose fingerprint still matches the step are written to review.json;
       flags and stale approvals are listed for follow-up, never signed.
 
+  python3 tools/review.py prune
+      After editing signed steps: drop their now-stale sign-offs so they queue for review.
+
 A step's fingerprint is the first 16 hex digits of SHA-256 over its canonical JSON
 (keys sorted, no spaces, UTF-8). ReviewLogTest computes the same thing in Kotlin, so a
 step edited after sign-off fails the build until it is reviewed again.
@@ -167,6 +170,21 @@ def page(a):
     print(f"{len(queue)} steps -> {a.o}")
 
 
+def prune(_):
+    """Drop sign-offs whose step changed (or no longer exists): those steps need review again."""
+    current = {s["id"]: s for _, _, s in steps()}
+    log = load_review()
+    keep, dropped = [], []
+    for so in log["signoffs"]:
+        st = current.get(so["step"])
+        (keep if st is not None and fingerprint(st) == so["hash"] else dropped).append(so)
+    log["signoffs"] = keep
+    save_review(log)
+    print(f"kept {len(keep)}; dropped {len(dropped)} changed since sign-off")
+    for so in dropped:
+        print(f"  {so['step']}")
+
+
 def selftest(_):
     # Kotlin's ReviewLogTest checks the same value, so both sides hash alike.
     print(fingerprint({"b": [1, -3.2, True, None], "a": "Quote \" and \\ and é", "c": {"z": 0, "y": "line\nbreak"}}))
@@ -184,6 +202,7 @@ def main():
     pg = sub.add_parser("page"); pg.set_defaults(fn=page)
     pg.add_argument("queue"); pg.add_argument("-o", required=True); pg.add_argument("--title", default="")
     pg.add_argument("--old-ids", help="JSON list of step ids that existed before; others are marked New")
+    sub.add_parser("prune").set_defaults(fn=prune)
     sub.add_parser("selftest").set_defaults(fn=selftest)
     a = p.parse_args()
     a.fn(a)

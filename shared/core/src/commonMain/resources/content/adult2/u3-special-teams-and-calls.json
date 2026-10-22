@@ -152,7 +152,7 @@
           "id": "a2-calls-06",
           "statement": "Spiking the ball uses up a down.",
           "answer": true,
-          "explanation": "Yes. A spike stops the clock but counts as an incomplete pass.",
+          "explanation": "A spike stops the clock but counts as an incomplete pass.",
           "concept": "spike"
         },
         {
@@ -565,7 +565,7 @@
           "id": "a2-gameday-13",
           "statement": "The right call on 4th and 1 can change with the score and the time left.",
           "answer": true,
-          "explanation": "Correct. Down and distance start the decision; score, clock and timeouts finish it. Together they are the game situation.",
+          "explanation": "Down and distance start the decision; score, clock and timeouts finish it. Together they are the game situation.",
           "concept": "game-situation"
         },
         {

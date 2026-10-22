@@ -149,7 +149,7 @@
           "id": "k2-penalties-07",
           "statement": "If the play clock runs out before the snap, the offense loses 5 yards.",
           "answer": true,
-          "explanation": "Yes. That is delay of game.",
+          "explanation": "That is delay of game.",
           "concept": "delay-of-game"
         },
         {
@@ -176,6 +176,21 @@
           ],
           "explanation": "Penalties keep the game fair. Each one has its own yards.",
           "concept": "penalty"
+        },
+        {
+          "type": "learn",
+          "id": "k2-safety-04",
+          "title": "Hands off receivers",
+          "body": "In the NFL, once a receiver is 5 yards past the line, a defender may not push or grab him before the ball is thrown. That's illegal contact. High school rules are different, so ask your coach.",
+          "concept": "illegal-contact"
+        },
+        {
+          "type": "true_false",
+          "id": "k2-safety-08",
+          "statement": "In the NFL, a defender may grab a receiver 20 yards downfield before the ball is thrown.",
+          "answer": false,
+          "explanation": "Past 5 yards, that's illegal contact: 5 yards and an automatic first down.",
+          "concept": "illegal-contact"
         }
       ]
     },
@@ -195,7 +210,7 @@
           "type": "learn",
           "id": "k2-clock-02",
           "title": "When the clock stops",
-          "body": "The game clock stops when a pass is not caught. It also stops for timeouts, scores and penalties.",
+          "body": "The game clock stops when a pass is not caught or a runner goes out of bounds. It also stops for timeouts, scores and penalties.",
           "concept": "game-clock"
         },
         {
@@ -217,7 +232,7 @@
           "id": "k2-clock-04",
           "statement": "The clock stops after an incomplete pass.",
           "answer": true,
-          "explanation": "Yes! A pass that is not caught stops the clock.",
+          "explanation": "A pass that is not caught stops the clock.",
           "concept": "game-clock"
         },
         {
@@ -239,7 +254,7 @@
           "id": "k2-clock-06",
           "statement": "Kids' leagues always use exactly the same timeout rules as the NFL.",
           "answer": false,
-          "explanation": "Not quite. Youth and flag leagues set their own rules, so ask your coach.",
+          "explanation": "Youth and flag leagues set their own rules, so ask your coach.",
           "concept": "timeout"
         }
       ]
@@ -260,7 +275,7 @@
           "type": "learn",
           "id": "k2-safety-02",
           "title": "Protect the quarterback",
-          "body": "Defenders may not hit the quarterback after he has thrown the ball, or hit him in the head. That's roughing the passer: 15 yards and a first down.",
+          "body": "Defenders may not hit the quarterback late, once the ball is clearly gone, or hit him in the head. That's roughing the passer: 15 yards and a first down.",
           "concept": "roughing-the-passer"
         },
         {
@@ -269,13 +284,6 @@
           "title": "Head up",
           "body": "Never hit with the top of your helmet or aim at someone's head. In high school and college football that's called targeting. In college, the player is sent out of the game.",
           "concept": "targeting"
-        },
-        {
-          "type": "learn",
-          "id": "k2-safety-04",
-          "title": "Hands off receivers",
-          "body": "In the NFL, once a receiver is 5 yards past the line, a defender may not push or grab him before the ball is thrown. That's illegal contact.",
-          "concept": "illegal-contact"
         },
         {
           "type": "multiple_choice",
@@ -288,7 +296,7 @@
             "A fair catch"
           ],
           "answer": 0,
-          "explanation": "Yes. That's 15 yards and an automatic first down.",
+          "explanation": "That's 15 yards and an automatic first down.",
           "concept": "roughing-the-passer"
         },
         {
@@ -296,7 +304,7 @@
           "id": "k2-safety-06",
           "statement": "It's fine to tackle a player after the whistle if he still has the ball.",
           "answer": false,
-          "explanation": "Not quite. After the whistle the play is over. A late hit is unnecessary roughness.",
+          "explanation": "After the whistle the play is over. A late hit is unnecessary roughness.",
           "concept": "unnecessary-roughness"
         },
         {
@@ -310,16 +318,8 @@
             "It makes the ball fly away"
           ],
           "answer": 0,
-          "explanation": "Yes. Keep your head up and see what you hit. In high school and college football it's called targeting.",
+          "explanation": "Keep your head up and see what you hit. In high school and college football it's called targeting.",
           "concept": "targeting"
-        },
-        {
-          "type": "true_false",
-          "id": "k2-safety-08",
-          "statement": "In the NFL, a defender may grab a receiver 20 yards downfield before the ball is thrown.",
-          "answer": false,
-          "explanation": "Not quite. Past 5 yards, that's illegal contact: 5 yards and an automatic first down.",
-          "concept": "illegal-contact"
         }
       ]
     }

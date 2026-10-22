@@ -118,7 +118,12 @@ object ContentValidator {
             if (t.isBlank()) err(w, "blank prompt")
             if (kid && words(t) > KID_PROMPT_MAX_WORDS) err(w, "kid prompt over $KID_PROMPT_MAX_WORDS words")
         }
-        fun explain(t: String) { if (t.isBlank()) err(w, "missing explanation") }
+        fun explain(t: String) {
+            if (t.isBlank()) err(w, "missing explanation")
+            // The same text follows a right and a wrong answer, under the app's own verdict,
+            // so it must not give one: "Not quite. Here's why." then "Yes! ..." contradicts.
+            VERDICT_OPENER.find(t)?.let { err(w, "explanation opens with a verdict ('${it.value.trim()}'); the headline gives it") }
+        }
         fun choices(list: List<String>, ans: Int) {
             if (list.size < 2) err(w, "needs at least 2 choices")
             if (list.toSet().size != list.size) err(w, "duplicate choices")
@@ -200,6 +205,7 @@ object ContentValidator {
     private const val ON_THE_LINE = 0.5f
     private val ISO_DATE = Regex("""\d{4}-\d{2}-\d{2}""")
     private val HASH = Regex("[0-9a-f]{16}")
+    private val VERDICT_OPENER = Regex("""^(Yes|Right|Correct|Not quite|No|Exactly|Wrong|Nope)[.!,:]\s""")
 
     private fun <T> dupes(l: List<T>): Set<T> = l.groupingBy { it }.eachCount().filterValues { it > 1 }.keys
 }

@@ -563,7 +563,7 @@
           "id": "k3-runs-08",
           "statement": "A draw play starts out looking like a pass.",
           "answer": true,
-          "explanation": "Yes. The pass rushers charge at the quarterback, then he hands off and the runner goes right past them.",
+          "explanation": "The pass rushers charge at the quarterback, then he hands off and the runner goes right past them.",
           "concept": "draw"
         },
         {
@@ -577,7 +577,7 @@
             "The center punts the ball"
           ],
           "answer": 0,
-          "explanation": "Yes. The linemen let the rushers in, then get in front of the catcher to block.",
+          "explanation": "The linemen let the rushers in, then get in front of the catcher to block.",
           "concept": "screen"
         },
         {
@@ -700,7 +700,7 @@
           "type": "diagram_tap",
           "id": "k3-runs-11",
           "prompt": "Tap the two guards pulling on this sweep.",
-          "explanation": "Yes. Both guards run toward the sideline to block for the runner.",
+          "explanation": "Both guards run toward the sideline to block for the runner.",
           "targets": [
             "lg",
             "rg"
@@ -1495,7 +1495,7 @@
           "id": "k3-smarts-05",
           "statement": "In a two-minute drill, a runner tries to get out of bounds to stop the clock.",
           "answer": true,
-          "explanation": "Yes. Going out of bounds saves precious seconds.",
+          "explanation": "Going out of bounds saves precious seconds.",
           "concept": "two-minute-drill"
         },
         {
@@ -1517,7 +1517,7 @@
           "id": "k3-smarts-07",
           "statement": "The best play can change with the score and the time left.",
           "answer": true,
-          "explanation": "Yes. Coaches look at the down, the distance, the score and the clock. All of that together is the game situation.",
+          "explanation": "Coaches look at the down, the distance, the score and the clock. All of that together is the game situation.",
           "concept": "game-situation"
         }
       ]

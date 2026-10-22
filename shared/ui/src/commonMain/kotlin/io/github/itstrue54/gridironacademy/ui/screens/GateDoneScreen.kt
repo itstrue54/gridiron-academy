@@ -35,6 +35,7 @@ import io.github.itstrue54.gridironacademy.ui.resources.big_game
 import io.github.itstrue54.gridironacademy.ui.resources.checkpoint
 import io.github.itstrue54.gridironacademy.ui.resources.checkpoint_not_yet_adult
 import io.github.itstrue54.gridironacademy.ui.resources.checkpoint_not_yet_kid
+import io.github.itstrue54.gridironacademy.ui.resources.checkpoint_not_yet_far_kid
 import io.github.itstrue54.gridironacademy.ui.resources.checkpoint_passed_adult
 import io.github.itstrue54.gridironacademy.ui.resources.checkpoint_passed_kid
 import io.github.itstrue54.gridironacademy.ui.resources.game_not_yet_adult
@@ -86,7 +87,15 @@ fun GateDoneScreen(state: LearnerAppState, done: Screen.GateDone) {
         done.gate == Gate.CHECKPOINT && done.passed && done.testOut ->
             stringResource(if (kid) Res.string.testout_passed_kid else Res.string.testout_passed_adult)
         done.gate == Gate.CHECKPOINT && done.passed -> stringResource(if (kid) Res.string.checkpoint_passed_kid else Res.string.checkpoint_passed_adult)
-        done.gate == Gate.CHECKPOINT -> stringResource(if (kid) Res.string.checkpoint_not_yet_kid else Res.string.checkpoint_not_yet_adult, done.passPct)
+        // "So close!" only when it was: a 25% try hears "Not yet!" (copy review).
+        done.gate == Gate.CHECKPOINT -> stringResource(
+            when {
+                !kid -> Res.string.checkpoint_not_yet_adult
+                done.scorePct >= done.passPct - CLOSE_MARGIN -> Res.string.checkpoint_not_yet_kid
+                else -> Res.string.checkpoint_not_yet_far_kid
+            },
+            done.passPct,
+        )
         done.passed -> stringResource(if (kid) Res.string.game_won_kid else Res.string.game_won_adult)
         else -> stringResource(if (kid) Res.string.game_not_yet_kid else Res.string.game_not_yet_adult, done.passPct)
     }
@@ -150,3 +159,6 @@ private fun ReviewCard(item: ReviewItem) {
         }
     }
 }
+
+/** Within this many points of the pass mark counts as "so close". */
+private const val CLOSE_MARGIN = 15

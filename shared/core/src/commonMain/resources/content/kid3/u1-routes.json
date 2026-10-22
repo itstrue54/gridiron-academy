@@ -1082,7 +1082,7 @@
           "id": "k3-moreroutes-07",
           "statement": "A post route goes deep toward the middle of the field.",
           "answer": true,
-          "explanation": "Yes. It aims for the goal posts, in the middle.",
+          "explanation": "It aims for the goal posts, in the middle.",
           "concept": "route"
         },
         {
@@ -1103,7 +1103,7 @@
             "To make the routes longer"
           ],
           "answer": 0,
-          "explanation": "Yes. A short number in the huddle tells a receiver exactly what to run.",
+          "explanation": "A short number in the huddle tells a receiver exactly what to run.",
           "concept": "route-tree"
         }
       ]
