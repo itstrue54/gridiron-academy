@@ -230,8 +230,8 @@
         {
           "type": "true_false",
           "id": "k2-clock-04",
-          "statement": "The clock stops after an incomplete pass.",
-          "answer": true,
+          "statement": "The clock keeps running after an incomplete pass.",
+          "answer": false,
           "explanation": "A pass that is not caught stops the clock.",
           "concept": "game-clock"
         },

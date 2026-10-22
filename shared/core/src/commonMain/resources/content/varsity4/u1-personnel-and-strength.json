@@ -330,9 +330,9 @@
         {
           "type": "true_false",
           "id": "v4-personnel-07",
-          "statement": "In 20 personnel there are two running backs and three receivers.",
-          "answer": true,
-          "explanation": "2 backs, 0 tight ends, so 5 - 2 = 3 receivers.",
+          "statement": "In 20 personnel there are two tight ends and no running backs.",
+          "answer": false,
+          "explanation": "The first digit is running backs, the second tight ends: 20 is 2 backs, 0 tight ends, so 3 receivers.",
           "concept": "personnel"
         },
         {

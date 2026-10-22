@@ -66,9 +66,9 @@
         {
           "type": "true_false",
           "id": "co7-offense-07",
-          "statement": "Stack and bunch formations make man coverage harder to play.",
-          "answer": true,
-          "explanation": "Receivers close together create natural rubs and traffic for man defenders.",
+          "statement": "Stack and bunch formations make man coverage easier to play.",
+          "answer": false,
+          "explanation": "Receivers close together create rubs and traffic, which makes man coverage harder.",
           "concept": "route-combination"
         }
       ]

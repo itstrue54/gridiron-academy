@@ -527,9 +527,9 @@
         {
           "type": "true_false",
           "id": "a3-timing-05",
-          "statement": "Deep routes like the post usually need more time than the quick game.",
-          "answer": true,
-          "explanation": "Deeper routes take longer to develop, so they pair with longer drops or play-action.",
+          "statement": "Deep routes like the post usually need less time than the quick game.",
+          "answer": false,
+          "explanation": "Deeper routes take longer to develop, so they pair with longer drops or play-action. Quick-game routes come out fast.",
           "concept": "route"
         }
       ]

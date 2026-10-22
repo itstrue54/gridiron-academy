@@ -1493,9 +1493,9 @@
         {
           "type": "true_false",
           "id": "k3-smarts-05",
-          "statement": "In a two-minute drill, a runner tries to get out of bounds to stop the clock.",
-          "answer": true,
-          "explanation": "Going out of bounds saves precious seconds.",
+          "statement": "In a two-minute drill, a runner should stay in bounds to stop the clock.",
+          "answer": false,
+          "explanation": "Staying in bounds keeps the clock running. Going out of bounds stops it and saves precious seconds.",
           "concept": "two-minute-drill"
         },
         {

@@ -1080,9 +1080,9 @@
         {
           "type": "true_false",
           "id": "k3-moreroutes-07",
-          "statement": "A post route goes deep toward the middle of the field.",
-          "answer": true,
-          "explanation": "It aims for the goal posts, in the middle.",
+          "statement": "A post route goes toward the sideline.",
+          "answer": false,
+          "explanation": "A post goes deep toward the middle, aiming at the goal posts. The corner route is the one that breaks toward the sideline.",
           "concept": "route"
         },
         {

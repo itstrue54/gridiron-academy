@@ -12,6 +12,8 @@ object ContentValidator {
     /** Kid-track text limits (words). Read-aloud is on, but short is still kinder. */
     const val KID_BODY_MAX_WORDS = 45
     const val KID_PROMPT_MAX_WORDS = 28
+    /** Levels with fewer true/false items than this aren't checked for balance. */
+    const val TF_BALANCE_MIN_ITEMS = 6
 
     fun validate(c: Content): List<String> {
         val errs = mutableListOf<String>()
@@ -44,6 +46,14 @@ object ContentValidator {
             for (u in units) {
                 errs += validateUnit(u, lv.track == Track.KID, glossaryIds)
                 u.lessons.forEach { l -> allLessonIds += l.id; l.steps.forEach { allStepIds += it.id } }
+            }
+            // "Always True" must not pass a level: each answer is at least a third of its
+            // true/false items (it was four in five before the launch review).
+            val tf = units.flatMap { u -> u.lessons.flatMap { it.steps } }.filterIsInstance<TrueFalse>()
+            if (tf.size >= TF_BALANCE_MIN_ITEMS) {
+                val falses = tf.count { !it.answer }
+                val minority = minOf(falses, tf.size - falses)
+                if (minority * 3 < tf.size) err("level ${lv.id}", "true/false answers lean one way: ${tf.size - falses} true, $falses false")
             }
         }
         dupes(allStepIds).forEach { err("content", "duplicate step id $it") }

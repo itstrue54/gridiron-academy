@@ -307,9 +307,9 @@
         {
           "type": "true_false",
           "id": "k3-man-04",
-          "statement": "In man coverage, a defender follows his receiver across the field.",
-          "answer": true,
-          "explanation": "Wherever the receiver goes, his defender goes too.",
+          "statement": "In man coverage, a defender guards one area and lets receivers pass through it.",
+          "answer": false,
+          "explanation": "That is zone coverage. In man coverage, a defender follows his receiver wherever he goes.",
           "concept": "man-coverage"
         },
         {

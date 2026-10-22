@@ -585,9 +585,9 @@
         {
           "type": "true_false",
           "id": "c5-option-08",
-          "statement": "Option plays deliberately leave a defender unblocked.",
-          "answer": true,
-          "explanation": "Reading one defender lets the offense block everyone else and still outnumber him.",
+          "statement": "Option plays try to block every defender.",
+          "answer": false,
+          "explanation": "Option plays leave one defender unblocked on purpose. Reading him lets the offense block everyone else and still outnumber him.",
           "concept": "option"
         }
       ]

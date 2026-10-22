@@ -557,9 +557,9 @@
         {
           "type": "true_false",
           "id": "p6-presnap-07",
-          "statement": "Two high safeties usually mean fewer defenders near the line.",
-          "answer": true,
-          "explanation": "Two deep leaves one fewer for the box, which is why runs look better against two-high shells.",
+          "statement": "Two high safeties usually mean more defenders near the line.",
+          "answer": false,
+          "explanation": "Two deep leaves one fewer defender for the box, which is why runs look better against two-high shells.",
           "concept": "mofo"
         }
       ]

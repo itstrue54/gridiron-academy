@@ -52,9 +52,9 @@
         {
           "type": "true_false",
           "id": "a2-pi-06",
-          "statement": "A cornerback may jam a receiver 3 yards past the line of scrimmage before the pass is thrown.",
-          "answer": true,
-          "explanation": "Within 5 yards of the line, contact is allowed until the ball is thrown.",
+          "statement": "In the NFL, a cornerback may jam a receiver 10 yards downfield before the pass is thrown.",
+          "answer": false,
+          "explanation": "NFL defenders may contact a receiver only within 5 yards of the line. Past that, before the throw, it's illegal contact: 5 yards and an automatic first down.",
           "concept": "illegal-contact"
         },
         {

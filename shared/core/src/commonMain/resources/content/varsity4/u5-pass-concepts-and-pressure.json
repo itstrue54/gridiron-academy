@@ -1502,9 +1502,9 @@
         {
           "type": "true_false",
           "id": "v4-pressure-05",
-          "statement": "In a stunt, two defensive linemen cross paths to confuse the blockers.",
-          "answer": true,
-          "explanation": "That's a stunt, or twist.",
+          "statement": "In a stunt, two defensive linemen drop into pass coverage.",
+          "answer": false,
+          "explanation": "Dropping linemen into coverage is a zone blitz idea. In a stunt, or twist, two linemen cross paths to confuse the blockers.",
           "concept": "blitz"
         }
       ]

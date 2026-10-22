@@ -300,9 +300,9 @@
         {
           "type": "true_false",
           "id": "k1-scoring-08",
-          "statement": "A field goal is worth 3 points.",
-          "answer": true,
-          "explanation": "Kick it through the posts for 3.",
+          "statement": "A field goal is worth 6 points.",
+          "answer": false,
+          "explanation": "A field goal is worth 3. A touchdown is the one worth 6.",
           "concept": "field-goal"
         },
         {

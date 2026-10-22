@@ -59,9 +59,9 @@
         {
           "type": "true_false",
           "id": "ar8-management-06",
-          "statement": "Releasing a player can still count against the salary cap.",
-          "answer": true,
-          "explanation": "Guaranteed money already paid or owed becomes dead money on the cap.",
+          "statement": "Releasing a player removes all of his money from the salary cap.",
+          "answer": false,
+          "explanation": "Guaranteed money already paid or owed stays on the cap as dead money.",
           "concept": "salary-cap"
         }
       ]

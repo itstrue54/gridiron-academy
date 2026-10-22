@@ -150,9 +150,9 @@
         {
           "type": "true_false",
           "id": "a2-calls-06",
-          "statement": "Spiking the ball uses up a down.",
-          "answer": true,
-          "explanation": "A spike stops the clock but counts as an incomplete pass.",
+          "statement": "Spiking the ball stops the clock without using a down.",
+          "answer": false,
+          "explanation": "A spike stops the clock, but it counts as an incomplete pass, so it uses a down.",
           "concept": "spike"
         },
         {

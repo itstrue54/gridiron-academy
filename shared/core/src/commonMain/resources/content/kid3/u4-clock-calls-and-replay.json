@@ -38,9 +38,9 @@
         {
           "type": "true_false",
           "id": "k3-calls-04",
-          "statement": "If the play clock reaches zero before the snap, the offense gets a penalty.",
-          "answer": true,
-          "explanation": "Delay of game costs 5 yards.",
+          "statement": "If the play clock reaches zero before the snap, the defense gets a penalty.",
+          "answer": false,
+          "explanation": "The offense gets the penalty: delay of game, 5 yards.",
           "concept": "play-clock"
         },
         {
