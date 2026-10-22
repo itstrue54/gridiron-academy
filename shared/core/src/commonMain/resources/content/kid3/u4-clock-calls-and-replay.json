@@ -96,7 +96,7 @@
             "Call a timeout"
           ],
           "answer": 0,
-          "explanation": "He kneels, the play ends safely, and the clock keeps running.",
+          "explanation": "The quarterback kneels, the play ends safely, and the clock keeps running.",
           "concept": "kneel-down"
         }
       ]
@@ -117,17 +117,17 @@
           "type": "learn",
           "id": "k3-replay-02",
           "title": "The red flag",
-          "body": "An NFL coach who thinks a call was wrong can throw a red flag to challenge it. If the call stands, his team loses a timeout.",
+          "body": "An NFL coach who thinks a call was wrong can throw a red flag to challenge it. If the call stands, the team loses a timeout.",
           "concept": "challenge"
         },
         {
           "type": "multiple_choice",
           "id": "k3-replay-03",
-          "prompt": "A coach throws a red flag onto the field. What does he want?",
+          "prompt": "A coach throws a red flag onto the field. What does the coach want?",
           "choices": [
             "The officials to check the call on replay",
-            "A timeout for his kicker",
-            "A penalty on his own team",
+            "A timeout for the kicker",
+            "A penalty on their own team",
             "The game to end"
           ],
           "answer": 0,

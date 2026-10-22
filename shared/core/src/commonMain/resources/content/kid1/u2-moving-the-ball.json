@@ -210,9 +210,9 @@
           "id": "k1-moving-09",
           "prompt": "How do you stop the ball carrier in tackle football?",
           "choices": [
-            "Tackle him to the ground",
-            "Pull his flag",
-            "Tag him with one hand",
+            "Tackle them to the ground",
+            "Pull their flag",
+            "Tag them with one hand",
             "Yell stop"
           ],
           "answer": 0,

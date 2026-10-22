@@ -11,7 +11,7 @@
           "type": "learn",
           "id": "k3-man-01",
           "title": "Man coverage",
-          "body": "In man coverage, each defender is assigned one receiver and follows him wherever he goes.",
+          "body": "In man coverage, each defender is assigned one receiver and follows them wherever they go.",
           "diagram": {
             "players": [
               {
@@ -301,7 +301,7 @@
           "targets": [
             "cb1"
           ],
-          "explanation": "The cornerback lined up across from X follows him on the route.",
+          "explanation": "The cornerback lined up across from X follows X on the route.",
           "concept": "man-coverage"
         },
         {
@@ -309,7 +309,7 @@
           "id": "k3-man-04",
           "statement": "In man coverage, a defender guards one area and lets receivers pass through it.",
           "answer": false,
-          "explanation": "That is zone coverage. In man coverage, a defender follows his receiver wherever he goes.",
+          "explanation": "That is zone coverage. In man coverage, a defender follows their receiver wherever they go.",
           "concept": "man-coverage"
         },
         {
@@ -330,14 +330,14 @@
           "type": "learn",
           "id": "k3-man-06",
           "title": "Leverage",
-          "body": "Look where the defender stands. If he's inside the receiver, closer to the middle, a route toward the sideline is easier. If he's outside, a route to the middle is easier. That's leverage.",
+          "body": "Look where the defender stands. If they're inside the receiver, closer to the middle, a route toward the sideline is easier. If they're outside, a route to the middle is easier. That's leverage.",
           "concept": "leverage"
         },
         {
           "type": "diagram_tap",
           "id": "k3-man-07",
           "prompt": "Tap the receiver who has the easier route toward the sideline.",
-          "explanation": "X's defender stands inside him, guarding the middle, so going toward the sideline is easier.",
+          "explanation": "X's defender stands inside X, guarding the middle, so going toward the sideline is easier.",
           "targets": [
             "x"
           ],
@@ -428,7 +428,7 @@
           "type": "learn",
           "id": "k3-zone-01",
           "title": "Zone coverage",
-          "body": "In zone coverage, each defender guards an area of the field. He covers any receiver who comes into his area.",
+          "body": "In zone coverage, each defender guards an area of the field. They cover any receiver who comes into their area.",
           "diagram": {
             "players": [
               {
@@ -753,7 +753,7 @@
           "id": "k3-zone-05",
           "statement": "In zone coverage, a defender follows one receiver all over the field.",
           "answer": false,
-          "explanation": "That's man coverage. In zone, he stays in his area.",
+          "explanation": "That's man coverage. In zone, each defender stays in their area.",
           "concept": "zone-coverage"
         },
         {

@@ -11,7 +11,7 @@
           "type": "learn",
           "id": "k3-routes-01",
           "title": "What is a route?",
-          "body": "A route is the path a receiver runs on a pass play. The quarterback knows every route, so he knows where to throw.",
+          "body": "A route is the path a receiver runs on a pass play. The quarterback knows every route, so they know where to throw.",
           "diagram": {
             "players": [
               {
@@ -84,7 +84,7 @@
           "type": "learn",
           "id": "k3-routes-02",
           "title": "Go",
-          "body": "On a go route, the receiver sprints straight down the field as fast as he can. It is the deep shot.",
+          "body": "On a go route, the receiver sprints straight down the field as fast as they can. It is the deep shot.",
           "diagram": {
             "players": [
               {
@@ -1211,7 +1211,7 @@
           "type": "learn",
           "id": "k3-combos-02",
           "title": "Read and throw",
-          "body": "The quarterback watches the defender. If he stays deep, throw short. If he comes up, throw deep.",
+          "body": "The quarterback watches the defender. If they stay deep, throw short. If they come up, throw deep.",
           "concept": "route-combination"
         },
         {
@@ -1336,7 +1336,7 @@
           "id": "k3-combos-05",
           "statement": "The quarterback throws to the receiver the defense is not covering.",
           "answer": true,
-          "explanation": "That is the whole idea: read the defender, throw away from him.",
+          "explanation": "That is the whole idea: read the defender, throw away from them.",
           "concept": "route-combination"
         },
         {
@@ -1350,7 +1350,7 @@
             "Nowhere"
           ],
           "answer": 0,
-          "explanation": "If the defender comes up, the deep receiver is behind him and open.",
+          "explanation": "If the defender comes up, the deep receiver is behind them and open.",
           "concept": "route-combination"
         }
       ]
