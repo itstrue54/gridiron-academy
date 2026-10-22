@@ -111,7 +111,10 @@
     <string name="speed_round">Speed round</string>
     <string name="speed_points">%1$d pts</string>
     <string name="speed_streak">%1$d in a row</string>
-    <string name="speed_seconds_left">%1$d seconds left</string>
+    <plurals name="speed_seconds_left">
+        <item quantity="one">%1$d second left</item>
+        <item quantity="other">%1$d seconds left</item>
+    </plurals>
     <string name="speed_question_of">Question %1$d of %2$d</string>
     <string name="speed_rules_kid">%1$d quick questions. Tap your answer and the next one pops up. Get 3 right in a row for double points!</string>
     <string name="speed_rules_adult">%1$d questions, one tap each, no second tries. Three right in a row doubles your points.</string>
@@ -352,14 +355,20 @@
     <string name="gate_answer">Answer</string>
     <string name="gate_wrong">That's not it. Here's a new one.</string>
     <string name="gate_question">What is %1$s times %2$s? Type the answer in numbers.</string>
-    <string name="gate_locked">Too many tries. Wait %1$d seconds.</string>
+    <plurals name="gate_locked">
+        <item quantity="one">Too many tries. Wait %1$d second.</item>
+        <item quantity="other">Too many tries. Wait %1$d seconds.</item>
+    </plurals>
     <string name="gate_hold">Hold to open</string>
     <string name="zone_profile">Profile</string>
     <string name="save_name">Save name</string>
     <string name="zone_age">Age</string>
     <string name="zone_age_note">The age decides which lessons and look they get. Progress is kept.</string>
     <string name="zone_report">Progress report</string>
-    <string name="report_minutes">%1$d minutes of practice this week</string>
+    <plurals name="report_minutes">
+        <item quantity="one">%1$d minute of practice this week</item>
+        <item quantity="other">%1$d minutes of practice this week</item>
+    </plurals>
     <string name="level_named_title">Level %1$d: %2$s</string>
     <string name="report_mastery_note">A concept counts as mastered after several right answers on at least two days. Answers given before this version of the app aren't counted, so drills can be passed with concepts still to master.</string>
     <string name="report_line">%1$d of %2$d drills passed · %3$d of %4$d concepts mastered</string>

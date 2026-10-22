@@ -35,9 +35,11 @@ import io.github.itstrue54.gridironacademy.ui.components.SecondaryButton
 import io.github.itstrue54.gridironacademy.ui.resources.*
 import io.github.itstrue54.gridironacademy.ui.theme.Gridiron
 import io.github.itstrue54.gridironacademy.ui.theme.screenBackground
+import org.jetbrains.compose.resources.pluralStringResource
 import org.jetbrains.compose.resources.stringResource
-import io.github.itstrue54.gridironacademy.ui.resources.gate_question
+import io.github.itstrue54.gridironacademy.ui.resources.report_minutes
 import io.github.itstrue54.gridironacademy.ui.resources.gate_locked
+import io.github.itstrue54.gridironacademy.ui.resources.gate_question
 import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.LiveRegionMode
 import kotlinx.coroutines.delay
@@ -78,7 +80,7 @@ fun GrownUpGateScreen(state: LearnerAppState, seed: Long) {
         }
         Text(stringResource(Res.string.gate_body), style = Gridiron.type.body, color = c.inkDim)
         if (lockedMillis > 0) {
-            Text(stringResource(Res.string.gate_locked, ((lockedMillis + 999) / 1000).toInt()), style = Gridiron.type.title, color = c.ink,
+            Text(((lockedMillis + 999) / 1000).toInt().let { pluralStringResource(Res.plurals.gate_locked, it, it) }, style = Gridiron.type.title, color = c.ink,
                 modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite })
             return@Column
         }
@@ -180,7 +182,7 @@ fun GrownUpZoneScreen(state: LearnerAppState, platform: LearnerPlatform) {
             Text(stringResource(Res.string.zone_age_note), style = Gridiron.type.label, color = c.inkDim)
 
             Section(stringResource(Res.string.zone_report))
-            Text(stringResource(Res.string.report_minutes, state.minutesThisWeek()), style = Gridiron.type.body, color = c.ink)
+            Text(state.minutesThisWeek().let { pluralStringResource(Res.plurals.report_minutes, it, it) }, style = Gridiron.type.body, color = c.ink)
             Text(stringResource(Res.string.report_mastery_note), style = Gridiron.type.label, color = c.inkDim)
             state.progressReport().forEach { r ->
                 Card(edge = if (r.passed) c.correct else null) {

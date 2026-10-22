@@ -14,6 +14,9 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.SideEffect
+import androidx.core.view.WindowCompat
+import io.github.itstrue54.gridironacademy.ui.app.Screen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import io.github.itstrue54.gridironacademy.ui.app.LearnerApp
 import io.github.itstrue54.gridironacademy.ui.screens.LoadErrorScreen
@@ -42,6 +45,17 @@ class MainActivity : ComponentActivity() {
                 Load.Loading -> Unit // the window background is the theme surface
                 Load.Failed -> LoadErrorScreen(dark, onRetry = model::retry)
                 is Load.Ready -> {
+                    // Prime Time is dark whatever the phone's theme (DESIGN 2.2), so the status
+                    // and navigation bar icons follow the screen, not the system. The grown-up
+                    // screens use the Coach look, which follows the system.
+                    val grownUp = l.app.screen == Screen.GrownUpGate || l.app.screen == Screen.GrownUpZone
+                    val darkScreen = dark || (l.app.profile != null && l.app.skin.primeTime && !grownUp)
+                    SideEffect {
+                        WindowCompat.getInsetsController(window, window.decorView).apply {
+                            isAppearanceLightStatusBars = !darkScreen
+                            isAppearanceLightNavigationBars = !darkScreen
+                        }
+                    }
                     BackHandler(enabled = l.app.backStack.size > 1) { l.app.requestBack() }
                     LearnerApp(l.app, dark = dark, reducedMotion = reducedMotion.value, platform = platform)
                 }
