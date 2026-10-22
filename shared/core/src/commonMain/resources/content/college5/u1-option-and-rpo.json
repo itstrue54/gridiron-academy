@@ -560,9 +560,9 @@
           "prompt": "On a zone read, the unblocked end crashes hard down the line toward the back. What should the quarterback do?",
           "choices": [
             "Keep it and run around him",
-            "Hand it off",
-            "Throw deep",
-            "Kneel"
+            "Hand it off to the running back",
+            "Throw a quick pass over him",
+            "Pitch it to the trailing receiver"
           ],
           "answer": 0,
           "explanation": "If the end chases the back, the space he left is the quarterback's.",
@@ -937,9 +937,9 @@
           "prompt": "The nickel steps into the box to stop the run. What does the quarterback do?",
           "choices": [
             "Throw the bubble to the slot",
-            "Hand off anyway",
-            "Kneel",
-            "Punt"
+            "Hand off into the extra box defender",
+            "Keep it and run up the middle",
+            "Check to a deep shot downfield"
           ],
           "answer": 0,
           "explanation": "With the nickel in the box, the slot is uncovered: throw it.",

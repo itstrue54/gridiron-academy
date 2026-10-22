@@ -2392,9 +2392,9 @@
           "prompt": "What does Tampa 2 fix compared with plain Cover 2?",
           "choices": [
             "The hole in the deep middle",
-            "The flats",
-            "Run defense",
-            "The pass rush"
+            "The open area in the flats",
+            "Run defense on the edges",
+            "A four-man pass rush"
           ],
           "answer": 0,
           "explanation": "Cover 2's weak spot is the deep middle; the Mike's drop covers it.",

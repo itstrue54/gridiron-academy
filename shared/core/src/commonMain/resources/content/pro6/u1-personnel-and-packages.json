@@ -275,9 +275,9 @@
           "prompt": "The offense brings in 10 personnel (four receivers). What do most defenses use?",
           "choices": [
             "Dime (six defensive backs)",
-            "Goal line",
-            "Base 4-3",
-            "Five linemen"
+            "Base 4-3 (four defensive backs)",
+            "Goal line (three defensive backs)",
+            "Base 3-4 (four defensive backs)"
           ],
           "answer": 0,
           "explanation": "Four receivers usually draws six defensive backs.",

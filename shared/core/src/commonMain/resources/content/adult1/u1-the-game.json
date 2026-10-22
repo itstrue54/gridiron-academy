@@ -113,9 +113,9 @@
           "prompt": "How does a running play usually end?",
           "choices": [
             "The ball carrier is tackled, goes out of bounds, or scores",
-            "After 10 seconds",
-            "When the quarterback calls it off",
-            "After 5 yards"
+            "The ball carrier crosses the line of scrimmage",
+            "The runner gains 10 yards for a first down",
+            "A defender touches the runner with one hand"
           ],
           "answer": 0,
           "explanation": "A play is over when the runner is down (tackled), out of bounds, or in the end zone.",

@@ -41,9 +41,9 @@
           "prompt": "The defense keeps rotating late. What's the simplest offensive answer?",
           "choices": [
             "Go tempo so they can't disguise",
-            "Huddle longer",
-            "Kneel",
-            "Punt early"
+            "Huddle longer so they have to show it",
+            "Snap later in the play clock",
+            "Keep extra blockers in on every play"
           ],
           "answer": 0,
           "explanation": "Without time to disguise, defenses tend to play what they show.",
@@ -55,9 +55,9 @@
           "prompt": "After the snap, the middle of the field opens up. What does an 'alert' tell the quarterback?",
           "choices": [
             "Throw the deep post",
-            "Throw it away",
-            "Run a sneak",
-            "Spike it"
+            "Throw the flat route",
+            "Check to a run",
+            "Throw the out to the boundary"
           ],
           "answer": 0,
           "explanation": "An open middle after the snap is the alert to take the post.",

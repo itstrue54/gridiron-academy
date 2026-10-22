@@ -532,9 +532,9 @@
           "prompt": "Six blockers against eight in the box. What's the smart check?",
           "choices": [
             "Throw: the defense has run defenders to spare",
-            "Run right at them",
-            "Kneel",
-            "Punt"
+            "Run: more defenders leave more gaps open",
+            "Run at the side with the extra defender",
+            "Keep running until they back off"
           ],
           "answer": 0,
           "explanation": "Eight in the box means fewer in coverage and more than you can block on a run.",

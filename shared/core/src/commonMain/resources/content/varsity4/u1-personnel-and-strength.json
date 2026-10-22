@@ -341,9 +341,9 @@
           "prompt": "The offense sends in 10 personnel. What do defenses usually do?",
           "choices": [
             "Add a defensive back (nickel or dime)",
-            "Add a lineman",
-            "Take out a cornerback",
-            "Nothing"
+            "Add a linebacker to stop the run",
+            "Stay in base with three linebackers",
+            "Bring in a goal-line front"
           ],
           "answer": 0,
           "explanation": "Four receivers mean more defensive backs to match them.",

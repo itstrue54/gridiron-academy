@@ -655,9 +655,9 @@
           "prompt": "Your offense runs wide zone. The opponent plays Wide-9. Where should you attack?",
           "choices": [
             "Inside, through the wider interior lanes",
-            "Only the deep sideline",
-            "Kneel every down",
-            "Directly at the ends"
+            "Outside, racing the ends to the edge",
+            "Deep, because Wide-9 means two-high safeties",
+            "Straight at the ends, to pin them wide"
           ],
           "answer": 0,
           "explanation": "With the ends that wide, the interior gaps are bigger; cutbacks and inside runs get room.",
@@ -669,9 +669,9 @@
           "prompt": "The opponent plays the 46 with a Bear front. What is it most vulnerable to?",
           "choices": [
             "Quick throws to the outside",
-            "Inside runs",
+            "Inside runs between the tackles",
             "Quarterback sneaks",
-            "Short field goals"
+            "Seven-step deep drops"
           ],
           "answer": 0,
           "explanation": "It loads the middle to stop runs and pressure the quarterback; quick throws outside beat it before the rush arrives.",

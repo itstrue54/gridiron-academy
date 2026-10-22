@@ -1302,8 +1302,8 @@
           "choices": [
             "A quick throw before the rush arrives",
             "A deep seven-step drop",
-            "A slow-developing screen",
-            "A kneel"
+            "A long play-action fake",
+            "Time to read the whole field"
           ],
           "answer": 0,
           "explanation": "More rushers than blockers means the ball has to come out fast.",
@@ -1315,9 +1315,9 @@
           "prompt": "Which concept is built to beat man coverage?",
           "choices": [
             "Mesh: two crossers rubbing past each other",
-            "Four verticals",
-            "A field goal",
-            "Curl-flat"
+            "Curl-flat: a curl and a flat route on one side",
+            "Smash: a hitch under a corner route",
+            "Flood: three routes at three depths on one side"
           ],
           "answer": 0,
           "explanation": "Crossing routes make man defenders fight through traffic.",
@@ -2404,9 +2404,9 @@
           "prompt": "Smash puts a hitch under a corner route. Why does it beat Cover 2?",
           "choices": [
             "The flat corner can't cover both",
-            "The safeties can't see",
-            "It's a run play",
-            "It beats man coverage"
+            "The safeties can't see the hitch",
+            "The corners have to cover the deep middle",
+            "Cover 2 has no flat defenders"
           ],
           "answer": 0,
           "explanation": "The corner sits on the hitch, the corner route goes over him before the safety arrives.",
@@ -3493,9 +3493,9 @@
           "prompt": "Why do four verticals stress Cover 3?",
           "choices": [
             "Four deep routes against three deep defenders",
-            "It's a run",
-            "Cover 3 has no corners",
-            "It beats only man"
+            "Cover 3 has no underneath defenders",
+            "The corners must play man on the slots",
+            "The single safety has to blitz"
           ],
           "answer": 0,
           "explanation": "Three deep defenders can't carry four deep routes, especially up the seams.",
@@ -4570,9 +4570,9 @@
           "prompt": "Cover 2 and Cover 4 both show two safeties. Which tell separates them?",
           "choices": [
             "Corner depth: shallow in Cover 2, deep in Cover 4",
-            "The number of linemen",
-            "The quarterback's stance",
-            "The kicker"
+            "The number of linemen in the front",
+            "Linebacker depth: deeper in Cover 4",
+            "Where the tight end lines up"
           ],
           "answer": 0,
           "explanation": "Squatting corners at 5 mean Cover 2; corners at 8 with tighter safeties mean quarters.",

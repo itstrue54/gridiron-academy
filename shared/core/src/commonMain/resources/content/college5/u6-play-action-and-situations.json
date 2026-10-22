@@ -34,9 +34,9 @@
           "prompt": "Why does play-action work best when the run game is working?",
           "choices": [
             "Defenders respect the fake and step up",
-            "It's always a touchdown",
-            "The line can go downfield",
-            "It stops the clock"
+            "Linemen can block farther downfield",
+            "The clock keeps running during the fake",
+            "The quarterback gets a longer drop"
           ],
           "answer": 0,
           "explanation": "The more a defense fears the run, the harder it bites on the fake.",

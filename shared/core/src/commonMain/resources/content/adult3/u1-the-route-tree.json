@@ -758,8 +758,8 @@
           "choices": [
             "One defender has to choose between two receivers",
             "Both receivers run the same route",
-            "The quarterback runs instead",
-            "The defense has to punt"
+            "Two defenders cover one receiver",
+            "The quarterback reads only the deep safety"
           ],
           "answer": 0,
           "explanation": "The defender who covers the short man leaves the deep man open, and the other way round.",
