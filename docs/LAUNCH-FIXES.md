@@ -85,10 +85,11 @@ their sign-off and are queued for re-review.
 
 ## Phase 6. Robustness and polish
 
-- [ ] Startup: no validation in release, splash until loaded (15).
-- [ ] Save encoded off the main thread, attempt log capped, import off the main thread with
-      a smaller limit (15).
-- [ ] Grown-up gate: harder question, lockout, re-lock when the app leaves the screen (16).
+- [x] Startup: no validation in release, splash until loaded (15).
+- [x] Save encoded off the main thread, attempt log capped (newest 20,000), import read off
+      the main thread with an 8 MB limit (15).
+- [x] Grown-up gate: two-digit times one-digit in words, a one-minute lock after three
+      misses, the zone closes when the app leaves the screen (not for the backup picker) (16).
 - [ ] Question quality: true/false balance, plausible distractors, choice lengths (17).
 - [ ] Pronouns ("they"), flag-football scoping (18).
 - [ ] UX: sheet off the diagram, larger tap targets, saved screen state, map back and

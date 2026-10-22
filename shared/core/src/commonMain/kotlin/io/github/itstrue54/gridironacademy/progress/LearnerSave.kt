@@ -67,5 +67,12 @@ data class LearnerSave(
 ) {
     companion object {
         const val CURRENT_SCHEMA = 2
+        /**
+         * The attempt log keeps the newest this many answers (about 5 MB), so the save
+         * stays quick to write and to back up. That's years of daily use; mastery reads
+         * only each concept's recent answers, so trimming the oldest rarely changes it.
+         * When sync ships, only synced events may be trimmed.
+         */
+        const val MAX_ATTEMPTS = 20_000
     }
 }

@@ -351,6 +351,8 @@
     <string name="gate_body">Settings, progress and backups are for a parent or guardian. Answer the question, then hold the button.</string>
     <string name="gate_answer">Answer</string>
     <string name="gate_wrong">That's not it. Here's a new one.</string>
+    <string name="gate_question">What is %1$s times %2$s? Type the answer in numbers.</string>
+    <string name="gate_locked">Too many tries. Wait %1$d seconds.</string>
     <string name="gate_hold">Hold to open</string>
     <string name="zone_profile">Profile</string>
     <string name="save_name">Save name</string>

@@ -591,8 +591,10 @@ stopping at the first level missed (80% to pass), starting them there with earli
 levels marked passed.
 
 ### 9.9 Grown-up zone
-Behind a **grown-up gate** (hold-to-open plus a multiplication question; never
-arithmetic a young child could guess, never a time-based hold alone). Contents:
+Behind a **grown-up gate** (hold-to-open plus a multiplication question written in
+words, a two-digit number times a one-digit one; never arithmetic a young child could
+guess, never a time-based hold alone). Three misses lock the gate for a minute. The zone
+closes whenever the app leaves the screen, except for the backup file picker. Contents:
 **Profiles** (add, rename, delete), **Time** (a daily practice limit that ends a
 session politely), **Reading aloud**, **Sound**, **Theme**, **Text size**, **Progress report**
 (concepts mastered per level, drills passed, practice minutes),

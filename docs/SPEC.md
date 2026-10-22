@@ -748,7 +748,8 @@ Penetration test and a privacy review before M3 public release.
 - **Now (schema 2):** the save is still one JSON file (`FileLearnerStore`); SQLDelight
   replaces it when sync arrives. Schema 2 adds the attempt log (`attempts`, every graded
   answer as an `AttemptEvent` with its context, credit, first try or retry, the answer
-  text and time spent), `deviceId` and a local `learnerId` (UUIDs from the platform) and
+  text and time spent; the newest `LearnerSave.MAX_ATTEMPTS` = 20,000 are kept, about
+  5 MB, and the file is encoded and written off the main thread), `deviceId` and a local `learnerId` (UUIDs from the platform) and
   `nextSeq`. Answers are saved with the lesson or gate result, or when the learner leaves
   part-way: an answer counts even if the lesson doesn't. `SaveMigrations` (in
   `shared/data/migration`) reads every version: schema 1 never wrote its version (it was

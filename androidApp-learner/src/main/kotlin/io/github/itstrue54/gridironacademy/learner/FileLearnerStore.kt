@@ -36,8 +36,10 @@ class FileLearnerStore(dir: File, private val newId: () -> String) : LearnerStor
     }
 
     override fun save(save: LearnerSave) {
-        val text = SaveMigrations.encode(save)
+        // The save is immutable, so encoding it on the writer thread is safe and keeps a
+        // long attempt log from stalling the UI.
         writer.execute {
+            val text = SaveMigrations.encode(save)
             val out = file.startWrite()
             try {
                 out.write(text.encodeToByteArray())

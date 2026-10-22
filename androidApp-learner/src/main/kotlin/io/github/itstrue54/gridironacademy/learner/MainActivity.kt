@@ -14,6 +14,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import io.github.itstrue54.gridironacademy.ui.app.LearnerApp
 import io.github.itstrue54.gridironacademy.ui.screens.LoadErrorScreen
 
@@ -30,6 +31,8 @@ class MainActivity : ComponentActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // The launch icon stays up until the lessons have loaded, never a blank screen.
+        installSplashScreen().setKeepOnScreenCondition { model.load.value == Load.Loading }
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         setContent {
@@ -56,6 +59,9 @@ class MainActivity : ComponentActivity() {
 
     override fun onStop() {
         contentResolver.unregisterContentObserver(animationScaleObserver)
+        // The grown-up zone never stays open behind the app (DESIGN 9.9). A rotation or
+        // the backup file picker stops the activity too; those keep the zone open.
+        if (!isChangingConfigurations && !platform.pickerOpen) (model.load.value as? Load.Ready)?.app?.leftTheApp()
         super.onStop()
     }
 

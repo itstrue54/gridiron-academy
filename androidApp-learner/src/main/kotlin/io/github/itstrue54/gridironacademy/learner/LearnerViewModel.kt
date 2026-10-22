@@ -44,14 +44,18 @@ class LearnerViewModel(app: Application) : AndroidViewModel(app) {
                 withContext(Dispatchers.IO) {
                     // The content JSON ships inside :shared:core as Java resources.
                     val all = ContentLoader.load(ClasspathContentSource())
-                    val problems = ContentValidator.validate(all)
-                    check(problems.isEmpty()) { "content failed validation: ${problems.take(5)}" }
+                    val debuggable = getApplication<Application>().applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE != 0
+                    // Release content is validated by the build (ContentTest); checking it again
+                    // on every start only slowed the first screen.
+                    if (debuggable) {
+                        val problems = ContentValidator.validate(all)
+                        check(problems.isEmpty()) { "content failed validation: ${problems.take(5)}" }
+                    }
                     val content = if (BuildConfig.REVIEWED_ONLY) all.reviewedOnly() else all
                     // Ids are the platform's job (SPEC 8.1): a random UUID per install and per profile.
                     val newId = { UUID.randomUUID().toString() }
                     val store = FileLearnerStore(getApplication<Application>().filesDir, newId)
                     // Debug builds mark steps no coach has signed off yet (SPEC 13.3).
-                    val debuggable = getApplication<Application>().applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE != 0
                     // Asked each time a Speed round opens, so turning TalkBack on mid-session counts.
                     val a11y = getApplication<Application>().getSystemService(AccessibilityManager::class.java)
                     val screenReaderOn = { a11y?.isTouchExplorationEnabled == true }
