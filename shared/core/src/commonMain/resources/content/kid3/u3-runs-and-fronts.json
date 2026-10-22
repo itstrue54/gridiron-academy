@@ -1493,7 +1493,7 @@
         {
           "type": "true_false",
           "id": "k3-smarts-05",
-          "statement": "In a two-minute drill, a runner should stay in bounds to stop the clock.",
+          "statement": "In a two-minute drill, the team that's behind wants its runners to stay in bounds.",
           "answer": false,
           "explanation": "Staying in bounds keeps the clock running. Going out of bounds stops it and saves precious seconds.",
           "concept": "two-minute-drill"

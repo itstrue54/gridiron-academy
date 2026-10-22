@@ -506,9 +506,9 @@
         {
           "type": "true_false",
           "id": "a1-positions-14",
-          "statement": "Every play from scrimmage starts with a snap from the center.",
+          "statement": "Every play from scrimmage starts with a snap.",
           "answer": true,
-          "explanation": "The center passes the ball back to the quarterback (or the holder or punter), and the play is live.",
+          "explanation": "The snapper, usually the center (a long snapper on kicks), passes the ball back to the quarterback, holder or punter, and the play is live.",
           "concept": "snap"
         }
       ],

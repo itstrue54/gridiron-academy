@@ -206,7 +206,7 @@
         {
           "type": "multiple_choice",
           "id": "a1-clock-06",
-          "prompt": "What is the two-minute warning?",
+          "prompt": "In the NFL, what is the two-minute warning?",
           "choices": [
             "A timeout each team may call once per half",
             "An automatic timeout at 2:00 of each half",

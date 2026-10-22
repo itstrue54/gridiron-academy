@@ -241,7 +241,7 @@
         {
           "type": "multiple_choice",
           "id": "a2-replay-06",
-          "prompt": "With 1:30 left in the half, a coach wants a sideline catch reviewed. What happens?",
+          "prompt": "In the NFL, with 1:30 left in the half, a coach wants a sideline catch reviewed. What happens?",
           "choices": [
             "The replay official decides; coaches can't challenge",
             "The coach throws the red flag to challenge",
