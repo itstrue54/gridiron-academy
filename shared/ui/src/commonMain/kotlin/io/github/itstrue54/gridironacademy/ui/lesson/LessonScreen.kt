@@ -215,6 +215,9 @@ private const val SHEET_MAX_FRACTION = 0.45f
 /** True for a step that should wear the ReviewBadge; provided by LearnerApp in debug builds. */
 val LocalReviewBadge = staticCompositionLocalOf<(String) -> Boolean> { { false } }
 
+/** Asks whether a screen reader is on (TalkBack): diagram questions then start as a list. */
+val LocalScreenReader = staticCompositionLocalOf<() -> Boolean> { { false } }
+
 /** DESIGN 8, ReviewBadge: debug builds only, "[review]" and the id to quote back. */
 @Composable
 private fun ReviewBadge(stepId: String) {

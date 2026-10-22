@@ -64,12 +64,15 @@ their sign-off and are queued for re-review.
 
 ## Phase 4. Accessibility
 
-- [ ] **Diagram list mode (4):** every tap target as a selectable row; default with
-      TalkBack; graded through the same ids.
-- [ ] **Announce results (11):** live region on the verdict; "Correct"/"Not quite" in
+- [x] **Diagram list mode (4):** every tap target as a selectable row; default with
+      TalkBack; graded through the same ids. Checked on the phone.
+- [x] **Announce results (11):** live region on the verdict; "Correct"/"Not quite" in
       answer labels; Match and Order readable by ear.
-- [ ] **Not colour alone (12):** selected state and graded zones get a symbol.
-- [ ] **200% text pass** with render tests at font scale 2.
+- [x] **Not colour alone (12):** selected answers show a filled dot; selected and graded
+      zones get a corner badge (dot, check, dash).
+- [x] **200% text pass** with render tests at font scale 2 (`f2-*`). Fixed: level titles
+      broke mid-word on Home, Match columns split words, letters and numbers ran into
+      Match and Order text.
 - [ ] **Read-aloud (11) (owner):** build text-to-speech for the kid skin, or narrow the age
       claim for launch.
 

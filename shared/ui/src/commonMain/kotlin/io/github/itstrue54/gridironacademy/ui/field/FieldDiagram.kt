@@ -422,6 +422,14 @@ private fun DrawScope.drawZones(d: Diagram, t: FieldTransform, highlight: String
                 Size(size.width - inset * 2, size.height - inset * 2),
                 style = Stroke(3.dp.toPx(), pathEffect = dashed),
             )
+            // A badge in the corner, so a zone's state never rests on colour alone.
+            val r = 9.dp.toPx()
+            val at = Offset(topLeft.x + size.width - r - 6.dp.toPx(), topLeft.y + r + 6.dp.toPx())
+            drawBadgeAt(at, markColor, when (marks[z.id]) {
+                MarkState.SELECTED -> Badge.DOT
+                MarkState.WRONG -> Badge.DASH
+                else -> Badge.CHECK
+            })
         }
     }
 }
@@ -574,13 +582,19 @@ private fun DrawScope.drawHelmet(c: Offset, half: Float, fill: Color, faceUp: Bo
     }
 }
 
+private enum class Badge { CHECK, DASH, DOT }
+
 /** A small round badge at the top-right of a mark: a check or a dash, so colour is never the only signal. */
-private fun DrawScope.drawBadge(c: Offset, half: Float, color: Color, check: Boolean) {
+private fun DrawScope.drawBadge(c: Offset, half: Float, color: Color, check: Boolean) =
+    drawBadgeAt(Offset(c.x + half * 0.85f, c.y - half * 0.85f), color, if (check) Badge.CHECK else Badge.DASH)
+
+private fun DrawScope.drawBadgeAt(b: Offset, color: Color, kind: Badge) {
     val r = 7.dp.toPx()
-    val b = Offset(c.x + half * 0.85f, c.y - half * 0.85f)
     drawCircle(color, r, b)
     val w = 2.dp.toPx()
-    if (check) {
+    if (kind == Badge.DOT) {
+        drawCircle(DiagramColors.badgeInk, r * 0.4f, b)
+    } else if (kind == Badge.CHECK) {
         drawPath(
             Path().apply { moveTo(b.x - r * 0.45f, b.y); lineTo(b.x - r * 0.1f, b.y + r * 0.35f); lineTo(b.x + r * 0.5f, b.y - r * 0.35f) },
             DiagramColors.badgeInk,

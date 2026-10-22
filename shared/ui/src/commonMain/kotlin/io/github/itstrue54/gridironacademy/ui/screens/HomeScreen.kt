@@ -29,6 +29,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.foundation.relocation.BringIntoViewRequester
 import androidx.compose.foundation.relocation.bringIntoViewRequester
 import androidx.compose.runtime.LaunchedEffect
@@ -227,6 +228,9 @@ private fun Modifier.scrolledToOnce(target: Boolean): Modifier {
     return bringIntoViewRequester(requester)
 }
 
+/** Font scale from which Home cards stack instead of sitting side by side. */
+private const val LARGE_TEXT = 1.5f
+
 private enum class NodeState { LOCKED, OPEN, PASSED }
 
 @Composable
@@ -259,15 +263,27 @@ private fun LevelRow(state: LearnerAppState, level: Level, modifier: Modifier = 
             contentDescription = "$levelLabel, ${level.title}. $stateWord. $progressLabel"
         },
     ) {
-        Row(Modifier.padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
-            LevelNode(level.number, nodeState, if (total == 0) 0f else passedCount.toFloat() / total)
-            Spacer(Modifier.width(14.dp))
-            Column(Modifier.weight(1f)) {
+        val node = @Composable { LevelNode(level.number, nodeState, if (total == 0) 0f else passedCount.toFloat() / total) }
+        val words = @Composable { m: Modifier ->
+            Column(m) {
                 Text(levelLabel, style = Gridiron.type.label, color = c.inkDim)
                 Text(level.title, style = Gridiron.type.title, color = c.ink)
                 Text(level.tagline, style = Gridiron.type.label, color = c.inkDim)
                 Spacer(Modifier.size(4.dp))
                 Text(progressLabel, style = Gridiron.type.label, color = c.ink)
+            }
+        }
+        // Large text (DESIGN 12): the node goes above the words so titles keep whole words.
+        if (LocalDensity.current.fontScale >= LARGE_TEXT) {
+            Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                node()
+                words(Modifier.fillMaxWidth())
+            }
+        } else {
+            Row(Modifier.padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
+                node()
+                Spacer(Modifier.width(14.dp))
+                words(Modifier.weight(1f))
             }
         }
     }

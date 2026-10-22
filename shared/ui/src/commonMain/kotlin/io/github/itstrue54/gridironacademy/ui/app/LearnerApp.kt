@@ -66,6 +66,7 @@ import io.github.itstrue54.gridironacademy.ui.resources.back_to_glossary
 import io.github.itstrue54.gridironacademy.ui.lesson.GlossaryQuizScreen
 import io.github.itstrue54.gridironacademy.ui.screens.GlossaryScreen
 import io.github.itstrue54.gridironacademy.ui.lesson.LocalReviewBadge
+import io.github.itstrue54.gridironacademy.ui.lesson.LocalScreenReader
 import io.github.itstrue54.gridironacademy.ui.screens.PlaybookMapScreen
 import io.github.itstrue54.gridironacademy.ui.screens.GrownUpGateScreen
 import io.github.itstrue54.gridironacademy.ui.screens.GrownUpZoneScreen
@@ -88,7 +89,8 @@ fun LearnerApp(state: LearnerAppState, dark: Boolean, reducedMotion: Boolean = f
     val badge: (String) -> Boolean = remember(state) {
         if (state.showReviewBadges) { id -> !state.content.signedOff(id) } else { _ -> false }
     }
-    CompositionLocalProvider(LocalReviewBadge provides badge) {
+    val screenReader: () -> Boolean = remember(state) { { state.screenReaderActive() } }
+    CompositionLocalProvider(LocalReviewBadge provides badge, LocalScreenReader provides screenReader) {
     GridironTheme(skin = skin, dark = dark, reducedMotion = reducedMotion) {
         // One readable column, centred: a landscape phone or a tablet gets margins of
         // surface colour instead of screens stretched edge to edge.

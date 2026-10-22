@@ -329,9 +329,10 @@ Every `Diagram` produces a **text description** (`DiagramDescriber`, in the engi
 section 11.2 of the spec): "Offense in shotgun: quarterback 5 yards behind the
 center; running back beside him; three receivers wide left, one wide right..." plus
 the routes and zones. The canvas exposes that text as its content description. Tap
-questions also render a **list mode** (a vertical list of players by name and
-position) selectable in Settings and offered automatically when TalkBack is on; it
-grades identically.
+questions also render a **list mode**: every player and shaded area as a row of words
+("DE, Defense, left of the middle, 1 yard off the ball") under the picture, which stops
+taking taps while the list is open. A "Show as a list" link on each tap question turns it
+on; it starts on when TalkBack is on. Rows carry the same ids, so it grades identically.
 
 ### 7.7 The reveal
 `read_defense` steps show the pre-snap picture, take an answer, then animate the
@@ -705,9 +706,12 @@ sentences at most in Kid.
 - **Screen reader:** every screen reads in order; every diagram has a text
   description (7.6); the DriveBar announces "Step 4 of 9"; AnswerButtons announce
   "Option B, Cover 3, not selected"; results announce "Correct" or "Not quite" before
-  the explanation.
-- **Font scale:** layouts are tested at 100%, 130%, 160% and 200%. At 130%+ answer
-  buttons grow vertically; the diagram never shrinks below 220dp tall and the card
+  the explanation (a polite live region on the verdict), and graded answers say
+  "correct" or "your answer, not quite"; Match items say what they're paired with and
+  Order rows read as "1, Goal line" with their grade.
+- **Font scale:** layouts are tested at 100%, 130%, 160% and 200% (render tests
+  `f2-*` at 200%). At 150%+ Home's level cards put the node above the words and Match
+  stacks its two columns; at 130%+ answer buttons grow vertically; the diagram never shrinks below 220dp tall and the card
   scrolls instead; HUDs wrap to two lines.
 - **Colour:** never the only carrier (section 1.2). Retry is amber with a dash icon,
   not red.
