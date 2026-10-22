@@ -98,9 +98,11 @@ all 167 on 2026-10-22, so every level ships again.
 - [ ] Flag-football scoping (18): which rules differ in flag; needs the owner's call on
       which flag rulebook (NFL FLAG, league rules) the kid course speaks for.
 - [x] Status bar on the dark skin (19), plurals (20). Status bar not yet seen on the phone.
-- [ ] UX (19): feedback sheet covering the diagram, larger tap targets on small dots,
-      screen state kept across process death, map back and zoom buttons; term consistency
-      (20).
+- [x] UX (19): the feedback sheet folds to its verdict so the graded diagram shows; the
+      map has + and − buttons and Back closes an open card first; Home, levels, glossary
+      and map come back after Android ends the app (a lesson comes back as its level).
+      Tap targets were already a 48dp circle per player, nearest centre winning.
+- [x] Term consistency (20): a unit inside a level is a "drill" everywhere (the close button, the adult done screen, the coach warm-up lines); "lessons" stays for the course as a whole.
 - [ ] Safety and concussion card; a kid bridge unit before Varsity-4 (10).
 
 ## Before sync (not this release)

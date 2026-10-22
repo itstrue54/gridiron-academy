@@ -50,7 +50,7 @@
     <string name="stars_label">%1$d of 3 stars</string>
 
     <!-- Lesson player (DESIGN 9.3) -->
-    <string name="close_lesson">Close lesson</string>
+    <string name="close_lesson">Close the drill</string>
     <string name="step_of">Step %1$d of %2$d</string>
     <string name="check">Check</string>
     <string name="next">Next</string>
@@ -71,6 +71,10 @@
     <string name="order_belongs_at">not quite, goes at number %1$d</string>
     <string name="answer_state_correct">correct</string>
     <string name="answer_state_wrong">your answer, not quite</string>
+    <string name="map_zoom_in">Zoom in</string>
+    <string name="map_zoom_out">Zoom out</string>
+    <string name="sheet_fold">Hide the explanation</string>
+    <string name="sheet_unfold">Show the explanation</string>
     <string name="diagram_show_list">Show as a list</string>
     <string name="diagram_hide_list">Hide the list</string>
     <string name="order_hint">Use the arrows to put these in order.</string>
@@ -165,9 +169,9 @@
 
     <!-- Lesson complete (DESIGN 9.7) -->
     <string name="done_kid">Touchdown!</string>
-    <string name="done_adult">Lesson complete</string>
+    <string name="done_adult">Drill complete</string>
     <string name="done_not_passed_kid">Good hustle!</string>
-    <string name="done_not_passed_adult">Lesson finished</string>
+    <string name="done_not_passed_adult">Drill finished</string>
     <string name="done_score">%1$d% on the first try</string>
     <string name="done_passed_kid">You passed! The next drill is open.</string>
     <string name="done_passed_adult">Passed. The next drill is open.</string>
@@ -403,14 +407,14 @@
     <string name="keep_going">Keep going</string>
     <string name="leave">Leave</string>
     <string name="include_warmups">Include warm-ups for missing basics</string>
-    <string name="include_warmups_body">Players who haven't mastered what this builds on get those lessons first.</string>
+    <string name="include_warmups_body">Players who haven't mastered what this builds on get those drills first.</string>
     <plurals name="plan_line_warmups">
         <item quantity="one">%1$s: %2$d warm-up + %3$d drills + check, about %4$d min</item>
         <item quantity="other">%1$s: %2$d warm-ups + %3$d drills + check, about %4$d min</item>
     </plurals>
     <plurals name="warmups_left_out">
-        <item quantity="one">%1$d more basic lesson left out to keep it short</item>
-        <item quantity="other">%1$d more basic lessons left out to keep it short</item>
+        <item quantity="one">%1$d more basic drill left out to keep it short</item>
+        <item quantity="other">%1$d more basic drills left out to keep it short</item>
     </plurals>
     <plurals name="players_count">
         <item quantity="one">%1$d player</item>

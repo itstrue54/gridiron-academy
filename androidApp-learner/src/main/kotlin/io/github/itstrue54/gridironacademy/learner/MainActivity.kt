@@ -38,6 +38,7 @@ class MainActivity : ComponentActivity() {
         installSplashScreen().setKeepOnScreenCondition { model.load.value == Load.Loading }
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
+        savedInstanceState?.getStringArrayList(ROUTE_KEY)?.let(model::restoreRoute)
         setContent {
             val load by model.load.collectAsState()
             val dark = isSystemInDarkTheme()
@@ -63,6 +64,11 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        (model.load.value as? Load.Ready)?.app?.let { outState.putStringArrayList(ROUTE_KEY, ArrayList(it.restorableRoute())) }
+    }
+
     override fun onStart() {
         super.onStart()
         readReducedMotion()
@@ -81,5 +87,9 @@ class MainActivity : ComponentActivity() {
 
     private fun readReducedMotion() {
         reducedMotion.value = Settings.Global.getFloat(contentResolver, Settings.Global.ANIMATOR_DURATION_SCALE, 1f) == 0f
+    }
+
+    private companion object {
+        const val ROUTE_KEY = "route"
     }
 }

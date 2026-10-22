@@ -37,6 +37,15 @@ class LearnerViewModel(app: Application) : AndroidViewModel(app) {
 
     fun retry() { if (_load.value == Load.Failed) start() }
 
+    /** The screens to reopen after Android ended the app; applied once the lessons load. */
+    @Volatile private var pendingRoute: List<String>? = null
+
+    /** From the activity's saved state. A live model (a rotation) keeps its own screens. */
+    fun restoreRoute(route: List<String>) {
+        if (_load.value is Load.Ready) return
+        pendingRoute = route
+    }
+
     private fun start() {
         _load.value = Load.Loading
         viewModelScope.launch {
@@ -60,7 +69,8 @@ class LearnerViewModel(app: Application) : AndroidViewModel(app) {
                     val a11y = getApplication<Application>().getSystemService(AccessibilityManager::class.java)
                     val screenReaderOn = { a11y?.isTouchExplorationEnabled == true }
                     Load.Ready(LearnerAppState(content, store, nowMillis = System::currentTimeMillis, newId = newId,
-                        showReviewBadges = debuggable, screenReaderOn = screenReaderOn) { LocalDate.now().toEpochDay() })
+                        showReviewBadges = debuggable, screenReaderOn = screenReaderOn) { LocalDate.now().toEpochDay() }
+                        .also { app -> pendingRoute?.let(app::restoreRoute); pendingRoute = null })
                 }
             } catch (e: Exception) {
                 Log.e(TAG, "lessons failed to load", e)

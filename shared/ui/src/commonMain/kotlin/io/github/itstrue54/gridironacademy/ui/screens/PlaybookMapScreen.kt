@@ -58,6 +58,14 @@ import io.github.itstrue54.gridironacademy.ui.theme.Gridiron
 import io.github.itstrue54.gridironacademy.ui.theme.screenBackground
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
+import io.github.itstrue54.gridironacademy.ui.resources.map_zoom_out
+import io.github.itstrue54.gridironacademy.ui.resources.map_zoom_in
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.Row
+import androidx.compose.material3.Surface
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.runtime.DisposableEffect
 
 /**
  * The Playbook map (DESIGN 9.14): the concept graph as a vertical skill tree per side,
@@ -96,6 +104,12 @@ fun PlaybookMapScreen(state: LearnerAppState) {
     fun open(id: String) {
         byId[id]?.let { sideName = it.side.name }
         selected = id
+    }
+
+    // The system Back closes an open concept card before it leaves the map.
+    DisposableEffect(selected) {
+        state.backOverride = if (selected != null) ({ selected = null; true }) else null
+        onDispose { state.backOverride = null }
     }
 
     Column(Modifier.fillMaxSize().screenBackground().safeDrawingPadding()) {
@@ -239,6 +253,33 @@ private fun MapCanvas(
                         .width(colW),
                     onClick = { onTap(id) },
                 )
+            }
+        }
+        // Pinching always has buttons too (DESIGN 12): zoom about the middle of the view.
+        Row(Modifier.align(Alignment.BottomStart).padding(8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            listOf(
+                Triple("−", stringResource(Res.string.map_zoom_out), 1f / ZOOM_STEP),
+                Triple("+", stringResource(Res.string.map_zoom_in), ZOOM_STEP),
+            ).forEach { (glyph, label, factor) ->
+                val enabled = if (factor < 1f) scale > MIN_SCALE else scale < MAX_SCALE
+                Surface(
+                    onClick = {
+                        val s = (scale * factor).coerceIn(MIN_SCALE, MAX_SCALE)
+                        val centre = Offset(view.width / 2f, view.height / 2f)
+                        pan = clamp(centre - (centre - pan) * (s / scale), s)
+                        scale = s
+                    },
+                    enabled = enabled,
+                    shape = Gridiron.skin.buttonShape,
+                    color = c.surfaceRaised.copy(alpha = ZOOM_BUTTON_BACK),
+                    contentColor = if (enabled) c.ink else c.line,
+                    border = BorderStroke(1.dp, c.line),
+                    modifier = Modifier.size(Gridiron.skin.touchTarget).semantics { contentDescription = label },
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
+                        Text(glyph, style = Gridiron.type.title, modifier = Modifier.clearAndSetSemantics {})
+                    }
+                }
             }
         }
         Text(stringResource(Res.string.map_zoom_hint), style = Gridiron.type.label, color = c.inkDim,
@@ -398,6 +439,8 @@ private val NODE = 44.dp
 private val GLYPH = 32.dp
 private val ROW_HEIGHT = 104.dp
 private val TOP_PAD = 16.dp
+private const val ZOOM_STEP = 1.5f
+private const val ZOOM_BUTTON_BACK = 0.95f
 private const val MIN_SCALE = 0.5f
 private const val MAX_SCALE = 2.5f
 private const val DIMMED = 0.35f

@@ -328,6 +328,38 @@ class LearnerAppStateTest {
     }
 
     @Test
+    fun theScreensComeBackAfterAndroidEndsTheAppButALessonComesBackAsItsLevel() {
+        val store = InMemoryLearnerStore()
+        val s = LearnerAppState(content, store) { 800 }
+        s.createProfile("Sam", AgeBand.AGE_18_PLUS)
+        val level = s.levels.first()
+        s.openLevel(level)
+        s.startLesson(level, content.unitsOf(level).first().lessons.first())
+        assertEquals(listOf("home", "level:${level.id}"), s.restorableRoute())
+
+        val again = LearnerAppState(content, store) { 800 }
+        again.restoreRoute(s.restorableRoute() + listOf("map", "level:architect-8"))
+        assertEquals(listOf(Screen.Home, Screen.LevelDetail(level.id), Screen.PlaybookMap), again.backStack,
+            "a locked level is dropped")
+        val fresh = LearnerAppState(content, InMemoryLearnerStore()) { 800 }
+        fresh.restoreRoute(listOf("home", "glossary"))
+        assertEquals(listOf(Screen.Welcome), fresh.backStack, "no profile, nothing to restore")
+    }
+
+    @Test
+    fun aScreensOwnBackIsAskedFirst() {
+        val s = LearnerAppState(content, InMemoryLearnerStore()) { 800 }
+        s.createProfile("Sam", AgeBand.AGE_18_PLUS)
+        s.openGlossary(); s.openPlaybookMap()
+        var cardOpen = true
+        s.backOverride = { if (cardOpen) { cardOpen = false; true } else false }
+        s.requestBack()
+        assertEquals(Screen.PlaybookMap, s.screen, "the first Back closes the card")
+        s.requestBack()
+        assertEquals(Screen.Glossary, s.screen)
+    }
+
+    @Test
     fun theGrownUpZoneRenamesChangesAgeAndBacksUp() {
         var ids = 0
         val store = InMemoryLearnerStore()
