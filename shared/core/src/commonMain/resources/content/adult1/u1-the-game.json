@@ -124,7 +124,7 @@
         {
           "type": "true_false",
           "id": "a1-basics-12",
-          "statement": "In flag football, you stop the ball carrier by pulling a flag from his belt.",
+          "statement": "In flag football, you stop the ball carrier by pulling a flag from their belt.",
           "answer": true,
           "explanation": "Pulling the flag ends the play, so there is no tackling.",
           "concept": "flag-football"

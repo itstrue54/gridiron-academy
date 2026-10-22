@@ -272,7 +272,7 @@
         {
           "type": "multiple_choice",
           "id": "p6-packages-04",
-          "prompt": "The offense brings in 10 personnel (four receivers). What do most defenses use?",
+          "prompt": "The offense brings in 10 personnel (four receivers). Which package do defenses often match it with?",
           "choices": [
             "Dime (six defensive backs)",
             "Base 4-3 (four defensive backs)",
