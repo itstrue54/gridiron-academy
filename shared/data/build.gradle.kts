@@ -5,7 +5,8 @@ plugins {
 }
 
 // Repositories and (later) sync (SPEC 11.1): apps -> ui -> data -> core. Common Kotlin
-// only; the backend client and platform storage join here behind the same interfaces.
+// only, and no network: the Supabase client lives in :shared:data-supabase, which only
+// the Coach app depends on (ADR-012), so the learner app stays offline (SPEC 5.4).
 
 kotlin {
     jvm {
@@ -31,14 +32,7 @@ kotlin {
         commonMain.dependencies {
             api(project(":shared:core"))
             api(libs.kotlinx.coroutines.core)
-            implementation(project.dependencies.platform(libs.supabase.bom))
-            implementation(libs.supabase.postgrest)
-            implementation(libs.supabase.auth)
         }
-        // supabase-kt finds its HTTP engine per platform.
-        jvmMain.dependencies { implementation(libs.ktor.client.okhttp) }
-        androidMain.dependencies { implementation(libs.ktor.client.okhttp) }
-        iosMain.dependencies { implementation(libs.ktor.client.darwin) }
         commonTest.dependencies {
             implementation(kotlin("test"))
         }

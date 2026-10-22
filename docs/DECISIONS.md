@@ -130,3 +130,22 @@ prerequisite already implies, so no line is drawn twice.
 library. Long hub edges (Offense to everything) still cross rows, which is why lines stay
 faint and List mode exists. A side changes only in glossary.json.
 
+## ADR-012: The Supabase client lives in its own module, outside the learner app (2026-10-22)
+
+**Context.** The learner app promises that an unlinked child's data never leaves the device
+and declares no INTERNET permission (SPEC 5.4). The pre-launch review found the release APK
+asking for INTERNET anyway: `:shared:data` carried supabase-kt and the OkHttp engine for the
+Coach app, `:shared:ui` exposes `:shared:data`, and the libraries' manifests merged the
+permission and three start-up initializers into the learner app, with about 4 MB of unused
+code. Nothing called the network, but a kids' app is judged on what it can do.
+
+**Decision.** `SupabaseCoachRepository` and the backend dependencies move to
+`:shared:data-supabase`, which only `androidApp-coach` depends on. `:shared:data` keeps the
+interfaces, the demo repository, the pure snapshot assembler and save migrations. The
+learner build fails if its merged manifest declares INTERNET (`check<Variant>NoInternet`),
+and CI builds release so the check runs on every change.
+
+**Consequences.** The learner APK has no network stack (12.3 MB to 9.2 MB before R8) and its
+Data safety answer is "no data collected". When sync ships, the learner app will add a
+network module and the permission deliberately, removing the check in the same change.
+

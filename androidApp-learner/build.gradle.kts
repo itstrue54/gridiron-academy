@@ -28,9 +28,9 @@ android {
             buildConfigField("boolean", "REVIEWED_ONLY", "false")
         }
         release {
-            // SPEC 13.3: ship only coach-signed levels. Off until the course is signed:
-            // build with -Pgridiron.reviewedOnly=true to turn it on.
-            buildConfigField("boolean", "REVIEWED_ONLY", (findProperty("gridiron.reviewedOnly") ?: "false").toString())
+            // SPEC 13.3: a release ships only coach-signed levels. On by default; an internal
+            // test build that needs unreviewed content passes -Pgridiron.reviewedOnly=false.
+            buildConfigField("boolean", "REVIEWED_ONLY", (findProperty("gridiron.reviewedOnly") ?: "true").toString())
             optimization {
                 enable = false
             }
@@ -50,4 +50,27 @@ dependencies {
     implementation(project(":shared:ui"))
     implementation(libs.androidx.activity.compose)
     implementation(libs.kotlinx.coroutines.android)
+}
+
+// SPEC 5.4: an unlinked learner's data never leaves the device, so the learner app declares
+// no INTERNET permission. A library that merges one in fails the build here (it happened:
+// the Supabase client, ADR-012). When sync ships, remove this check on purpose.
+abstract class NoInternetPermission : DefaultTask() {
+    @get:InputFile abstract val manifest: RegularFileProperty
+
+    @TaskAction fun check() {
+        if ("android.permission.INTERNET" in manifest.get().asFile.readText()) {
+            throw GradleException("The learner app must not declare INTERNET (SPEC 5.4): ${manifest.get().asFile}")
+        }
+    }
+}
+
+androidComponents {
+    onVariants { variant ->
+        val name = variant.name.replaceFirstChar { it.uppercase() }
+        val check = tasks.register<NoInternetPermission>("check${name}NoInternet") {
+            manifest.set(variant.artifacts.get(com.android.build.api.artifact.SingleArtifact.MERGED_MANIFEST))
+        }
+        tasks.matching { it.name == "assemble$name" || it.name == "bundle$name" }.configureEach { dependsOn(check) }
+    }
 }
