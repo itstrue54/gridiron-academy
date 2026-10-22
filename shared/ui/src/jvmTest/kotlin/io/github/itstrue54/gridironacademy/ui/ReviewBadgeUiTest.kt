@@ -15,7 +15,9 @@ import kotlin.test.Test
 /** DESIGN 8, ReviewBadge: debug builds mark unsigned steps; signed ones and release builds don't. */
 @OptIn(ExperimentalTestApi::class)
 class ReviewBadgeUiTest {
-    private val content = ContentLoader.load(ClasspathContentSource())
+    private val shipped = ContentLoader.load(ClasspathContentSource())
+    /** No sign-offs, whatever review.json holds today. */
+    private val content = Content(shipped.curriculum, shipped.glossary, shipped.unitsByLevel, shipped.scenes, shipped.packs, ReviewLog())
 
     private fun firstLesson(c: Content, badges: Boolean) = LearnerAppState(c, InMemoryLearnerStore(), showReviewBadges = badges) { 800 }.also {
         it.createProfile("Leo", AgeBand.AGE_8_9)
@@ -37,7 +39,7 @@ class ReviewBadgeUiTest {
 
     @Test fun aSignedStepDoesNot() = runComposeUiTest {
         val log = ReviewLog(signoffs = listOf(Signoff("k1-field-01", "Coach", "2026-10-21", 2026, "0123456789abcdef")))
-        val signed = Content(content.curriculum, content.glossary, content.unitsByLevel, content.scenes, content.packs, log)
+        val signed = Content(shipped.curriculum, shipped.glossary, shipped.unitsByLevel, shipped.scenes, shipped.packs, log)
         val state = firstLesson(signed, badges = true)
         setContent { LearnerApp(state, dark = false) }
         onAllNodesWithText("[review]", substring = true).assertCountEquals(0)

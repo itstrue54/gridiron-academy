@@ -7,17 +7,17 @@ and validated, `preview` = exemplar content proving the model, `planned` = to be
 | # | Level | Track | Age/audience | Gate game | Status |
 |---|---|---|---|---|---|
 | 0 | Little Huddle | kid | 4-7, pre-readers | Picture Play (no test) | planned |
-| 1 | Pee-wee | kid | ~8 | Speed round | **done** (`kid-1`) |
-| 1 | Fan Starter | adult | new fans | Speed round | **done** (`adult-1`) |
-| 2 | Rookie | kid | ~9-10 | Speed round | **done** (`kid-2`, coach review pending) |
-| 2 | Season Ticket | adult | casual fans | Game day | **done** (`adult-2`, coach review pending) |
-| 3 | Junior Varsity | kid | ~11-12 | Diagram dash | **done** (`kid-3`, coach review pending) |
-| 3 | Armchair Coach | adult | fans | Diagram dash | **done** (`adult-3`, coach review pending) |
-| 4 | Varsity | shared | both | Read the defense | **done** (`varsity-4`, coach review pending) |
-| 5 | College | shared | | Game day | **done** (`college-5`, coach review pending) |
-| 6 | Pro | shared | | Read the defense | **done** (`pro-6`, coach review pending) |
-| 7 | Coordinator | shared | | Read the defense | **done** (`coordinator-7`, coach review pending) |
-| 8 | Architect | shared | | Game day | **done** (`architect-8`, coach review pending) |
+| 1 | Pee-wee | kid | ~8 | Speed round | **done** (`kid-1`, signed off 2026-10-21) |
+| 1 | Fan Starter | adult | new fans | Speed round | **done** (`adult-1`, signed off 2026-10-21) |
+| 2 | Rookie | kid | ~9-10 | Speed round | **done** (`kid-2`, signed off 2026-10-21) |
+| 2 | Season Ticket | adult | casual fans | Game day | **done** (`adult-2`, signed off 2026-10-21) |
+| 3 | Junior Varsity | kid | ~11-12 | Diagram dash | **done** (`kid-3`, signed off 2026-10-21) |
+| 3 | Armchair Coach | adult | fans | Diagram dash | **done** (`adult-3`, signed off 2026-10-21) |
+| 4 | Varsity | shared | both | Read the defense | **done** (`varsity-4`, signed off 2026-10-21) |
+| 5 | College | shared | | Game day | **done** (`college-5`, signed off 2026-10-21) |
+| 6 | Pro | shared | | Read the defense | **done** (`pro-6`, signed off 2026-10-21) |
+| 7 | Coordinator | shared | | Read the defense | **done** (`coordinator-7`, signed off 2026-10-21) |
+| 8 | Architect | shared | | Game day | **done** (`architect-8`, signed off 2026-10-21) |
 
 Placement: an adult can take a short quiz per level and start at the first one they miss.
 Any level's test can be "tested out" of, with the game still to be played.
