@@ -385,9 +385,9 @@
         {
           "type": "true_false",
           "id": "v4-gaps-08",
-          "statement": "A 5-technique lines up on the outside shoulder of the tackle.",
-          "answer": true,
-          "explanation": "The 5 is the tackle's outside shoulder, in the C gap.",
+          "statement": "A 5-technique lines up head-up on the center.",
+          "answer": false,
+          "explanation": "Head-up on the center is a 0-technique. The 5 is the tackle's outside shoulder, in the C gap.",
           "concept": "technique"
         }
       ]

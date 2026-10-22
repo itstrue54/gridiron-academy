@@ -34,9 +34,9 @@
           "prompt": "Why does play-action work best when the run game is working?",
           "choices": [
             "Defenders respect the fake and step up",
-            "It's always a touchdown",
-            "The line can go downfield",
-            "It stops the clock"
+            "Linemen can block farther downfield",
+            "The clock keeps running during the fake",
+            "The quarterback gets a longer drop"
           ],
           "answer": 0,
           "explanation": "The more a defense fears the run, the harder it bites on the fake.",
@@ -45,9 +45,9 @@
         {
           "type": "true_false",
           "id": "c5-playaction-05",
-          "statement": "On a bootleg, the quarterback rolls out the opposite way from the run fake.",
-          "answer": true,
-          "explanation": "That's the boot: fake one way, move the other.",
+          "statement": "On a bootleg, the quarterback rolls out the same way as the run fake.",
+          "answer": false,
+          "explanation": "On a bootleg the quarterback fakes the run one way and rolls out the other.",
           "concept": "play-action"
         }
       ]

@@ -35,7 +35,15 @@ import io.github.itstrue54.gridironacademy.ui.components.SecondaryButton
 import io.github.itstrue54.gridironacademy.ui.resources.*
 import io.github.itstrue54.gridironacademy.ui.theme.Gridiron
 import io.github.itstrue54.gridironacademy.ui.theme.screenBackground
+import org.jetbrains.compose.resources.pluralStringResource
 import org.jetbrains.compose.resources.stringResource
+import io.github.itstrue54.gridironacademy.ui.resources.report_minutes
+import io.github.itstrue54.gridironacademy.ui.resources.gate_locked
+import io.github.itstrue54.gridironacademy.ui.resources.gate_question
+import androidx.compose.ui.semantics.liveRegion
+import androidx.compose.ui.semantics.LiveRegionMode
+import kotlinx.coroutines.delay
+import androidx.compose.runtime.LaunchedEffect
 
 /**
  * The grown-up gate (DESIGN 9.9): a multiplication a young child can't guess (both
@@ -46,12 +54,21 @@ import org.jetbrains.compose.resources.stringResource
 fun GrownUpGateScreen(state: LearnerAppState, seed: Long) {
     val c = Gridiron.colors
     var round by remember { mutableStateOf(0) }
-    val (a, b) = remember(round) { Rng(seed + round).let { r -> (MIN_FACTOR + r.nextInt(FACTOR_SPAN)) to (MIN_FACTOR + r.nextInt(FACTOR_SPAN)) } }
+    // A two-digit times a one-digit number, written in words (DESIGN 9.9): beyond a
+    // young reader, a few seconds for a parent.
+    val (a, b) = remember(round) { Rng(seed + round).let { r -> (MIN_BIG + r.nextInt(BIG_SPAN)) to (MIN_SMALL + r.nextInt(SMALL_SPAN)) } }
     var typed by remember(round) { mutableStateOf("") }
     var wrong by remember { mutableStateOf(false) }
+    var lockedMillis by remember { mutableStateOf(state.grownUpGateLockedMillis()) }
+    LaunchedEffect(lockedMillis > 0) {
+        while (lockedMillis > 0) { delay(LOCK_TICK_MS); lockedMillis = state.grownUpGateLockedMillis() }
+    }
     val right = typed.toIntOrNull() == a * b
     fun attempt() {
-        if (right) state.enterGrownUpZone() else { wrong = true; round++ }
+        if (right) { state.enterGrownUpZone(); return }
+        state.grownUpGateMissed()
+        wrong = true; round++
+        lockedMillis = state.grownUpGateLockedMillis()
     }
     Column(
         Modifier.fillMaxSize().screenBackground().safeDrawingPadding().padding(Gridiron.skin.gutter).imePadding(),
@@ -62,9 +79,14 @@ fun GrownUpGateScreen(state: LearnerAppState, seed: Long) {
             Text(stringResource(Res.string.grown_ups_only), style = Gridiron.type.headline, color = c.ink, modifier = Modifier.semantics { heading() })
         }
         Text(stringResource(Res.string.gate_body), style = Gridiron.type.body, color = c.inkDim)
-        Text("$a × $b = ?", style = Gridiron.type.displayLarge, color = c.ink, modifier = Modifier.align(Alignment.CenterHorizontally))
+        if (lockedMillis > 0) {
+            Text(((lockedMillis + 999) / 1000).toInt().let { pluralStringResource(Res.plurals.gate_locked, it, it) }, style = Gridiron.type.title, color = c.ink,
+                modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite })
+            return@Column
+        }
+        Text(stringResource(Res.string.gate_question, numberWords(a), numberWords(b)), style = Gridiron.type.headline, color = c.ink)
         OutlinedTextField(
-            value = typed, onValueChange = { v -> typed = v.filter { it.isDigit() }.take(3); wrong = false },
+            value = typed, onValueChange = { v -> typed = v.filter { it.isDigit() }.take(4); wrong = false },
             label = { Text(stringResource(Res.string.gate_answer)) }, singleLine = true,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
             textStyle = Gridiron.type.title.copy(color = c.ink), modifier = Modifier.fillMaxWidth(),
@@ -160,7 +182,7 @@ fun GrownUpZoneScreen(state: LearnerAppState, platform: LearnerPlatform) {
             Text(stringResource(Res.string.zone_age_note), style = Gridiron.type.label, color = c.inkDim)
 
             Section(stringResource(Res.string.zone_report))
-            Text(stringResource(Res.string.report_minutes, state.minutesThisWeek()), style = Gridiron.type.body, color = c.ink)
+            Text(state.minutesThisWeek().let { pluralStringResource(Res.plurals.report_minutes, it, it) }, style = Gridiron.type.body, color = c.ink)
             Text(stringResource(Res.string.report_mastery_note), style = Gridiron.type.label, color = c.inkDim)
             state.progressReport().forEach { r ->
                 Card(edge = if (r.passed) c.correct else null) {
@@ -239,7 +261,21 @@ private fun Section(title: String) {
         modifier = Modifier.padding(top = 8.dp).semantics { heading() })
 }
 
-private const val MIN_FACTOR = 6
-private const val FACTOR_SPAN = 4
+private const val MIN_BIG = 12
+private const val BIG_SPAN = 8 // 12-19
+private const val MIN_SMALL = 3
+private const val SMALL_SPAN = 7 // 3-9
+private const val LOCK_TICK_MS = 1_000L
+
+private val ONES = listOf("zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten",
+    "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen")
+private val TENS = listOf("", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety")
+
+/** 0-99 in English words, for the gate question. */
+internal fun numberWords(n: Int): String = when {
+    n < 20 -> ONES[n]
+    n % 10 == 0 -> TENS[n / 10]
+    else -> "${TENS[n / 10]}-${ONES[n % 10]}"
+}
 private const val HOLD_MS = 2_000
 private const val RELEASE_MS = 200

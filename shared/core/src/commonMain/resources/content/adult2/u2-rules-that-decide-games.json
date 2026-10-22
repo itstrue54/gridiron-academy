@@ -52,9 +52,9 @@
         {
           "type": "true_false",
           "id": "a2-pi-06",
-          "statement": "A cornerback may jam a receiver 3 yards past the line of scrimmage before the pass is thrown.",
-          "answer": true,
-          "explanation": "Within 5 yards of the line, contact is allowed until the ball is thrown.",
+          "statement": "In the NFL, a cornerback may jam a receiver 10 yards downfield before the pass is thrown.",
+          "answer": false,
+          "explanation": "NFL defenders may contact a receiver only within 5 yards of the line. Past that, before the throw, it's illegal contact: 5 yards and an automatic first down.",
           "concept": "illegal-contact"
         },
         {
@@ -91,9 +91,9 @@
           "prompt": "After a foul, how does the referee tell everyone what was called?",
           "choices": [
             "A hand signal and an announcement",
-            "A red flag",
-            "A long whistle",
-            "It appears only on TV"
+            "A whistle and a flag at the spot",
+            "Only on the stadium scoreboard",
+            "A note to the head coach"
           ],
           "answer": 0,
           "explanation": "Every foul has its own hand signal, and the referee announces the foul and the player's number.",
@@ -244,9 +244,9 @@
           "prompt": "With 1:30 left in the half, a coach wants a sideline catch reviewed. What happens?",
           "choices": [
             "The replay official decides; coaches can't challenge",
-            "The coach throws the red flag",
-            "Nothing can be reviewed",
-            "The play is replayed"
+            "The coach throws the red flag to challenge",
+            "Nothing: catches can't be reviewed now",
+            "Both coaches must agree to a review"
           ],
           "answer": 0,
           "explanation": "Inside two minutes of each half, reviews come from the replay booth, not the coach.",

@@ -58,9 +58,9 @@
         {
           "type": "true_false",
           "id": "k1-downs-06",
-          "statement": "When a team gets a first down, it gets 4 new tries.",
-          "answer": true,
-          "explanation": "That is why first downs are so important.",
+          "statement": "When a team gets a first down, it gets just one more try.",
+          "answer": false,
+          "explanation": "A first down gives 4 new tries to go 10 more yards.",
           "concept": "first-down"
         },
         {
@@ -210,9 +210,9 @@
           "id": "k1-moving-09",
           "prompt": "How do you stop the ball carrier in tackle football?",
           "choices": [
-            "Tackle him to the ground",
-            "Pull his flag",
-            "Tag him with one hand",
+            "Tackle them to the ground",
+            "Pull their flag",
+            "Tag them with one hand",
             "Yell stop"
           ],
           "answer": 0,

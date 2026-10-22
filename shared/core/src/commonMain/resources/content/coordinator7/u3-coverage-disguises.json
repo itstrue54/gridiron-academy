@@ -1502,9 +1502,9 @@
           "prompt": "What is a bracket?",
           "choices": [
             "Two defenders on one receiver, one under and one over",
-            "A blitz from the slot",
-            "A type of punt",
-            "Four deep defenders"
+            "One defender guarding two receivers",
+            "A corner blitz from the slot side",
+            "Four deep defenders splitting the field"
           ],
           "answer": 0,
           "explanation": "A bracket takes away a star by doubling him.",

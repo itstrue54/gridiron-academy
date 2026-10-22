@@ -208,10 +208,10 @@
           "id": "a1-clock-06",
           "prompt": "What is the two-minute warning?",
           "choices": [
-            "A penalty",
+            "A timeout each team may call once per half",
             "An automatic timeout at 2:00 of each half",
-            "A two-minute overtime",
-            "A rule that bans huddles"
+            "A penalty for wasting time before halftime",
+            "The last two minutes, when the clock never stops"
           ],
           "answer": 1,
           "explanation": "It is at the two-minute mark of the 2nd and 4th quarters.",
@@ -273,9 +273,9 @@
           "prompt": "A pass bounces off the turf before the receiver secures it. What is it?",
           "choices": [
             "Incomplete: the down is used and the ball goes back",
-            "A fumble the defense can recover",
-            "A catch, if he holds on after",
-            "A turnover"
+            "A fumble: the defense can recover it",
+            "A catch, as long as he holds on after",
+            "A live ball until someone falls on it"
           ],
           "answer": 0,
           "explanation": "A pass that hits the ground is incomplete: the down is used, the ball returns to the previous spot, and the clock stops.",

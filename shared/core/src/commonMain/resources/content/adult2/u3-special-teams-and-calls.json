@@ -84,9 +84,9 @@
           "prompt": "A punt returner waves one arm above his head before the catch. What has he signaled?",
           "choices": [
             "A fair catch: he won't run, and nobody may hit him",
-            "A timeout",
-            "That he will let it bounce",
-            "A touchback"
+            "A timeout before the kick comes down",
+            "A touchback: he'll down it in the end zone",
+            "A return: blockers should set up a wall"
           ],
           "answer": 0,
           "explanation": "A fair catch trades the return for safety: his team takes the ball where he caught it.",
@@ -150,9 +150,9 @@
         {
           "type": "true_false",
           "id": "a2-calls-06",
-          "statement": "Spiking the ball uses up a down.",
-          "answer": true,
-          "explanation": "A spike stops the clock but counts as an incomplete pass.",
+          "statement": "Spiking the ball stops the clock without using a down.",
+          "answer": false,
+          "explanation": "A spike stops the clock, but it counts as an incomplete pass, so it uses a down.",
           "concept": "spike"
         },
         {

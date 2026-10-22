@@ -55,9 +55,9 @@
           "prompt": "A 6-yard gain on 3rd and 10. Why is its EPA usually negative?",
           "choices": [
             "It falls short of the first down, so you'll probably punt",
-            "Six yards is never good",
-            "EPA ignores 3rd down",
-            "Because it was a pass"
+            "Third-down plays always count as negative",
+            "Six yards is below the league's average gain",
+            "EPA only counts plays that score"
           ],
           "answer": 0,
           "explanation": "Yards only count for what they lead to; short of the sticks on 3rd down, the drive likely ends.",
@@ -69,9 +69,9 @@
           "prompt": "A team's PROE is strongly positive. What does that mean?",
           "choices": [
             "It passes more than a typical team would in the same situations",
-            "It runs more than expected",
-            "It scores more",
-            "It punts less"
+            "It runs more than a typical team would in the same situations",
+            "It passes on more than half of its plays",
+            "It completes more passes than expected"
           ],
           "answer": 0,
           "explanation": "Positive PROE means more passing than the situation predicts.",
@@ -119,9 +119,9 @@
           "prompt": "Why do modern models favor going for it on many 4th and shorts?",
           "choices": [
             "Converting keeps the drive alive, worth more than the punt's field position",
-            "Punting is illegal",
-            "Kickers never miss",
-            "Defenses are always tired"
+            "Punts are blocked far more often than they used to be",
+            "Defenses tire late in drives, so 4th downs are easier",
+            "A failed try costs nothing in field position"
           ],
           "answer": 0,
           "explanation": "Short conversions succeed often, and a fresh set of downs is worth a lot of expected points.",

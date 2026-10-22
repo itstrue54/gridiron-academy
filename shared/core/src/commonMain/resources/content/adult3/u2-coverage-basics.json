@@ -973,9 +973,9 @@
         {
           "type": "true_false",
           "id": "a3-leverage-04",
-          "statement": "A defender with inside leverage is protecting the middle of the field.",
-          "answer": true,
-          "explanation": "Inside leverage takes away inside-breaking routes.",
+          "statement": "A defender with inside leverage is protecting the sideline.",
+          "answer": false,
+          "explanation": "Inside leverage protects the middle and takes away inside-breaking routes. Outside leverage protects the sideline.",
           "concept": "leverage"
         }
       ]

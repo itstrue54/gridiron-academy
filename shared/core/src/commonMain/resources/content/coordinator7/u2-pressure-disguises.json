@@ -1740,9 +1740,9 @@
           "prompt": "What's the main idea of simulated pressure?",
           "choices": [
             "Blitz-like confusion while still dropping seven into coverage",
-            "Rush all eleven",
-            "Play no defense at all",
-            "Rush only three"
+            "Rushing six so the quarterback must throw hot",
+            "Showing blitz, then rushing only three",
+            "Sending a corner and playing man behind it"
           ],
           "answer": 0,
           "explanation": "It attacks the protection's rules without giving up coverage numbers.",

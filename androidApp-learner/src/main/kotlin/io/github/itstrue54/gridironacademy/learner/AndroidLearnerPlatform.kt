@@ -17,6 +17,9 @@ class AndroidLearnerPlatform(private val activity: ComponentActivity) : LearnerP
     private var onExported: ((Boolean) -> Unit)? = null
     private var onPicked: ((String?) -> Unit)? = null
 
+    /** A system file picker is up; the app leaving the screen for it isn't the child leaving. */
+    val pickerOpen: Boolean get() = onExported != null || onPicked != null
+
     private val createDoc = activity.registerForActivityResult(ActivityResultContracts.CreateDocument(MIME)) { uri ->
         val text = pendingText
         val ok = uri != null && text != null && write(activity, uri, text)
@@ -26,8 +29,14 @@ class AndroidLearnerPlatform(private val activity: ComponentActivity) : LearnerP
     }
 
     private val openDoc = activity.registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
-        onPicked?.invoke(uri?.let { read(activity, it) })
+        val done = onPicked
         onPicked = null
+        if (uri == null) { done?.invoke(null); return@registerForActivityResult }
+        // The file can be large and on a slow provider: read it off the main thread.
+        Thread({
+            val text = read(activity, uri)
+            activity.runOnUiThread { done?.invoke(text) }
+        }, "backup-read").start()
     }
 
     override fun exportBackup(text: String, fileName: String, done: (Boolean) -> Unit) {
@@ -77,7 +86,7 @@ class AndroidLearnerPlatform(private val activity: ComponentActivity) : LearnerP
     private companion object {
         const val TAG = "LearnerBackup"
         const val MIME = "application/json"
-        /** 20 MB: years of attempts; anything larger isn't a Gridiron Academy save. */
-        const val MAX_BYTES = 20 * 1024 * 1024
+        /** 8 MB: the attempt log is capped near 5 MB, so anything larger isn't one of ours. */
+        const val MAX_BYTES = 8 * 1024 * 1024
     }
 }

@@ -3142,9 +3142,9 @@
           "prompt": "Why time a rotation for the very last second?",
           "choices": [
             "So the quarterback reads the wrong picture and can't adjust",
-            "To confuse the referee",
-            "Because the rules require it",
-            "To save energy"
+            "So the offense can't hear the coverage call",
+            "Because rotating early is a penalty",
+            "To save the safeties' legs for the run"
           ],
           "answer": 0,
           "explanation": "The later the movement, the less time the offense has to change the play or the protection.",

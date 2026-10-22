@@ -119,7 +119,7 @@
         {
           "type": "multiple_choice",
           "id": "k2-penalties-05",
-          "prompt": "A blocker grabs a defender's jersey to stop him. What penalty is that?",
+          "prompt": "A blocker grabs a defender's jersey to stop them. What penalty is that?",
           "choices": [
             "Holding",
             "Offside",
@@ -181,7 +181,7 @@
           "type": "learn",
           "id": "k2-safety-04",
           "title": "Hands off receivers",
-          "body": "In the NFL, once a receiver is 5 yards past the line, a defender may not push or grab him before the ball is thrown. That's illegal contact. High school rules are different, so ask your coach.",
+          "body": "In the NFL, once a receiver is 5 yards past the line, a defender may not push or grab them before the ball is thrown. That's illegal contact. High school rules are different, so ask your coach.",
           "concept": "illegal-contact"
         },
         {
@@ -230,8 +230,8 @@
         {
           "type": "true_false",
           "id": "k2-clock-04",
-          "statement": "The clock stops after an incomplete pass.",
-          "answer": true,
+          "statement": "The clock keeps running after an incomplete pass.",
+          "answer": false,
           "explanation": "A pass that is not caught stops the clock.",
           "concept": "game-clock"
         },
@@ -275,7 +275,7 @@
           "type": "learn",
           "id": "k2-safety-02",
           "title": "Protect the quarterback",
-          "body": "Defenders may not hit the quarterback late, once the ball is clearly gone, or hit him in the head. That's roughing the passer: 15 yards and a first down.",
+          "body": "Defenders may not hit the quarterback late, once the ball is clearly gone, or hit them in the head. That's roughing the passer: 15 yards and a first down.",
           "concept": "roughing-the-passer"
         },
         {
@@ -288,7 +288,7 @@
         {
           "type": "multiple_choice",
           "id": "k2-safety-05",
-          "prompt": "A defender hits the quarterback after he already threw the ball. What's the call?",
+          "prompt": "A defender hits the quarterback after the ball is already thrown. What's the call?",
           "choices": [
             "Roughing the passer",
             "A touchdown",
@@ -302,7 +302,7 @@
         {
           "type": "true_false",
           "id": "k2-safety-06",
-          "statement": "It's fine to tackle a player after the whistle if he still has the ball.",
+          "statement": "It's fine to tackle a player after the whistle if they still have the ball.",
           "answer": false,
           "explanation": "After the whistle the play is over. A late hit is unnecessary roughness.",
           "concept": "unnecessary-roughness"

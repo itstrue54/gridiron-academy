@@ -4,5 +4,11 @@
     <style name="Theme.GridironAcademy" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:windowBackground">@color/surface</item>
     </style>
+    <!-- Launch: the icon on the surface until the lessons have loaded (MainActivity). -->
+    <style name="Theme.GridironAcademy.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/surface</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher_foreground</item>
+        <item name="postSplashScreenTheme">@style/Theme.GridironAcademy</item>
+    </style>
     <color name="surface">#F7F4EB</color>
 </resources>

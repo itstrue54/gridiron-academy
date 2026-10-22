@@ -111,7 +111,7 @@
     {
       "id": "safety-score",
       "term": "Safety (scoring)",
-      "kid": "When the defense tackles the ball carrier in his own end zone. Worth 2 points.",
+      "kid": "When the defense tackles the ball carrier in their own end zone. Worth 2 points.",
       "full": "A 2-point score for the defense when the ball carrier is down in his own end zone, among other situations.",
       "level": 1,
       "side": "defense",
@@ -703,7 +703,7 @@
     {
       "id": "pistol",
       "term": "Pistol",
-      "kid": "The quarterback is a few yards back with the runner right behind him.",
+      "kid": "The quarterback is a few yards back with the runner right behind.",
       "full": "Quarterback about 4 yards deep with the running back directly behind, combining a downhill run game with shotgun vision.",
       "level": 2,
       "side": "offense",
@@ -770,7 +770,7 @@
     {
       "id": "roughing-the-passer",
       "term": "Roughing the passer",
-      "kid": "Hitting the quarterback after he throws.",
+      "kid": "Hitting the quarterback after the ball is thrown.",
       "full": "Late, high or full-weight hits on a passer: 15 yards and an automatic first down.",
       "level": 2,
       "side": "rules",
@@ -963,7 +963,7 @@
     {
       "id": "pull-block",
       "term": "Pull",
-      "kid": "A lineman leaves his spot to block elsewhere.",
+      "kid": "A lineman leaves their spot to block somewhere else.",
       "full": "A lineman steps back and runs along the line to block at the point of attack, leading a sweep or kicking out an edge player on a counter or trap.",
       "level": 3,
       "side": "offense",
@@ -1254,7 +1254,7 @@
     {
       "id": "sack",
       "term": "Sack",
-      "kid": "Tackling the quarterback before he throws.",
+      "kid": "Tackling the quarterback before the ball is thrown.",
       "full": "A tackle of the passer behind the line of scrimmage on a pass play; with hits and hurries, part of 'pressure'.",
       "level": 4,
       "side": "defense",
@@ -1417,7 +1417,7 @@
     {
       "id": "option",
       "term": "Option",
-      "kid": "The quarterback reads a defender instead of blocking him.",
+      "kid": "The quarterback reads a defender instead of blocking them.",
       "full": "Plays that leave one defender unblocked and let the quarterback choose (give, keep, pitch) based on what he does: zone read, speed option, triple option.",
       "level": 5,
       "side": "offense",
@@ -1580,7 +1580,7 @@
     {
       "id": "progression",
       "term": "Progression",
-      "kid": "The order a quarterback reads his receivers.",
+      "kid": "The order a quarterback reads their receivers.",
       "full": "The sequence of reads on a pass play: hot (against a blitz), first, second and third reads, then the checkdown.",
       "level": 6,
       "side": "offense",

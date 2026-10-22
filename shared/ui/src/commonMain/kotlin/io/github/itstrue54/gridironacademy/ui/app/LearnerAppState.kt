@@ -384,7 +384,26 @@ class LearnerAppState(
 
     /** The gate was passed: the zone takes its place, so Back from the zone goes Home. */
     fun enterGrownUpZone() {
-        if (screen == Screen.GrownUpGate) replaceTop(Screen.GrownUpZone)
+        if (screen == Screen.GrownUpGate) { gateMisses = 0; replaceTop(Screen.GrownUpZone) }
+    }
+
+    private var gateMisses = 0
+    private var gateLockedUntil by mutableStateOf(0L)
+
+    /** A wrong gate answer. The third in a row locks the gate for [GATE_LOCK_MILLIS] (DESIGN 9.9). */
+    fun grownUpGateMissed() {
+        if (++gateMisses >= GATE_MISSES) { gateMisses = 0; gateLockedUntil = now() + GATE_LOCK_MILLIS }
+    }
+
+    /** How long the gate stays locked; 0 when it's open to answers. */
+    fun grownUpGateLockedMillis(): Long = (gateLockedUntil - now()).coerceAtLeast(0)
+
+    /**
+     * The app left the screen (home button, another app, screen off). The grown-up zone
+     * closes, so a child picking the phone up later finds the gate again.
+     */
+    fun leftTheApp() {
+        if (screen == Screen.GrownUpZone || screen == Screen.GrownUpGate) back()
     }
 
     fun renameProfile(nickname: String) {
@@ -622,7 +641,7 @@ class LearnerAppState(
     /** Saves [next] with any answers graded since the last save. */
     private fun commit(next: LearnerSave) {
         val withLog = if (pending.isEmpty()) next else next.copy(
-            attempts = next.attempts + pending,
+            attempts = (next.attempts + pending).takeLast(LearnerSave.MAX_ATTEMPTS),
             nextSeq = next.nextSeq + pending.size,
         )
         pending.clear()
@@ -633,8 +652,10 @@ class LearnerAppState(
     private companion object {
         const val DEFAULT_NICKNAME = "Player"
         const val SEED_MIX = 1_000_003L
-        /** DESIGN 9.6: a one-minute round. The Untimed option arrives with profile settings. */
+        /** DESIGN 9.6: a one-minute round, unless the rules screen's Clock switch is off. */
         const val SPEED_ROUND_MILLIS = 60_000L
+        const val GATE_MISSES = 3
+        const val GATE_LOCK_MILLIS = 60_000L
         const val MILLIS_PER_DAY = 86_400_000L
         const val NICKNAME_MAX = 20
         /** Practice XP, the same rate as a lesson: a tenth of the score. */

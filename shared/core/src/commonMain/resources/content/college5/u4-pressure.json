@@ -1926,9 +1926,9 @@
         {
           "type": "true_false",
           "id": "c5-pressure-08",
-          "statement": "A creeper rushes only four but from unexpected places.",
-          "answer": true,
-          "explanation": "That's the point: blitz-like confusion without leaving extra holes in coverage.",
+          "statement": "A creeper sends six rushers after the quarterback.",
+          "answer": false,
+          "explanation": "A creeper rushes only four, but from unexpected places: blitz-like confusion without leaving extra holes in coverage.",
           "concept": "simulated-pressure"
         }
       ]

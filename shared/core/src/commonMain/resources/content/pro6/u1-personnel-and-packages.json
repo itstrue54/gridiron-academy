@@ -275,9 +275,9 @@
           "prompt": "The offense brings in 10 personnel (four receivers). What do most defenses use?",
           "choices": [
             "Dime (six defensive backs)",
-            "Goal line",
-            "Base 4-3",
-            "Five linemen"
+            "Base 4-3 (four defensive backs)",
+            "Goal line (three defensive backs)",
+            "Base 3-4 (four defensive backs)"
           ],
           "answer": 0,
           "explanation": "Four receivers usually draws six defensive backs.",
@@ -300,9 +300,9 @@
         {
           "type": "true_false",
           "id": "p6-packages-06",
-          "statement": "A goal-line defense usually has more defensive linemen than a base defense.",
-          "answer": true,
-          "explanation": "Five or six linemen to stop short-yardage runs.",
+          "statement": "A goal-line defense usually has fewer defensive linemen than a base defense.",
+          "answer": false,
+          "explanation": "Goal-line defenses add linemen, five or six, to stop short-yardage runs.",
           "concept": "goal-line"
         }
       ]

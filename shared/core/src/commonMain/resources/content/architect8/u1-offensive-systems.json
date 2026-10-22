@@ -226,9 +226,9 @@
           "prompt": "Why does the wide-zone system pair so naturally with bootlegs?",
           "choices": [
             "The boot looks exactly like the run, so defenders chase the wrong way",
-            "Bootlegs are always touchdowns",
-            "It doesn't need linemen",
-            "It only works in the rain"
+            "Wide zone needs only two receivers, so the rest can block",
+            "Bootlegs let linemen go downfield to block early",
+            "The quarterback hands off and becomes a receiver"
           ],
           "answer": 0,
           "explanation": "The run and the boot start the same; when defenders flow with the run, the quarterback rolls the other way.",

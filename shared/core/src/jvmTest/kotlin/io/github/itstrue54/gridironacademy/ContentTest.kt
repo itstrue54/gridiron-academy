@@ -55,6 +55,18 @@ class ContentTest {
         assertEquals(2, errs.count { "opens with a verdict" in it }, errs.joinToString())
     }
 
+    @Test fun `validator rejects a level whose true-false items lean one way`() {
+        // Before the launch review, answering True every time scored about 80%.
+        val allTrue = content.unitsByLevel.mapValues { (id, units) ->
+            if (id != "kid-2") units else units.map { u ->
+                u.copy(lessons = u.lessons.map { l -> l.copy(steps = l.steps.map { if (it is TrueFalse) it.copy(answer = true) else it }) })
+            }
+        }
+        val leaning = Content(content.curriculum, content.glossary, allTrue, content.scenes, content.packs, content.review)
+        val errs = ContentValidator.validate(leaning)
+        assertTrue(errs.any { it.startsWith("level kid-2: true/false answers lean one way") }, errs.joinToString("\n"))
+    }
+
     @Test fun `validator catches an illegal formation`() {
         fun offense(onLine: Int) = (0 until 11).map { i ->
             DiagramPlayer("o$i", "O", Side.OFFENSE, i * 2f - 10f, if (i < onLine) 0f else -1f)

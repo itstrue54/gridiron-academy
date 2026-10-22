@@ -34,9 +34,9 @@
           "prompt": "Strong wind is blowing straight across the field. Which plays get riskier?",
           "choices": [
             "Long passes and long field goals",
-            "Inside runs",
-            "Kneel downs",
-            "Handoffs"
+            "Inside runs and quarterback sneaks",
+            "Short passes to the flat",
+            "Screens and draws"
           ],
           "answer": 0,
           "explanation": "Wind pushes deep balls and long kicks; the run game barely notices.",
@@ -48,9 +48,9 @@
           "prompt": "Why is a quarterback on a rookie contract such an advantage?",
           "choices": [
             "His low salary leaves cap room to build the roster",
-            "Rookies can't be sacked",
-            "The cap doesn't apply to them",
-            "They play more downs"
+            "Rookie contracts don't count toward the cap",
+            "Teams get an extra roster spot for a rookie",
+            "Rookies are paid by the league, not the team"
           ],
           "answer": 0,
           "explanation": "A cheap starting quarterback frees money for the rest of the team.",
@@ -59,9 +59,9 @@
         {
           "type": "true_false",
           "id": "ar8-management-06",
-          "statement": "Releasing a player can still count against the salary cap.",
-          "answer": true,
-          "explanation": "Guaranteed money already paid or owed becomes dead money on the cap.",
+          "statement": "Releasing a player removes all of his money from the salary cap.",
+          "answer": false,
+          "explanation": "Guaranteed money already paid or owed stays on the cap as dead money.",
           "concept": "salary-cap"
         }
       ]

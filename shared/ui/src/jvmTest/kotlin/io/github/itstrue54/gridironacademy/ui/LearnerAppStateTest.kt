@@ -6,6 +6,9 @@ import io.github.itstrue54.gridironacademy.engine.Answer
 import io.github.itstrue54.gridironacademy.engine.LessonSession
 import io.github.itstrue54.gridironacademy.model.*
 import io.github.itstrue54.gridironacademy.progress.AgeBand
+import io.github.itstrue54.gridironacademy.progress.AttemptEvent
+import io.github.itstrue54.gridironacademy.progress.Profile
+import io.github.itstrue54.gridironacademy.progress.LearnerSave
 import io.github.itstrue54.gridironacademy.progress.AttemptContext
 import io.github.itstrue54.gridironacademy.ui.app.InMemoryLearnerStore
 import io.github.itstrue54.gridironacademy.ui.app.LearnerAppState
@@ -278,6 +281,50 @@ class LearnerAppStateTest {
         assertEquals(quiz.size, store.load()!!.attempts.size)
         s.back()
         assertEquals(Screen.Glossary, s.screen)
+    }
+
+    @Test
+    fun threeWrongGateAnswersLockItForAMinuteAndLeavingTheAppClosesTheZone() {
+        var clock = 1_000_000L
+        val s = LearnerAppState(content, InMemoryLearnerStore(), nowMillis = { clock }) { 800 }
+        s.createProfile("Leo", AgeBand.AGE_8_9)
+        s.openGrownUpGate()
+        repeat(2) { s.grownUpGateMissed() }
+        assertEquals(0, s.grownUpGateLockedMillis())
+        s.grownUpGateMissed()
+        assertEquals(60_000, s.grownUpGateLockedMillis())
+        clock += 59_000
+        assertEquals(1_000, s.grownUpGateLockedMillis())
+        clock += 1_000
+        assertEquals(0, s.grownUpGateLockedMillis())
+
+        s.enterGrownUpZone()
+        assertEquals(Screen.GrownUpZone, s.screen)
+        s.leftTheApp()
+        assertEquals(Screen.Home, s.screen, "back at Home; the zone needs the gate again")
+        s.leftTheApp()
+        assertEquals(Screen.Home, s.screen, "leaving from anywhere else changes nothing")
+    }
+
+    @Test
+    fun theAttemptLogKeepsOnlyTheNewestAnswers() {
+        val old = (0 until LearnerSave.MAX_ATTEMPTS).map {
+            AttemptEvent("l", "d", it.toLong(), "k1-field-03", AttemptContext.LESSON, pct = 1f, epochDay = 1, at = 1)
+        }
+        val store = InMemoryLearnerStore(LearnerSave(profile = Profile("Sam", AgeBand.AGE_18_PLUS), attempts = old, nextSeq = old.size.toLong()))
+        val s = LearnerAppState(content, store) { 800 }
+        val (level, lesson) = s.nextLesson()!!
+        s.startLesson(level, lesson)
+        val c = s.lessonController(level.id, lesson.id)
+        // Step past any learn cards to the first graded step, and answer it.
+        while (!io.github.itstrue54.gridironacademy.engine.Grader.isGraded(c.step!!)) c.next()
+        val answered = c.step!!.id
+        c.submit(perfect(c.step!!))
+        s.back()
+        val kept = store.load()!!.attempts
+        assertEquals(LearnerSave.MAX_ATTEMPTS, kept.size)
+        assertEquals(1L, kept.first().seq, "the oldest went")
+        assertEquals(answered, kept.last().stepId, "the newest is kept")
     }
 
     @Test

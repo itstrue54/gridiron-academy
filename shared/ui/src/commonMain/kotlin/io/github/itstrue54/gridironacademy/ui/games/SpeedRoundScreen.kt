@@ -50,11 +50,12 @@ import io.github.itstrue54.gridironacademy.ui.resources.close_game
 import io.github.itstrue54.gridironacademy.ui.resources.speed_points
 import io.github.itstrue54.gridironacademy.ui.resources.speed_question_of
 import io.github.itstrue54.gridironacademy.ui.resources.speed_round
-import io.github.itstrue54.gridironacademy.ui.resources.speed_seconds_left
 import io.github.itstrue54.gridironacademy.ui.resources.speed_streak
 import io.github.itstrue54.gridironacademy.ui.theme.Gridiron
 import io.github.itstrue54.gridironacademy.ui.theme.screenBackground
+import org.jetbrains.compose.resources.pluralStringResource
 import org.jetbrains.compose.resources.stringResource
+import io.github.itstrue54.gridironacademy.ui.resources.speed_seconds_left
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
@@ -243,7 +244,7 @@ private fun Chip(text: String) {
 fun TimerRing(millisLeft: Long, limitMillis: Long) {
     val c = Gridiron.colors
     val seconds = ((millisLeft + 999) / 1000).toInt()
-    val label = stringResource(Res.string.speed_seconds_left, seconds)
+    val label = pluralStringResource(Res.plurals.speed_seconds_left, seconds, seconds)
     Box(Modifier.size(72.dp).clearAndSetSemantics { contentDescription = label }, contentAlignment = Alignment.Center) {
         Canvas(Modifier.matchParentSize()) {
             val stroke = (if (seconds <= LOW_SECONDS) 8 else 5).dp.toPx()

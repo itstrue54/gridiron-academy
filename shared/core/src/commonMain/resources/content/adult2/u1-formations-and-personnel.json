@@ -868,9 +868,9 @@
         {
           "type": "true_false",
           "id": "a2-eligibility-08",
-          "statement": "A team may throw only one forward pass per play, and only from behind the line of scrimmage.",
-          "answer": true,
-          "explanation": "Backward passes (laterals) are allowed anywhere, any number of times.",
+          "statement": "A team may throw two forward passes on one play if both are thrown from behind the line of scrimmage.",
+          "answer": false,
+          "explanation": "Only one forward pass is allowed per play, and only from behind the line. Backward passes (laterals) are allowed anywhere, any number of times.",
           "concept": "pass-play"
         },
         {
@@ -948,9 +948,9 @@
         {
           "type": "true_false",
           "id": "a2-motion-07",
-          "statement": "After a shift, the offense must be set for one second before the snap.",
-          "answer": true,
-          "explanation": "Moving without setting for a second after a shift is an illegal shift.",
+          "statement": "After a shift, the offense may snap the ball right away.",
+          "answer": false,
+          "explanation": "After a shift, everyone must be set for one second before the snap. Snapping sooner is an illegal shift.",
           "concept": "shift"
         }
       ]
