@@ -146,7 +146,7 @@
           "id": "a2-protect-05",
           "statement": "In college football, a targeting foul also ejects the player.",
           "answer": true,
-          "explanation": "Yes. Targeting is 15 yards plus an ejection after review.",
+          "explanation": "Targeting is 15 yards plus an ejection after review.",
           "concept": "targeting"
         },
         {

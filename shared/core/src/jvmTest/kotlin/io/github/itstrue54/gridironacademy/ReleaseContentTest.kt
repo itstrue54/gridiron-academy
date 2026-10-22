@@ -38,11 +38,14 @@ class ReleaseContentTest {
         assertEquals(listOf("kid-1", "kid-2", "kid-3", "varsity-4"), kidSide)
     }
 
-    @Test fun `the shipped sign-offs open the whole course`() {
-        // review.json: itstrue54 signed all 748 steps on 2026-10-21.
+    @Test fun `the shipped course is exactly the fully signed levels and what they open`() {
+        // Whatever review.json holds today: a level ships if all its steps are signed and
+        // its prerequisites ship. Nothing partly signed gets through.
         val shipped = content.reviewedOnly()
-        assertEquals(content.levelIds(), shipped.levelIds())
-        assertEquals(content.packs, shipped.packs)
+        shipped.curriculum.levels.forEach { lv ->
+            val unsigned = content.unitsOf(lv).flatMap { u -> u.lessons.flatMap { it.steps } }.filterNot { content.signedOff(it.id) }
+            assertEquals(emptyList(), unsigned.map { it.id }, "${lv.id} shipped with unsigned steps")
+        }
     }
 
     @Test fun `everything signed ships the whole course, and it still validates`() {

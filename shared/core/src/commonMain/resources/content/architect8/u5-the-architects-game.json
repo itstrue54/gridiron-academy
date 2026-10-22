@@ -31,7 +31,7 @@
             {
               "text": "Go for it",
               "quality": "best",
-              "why": "Short-yardage conversions are likely, and modern 4th-down models favour going even in your own territory."
+              "why": "Short-yardage conversions are likely, and modern 4th-down models favor going even in your own territory."
             },
             {
               "text": "Punt",
@@ -97,12 +97,12 @@
             {
               "text": "Four verticals or a seam shot",
               "quality": "best",
-              "why": "Three deep defenders can't carry four vertical routes, even in the red zone."
+              "why": "Three deep defenders can't carry four vertical routes."
             },
             {
               "text": "Run into the eight-man box",
               "quality": "ok",
-              "why": "Possible, but the numbers favour them."
+              "why": "Possible, but the numbers favor them."
             },
             {
               "text": "Field goal now",
@@ -242,7 +242,7 @@
               "why": "Can catch an over-pursuing blitz, but risky."
             }
           ],
-          "explanation": "Recognise the pressure, then throw hot.",
+          "explanation": "Recognize the pressure, then throw hot.",
           "concept": "hot-route"
         },
         {

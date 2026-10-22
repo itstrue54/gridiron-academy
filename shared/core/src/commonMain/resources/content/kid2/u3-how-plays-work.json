@@ -54,7 +54,7 @@
           "id": "k2-runpass-05",
           "statement": "A pass can be intercepted by the defense.",
           "answer": true,
-          "explanation": "Yes. That is one of the risks of passing.",
+          "explanation": "That is one of the risks of passing.",
           "concept": "interception"
         },
         {
@@ -381,7 +381,7 @@
           "id": "k2-oline-06",
           "statement": "Offensive linemen usually catch passes.",
           "answer": false,
-          "explanation": "Not quite. Linemen block. In the NFL, they usually aren't allowed to catch passes.",
+          "explanation": "Linemen block. They aren't eligible to catch passes.",
           "concept": "offensive-line"
         }
       ]
@@ -451,7 +451,7 @@
           "id": "k2-scoreboard-06",
           "statement": "\"Ball on 30\" tells you where the ball is on the field.",
           "answer": true,
-          "explanation": "Yes. It is the yard line where the next play starts.",
+          "explanation": "It is the yard line where the next play starts.",
           "concept": "yard-line"
         },
         {
@@ -465,7 +465,7 @@
             "Who is hurt"
           ],
           "answer": 0,
-          "explanation": "Yes. The scoreboard tells you the score, the quarter, the clock, the down and the timeouts left.",
+          "explanation": "The scoreboard tells you the score, the quarter, the clock, the down and the timeouts left.",
           "concept": "scoreboard"
         }
       ]

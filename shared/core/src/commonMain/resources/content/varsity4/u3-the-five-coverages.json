@@ -215,10 +215,11 @@
                 "points": [
                   {
                     "x": 2,
-                    "y": -2
+                    "y": 3
                   }
                 ],
-                "kind": "drop"
+                "kind": "drop",
+                "label": "on the back"
               },
               {
                 "playerId": "w",
@@ -475,10 +476,11 @@
                 "points": [
                   {
                     "x": 2.5,
-                    "y": -3
+                    "y": 3
                   }
                 ],
-                "kind": "drop"
+                "kind": "drop",
+                "label": "on the back"
               }
             ],
             "caption": "Cover 0: all-out man, no deep help"
@@ -857,10 +859,11 @@
                 "points": [
                   {
                     "x": 2,
-                    "y": -2
+                    "y": 3
                   }
                 ],
-                "kind": "drop"
+                "kind": "drop",
+                "label": "on the back"
               },
               {
                 "playerId": "w",
@@ -1281,10 +1284,11 @@
                 "points": [
                   {
                     "x": 2.5,
-                    "y": -3
+                    "y": 3
                   }
                 ],
-                "kind": "drop"
+                "kind": "drop",
+                "label": "on the back"
               }
             ]
           },
@@ -4960,10 +4964,11 @@
                 "points": [
                   {
                     "x": 2,
-                    "y": -2
+                    "y": 3
                   }
                 ],
-                "kind": "drop"
+                "kind": "drop",
+                "label": "on the back"
               },
               {
                 "playerId": "w",
@@ -6196,10 +6201,11 @@
                 "points": [
                   {
                     "x": 2.5,
-                    "y": -3
+                    "y": 3
                   }
                 ],
-                "kind": "drop"
+                "kind": "drop",
+                "label": "on the back"
               }
             ]
           },

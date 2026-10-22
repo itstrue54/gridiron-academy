@@ -702,7 +702,7 @@
           "id": "a2-formations-11",
           "statement": "In an empty formation, the quarterback has no running backs beside or behind him.",
           "answer": true,
-          "explanation": "Correct. Five receivers spread out, but nobody stays in to block an extra rusher.",
+          "explanation": "Five receivers spread out, but nobody stays in to block an extra rusher.",
           "concept": "empty-backfield"
         }
       ]
@@ -832,9 +832,9 @@
         {
           "type": "true_false",
           "id": "a2-eligibility-05",
-          "statement": "An offensive tackle can catch a pass if he reports to the referee as eligible and lines up at an eligible spot.",
+          "statement": "In the NFL, an offensive tackle can catch a pass if he reports to the referee as eligible and lines up at an eligible spot.",
           "answer": true,
-          "explanation": "Teams use this near the goal line: a lineman reports eligible and lines up as a tight end.",
+          "explanation": "High school and college don't allow it. NFL teams use this near the goal line: a lineman reports eligible and lines up as a tight end.",
           "concept": "ineligible-receiver"
         },
         {
@@ -870,7 +870,7 @@
           "id": "a2-eligibility-08",
           "statement": "A team may throw only one forward pass per play, and only from behind the line of scrimmage.",
           "answer": true,
-          "explanation": "Correct. Backward passes (laterals) are allowed anywhere, any number of times.",
+          "explanation": "Backward passes (laterals) are allowed anywhere, any number of times.",
           "concept": "pass-play"
         },
         {
@@ -878,7 +878,7 @@
           "id": "a2-eligibility-09",
           "statement": "Offside is called when a defender is across the line of scrimmage as the ball is snapped.",
           "answer": true,
-          "explanation": "Correct: 5 yards. A defender who gets back before the snap without contact has no foul.",
+          "explanation": "Offside is 5 yards. A defender who gets back before the snap without contact has no foul.",
           "concept": "offside"
         }
       ]
@@ -950,7 +950,7 @@
           "id": "a2-motion-07",
           "statement": "After a shift, the offense must be set for one second before the snap.",
           "answer": true,
-          "explanation": "Yes. Moving without setting for a second after a shift is an illegal shift.",
+          "explanation": "Moving without setting for a second after a shift is an illegal shift.",
           "concept": "shift"
         }
       ]

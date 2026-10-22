@@ -47,7 +47,7 @@
           "id": "k2-kickoff-05",
           "statement": "After a team scores a touchdown, that team kicks off to the other team.",
           "answer": true,
-          "explanation": "Yes! The scoring team kicks, so the other team gets the ball.",
+          "explanation": "The scoring team kicks, so the other team gets the ball.",
           "concept": "kickoff"
         },
         {
@@ -76,7 +76,7 @@
           "id": "k2-kickoff-08",
           "statement": "On a touchback, the receiving team gets the ball without running it out.",
           "answer": true,
-          "explanation": "Right. A touchback is a safe choice: no run, but a good starting spot.",
+          "explanation": "A touchback is a safe choice: no run, but a good starting spot.",
           "concept": "touchback"
         }
       ]
@@ -97,7 +97,7 @@
           "type": "learn",
           "id": "k2-onside-02",
           "title": "Ten yards",
-          "body": "The ball must go 10 yards before the kicking team can grab it. The other team can grab it any time.",
+          "body": "The ball must go 10 yards before the kicking team can grab it, unless the other team touches it first. The other team can grab it any time.",
           "concept": "onside-kick"
         },
         {
@@ -119,7 +119,7 @@
           "id": "k2-onside-04",
           "statement": "On an onside kick, the kicking team can grab the ball after it goes 10 yards.",
           "answer": true,
-          "explanation": "Yes. Before 10 yards, only the other team may grab it.",
+          "explanation": "Before 10 yards, only the other team may grab it.",
           "concept": "onside-kick"
         },
         {
@@ -141,7 +141,7 @@
           "id": "k2-onside-06",
           "statement": "An onside kick is a long, high kick down the field.",
           "answer": false,
-          "explanation": "Not quite. An onside kick is short, so the kicking team has a chance to get it.",
+          "explanation": "An onside kick is short, so the kicking team has a chance to get it.",
           "concept": "onside-kick"
         }
       ]
@@ -184,7 +184,7 @@
           "id": "k2-punts-04",
           "statement": "After a fair catch, the returner can run with the ball.",
           "answer": false,
-          "explanation": "Not quite. With a fair catch, play stops where they catch it. In exchange, nobody may hit them.",
+          "explanation": "With a fair catch, play stops where they catch it. In exchange, nobody may hit them.",
           "concept": "fair-catch"
         },
         {

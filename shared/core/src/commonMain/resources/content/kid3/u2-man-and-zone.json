@@ -309,7 +309,7 @@
           "id": "k3-man-04",
           "statement": "In man coverage, a defender follows his receiver across the field.",
           "answer": true,
-          "explanation": "Yes. Wherever the receiver goes, his defender goes too.",
+          "explanation": "Wherever the receiver goes, his defender goes too.",
           "concept": "man-coverage"
         },
         {
@@ -337,7 +337,7 @@
           "type": "diagram_tap",
           "id": "k3-man-07",
           "prompt": "Tap the receiver who has the easier route toward the sideline.",
-          "explanation": "Yes. X's defender stands inside him, guarding the middle, so going toward the sideline is easier.",
+          "explanation": "X's defender stands inside him, guarding the middle, so going toward the sideline is easier.",
           "targets": [
             "x"
           ],
@@ -753,7 +753,7 @@
           "id": "k3-zone-05",
           "statement": "In zone coverage, a defender follows one receiver all over the field.",
           "answer": false,
-          "explanation": "Not quite. That's man coverage. In zone, he stays in his area.",
+          "explanation": "That's man coverage. In zone, he stays in his area.",
           "concept": "zone-coverage"
         },
         {
@@ -1162,7 +1162,7 @@
           "id": "k3-safeties-06",
           "statement": "Counting safeties is a clue, not a promise.",
           "answer": true,
-          "explanation": "Right. Defenses can move after the snap. It is still the best first look.",
+          "explanation": "Defenses can move after the snap. It is still the best first look.",
           "concept": "safety-position"
         }
       ]

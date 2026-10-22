@@ -576,7 +576,7 @@
             "Touchdown",
             "Penalty",
             "Fumble",
-            "Time out"
+            "Timeout"
           ],
           "answer": 0,
           "explanation": "Both arms up is the touchdown signal.",

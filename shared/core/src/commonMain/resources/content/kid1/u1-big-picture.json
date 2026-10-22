@@ -39,7 +39,7 @@
           "id": "k1-field-04",
           "statement": "The end zone is where you score a touchdown.",
           "answer": true,
-          "explanation": "Yes! Get the ball into the end zone to score.",
+          "explanation": "Get the ball into the end zone to score.",
           "concept": "endzone"
         },
         {
@@ -227,7 +227,7 @@
           "type": "learn",
           "id": "k1-scoring-02",
           "title": "Extra point",
-          "body": "After a touchdown, a team can kick an extra point for 1 point. Or they can try to run or pass it in again for 2 points.",
+          "body": "After a touchdown, a team gets one more try. In high school and the NFL, a kick is worth 1 point and a run or pass is worth 2. Some youth leagues flip that, so ask your coach.",
           "concept": "extra-point"
         },
         {
@@ -241,7 +241,7 @@
           "type": "learn",
           "id": "k1-scoring-04",
           "title": "Safety",
-          "body": "A safety is worth 2 points. The defense gets it by tackling the offense in its own end zone.",
+          "body": "A safety is worth 2 points. The defense gets it by tackling the ball carrier in his own end zone.",
           "concept": "safety-score"
         },
         {
@@ -302,7 +302,7 @@
           "id": "k1-scoring-08",
           "statement": "A field goal is worth 3 points.",
           "answer": true,
-          "explanation": "Yes. Kick it through the posts for 3.",
+          "explanation": "Kick it through the posts for 3.",
           "concept": "field-goal"
         },
         {

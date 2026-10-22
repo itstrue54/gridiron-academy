@@ -179,17 +179,18 @@
                   }
                 ],
                 "kind": "drop",
-                "label": "drops"
+                "label": "drops: curl-flat"
               },
               {
                 "playerId": "w",
                 "points": [
                   {
-                    "x": -2.5,
-                    "y": -1
+                    "x": -8,
+                    "y": 8
                   }
                 ],
-                "kind": "blitz"
+                "kind": "drop",
+                "label": "curl-flat"
               },
               {
                 "playerId": "m",
@@ -235,21 +236,22 @@
                 "playerId": "ss",
                 "points": [
                   {
-                    "x": 10,
+                    "x": 0,
                     "y": 9
                   }
                 ],
-                "kind": "drop"
+                "kind": "drop",
+                "label": "hook"
               },
               {
                 "playerId": "s",
                 "points": [
                   {
-                    "x": -2,
-                    "y": 9
+                    "x": 4,
+                    "y": -1
                   }
                 ],
-                "kind": "drop"
+                "kind": "blitz"
               }
             ],
             "caption": "Fire zone: an end drops, two linebackers come"
@@ -399,7 +401,7 @@
                 "id": "s",
                 "label": "S",
                 "side": "DEFENSE",
-                "x": 4,
+                "x": -5,
                 "y": 4.5
               },
               {
@@ -564,7 +566,7 @@
                 "id": "s",
                 "label": "S",
                 "side": "DEFENSE",
-                "x": 4,
+                "x": -5,
                 "y": 4.5
               },
               {
@@ -621,11 +623,12 @@
                 "playerId": "s",
                 "points": [
                   {
-                    "x": 4,
+                    "x": -7,
                     "y": 8
                   }
                 ],
-                "kind": "drop"
+                "kind": "drop",
+                "label": "on H"
               },
               {
                 "playerId": "cb1",
@@ -801,7 +804,7 @@
                 "id": "s",
                 "label": "S",
                 "side": "DEFENSE",
-                "x": 5,
+                "x": -5,
                 "y": 4.5
               },
               {
@@ -966,7 +969,7 @@
                 "id": "s",
                 "label": "S",
                 "side": "DEFENSE",
-                "x": 5,
+                "x": -5,
                 "y": 4.5
               },
               {
@@ -1071,11 +1074,12 @@
                 "playerId": "s",
                 "points": [
                   {
-                    "x": 5,
+                    "x": -7,
                     "y": 8
                   }
                 ],
-                "kind": "drop"
+                "kind": "drop",
+                "label": "on H"
               }
             ]
           },
@@ -1418,17 +1422,18 @@
                   }
                 ],
                 "kind": "drop",
-                "label": "drops"
+                "label": "drops: curl-flat"
               },
               {
                 "playerId": "w",
                 "points": [
                   {
-                    "x": -2.5,
-                    "y": -1
+                    "x": -8,
+                    "y": 8
                   }
                 ],
-                "kind": "blitz"
+                "kind": "drop",
+                "label": "curl-flat"
               },
               {
                 "playerId": "m",
@@ -1474,21 +1479,22 @@
                 "playerId": "ss",
                 "points": [
                   {
-                    "x": 10,
+                    "x": 0,
                     "y": 9
                   }
                 ],
-                "kind": "drop"
+                "kind": "drop",
+                "label": "hook"
               },
               {
                 "playerId": "s",
                 "points": [
                   {
-                    "x": -2,
-                    "y": 9
+                    "x": 4,
+                    "y": -1
                   }
                 ],
-                "kind": "drop"
+                "kind": "blitz"
               }
             ]
           },
@@ -1914,7 +1920,7 @@
               }
             ]
           },
-          "explanation": "Four rushers to the right against fewer blockers: an overload.",
+          "explanation": "Four rushers to the right against fewer blockers: an overload. The hot throw goes to the side they emptied.",
           "concept": "simulated-pressure"
         },
         {
