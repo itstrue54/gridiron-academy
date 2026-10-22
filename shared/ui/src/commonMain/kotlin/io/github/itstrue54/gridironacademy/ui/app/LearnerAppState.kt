@@ -156,6 +156,8 @@ class LearnerAppState(
     private val newId: () -> String = { "local" },
     /** Debug builds: mark steps no coach has signed off (DESIGN 8, ReviewBadge). */
     val showReviewBadges: Boolean = false,
+    /** Whether a screen reader is on now (TalkBack): the Speed round then starts untimed. */
+    private val screenReaderOn: () -> Boolean = { false },
     // Last, so `LearnerAppState(content, store) { day }` keeps reading as "today is day".
     private val today: () -> Long,
 ) {
@@ -192,8 +194,12 @@ class LearnerAppState(
     /** Attempts waiting to be saved; for tests. */
     val unsavedAttempts: Int get() = pending.size
 
-    var backStack: List<Screen> by mutableStateOf(listOf(if (save.profile == null) Screen.Welcome else Screen.Home))
-        private set
+    private var stack: List<Screen> by mutableStateOf(listOf(if (save.profile == null) Screen.Welcome else Screen.Home))
+
+    /** Every screen change also closes the Leave dialog: it belongs to the screen it asked about. */
+    var backStack: List<Screen>
+        get() = stack
+        private set(value) { stack = value; confirmingLeave = false }
 
     val screen: Screen get() = backStack.last()
 
@@ -259,6 +265,14 @@ class LearnerAppState(
             SpeedRoundController(LevelTest.gamePool(content.unitsOf(level), level.gate, gateSeed(level)), SPEED_ROUND_MILLIS,
                 onGraded = recorder(AttemptContext.GAME))
         }
+
+    /**
+     * The rules screen's default (DESIGN 12): no clock for 8-9-year-olds, whose first Speed
+     * round this is, and for screen-reader users, for whom reading out each question eats
+     * the clock. Anyone can switch.
+     */
+    fun speedRoundUntimedByDefault(): Boolean =
+        (save.profile?.ageBand ?: AgeBand.AGE_18_PLUS) <= AgeBand.AGE_8_9 || screenReaderOn()
 
     fun speedRoundController(levelId: String): SpeedRoundController =
         checkNotNull(speedRoundControllerOrNull(levelId)) { "big game $levelId is not on screen" }

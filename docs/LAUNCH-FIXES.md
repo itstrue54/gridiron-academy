@@ -51,12 +51,16 @@ their sign-off and are queued for re-review.
 
 ## Phase 3. Kids can finish a level
 
-- [ ] **Speed round (5):** Untimed option (default for ages 8-9 and when TalkBack is on),
+- [x] **Speed round (5):** Untimed option (default for ages 8-9 and when TalkBack is on),
       a rules screen with Start, clock paused under the Leave dialog, the dialog cleared
       when the screen changes.
-- [ ] **Home (8):** name on one line, map opens on the child's level, levels ordered the
-      same in both skins.
-- [ ] **Checkpoint copy and kid pass mark** reconsidered (17).
+- [x] **Home (8):** name on one line (the streak chip moved under it), Home opens scrolled
+      to the level being played. Order stays as designed: the kid drive map runs up the
+      field (Level 1 at the goal line), the adult season list runs down; with the scroll
+      the child no longer starts at Level 8.
+- [x] **Checkpoint copy** (17): "so close" vs "not yet" wording landed in phase 1.
+- [ ] **Kid pass mark** (owner): the Checkpoint is 80% (10 of 12) on every track. Lowering it
+      for kids is a curriculum change, so it waits for your call.
 
 ## Phase 4. Accessibility
 

@@ -550,7 +550,9 @@ chosen, and the explanation. The game ends with a **box score**: coach points, b
 calls, and the single decision that cost the most, replayed.
 
 ### 9.6 Speed round
-Timer ring, streak chip, a score counter, and one question at a time with two to four
+A rules screen comes first: how many questions, how many right to win, the streak bonus,
+a **Clock** switch (off for ages 8-9 and with a screen reader on; anyone can flip it) and
+Start. Nothing is timed before Start. Then the timer ring (absent when untimed), streak chip, a score counter, and one question at a time with two to four
 answer buttons. Answers advance immediately with no sheet; the explanation for a miss
 is collected and shown in a review list at the end. Ends with the score (right answers
 out of the round's questions), best streak, points, and the "Look again" list of misses

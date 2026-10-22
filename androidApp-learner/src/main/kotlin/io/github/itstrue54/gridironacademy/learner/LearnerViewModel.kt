@@ -3,6 +3,7 @@ package io.github.itstrue54.gridironacademy.learner
 import android.app.Application
 import android.content.pm.ApplicationInfo
 import android.util.Log
+import android.view.accessibility.AccessibilityManager
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import io.github.itstrue54.gridironacademy.content.ClasspathContentSource
@@ -51,7 +52,11 @@ class LearnerViewModel(app: Application) : AndroidViewModel(app) {
                     val store = FileLearnerStore(getApplication<Application>().filesDir, newId)
                     // Debug builds mark steps no coach has signed off yet (SPEC 13.3).
                     val debuggable = getApplication<Application>().applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE != 0
-                    Load.Ready(LearnerAppState(content, store, nowMillis = System::currentTimeMillis, newId = newId, showReviewBadges = debuggable) { LocalDate.now().toEpochDay() })
+                    // Asked each time a Speed round opens, so turning TalkBack on mid-session counts.
+                    val a11y = getApplication<Application>().getSystemService(AccessibilityManager::class.java)
+                    val screenReaderOn = { a11y?.isTouchExplorationEnabled == true }
+                    Load.Ready(LearnerAppState(content, store, nowMillis = System::currentTimeMillis, newId = newId,
+                        showReviewBadges = debuggable, screenReaderOn = screenReaderOn) { LocalDate.now().toEpochDay() })
                 }
             } catch (e: Exception) {
                 Log.e(TAG, "lessons failed to load", e)

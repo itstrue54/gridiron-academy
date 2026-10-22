@@ -14,6 +14,7 @@ import io.github.itstrue54.gridironacademy.ui.app.NextUp
 import io.github.itstrue54.gridironacademy.ui.app.Screen
 import io.github.itstrue54.gridironacademy.ui.app.RestoreResult
 import io.github.itstrue54.gridironacademy.ui.theme.Skin
+import io.github.itstrue54.gridironacademy.ui.games.rightToPass
 import kotlin.test.*
 
 class LearnerAppStateTest {
@@ -498,6 +499,58 @@ class LearnerAppStateTest {
         val before = round.points
         round.current?.let { round.answer(perfect(it)) }
         assertEquals(before, round.points, "no answers after the whistle")
+    }
+
+    @Test
+    fun theSpeedRoundStartsUntimedForEightToNineAndForScreenReaders() {
+        fun default(band: AgeBand, reader: Boolean = false) =
+            LearnerAppState(content, InMemoryLearnerStore(), screenReaderOn = { reader }) { 700 }
+                .apply { createProfile("Sam", band) }.speedRoundUntimedByDefault()
+        assertTrue(default(AgeBand.AGE_8_9))
+        assertFalse(default(AgeBand.AGE_10_12))
+        assertFalse(default(AgeBand.AGE_18_PLUS))
+        assertTrue(default(AgeBand.AGE_18_PLUS, reader = true))
+    }
+
+    @Test
+    fun anUntimedSpeedRoundKeepsScoringAndOnlyEndsWhenEveryQuestionIsAnswered() {
+        val s = LearnerAppState(content, InMemoryLearnerStore()) { 700 }
+        s.createProfile("Leo", AgeBand.AGE_8_9)
+        val level = s.levels.first()
+        s.startBigGame(level)
+        val round = s.speedRoundController(level.id)
+        assertFalse(round.started)
+        round.start(timed = false)
+        round.tick(10 * 60_000)
+        assertFalse(round.over, "no clock")
+        repeat(3) { round.answer(perfect(round.current!!)) }
+        assertEquals(10 + 10 + 20, round.points, "the streak still doubles")
+        while (!round.over) round.answer(perfect(round.current!!))
+        assertEquals(100, round.scorePct)
+    }
+
+    @Test
+    fun theLeaveDialogClosesWhenTheScreenChangesUnderIt() {
+        val s = LearnerAppState(content, InMemoryLearnerStore()) { 700 }
+        s.createProfile("Sam", AgeBand.AGE_18_PLUS)
+        val level = s.levels.first()
+        s.startBigGame(level)
+        val round = s.speedRoundController(level.id)
+        round.start(timed = true)
+        round.answer(perfect(round.current!!))
+        s.requestBack()
+        assertTrue(s.confirmingLeave)
+        round.tick(60_000)
+        s.finishSpeedRound(level.id, round)
+        assertTrue(s.screen is Screen.GateDone)
+        assertFalse(s.confirmingLeave, "a result screen never opens under a stale Leave? dialog")
+    }
+
+    @Test
+    fun theRulesScreenSaysHowManyRightAnswersWin() {
+        assertEquals(7, rightToPass(10, 70))
+        assertEquals(9, rightToPass(12, 70))
+        assertEquals(0, rightToPass(0, 70))
     }
 
     @Test
