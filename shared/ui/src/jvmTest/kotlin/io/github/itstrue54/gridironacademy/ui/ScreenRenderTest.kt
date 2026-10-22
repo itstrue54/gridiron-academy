@@ -177,6 +177,15 @@ class ScreenRenderTest {
             val rights = m.pairs.map { p -> p.right }
             Answer.Matches(m.pairs.mapIndexed { i, p -> p.left to rights[if (i < 2) 1 - i else i] }.toMap())
         }
+        // The kid bridge into Level 4 and the concussion card (launch plan item 10).
+        lessonShot("15a-bridge-gaps-kid", AgeBand.AGE_10_12, dark = false, pick = { it.id == "k3-ready-08" })
+        lessonShot("15b-bridge-cover2-kid", AgeBand.AGE_10_12, dark = false, pick = { it.id == "k3-ready-14" }) {
+            Answer.Taps(setOf("fs1"))
+        }
+        lessonShot("15c-concussion-kid", AgeBand.AGE_8_9, dark = false, pick = { it.id == "k2-safety-09" })
+        lessonShot("15d-concussion-adult", AgeBand.AGE_18_PLUS, dark = true, pick = { it.id == "a2-protect-09" }) {
+            Answer.Choice(1)
+        }
         lessonShot("13-order-adult", AgeBand.AGE_18_PLUS, dark = false, pick = { it is Order })
         lessonShot("14-situation-graded-adult", AgeBand.AGE_18_PLUS, dark = false, pick = { it is Situation }) {
             Answer.Choice((it as Situation).options.indexOfFirst { o -> o.quality == Quality.POOR })
