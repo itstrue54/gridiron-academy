@@ -67,6 +67,12 @@
     <string name="disguise">Disguise</string>
     <string name="replay">Replay the snap</string>
     <string name="match_answer">Goes with: %1$s</string>
+    <string name="match_paired_with">paired with %1$s</string>
+    <string name="order_belongs_at">not quite, goes at number %1$d</string>
+    <string name="answer_state_correct">correct</string>
+    <string name="answer_state_wrong">your answer, not quite</string>
+    <string name="diagram_show_list">Show as a list</string>
+    <string name="diagram_hide_list">Hide the list</string>
     <string name="order_hint">Use the arrows to put these in order.</string>
     <string name="move_up">Move %1$s up</string>
     <string name="move_down">Move %1$s down</string>

@@ -78,6 +78,21 @@ object DiagramDescriber {
         return parts.joinToString(" ")
     }
 
+    /**
+     * Everything a learner could tap, as list rows (DESIGN 7.6, list mode): players in the
+     * same order [describe] reads them, offense first, then the shaded areas. Each row is
+     * (id, words); the id is what the grader checks, so list and picture grade alike.
+     */
+    fun tapTargets(d: Diagram, w: Words = Words()): List<Pair<String, String>> {
+        val players = listOf(Side.OFFENSE, Side.DEFENSE).flatMap { side ->
+            d.players.filter { it.side == side }.sortedWith(compareBy({ it.x }, { it.y })).map { p ->
+                p.id to "${p.label}, ${if (side == Side.OFFENSE) w.offense else w.defense}, ${where(p, w)}"
+            }
+        }
+        val zones = d.zones.map { z -> z.id to w.zone(z.label, z.y.roundToInt(), (z.y + z.h).roundToInt()).removeSuffix(".") }
+        return players + zones
+    }
+
     private fun where(p: DiagramPlayer, w: Words): String {
         val across = when {
             abs(p.x) <= MIDDLE -> w.middle

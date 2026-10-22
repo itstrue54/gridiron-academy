@@ -4,6 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.ImageComposeScene
 import androidx.compose.ui.unit.Density
+import androidx.compose.runtime.CompositionLocalProvider
+import io.github.itstrue54.gridironacademy.ui.lesson.LocalScreenReader
 import androidx.compose.ui.use
 import io.github.itstrue54.gridironacademy.content.ClasspathContentSource
 import io.github.itstrue54.gridironacademy.content.ContentLoader
@@ -29,8 +31,8 @@ class ScreenRenderTest {
     private val allSteps = content.curriculum.levels.flatMap { l -> content.unitsOf(l).flatMap { u -> u.lessons.map { l to it } } }
 
     @OptIn(ExperimentalComposeUiApi::class)
-    private fun shot(name: String, height: Int = 1520, ui: @Composable () -> Unit) {
-        val bytes = ImageComposeScene(width = 720, height = height, density = Density(2f)) { ui() }.use { scene ->
+    private fun shot(name: String, height: Int = 1520, fontScale: Float = 1f, ui: @Composable () -> Unit) {
+        val bytes = ImageComposeScene(width = 720, height = height, density = Density(2f, fontScale)) { ui() }.use { scene ->
             scene.render(0)
             scene.render(1_000_000_000L) // let effects and transitions settle
             scene.render(2_000_000_000L).encodeToData(EncodedImageFormat.PNG)!!.bytes
@@ -42,7 +44,10 @@ class ScreenRenderTest {
     private fun appState(band: AgeBand?): LearnerAppState =
         LearnerAppState(content, InMemoryLearnerStore()) { 500 }.also { if (band != null) it.createProfile(if (band.child) "Leo" else "Sam", band) }
 
-    private fun lessonShot(name: String, band: AgeBand, dark: Boolean, pick: (Step) -> Boolean, answer: ((Step) -> Answer)? = null) {
+    private fun lessonShot(
+        name: String, band: AgeBand, dark: Boolean, pick: (Step) -> Boolean,
+        screenReader: Boolean = false, fontScale: Float = 1f, answer: ((Step) -> Answer)? = null,
+    ) {
         val state = appState(band)
         // Prefer the profile's own track; fall back to the other if only it has this step type.
         val (level, lesson) = allSteps.firstOrNull { (l, les) -> l.track == band.track && les.steps.any(pick) }
@@ -50,11 +55,29 @@ class ScreenRenderTest {
         val step = lesson.steps.first(pick)
         val controller = LessonController(listOf(step))
         if (answer != null) controller.submit(answer(step))
-        shot(name) {
-            GridironTheme(skin = state.skin, dark = dark) {
-                LessonScreen(state, level.id, lesson.id, controller)
+        shot(name, fontScale = fontScale) {
+            CompositionLocalProvider(LocalScreenReader provides { screenReader }) {
+                GridironTheme(skin = state.skin, dark = dark) {
+                    LessonScreen(state, level.id, lesson.id, controller)
+                }
             }
         }
+    }
+
+    /** DESIGN 12: layouts hold at 200% text. Nothing may clip; long screens scroll. */
+    @Test fun fontScale200() {
+        shot("f2-1-home-kid", fontScale = 2f) { LearnerApp(appState(AgeBand.AGE_8_9), dark = false) }
+        shot("f2-2-home-adult", fontScale = 2f) { LearnerApp(appState(AgeBand.AGE_18_PLUS), dark = true) }
+        lessonShot("f2-3-mc-kid", AgeBand.AGE_8_9, dark = false, fontScale = 2f, pick = { it is MultipleChoice }) {
+            val mc = it as MultipleChoice; Answer.Choice((mc.answer + 1) % mc.choices.size)
+        }
+        lessonShot("f2-4-tap-list-adult", AgeBand.AGE_18_PLUS, dark = false, fontScale = 2f, screenReader = true, pick = { it is DiagramTap })
+        lessonShot("f2-5-match-kid", AgeBand.AGE_8_9, dark = false, fontScale = 2f, pick = { it is Match })
+        lessonShot("f2-6-order-adult", AgeBand.AGE_18_PLUS, dark = false, fontScale = 2f, pick = { it is Order })
+        val kid = appState(AgeBand.AGE_8_9)
+        val level = kid.levels.first()
+        kid.startBigGame(level)
+        shot("f2-7-speed-rules-kid", fontScale = 2f) { LearnerApp(kid, dark = false) }
     }
 
     @Test fun welcomeAndOnboarding() {
@@ -138,6 +161,15 @@ class ScreenRenderTest {
         lessonShot("10-tap-graded-adult", AgeBand.AGE_18_PLUS, dark = false, pick = { it is DiagramTap }) {
             val t = it as DiagramTap
             Answer.Taps(setOf(t.diagram.players.first { p -> p.id !in t.targets }.id))
+        }
+        // List mode (DESIGN 7.6): what a TalkBack user gets, before and after grading.
+        lessonShot("09b-tap-list-kid", AgeBand.AGE_8_9, dark = false, screenReader = true, pick = { it is DiagramTap && it.diagram.players.size > 3 })
+        lessonShot("10b-tap-list-graded-adult", AgeBand.AGE_18_PLUS, dark = true, screenReader = true, pick = { it is DiagramTap }) {
+            val t = it as DiagramTap
+            Answer.Taps(setOf(t.diagram.players.first { p -> p.id !in t.targets }.id))
+        }
+        lessonShot("09c-tap-zone-graded-kid", AgeBand.AGE_8_9, dark = false, pick = { it is DiagramTap && it.diagram.zones.isNotEmpty() }) {
+            Answer.Taps(setOf((it as DiagramTap).diagram.zones.first().id))
         }
         lessonShot("11-match-adult-dark", AgeBand.AGE_18_PLUS, dark = true, pick = { it is Match })
         lessonShot("12-match-graded-kid", AgeBand.AGE_8_9, dark = false, pick = { it is Match }) {

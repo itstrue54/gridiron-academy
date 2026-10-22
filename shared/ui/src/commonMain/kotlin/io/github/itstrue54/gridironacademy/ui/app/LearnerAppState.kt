@@ -271,6 +271,9 @@ class LearnerAppState(
      * round this is, and for screen-reader users, for whom reading out each question eats
      * the clock. Anyone can switch.
      */
+    /** Whether a screen reader is on right now; diagram questions then open as a list. */
+    fun screenReaderActive(): Boolean = screenReaderOn()
+
     fun speedRoundUntimedByDefault(): Boolean =
         (save.profile?.ageBand ?: AgeBand.AGE_18_PLUS) <= AgeBand.AGE_8_9 || screenReaderOn()
 

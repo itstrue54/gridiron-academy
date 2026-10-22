@@ -29,6 +29,12 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.ProgressBarRangeInfo
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.LiveRegionMode
+import androidx.compose.ui.semantics.liveRegion
+import io.github.itstrue54.gridironacademy.ui.resources.Res
+import io.github.itstrue54.gridironacademy.ui.resources.answer_state_correct
+import io.github.itstrue54.gridironacademy.ui.resources.answer_state_wrong
+import org.jetbrains.compose.resources.stringResource
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
@@ -124,6 +130,11 @@ fun AnswerButton(
 ) {
     val c = Gridiron.colors
     val skin = Gridiron.skin
+    val gradeWords = when (state) {
+        AnswerState.CORRECT -> stringResource(Res.string.answer_state_correct)
+        AnswerState.RETRY -> stringResource(Res.string.answer_state_wrong)
+        else -> ""
+    }
     val edge = when (state) {
         AnswerState.SELECTED -> c.gold
         AnswerState.CORRECT -> c.correct
@@ -143,7 +154,9 @@ fun AnswerButton(
             .semantics {
                 role = Role.Button
                 selected = state == AnswerState.SELECTED
-                if (stateWords.isNotEmpty()) stateDescription = stateWords
+                // After grading the words say what the check and the dash show (DESIGN 12).
+                val words = listOf(stateWords, gradeWords).filter { it.isNotEmpty() }.joinToString(", ")
+                if (words.isNotEmpty()) stateDescription = words
             },
     ) {
         Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(horizontal = 14.dp, vertical = 12.dp)) {
@@ -161,6 +174,8 @@ fun AnswerButton(
             when (state) {
                 AnswerState.CORRECT -> GlyphIcon(Glyph.CHECK, c.correct)
                 AnswerState.RETRY -> GlyphIcon(Glyph.DASH, c.retry)
+                // Selected shows a filled dot as well as the gold edge: colour is never alone.
+                AnswerState.SELECTED -> GlyphIcon(Glyph.PICKED, c.gold)
                 else -> Unit
             }
         }
@@ -245,7 +260,9 @@ fun FeedbackSheet(
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     GlyphIcon(if (verdict == Verdict.RIGHT) Glyph.CHECK else Glyph.DASH, accent, size = 28.dp)
                     Spacer(Modifier.width(10.dp))
-                    Text(headline, style = Gridiron.type.title, color = accent, modifier = Modifier.semantics { heading() })
+                    // Polite live region: TalkBack reads the verdict as the sheet appears.
+                    Text(headline, style = Gridiron.type.title, color = accent,
+                        modifier = Modifier.semantics { heading(); liveRegion = LiveRegionMode.Polite })
                 }
                 if (detail.isNotEmpty()) {
                     Spacer(Modifier.height(8.dp))

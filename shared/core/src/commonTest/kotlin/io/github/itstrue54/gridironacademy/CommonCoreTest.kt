@@ -88,6 +88,27 @@ class CommonCoreTest {
     }
 
     @Test
+    fun describerListsEveryTapTargetByIdInReadingOrder() {
+        val d = Diagram(
+            players = listOf(
+                DiagramPlayer("qb", "QB", Side.OFFENSE, 0f, -5f),
+                DiagramPlayer("fs", "FS", Side.DEFENSE, 1f, 12f),
+                DiagramPlayer("x", "X", Side.OFFENSE, -18f, 0f),
+            ),
+            zones = listOf(DiagramZone("ez", "End zone", -26.5f, 10f, 53f, 4.5f)),
+        )
+        assertEquals(
+            listOf(
+                "x" to "X, Offense, wide left, on the line",
+                "qb" to "QB, Offense, in the middle, 5 yards behind the line",
+                "fs" to "FS, Defense, in the middle, 12 yards off the ball",
+                "ez" to "Shaded area End zone, from 10 yards up the field to 15 yards up the field",
+            ),
+            DiagramDescriber.tapTargets(d),
+        )
+    }
+
+    @Test
     fun describerHandlesDiagonalsAndRepeatedPoints() {
         val d = Diagram(
             players = listOf(DiagramPlayer("w", "W", Side.DEFENSE, 4f, 5f)),
