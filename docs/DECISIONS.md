@@ -149,3 +149,22 @@ and CI builds release so the check runs on every change.
 Data safety answer is "no data collected". When sync ships, the learner app will add a
 network module and the permission deliberately, removing the check in the same change.
 
+
+## ADR-013: The learner release is shrunk by R8, and packs only what it reads (2026-10-22)
+
+**Context.** The learner release shipped with R8 off: 9.2 MB, two dex files of mostly unused
+library code, every AndroidX translation, the Compose resources twice (as assets and as Java
+resources) and the preview units that only tests read.
+
+**Decision.** The learner release turns on R8 code and resource shrinking with the default
+optimize rules plus `androidApp-learner/keep-rules.pro`, which is empty on purpose: content
+and saves go through kotlinx.serialization's generated serializers, which its bundled rules
+keep, and the app uses no reflection. `localeFilters` keeps English only. Packaging drops the
+Java-resource copy of `composeResources/**` (Compose reads the asset copy) and
+`content/preview/**`. Any change to keep rules, serialization or resource loading needs an
+on-device smoke test of the release build: onboarding, a lesson of each step type, a restart
+to read the save back, the glossary and map, and the grown-up zone.
+
+**Consequences.** 9.2 MB to 2.1 MB. Smoke-tested on a Galaxy phone on 2026-10-21; cold start
+about 170 ms. The Coach app keeps R8 off until its Supabase path can be smoke-tested against a
+real project, since Ktor and supabase-kt lean on reflection-adjacent serialization.
