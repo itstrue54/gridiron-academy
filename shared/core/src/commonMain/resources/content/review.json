@@ -65,6 +65,27 @@
       "hash": "1ea4da346baa85c3"
     },
     {
+      "step": "a1-basics-10",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "baaa9533eab14713"
+    },
+    {
+      "step": "a1-basics-11",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "7ff99e36d5e64c27"
+    },
+    {
+      "step": "a1-basics-12",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "47a7ad29d3ff837f"
+    },
+    {
       "step": "a1-clock-01",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
@@ -100,6 +121,13 @@
       "hash": "0d475a35e26ccc0e"
     },
     {
+      "step": "a1-clock-06",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "9d9f8a8144aaa6d4"
+    },
+    {
       "step": "a1-clock-07",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
@@ -126,6 +154,13 @@
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "ddb2d21a41ef57da"
+    },
+    {
+      "step": "a1-clock-11",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "cbce209355b85f3e"
     },
     {
       "step": "a1-clock-12",
@@ -282,6 +317,13 @@
       "hash": "5329dcfcc9097ada"
     },
     {
+      "step": "a1-positions-14",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "5f2543ac632fbc31"
+    },
+    {
       "step": "a1-scoring-01",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
@@ -415,6 +457,13 @@
       "hash": "0b9aa44b2652d8a1"
     },
     {
+      "step": "a2-calls-06",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "60f010a025c28ccb"
+    },
+    {
       "step": "a2-calls-07",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
@@ -457,6 +506,13 @@
       "hash": "2b171b4025fe7676"
     },
     {
+      "step": "a2-eligibility-05",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "2259ebb9f716dfac"
+    },
+    {
       "step": "a2-eligibility-06",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
@@ -469,6 +525,20 @@
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "7c1c85cfe53a9596"
+    },
+    {
+      "step": "a2-eligibility-08",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "70f95508b2bad392"
+    },
+    {
+      "step": "a2-eligibility-09",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "d8eccec0648764f8"
     },
     {
       "step": "a2-formations-01",
@@ -539,6 +609,13 @@
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "56215cfb79bfabe5"
+    },
+    {
+      "step": "a2-formations-11",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "d8b911915b03d2e4"
     },
     {
       "step": "a2-gameday-01",
@@ -625,6 +702,13 @@
       "hash": "54126e2aba537d4a"
     },
     {
+      "step": "a2-gameday-13",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "33cf01ec064c2d0d"
+    },
+    {
       "step": "a2-gameday-14",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
@@ -681,6 +765,13 @@
       "hash": "c92418c0a7b99278"
     },
     {
+      "step": "a2-motion-07",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "84796ba820dc96e9"
+    },
+    {
       "step": "a2-pi-01",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
@@ -716,6 +807,13 @@
       "hash": "9390afaa5eb1178f"
     },
     {
+      "step": "a2-pi-06",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "aa2899f746612a23"
+    },
+    {
       "step": "a2-pi-07",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
@@ -728,6 +826,13 @@
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "9b7c4d167ed5a704"
+    },
+    {
+      "step": "a2-pi-09",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "6913a8b0d83f675e"
     },
     {
       "step": "a2-protect-01",
@@ -756,6 +861,13 @@
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "a3ecf63f2621cfd4"
+    },
+    {
+      "step": "a2-protect-05",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "0da691c1d9d0613c"
     },
     {
       "step": "a2-protect-06",
@@ -805,6 +917,13 @@
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "58ab6da93a02760c"
+    },
+    {
+      "step": "a2-replay-06",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "623a778e5f7ec94c"
     },
     {
       "step": "a2-replay-07",
@@ -863,6 +982,13 @@
       "hash": "f5046053f19d48c9"
     },
     {
+      "step": "a2-special-08",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "3a96f1cf49cc00c7"
+    },
+    {
       "step": "a3-blocking-01",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
@@ -889,6 +1015,13 @@
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "2dbc61f6cd5f1db2"
+    },
+    {
+      "step": "a3-blocking-05",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "1e52d3b26b6b6c42"
     },
     {
       "step": "a3-fronts-01",
@@ -954,6 +1087,13 @@
       "hash": "9530b7ebc86afd8a"
     },
     {
+      "step": "a3-leverage-04",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "99aa6cf07c42908b"
+    },
+    {
       "step": "a3-manzone-01",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
@@ -1015,6 +1155,13 @@
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "5841226bbb9bf07f"
+    },
+    {
+      "step": "a3-pairs-04",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "3e5ece9d1e87252d"
     },
     {
       "step": "a3-pairs-05",
@@ -1150,11 +1297,25 @@
       "hash": "19f984cd775d8981"
     },
     {
+      "step": "a3-timing-05",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "ed0759c405bdf515"
+    },
+    {
       "step": "a3-tree-01",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "4d14d73dd91e7811"
+    },
+    {
+      "step": "a3-tree-02",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "0a5d932b60039363"
     },
     {
       "step": "a3-tree-03",
@@ -1234,6 +1395,13 @@
       "hash": "b59c2ab3779ccb42"
     },
     {
+      "step": "a3-twominute-06",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "72e05777e56ebcd2"
+    },
+    {
       "step": "ar8-analytics-01",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
@@ -1267,6 +1435,20 @@
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "66b9481162a21c46"
+    },
+    {
+      "step": "ar8-analytics-06",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "e1d40641bfbee339"
+    },
+    {
+      "step": "ar8-analytics-07",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "7f2b4f0238c6c1f2"
     },
     {
       "step": "ar8-analytics-08",
@@ -1332,11 +1514,32 @@
       "hash": "a35189937d3d67ae"
     },
     {
+      "step": "ar8-fourth-02",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "d4a465f4ac5bfa63"
+    },
+    {
       "step": "ar8-fourth-03",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "ea438d0d47b52918"
+    },
+    {
+      "step": "ar8-fourth-04",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "0df9498b0b7f72e0"
+    },
+    {
+      "step": "ar8-fourth-05",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "3532f8f8a230f74f"
     },
     {
       "step": "ar8-fourth-06",
@@ -1353,11 +1556,25 @@
       "hash": "cfc8f114be6bb99f"
     },
     {
+      "step": "ar8-game-02",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "2293e8c2bdb42255"
+    },
+    {
       "step": "ar8-game-03",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "017b794341a19444"
+    },
+    {
+      "step": "ar8-game-04",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "f80889310442b063"
     },
     {
       "step": "ar8-game-05",
@@ -1379,6 +1596,13 @@
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "360af358073a77cc"
+    },
+    {
+      "step": "ar8-game-08",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "6251d9a913bc9ca1"
     },
     {
       "step": "ar8-game-09",
@@ -1430,11 +1654,46 @@
       "hash": "8c130a7efcd5b320"
     },
     {
+      "step": "ar8-management-04",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "52ad03df4a10c0a7"
+    },
+    {
+      "step": "ar8-management-05",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "11644c61be86d694"
+    },
+    {
+      "step": "ar8-management-06",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "7f04afff812cedaa"
+    },
+    {
       "step": "ar8-matchups-01",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "6d49028fff2513fc"
+    },
+    {
+      "step": "ar8-matchups-02",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "6c595de7f15f988e"
+    },
+    {
+      "step": "ar8-matchups-03",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "d999888a28b3cd10"
     },
     {
       "step": "ar8-matchups-04",
@@ -1498,6 +1757,13 @@
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "93705d08e66b3f6a"
+    },
+    {
+      "step": "ar8-offense-08",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "4390740ff4da6057"
     },
     {
       "step": "ar8-offense-09",
@@ -1575,6 +1841,13 @@
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "40cc62bdcccb0973"
+    },
+    {
+      "step": "c5-gameday-11",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "4aff8fa87b456204"
     },
     {
       "step": "c5-gameday-12",
@@ -1668,11 +1941,25 @@
       "hash": "854b74d89a808ecc"
     },
     {
+      "step": "c5-option-06",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "74936a61a4dcfd28"
+    },
+    {
       "step": "c5-option-07",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "e723f1b442275121"
+    },
+    {
+      "step": "c5-option-08",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "d6332c5e2e6c9c42"
     },
     {
       "step": "c5-playaction-01",
@@ -1696,6 +1983,27 @@
       "hash": "a60cd4653519ec64"
     },
     {
+      "step": "c5-playaction-04",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "0d0e1412eb91b81e"
+    },
+    {
+      "step": "c5-playaction-05",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "4e50843358bbc427"
+    },
+    {
+      "step": "c5-pressure-01",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "e67430fe6e67f088"
+    },
+    {
       "step": "c5-pressure-02",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
@@ -1708,6 +2016,41 @@
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "173c336f716e3195"
+    },
+    {
+      "step": "c5-pressure-04",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "6ac95bd1a1b388d5"
+    },
+    {
+      "step": "c5-pressure-05",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "1d7332c65f7713d9"
+    },
+    {
+      "step": "c5-pressure-06",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "085a71b4f719f7ac"
+    },
+    {
+      "step": "c5-pressure-07",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "00a137fae1eac530"
+    },
+    {
+      "step": "c5-pressure-08",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "2152661044ce67e4"
     },
     {
       "step": "c5-protect-01",
@@ -1785,6 +2128,13 @@
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "e5675f963cad2bc4"
+    },
+    {
+      "step": "c5-rpo-04",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "e734ad5e69d9494d"
     },
     {
       "step": "c5-rpo-05",
@@ -1920,6 +2270,20 @@
       "hash": "5d77213aa4e6acd9"
     },
     {
+      "step": "co7-coverage-06",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "e3e6527c4bd4fc2b"
+    },
+    {
+      "step": "co7-coverage-07",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "e71902cf1aadf1cd"
+    },
+    {
       "step": "co7-defense-01",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
@@ -1960,6 +2324,13 @@
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "a2327cce1b0f642c"
+    },
+    {
+      "step": "co7-film-02",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "9c3ae738a6bf5d31"
     },
     {
       "step": "co7-film-03",
@@ -2004,6 +2375,13 @@
       "hash": "af1450e20a5881a5"
     },
     {
+      "step": "co7-late-05",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "5b5dc225af456ff3"
+    },
+    {
       "step": "co7-offense-01",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
@@ -2030,6 +2408,27 @@
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "cc92837d16afe549"
+    },
+    {
+      "step": "co7-offense-05",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "b43eeaf2d7b95d2b"
+    },
+    {
+      "step": "co7-offense-06",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "7e6820d99faa10d7"
+    },
+    {
+      "step": "co7-offense-07",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "6321b05fa372f31a"
     },
     {
       "step": "co7-pressure-01",
@@ -2067,6 +2466,13 @@
       "hash": "14e152bf9c102f52"
     },
     {
+      "step": "co7-pressure-06",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "47f56a0f02b8ea75"
+    },
+    {
       "step": "co7-rotate-01",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
@@ -2093,6 +2499,13 @@
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "5a56887074a32a70"
+    },
+    {
+      "step": "co7-rotate-05",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "3b3125d5fb3f0182"
     },
     {
       "step": "co7-rotate-06",
@@ -2144,6 +2557,13 @@
       "hash": "f428ee0cb8d30ff5"
     },
     {
+      "step": "k1-downs-06",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "caad1ac2dc51a773"
+    },
+    {
       "step": "k1-downs-07",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
@@ -2177,6 +2597,13 @@
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "0f90c89f63f27d27"
+    },
+    {
+      "step": "k1-field-04",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "3e6f41c627680b71"
     },
     {
       "step": "k1-field-05",
@@ -2312,6 +2739,13 @@
       "hash": "5c3d12432d029d74"
     },
     {
+      "step": "k1-moving-04",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "83e33b0355674468"
+    },
+    {
       "step": "k1-moving-05",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
@@ -2326,11 +2760,25 @@
       "hash": "9543eb364d8c2feb"
     },
     {
+      "step": "k1-moving-07",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "a921725e17aa3b1f"
+    },
+    {
       "step": "k1-moving-08",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "49511bd4add20a94"
+    },
+    {
+      "step": "k1-moving-09",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "7edd7fcec69ede60"
     },
     {
       "step": "k1-positions-01",
@@ -2445,6 +2893,13 @@
       "hash": "47c9f36a73bb958c"
     },
     {
+      "step": "k1-refs-07",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "f1b3118cce4199f4"
+    },
+    {
       "step": "k1-scoring-01",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
@@ -2452,11 +2907,25 @@
       "hash": "7f52f283daceb6ca"
     },
     {
+      "step": "k1-scoring-02",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "770421b14cb2492a"
+    },
+    {
       "step": "k1-scoring-03",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "d21de5460bfb293d"
+    },
+    {
+      "step": "k1-scoring-04",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "69c348726dff1b69"
     },
     {
       "step": "k1-scoring-05",
@@ -2478,6 +2947,13 @@
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "4fa593e00a9b86a9"
+    },
+    {
+      "step": "k1-scoring-08",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "16d39c5c4e6076aa"
     },
     {
       "step": "k1-scoring-09",
@@ -2543,6 +3019,13 @@
       "hash": "c680e4d6e96756f1"
     },
     {
+      "step": "k2-clock-02",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "823a88ef57a1fdf4"
+    },
+    {
       "step": "k2-clock-03",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
@@ -2550,11 +3033,25 @@
       "hash": "ebfe2307d3ec07ba"
     },
     {
+      "step": "k2-clock-04",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "973ddd4a95394a15"
+    },
+    {
       "step": "k2-clock-05",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "8305d5f1f4444550"
+    },
+    {
+      "step": "k2-clock-06",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "aeae08c8f8e89d2d"
     },
     {
       "step": "k2-kickoff-01",
@@ -2585,6 +3082,13 @@
       "hash": "082ecba58d581395"
     },
     {
+      "step": "k2-kickoff-05",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "41f9a481ff936fab"
+    },
+    {
       "step": "k2-kickoff-06",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
@@ -2599,11 +3103,25 @@
       "hash": "5d4d4b11a58fc914"
     },
     {
+      "step": "k2-kickoff-08",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "d1435e2295655797"
+    },
+    {
       "step": "k2-line-01",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "50f718b7e54c5670"
+    },
+    {
+      "step": "k2-line-02",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "24cfd108a96572ab"
     },
     {
       "step": "k2-line-03",
@@ -2613,11 +3131,60 @@
       "hash": "e42a015f72fd1b75"
     },
     {
+      "step": "k2-line-04",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "c31fd0a9d9f0273b"
+    },
+    {
+      "step": "k2-line-05",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "cdb4213a7e95ff15"
+    },
+    {
+      "step": "k2-line-06",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "31f9e9d689517613"
+    },
+    {
+      "step": "k2-line-07",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "d527a7b9c9cff14b"
+    },
+    {
+      "step": "k2-line-08",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "bf04d2462f04628f"
+    },
+    {
       "step": "k2-oline-01",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "bd6edc431726cb6d"
+    },
+    {
+      "step": "k2-oline-02",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "a99d0a81be45c7aa"
+    },
+    {
+      "step": "k2-oline-03",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "c46c082217f22e20"
     },
     {
       "step": "k2-oline-04",
@@ -2634,11 +3201,25 @@
       "hash": "5b22ff203e369d50"
     },
     {
+      "step": "k2-oline-06",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "8bb0ad83b2190f5b"
+    },
+    {
       "step": "k2-onside-01",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "5ee46cb4d121af42"
+    },
+    {
+      "step": "k2-onside-02",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "03f46015746b03b3"
     },
     {
       "step": "k2-onside-03",
@@ -2648,11 +3229,25 @@
       "hash": "5f97b61b1d32b72e"
     },
     {
+      "step": "k2-onside-04",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "6622ba6490804f83"
+    },
+    {
       "step": "k2-onside-05",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "29a1d0436ae23dd1"
+    },
+    {
+      "step": "k2-onside-06",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "ccedf6dc1070c67b"
     },
     {
       "step": "k2-penalties-01",
@@ -2683,11 +3278,25 @@
       "hash": "f3706ff5cba20e29"
     },
     {
+      "step": "k2-penalties-05",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "3a6cc76050edaa48"
+    },
+    {
       "step": "k2-penalties-06",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "6d44efdc5c8e7d1d"
+    },
+    {
+      "step": "k2-penalties-07",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "e0a7109f9d24e17c"
     },
     {
       "step": "k2-penalties-08",
@@ -2716,6 +3325,13 @@
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "8cd32567174a5f48"
+    },
+    {
+      "step": "k2-punts-04",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "5979d2c433f7b2be"
     },
     {
       "step": "k2-punts-05",
@@ -2760,6 +3376,13 @@
       "hash": "a8c834b077f09d47"
     },
     {
+      "step": "k2-runpass-05",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "2b39ca212cd04bd0"
+    },
+    {
       "step": "k2-runpass-06",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
@@ -2774,11 +3397,53 @@
       "hash": "6b53bb50cc49475a"
     },
     {
+      "step": "k2-safety-02",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "91cdf7ed30a02be3"
+    },
+    {
       "step": "k2-safety-03",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "d9d08063f0a0188c"
+    },
+    {
+      "step": "k2-safety-04",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "56bd8bf294ab8d10"
+    },
+    {
+      "step": "k2-safety-05",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "0e4e82f152eebb59"
+    },
+    {
+      "step": "k2-safety-06",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "f91e435d785f2898"
+    },
+    {
+      "step": "k2-safety-07",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "1a8438c5d8de1166"
+    },
+    {
+      "step": "k2-safety-08",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "e1005d9e530e1b6b"
     },
     {
       "step": "k2-scoreboard-01",
@@ -2816,11 +3481,39 @@
       "hash": "ea44f83e3bf72f90"
     },
     {
+      "step": "k2-scoreboard-06",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "d84bbce118bb00ad"
+    },
+    {
+      "step": "k2-scoreboard-07",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "0440eb2d72dd1baa"
+    },
+    {
+      "step": "k2-sets-01",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "5587dc529b6ff051"
+    },
+    {
       "step": "k2-sets-02",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "60a59d0123868d96"
+    },
+    {
+      "step": "k2-sets-03",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "8b12ab93a64e936f"
     },
     {
       "step": "k2-sets-04",
@@ -2830,11 +3523,53 @@
       "hash": "a5e45faf60370527"
     },
     {
+      "step": "k2-sets-05",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "5fc54b2c48f0ac00"
+    },
+    {
+      "step": "k2-sets-06",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "511c3090c9c0c505"
+    },
+    {
+      "step": "k2-sets-07",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "c1c34e2e9bf85fa5"
+    },
+    {
+      "step": "k2-sets-08",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "01795c76b7d43c07"
+    },
+    {
+      "step": "k2-sets-09",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "6491a1371bc7fb4a"
+    },
+    {
       "step": "k2-sets-10",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "c681b0c7d189c63d"
+    },
+    {
+      "step": "k2-sets-11",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "1dc0359145e599dc"
     },
     {
       "step": "k2-signals-01",
@@ -2886,11 +3621,25 @@
       "hash": "81fd09efa447a9ea"
     },
     {
+      "step": "k3-calls-02",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "56038ac4bf4b8290"
+    },
+    {
       "step": "k3-calls-03",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "3a7f463b8137e2d0"
+    },
+    {
+      "step": "k3-calls-04",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "786a5f3c9928edc7"
     },
     {
       "step": "k3-calls-05",
@@ -2900,6 +3649,13 @@
       "hash": "772573ecc2895422"
     },
     {
+      "step": "k3-calls-06",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "ed4c6fc19285a423"
+    },
+    {
       "step": "k3-calls-07",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
@@ -2907,11 +3663,32 @@
       "hash": "ca0a867137ffe044"
     },
     {
+      "step": "k3-calls-08",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "ad2f1f782eea0975"
+    },
+    {
+      "step": "k3-calls-09",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "56ad6211f484a461"
+    },
+    {
       "step": "k3-combos-01",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "ef860e63364012df"
+    },
+    {
+      "step": "k3-combos-02",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "2a514ed78afc4097"
     },
     {
       "step": "k3-combos-03",
@@ -2926,6 +3703,20 @@
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "c4dab44ca74968e7"
+    },
+    {
+      "step": "k3-combos-05",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "9268cd0543c86632"
+    },
+    {
+      "step": "k3-combos-06",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "faea14d80e522164"
     },
     {
       "step": "k3-fronts-01",
@@ -2970,6 +3761,13 @@
       "hash": "953ae51c1abdc7b1"
     },
     {
+      "step": "k3-man-01",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "4a3be49f5cab8f9e"
+    },
+    {
       "step": "k3-man-02",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
@@ -2977,11 +3775,39 @@
       "hash": "4cc44888789d80b4"
     },
     {
+      "step": "k3-man-03",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "413a4ced0951a2ee"
+    },
+    {
+      "step": "k3-man-04",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "324beb2bf2d83449"
+    },
+    {
       "step": "k3-man-05",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "abcdbc7ef5f31a6a"
+    },
+    {
+      "step": "k3-man-06",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "c58e0c5530dee353"
+    },
+    {
+      "step": "k3-man-07",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "66288ec40e4ea9f5"
     },
     {
       "step": "k3-moreroutes-01",
@@ -3026,6 +3852,13 @@
       "hash": "19c810344fb13bd6"
     },
     {
+      "step": "k3-moreroutes-07",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "ea7bace4668080dd"
+    },
+    {
       "step": "k3-moreroutes-08",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
@@ -3033,11 +3866,67 @@
       "hash": "f614c666f3882fce"
     },
     {
+      "step": "k3-moreroutes-09",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "e0ec5f0d29afe038"
+    },
+    {
       "step": "k3-replay-01",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "db8721de445e604e"
+    },
+    {
+      "step": "k3-replay-02",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "ee2af7a4e927b9f5"
+    },
+    {
+      "step": "k3-replay-03",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "910379974364591c"
+    },
+    {
+      "step": "k3-replay-04",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "61af97334d41fc4f"
+    },
+    {
+      "step": "k3-replay-05",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "1a13fd75583e26b0"
+    },
+    {
+      "step": "k3-replay-06",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "a8d999c1a3172d58"
+    },
+    {
+      "step": "k3-routes-01",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "69409b5320225b82"
+    },
+    {
+      "step": "k3-routes-02",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "6527fcd6cdf237fb"
     },
     {
       "step": "k3-routes-03",
@@ -3124,6 +4013,41 @@
       "hash": "80c28bf1f1db4933"
     },
     {
+      "step": "k3-runs-07",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "a9f3fe3d9643a126"
+    },
+    {
+      "step": "k3-runs-08",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "ea9d4926d38be22b"
+    },
+    {
+      "step": "k3-runs-09",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "aa9bc4ea17b6f75b"
+    },
+    {
+      "step": "k3-runs-10",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "ba9f3fb6ff0d751a"
+    },
+    {
+      "step": "k3-runs-11",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "7eb3961cbe13b967"
+    },
+    {
       "step": "k3-safeties-01",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
@@ -3159,6 +4083,13 @@
       "hash": "63c2dca9e08a2bb1"
     },
     {
+      "step": "k3-safeties-06",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "4706d05cbed199cc"
+    },
+    {
       "step": "k3-smarts-01",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
@@ -3187,11 +4118,32 @@
       "hash": "921d852ff16fdf36"
     },
     {
+      "step": "k3-smarts-05",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "40d1d7b96f442181"
+    },
+    {
       "step": "k3-smarts-06",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "bd42af2219b611c6"
+    },
+    {
+      "step": "k3-smarts-07",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "4cca150b07cc7bfc"
+    },
+    {
+      "step": "k3-zone-01",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "0978d97541274e0f"
     },
     {
       "step": "k3-zone-02",
@@ -3215,11 +4167,46 @@
       "hash": "2ae73a403bd7ff3a"
     },
     {
+      "step": "k3-zone-05",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "b2b4a13247869ae1"
+    },
+    {
       "step": "k3-zone-06",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "61ed270808dcdecb"
+    },
+    {
+      "step": "p6-cover1-01",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "5f8b2d0a8555b0b0"
+    },
+    {
+      "step": "p6-cover1-02",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "37d761c79393fb2f"
+    },
+    {
+      "step": "p6-cover1-03",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "f8f32072022d4ae0"
+    },
+    {
+      "step": "p6-cover1-04",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "e62d87ff056841c0"
     },
     {
       "step": "p6-cover1-05",
@@ -3327,6 +4314,13 @@
       "hash": "a2af325f18d5a952"
     },
     {
+      "step": "p6-mixed-02",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "6597d7b6c6e763d2"
+    },
+    {
       "step": "p6-mixed-03",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
@@ -3362,6 +4356,13 @@
       "hash": "70e22d24680665b0"
     },
     {
+      "step": "p6-packages-04",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "6a3a4de1d016b938"
+    },
+    {
       "step": "p6-packages-05",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
@@ -3369,11 +4370,25 @@
       "hash": "15b05495a83e4967"
     },
     {
+      "step": "p6-packages-06",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "b592a178a5599e35"
+    },
+    {
       "step": "p6-presnap-01",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "673028f51ed76120"
+    },
+    {
+      "step": "p6-presnap-02",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "895d622bf63ef68b"
     },
     {
       "step": "p6-presnap-03",
@@ -3390,11 +4405,25 @@
       "hash": "dd5d63493c2c5ba5"
     },
     {
+      "step": "p6-presnap-05",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "adb9648b53a9510e"
+    },
+    {
       "step": "p6-presnap-06",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "80da6cca752570ae"
+    },
+    {
+      "step": "p6-presnap-07",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "eedd368df9b00908"
     },
     {
       "step": "p6-qb-01",
@@ -3474,6 +4503,13 @@
       "hash": "39988018f9de55f2"
     },
     {
+      "step": "p6-quarters-05",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "6d21502ca42a572e"
+    },
+    {
       "step": "p6-quarters-06",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
@@ -3551,6 +4587,13 @@
       "hash": "3d598ab5af182a14"
     },
     {
+      "step": "p6-tampa-05",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "d0948c60e64d1cb5"
+    },
+    {
       "step": "v4-cover2-01",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
@@ -3584,6 +4627,13 @@
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "da7c6469701e4e73"
+    },
+    {
+      "step": "v4-cover2-06",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "9ed96aaca997622a"
     },
     {
       "step": "v4-cover3-01",
@@ -3621,6 +4671,13 @@
       "hash": "3d6e0e4566e06511"
     },
     {
+      "step": "v4-cover3-06",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "99f7f8013a5c4442"
+    },
+    {
       "step": "v4-cover4-01",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
@@ -3654,6 +4711,13 @@
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "7a4501f5b325a08c"
+    },
+    {
+      "step": "v4-cover4-06",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "86d3ff73838bdcf6"
     },
     {
       "step": "v4-dropback-01",
@@ -3775,6 +4839,13 @@
       "hash": "30b0428f89f89fd0"
     },
     {
+      "step": "v4-gap-02",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "20cf16bb3ce681db"
+    },
+    {
       "step": "v4-gap-03",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
@@ -3787,6 +4858,13 @@
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "fea27ec3f7f3f536"
+    },
+    {
+      "step": "v4-gap-05",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "f779dc3b37b23eb3"
     },
     {
       "step": "v4-gap-06",
@@ -3859,6 +4937,55 @@
       "hash": "8dab2d1ea313e3df"
     },
     {
+      "step": "v4-gaps-08",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "56e85bb42637eab1"
+    },
+    {
+      "step": "v4-man-01",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "af5718b2ab5f2d90"
+    },
+    {
+      "step": "v4-man-02",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "51520426aa635b29"
+    },
+    {
+      "step": "v4-man-03",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "976c5896c0108bb6"
+    },
+    {
+      "step": "v4-man-04",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "f46b1ada36b5a985"
+    },
+    {
+      "step": "v4-man-05",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "1ed7f6483d15f01e"
+    },
+    {
+      "step": "v4-man-06",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "e4f505d43a3a6506"
+    },
+    {
       "step": "v4-personnel-01",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
@@ -3901,6 +5028,20 @@
       "hash": "d52eeac7ea36459f"
     },
     {
+      "step": "v4-personnel-07",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "dc321150e96a9cb7"
+    },
+    {
+      "step": "v4-personnel-08",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "678875561fa9e34a"
+    },
+    {
       "step": "v4-pressure-01",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
@@ -3927,6 +5068,13 @@
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "cd87de479388855c"
+    },
+    {
+      "step": "v4-pressure-05",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "90575fa1e89e6c1b"
     },
     {
       "step": "v4-quick-01",
@@ -3978,6 +5126,13 @@
       "hash": "28ab6ec90314cb5e"
     },
     {
+      "step": "v4-readdefense-02",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "e5872c38e5c9b419"
+    },
+    {
       "step": "v4-readdefense-03",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
@@ -3990,6 +5145,13 @@
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "427e3b247d4402a9"
+    },
+    {
+      "step": "v4-readdefense-05",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "3f92b20cbe3c8a8a"
     },
     {
       "step": "v4-readdefense-06",
@@ -4046,6 +5208,13 @@
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "426b5cd8ae1df959"
+    },
+    {
+      "step": "v4-zone-03",
+      "reviewer": "itstrue54",
+      "date": "2026-10-22",
+      "ruleSeason": 2026,
+      "hash": "4e330333db5b7923"
     },
     {
       "step": "v4-zone-04",
