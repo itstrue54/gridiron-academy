@@ -506,6 +506,12 @@ class LearnerAppState(
 
     fun go(screen: Screen) { backStack = backStack + screen }
 
+    /**
+     * A screen's own use for Back, asked first (the map closes its open card). The screen
+     * sets it while it applies and clears it when it leaves.
+     */
+    var backOverride: (() -> Boolean)? = null
+
     /** Set while "Leave? This try won't count" is on screen. */
     var confirmingLeave: Boolean by mutableStateOf(false)
         private set
@@ -528,6 +534,7 @@ class LearnerAppState(
      * mid-Checkpoint shouldn't throw the try away); anywhere else it's [back].
      */
     fun requestBack(): Boolean {
+        if (backOverride?.invoke() == true) return true
         if (answeredHere() > 0) { confirmingLeave = true; return true }
         return back()
     }
@@ -545,6 +552,36 @@ class LearnerAppState(
         if (screen is Screen.CheckpointPlay || screen is Screen.BigGamePlay) activeGate = null
         backStack = backStack.dropLast(1)
         return true
+    }
+
+    /**
+     * Where the learner was, for Android to keep if it ends the app in the background:
+     * Home, levels, the glossary and the map. A lesson or game can't resume part-way, so
+     * it comes back as the level it belongs to.
+     */
+    fun restorableRoute(): List<String> = backStack.mapNotNull {
+        when (it) {
+            Screen.Home -> ROUTE_HOME
+            is Screen.LevelDetail -> ROUTE_LEVEL + it.levelId
+            Screen.Glossary -> ROUTE_GLOSSARY
+            Screen.PlaybookMap -> ROUTE_MAP
+            else -> null
+        }
+    }.distinct()
+
+    /** Reopens a [restorableRoute], skipping anything this save can't show now. */
+    fun restoreRoute(route: List<String>) {
+        if (profile == null || route.firstOrNull() != ROUTE_HOME) return
+        val ids = levels.filter { levelUnlocked(it) }.map { it.id }.toSet()
+        val screens = route.drop(1).mapNotNull { r ->
+            when {
+                r == ROUTE_GLOSSARY -> Screen.Glossary
+                r == ROUTE_MAP -> Screen.PlaybookMap
+                r.startsWith(ROUTE_LEVEL) && r.removePrefix(ROUTE_LEVEL) in ids -> Screen.LevelDetail(r.removePrefix(ROUTE_LEVEL))
+                else -> null
+            }
+        }
+        backStack = listOf(Screen.Home) + screens
     }
 
     fun startOnboarding() { backStack = listOf(Screen.Onboarding) }
@@ -654,6 +691,10 @@ class LearnerAppState(
         const val SEED_MIX = 1_000_003L
         /** DESIGN 9.6: a one-minute round, unless the rules screen's Clock switch is off. */
         const val SPEED_ROUND_MILLIS = 60_000L
+        const val ROUTE_HOME = "home"
+        const val ROUTE_LEVEL = "level:"
+        const val ROUTE_GLOSSARY = "glossary"
+        const val ROUTE_MAP = "map"
         const val GATE_MISSES = 3
         const val GATE_LOCK_MILLIS = 60_000L
         const val MILLIS_PER_DAY = 86_400_000L

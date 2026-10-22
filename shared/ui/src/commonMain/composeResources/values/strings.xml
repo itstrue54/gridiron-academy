@@ -71,6 +71,10 @@
     <string name="order_belongs_at">not quite, goes at number %1$d</string>
     <string name="answer_state_correct">correct</string>
     <string name="answer_state_wrong">your answer, not quite</string>
+    <string name="map_zoom_in">Zoom in</string>
+    <string name="map_zoom_out">Zoom out</string>
+    <string name="sheet_fold">Hide the explanation</string>
+    <string name="sheet_unfold">Show the explanation</string>
     <string name="diagram_show_list">Show as a list</string>
     <string name="diagram_hide_list">Hide the list</string>
     <string name="order_hint">Use the arrows to put these in order.</string>

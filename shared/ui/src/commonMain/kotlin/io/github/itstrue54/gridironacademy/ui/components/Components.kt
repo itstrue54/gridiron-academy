@@ -35,6 +35,12 @@ import io.github.itstrue54.gridironacademy.ui.resources.Res
 import io.github.itstrue54.gridironacademy.ui.resources.answer_state_correct
 import io.github.itstrue54.gridironacademy.ui.resources.answer_state_wrong
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.getValue
+import io.github.itstrue54.gridironacademy.ui.resources.sheet_unfold
+import io.github.itstrue54.gridironacademy.ui.resources.sheet_fold
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
@@ -248,6 +254,9 @@ fun FeedbackSheet(
         Verdict.RIGHT -> c.correct
         Verdict.PARTIAL, Verdict.NOT_QUITE -> c.retry
     }
+    // The sheet can fold down to its verdict and Continue, so a graded diagram underneath
+    // is visible without scrolling (DESIGN 8). It opens unfolded for every new answer.
+    var folded by remember(headline, body) { mutableStateOf(false) }
     Surface(
         shape = skin.sheetShape,
         color = c.surfaceRaised, // opaque: the explanation must not show the lesson through it
@@ -262,15 +271,24 @@ fun FeedbackSheet(
                     Spacer(Modifier.width(10.dp))
                     // Polite live region: TalkBack reads the verdict as the sheet appears.
                     Text(headline, style = Gridiron.type.title, color = accent,
-                        modifier = Modifier.semantics { heading(); liveRegion = LiveRegionMode.Polite })
+                        modifier = Modifier.weight(1f).semantics { heading(); liveRegion = LiveRegionMode.Polite })
+                    if (detail.isNotEmpty() || body.isNotEmpty()) {
+                        IconAction(
+                            if (folded) Glyph.UP else Glyph.DOWN,
+                            stringResource(if (folded) Res.string.sheet_unfold else Res.string.sheet_fold),
+                            onClick = { folded = !folded },
+                        )
+                    }
                 }
-                if (detail.isNotEmpty()) {
-                    Spacer(Modifier.height(8.dp))
-                    Text(detail, style = Gridiron.type.body, color = c.ink)
-                }
-                if (body.isNotEmpty()) {
-                    Spacer(Modifier.height(8.dp))
-                    Text(body, style = Gridiron.type.body, color = c.inkDim)
+                if (!folded) {
+                    if (detail.isNotEmpty()) {
+                        Spacer(Modifier.height(8.dp))
+                        Text(detail, style = Gridiron.type.body, color = c.ink)
+                    }
+                    if (body.isNotEmpty()) {
+                        Spacer(Modifier.height(8.dp))
+                        Text(body, style = Gridiron.type.body, color = c.inkDim)
+                    }
                 }
             }
             Spacer(Modifier.height(16.dp))
