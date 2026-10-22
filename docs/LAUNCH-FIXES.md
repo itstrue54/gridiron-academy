@@ -107,7 +107,7 @@ all 167 on 2026-10-22, so every level ships again.
       concussion card in kid "Playing Safe" (3 steps) and adult "Protecting Players" (2 steps),
       glossary "concussion" (Level 2), and kid Level 3 unit "Ready for Varsity" (14 steps:
       personnel numbers, gap letters, cover numbers). The bridge questions are untagged so the
-      glossary still teaches those terms at Level 4 (ADR-010). Awaiting sign-off.
+      glossary still teaches those terms at Level 4 (ADR-010). Signed off by itstrue54, 2026-10-22.
 
 ## Before sync (not this release)
 
