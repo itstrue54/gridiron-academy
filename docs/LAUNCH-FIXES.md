@@ -102,7 +102,7 @@ all 167 on 2026-10-22, so every level ships again.
       map has + and − buttons and Back closes an open card first; Home, levels, glossary
       and map come back after Android ends the app (a lesson comes back as its level).
       Tap targets were already a 48dp circle per player, nearest centre winning.
-- [ ] Term consistency (20).
+- [x] Term consistency (20): a unit inside a level is a "drill" everywhere (the close button, the adult done screen, the coach warm-up lines); "lessons" stays for the course as a whole.
 - [ ] Safety and concussion card; a kid bridge unit before Varsity-4 (10).
 
 ## Before sync (not this release)
