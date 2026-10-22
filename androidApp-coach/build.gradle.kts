@@ -41,9 +41,9 @@ android {
             buildConfigField("boolean", "REVIEWED_ONLY", "false")
         }
         release {
-            // SPEC 13.3: ship only coach-signed levels. Off until the course is signed:
-            // build with -Pgridiron.reviewedOnly=true to turn it on.
-            buildConfigField("boolean", "REVIEWED_ONLY", (findProperty("gridiron.reviewedOnly") ?: "false").toString())
+            // SPEC 13.3: a release ships only coach-signed levels. On by default; an internal
+            // test build that needs unreviewed content passes -Pgridiron.reviewedOnly=false.
+            buildConfigField("boolean", "REVIEWED_ONLY", (findProperty("gridiron.reviewedOnly") ?: "true").toString())
             optimization {
                 enable = false
             }
@@ -61,6 +61,7 @@ android {
 
 dependencies {
     implementation(project(":shared:ui"))
+    implementation(project(":shared:data-supabase"))
     implementation(libs.androidx.activity.compose)
     implementation(libs.kotlinx.coroutines.android)
 }

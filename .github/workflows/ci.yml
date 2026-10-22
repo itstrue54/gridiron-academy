@@ -33,6 +33,10 @@ jobs:
         run: ./gradlew :shared:core:jvmTest :shared:data:jvmTest :shared:ui:jvmTest --continue
       - name: Build the learner and coach apps
         run: ./gradlew :androidApp-learner:assembleDebug :androidApp-coach:assembleDebug
+      # Release builds too: the review gate is on by default there, and the learner build
+      # fails if its merged manifest declares INTERNET (SPEC 5.4). Unsigned in CI.
+      - name: Build release
+        run: ./gradlew :androidApp-learner:assembleRelease :androidApp-coach:assembleRelease
       - name: Keep the screen renders for review
         if: always()
         uses: actions/upload-artifact@v4

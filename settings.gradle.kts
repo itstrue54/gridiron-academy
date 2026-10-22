@@ -25,6 +25,7 @@ dependencyResolutionManagement {
 rootProject.name = "gridiron-academy"
 include(":shared:core")
 include(":shared:data")
+include(":shared:data-supabase")
 include(":shared:ui")
 include(":androidApp-learner")
 include(":androidApp-coach")

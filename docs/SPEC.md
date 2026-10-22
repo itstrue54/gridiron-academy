@@ -920,10 +920,10 @@ dates or fingerprints; `ReviewLogTest` fails when a signed step has been edited 
 so an edit sends it back for review. Debug builds show "[review] <step id>" above every
 unsigned step. `tools/review.py` exports a queue (with pre-read notes), builds the review
 page from `tools/review-page.html`, and turns approvals into sign-offs; a flag never
-signs. Release gating is built and off: building with `-Pgridiron.reviewedOnly=true`
-makes both apps ship `Content.reviewedOnly()`, only levels whose every step is signed
-(a level that needs a dropped one goes too, and so do packs using dropped lessons). Turn
-it on for a release; with it on, a level with any unsigned step is held back whole. As
+signs. Release gating is on by default for release builds (an internal build can pass
+`-Pgridiron.reviewedOnly=false`); both apps then ship `Content.reviewedOnly()`, only levels whose every step is signed
+(a level that needs a dropped one goes too, and so do packs using dropped lessons). A
+release never ships unsigned content: a level with any unsigned step is held back whole. As
 of 2026-10-21 every one of the 748 steps is signed (itstrue54, rule season 2026, after a
 coach's pre-read that fixed 17 steps), so a gated release ships the whole course. New or
 edited steps go back through `tools/review.py export`/`page`/`apply`.
