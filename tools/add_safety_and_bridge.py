@@ -52,7 +52,7 @@ BRIDGE = {
                 {"type": "learn", "id": "k3-ready-01", "title": "Two numbers",
                  "body": "Coaches name the offense with two numbers. The first counts running backs. The second counts tight ends. Everyone else who can catch a pass is a wide receiver."},
                 {"type": "learn", "id": "k3-ready-02", "title": "11 personnel",
-                 "body": "Five players can catch passes on every play. \"11\" means 1 running back and 1 tight end, so the other 3 are wide receivers."},
+                 "body": "Besides the quarterback and the five linemen, five players can catch passes. \"11\" (say \"one-one\") means 1 running back and 1 tight end, so the other 3 are wide receivers."},
                 {"type": "multiple_choice", "id": "k3-ready-03", "prompt": "In 12 personnel, how many tight ends are on the field?",
                  "choices": ["2", "1", "0", "3"], "answer": 0,
                  "explanation": "The second number counts tight ends: 12 is 1 running back and 2 tight ends."},
