@@ -125,7 +125,7 @@ KID_SAFETY = [
 
 ADULT_SAFETY = [
     {"type": "learn", "id": "a2-protect-08", "title": "Concussions: sit out, then get cleared",
-     "body": "Signs include headache, dizziness, confusion, nausea, blurred vision, or not remembering the play. Every US state has a youth sports concussion law: a player suspected of a concussion comes out and doesn't return until a licensed health care provider clears them. When in doubt, sit them out.",
+     "body": "Signs include headache, dizziness, confusion, nausea, blurred vision, or not remembering the play. Every US state has a youth sports concussion law, and most say a player suspected of one comes out and stays out until a health care provider clears them. Rules vary, so learn your state's and your league's. When in doubt, sit them out.",
      "concept": "concussion"},
     {"type": "multiple_choice", "id": "a2-protect-09",
      "prompt": "A youth player takes a hit, then seems confused about the play call. What should the coach do?",
@@ -142,7 +142,7 @@ CONCUSSION = {
     "id": "concussion",
     "term": "Concussion",
     "kid": "A hurt brain from a hit to the head or body. If your head hurts or you feel dizzy after a hit, stop and tell a grown-up.",
-    "full": "A brain injury caused by a blow to the head or body. A player with a suspected concussion comes out and stays out until a licensed health care provider clears them; every US state has a youth sports law requiring this.",
+    "full": "A brain injury caused by a blow to the head or body. A player with a suspected concussion should come out and stay out until a health care provider clears them; every US state has a youth sports concussion law, and most require this.",
     "level": 2,
     "side": "rules",
     "requires": [],
