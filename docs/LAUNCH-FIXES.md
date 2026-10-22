@@ -90,10 +90,16 @@ their sign-off and are queued for re-review.
       the main thread with an 8 MB limit (15).
 - [x] Grown-up gate: two-digit times one-digit in words, a one-minute lock after three
       misses, the zone closes when the app leaves the screen (not for the backup picker) (16).
-- [ ] Question quality: true/false balance, plausible distractors, choice lengths (17).
-- [ ] Pronouns ("they"), flag-football scoping (18).
-- [ ] UX: sheet off the diagram, larger tap targets, saved screen state, map back and
-      zoom buttons, status bar on the dark skin (19); plurals and term consistency (20).
+- [x] Question quality (17): 24 true/false items rewritten as false (69:18 became 45:42;
+      the validator now fails a lopsided level); 32 adult and shared questions get real
+      wrong answers instead of throwaways (answer clearly longest: 50 became 19 of 208).
+- [x] Pronouns (18): kid levels and kid glossary say "they". NFL levels keep "he".
+- [ ] Flag-football scoping (18): which rules differ in flag; needs the owner's call on
+      which flag rulebook (NFL FLAG, league rules) the kid course speaks for.
+- [x] Status bar on the dark skin (19), plurals (20). Status bar not yet seen on the phone.
+- [ ] UX (19): feedback sheet covering the diagram, larger tap targets on small dots,
+      screen state kept across process death, map back and zoom buttons; term consistency
+      (20).
 - [ ] Safety and concussion card; a kid bridge unit before Varsity-4 (10).
 
 ## Before sync (not this release)
