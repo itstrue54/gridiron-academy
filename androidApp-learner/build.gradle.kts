@@ -21,6 +21,20 @@ android {
         versionName = "0.1.0"
     }
 
+    // The app is English only; drop the 80-odd translations AndroidX and Compose bring.
+    androidResources {
+        localeFilters += "en"
+    }
+
+    packaging {
+        resources {
+            // Compose resources ship once, as assets; the Java-resource copy is unread.
+            excludes += "composeResources/**"
+            // Preview units are test fixtures (ContentTest, ScreenRenderTest), not course.
+            excludes += "content/preview/**"
+        }
+    }
+
     buildTypes {
         debug {
             // A development build installs beside the store one, not over it.
@@ -31,9 +45,11 @@ android {
             // SPEC 13.3: a release ships only coach-signed levels. On by default; an internal
             // test build that needs unreviewed content passes -Pgridiron.reviewedOnly=false.
             buildConfigField("boolean", "REVIEWED_ONLY", (findProperty("gridiron.reviewedOnly") ?: "true").toString())
-            optimization {
-                enable = false
-            }
+            // R8 shrinks code and resources (ADR-013). Library keep rules ship in their
+            // jars (kotlinx.serialization, Compose); app-specific ones go in keep-rules.pro.
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "keep-rules.pro")
         }
     }
     compileOptions {
