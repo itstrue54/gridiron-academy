@@ -14,6 +14,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.semantics.heading
@@ -39,6 +40,7 @@ import org.jetbrains.compose.resources.pluralStringResource
 import org.jetbrains.compose.resources.stringResource
 import io.github.itstrue54.gridironacademy.ui.resources.report_minutes
 import io.github.itstrue54.gridironacademy.ui.resources.gate_locked
+import io.github.itstrue54.gridironacademy.ui.resources.privacy_policy_link
 import io.github.itstrue54.gridironacademy.ui.resources.gate_question
 import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.LiveRegionMode
@@ -205,6 +207,11 @@ fun GrownUpZoneScreen(state: LearnerAppState, platform: LearnerPlatform) {
 
             Section(stringResource(Res.string.zone_privacy))
             Text(stringResource(Res.string.privacy_statement), style = Gridiron.type.body, color = c.ink)
+            val uris = LocalUriHandler.current
+            // Behind the grown-up gate, as Families policy wants for links out of the app.
+            SecondaryButton(stringResource(Res.string.privacy_policy_link), onClick = {
+                runCatching { uris.openUri(PRIVACY_POLICY_URL) }
+            })
 
             Section(stringResource(Res.string.zone_about))
             Text(stringResource(Res.string.about_line, platform.appVersion, state.content.curriculum.version),
@@ -254,6 +261,9 @@ fun GrownUpZoneScreen(state: LearnerAppState, platform: LearnerPlatform) {
         )
     }
 }
+
+/** The privacy policy, published from site/ by the Pages workflow. */
+private const val PRIVACY_POLICY_URL = "https://itstrue54.github.io/gridiron-academy/privacy.html"
 
 @Composable
 private fun Section(title: String) {
