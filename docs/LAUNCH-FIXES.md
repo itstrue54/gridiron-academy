@@ -42,13 +42,19 @@ all 167 on 2026-10-22, so every level ships again.
 
 ## Phase 2. A learner app that matches its privacy promise
 
-- [ ] **No network in the learner app (1).** Move Supabase/Ktor/coach UI out of what the
+- [x] **No network in the learner app (1).** Move Supabase/Ktor/coach UI out of what the
       learner app depends on; manifest guard for INTERNET; a CI check that the learner
       APK declares no INTERNET permission. ADR + SPEC.
-- [ ] **R8 on (13)** with keep rules, a smoke test of every step type, save and restore.
-- [ ] **Packaging (13):** fonts once, `localeFilters`, preview content to test resources.
-- [ ] **Review gate (14):** on by default for release, fingerprints checked, CI builds
+- [x] **R8 on (13)** with keep rules, a smoke test of every step type, save and restore.
+- [x] **Packaging (13):** fonts once, `localeFilters`, preview content to test resources.
+- [x] **Review gate (14):** on by default for release, fingerprints checked, CI builds
       `bundleRelease`.
+
+Phase 2 status (2026-10-23): done. The Supabase client lives in `:shared:data-supabase`,
+used by the coach app only (ADR-012); the learner build fails if its merged manifest declares
+INTERNET. R8 and the packaging cuts took the APK from 9.2 MB to 2.1 MB (ADR-013), smoke-tested
+on the phone. Release builds ship only signed levels unless `-Pgridiron.reviewedOnly=false`;
+CI builds the release APK and the Play bundle.
 
 ## Phase 3. Kids can finish a level
 
