@@ -172,7 +172,7 @@ fun GrownUpZoneScreen(state: LearnerAppState, platform: LearnerPlatform) {
             }
             Text(stringResource(Res.string.zone_age), style = Gridiron.type.label, color = c.inkDim)
             FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                AgeBand.entries.forEach { band ->
+                (AgeBand.offered + profile.ageBand).distinct().sorted().forEach { band ->
                     FilterChip(
                         selected = profile.ageBand == band,
                         onClick = { if (state.trackChangeFor(band) == null) state.changeAgeBand(band) else pendingBand = band },

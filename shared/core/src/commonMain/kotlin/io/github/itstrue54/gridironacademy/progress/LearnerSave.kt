@@ -30,6 +30,14 @@ enum class AgeBand(val label: String) {
 
     /** Under 13: COPPA rules apply to anything that would leave the device (SPEC 5.4). */
     val child: Boolean get() = this <= AGE_10_12
+
+    companion object {
+        /**
+         * The bands a new profile can pick. The app claims ages 6+ until the kid skin reads
+         * aloud (ADR-015), so 4-5 is held back; a save that already has it still loads.
+         */
+        val offered: List<AgeBand> = entries.filter { it >= AGE_6_7 }
+    }
 }
 
 /** One local profile (SPEC 5.1): a nickname and an age band. Never a real name. */
