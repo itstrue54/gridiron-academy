@@ -187,6 +187,27 @@
           "answer": 0,
           "explanation": "Late or extra hits are unnecessary roughness: 15 yards.",
           "concept": "unnecessary-roughness"
+        },
+        {
+          "type": "learn",
+          "id": "a2-protect-08",
+          "title": "Concussions: sit out, then get cleared",
+          "body": "Signs include headache, dizziness, confusion, nausea, blurred vision, or not remembering the play. Every US state has a youth sports concussion law, and most say a player suspected of one comes out and stays out until a health care provider clears them. Rules vary, so learn your state's and your league's. When in doubt, sit them out.",
+          "concept": "concussion"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a2-protect-09",
+          "prompt": "A youth player takes a hit, then seems confused about the play call. What should the coach do?",
+          "choices": [
+            "Take them out until a health care provider clears them",
+            "Let them sit one series, then put them back in",
+            "Ask if they feel OK and keep them in if they say yes",
+            "Have them drink some water and keep playing"
+          ],
+          "answer": 0,
+          "explanation": "Confusion after a hit is a concussion sign. They come out and stay out until a licensed provider clears them; a short rest or a player's \"I'm fine\" isn't enough.",
+          "concept": "concussion"
         }
       ]
     },

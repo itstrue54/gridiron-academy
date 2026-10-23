@@ -320,6 +320,35 @@
           "answer": 0,
           "explanation": "Keep your head up and see what you hit. In high school and college football it's called targeting.",
           "concept": "targeting"
+        },
+        {
+          "type": "learn",
+          "id": "k2-safety-09",
+          "title": "If your head hurts",
+          "body": "After a bump or a hit, a headache, feeling dizzy, sick or sleepy, or seeing blurry can mean a concussion. Stop playing and tell your coach or a grown-up right away. A doctor decides when you can play again.",
+          "concept": "concussion"
+        },
+        {
+          "type": "true_false",
+          "id": "k2-safety-10",
+          "statement": "If you feel dizzy after a hit, you should keep playing so your team isn't short a player.",
+          "answer": false,
+          "explanation": "Stop and tell a grown-up. Playing on with a hurt head can make it much worse.",
+          "concept": "concussion"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k2-safety-11",
+          "prompt": "You bump heads in practice and now your head hurts. What should you do?",
+          "choices": [
+            "Stop and tell your coach or a grown-up",
+            "Keep playing and tell nobody",
+            "Shake it off and run harder",
+            "Wait until the game ends to say anything"
+          ],
+          "answer": 0,
+          "explanation": "Telling a grown-up right away is the brave and smart call. Your brain comes first.",
+          "concept": "concussion"
         }
       ]
     }
