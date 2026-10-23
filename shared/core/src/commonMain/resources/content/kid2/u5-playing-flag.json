@@ -89,14 +89,14 @@
           "type": "learn",
           "id": "k2-flag-08",
           "title": "Rushing the passer",
-          "body": "Defenders who rush the quarterback start 7 yards back from the line, and a referee marks the spot. Nobody may touch the quarterback. The quarterback can't run past the line, but can hand the ball off behind it.",
+          "body": "Defenders who rush the quarterback start 7 yards back from the line, and nobody may touch the quarterback. The quarterback can't run past the line but can hand off behind it. Every player on offense can catch a pass, even the center.",
           "concept": "flag-football"
         },
         {
           "type": "learn",
           "id": "k2-flag-09",
           "title": "Points after a touchdown",
-          "body": "A touchdown is 6 points. Then there's no kick: run one play from the 5-yard line for 1 point, or from the 10-yard line for 2. The longer try is worth more. Every player on offense can catch a pass.",
+          "body": "A touchdown is 6 points, and there's no kick after it. The offense gets one play from the 5-yard line for 1 point, or from the 10 for 2. The 5 is in the no-run zone, so the 1-point try has to be a pass.",
           "concept": "flag-football"
         },
         {
@@ -132,7 +132,7 @@
             "Everyone except the center"
           ],
           "answer": 0,
-          "explanation": "Every offensive player can catch a pass in NFL FLAG, even the center.",
+          "explanation": "Every offensive player can catch a pass in NFL FLAG, even the center. The quarterback can too, after handing the ball off.",
           "concept": "flag-football"
         },
         {
