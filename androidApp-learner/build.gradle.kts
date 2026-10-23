@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
@@ -35,6 +37,20 @@ android {
         }
     }
 
+    // Play upload key (ADR-014). The key and its passwords stay outside the repo, in
+    // ~/.gradle/gridiron-signing.properties (storeFile, storePassword, keyAlias, keyPassword).
+    // Without that file the release builds unsigned, as in CI.
+    val signingFile = File(System.getProperty("user.home"), ".gradle/gridiron-signing.properties")
+    val upload = signingFile.takeIf { it.isFile }?.let { file ->
+        val props = Properties().apply { file.inputStream().use { load(it) } }
+        signingConfigs.create("upload") {
+            storeFile = File(props.getProperty("storeFile"))
+            storePassword = props.getProperty("storePassword")
+            keyAlias = props.getProperty("keyAlias")
+            keyPassword = props.getProperty("keyPassword")
+        }
+    }
+
     buildTypes {
         debug {
             // A development build installs beside the store one, not over it.
@@ -47,6 +63,7 @@ android {
             buildConfigField("boolean", "REVIEWED_ONLY", (findProperty("gridiron.reviewedOnly") ?: "true").toString())
             // R8 shrinks code and resources (ADR-013). Library keep rules ship in their
             // jars (kotlinx.serialization, Compose); app-specific ones go in keep-rules.pro.
+            signingConfig = upload
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "keep-rules.pro")
