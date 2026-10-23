@@ -973,8 +973,8 @@ in < 500 ms on device.
    or fully free / one-time purchase?
 3. **Backend:** Supabase (recommended) or Firebase (§8.2)?
 4. **VPC method and vendor** for under-13 linking; legal counsel needed (§5.4).
-5. **Default variant for kid content:** flag (5v5) or youth tackle? Current plan:
-   flag first, tackle-specific steps tagged `youth`.
+5. ~~**Default variant for kid content.**~~ Decided 2026-10-23 (ADR-015): where flag
+   rules differ, the kid course follows NFL FLAG and says "your league may differ".
 6. **Video:** should coaches eventually upload their own game film clips? (Large
    privacy and moderation cost; out of v1.)
 7. **Voice talent** for Level 0 recordings and the first second locale.

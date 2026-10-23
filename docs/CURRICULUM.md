@@ -43,7 +43,9 @@ in 3 units (Formations and Personnel: backfield sets, eligibility, motion and sh
 Rules That Decide Games: pass interference, protecting players, replay, challenges and
 overtime; Special Teams and Calls: tries and kicks, reading a play call, and 11 Game Day
 situations for the level game), 65 steps. Kids' scoreboard and timeout rules say "in the
-NFL" and point to their own league for youth and flag rules.
+NFL" and point to their own league for youth and flag rules. Later added: Lining Up, and
+Playing Flag (NFL FLAG rules where flag differs from tackle: flag guarding, no fumbles,
+three plays to midfield, no-run zones, the 7-yard rush, 1- and 2-point tries; ADR-015).
 
 Added 2026-10-20 so kids reach Level 4 knowing what it builds on (formation is a
 prerequisite of personnel): Kid unit 4, Lining Up (the line of scrimmage, formations,

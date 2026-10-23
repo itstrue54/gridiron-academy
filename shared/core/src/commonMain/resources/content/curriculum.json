@@ -52,7 +52,8 @@
         "kid2/u1-kicking-plays.json",
         "kid2/u2-referees-and-rules.json",
         "kid2/u3-how-plays-work.json",
-        "kid2/u4-lining-up.json"
+        "kid2/u4-lining-up.json",
+        "kid2/u5-playing-flag.json"
       ],
       "gate": {
         "testPassPct": 80,
