@@ -168,3 +168,18 @@ to read the save back, the glossary and map, and the grown-up zone.
 **Consequences.** 9.2 MB to 2.1 MB. Smoke-tested on a Galaxy phone on 2026-10-21; cold start
 about 170 ms. The Coach app keeps R8 off until its Supabase path can be smoke-tested against a
 real project, since Ktor and supabase-kt lean on reflection-adjacent serialization.
+
+
+## ADR-014: The upload key lives outside the repo; Google holds the app signing key (2026-10-23)
+
+**Context.** The learner app needs a release key before it can go to Play. The repo is
+public, and CI builds release unsigned.
+
+**Decision.** Play App Signing: Google holds the key that signs what users install, and the
+owner holds only an upload key. The build reads the upload key's path and passwords from
+`~/.gradle/gridiron-signing.properties` on the owner's machine; without that file the release
+builds unsigned, so CI and other machines are unaffected. The keystore and that file are never
+committed. The owner made the key with `keytool` and typed the passwords themselves.
+
+**Consequences.** A lost upload key can be reset through Play support, since Google keeps the
+app signing key. Back up the keystore and its passwords somewhere other than this laptop.
