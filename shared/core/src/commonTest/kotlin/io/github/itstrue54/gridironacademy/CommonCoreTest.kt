@@ -60,6 +60,12 @@ class CommonCoreTest {
     }
 
     @Test
+    fun newProfilesStartAtSixUntilReadAloudShips() {
+        assertEquals(AgeBand.AGE_6_7, AgeBand.offered.first())
+        assertEquals(AgeBand.entries.size - 1, AgeBand.offered.size)
+    }
+
+    @Test
     fun saveRoundTripsThroughJson() {
         val save = LearnerSave(profile = Profile("Leo", AgeBand.AGE_8_9), progress = Progress(xp = 40, streakDays = 3))
         val text = ContentLoader.json.encodeToString(LearnerSave.serializer(), save)

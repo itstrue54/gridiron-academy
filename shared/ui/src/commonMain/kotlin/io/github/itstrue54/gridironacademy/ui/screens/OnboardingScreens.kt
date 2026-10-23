@@ -114,7 +114,7 @@ fun OnboardingScreen(onDone: (nickname: String, band: AgeBand) -> Unit) {
             )
             Spacer(Modifier.height(4.dp))
             Text(stringResource(Res.string.age_title), style = Gridiron.type.title, color = c.ink, modifier = Modifier.semantics { heading() })
-            AgeBand.entries.chunked(2).forEach { row ->
+            AgeBand.offered.chunked(2).forEach { row ->
                 Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                     row.forEach { b ->
                         val label = if (b == AgeBand.AGE_18_PLUS) stringResource(Res.string.age_band_adult) else stringResource(Res.string.age_band, b.label)

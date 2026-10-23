@@ -1,7 +1,7 @@
 # Gridiron Academy
 
 Learn American football the way Duolingo teaches a language: short lessons, games and
-tests on an animated field, from "what is a touchdown?" at age 4 to reading an NFL
+tests on an animated field, from "what is a touchdown?" at age 6 to reading an NFL
 coverage disguise before the snap. A separate **Coach & Parent** app lets the adults in a
 learner's life see progress and assign the exact offense and defense their team runs.
 

@@ -183,3 +183,20 @@ committed. The owner made the key with `keytool` and typed the passwords themsel
 
 **Consequences.** A lost upload key can be reset through Play support, since Google keeps the
 app signing key. Back up the keystore and its passwords somewhere other than this laptop.
+
+
+## ADR-015: Launch the learner app alone, for ages 6 and up (2026-10-23)
+
+**Context.** The pre-launch review found that the store's "4+" claim outruns the app: every
+card is text, and a 4-5 year old can't read it yet. The Coach & Parent app still needs a
+Supabase project, a parental-consent vendor and pricing.
+
+**Decision.** The owner's calls: the learner app launches first, on its own, claiming ages 6
+and up. New profiles pick from 6-7 upward (`AgeBand.offered`); a save that already has 4-5
+still loads and keeps it. Read-aloud with the phone's own speech engine (no network) comes
+next, and with it 4-5 and the 4+ claim. The Checkpoint pass mark stays 80% on every track,
+kids included. Where flag football differs from tackle, the kid course follows NFL FLAG rules
+and says "your league may differ".
+
+**Consequences.** The Families target age groups on Play are 6-8 and up. The coach app, sync
+and the INTERNET permission stay out of the learner app until the coach app launches.
