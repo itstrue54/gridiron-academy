@@ -317,13 +317,6 @@
       "hash": "5f2543ac632fbc31"
     },
     {
-      "step": "a1-scoring-02",
-      "reviewer": "itstrue54",
-      "date": "2026-10-21",
-      "ruleSeason": 2026,
-      "hash": "9b0cfcd1f5378fb5"
-    },
-    {
       "step": "a1-scoring-03",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
@@ -2844,13 +2837,6 @@
       "hash": "d21de5460bfb293d"
     },
     {
-      "step": "k1-scoring-04",
-      "reviewer": "itstrue54",
-      "date": "2026-10-22",
-      "ruleSeason": 2026,
-      "hash": "69c348726dff1b69"
-    },
-    {
       "step": "k1-scoring-05",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
@@ -2898,13 +2884,6 @@
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "5366c81543d457a8"
-    },
-    {
-      "step": "k1-turnovers-03",
-      "reviewer": "itstrue54",
-      "date": "2026-10-21",
-      "ruleSeason": 2026,
-      "hash": "7b530674a806e784"
     },
     {
       "step": "k1-turnovers-04",
@@ -3075,13 +3054,6 @@
       "hash": "b37b5d250132a6cf"
     },
     {
-      "step": "k2-kickoff-03",
-      "reviewer": "itstrue54",
-      "date": "2026-10-21",
-      "ruleSeason": 2026,
-      "hash": "dbd87971e4c0228d"
-    },
-    {
       "step": "k2-kickoff-04",
       "reviewer": "itstrue54",
       "date": "2026-10-21",
@@ -3208,13 +3180,6 @@
       "hash": "8bb0ad83b2190f5b"
     },
     {
-      "step": "k2-onside-01",
-      "reviewer": "itstrue54",
-      "date": "2026-10-21",
-      "ruleSeason": 2026,
-      "hash": "5ee46cb4d121af42"
-    },
-    {
       "step": "k2-onside-02",
       "reviewer": "itstrue54",
       "date": "2026-10-22",
@@ -3304,20 +3269,6 @@
       "date": "2026-10-21",
       "ruleSeason": 2026,
       "hash": "1bcc2b42b655106a"
-    },
-    {
-      "step": "k2-punts-01",
-      "reviewer": "itstrue54",
-      "date": "2026-10-21",
-      "ruleSeason": 2026,
-      "hash": "3a8bd55f41936da9"
-    },
-    {
-      "step": "k2-punts-02",
-      "reviewer": "itstrue54",
-      "date": "2026-10-21",
-      "ruleSeason": 2026,
-      "hash": "4d9f3218f1ecabdb"
     },
     {
       "step": "k2-punts-03",

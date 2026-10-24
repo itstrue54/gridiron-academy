@@ -25,6 +25,12 @@ class BallFlightTest {
         assertEquals(Pt(10f, 18f), FieldGeometry.ballAt(pass, 0.9f, spot))
     }
 
+    @Test fun `a fumble lies on the ground until someone picks it up`() {
+        val fumble = listOf(BallSpot("x"), BallSpot(null, 0.5f, 3f, 12f), BallSpot("qb", 0.9f))
+        assertEquals(Pt(3f, 12f), FieldGeometry.ballAt(fumble, 0.6f, spot))
+        assertEquals(Pt(0f, -5f), FieldGeometry.ballAt(fumble, 1f, spot))
+    }
+
     @Test fun `in the air it is between the two`() {
         val mid = assertNotNull(FieldGeometry.ballAt(pass, 0.7f, spot))
         assertTrue(mid.x in 0f..10f && mid.y in -5f..16f, "$mid")

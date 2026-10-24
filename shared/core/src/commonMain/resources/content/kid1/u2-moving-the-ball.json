@@ -89,6 +89,17 @@
                 "kind": "block"
               },
               {
+                "playerId": "dl1",
+                "points": [
+                  {
+                    "x": -0.4,
+                    "y": 1.8
+                  }
+                ],
+                "kind": "block",
+                "drawn": false
+              },
+              {
                 "playerId": "rb",
                 "points": [
                   {
@@ -842,6 +853,114 @@
           "id": "k1-turnovers-03",
           "title": "Fumble",
           "body": "A fumble is when the runner drops the ball. Anyone can pounce on it. Whoever recovers it gets the ball.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -4
+              },
+              {
+                "id": "lb",
+                "label": "LB",
+                "side": "DEFENSE",
+                "x": 4,
+                "y": 6
+              },
+              {
+                "id": "s",
+                "label": "S",
+                "side": "DEFENSE",
+                "x": -4,
+                "y": 9
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "rb",
+                "points": [
+                  {
+                    "x": 0.8,
+                    "y": -0.6
+                  },
+                  {
+                    "x": 1.6,
+                    "y": 4.5
+                  }
+                ],
+                "kind": "run"
+              },
+              {
+                "playerId": "lb",
+                "points": [
+                  {
+                    "x": 2.2,
+                    "y": 5
+                  }
+                ],
+                "kind": "blitz"
+              },
+              {
+                "playerId": "s",
+                "points": [
+                  {
+                    "x": -1,
+                    "y": 7
+                  },
+                  {
+                    "x": 2.6,
+                    "y": 6.2
+                  }
+                ],
+                "kind": "blitz"
+              }
+            ],
+            "ball": [
+              {
+                "playerId": "rb",
+                "at": 0
+              },
+              {
+                "playerId": "rb",
+                "at": 0.55
+              },
+              {
+                "x": 2.6,
+                "y": 6.2,
+                "at": 0.62
+              },
+              {
+                "playerId": "s",
+                "at": 1.0
+              }
+            ],
+            "depth": 11,
+            "behind": 6,
+            "caption": "The ball comes loose, and the safety pounces on it"
+          },
           "concept": "fumble"
         },
         {

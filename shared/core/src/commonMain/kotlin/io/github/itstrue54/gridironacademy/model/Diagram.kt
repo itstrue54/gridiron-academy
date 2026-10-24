@@ -31,10 +31,12 @@ data class Diagram(
 /**
  * The ball reaches [playerId] at [at], a fraction 0..1 of the play. Between two spots it
  * is in the air (a pass, a pitch) or changing hands (a snap, a handoff); a longer trip
- * leaves the hand earlier. Afterwards it moves with that player.
+ * leaves the hand earlier. Afterwards it moves with that player. With no [playerId], the
+ * spot is on the ground at [x], [y]: a fumble, a bouncing onside kick, a kick still in
+ * the air above the field.
  */
 @Serializable
-data class BallSpot(val playerId: String, val at: Float = 0f)
+data class BallSpot(val playerId: String? = null, val at: Float = 0f, val x: Float? = null, val y: Float? = null)
 
 @Serializable
 enum class Side { OFFENSE, DEFENSE }
@@ -71,6 +73,11 @@ data class DiagramRoute(
     val kind: PathKind = PathKind.PASS,
     /** Optional name drawn near the end of the path, e.g. "Curl". */
     val label: String = "",
+    /**
+     * False: the player moves along it in film mode but no line is drawn and the screen
+     * reader skips it. For reactions, like a defender driven back by a block.
+     */
+    val drawn: Boolean = true,
 )
 
 /**

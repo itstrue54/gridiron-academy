@@ -362,7 +362,10 @@ play once, half a second after it appears, and again on **Replay**. Everyone mov
 snap along their paths (no stagger); a faint ghost marks where each player started. A
 diagram's optional `ball` list (`BallSpot`: a player and the moment the ball reaches them)
 puts the football on the field: it rides beside its holder and flies between holders,
-leaving the hand earlier on a longer throw. Reduced motion shows the still picture. The
+leaving the hand earlier on a longer throw. A spot with no player and an x, y is the ball on
+the ground or in the air above the field: a fumble, a bouncing onside kick, a punt coming
+down. A path with `drawn: false` moves its player without a line, for reactions such as a
+defender driven back by a block or a quarterback's drop. Reduced motion shows the still picture. The
 screen reader hears where the ball goes ("The ball goes from QB to RB."). Not built yet:
 play/pause, the speed chip and the scrubber.
 

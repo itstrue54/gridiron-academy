@@ -82,6 +82,17 @@
                 "kind": "block"
               },
               {
+                "playerId": "dl1",
+                "points": [
+                  {
+                    "x": -0.4,
+                    "y": 1.8
+                  }
+                ],
+                "kind": "block",
+                "drawn": false
+              },
+              {
                 "playerId": "rb",
                 "points": [
                   {

@@ -35,10 +35,12 @@ class ContentTest {
         val unit = CourseUnit("u", "u", listOf(Lesson("l", "l", steps = listOf(
             Learn("a", "t", "b", Diagram(players = players, ball = listOf(BallSpot("qb"), BallSpot("zz", 0.5f)))),
             Learn("b", "t", "b", Diagram(players = players, ball = listOf(BallSpot("qb", 0.5f), BallSpot("x", 0.3f)))),
+            Learn("c", "t", "b", Diagram(players = players, ball = listOf(BallSpot("qb"), BallSpot(null, 0.5f, x = 2f)))),
         ))))
         val errs = ContentValidator.validateUnit(unit, kid = false, glossaryIds = emptySet())
         assertTrue(errs.any { "unknown player 'zz'" in it }, errs.joinToString("\n"))
         assertTrue(errs.any { "out of time order" in it }, errs.joinToString("\n"))
+        assertTrue(errs.any { "needs a player or x and y" in it }, errs.joinToString("\n"))
     }
 
     @Test fun `validator catches a bad answer key and a bad target`() {

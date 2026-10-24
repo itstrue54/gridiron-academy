@@ -205,7 +205,7 @@ fun FieldDiagram(
                 // ever hides a player (DESIGN 7.2-7.5).
                 drawTurf(t)
                 drawZones(diagram, t, highlightZone, marks)
-                diagram.routes.forEach { route ->
+                diagram.routes.filter { it.drawn }.forEach { route ->
                     diagram.players.firstOrNull { it.id == route.playerId }?.let { drawRoute(route, it, t) }
                 }
                 diagram.zones.forEach { z ->
@@ -234,9 +234,8 @@ fun FieldDiagram(
                 }
                 if (motion == null) {
                     diagram.players.forEach { drawPlayer(it, t, markPx / 2, skin.helmets, marks[it.id], reducedMotion, measurer, markLabel) }
-                    diagram.ball.firstOrNull()?.let { b ->
-                        diagram.players.firstOrNull { it.id == b.playerId }?.let { drawFootball(Offset(t.x(it.x), t.y(it.y)), markPx) }
-                    }
+                    FieldGeometry.ballAt(diagram.ball, 0f) { id, _ -> diagram.players.firstOrNull { it.id == id }?.let { Pt(it.x, it.y) } }
+                        ?.let { drawFootball(Offset(t.x(it.x), t.y(it.y)), markPx) }
                 } else {
                     // Each mover's reveal paths, chained in order (a show-blitz then a drop
                     // is one trip), in the order the movers first appear in `routes`.

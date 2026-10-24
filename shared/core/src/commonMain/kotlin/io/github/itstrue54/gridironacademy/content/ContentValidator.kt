@@ -198,7 +198,8 @@ object ContentValidator {
             if (r.points.isEmpty()) err(w, "empty route for '${r.playerId}'")
         }
         d.ball.forEach { b ->
-            if (b.playerId !in ids) err(w, "ball with unknown player '${b.playerId}'")
+            if (b.playerId == null && (b.x == null || b.y == null)) err(w, "ball spot needs a player or x and y")
+            if (b.playerId != null && b.playerId !in ids) err(w, "ball with unknown player '${b.playerId}'")
             if (b.at !in 0f..1f) err(w, "ball reaches '${b.playerId}' at ${b.at}, outside 0..1")
         }
         if (d.ball.zipWithNext().any { (a, b) -> b.at <= a.at }) err(w, "ball spots out of time order")

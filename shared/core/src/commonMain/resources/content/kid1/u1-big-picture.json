@@ -299,6 +299,17 @@
                 "kind": "block"
               },
               {
+                "playerId": "dl2",
+                "points": [
+                  {
+                    "x": 0.4,
+                    "y": 1.8
+                  }
+                ],
+                "kind": "block",
+                "drawn": false
+              },
+              {
                 "playerId": "rb",
                 "points": [
                   {
@@ -394,6 +405,112 @@
           "id": "k1-scoring-04",
           "title": "Safety",
           "body": "A safety is worth 2 points. The defense gets it by tackling the ball carrier in their own end zone.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -1
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "de",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": -4,
+                "y": 1
+              },
+              {
+                "id": "dt",
+                "label": "DT",
+                "side": "DEFENSE",
+                "x": 1,
+                "y": 1
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "rb",
+                "points": [
+                  {
+                    "x": -1,
+                    "y": -4
+                  },
+                  {
+                    "x": -2.6,
+                    "y": -5
+                  }
+                ],
+                "kind": "run"
+              },
+              {
+                "playerId": "de",
+                "points": [
+                  {
+                    "x": -3.6,
+                    "y": -2
+                  },
+                  {
+                    "x": -2.9,
+                    "y": -4.6
+                  }
+                ],
+                "kind": "blitz"
+              }
+            ],
+            "zones": [
+              {
+                "id": "ez",
+                "label": "End zone",
+                "x": -9,
+                "y": -12,
+                "w": 18,
+                "h": 10
+              }
+            ],
+            "ball": [
+              {
+                "playerId": "qb",
+                "at": 0
+              },
+              {
+                "playerId": "rb",
+                "at": 0.3
+              }
+            ],
+            "depth": 4,
+            "behind": 12,
+            "caption": "Tackled in their own end zone: a safety, 2 points"
+          },
           "concept": "safety-score"
         },
         {

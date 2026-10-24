@@ -234,15 +234,17 @@ object FieldGeometry {
      */
     fun ballAt(ball: List<BallSpot>, p: Float, spot: (playerId: String, time: Float) -> Pt?): Pt? {
         if (ball.isEmpty()) return null
+        // A spot with no player is on the ground, and stays put.
+        fun where(b: BallSpot, time: Float): Pt? = b.playerId?.let { spot(it, time) } ?: Pt(b.x ?: 0f, b.y ?: 0f)
         val i = ball.indexOfLast { it.at <= p }.coerceAtLeast(0)
         val held = ball[i]
-        val next = ball.getOrNull(i + 1) ?: return spot(held.playerId, p)
-        val to = spot(next.playerId, next.at) ?: return spot(held.playerId, p)
-        val near = spot(held.playerId, next.at) ?: return null
+        val next = ball.getOrNull(i + 1) ?: return where(held, p)
+        val to = where(next, next.at) ?: return where(held, p)
+        val near = where(held, next.at) ?: return null
         val flight = (hypot(to.x - near.x, to.y - near.y) * FLIGHT_PER_YARD).coerceIn(MIN_FLIGHT, MAX_FLIGHT)
         val leave = maxOf(held.at, next.at - flight)
-        if (p <= leave) return spot(held.playerId, p)
-        val from = spot(held.playerId, leave) ?: return null
+        if (p <= leave) return where(held, p)
+        val from = where(held, leave) ?: return null
         val k = (p - leave) / (next.at - leave)
         return Pt(from.x + (to.x - from.x) * k, from.y + (to.y - from.y) * k)
     }

@@ -158,7 +158,7 @@ textarea { width: 100%; min-height: 4.5rem; font: inherit; padding: 8px 10px; bo
     }
     const pos = Object.fromEntries((d.players || []).map(p => [p.id, p]));
     const KIND = { pass: ["#F3F0E7", 2.5, ""], run: ["#F3F0E7", 4, ""], motion: ["#F3F0E7", 2, "6 5"], block: ["#F3F0E7", 3, ""], blitz: ["#FF6B6B", 3, ""], rotate: ["#FFC857", 2.5, "8 5"], drop: ["#9AD0FF", 2.5, "3 4"] };
-    for (const r of d.routes || []) {
+    for (const r of (d.routes || []).filter(r => r.drawn !== false)) {
       const p = pos[r.playerId]; if (!p) continue;
       const pts = [[p.x, p.y], ...r.points.map(t => [t.x, t.y])].map(([x, y]) => `${X(x)},${Y(y)}`).join(" ");
       const [c, w, dash] = KIND[r.kind || "pass"] || KIND.pass;
@@ -172,7 +172,10 @@ textarea { width: 100%; min-height: 4.5rem; font: inherit; padding: 8px 10px; bo
       s += `<text x="${X(p.x)}" y="${Y(p.y)}" fill="#FFFFFF" font-size="${p.label.length > 2 ? 9 : 11}" font-weight="700" text-anchor="middle" dominant-baseline="central" font-family="sans-serif">${esc(p.label)}</text>`;
     }
     s += `</svg>`;
-    return `${title ? `<div class="cap"><strong>${esc(title)}</strong></div>` : ""}<div class="field">${s}</div>${d.caption ? `<div class="cap">Caption shown: ${esc(d.caption)}</div>` : ""}${targets.size ? `<div class="cap">Gold rings mark the correct taps.</div>` : ""}`;
+    // The ball's trip, in words: the page draws the starting picture, not the motion.
+    const labelOf = b => b.playerId ? (pos[b.playerId]?.label ?? b.playerId) : "the ground";
+    const ballLine = (d.ball || []).length > 1 ? `<div class="cap">Ball, as the play runs: ${(d.ball).map(labelOf).map(esc).join(" → ")}</div>` : "";
+    return `${title ? `<div class="cap"><strong>${esc(title)}</strong></div>` : ""}<div class="field">${s}</div>${d.caption ? `<div class="cap">Caption shown: ${esc(d.caption)}</div>` : ""}${ballLine}${targets.size ? `<div class="cap">Gold rings mark the correct taps.</div>` : ""}`;
   }
 
   function body(q) {

@@ -26,6 +26,136 @@
           "id": "k2-kickoff-03",
           "title": "The returner",
           "body": "The player who catches the kick is the kick returner. Their job is to run the ball back as far as they can.",
+          "diagram": {
+            "players": [
+              {
+                "id": "kr",
+                "label": "KR",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "b1",
+                "label": "B",
+                "side": "OFFENSE",
+                "x": -5,
+                "y": 8
+              },
+              {
+                "id": "b2",
+                "label": "B",
+                "side": "OFFENSE",
+                "x": 5,
+                "y": 8
+              },
+              {
+                "id": "k1",
+                "label": "G",
+                "side": "DEFENSE",
+                "x": -8,
+                "y": 24
+              },
+              {
+                "id": "k2",
+                "label": "G",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 26
+              },
+              {
+                "id": "k3",
+                "label": "G",
+                "side": "DEFENSE",
+                "x": 8,
+                "y": 24
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "kr",
+                "points": [
+                  {
+                    "x": 0,
+                    "y": 2
+                  },
+                  {
+                    "x": 3,
+                    "y": 10
+                  },
+                  {
+                    "x": 2,
+                    "y": 20
+                  }
+                ],
+                "kind": "run"
+              },
+              {
+                "playerId": "b1",
+                "points": [
+                  {
+                    "x": -4,
+                    "y": 13
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "b2",
+                "points": [
+                  {
+                    "x": 6,
+                    "y": 13
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "k1",
+                "points": [
+                  {
+                    "x": -4,
+                    "y": 14
+                  }
+                ],
+                "kind": "blitz"
+              },
+              {
+                "playerId": "k2",
+                "points": [
+                  {
+                    "x": -1,
+                    "y": 17
+                  }
+                ],
+                "kind": "blitz"
+              },
+              {
+                "playerId": "k3",
+                "points": [
+                  {
+                    "x": 6.5,
+                    "y": 14
+                  }
+                ],
+                "kind": "blitz"
+              }
+            ],
+            "ball": [
+              {
+                "x": 0,
+                "y": 28,
+                "at": 0
+              },
+              {
+                "playerId": "kr",
+                "at": 0.25
+              }
+            ],
+            "depth": 29,
+            "behind": 3,
+            "caption": "The returner catches the kick and runs it back behind blockers"
+          },
           "concept": "kick-returner"
         },
         {
@@ -91,6 +221,128 @@
           "id": "k2-onside-01",
           "title": "Onside kick",
           "body": "Sometimes the kicking team wants the ball back. They kick it short on purpose and try to grab it. That is an onside kick.",
+          "diagram": {
+            "players": [
+              {
+                "id": "k",
+                "label": "K",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -1
+              },
+              {
+                "id": "c1",
+                "label": "G",
+                "side": "OFFENSE",
+                "x": -4,
+                "y": 0
+              },
+              {
+                "id": "c2",
+                "label": "G",
+                "side": "OFFENSE",
+                "x": 4,
+                "y": 0
+              },
+              {
+                "id": "c3",
+                "label": "G",
+                "side": "OFFENSE",
+                "x": 8,
+                "y": 0
+              },
+              {
+                "id": "r1",
+                "label": "R",
+                "side": "DEFENSE",
+                "x": 2,
+                "y": 11
+              },
+              {
+                "id": "r2",
+                "label": "R",
+                "side": "DEFENSE",
+                "x": 9,
+                "y": 12
+              },
+              {
+                "id": "r3",
+                "label": "R",
+                "side": "DEFENSE",
+                "x": -5,
+                "y": 12
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "c2",
+                "points": [
+                  {
+                    "x": 4.5,
+                    "y": 6
+                  },
+                  {
+                    "x": 5.2,
+                    "y": 11.4
+                  }
+                ],
+                "kind": "run"
+              },
+              {
+                "playerId": "c3",
+                "points": [
+                  {
+                    "x": 8.6,
+                    "y": 11
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "r1",
+                "points": [
+                  {
+                    "x": 4.6,
+                    "y": 12.4
+                  }
+                ],
+                "kind": "blitz"
+              }
+            ],
+            "ball": [
+              {
+                "playerId": "k",
+                "at": 0
+              },
+              {
+                "x": 2.5,
+                "y": 5,
+                "at": 0.3
+              },
+              {
+                "x": 5,
+                "y": 11.2,
+                "at": 0.8
+              },
+              {
+                "playerId": "c2",
+                "at": 1.0
+              }
+            ],
+            "zones": [
+              {
+                "id": "ten",
+                "label": "10 yards",
+                "x": -9,
+                "y": 10,
+                "w": 18,
+                "h": 0.6
+              }
+            ],
+            "depth": 15,
+            "behind": 3,
+            "caption": "Onside kick: short and bouncing, and the kicking team grabs it past 10 yards"
+          },
           "concept": "onside-kick"
         },
         {
@@ -156,6 +408,106 @@
           "id": "k2-punts-01",
           "title": "Punt return",
           "body": "When a team punts, a player on the other team catches it and tries to run it back. That is a punt return.",
+          "diagram": {
+            "players": [
+              {
+                "id": "pr",
+                "label": "PR",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "b1",
+                "label": "B",
+                "side": "OFFENSE",
+                "x": -6,
+                "y": 6
+              },
+              {
+                "id": "g1",
+                "label": "G",
+                "side": "DEFENSE",
+                "x": -12,
+                "y": 22
+              },
+              {
+                "id": "g2",
+                "label": "G",
+                "side": "DEFENSE",
+                "x": 12,
+                "y": 22
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "pr",
+                "points": [
+                  {
+                    "x": 0,
+                    "y": 2
+                  },
+                  {
+                    "x": -4,
+                    "y": 8
+                  },
+                  {
+                    "x": -9,
+                    "y": 18
+                  }
+                ],
+                "kind": "run"
+              },
+              {
+                "playerId": "b1",
+                "points": [
+                  {
+                    "x": -7,
+                    "y": 11
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "g1",
+                "points": [
+                  {
+                    "x": -7,
+                    "y": 11
+                  }
+                ],
+                "kind": "blitz"
+              },
+              {
+                "playerId": "g2",
+                "points": [
+                  {
+                    "x": 3,
+                    "y": 8
+                  },
+                  {
+                    "x": -3,
+                    "y": 12
+                  }
+                ],
+                "kind": "blitz"
+              }
+            ],
+            "ball": [
+              {
+                "x": 0,
+                "y": 26,
+                "at": 0
+              },
+              {
+                "playerId": "pr",
+                "at": 0.22
+              }
+            ],
+            "depth": 27,
+            "behind": 3,
+            "caption": "The punt returner catches it and runs it back"
+          },
           "concept": "punt"
         },
         {
@@ -163,6 +515,67 @@
           "id": "k2-punts-02",
           "title": "Fair catch",
           "body": "The returner can wave one arm over their head before catching. That is a fair catch: nobody may tackle them, but they can't run after catching.",
+          "diagram": {
+            "players": [
+              {
+                "id": "pr",
+                "label": "PR",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "g1",
+                "label": "G",
+                "side": "DEFENSE",
+                "x": -12,
+                "y": 22
+              },
+              {
+                "id": "g2",
+                "label": "G",
+                "side": "DEFENSE",
+                "x": 12,
+                "y": 22
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "g1",
+                "points": [
+                  {
+                    "x": -2.5,
+                    "y": 3.5
+                  }
+                ],
+                "kind": "blitz"
+              },
+              {
+                "playerId": "g2",
+                "points": [
+                  {
+                    "x": 2.5,
+                    "y": 3.5
+                  }
+                ],
+                "kind": "blitz"
+              }
+            ],
+            "ball": [
+              {
+                "x": 0,
+                "y": 26,
+                "at": 0
+              },
+              {
+                "playerId": "pr",
+                "at": 0.7
+              }
+            ],
+            "depth": 27,
+            "behind": 3,
+            "caption": "Fair catch: the returner waves, catches, and nobody may hit them"
+          },
           "concept": "fair-catch"
         },
         {
