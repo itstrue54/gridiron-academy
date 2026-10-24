@@ -156,7 +156,9 @@ def page(a):
     """Fill tools/review-page.html with a queue (export's output) for publishing."""
     queue = json.loads(Path(a.queue).read_text())
     for q in queue:
-        q["note"] = q.get("note") or []
+        # The page reads a list of {kind, text}; a bare string would blank the whole page.
+        note = q.get("note") or []
+        q["note"] = [{"kind": "rule", "text": note}] if isinstance(note, str) else note
     old = set(json.loads(Path(a.old_ids).read_text())) if a.old_ids else None
     for q in queue:
         q["new"] = old is not None and q["step"] not in old
