@@ -15,6 +15,8 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.animation.core.Animatable
+import io.github.itstrue54.gridironacademy.ui.resources.watch_again
+import org.jetbrains.compose.resources.StringResource
 import kotlinx.coroutines.delay
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.FastOutSlowInEasing
@@ -143,7 +145,7 @@ fun LearnView(step: Learn) {
 
 /**
  * Film mode on a teaching card (DESIGN 7.8): the play runs once, a beat after the card
- * appears, and Replay runs it again. The drawn paths stay as the guide; a faint ghost marks
+ * appears, and Watch again runs it again. The drawn paths stay as the guide; a faint ghost marks
  * where each player started. Reduced motion keeps the still picture, paths and all.
  */
 @Composable
@@ -158,13 +160,14 @@ private fun FilmDiagram(stepId: String, diagram: Diagram) {
         progress.snapTo(0f)
         progress.animateTo(1f, tween(millis, easing = LinearOutSlowInEasing))
     }
-    Box {
+    // Under the field, not on it: any corner of the field can be where the play ends.
+    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         FieldDiagram(
             diagram, description = diagram.spoken(), modifier = Modifier.fillMaxWidth(),
             motion = if (reduced) null else progress.value,
             motionKinds = FieldGeometry.FILM_KINDS, motionStaggerMs = 0,
         )
-        if (!reduced) ReplayChip(onClick = { plays++ }, modifier = Modifier.align(Alignment.TopStart).padding(6.dp))
+        if (!reduced) ReplayChip(onClick = { plays++ }, modifier = Modifier, label = Res.string.watch_again)
     }
 }
 
@@ -498,7 +501,7 @@ fun ReadDefenseView(step: ReadDefense, selected: Int?, graded: Boolean, onSelect
 }
 
 @Composable
-private fun ReplayChip(onClick: () -> Unit, modifier: Modifier) {
+private fun ReplayChip(onClick: () -> Unit, modifier: Modifier, label: StringResource = Res.string.replay) {
     val c = Gridiron.colors
     Surface(
         onClick = onClick,
@@ -509,7 +512,7 @@ private fun ReplayChip(onClick: () -> Unit, modifier: Modifier) {
         modifier = modifier.heightIn(min = Gridiron.skin.touchTarget),
     ) {
         Box(contentAlignment = Alignment.Center, modifier = Modifier.padding(horizontal = 12.dp)) {
-            Text(stringResource(Res.string.replay), style = Gridiron.type.label)
+            Text(stringResource(label), style = Gridiron.type.label)
         }
     }
 }
