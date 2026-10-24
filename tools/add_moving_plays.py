@@ -50,7 +50,7 @@ LINE = [o("lt", "LT", -3.2, 0)] + INTERIOR + [o("rt", "RT", 3.2, 0)]
 TOUCHDOWN = {
     "players": INTERIOR + [o("qb", "QB", 0, -1), o("rb", "RB", 0, -5),
                            d("dl1", "DL", -1, 1), d("dl2", "DL", 1, 1), d("lb", "LB", 0, 5), d("s", "S", 4, 9)],
-    "routes": [r("rb", "run", (0.8, -1.5), (2.4, 1), (2.6, 8), (1.5, 15)),
+    "routes": [r("rg", "block", (1.2, 0.6)), r("rb", "run", (1.2, -1.5), (2.6, 0), (2.8, 8), (1.5, 15)),
                r("lb", "blitz", (1.5, 5.5), (3.4, 7)), r("s", "blitz", (3, 11), (2.8, 12.5))],
     "zones": [zone("ez", "End zone", -9, 12, 18, 10)],
     "ball": ball(("qb", 0), ("rb", 0.2)),
@@ -61,7 +61,8 @@ TOUCHDOWN = {
 FIRST_DOWN = {
     "players": INTERIOR + [o("qb", "QB", 0, -1), o("rb", "RB", 0, -5),
                            d("dl1", "DL", -1, 1), d("dl2", "DL", 1, 1), d("lb", "LB", -1, 5)],
-    "routes": [r("rb", "run", (-0.8, -1.5), (-2.4, 1), (-2.8, 7), (-2.2, 12))],
+    "routes": [r("lg", "block", (-1.2, 0.6)), r("rb", "run", (-1.2, -1.5), (-2.6, 0), (-2.9, 7), (-2.2, 12)),
+               r("lb", "blitz", (-2, 6), (-3.6, 7.5))],
     "zones": [zone("fd", "First down", -9, 10, 18, 0.6)],
     "ball": ball(("qb", 0), ("rb", 0.2)),
     "depth": 14, "behind": 7,
@@ -77,7 +78,7 @@ SNAP = {
 
 HANDOFF = {
     "players": INTERIOR + [o("qb", "QB", 0, -1), o("rb", "RB", 0, -6), d("lb", "LB", -2, 5)],
-    "routes": [r("rb", "run", (0.4, -2.2), (1.6, 2), (2, 9))],
+    "routes": [r("rb", "run", (0.5, -2.2), (0.8, 0), (1.2, 9))],
     "ball": ball(("qb", 0), ("rb", 0.28)),
     "depth": 11, "behind": 8,
     "caption": "Handoff: the QB gives it to the running back",
@@ -85,7 +86,7 @@ HANDOFF = {
 
 PASS = {
     "players": INTERIOR + [o("qb", "QB", 0, -5), o("wr", "WR", -12, 0), d("cb", "CB", -12, 6)],
-    "routes": [r("wr", "pass", (-12, 10), (-7, 15)), r("cb", "drop", (-11.5, 10), (-9.5, 13))],
+    "routes": [r("wr", "pass", (-12, 10), (-7, 15)), r("cb", "drop", (-11.5, 8), (-10, 10))],
     "ball": ball(("qb", 0), ("wr", 0.9)),
     "depth": 17, "behind": 7,
     "caption": "Pass: the QB throws to the receiver",
@@ -93,17 +94,17 @@ PASS = {
 
 TACKLE = {
     "players": INTERIOR + [o("rb", "RB", 0, -4), d("lb", "LB", 5, 6)],
-    "routes": [r("rb", "run", (1.2, -0.5), (2.4, 4)), r("lb", "blitz", (3.6, 5.2), (2.6, 4.6))],
+    "routes": [r("rb", "run", (2.4, -0.5), (2.6, 4)), r("lb", "blitz", (3.8, 5.2), (2.8, 4.6))],
     "ball": ball(("rb", 0)),
     "depth": 9, "behind": 6,
     "caption": "The linebacker meets the runner",
 }
 
-_CB_START = (-9, 6)
-_CB_PATH = [(-6.5, 11.5), (-9, 3)]
+_CB_START = (-13, 6)
+_CB_PATH = [(-7, 11.5), (-9, 8.5)]
 INTERCEPTION = {
     "players": [o("c", "C", 0, 0), o("qb", "QB", 0, -5), o("wr", "WR", -12, 0), d("cb", "CB", *_CB_START)],
-    "routes": [r("wr", "pass", (-12, 7), (-6, 12)), r("cb", "run", *_CB_PATH)],
+    "routes": [r("wr", "pass", (-12, 6), (-5, 12.5)), r("cb", "run", *_CB_PATH)],
     "ball": ball(("qb", 0), ("cb", share(_CB_START, _CB_PATH, 0))),
     "depth": 15, "behind": 7,
     "caption": "The cornerback jumps in front and catches it",
@@ -112,9 +113,9 @@ INTERCEPTION = {
 BLOCKS = {
     "players": LINE + [o("qb", "QB", 0, -1), o("rb", "RB", 0, -5),
                        d("de1", "DE", -4, 1), d("dt1", "DT", -1, 1), d("dt2", "DT", 1.2, 1), d("de2", "DE", 4, 1)],
-    "routes": [r("lt", "block", (-3.6, 1.2)), r("lg", "block", (-1.4, 1.2)), r("c", "block", (-0.6, 1.2)),
-               r("rg", "block", (1.0, 1.2)), r("rt", "block", (3.8, 1.2)),
-               r("rb", "run", (1, -1.5), (2.4, 1.5), (2.6, 8))],
+    "routes": [r("lt", "block", (-3.8, 0.3)), r("lg", "block", (-1.2, 0.3)), r("c", "block", (-0.4, 0.3)),
+               r("rg", "block", (1.1, 0.3)), r("rt", "block", (3.9, 0.3)),
+               r("rb", "run", (1.4, -1.5), (2.4, 0), (2.6, 8))],
     "ball": ball(("qb", 0), ("rb", 0.22)),
     "depth": 10, "behind": 7,
     "caption": "Blockers push defenders aside and open a hole",
@@ -129,7 +130,7 @@ PUNT = {
 }
 
 MOTION = {
-    "players": LINE + [o("qb", "QB", 0, -1), o("rb", "RB", 0, -6), o("z", "Z", 14, -1)],
+    "players": LINE + [o("te", "TE", 4.8, 0), o("x", "X", -14, 0), o("qb", "QB", 0, -1), o("rb", "RB", 0, -6), o("z", "Z", 14, -1)],
     "routes": [r("z", "motion", (6, -1))],
     "ball": ball(("c", 0), ("qb", 0.95)),
     "depth": 6, "behind": 8,

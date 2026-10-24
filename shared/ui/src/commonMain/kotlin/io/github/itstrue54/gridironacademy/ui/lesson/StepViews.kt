@@ -171,8 +171,8 @@ private fun FilmDiagram(stepId: String, diagram: Diagram) {
     }
 }
 
-/** A play runs this many reveals long; it waits this long after the card appears. */
-private const val FILM_TO_REVEAL = 2
+/** A play runs this many reveals long (2.7 s Kid, 1.9 s Adult); it waits this long after the card appears. */
+private const val FILM_TO_REVEAL = 3
 private const val FILM_LEAD_MS = 500L
 
 /** Multiple choice and situation options share this list (DESIGN 9.3). */

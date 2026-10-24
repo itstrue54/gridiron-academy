@@ -931,6 +931,20 @@
                 "y": 0
               },
               {
+                "id": "te",
+                "label": "TE",
+                "side": "OFFENSE",
+                "x": 4.8,
+                "y": 0
+              },
+              {
+                "id": "x",
+                "label": "X",
+                "side": "OFFENSE",
+                "x": -14,
+                "y": 0
+              },
+              {
                 "id": "qb",
                 "label": "QB",
                 "side": "OFFENSE",
