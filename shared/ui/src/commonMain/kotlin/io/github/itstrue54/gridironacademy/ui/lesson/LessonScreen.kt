@@ -1,6 +1,15 @@
 package io.github.itstrue54.gridironacademy.ui.lesson
 
 import androidx.compose.foundation.background
+import kotlinx.coroutines.launch
+import io.github.itstrue54.gridironacademy.ui.resources.more_below
+import io.github.itstrue54.gridironacademy.ui.components.GlyphIcon
+import androidx.compose.ui.draw.clip
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
@@ -166,6 +175,7 @@ fun StepPlayer(
     val step = controller.step ?: return
     val stepKey = "${step.id}#${controller.done}"
     val pending = controller.draft
+    val scope = rememberCoroutineScope()
 
     BoxWithConstraints(Modifier.fillMaxSize().screenBackground().safeDrawingPadding()) {
         val sheetMax = maxHeight * SHEET_MAX_FRACTION
@@ -174,15 +184,25 @@ fun StepPlayer(
                 IconAction(Glyph.CLOSE, closeLabel, onClick = onClose)
                 DriveBar(controller.done, controller.total, stringResource(Res.string.step_of, controller.done + 1, controller.total), Modifier.weight(1f))
             }
-            Column(
-                Modifier.weight(1f).fillMaxWidth().verticalScroll(rememberScrollState()).padding(horizontal = skin.gutter, vertical = 12.dp),
-            ) {
-                if (LocalReviewBadge.current(step.id)) ReviewBadge(step.id)
-                key(stepKey) {
-                    StepBody(step, controller, pending, controller.grade != null, controller.answer) { controller.draft = it }
+            // Each step starts at the top.
+            val scroll = key(stepKey) { rememberScrollState() }
+            Box(Modifier.weight(1f).fillMaxWidth()) {
+                Column(
+                    Modifier.fillMaxSize().verticalScroll(scroll).padding(horizontal = skin.gutter, vertical = 12.dp),
+                ) {
+                    if (LocalReviewBadge.current(step.id)) ReviewBadge(step.id)
+                    key(stepKey) {
+                        StepBody(step, controller, pending, controller.grade != null, controller.answer) { controller.draft = it }
+                    }
+                    // Room so the feedback sheet never covers the end of the step.
+                    if (controller.grade != null) Spacer(Modifier.height(sheetMax))
                 }
-                // Room so the feedback sheet never covers the end of the step.
-                if (controller.grade != null) Spacer(Modifier.height(sheetMax))
+                // A diagram can push the last answers under the button bar: say there's more.
+                if (controller.grade == null && scroll.canScrollForward) {
+                    MoreBelow(Modifier.align(Alignment.BottomCenter).padding(bottom = 8.dp)) {
+                        scope.launch { scroll.animateScrollTo(scroll.maxValue) }
+                    }
+                }
             }
             if (controller.grade == null) {
                 Box(Modifier.padding(skin.gutter)) {
@@ -211,6 +231,25 @@ fun StepPlayer(
 }
 
 private const val SHEET_MAX_FRACTION = 0.45f
+
+/** A pill at the foot of a step that scrolls: there are more answers below the fold. */
+@Composable
+private fun MoreBelow(modifier: Modifier = Modifier, onClick: () -> Unit) {
+    val c = Gridiron.colors
+    Row(
+        modifier
+            .clip(RoundedCornerShape(50))
+            .background(c.surfaceRaised)
+            .border(1.dp, c.line, RoundedCornerShape(50))
+            .clickable(onClick = onClick)
+            .padding(horizontal = 16.dp, vertical = 8.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(6.dp),
+    ) {
+        Text(stringResource(Res.string.more_below), style = Gridiron.type.label, color = c.ink)
+        GlyphIcon(Glyph.DOWN, c.ink, size = 18.dp)
+    }
+}
 
 /** True for a step that should wear the ReviewBadge; provided by LearnerApp in debug builds. */
 val LocalReviewBadge = staticCompositionLocalOf<(String) -> Boolean> { { false } }

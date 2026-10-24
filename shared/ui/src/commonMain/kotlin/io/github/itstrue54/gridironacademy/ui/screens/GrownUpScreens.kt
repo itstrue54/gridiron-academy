@@ -41,6 +41,7 @@ import org.jetbrains.compose.resources.stringResource
 import io.github.itstrue54.gridironacademy.ui.resources.report_minutes
 import io.github.itstrue54.gridironacademy.ui.resources.gate_locked
 import io.github.itstrue54.gridironacademy.ui.resources.privacy_policy_link
+import io.github.itstrue54.gridironacademy.ui.resources.report_legacy_note
 import io.github.itstrue54.gridironacademy.ui.resources.gate_question
 import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.LiveRegionMode
@@ -186,6 +187,9 @@ fun GrownUpZoneScreen(state: LearnerAppState, platform: LearnerPlatform) {
             Section(stringResource(Res.string.zone_report))
             Text(state.minutesThisWeek().let { pluralStringResource(Res.plurals.report_minutes, it, it) }, style = Gridiron.type.body, color = c.ink)
             Text(stringResource(Res.string.report_mastery_note), style = Gridiron.type.label, color = c.inkDim)
+            if (state.progressPredatesLog()) {
+                Text(stringResource(Res.string.report_legacy_note), style = Gridiron.type.label, color = c.inkDim)
+            }
             state.progressReport().forEach { r ->
                 Card(edge = if (r.passed) c.correct else null) {
                     Column {

@@ -44,6 +44,13 @@ import io.github.itstrue54.gridironacademy.ui.resources.done_review
 import io.github.itstrue54.gridironacademy.ui.resources.done_score
 import io.github.itstrue54.gridironacademy.ui.resources.done_try_again_adult
 import io.github.itstrue54.gridironacademy.ui.resources.done_try_again_kid
+import io.github.itstrue54.gridironacademy.ui.resources.done_passed_checkpoint_kid
+import io.github.itstrue54.gridironacademy.ui.resources.done_passed_checkpoint_adult
+import io.github.itstrue54.gridironacademy.ui.resources.done_try_again_checkpoint_kid
+import io.github.itstrue54.gridironacademy.ui.resources.done_try_again_checkpoint_adult
+import io.github.itstrue54.gridironacademy.ui.resources.done_passed_again_kid
+import io.github.itstrue54.gridironacademy.ui.resources.done_passed_again_adult
+import io.github.itstrue54.gridironacademy.ui.resources.done_best_still_counts
 import io.github.itstrue54.gridironacademy.ui.resources.done_xp
 import io.github.itstrue54.gridironacademy.ui.resources.stars_label
 import io.github.itstrue54.gridironacademy.ui.resources.try_again
@@ -228,9 +235,19 @@ fun LessonDoneScreen(state: LearnerAppState, done: Screen.LessonDone) {
         StarRow(done.stars, stringResource(Res.string.stars_label, done.stars), size = 44.dp)
         Text(stringResource(Res.string.done_score, done.scorePct), style = Gridiron.type.title, color = c.ink)
         Text(stringResource(Res.string.done_xp, done.xpGained), style = Gridiron.type.answer, color = c.xp)
+        val pass = LessonSession.LESSON_PASS_PCT
         Text(
-            if (done.passed) stringResource(if (kid) Res.string.done_passed_kid else Res.string.done_passed_adult)
-            else stringResource(if (kid) Res.string.done_try_again_kid else Res.string.done_try_again_adult, LessonSession.LESSON_PASS_PCT),
+            when (done.opens) {
+                Opens.NOTHING ->
+                    if (done.passed) stringResource(if (kid) Res.string.done_passed_again_kid else Res.string.done_passed_again_adult)
+                    else stringResource(Res.string.done_best_still_counts)
+                Opens.CHECKPOINT ->
+                    if (done.passed) stringResource(if (kid) Res.string.done_passed_checkpoint_kid else Res.string.done_passed_checkpoint_adult)
+                    else stringResource(if (kid) Res.string.done_try_again_checkpoint_kid else Res.string.done_try_again_checkpoint_adult, pass)
+                Opens.NEXT_DRILL ->
+                    if (done.passed) stringResource(if (kid) Res.string.done_passed_kid else Res.string.done_passed_adult)
+                    else stringResource(if (kid) Res.string.done_try_again_kid else Res.string.done_try_again_adult, pass)
+            },
             style = Gridiron.type.body,
             color = c.ink,
         )

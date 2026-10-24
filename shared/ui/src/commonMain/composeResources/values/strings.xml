@@ -177,6 +177,14 @@
     <string name="done_passed_adult">Passed. The next drill is open.</string>
     <string name="done_try_again_kid">Get %1$d% to open the next drill. Try again any time!</string>
     <string name="done_try_again_adult">%1$d% opens the next drill.</string>
+    <string name="done_passed_checkpoint_kid">You passed! The Checkpoint is open.</string>
+    <string name="done_passed_checkpoint_adult">Passed. The Checkpoint is open.</string>
+    <string name="done_try_again_checkpoint_kid">Get %1$d% to open the Checkpoint. Try again any time!</string>
+    <string name="done_try_again_checkpoint_adult">%1$d% opens the Checkpoint.</string>
+    <string name="done_passed_again_kid">You passed it again!</string>
+    <string name="done_passed_again_adult">Passed again.</string>
+    <string name="more_below">More below</string>
+    <string name="done_best_still_counts">Your best score still counts.</string>
     <string name="done_review">Tricky ones come back in practice.</string>
     <string name="done_xp">+%1$d XP</string>
     <string name="back_to_level">Back to the level</string>
@@ -374,7 +382,8 @@
         <item quantity="other">%1$d minutes of practice this week</item>
     </plurals>
     <string name="level_named_title">Level %1$d: %2$s</string>
-    <string name="report_mastery_note">A concept counts as mastered after several right answers on at least two days. Answers given before this version of the app aren't counted, so drills can be passed with concepts still to master.</string>
+    <string name="report_mastery_note">A concept counts as mastered after several right answers on at least two days.</string>
+    <string name="report_legacy_note">Answers given before this version of the app aren't counted, so drills can be passed with concepts still to master.</string>
     <string name="report_line">%1$d of %2$d drills passed · %3$d of %4$d concepts mastered</string>
     <string name="zone_backup">Backup</string>
     <string name="backup_body">Save a copy of all progress to a file you choose, and restore it on this or another device.</string>

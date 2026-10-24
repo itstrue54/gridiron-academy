@@ -14,6 +14,7 @@ import io.github.itstrue54.gridironacademy.ui.app.InMemoryLearnerStore
 import io.github.itstrue54.gridironacademy.ui.app.LearnerAppState
 import io.github.itstrue54.gridironacademy.ui.app.LessonController
 import io.github.itstrue54.gridironacademy.ui.app.NextUp
+import io.github.itstrue54.gridironacademy.ui.app.Opens
 import io.github.itstrue54.gridironacademy.ui.app.Screen
 import io.github.itstrue54.gridironacademy.ui.app.RestoreResult
 import io.github.itstrue54.gridironacademy.ui.theme.Skin
@@ -520,6 +521,38 @@ class LearnerAppStateTest {
             s.finishLesson(level.id, lesson.id, c.result)
             s.back()
         }
+    }
+
+    @Test
+    fun aDrillResultSaysWhatItOpens() {
+        val s = LearnerAppState(content, InMemoryLearnerStore()) { 700 }
+        s.createProfile("Leo", AgeBand.AGE_8_9)
+        val level = s.levels.first()
+        val lessons = content.unitsOf(level).flatMap { it.lessons }
+        s.openLevel(level)
+        fun play(lesson: Lesson): Screen.LessonDone {
+            s.startLesson(level, lesson)
+            val c = s.lessonController(level.id, lesson.id)
+            playPerfect(c)
+            s.finishLesson(level.id, lesson.id, c.result)
+            return (s.screen as Screen.LessonDone).also { s.back() }
+        }
+        lessons.dropLast(1).forEach { assertEquals(Opens.NEXT_DRILL, play(it).opens, it.id) }
+        assertEquals(Opens.CHECKPOINT, play(lessons.last()).opens, "the last drill opens the Checkpoint")
+        assertEquals(Opens.NOTHING, play(lessons.first()).opens, "a replay opens nothing new")
+    }
+
+    @Test
+    fun theReportMentionsUncountedAnswersOnlyWhenProgressPredatesTheLog() {
+        val store = InMemoryLearnerStore()
+        val s = LearnerAppState(content, store) { 710 }
+        s.createProfile("Leo", AgeBand.AGE_8_9)
+        val level = s.levels.first()
+        assertFalse(s.progressPredatesLog(), "a new player has nothing uncounted")
+        passAllDrills(s, level)
+        assertFalse(s.progressPredatesLog(), "drills played in this version are all in the log")
+        val old = store.load()!!.copy(attempts = emptyList())
+        assertTrue(LearnerAppState(content, InMemoryLearnerStore().apply { save(old) }) { 711 }.progressPredatesLog())
     }
 
     @Test
