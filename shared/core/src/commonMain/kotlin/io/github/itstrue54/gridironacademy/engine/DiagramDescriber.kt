@@ -48,6 +48,8 @@ object DiagramDescriber {
             }
         },
         val named: (String) -> String = { " ($it)" },
+        val ball: (List<String>) -> String = { "The ball goes from ${it.joinToString(" to ")}." },
+        val ground: String = "the ground",
         val zone: (label: String, from: Int, to: Int) -> String = { label, from, to ->
             "Shaded area $label, from ${yardWords(from)} to ${yardWords(to)}."
         },
@@ -68,13 +70,17 @@ object DiagramDescriber {
             val list = players.sortedWith(compareBy({ it.x }, { it.y })).joinToString("; ") { "${it.label}, ${where(it, w)}" }
             parts += "${if (side == Side.OFFENSE) w.offense else w.defense}: $list."
         }
-        d.routes.forEach { r ->
+        d.routes.filter { it.drawn }.forEach { r ->
             val p = d.players.firstOrNull { it.id == r.playerId } ?: return@forEach
             parts += route(p, r, w)
         }
         d.zones.forEach { z ->
             parts += w.zone(z.label, z.y.roundToInt(), (z.y + z.h).roundToInt())
         }
+        val holders = d.ball.mapNotNull { b ->
+            if (b.playerId == null) w.ground else d.players.firstOrNull { it.id == b.playerId }?.label
+        }
+        if (holders.size > 1) parts += w.ball(holders)
         return parts.joinToString(" ")
     }
 

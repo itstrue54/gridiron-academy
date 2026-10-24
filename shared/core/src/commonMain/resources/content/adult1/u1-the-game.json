@@ -141,6 +141,169 @@
           "id": "a1-scoring-01",
           "title": "Touchdown and the extras",
           "body": "A touchdown is 6 points. The scoring team then chooses an extra point (a kick, worth 1, from the 15-yard line, which makes it a 33-yard attempt) or a two-point conversion (a run or pass from the 2-yard line).",
+          "diagram": {
+            "players": [
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -1
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "dl1",
+                "label": "DL",
+                "side": "DEFENSE",
+                "x": -1,
+                "y": 1
+              },
+              {
+                "id": "dl2",
+                "label": "DL",
+                "side": "DEFENSE",
+                "x": 1,
+                "y": 1
+              },
+              {
+                "id": "lb",
+                "label": "LB",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 5
+              },
+              {
+                "id": "s",
+                "label": "S",
+                "side": "DEFENSE",
+                "x": 4,
+                "y": 9
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "rg",
+                "points": [
+                  {
+                    "x": 1.2,
+                    "y": 0.6
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "dl2",
+                "points": [
+                  {
+                    "x": 0.4,
+                    "y": 1.8
+                  }
+                ],
+                "kind": "block",
+                "drawn": false
+              },
+              {
+                "playerId": "rb",
+                "points": [
+                  {
+                    "x": 1.2,
+                    "y": -1.5
+                  },
+                  {
+                    "x": 2.6,
+                    "y": 0
+                  },
+                  {
+                    "x": 2.8,
+                    "y": 8
+                  },
+                  {
+                    "x": 1.5,
+                    "y": 15
+                  }
+                ],
+                "kind": "run"
+              },
+              {
+                "playerId": "lb",
+                "points": [
+                  {
+                    "x": 1.5,
+                    "y": 5.5
+                  },
+                  {
+                    "x": 3.4,
+                    "y": 7
+                  }
+                ],
+                "kind": "blitz"
+              },
+              {
+                "playerId": "s",
+                "points": [
+                  {
+                    "x": 3,
+                    "y": 11
+                  },
+                  {
+                    "x": 2.8,
+                    "y": 12.5
+                  }
+                ],
+                "kind": "blitz"
+              }
+            ],
+            "zones": [
+              {
+                "id": "ez",
+                "label": "End zone",
+                "x": -9,
+                "y": 12,
+                "w": 18,
+                "h": 10
+              }
+            ],
+            "ball": [
+              {
+                "playerId": "qb",
+                "at": 0
+              },
+              {
+                "playerId": "rb",
+                "at": 0.2
+              }
+            ],
+            "depth": 22,
+            "behind": 7,
+            "caption": "The runner carries it into the end zone"
+          },
           "concept": "touchdown"
         },
         {
@@ -148,6 +311,112 @@
           "id": "a1-scoring-02",
           "title": "Field goal and safety",
           "body": "A field goal is a kick through the uprights, worth 3 points. A safety is worth 2 points: the defense tackles the ball carrier in his own end zone. The team that gave up the safety then kicks the ball back to the scorers.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -1
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "de",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": -4,
+                "y": 1
+              },
+              {
+                "id": "dt",
+                "label": "DT",
+                "side": "DEFENSE",
+                "x": 1,
+                "y": 1
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "rb",
+                "points": [
+                  {
+                    "x": -1,
+                    "y": -4
+                  },
+                  {
+                    "x": -2.6,
+                    "y": -5
+                  }
+                ],
+                "kind": "run"
+              },
+              {
+                "playerId": "de",
+                "points": [
+                  {
+                    "x": -3.6,
+                    "y": -2
+                  },
+                  {
+                    "x": -2.9,
+                    "y": -4.6
+                  }
+                ],
+                "kind": "blitz"
+              }
+            ],
+            "zones": [
+              {
+                "id": "ez",
+                "label": "End zone",
+                "x": -9,
+                "y": -12,
+                "w": 18,
+                "h": 10
+              }
+            ],
+            "ball": [
+              {
+                "playerId": "qb",
+                "at": 0
+              },
+              {
+                "playerId": "rb",
+                "at": 0.3
+              }
+            ],
+            "depth": 4,
+            "behind": 12,
+            "caption": "Tackled in their own end zone: a safety, 2 points"
+          },
           "concept": "field-goal"
         },
         {

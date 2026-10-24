@@ -60,12 +60,17 @@ class FieldRenderTest {
         marks: Map<String, MarkState> = emptyMap(),
         zoom: FieldZoom = FieldZoom(),
         motion: Float? = null,
+        film: Boolean = false,
     ): Rendered {
         val zoomState = FieldZoomState().apply { value = zoom }
         val image = ImageComposeScene(width = WIDTH_PX, height = 1000, density = Density(DENSITY)) {
             GridironTheme(skin = skin, dark = dark) {
                 Box(Modifier.fillMaxSize().background(Gridiron.colors.surface).padding(PAD_DP.dp)) {
-                    FieldDiagram(diagram, description = name, marks = marks, zoom = zoomState, motion = motion)
+                    if (film) {
+                        FieldDiagram(diagram, description = name, zoom = zoomState, motion = motion, motionKinds = FieldGeometry.FILM_KINDS, motionStaggerMs = 0)
+                    } else {
+                        FieldDiagram(diagram, description = name, marks = marks, zoom = zoomState, motion = motion)
+                    }
                 }
             }
         }.use { it.render() }
@@ -86,6 +91,16 @@ class FieldRenderTest {
         render("disguise-presnap-adult-dark", rd.preSnap, Skin.Adult, dark = true)
         render("disguise-reveal-adult-light", rd.reveal, Skin.Adult, dark = false)
         render("disguise-reveal-kid-light", rd.reveal, Skin.Kid, dark = false)
+    }
+
+    /** Film mode (DESIGN 7.8): every teaching card with a ball, at the snap, midway and the end. */
+    @Test
+    fun teachingPlaysRunWithTheBall() {
+        val films = steps().filterIsInstance<Learn>().filter { (it.diagram?.ball?.size ?: 0) > 0 }
+        assertTrue(films.size >= 17, "found ${films.size}")
+        for (step in films) for (m in listOf(0f, 0.5f, 1f)) {
+            render("film-${step.id}-${(m * 100).toInt()}", step.diagram!!, Skin.Kid, dark = false, motion = m, film = true)
+        }
     }
 
     @Test

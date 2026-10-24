@@ -3,6 +3,7 @@ package io.github.itstrue54.gridironacademy.ui.field
 import io.github.itstrue54.gridironacademy.model.Diagram
 import io.github.itstrue54.gridironacademy.model.DiagramPlayer
 import io.github.itstrue54.gridironacademy.model.DiagramZone
+import io.github.itstrue54.gridironacademy.model.BallSpot
 import io.github.itstrue54.gridironacademy.model.PathKind
 import io.github.itstrue54.gridironacademy.model.Pt
 import io.github.itstrue54.gridironacademy.model.Side
@@ -222,6 +223,36 @@ object FieldGeometry {
 
     /** Paths a player travels along in the reveal (DESIGN 7.7); others are drawn, not driven. */
     val REVEAL_KINDS = setOf(PathKind.ROTATE, PathKind.DROP, PathKind.BLITZ)
+
+    /** Film mode (DESIGN 7.8): every path runs, routes, runs, blocks and motion alike. */
+    val FILM_KINDS = PathKind.entries.toSet()
+
+    /**
+     * Where the ball is at [p] of the play (DESIGN 7.8), or null when the diagram has none.
+     * [spot] says where a player is at a given moment. Held, the ball rides with its
+     * holder; between holders it flies, leaving the hand earlier on a longer throw.
+     */
+    fun ballAt(ball: List<BallSpot>, p: Float, spot: (playerId: String, time: Float) -> Pt?): Pt? {
+        if (ball.isEmpty()) return null
+        // A spot with no player is on the ground, and stays put.
+        fun where(b: BallSpot, time: Float): Pt? = b.playerId?.let { spot(it, time) } ?: Pt(b.x ?: 0f, b.y ?: 0f)
+        val i = ball.indexOfLast { it.at <= p }.coerceAtLeast(0)
+        val held = ball[i]
+        val next = ball.getOrNull(i + 1) ?: return where(held, p)
+        val to = where(next, next.at) ?: return where(held, p)
+        val near = where(held, next.at) ?: return null
+        val flight = (hypot(to.x - near.x, to.y - near.y) * FLIGHT_PER_YARD).coerceIn(MIN_FLIGHT, MAX_FLIGHT)
+        val leave = maxOf(held.at, next.at - flight)
+        if (p <= leave) return where(held, p)
+        val from = where(held, leave) ?: return null
+        val k = (p - leave) / (next.at - leave)
+        return Pt(from.x + (to.x - from.x) * k, from.y + (to.y - from.y) * k)
+    }
+
+    /** A ball in the air covers a yard in this share of the play, within these bounds. */
+    private const val FLIGHT_PER_YARD = 0.012f
+    private const val MIN_FLIGHT = 0.03f
+    private const val MAX_FLIGHT = 0.3f
     /** Each reveal path starts this long after the one before it, in `routes` order. */
     const val REVEAL_STAGGER_MS = 60
 

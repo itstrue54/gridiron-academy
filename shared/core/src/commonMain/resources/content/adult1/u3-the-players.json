@@ -523,6 +523,81 @@
           "id": "a1-turnovers-01",
           "title": "Turnovers",
           "body": "An interception (a defender catches a forward pass) and a fumble recovered by the defense are turnovers. A turnover on downs is when the offense fails to convert on 4th down.",
+          "diagram": {
+            "players": [
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "wr",
+                "label": "WR",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "cb",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": -13,
+                "y": 6
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "wr",
+                "points": [
+                  {
+                    "x": -12,
+                    "y": 6
+                  },
+                  {
+                    "x": -5,
+                    "y": 12.5
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "cb",
+                "points": [
+                  {
+                    "x": -7,
+                    "y": 11.5
+                  },
+                  {
+                    "x": -9,
+                    "y": 8.5
+                  }
+                ],
+                "kind": "run"
+              }
+            ],
+            "ball": [
+              {
+                "playerId": "qb",
+                "at": 0
+              },
+              {
+                "playerId": "cb",
+                "at": 0.69
+              }
+            ],
+            "depth": 15,
+            "behind": 7,
+            "caption": "The cornerback jumps in front and catches it"
+          },
           "concept": "turnover"
         },
         {
@@ -530,6 +605,92 @@
           "id": "a1-turnovers-02",
           "title": "Kicks",
           "body": "A kickoff starts each half and follows every score. A punt gives the ball away on 4th down for field position. A field goal is a kick for points. A touchback on a punt or an interception in the end zone puts the ball at the 20-yard line.",
+          "diagram": {
+            "players": [
+              {
+                "id": "ls",
+                "label": "LS",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "g1",
+                "label": "G",
+                "side": "OFFENSE",
+                "x": -18,
+                "y": 0
+              },
+              {
+                "id": "g2",
+                "label": "G",
+                "side": "OFFENSE",
+                "x": 18,
+                "y": 0
+              },
+              {
+                "id": "p",
+                "label": "P",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -12
+              },
+              {
+                "id": "pr",
+                "label": "PR",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 28
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "g1",
+                "points": [
+                  {
+                    "x": -12,
+                    "y": 16
+                  },
+                  {
+                    "x": -3,
+                    "y": 25
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "g2",
+                "points": [
+                  {
+                    "x": 12,
+                    "y": 16
+                  },
+                  {
+                    "x": 3,
+                    "y": 25
+                  }
+                ],
+                "kind": "pass"
+              }
+            ],
+            "ball": [
+              {
+                "playerId": "ls",
+                "at": 0
+              },
+              {
+                "playerId": "p",
+                "at": 0.12
+              },
+              {
+                "playerId": "pr",
+                "at": 0.85
+              }
+            ],
+            "depth": 31,
+            "behind": 14,
+            "caption": "A punt: kicked far away, and the gunners race to the returner"
+          },
           "concept": "special-teams"
         },
         {

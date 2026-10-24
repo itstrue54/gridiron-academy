@@ -66,6 +66,7 @@
     <string name="match_hint">Tap one on the left, then its partner on the right.</string>
     <string name="disguise">Disguise</string>
     <string name="replay">Replay the snap</string>
+    <string name="watch_again">Watch again</string>
     <string name="match_answer">Goes with: %1$s</string>
     <string name="match_paired_with">paired with %1$s</string>
     <string name="order_belongs_at">not quite, goes at number %1$d</string>

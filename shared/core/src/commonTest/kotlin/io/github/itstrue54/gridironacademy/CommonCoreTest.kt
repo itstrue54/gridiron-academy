@@ -74,6 +74,22 @@ class CommonCoreTest {
     }
 
     @Test
+    fun describerSaysWhereTheBallGoes() {
+        val d = Diagram(
+            players = listOf(DiagramPlayer("qb", "QB", Side.OFFENSE, 0f, -5f), DiagramPlayer("rb", "RB", Side.OFFENSE, 0f, -7f)),
+            ball = listOf(BallSpot("qb"), BallSpot("rb", 0.2f)),
+        )
+        assertTrue(DiagramDescriber.describe(d).endsWith("The ball goes from QB to RB."))
+        val loose = d.copy(
+            ball = listOf(BallSpot("rb"), BallSpot(null, 0.5f, 1f, 2f)),
+            routes = listOf(DiagramRoute("qb", listOf(Pt(0f, -7f)), PathKind.BLOCK, drawn = false)),
+        )
+        val said = DiagramDescriber.describe(loose)
+        assertTrue(said.endsWith("The ball goes from RB to the ground."), said)
+        assertFalse("QB blocks" in said, "an undrawn reaction isn't read out")
+    }
+
+    @Test
     fun describerSaysWhoIsWhereAndWhoGoesWhere() {
         val d = Diagram(
             players = listOf(

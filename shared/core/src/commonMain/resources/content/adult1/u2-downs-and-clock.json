@@ -11,6 +11,148 @@
           "id": "a1-downs-01",
           "title": "Four downs to go 10",
           "body": "A team on offense has four plays (downs) to gain 10 yards. If it does, it earns a new first down and the count resets. If not, the ball goes to the other team, usually after a punt on 4th down.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -1
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "dl1",
+                "label": "DL",
+                "side": "DEFENSE",
+                "x": -1,
+                "y": 1
+              },
+              {
+                "id": "dl2",
+                "label": "DL",
+                "side": "DEFENSE",
+                "x": 1,
+                "y": 1
+              },
+              {
+                "id": "lb",
+                "label": "LB",
+                "side": "DEFENSE",
+                "x": -1,
+                "y": 5
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "lg",
+                "points": [
+                  {
+                    "x": -1.2,
+                    "y": 0.6
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "dl1",
+                "points": [
+                  {
+                    "x": -0.4,
+                    "y": 1.8
+                  }
+                ],
+                "kind": "block",
+                "drawn": false
+              },
+              {
+                "playerId": "rb",
+                "points": [
+                  {
+                    "x": -1.2,
+                    "y": -1.5
+                  },
+                  {
+                    "x": -2.6,
+                    "y": 0
+                  },
+                  {
+                    "x": -2.9,
+                    "y": 7
+                  },
+                  {
+                    "x": -2.2,
+                    "y": 12
+                  }
+                ],
+                "kind": "run"
+              },
+              {
+                "playerId": "lb",
+                "points": [
+                  {
+                    "x": -2,
+                    "y": 6
+                  },
+                  {
+                    "x": -3.6,
+                    "y": 7.5
+                  }
+                ],
+                "kind": "blitz"
+              }
+            ],
+            "zones": [
+              {
+                "id": "fd",
+                "label": "First down",
+                "x": -9,
+                "y": 10,
+                "w": 18,
+                "h": 0.6
+              }
+            ],
+            "ball": [
+              {
+                "playerId": "qb",
+                "at": 0
+              },
+              {
+                "playerId": "rb",
+                "at": 0.2
+              }
+            ],
+            "depth": 14,
+            "behind": 7,
+            "caption": "Past the line 10 yards ahead: a first down"
+          },
           "concept": "down"
         },
         {

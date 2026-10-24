@@ -18,6 +18,148 @@
           "id": "k1-downs-02",
           "title": "First down!",
           "body": "If the offense moves 10 yards, that is a first down! They get 4 brand new tries.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -1
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "dl1",
+                "label": "DL",
+                "side": "DEFENSE",
+                "x": -1,
+                "y": 1
+              },
+              {
+                "id": "dl2",
+                "label": "DL",
+                "side": "DEFENSE",
+                "x": 1,
+                "y": 1
+              },
+              {
+                "id": "lb",
+                "label": "LB",
+                "side": "DEFENSE",
+                "x": -1,
+                "y": 5
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "lg",
+                "points": [
+                  {
+                    "x": -1.2,
+                    "y": 0.6
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "dl1",
+                "points": [
+                  {
+                    "x": -0.4,
+                    "y": 1.8
+                  }
+                ],
+                "kind": "block",
+                "drawn": false
+              },
+              {
+                "playerId": "rb",
+                "points": [
+                  {
+                    "x": -1.2,
+                    "y": -1.5
+                  },
+                  {
+                    "x": -2.6,
+                    "y": 0
+                  },
+                  {
+                    "x": -2.9,
+                    "y": 7
+                  },
+                  {
+                    "x": -2.2,
+                    "y": 12
+                  }
+                ],
+                "kind": "run"
+              },
+              {
+                "playerId": "lb",
+                "points": [
+                  {
+                    "x": -2,
+                    "y": 6
+                  },
+                  {
+                    "x": -3.6,
+                    "y": 7.5
+                  }
+                ],
+                "kind": "blitz"
+              }
+            ],
+            "zones": [
+              {
+                "id": "fd",
+                "label": "First down",
+                "x": -9,
+                "y": 10,
+                "w": 18,
+                "h": 0.6
+              }
+            ],
+            "ball": [
+              {
+                "playerId": "qb",
+                "at": 0
+              },
+              {
+                "playerId": "rb",
+                "at": 0.2
+              }
+            ],
+            "depth": 14,
+            "behind": 7,
+            "caption": "Past the line 10 yards ahead: a first down"
+          },
           "concept": "first-down"
         },
         {
@@ -25,6 +167,92 @@
           "id": "k1-downs-03",
           "title": "Punt",
           "body": "On 4th down, teams often punt. They kick the ball far away, so the other team has to start a long way from the end zone it's trying to reach.",
+          "diagram": {
+            "players": [
+              {
+                "id": "ls",
+                "label": "LS",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "g1",
+                "label": "G",
+                "side": "OFFENSE",
+                "x": -18,
+                "y": 0
+              },
+              {
+                "id": "g2",
+                "label": "G",
+                "side": "OFFENSE",
+                "x": 18,
+                "y": 0
+              },
+              {
+                "id": "p",
+                "label": "P",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -12
+              },
+              {
+                "id": "pr",
+                "label": "PR",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 28
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "g1",
+                "points": [
+                  {
+                    "x": -12,
+                    "y": 16
+                  },
+                  {
+                    "x": -3,
+                    "y": 25
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "g2",
+                "points": [
+                  {
+                    "x": 12,
+                    "y": 16
+                  },
+                  {
+                    "x": 3,
+                    "y": 25
+                  }
+                ],
+                "kind": "pass"
+              }
+            ],
+            "ball": [
+              {
+                "playerId": "ls",
+                "at": 0
+              },
+              {
+                "playerId": "p",
+                "at": 0.12
+              },
+              {
+                "playerId": "pr",
+                "at": 0.85
+              }
+            ],
+            "depth": 31,
+            "behind": 14,
+            "caption": "A punt: kicked far away, and the gunners race to the returner"
+          },
           "concept": "punt"
         },
         {
@@ -121,6 +349,65 @@
           "id": "k1-moving-01",
           "title": "The snap",
           "body": "The center passes the ball back to the quarterback. This is the snap. The snap starts most plays!",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              }
+            ],
+            "ball": [
+              {
+                "playerId": "c",
+                "at": 0
+              },
+              {
+                "playerId": "qb",
+                "at": 0.35
+              }
+            ],
+            "depth": 4,
+            "behind": 7,
+            "caption": "The center snaps the ball back to the quarterback"
+          },
           "concept": "snap"
         },
         {
@@ -128,6 +415,85 @@
           "id": "k1-moving-02",
           "title": "Handoff",
           "body": "In a handoff, the quarterback hands the ball to a running back. The running back runs with it.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -1
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -6
+              },
+              {
+                "id": "lb",
+                "label": "LB",
+                "side": "DEFENSE",
+                "x": -2,
+                "y": 5
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "rb",
+                "points": [
+                  {
+                    "x": 0.5,
+                    "y": -2.2
+                  },
+                  {
+                    "x": 0.8,
+                    "y": 0
+                  },
+                  {
+                    "x": 1.2,
+                    "y": 9
+                  }
+                ],
+                "kind": "run"
+              }
+            ],
+            "ball": [
+              {
+                "playerId": "qb",
+                "at": 0
+              },
+              {
+                "playerId": "rb",
+                "at": 0.28
+              }
+            ],
+            "depth": 11,
+            "behind": 8,
+            "caption": "Handoff: the QB gives it to the running back"
+          },
           "concept": "handoff"
         },
         {
@@ -135,6 +501,95 @@
           "id": "k1-moving-03",
           "title": "Pass",
           "body": "In a pass, the quarterback throws the ball to a receiver. If nobody catches it, it is an incomplete pass and the play is over.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "wr",
+                "label": "WR",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "cb",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": -12,
+                "y": 6
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "wr",
+                "points": [
+                  {
+                    "x": -12,
+                    "y": 10
+                  },
+                  {
+                    "x": -7,
+                    "y": 15
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "cb",
+                "points": [
+                  {
+                    "x": -11.5,
+                    "y": 8
+                  },
+                  {
+                    "x": -10,
+                    "y": 10
+                  }
+                ],
+                "kind": "drop"
+              }
+            ],
+            "ball": [
+              {
+                "playerId": "qb",
+                "at": 0
+              },
+              {
+                "playerId": "wr",
+                "at": 0.9
+              }
+            ],
+            "depth": 17,
+            "behind": 7,
+            "caption": "Pass: the QB throws to the receiver"
+          },
           "concept": "incomplete"
         },
         {
@@ -142,6 +597,84 @@
           "id": "k1-moving-04",
           "title": "Tackle",
           "body": "The defense stops a runner by tackling: bringing them to the ground. In flag football, they pull a flag instead. In youth and high school football, a runner is down as soon as a knee touches the ground.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -4
+              },
+              {
+                "id": "lb",
+                "label": "LB",
+                "side": "DEFENSE",
+                "x": 5,
+                "y": 6
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "rb",
+                "points": [
+                  {
+                    "x": 2.4,
+                    "y": -0.5
+                  },
+                  {
+                    "x": 2.6,
+                    "y": 4
+                  }
+                ],
+                "kind": "run"
+              },
+              {
+                "playerId": "lb",
+                "points": [
+                  {
+                    "x": 3.8,
+                    "y": 5.2
+                  },
+                  {
+                    "x": 2.8,
+                    "y": 4.6
+                  }
+                ],
+                "kind": "blitz"
+              }
+            ],
+            "ball": [
+              {
+                "playerId": "rb",
+                "at": 0
+              }
+            ],
+            "depth": 9,
+            "behind": 6,
+            "caption": "The linebacker meets the runner"
+          },
           "concept": "tackle"
         },
         {
@@ -238,6 +771,81 @@
           "id": "k1-turnovers-02",
           "title": "Interception",
           "body": "An interception is when a defender catches the quarterback's pass. The defense now has the ball!",
+          "diagram": {
+            "players": [
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "wr",
+                "label": "WR",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "cb",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": -13,
+                "y": 6
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "wr",
+                "points": [
+                  {
+                    "x": -12,
+                    "y": 6
+                  },
+                  {
+                    "x": -5,
+                    "y": 12.5
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "cb",
+                "points": [
+                  {
+                    "x": -7,
+                    "y": 11.5
+                  },
+                  {
+                    "x": -9,
+                    "y": 8.5
+                  }
+                ],
+                "kind": "run"
+              }
+            ],
+            "ball": [
+              {
+                "playerId": "qb",
+                "at": 0
+              },
+              {
+                "playerId": "cb",
+                "at": 0.69
+              }
+            ],
+            "depth": 15,
+            "behind": 7,
+            "caption": "The cornerback jumps in front and catches it"
+          },
           "concept": "interception"
         },
         {
@@ -245,6 +853,114 @@
           "id": "k1-turnovers-03",
           "title": "Fumble",
           "body": "A fumble is when the runner drops the ball. Anyone can pounce on it. Whoever recovers it gets the ball.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -4
+              },
+              {
+                "id": "lb",
+                "label": "LB",
+                "side": "DEFENSE",
+                "x": 4,
+                "y": 6
+              },
+              {
+                "id": "s",
+                "label": "S",
+                "side": "DEFENSE",
+                "x": -4,
+                "y": 9
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "rb",
+                "points": [
+                  {
+                    "x": 0.8,
+                    "y": -0.6
+                  },
+                  {
+                    "x": 1.6,
+                    "y": 4.5
+                  }
+                ],
+                "kind": "run"
+              },
+              {
+                "playerId": "lb",
+                "points": [
+                  {
+                    "x": 2.2,
+                    "y": 5
+                  }
+                ],
+                "kind": "blitz"
+              },
+              {
+                "playerId": "s",
+                "points": [
+                  {
+                    "x": -1,
+                    "y": 7
+                  },
+                  {
+                    "x": 2.6,
+                    "y": 6.2
+                  }
+                ],
+                "kind": "blitz"
+              }
+            ],
+            "ball": [
+              {
+                "playerId": "rb",
+                "at": 0
+              },
+              {
+                "playerId": "rb",
+                "at": 0.55
+              },
+              {
+                "x": 2.6,
+                "y": 6.2,
+                "at": 0.62
+              },
+              {
+                "playerId": "s",
+                "at": 1.0
+              }
+            ],
+            "depth": 11,
+            "behind": 6,
+            "caption": "The ball comes loose, and the safety pounces on it"
+          },
           "concept": "fumble"
         },
         {
