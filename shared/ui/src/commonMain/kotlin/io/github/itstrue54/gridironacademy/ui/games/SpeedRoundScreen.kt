@@ -34,7 +34,9 @@ import androidx.compose.ui.unit.dp
 import io.github.itstrue54.gridironacademy.engine.Answer
 import io.github.itstrue54.gridironacademy.model.MultipleChoice
 import io.github.itstrue54.gridironacademy.model.TrueFalse
+import io.github.itstrue54.gridironacademy.ui.app.Cue
 import io.github.itstrue54.gridironacademy.ui.app.LearnerAppState
+import io.github.itstrue54.gridironacademy.ui.app.LocalCues
 import io.github.itstrue54.gridironacademy.ui.app.SpeedRoundController
 import io.github.itstrue54.gridironacademy.ui.components.AnswerButton
 import io.github.itstrue54.gridironacademy.ui.components.AnswerState
@@ -91,6 +93,10 @@ fun SpeedRoundScreen(state: LearnerAppState, levelId: String, round: SpeedRoundC
     if (round == null) return // a quit game fading out
     val c = Gridiron.colors
     val skin = Gridiron.skin
+    val cues = LocalCues.current
+    LaunchedEffect(round.answered) {
+        if (round.answered > 0) round.lastRight?.let { cues.play(if (it) Cue.CORRECT else Cue.RETRY) }
+    }
     if (clock) {
         LaunchedEffect(round) {
             // Time adds up frame by frame from the round's own elapsed time, so a rebuilt

@@ -20,6 +20,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import io.github.itstrue54.gridironacademy.ui.components.GoldSweep
+import io.github.itstrue54.gridironacademy.ui.components.Celebration
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
@@ -97,7 +100,19 @@ fun LearnerApp(state: LearnerAppState, dark: Boolean, reducedMotion: Boolean = f
         if (state.showReviewBadges) { id -> !state.content.signedOff(id) } else { _ -> false }
     }
     val screenReader: () -> Boolean = remember(state) { { state.screenReaderActive() } }
-    CompositionLocalProvider(LocalReviewBadge provides badge, LocalScreenReader provides screenReader) {
+    val sound = remember(platform) { SoundSetting(platform) }
+    val haptics = LocalHapticFeedback.current
+    val soundOn = sound.on(skin)
+    val cues = remember(haptics, soundOn, platform) {
+        Cues { cue ->
+            haptics.performHapticFeedback(cue.haptic)
+            if (soundOn) platform.playSound(cue)
+        }
+    }
+    CompositionLocalProvider(
+        LocalReviewBadge provides badge, LocalScreenReader provides screenReader,
+        LocalCues provides cues, LocalSoundSetting provides sound,
+    ) {
     GridironTheme(skin = skin, dark = dark, reducedMotion = reducedMotion) {
         // One readable column, centred: a landscape phone or a tablet gets margins of
         // surface colour instead of screens stretched edge to edge.
@@ -216,6 +231,7 @@ fun QuizDoneScreen(state: LearnerAppState, done: Screen.QuizDone) {
 fun LessonDoneScreen(state: LearnerAppState, done: Screen.LessonDone) {
     val c = Gridiron.colors
     val kid = Gridiron.skin.voice == Voice.KID
+    Box(Modifier.fillMaxSize()) {
     Column(
         Modifier.fillMaxSize().screenBackground().safeDrawingPadding().padding(Gridiron.skin.gutter),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -232,6 +248,7 @@ fun LessonDoneScreen(state: LearnerAppState, done: Screen.LessonDone) {
             color = if (Gridiron.skin.primeTime) c.gold else c.ink,
             modifier = Modifier.semantics { heading() },
         )
+        if (done.passed) GoldSweep(Modifier.widthIn(max = 220.dp))
         StarRow(done.stars, stringResource(Res.string.stars_label, done.stars), size = 44.dp)
         Text(stringResource(Res.string.done_score, done.scorePct), style = Gridiron.type.title, color = c.ink)
         Text(stringResource(Res.string.done_xp, done.xpGained), style = Gridiron.type.answer, color = c.xp)
@@ -260,5 +277,7 @@ fun LessonDoneScreen(state: LearnerAppState, done: Screen.LessonDone) {
                 state.startLesson(state.content.level(done.levelId), state.lesson(done.levelId, done.lessonId))
             })
         }
+    }
+    if (done.passed) Celebration()
     }
 }

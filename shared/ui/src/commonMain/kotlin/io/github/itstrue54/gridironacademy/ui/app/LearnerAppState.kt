@@ -50,6 +50,10 @@ interface LearnerPlatform {
     /** Ask for a backup file; hand back its text, or null if cancelled or unreadable. */
     fun pickBackup(done: (String?) -> Unit)
     val appVersion: String
+    /** Plays [cue]'s short sound (DESIGN 10). */
+    fun playSound(cue: Cue) {}
+    /** The grown-up zone's Sound setting, kept on the device beside the save; null until changed. */
+    var soundSetting: Boolean?
 }
 
 /** For tests and previews: no files. */
@@ -57,6 +61,7 @@ object NoPlatform : LearnerPlatform {
     override fun exportBackup(text: String, fileName: String, done: (Boolean) -> Unit) = done(false)
     override fun pickBackup(done: (String?) -> Unit) = done(null)
     override val appVersion: String = "dev"
+    override var soundSetting: Boolean? = null
 }
 
 /** Where the learner is. The back stack is a plain list so it is easy to test and restore. */
@@ -775,10 +780,17 @@ class LessonController(
     val finished: Boolean get() = step == null
     val result: LessonSession get() = session
 
+    /** Right answers in a row in this run, for the feedback sheet's streak line. */
+    var inARow: Int by mutableStateOf(0)
+        private set
+
     fun submit(a: Answer) {
         val s = step ?: return
         val g = session.submit(a)
-        if (Grader.isGraded(s)) graded += 1
+        if (Grader.isGraded(s)) {
+            graded += 1
+            inARow = if (g.correct) inARow + 1 else 0
+        }
         grade = g
         answer = a
         onGraded?.invoke(s, g, a, s.id !in seen, now() - shownAt)

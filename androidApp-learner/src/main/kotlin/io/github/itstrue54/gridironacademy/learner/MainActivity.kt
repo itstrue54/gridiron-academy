@@ -39,6 +39,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         savedInstanceState?.getStringArrayList(ROUTE_KEY)?.let(model::restoreRoute)
+        platform.preloadSounds()
         setContent {
             val load by model.load.collectAsState()
             val dark = isSystemInDarkTheme()
@@ -62,6 +63,11 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        platform.release()
+        super.onDestroy()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

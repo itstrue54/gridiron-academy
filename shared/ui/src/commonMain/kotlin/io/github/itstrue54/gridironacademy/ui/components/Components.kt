@@ -247,6 +247,7 @@ fun FeedbackSheet(
     maxHeight: androidx.compose.ui.unit.Dp,
     modifier: Modifier = Modifier,
     detail: String = "",
+    streak: String = "",
 ) {
     val c = Gridiron.colors
     val skin = Gridiron.skin
@@ -278,6 +279,14 @@ fun FeedbackSheet(
                             stringResource(if (folded) Res.string.sheet_unfold else Res.string.sheet_fold),
                             onClick = { folded = !folded },
                         )
+                    }
+                }
+                if (streak.isNotEmpty()) {
+                    Spacer(Modifier.height(6.dp))
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        GlyphIcon(Glyph.FLAME, c.gold, size = 20.dp)
+                        Spacer(Modifier.width(6.dp))
+                        Text(streak, style = Gridiron.type.answer, color = c.ink)
                     }
                 }
                 if (!folded) {

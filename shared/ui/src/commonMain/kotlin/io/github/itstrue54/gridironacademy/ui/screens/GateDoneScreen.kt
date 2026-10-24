@@ -15,6 +15,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.Box
+import io.github.itstrue54.gridironacademy.ui.components.GoldSweep
+import io.github.itstrue54.gridironacademy.ui.components.Celebration
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
@@ -100,6 +104,7 @@ fun GateDoneScreen(state: LearnerAppState, done: Screen.GateDone) {
         else -> stringResource(if (kid) Res.string.game_not_yet_kid else Res.string.game_not_yet_adult, done.passPct)
     }
     val stars = LessonSession.stars(done.scorePct)
+    Box(Modifier.fillMaxSize()) {
     Column(Modifier.fillMaxSize().screenBackground().safeDrawingPadding().padding(Gridiron.skin.gutter)) {
         Column(
             // Full width, or "centred" means centred on the widest line, not the screen.
@@ -109,6 +114,7 @@ fun GateDoneScreen(state: LearnerAppState, done: Screen.GateDone) {
         ) {
             Spacer(Modifier.size(24.dp))
             Text(headline, style = Gridiron.type.displayLarge, color = if (Gridiron.skin.primeTime) c.gold else c.ink, textAlign = TextAlign.Center, modifier = Modifier.semantics { heading() })
+            if (done.passed) GoldSweep(Modifier.widthIn(max = 220.dp))
             StarRow(stars, stringResource(Res.string.stars_label, stars), size = 44.dp)
             Text(stringResource(Res.string.your_score, done.scorePct), style = Gridiron.type.scoreboard, color = c.ink)
             if (done.points > 0 || done.bestStreak > 0) {
@@ -144,6 +150,8 @@ fun GateDoneScreen(state: LearnerAppState, done: Screen.GateDone) {
                 else -> PrimaryButton(stringResource(Res.string.back_to_level), onClick = { state.back() })
             }
         }
+    }
+    if (done.passed) Celebration()
     }
 }
 

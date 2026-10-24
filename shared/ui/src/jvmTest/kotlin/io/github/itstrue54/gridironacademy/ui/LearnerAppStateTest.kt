@@ -15,6 +15,9 @@ import io.github.itstrue54.gridironacademy.ui.app.LearnerAppState
 import io.github.itstrue54.gridironacademy.ui.app.LessonController
 import io.github.itstrue54.gridironacademy.ui.app.NextUp
 import io.github.itstrue54.gridironacademy.ui.app.Opens
+import io.github.itstrue54.gridironacademy.ui.app.LearnerPlatform
+import io.github.itstrue54.gridironacademy.ui.app.NoPlatform
+import io.github.itstrue54.gridironacademy.ui.app.SoundSetting
 import io.github.itstrue54.gridironacademy.ui.app.Screen
 import io.github.itstrue54.gridironacademy.ui.app.RestoreResult
 import io.github.itstrue54.gridironacademy.ui.theme.Skin
@@ -521,6 +524,35 @@ class LearnerAppStateTest {
             s.finishLesson(level.id, lesson.id, c.result)
             s.back()
         }
+    }
+
+    @Test
+    fun rightAnswersInARowCountUntilAMiss() {
+        val graded = content.unitsOf(content.level("kid-1")).flatMap { it.lessons }.flatMap { it.steps }
+            .filter { it is MultipleChoice || it is TrueFalse }.take(4)
+        val c = LessonController(graded)
+        repeat(3) { c.submit(perfect(c.step!!)); c.next() }
+        assertEquals(3, c.inARow)
+        val miss = when (val st = c.step!!) {
+            is MultipleChoice -> Answer.Choice((st.answer + 1) % st.choices.size)
+            is TrueFalse -> Answer.Bool(!st.answer)
+            else -> error("unexpected")
+        }
+        c.submit(miss)
+        assertEquals(0, c.inARow)
+    }
+
+    @Test
+    fun soundIsOnForKidsAndOffForAdultsUntilChosen() {
+        val platform = object : LearnerPlatform by NoPlatform {
+            override var soundSetting: Boolean? = null
+        }
+        val sound = SoundSetting(platform)
+        assertTrue(sound.on(Skin.Kid))
+        assertFalse(sound.on(Skin.Adult))
+        sound.set(true)
+        assertTrue(sound.on(Skin.Adult))
+        assertEquals(true, platform.soundSetting, "the choice is kept by the platform")
     }
 
     @Test

@@ -14,6 +14,12 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import io.github.itstrue54.gridironacademy.ui.resources.sound_note
+import io.github.itstrue54.gridironacademy.ui.resources.sound_label
+import io.github.itstrue54.gridironacademy.ui.resources.zone_sound
+import io.github.itstrue54.gridironacademy.ui.app.LocalSoundSetting
+import androidx.compose.ui.semantics.Role
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
@@ -183,6 +189,18 @@ fun GrownUpZoneScreen(state: LearnerAppState, platform: LearnerPlatform) {
                 }
             }
             Text(stringResource(Res.string.zone_age_note), style = Gridiron.type.label, color = c.inkDim)
+
+            Section(stringResource(Res.string.zone_sound))
+            val sound = LocalSoundSetting.current
+            val soundOn = sound.on(state.skin)
+            Row(
+                Modifier.fillMaxWidth().toggleable(value = soundOn, role = Role.Switch, onValueChange = sound::set),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Text(stringResource(Res.string.sound_label), style = Gridiron.type.body, color = c.ink, modifier = Modifier.weight(1f))
+                Switch(checked = soundOn, onCheckedChange = null)
+            }
+            Text(stringResource(Res.string.sound_note), style = Gridiron.type.label, color = c.inkDim)
 
             Section(stringResource(Res.string.zone_report))
             Text(state.minutesThisWeek().let { pluralStringResource(Res.plurals.report_minutes, it, it) }, style = Gridiron.type.body, color = c.ink)

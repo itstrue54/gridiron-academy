@@ -1,6 +1,10 @@
 package io.github.itstrue54.gridironacademy.ui.lesson
 
 import androidx.compose.foundation.background
+import io.github.itstrue54.gridironacademy.ui.resources.in_a_row_adult
+import io.github.itstrue54.gridironacademy.ui.resources.in_a_row_kid
+import io.github.itstrue54.gridironacademy.ui.app.LocalCues
+import io.github.itstrue54.gridironacademy.ui.app.Cue
 import kotlinx.coroutines.launch
 import io.github.itstrue54.gridironacademy.ui.resources.more_below
 import io.github.itstrue54.gridironacademy.ui.components.GlyphIcon
@@ -176,6 +180,10 @@ fun StepPlayer(
     val stepKey = "${step.id}#${controller.done}"
     val pending = controller.draft
     val scope = rememberCoroutineScope()
+    val cues = LocalCues.current
+    LaunchedEffect(controller.grade) {
+        controller.grade?.let { cues.play(if (it.correct) Cue.CORRECT else Cue.RETRY) }
+    }
 
     BoxWithConstraints(Modifier.fillMaxSize().screenBackground().safeDrawingPadding()) {
         val sheetMax = maxHeight * SHEET_MAX_FRACTION
@@ -192,7 +200,11 @@ fun StepPlayer(
                 ) {
                     if (LocalReviewBadge.current(step.id)) ReviewBadge(step.id)
                     key(stepKey) {
-                        StepBody(step, controller, pending, controller.grade != null, controller.answer) { controller.draft = it }
+                        StepBody(step, controller, pending, controller.grade != null, controller.answer) {
+                            // An order step sets its starting order itself; that isn't a tap.
+                            if (it != null && !(step is Order && controller.draft == null)) cues.play(Cue.SELECT)
+                            controller.draft = it
+                        }
                     }
                     // Room so the feedback sheet never covers the end of the step.
                     if (controller.grade != null) Spacer(Modifier.height(sheetMax))
@@ -221,6 +233,9 @@ fun StepPlayer(
                 headline = stringResource(fb.headline),
                 detail = fb.detail,
                 body = fb.body,
+                streak = if (grade.correct && controller.inARow >= STREAK_SHOWN_FROM) {
+                    stringResource(if (Gridiron.skin.voice == Voice.KID) Res.string.in_a_row_kid else Res.string.in_a_row_adult, controller.inARow)
+                } else "",
                 continueLabel = stringResource(Res.string.continue_),
                 onContinue = { controller.next() },
                 maxHeight = sheetMax,
@@ -231,6 +246,9 @@ fun StepPlayer(
 }
 
 private const val SHEET_MAX_FRACTION = 0.45f
+
+/** The feedback sheet names a run of right answers from this many on. */
+private const val STREAK_SHOWN_FROM = 3
 
 /** A pill at the foot of a step that scrolls: there are more answers below the fold. */
 @Composable
