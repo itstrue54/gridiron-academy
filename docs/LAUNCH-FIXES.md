@@ -102,7 +102,8 @@ CI builds the release APK and the Play bundle.
       wrong answers instead of throwaways (answer clearly longest: 50 became 19 of 208).
 - [x] Pronouns (18): kid levels and kid glossary say "they". NFL levels keep "he".
 - [x] Flag-football scoping (18): the owner chose NFL FLAG (ADR-015). Kid Level 2 unit
-      "Playing Flag" (13 steps) covers where it differs from tackle. Awaiting sign-off.
+      "Playing Flag" (13 steps) covers where it differs from tackle. Signed off by itstrue54,
+      2026-10-24.
 - [x] Status bar on the dark skin (19), plurals (20). Status bar not yet seen on the phone.
 - [x] UX (19): the feedback sheet folds to its verdict so the graded diagram shows; the
       map has + and − buttons and Back closes an open card first; Home, levels, glossary
