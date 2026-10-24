@@ -368,12 +368,12 @@
                 "playerId": "rb",
                 "points": [
                   {
-                    "x": -1,
-                    "y": -4
+                    "x": -1.2,
+                    "y": -3.6
                   },
                   {
-                    "x": -2.6,
-                    "y": -5
+                    "x": -4.2,
+                    "y": -4.4
                   }
                 ],
                 "kind": "run"
@@ -382,12 +382,12 @@
                 "playerId": "de",
                 "points": [
                   {
-                    "x": -3.6,
-                    "y": -2
+                    "x": -4.4,
+                    "y": -1.5
                   },
                   {
-                    "x": -2.9,
-                    "y": -4.6
+                    "x": -4.4,
+                    "y": -4
                   }
                 ],
                 "kind": "blitz"
@@ -397,10 +397,10 @@
               {
                 "id": "ez",
                 "label": "End zone",
-                "x": -9,
-                "y": -12,
-                "w": 18,
-                "h": 10
+                "x": -6,
+                "y": -9,
+                "w": 12,
+                "h": 7
               }
             ],
             "ball": [
@@ -413,8 +413,8 @@
                 "at": 0.3
               }
             ],
-            "depth": 4,
-            "behind": 12,
+            "depth": 3,
+            "behind": 9,
             "caption": "Tackled in their own end zone: a safety, 2 points"
           },
           "concept": "field-goal"
