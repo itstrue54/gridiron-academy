@@ -64,14 +64,16 @@ FLAG or any team.
 - **Government apps, financial features, health:** none.
 - **News app:** no.
 
-## Screenshots to take
+## Phone screenshots
 
-On the phone, with a fresh profile per shot (back up first, uninstall the test build after):
+In `screenshots/`, taken on 2026-10-24 from the release build on a Galaxy S24 Ultra, with test
+saves restored through the grown-up zone. Cropped to 1080x2111 (status and navigation bars
+off), because Play rejects a side more than twice the other.
 
-1. Kid Home, the drive map, at Level 2.
-2. A kid learn card with a field diagram ("Playing Safe" or "Lining Up").
-3. A diagram tap question, after a right answer, with the verdict sheet folded.
-4. Adult Home in Prime Time.
-5. A Level 4 Read the Defense question.
-6. The Playbook map.
-7. The grown-up zone progress report.
+1. `1-kid-home`: kid Home, the drive map, at Level 4.
+2. `2-kid-diagram-card`: a kid card with a field diagram (A, B and C gaps).
+3. `3-tap-the-field`: a tap question after a right answer, the verdict sheet folded.
+4. `4-adult-home`: adult Home in Prime Time.
+5. `5-read-the-defense`: a Level 4 Read the Defense question.
+6. `6-playbook-map`: the Playbook map with concepts mastered.
+7. `7-progress-report`: the grown-up zone progress report.
