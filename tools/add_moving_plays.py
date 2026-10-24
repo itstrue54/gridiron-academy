@@ -160,18 +160,23 @@ PASS_PRO = {
 # Backed up at the 2: the goal line is at y = -2, the end zone behind it.
 SAFETY = {
     "players": INTERIOR + [o("qb", "QB", 0, -1), o("rb", "RB", 0, -5), d("de", "DE", -4, 1), d("dt", "DT", 1, 1)],
-    "routes": [r("rb", "run", (-1, -4), (-2.6, -5)), r("de", "blitz", (-3.6, -2), (-2.9, -4.6))],
-    "zones": [zone("ez", "End zone", -9, -12, 18, 10)],
+    "routes": [r("rb", "run", (-1.2, -3.6), (-4.2, -4.4)), r("de", "blitz", (-4.4, -1.5), (-4.4, -4))],
+    "zones": [zone("ez", "End zone", -6, -9, 12, 7)],
     "ball": ball(("qb", 0), ("rb", 0.3)),
-    "depth": 4, "behind": 12,
+    "depth": 3, "behind": 9,
     "caption": "Tackled in their own end zone: a safety, 2 points",
 }
 
+# The hit lands late in the play (the runner is knocked back after it), so the ball comes
+# out at the hit and the safety has a moment to reach it.
+_RB_START = (0, -4)
+_RB_PATH = [(0.8, -0.6), (1.6, 4.5), (1.0, 3.1)]
+_HIT = share(_RB_START, _RB_PATH, 1)
 FUMBLE = {
-    "players": INTERIOR + [o("rb", "RB", 0, -4), d("lb", "LB", 4, 6), d("s", "S", -4, 9)],
-    "routes": [r("rb", "run", (0.8, -0.6), (1.6, 4.5)), r("lb", "blitz", (2.2, 5)),
-               r("s", "blitz", (-1, 7), (2.6, 6.2))],
-    "ball": ball(("rb", 0), ("rb", 0.55), (2.6, 6.2, 0.62), ("s", 1.0)),
+    "players": INTERIOR + [o("rb", "RB", *_RB_START), d("lb", "LB", 4, 6), d("s", "S", -4, 9)],
+    "routes": [r("rb", "run", *_RB_PATH), r("lb", "blitz", (2.2, 5), (1.9, 4.8)),
+               r("s", "blitz", (-1, 7), (2.4, 5.2))],
+    "ball": ball(("rb", 0), (2.4, 5.2, round(_HIT + 0.03, 2)), ("s", 1.0)),
     "depth": 11, "behind": 6,
     "caption": "The ball comes loose, and the safety pounces on it",
 }
@@ -209,7 +214,7 @@ FAIR_CATCH = {
 ONSIDE = {
     "players": [o("k", "K", 0, -1), o("c1", "G", -4, 0), o("c2", "G", 4, 0), o("c3", "G", 8, 0),
                 d("r1", "R", 2, 11), d("r2", "R", 9, 12), d("r3", "R", -5, 12)],
-    "routes": [r("c2", "run", (4.5, 6), (5.2, 11.4)), r("c3", "block", (8.6, 11)), r("r1", "blitz", (4.6, 12.4))],
+    "routes": [r("c2", "run", (4.5, 6), (5.2, 11.4)), r("c3", "block", (8.6, 11)), r("r1", "blitz", (2.8, 13.6))],
     "ball": ball(("k", 0), (2.5, 5, 0.3), (5, 11.2, 0.8), ("c2", 1.0)),
     "zones": [zone("ten", "10 yards", -9, 10, 18, 0.6)],
     "depth": 15, "behind": 3,
