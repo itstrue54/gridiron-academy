@@ -106,8 +106,12 @@ sealed interface Screen {
         val xpGained: Int,
         val passed: Boolean,
         val missedCount: Int,
+        val opens: Opens,
     ) : Screen
 }
+
+/** What passing a drill opens: the next drill, the level's Checkpoint, or nothing new (a replay). */
+enum class Opens { NEXT_DRILL, CHECKPOINT, NOTHING }
 
 enum class Gate { CHECKPOINT, BIG_GAME }
 
@@ -671,8 +675,29 @@ class LearnerAppState(
             xpGained = after.xp - before.xp,
             passed = session.scorePct >= LessonSession.LESSON_PASS_PCT,
             missedCount = missed.size,
+            opens = opensAfter(levelId, lessonId, before),
         )
         backStack = backStack.dropLast(1) + done
+    }
+
+    /** What passing [lessonId] opens, judged from the progress [before] this attempt. */
+    private fun opensAfter(levelId: String, lessonId: String, before: Progress): Opens {
+        if (before.lessonPassed(lessonId)) return Opens.NOTHING
+        val others = content.unitsOf(content.level(levelId)).flatMap { it.lessons }.filter { it.id != lessonId }
+        return if (others.all { before.lessonPassed(it.id) }) Opens.CHECKPOINT else Opens.NEXT_DRILL
+    }
+
+    /**
+     * True when some passed drill has none of its answers in the log: progress from before the
+     * log (save version 1) or a restored older backup. The report then says those answers
+     * don't count toward mastery. A full log has dropped its oldest answers, so it says nothing.
+     */
+    fun progressPredatesLog(): Boolean {
+        if (save.attempts.size >= LearnerSave.MAX_ATTEMPTS) return false
+        val logged = save.attempts.mapTo(HashSet()) { it.stepId }
+        return levels.flatMap { content.unitsOf(it) }.flatMap { it.lessons }.any { lesson ->
+            save.progress.lessonPassed(lesson.id) && lesson.steps.none { it.id in logged }
+        }
     }
 
     /** Saves [next] with any answers graded since the last save. */
