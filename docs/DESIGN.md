@@ -667,6 +667,14 @@ from another tab are listed in the sheet, not drawn (ADR-011).
 - Sound, short mono WAV/OGG under 120KB total per cue: select, correct, retry, level
   pass, star, timer tick, whistle, sticker. Kid default on, Adult default off. Never autoplay
   when another app holds audio focus. All sounds are original.
+- **Built (2026-10-24):** `Cue` SELECT, CORRECT, RETRY and PASS, each a Compose haptic
+  (segment tick, confirm, reject, long press) plus a synthesized sound from
+  `tools/make-sounds.py` (`res/raw/cue_*.wav`, 92 KB in all). The grown-up zone's **Sound**
+  switch is kept beside the save, not in it; haptics follow the phone's touch-vibration
+  setting. A drill's feedback sheet names a run of 3 or more right answers ("4 in a row!").
+  A pass plays PASS and, in the Kid look, 2.2 s of confetti; the Adult look sweeps a gold
+  rule under the headline. Reduced motion: no confetti, the rule appears at once. Not yet
+  built: the star and timer-tick sounds, the whistle and sticker cues.
 - **Recorded voice** (Little Huddle, spec 6.9): one warm, unhurried adult voice for
   every Level 0 prompt, picture name and feedback line; normalised loudness so a
   clip never startles; plays even with "Sound" off (voice is a separate setting,

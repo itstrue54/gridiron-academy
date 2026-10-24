@@ -1,10 +1,13 @@
 package io.github.itstrue54.gridironacademy.learner
 
 import android.content.Context
+import android.media.AudioAttributes
+import android.media.SoundPool
 import android.net.Uri
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
+import io.github.itstrue54.gridironacademy.ui.app.Cue
 import io.github.itstrue54.gridironacademy.ui.app.LearnerPlatform
 
 /**
@@ -50,6 +53,41 @@ class AndroidLearnerPlatform(private val activity: ComponentActivity) : LearnerP
         openDoc.launch(arrayOf(MIME, "text/plain", "application/octet-stream"))
     }
 
+    // Cue sounds (DESIGN 10): loaded once, played as sonification so they follow the
+    // system volume. A sound still loading is skipped rather than played late.
+    private val sounds: SoundPool by lazy {
+        SoundPool.Builder().setMaxStreams(2).setAudioAttributes(
+            AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .build(),
+        ).build()
+    }
+    private val soundIds: Map<Cue, Int> by lazy {
+        mapOf(
+            Cue.SELECT to R.raw.cue_select, Cue.CORRECT to R.raw.cue_correct,
+            Cue.RETRY to R.raw.cue_retry, Cue.PASS to R.raw.cue_pass,
+        ).mapValues { (_, res) -> sounds.load(activity, res, 1) }
+    }
+
+    override fun playSound(cue: Cue) {
+        val id = soundIds[cue] ?: return
+        sounds.play(id, 1f, 1f, 1, 0, 1f)
+    }
+
+    /** Loads the sounds ahead of the first answer. */
+    fun preloadSounds() { soundIds }
+
+    fun release() = sounds.release()
+
+    private val prefs by lazy { activity.getSharedPreferences(PREFS, Context.MODE_PRIVATE) }
+
+    override var soundSetting: Boolean?
+        get() = if (prefs.contains(KEY_SOUND)) prefs.getBoolean(KEY_SOUND, false) else null
+        set(value) {
+            prefs.edit().apply { if (value == null) remove(KEY_SOUND) else putBoolean(KEY_SOUND, value) }.apply()
+        }
+
     override val appVersion: String =
         runCatching { activity.packageManager.getPackageInfo(activity.packageName, 0).versionName }.getOrNull() ?: "?"
 
@@ -88,5 +126,7 @@ class AndroidLearnerPlatform(private val activity: ComponentActivity) : LearnerP
         const val MIME = "application/json"
         /** 8 MB: the attempt log is capped near 5 MB, so anything larger isn't one of ours. */
         const val MAX_BYTES = 8 * 1024 * 1024
+        const val PREFS = "settings"
+        const val KEY_SOUND = "sound"
     }
 }

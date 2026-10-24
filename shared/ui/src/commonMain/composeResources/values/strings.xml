@@ -184,6 +184,8 @@
     <string name="done_passed_again_kid">You passed it again!</string>
     <string name="done_passed_again_adult">Passed again.</string>
     <string name="more_below">More below</string>
+    <string name="in_a_row_kid">%1$d in a row!</string>
+    <string name="in_a_row_adult">%1$d in a row</string>
     <string name="done_best_still_counts">Your best score still counts.</string>
     <string name="done_review">Tricky ones come back in practice.</string>
     <string name="done_xp">+%1$d XP</string>
@@ -397,6 +399,9 @@
     <string name="backup_too_new">That backup was made by a newer version of the app. Update the app, then try again.</string>
     <string name="backup_not_backup">That file isn't a Gridiron Academy backup.</string>
     <string name="cancel">Cancel</string>
+    <string name="zone_sound">Sound</string>
+    <string name="sound_label">Sounds for answers and wins</string>
+    <string name="sound_note">Taps and answers also buzz gently when the phone's touch vibration is on.</string>
     <string name="zone_privacy">Privacy</string>
     <string name="privacy_statement">Nothing about this player leaves this device. The app has no accounts, no ads and no tracking, and it can't reach the internet.</string>
     <string name="privacy_policy_link">Read the privacy policy</string>
