@@ -12,6 +12,85 @@
           "id": "k2-runpass-01",
           "title": "Run plays",
           "body": "On a run play, the quarterback hands the ball to a runner, who runs it forward. Runs are safer, and the clock usually keeps running.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -1
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -6
+              },
+              {
+                "id": "lb",
+                "label": "LB",
+                "side": "DEFENSE",
+                "x": -2,
+                "y": 5
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "rb",
+                "points": [
+                  {
+                    "x": 0.4,
+                    "y": -2.2
+                  },
+                  {
+                    "x": 1.6,
+                    "y": 2
+                  },
+                  {
+                    "x": 2,
+                    "y": 9
+                  }
+                ],
+                "kind": "run"
+              }
+            ],
+            "ball": [
+              {
+                "playerId": "qb",
+                "at": 0
+              },
+              {
+                "playerId": "rb",
+                "at": 0.28
+              }
+            ],
+            "depth": 11,
+            "behind": 8,
+            "caption": "Handoff: the QB gives it to the running back"
+          },
           "concept": "run-play"
         },
         {
@@ -19,6 +98,95 @@
           "id": "k2-runpass-02",
           "title": "Pass plays",
           "body": "On a pass play, the quarterback throws the ball to a receiver. Passes can gain lots of yards, but they can be dropped or intercepted.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "wr",
+                "label": "WR",
+                "side": "OFFENSE",
+                "x": -12,
+                "y": 0
+              },
+              {
+                "id": "cb",
+                "label": "CB",
+                "side": "DEFENSE",
+                "x": -12,
+                "y": 6
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "wr",
+                "points": [
+                  {
+                    "x": -12,
+                    "y": 10
+                  },
+                  {
+                    "x": -7,
+                    "y": 15
+                  }
+                ],
+                "kind": "pass"
+              },
+              {
+                "playerId": "cb",
+                "points": [
+                  {
+                    "x": -11.5,
+                    "y": 10
+                  },
+                  {
+                    "x": -9.5,
+                    "y": 13
+                  }
+                ],
+                "kind": "drop"
+              }
+            ],
+            "ball": [
+              {
+                "playerId": "qb",
+                "at": 0
+              },
+              {
+                "playerId": "wr",
+                "at": 0.9
+              }
+            ],
+            "depth": 17,
+            "behind": 7,
+            "caption": "Pass: the QB throws to the receiver"
+          },
           "concept": "pass-play"
         },
         {
@@ -172,6 +340,170 @@
           "id": "k2-oline-02",
           "title": "Their jobs",
           "body": "On runs, linemen push defenders out of the way. On passes, they protect the quarterback so there's time to throw.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -1
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "de1",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": -4,
+                "y": 1
+              },
+              {
+                "id": "dt1",
+                "label": "DT",
+                "side": "DEFENSE",
+                "x": -1,
+                "y": 1
+              },
+              {
+                "id": "dt2",
+                "label": "DT",
+                "side": "DEFENSE",
+                "x": 1.2,
+                "y": 1
+              },
+              {
+                "id": "de2",
+                "label": "DE",
+                "side": "DEFENSE",
+                "x": 4,
+                "y": 1
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "lt",
+                "points": [
+                  {
+                    "x": -3.6,
+                    "y": 1.2
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "lg",
+                "points": [
+                  {
+                    "x": -1.4,
+                    "y": 1.2
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "c",
+                "points": [
+                  {
+                    "x": -0.6,
+                    "y": 1.2
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "rg",
+                "points": [
+                  {
+                    "x": 1.0,
+                    "y": 1.2
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "rt",
+                "points": [
+                  {
+                    "x": 3.8,
+                    "y": 1.2
+                  }
+                ],
+                "kind": "block"
+              },
+              {
+                "playerId": "rb",
+                "points": [
+                  {
+                    "x": 1,
+                    "y": -1.5
+                  },
+                  {
+                    "x": 2.4,
+                    "y": 1.5
+                  },
+                  {
+                    "x": 2.6,
+                    "y": 8
+                  }
+                ],
+                "kind": "run"
+              }
+            ],
+            "ball": [
+              {
+                "playerId": "qb",
+                "at": 0
+              },
+              {
+                "playerId": "rb",
+                "at": 0.22
+              }
+            ],
+            "depth": 10,
+            "behind": 7,
+            "caption": "Blockers push defenders aside and open a hole"
+          },
           "concept": "offensive-line"
         },
         {

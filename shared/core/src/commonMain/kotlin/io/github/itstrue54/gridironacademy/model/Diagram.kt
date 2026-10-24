@@ -21,7 +21,20 @@ data class Diagram(
     val depth: Float = 15f,
     val behind: Float = 6f,
     val caption: String = "",
+    /**
+     * Where the football goes when the play runs (film mode, DESIGN 7.8), in time order.
+     * Empty: no ball is drawn. The first spot is who holds it at the snap.
+     */
+    val ball: List<BallSpot> = emptyList(),
 )
+
+/**
+ * The ball reaches [playerId] at [at], a fraction 0..1 of the play. Between two spots it
+ * is in the air (a pass, a pitch) or changing hands (a snap, a handoff); a longer trip
+ * leaves the hand earlier. Afterwards it moves with that player.
+ */
+@Serializable
+data class BallSpot(val playerId: String, val at: Float = 0f)
 
 @Serializable
 enum class Side { OFFENSE, DEFENSE }

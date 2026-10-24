@@ -141,6 +141,148 @@
           "id": "a1-scoring-01",
           "title": "Touchdown and the extras",
           "body": "A touchdown is 6 points. The scoring team then chooses an extra point (a kick, worth 1, from the 15-yard line, which makes it a 33-yard attempt) or a two-point conversion (a run or pass from the 2-yard line).",
+          "diagram": {
+            "players": [
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -1
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -5
+              },
+              {
+                "id": "dl1",
+                "label": "DL",
+                "side": "DEFENSE",
+                "x": -1,
+                "y": 1
+              },
+              {
+                "id": "dl2",
+                "label": "DL",
+                "side": "DEFENSE",
+                "x": 1,
+                "y": 1
+              },
+              {
+                "id": "lb",
+                "label": "LB",
+                "side": "DEFENSE",
+                "x": 0,
+                "y": 5
+              },
+              {
+                "id": "s",
+                "label": "S",
+                "side": "DEFENSE",
+                "x": 4,
+                "y": 9
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "rb",
+                "points": [
+                  {
+                    "x": 0.8,
+                    "y": -1.5
+                  },
+                  {
+                    "x": 2.4,
+                    "y": 1
+                  },
+                  {
+                    "x": 2.6,
+                    "y": 8
+                  },
+                  {
+                    "x": 1.5,
+                    "y": 15
+                  }
+                ],
+                "kind": "run"
+              },
+              {
+                "playerId": "lb",
+                "points": [
+                  {
+                    "x": 1.5,
+                    "y": 5.5
+                  },
+                  {
+                    "x": 3.4,
+                    "y": 7
+                  }
+                ],
+                "kind": "blitz"
+              },
+              {
+                "playerId": "s",
+                "points": [
+                  {
+                    "x": 3,
+                    "y": 11
+                  },
+                  {
+                    "x": 2.8,
+                    "y": 12.5
+                  }
+                ],
+                "kind": "blitz"
+              }
+            ],
+            "zones": [
+              {
+                "id": "ez",
+                "label": "End zone",
+                "x": -9,
+                "y": 12,
+                "w": 18,
+                "h": 10
+              }
+            ],
+            "ball": [
+              {
+                "playerId": "qb",
+                "at": 0
+              },
+              {
+                "playerId": "rb",
+                "at": 0.2
+              }
+            ],
+            "depth": 22,
+            "behind": 7,
+            "caption": "The runner carries it into the end zone"
+          },
           "concept": "touchdown"
         },
         {

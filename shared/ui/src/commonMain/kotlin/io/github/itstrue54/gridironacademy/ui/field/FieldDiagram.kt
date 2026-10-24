@@ -61,6 +61,7 @@ import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.github.itstrue54.gridironacademy.model.Diagram
+import io.github.itstrue54.gridironacademy.model.Pt
 import io.github.itstrue54.gridironacademy.model.DiagramPlayer
 import io.github.itstrue54.gridironacademy.model.DiagramRoute
 import io.github.itstrue54.gridironacademy.model.PathKind
@@ -112,6 +113,9 @@ enum class MarkState { SELECTED, CORRECT, WRONG, MISSED }
  * @param motion the reveal (DESIGN 7.7): null draws everyone where they stand; 0..1 moves
  *   players along their rotate, drop and blitz paths, staggered, with a 25% ghost left
  *   at each starting spot.
+ * @param motionKinds which paths [motion] runs: the reveal's by default; film mode
+ *   (DESIGN 7.8) passes [FieldGeometry.FILM_KINDS] so the whole play runs.
+ * @param motionStaggerMs the delay between movers; film mode moves everyone at the snap.
  * @param window the field area to fit; by default this diagram's own. Pass
  *   `FieldGeometry.window(preSnap, reveal)` so both pictures share one scale.
  */
@@ -128,6 +132,8 @@ fun FieldDiagram(
     zoom: FieldZoomState = rememberFieldZoomState(diagram),
     window: FieldWindow = remember(diagram) { FieldGeometry.window(diagram) },
     motion: Float? = null,
+    motionKinds: Set<PathKind> = FieldGeometry.REVEAL_KINDS,
+    motionStaggerMs: Int = FieldGeometry.REVEAL_STAGGER_MS,
 ) {
     val skin = Gridiron.skin
     val colors = Gridiron.colors
@@ -228,10 +234,13 @@ fun FieldDiagram(
                 }
                 if (motion == null) {
                     diagram.players.forEach { drawPlayer(it, t, markPx / 2, skin.helmets, marks[it.id], reducedMotion, measurer, markLabel) }
+                    diagram.ball.firstOrNull()?.let { b ->
+                        diagram.players.firstOrNull { it.id == b.playerId }?.let { drawFootball(Offset(t.x(it.x), t.y(it.y)), markPx) }
+                    }
                 } else {
                     // Each mover's reveal paths, chained in order (a show-blitz then a drop
                     // is one trip), in the order the movers first appear in `routes`.
-                    val trips = diagram.routes.filter { it.kind in FieldGeometry.REVEAL_KINDS }
+                    val trips = diagram.routes.filter { it.kind in motionKinds }
                         .groupBy { it.playerId }
                         .mapValues { (_, rs) -> rs.flatMap { it.points } }
                     val order = trips.keys.toList()
@@ -245,10 +254,16 @@ fun FieldDiagram(
                     diagram.players.forEach { p ->
                         val trip = trips[p.id]
                         val at = if (trip == null) null else FieldGeometry.along(
-                            p.x, p.y, trip, FieldGeometry.staggered(motion, order.indexOf(p.id), order.size, skin.revealMillis),
+                            p.x, p.y, trip, FieldGeometry.staggered(motion, order.indexOf(p.id), order.size, skin.revealMillis, motionStaggerMs),
                         )
                         drawPlayer(if (at == null) p else p.copy(x = at.x, y = at.y), t, markPx / 2, skin.helmets, marks[p.id], reducedMotion, measurer, markLabel)
                     }
+                    val byId = diagram.players.associateBy { it.id }
+                    FieldGeometry.ballAt(diagram.ball, motion) { id, time ->
+                        val p = byId[id] ?: return@ballAt null
+                        val trip = trips[id] ?: return@ballAt Pt(p.x, p.y)
+                        FieldGeometry.along(p.x, p.y, trip, FieldGeometry.staggered(time, order.indexOf(id), order.size, skin.revealMillis, motionStaggerMs))
+                    }?.let { drawFootball(Offset(t.x(it.x), t.y(it.y)), markPx) }
                 }
                 // Zoomed in, nobody vanishes: players out of view get a marker on that edge
                 // (DESIGN 7.10), so a corner's alignment is still known and where to pan.
@@ -570,6 +585,21 @@ private fun DrawScope.drawPlayer(
 }
 
 /** Kid skin: a helmet shell with a facemask on the side the player faces. */
+/** The football, beside its holder's mark (up and to the right) so neither hides the other. */
+private fun DrawScope.drawFootball(at: Offset, markPx: Float) {
+    val w = markPx * BALL_LENGTH
+    val h = markPx * BALL_WIDTH
+    val c = at + Offset(markPx * BALL_OFFSET, -markPx * BALL_OFFSET)
+    drawOval(BALL_BROWN, topLeft = c - Offset(w / 2, h / 2), size = Size(w, h))
+    drawOval(Color.White, topLeft = c - Offset(w / 2, h / 2), size = Size(w, h), style = Stroke(width = markPx * 0.05f))
+    drawLine(Color.White, c - Offset(w * 0.18f, 0f), c + Offset(w * 0.18f, 0f), strokeWidth = markPx * 0.06f)
+}
+
+private val BALL_BROWN = Color(0xFF8B4A1C)
+private const val BALL_LENGTH = 0.62f
+private const val BALL_WIDTH = 0.38f
+private const val BALL_OFFSET = 0.5f
+
 private fun DrawScope.drawHelmet(c: Offset, half: Float, fill: Color, faceUp: Boolean) {
     drawCircle(fill, half, c)
     val dir = if (faceUp) -1f else 1f

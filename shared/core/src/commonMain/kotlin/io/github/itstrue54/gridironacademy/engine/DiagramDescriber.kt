@@ -48,6 +48,7 @@ object DiagramDescriber {
             }
         },
         val named: (String) -> String = { " ($it)" },
+        val ball: (List<String>) -> String = { "The ball goes from ${it.joinToString(" to ")}." },
         val zone: (label: String, from: Int, to: Int) -> String = { label, from, to ->
             "Shaded area $label, from ${yardWords(from)} to ${yardWords(to)}."
         },
@@ -75,6 +76,8 @@ object DiagramDescriber {
         d.zones.forEach { z ->
             parts += w.zone(z.label, z.y.roundToInt(), (z.y + z.h).roundToInt())
         }
+        val holders = d.ball.mapNotNull { b -> d.players.firstOrNull { it.id == b.playerId }?.label }
+        if (holders.size > 1) parts += w.ball(holders)
         return parts.joinToString(" ")
     }
 

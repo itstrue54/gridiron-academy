@@ -30,6 +30,17 @@ class ContentTest {
         assertTrue(steps.any { it is Match } && steps.any { it is Order } && steps.any { it is DiagramTap } && steps.any { it is Situation })
     }
 
+    @Test fun `validator catches a ball with a stranger or out of order`() {
+        val players = listOf(DiagramPlayer("qb", "QB", Side.OFFENSE, 0f, -5f), DiagramPlayer("x", "X", Side.OFFENSE, -12f, 0f))
+        val unit = CourseUnit("u", "u", listOf(Lesson("l", "l", steps = listOf(
+            Learn("a", "t", "b", Diagram(players = players, ball = listOf(BallSpot("qb"), BallSpot("zz", 0.5f)))),
+            Learn("b", "t", "b", Diagram(players = players, ball = listOf(BallSpot("qb", 0.5f), BallSpot("x", 0.3f)))),
+        ))))
+        val errs = ContentValidator.validateUnit(unit, kid = false, glossaryIds = emptySet())
+        assertTrue(errs.any { "unknown player 'zz'" in it }, errs.joinToString("\n"))
+        assertTrue(errs.any { "out of time order" in it }, errs.joinToString("\n"))
+    }
+
     @Test fun `validator catches a bad answer key and a bad target`() {
         val glossary = emptySet<String>()
         val bad = CourseUnit("u", "u", listOf(Lesson("l", "l", steps = listOf(

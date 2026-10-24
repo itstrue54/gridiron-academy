@@ -15,6 +15,8 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.animation.core.Animatable
+import kotlinx.coroutines.delay
+import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
@@ -133,10 +135,42 @@ private fun StepDiagram(diagram: Diagram?) {
 fun LearnView(step: Learn) {
     Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
         Text(step.title, style = Gridiron.type.headline, color = Gridiron.colors.ink, modifier = Modifier.semantics { heading() })
-        StepDiagram(step.diagram)
+        val diagram = step.diagram
+        if (diagram != null && (diagram.routes.isNotEmpty() || diagram.ball.size > 1)) FilmDiagram(step.id, diagram) else StepDiagram(diagram)
         Text(step.body, style = Gridiron.type.body, color = Gridiron.colors.ink)
     }
 }
+
+/**
+ * Film mode on a teaching card (DESIGN 7.8): the play runs once, a beat after the card
+ * appears, and Replay runs it again. The drawn paths stay as the guide; a faint ghost marks
+ * where each player started. Reduced motion keeps the still picture, paths and all.
+ */
+@Composable
+private fun FilmDiagram(stepId: String, diagram: Diagram) {
+    val reduced = Gridiron.reducedMotion
+    val millis = Gridiron.skin.revealMillis * FILM_TO_REVEAL
+    val progress = remember(stepId) { Animatable(0f) }
+    var plays by remember(stepId) { mutableStateOf(0) }
+    LaunchedEffect(plays, reduced) {
+        if (reduced) return@LaunchedEffect
+        if (plays == 0) delay(FILM_LEAD_MS)
+        progress.snapTo(0f)
+        progress.animateTo(1f, tween(millis, easing = LinearOutSlowInEasing))
+    }
+    Box {
+        FieldDiagram(
+            diagram, description = diagram.spoken(), modifier = Modifier.fillMaxWidth(),
+            motion = if (reduced) null else progress.value,
+            motionKinds = FieldGeometry.FILM_KINDS, motionStaggerMs = 0,
+        )
+        if (!reduced) ReplayChip(onClick = { plays++ }, modifier = Modifier.align(Alignment.TopStart).padding(6.dp))
+    }
+}
+
+/** A play runs this many reveals long; it waits this long after the card appears. */
+private const val FILM_TO_REVEAL = 2
+private const val FILM_LEAD_MS = 500L
 
 /** Multiple choice and situation options share this list (DESIGN 9.3). */
 @Composable

@@ -357,6 +357,15 @@ the field: play/pause, replay, speed chip, and a scrubber with the snap marked.
 ring. Reduced motion shows numbered end-state snapshots (snap, 1s, 2s, end) instead
 of continuous movement.
 
+Built (2026-10-24) for teaching cards: a card whose diagram has paths or a ball runs the
+play once, half a second after it appears, and again on **Replay**. Everyone moves at the
+snap along their paths (no stagger); a faint ghost marks where each player started. A
+diagram's optional `ball` list (`BallSpot`: a player and the moment the ball reaches them)
+puts the football on the field: it rides beside its holder and flies between holders,
+leaving the hand earlier on a longer throw. Reduced motion shows the still picture. The
+screen reader hears where the ball goes ("The ball goes from QB to RB."). Not built yet:
+play/pause, the speed chip and the scrubber.
+
 ### 7.9 Drawing and placing
 - **`draw_route`:** the learner drags from the highlighted player; the stroke is
   drawn as a `pass` path in gold while drawing, then simplified to waypoints and

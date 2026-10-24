@@ -893,6 +893,91 @@
           "id": "a2-motion-01",
           "title": "Motion",
           "body": "One offensive player may be moving at the snap, as long as he is moving parallel to the line or away from it, never toward it.",
+          "diagram": {
+            "players": [
+              {
+                "id": "lt",
+                "label": "LT",
+                "side": "OFFENSE",
+                "x": -3.2,
+                "y": 0
+              },
+              {
+                "id": "lg",
+                "label": "LG",
+                "side": "OFFENSE",
+                "x": -1.6,
+                "y": 0
+              },
+              {
+                "id": "c",
+                "label": "C",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "rg",
+                "label": "RG",
+                "side": "OFFENSE",
+                "x": 1.6,
+                "y": 0
+              },
+              {
+                "id": "rt",
+                "label": "RT",
+                "side": "OFFENSE",
+                "x": 3.2,
+                "y": 0
+              },
+              {
+                "id": "qb",
+                "label": "QB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -1
+              },
+              {
+                "id": "rb",
+                "label": "RB",
+                "side": "OFFENSE",
+                "x": 0,
+                "y": -6
+              },
+              {
+                "id": "z",
+                "label": "Z",
+                "side": "OFFENSE",
+                "x": 14,
+                "y": -1
+              }
+            ],
+            "routes": [
+              {
+                "playerId": "z",
+                "points": [
+                  {
+                    "x": 6,
+                    "y": -1
+                  }
+                ],
+                "kind": "motion"
+              }
+            ],
+            "ball": [
+              {
+                "playerId": "c",
+                "at": 0
+              },
+              {
+                "playerId": "qb",
+                "at": 0.95
+              }
+            ],
+            "depth": 6,
+            "behind": 8,
+            "caption": "Z runs across, parallel to the line, before the snap"
+          },
           "concept": "motion"
         },
         {

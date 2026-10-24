@@ -74,6 +74,15 @@ class CommonCoreTest {
     }
 
     @Test
+    fun describerSaysWhereTheBallGoes() {
+        val d = Diagram(
+            players = listOf(DiagramPlayer("qb", "QB", Side.OFFENSE, 0f, -5f), DiagramPlayer("rb", "RB", Side.OFFENSE, 0f, -7f)),
+            ball = listOf(BallSpot("qb"), BallSpot("rb", 0.2f)),
+        )
+        assertTrue(DiagramDescriber.describe(d).endsWith("The ball goes from QB to RB."))
+    }
+
+    @Test
     fun describerSaysWhoIsWhereAndWhoGoesWhere() {
         val d = Diagram(
             players = listOf(
