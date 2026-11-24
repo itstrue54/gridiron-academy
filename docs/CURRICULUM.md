@@ -47,6 +47,13 @@ NFL" and point to their own league for youth and flag rules. Later added: Lining
 Playing Flag (NFL FLAG rules where flag differs from tackle: flag guarding, no fumbles,
 three plays to midfield, no-run zones, the 7-yard rush, 1- and 2-point tries; ADR-015).
 
+Game-only items (added 2026-11-24): the adult Game Day gate carries 8 situations of its own
+(`a2-game-01`..`08`, in `curriculum.json` under the gate's `gameItems`, in no lesson):
+defensive timeouts when trailing late, running the clock down before a tying-time field goal,
+leaving a punt inside the 10, declining a penalty, going for two up 5, a timeout to dodge
+delay of game on 4th and short, kneeling out the half, and not challenging on unclear video.
+The 10-question game asks all 8 plus 2 of the 11 lesson situations, shuffled together.
+
 Added 2026-10-20 so kids reach Level 4 knowing what it builds on (formation is a
 prerequisite of personnel): Kid unit 4, Lining Up (the line of scrimmage, formations,
 eligible and ineligible receivers; shotgun, I, singleback, pistol, empty and shifts), and
@@ -105,6 +112,12 @@ cross dog, overload and creeper pressures (4 animated reveals); nickel, dime, 3-
 big nickel; play-action, boots and screens; and 12 Game Day situations for the level
 game (goal line, sub-package matchups, A-gap pressure, zone read and RPO reads, tempo,
 4th down, Cover 0, play-action, red zone and late-game clock).
+
+Game-only items (added 2026-11-24): the Game Day gate also carries 8 situations of its own
+(`c5-game-01`..`08`, gate `gameItems` in `curriculum.json`, in no lesson): the triple-option
+dive read, matching 22 personnel on defense, a creeper (don't throw hot), sliding protection
+to an overload, the jet fake, red-zone clock at the end of a half, rubs against press man, and
+slowing the tempo to protect a lead. The 10-question game asks all 8 plus 2 of the 12 lesson situations, shuffled together.
 
 Originally planned:
 RPOs, zone read, speed/triple option; tempo and no-huddle; tight and wide splits;

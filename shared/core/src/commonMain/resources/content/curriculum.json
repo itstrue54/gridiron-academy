@@ -82,7 +82,273 @@
         "testQuestions": 12,
         "game": "game_day",
         "gameQuestions": 10,
-        "gamePassPct": 70
+        "gamePassPct": 70,
+        "gameItems": [
+          {
+            "type": "situation",
+            "id": "a2-game-01",
+            "state": {
+              "quarter": 4,
+              "clock": 110,
+              "down": 2,
+              "toGo": 7,
+              "yardLine": 62,
+              "scoreDiff": -4,
+              "timeouts": 3
+            },
+            "prompt": "You're on defense, down 4 with 1:50 left. Their run is stopped in bounds: 2nd and 7 at their 38. You have all three timeouts. What now?",
+            "options": [
+              {
+                "text": "Call timeout right away",
+                "quality": "best",
+                "why": "Each timeout after an in-bounds play saves up to 40 seconds. Stop them on third down and you get the ball back with well over a minute left."
+              },
+              {
+                "text": "Save your timeouts for your own drive",
+                "quality": "poor",
+                "why": "Let the clock run and they can take 40 seconds a play. By the time they punt, there's almost no time left."
+              },
+              {
+                "text": "Wait until the play clock is nearly out, then call timeout",
+                "quality": "poor",
+                "why": "The game clock keeps running while you wait. Call it the moment the tackle is made."
+              }
+            ],
+            "explanation": "Trailing late on defense, your timeouts buy back the clock. Use them right after each in-bounds play.",
+            "concept": "timeout"
+          },
+          {
+            "type": "situation",
+            "id": "a2-game-02",
+            "state": {
+              "quarter": 4,
+              "clock": 35,
+              "down": 2,
+              "toGo": 3,
+              "yardLine": 88,
+              "scoreDiff": 0,
+              "timeouts": 1
+            },
+            "prompt": "Tied with 0:35 left. Your run is stopped in bounds at their 12: 2nd and 3, clock running. You have one timeout. What's the plan?",
+            "options": [
+              {
+                "text": "Let the clock run down, call timeout with a few seconds left, then kick",
+                "quality": "best",
+                "why": "The 40-second play clock outlasts the 35 seconds left, so you can burn nearly all of it. Then a 29-yard kick wins with little or no time for them to answer."
+              },
+              {
+                "text": "Kick the field goal right now",
+                "quality": "ok",
+                "why": "A 29-yarder is very likely good, but it leaves them about 30 seconds and a kickoff return to answer."
+              },
+              {
+                "text": "Throw for the end zone",
+                "quality": "poor",
+                "why": "An incompletion leaves them more time, and an interception or a fumble throws away a nearly sure win."
+              }
+            ],
+            "explanation": "Tied at the end, score last: run the clock down, then kick.",
+            "concept": "game-clock"
+          },
+          {
+            "type": "situation",
+            "id": "a2-game-03",
+            "state": {
+              "quarter": 3,
+              "clock": 480,
+              "down": 4,
+              "toGo": 8,
+              "yardLine": 50,
+              "scoreDiff": 0,
+              "timeouts": 3
+            },
+            "prompt": "You're returning a punt. Their kick from midfield is coming down around your 6-yard line, with the coverage team closing in. What do you do?",
+            "options": [
+              {
+                "text": "Stay away from it and let it go",
+                "quality": "best",
+                "why": "A punt landing this deep often bounces into the end zone for a touchback, and you start at the 20. Returners are coached to leave punts inside their 10 alone."
+              },
+              {
+                "text": "Fair catch it at the 6",
+                "quality": "ok",
+                "why": "Safe, but it locks in a start at your 6 when a bounce into the end zone would give you the 20."
+              },
+              {
+                "text": "Catch it and run it back",
+                "quality": "poor",
+                "why": "With the coverage on top of you, you'll likely be tackled inside your 10, and a fumble there can hand them a touchdown."
+              }
+            ],
+            "explanation": "Inside your own 10, let the punt go and hope for a touchback.",
+            "concept": "touchback"
+          },
+          {
+            "type": "situation",
+            "id": "a2-game-04",
+            "state": {
+              "quarter": 2,
+              "clock": 300,
+              "down": 4,
+              "toGo": 3,
+              "yardLine": 40,
+              "scoreDiff": 0,
+              "timeouts": 3
+            },
+            "prompt": "You're on defense. They go for it on 4th and 3 at your 40 and the pass falls incomplete, but their tackle was flagged for holding. Accept or decline?",
+            "options": [
+              {
+                "text": "Decline the penalty",
+                "quality": "best",
+                "why": "Declined, the play stands: an incomplete pass on 4th down is a turnover on downs, and you take over at your 40."
+              },
+              {
+                "text": "Accept the 10 yards",
+                "quality": "poor",
+                "why": "That replays 4th down as 4th and 13 at midfield. You'd give back a stop you already made."
+              },
+              {
+                "text": "Let the referee pick the better one",
+                "quality": "poor",
+                "why": "The referee explains the choices, but the team that was fouled decides."
+              }
+            ],
+            "explanation": "A penalty is a choice, not a gift: take the play when the play is better.",
+            "concept": "penalty"
+          },
+          {
+            "type": "situation",
+            "id": "a2-game-05",
+            "state": {
+              "quarter": 4,
+              "clock": 180,
+              "down": 1,
+              "toGo": 2,
+              "yardLine": 98,
+              "scoreDiff": 5,
+              "timeouts": 2
+            },
+            "prompt": "Your touchdown puts you ahead by 5 with 3:00 left. What's the try?",
+            "options": [
+              {
+                "text": "Go for two",
+                "quality": "best",
+                "why": "Up 7, their touchdown and extra point only tie the game. Fail, and you're still up 5."
+              },
+              {
+                "text": "Kick the extra point",
+                "quality": "ok",
+                "why": "The near-sure point doesn't help much: up 5 or up 6, a touchdown and extra point still beat you."
+              },
+              {
+                "text": "Either one: they need a touchdown regardless",
+                "quality": "poor",
+                "why": "Not the same: at 7 their touchdown and kick only tie, at 6 they win. That difference is why coaches go for two here."
+              }
+            ],
+            "explanation": "Late in the game, pick the try that changes what the other team needs.",
+            "concept": "two-point"
+          },
+          {
+            "type": "situation",
+            "id": "a2-game-06",
+            "state": {
+              "quarter": 3,
+              "clock": 400,
+              "down": 4,
+              "toGo": 2,
+              "yardLine": 65,
+              "scoreDiff": 3,
+              "timeouts": 2
+            },
+            "prompt": "You're going for it on 4th and 2 at their 35, but the call came in late. The play clock reads 3 and your players are still getting set. What do you do?",
+            "options": [
+              {
+                "text": "Call timeout",
+                "quality": "best",
+                "why": "A timeout keeps it 4th and 2. Five yards back would make it 4th and 7."
+              },
+              {
+                "text": "Take the delay of game penalty",
+                "quality": "poor",
+                "why": "4th and 7 is much harder to convert, and a 57-yard field goal is far from a sure thing."
+              },
+              {
+                "text": "Snap it before everyone is set",
+                "quality": "poor",
+                "why": "Players still moving at the snap draw a 5-yard flag too, and the play starts in a mess."
+              }
+            ],
+            "explanation": "A short 4th down is worth a timeout. Five yards can change the whole decision.",
+            "concept": "delay-of-game"
+          },
+          {
+            "type": "situation",
+            "id": "a2-game-07",
+            "state": {
+              "quarter": 2,
+              "clock": 18,
+              "down": 1,
+              "toGo": 10,
+              "yardLine": 12,
+              "scoreDiff": 3,
+              "timeouts": 0
+            },
+            "prompt": "18 seconds left in the half. You lead by 3 with 1st and 10 at your own 12 and no timeouts. What's the call?",
+            "options": [
+              {
+                "text": "Take a knee and go to halftime",
+                "quality": "best",
+                "why": "88 yards in 18 seconds with no timeouts almost never works, and a turnover this deep hands them easy points."
+              },
+              {
+                "text": "Hand off up the middle",
+                "quality": "ok",
+                "why": "Mostly harmless, but it can't score and still risks a fumble deep in your own end."
+              },
+              {
+                "text": "Throw deep down the middle",
+                "quality": "poor",
+                "why": "Even a big catch leaves you far from field goal range with no timeouts, and an interception gives them a shot at points before the half."
+              }
+            ],
+            "explanation": "When a drive can't realistically score, don't risk handing the other team points.",
+            "concept": "kneel-down"
+          },
+          {
+            "type": "situation",
+            "id": "a2-game-08",
+            "state": {
+              "quarter": 4,
+              "clock": 330,
+              "down": 4,
+              "toGo": 1,
+              "yardLine": 47,
+              "scoreDiff": -3,
+              "timeouts": 1
+            },
+            "prompt": "Down 3 with 5:30 left and one timeout. Your 3rd-down run is spotted just short of the first down at your 47. The big-screen replay could go either way. Do you challenge the spot?",
+            "options": [
+              {
+                "text": "Don't challenge; keep the timeout",
+                "quality": "best",
+                "why": "A call only changes on clear video. Lose the challenge and you also lose the timeout you'll want for the clock."
+              },
+              {
+                "text": "Challenge the spot",
+                "quality": "poor",
+                "why": "Video this close rarely overturns a spot, and a lost challenge costs your last timeout."
+              },
+              {
+                "text": "Call timeout to watch more replays, then decide",
+                "quality": "poor",
+                "why": "That spends your last timeout either way, and with no timeouts left you can't challenge at all."
+              }
+            ],
+            "explanation": "Challenge on clear evidence, and only when you can afford the timeout.",
+            "concept": "challenge"
+          }
+        ]
       }
     },
     {
@@ -178,7 +444,273 @@
         "testQuestions": 12,
         "game": "game_day",
         "gameQuestions": 10,
-        "gamePassPct": 70
+        "gamePassPct": 70,
+        "gameItems": [
+          {
+            "type": "situation",
+            "id": "c5-game-01",
+            "state": {
+              "quarter": 2,
+              "clock": 500,
+              "down": 1,
+              "toGo": 10,
+              "yardLine": 35,
+              "scoreDiff": 0,
+              "timeouts": 3
+            },
+            "prompt": "Triple option. Your first read, the unblocked defensive lineman, squeezes hard inside onto the dive back. Give, or pull it?",
+            "options": [
+              {
+                "text": "Pull it and read the next defender for keep or pitch",
+                "quality": "best",
+                "why": "He took the dive, so the give is gone. Pull it, then the outside defender's choice decides keep or pitch."
+              },
+              {
+                "text": "Give to the dive back",
+                "quality": "poor",
+                "why": "You'd hand off straight into the defender who chose to take him."
+              },
+              {
+                "text": "Pull it and pitch right away",
+                "quality": "poor",
+                "why": "Pitching before you read the outside defender lets him play the pitch with nobody making him choose."
+              }
+            ],
+            "explanation": "Option rule: whatever the read defender takes, the ball goes somewhere else.",
+            "concept": "option"
+          },
+          {
+            "type": "situation",
+            "id": "c5-game-02",
+            "state": {
+              "quarter": 3,
+              "clock": 600,
+              "down": 3,
+              "toGo": 1,
+              "yardLine": 55,
+              "scoreDiff": 7,
+              "timeouts": 3
+            },
+            "prompt": "You're on defense. It's their 3rd and 1 at their 45, and they bring in 22 personnel: two running backs and two tight ends. Which package do you send out?",
+            "options": [
+              {
+                "text": "Your base defense or a heavy short-yardage front",
+                "quality": "best",
+                "why": "Bigger bodies match their blockers, and on 3rd and 1 you have to stop the run first."
+              },
+              {
+                "text": "Nickel",
+                "quality": "ok",
+                "why": "Better than dime, but a fifth defensive back in place of a linebacker is light against a two-back power run."
+              },
+              {
+                "text": "Dime",
+                "quality": "poor",
+                "why": "Six defensive backs against two backs and two tight ends: they'll run right at your smallest players."
+              }
+            ],
+            "explanation": "Match their personnel: a big offense on a short down calls for a big defense.",
+            "concept": "personnel"
+          },
+          {
+            "type": "situation",
+            "id": "c5-game-03",
+            "state": {
+              "quarter": 3,
+              "clock": 450,
+              "down": 3,
+              "toGo": 7,
+              "yardLine": 42,
+              "scoreDiff": 0,
+              "timeouts": 2
+            },
+            "prompt": "3rd and 7. At the snap a linebacker blitzes off the edge, and a defensive end drops into the short zone your hot route runs to. Only four are rushing, and your line has them picked up. What does the quarterback do?",
+            "options": [
+              {
+                "text": "Hang in and work his normal reads",
+                "quality": "best",
+                "why": "Four rushers against your full protection means there's time. The dropping end is sitting right where the quick hot throw goes."
+              },
+              {
+                "text": "Throw the hot route right away",
+                "quality": "poor",
+                "why": "That throw goes straight at the end who dropped. A creeper is built to bait it."
+              },
+              {
+                "text": "Check it down to the back",
+                "quality": "ok",
+                "why": "Safe, but a short checkdown on 3rd and 7 often comes up short of the first down."
+              }
+            ],
+            "explanation": "Count the rushers after the snap: four from odd spots is a creeper, not a blitz, so play it like a normal rush.",
+            "concept": "simulated-pressure"
+          },
+          {
+            "type": "situation",
+            "id": "c5-game-04",
+            "state": {
+              "quarter": 2,
+              "clock": 250,
+              "down": 2,
+              "toGo": 8,
+              "yardLine": 30,
+              "scoreDiff": -7,
+              "timeouts": 3
+            },
+            "prompt": "2nd and 8. Your call slides the line right, leaving the back to block the left edge. Before the snap, a linebacker and a safety creep up beside the end outside your left tackle. What's the adjustment?",
+            "options": [
+              {
+                "text": "Slide the protection left, toward the extra rushers",
+                "quality": "best",
+                "why": "Linemen sliding that way pick up the overload, and the back takes the lighter right side."
+              },
+              {
+                "text": "Keep sliding right and trust the back",
+                "quality": "poor",
+                "why": "One back can't block three rushers coming off the same edge."
+              },
+              {
+                "text": "Keep the protection and plan a hot throw to the left",
+                "quality": "ok",
+                "why": "If they all come, the hot throw into the space they leave can work, but fixing the protection buys more time."
+              }
+            ],
+            "explanation": "Slide toward the pressure, and let the hot throw handle what's left.",
+            "concept": "slide-protection"
+          },
+          {
+            "type": "situation",
+            "id": "c5-game-05",
+            "state": {
+              "quarter": 1,
+              "clock": 300,
+              "down": 2,
+              "toGo": 6,
+              "yardLine": 40,
+              "scoreDiff": 7,
+              "timeouts": 3
+            },
+            "prompt": "Your jet sweep has gone for big gains twice. Now their linebackers and a safety race toward the jet as soon as the motion starts. What's your next call?",
+            "options": [
+              {
+                "text": "Fake the jet and run inside, away from the motion",
+                "quality": "best",
+                "why": "Every defender chasing the jet is one fewer in the gap you're running at."
+              },
+              {
+                "text": "Hand it on the jet sweep again",
+                "quality": "poor",
+                "why": "They're flying to it now, so it runs into a crowd."
+              },
+              {
+                "text": "Line up without motion",
+                "quality": "ok",
+                "why": "Safe, but it throws away the motion that's pulling them out of place."
+              }
+            ],
+            "explanation": "When the defense chases the motion, run where they left.",
+            "concept": "jet-motion"
+          },
+          {
+            "type": "situation",
+            "id": "c5-game-06",
+            "state": {
+              "quarter": 2,
+              "clock": 20,
+              "down": 1,
+              "toGo": 8,
+              "yardLine": 92,
+              "scoreDiff": 0,
+              "timeouts": 0
+            },
+            "prompt": "20 seconds left in the half, 1st and goal at the 8, no timeouts. The clock is stopped after an incompletion. What's the plan?",
+            "options": [
+              {
+                "text": "Throw only to the end zone or the sideline, then kick if it fails",
+                "quality": "best",
+                "why": "A catch in the end zone is a touchdown, and an incompletion stops the clock with time left to kick. Just don't take a sack."
+              },
+              {
+                "text": "Kick the field goal now",
+                "quality": "ok",
+                "why": "Locks in 3 points, but gives up a free shot at 7."
+              },
+              {
+                "text": "Run the ball",
+                "quality": "poor",
+                "why": "Tackled in bounds with no timeouts, the clock keeps running: you'd rush the field goal team on, and runs rarely score from the 8."
+              }
+            ],
+            "explanation": "In the red zone at the end of a half, throw where the result is a score or a stopped clock.",
+            "concept": "red-zone"
+          },
+          {
+            "type": "situation",
+            "id": "c5-game-07",
+            "state": {
+              "quarter": 3,
+              "clock": 400,
+              "down": 3,
+              "toGo": 4,
+              "yardLine": 55,
+              "scoreDiff": 3,
+              "timeouts": 3
+            },
+            "prompt": "3rd and 4 at their 45. They're in Cover 1, pressing your receivers man-to-man. What do you want?",
+            "options": [
+              {
+                "text": "Bunch or stack receivers and run crossing routes",
+                "quality": "best",
+                "why": "Tight alignments make man defenders fight through traffic to stay with their man, and one of the crossers usually comes free. Rubs are legal as long as receivers run their routes and don't block."
+              },
+              {
+                "text": "Run the ball",
+                "quality": "ok",
+                "why": "Cover 1 often puts an extra defender near the line, so four yards on the ground can be tough."
+              },
+              {
+                "text": "Max protect with two deep routes",
+                "quality": "poor",
+                "why": "Two receivers against man coverage and a free safety are easy to cover, and 3rd and 4 doesn't need a deep shot."
+              }
+            ],
+            "explanation": "Against man coverage, make defenders run through traffic.",
+            "concept": "splits"
+          },
+          {
+            "type": "situation",
+            "id": "c5-game-08",
+            "state": {
+              "quarter": 4,
+              "clock": 360,
+              "down": 1,
+              "toGo": 10,
+              "yardLine": 40,
+              "scoreDiff": 10,
+              "timeouts": 3
+            },
+            "prompt": "You lead by 10 with 6:00 left, 1st and 10 at your 40. Your offense has played fast all game. Now what?",
+            "options": [
+              {
+                "text": "Slow down: huddle and snap late in the play clock",
+                "quality": "best",
+                "why": "Snapping late takes most of the 40-second play clock off between plays. Playing fast would save time for their comeback."
+              },
+              {
+                "text": "Keep the fast pace, but run the ball",
+                "quality": "ok",
+                "why": "Runs keep the clock moving, but snapping early still leaves them extra time."
+              },
+              {
+                "text": "Keep the fast pace and keep throwing",
+                "quality": "poor",
+                "why": "Quick snaps leave time on the clock, and every incompletion stops it."
+              }
+            ],
+            "explanation": "Tempo is a clock tool both ways: speed up when you need time, slow down when you're protecting a lead.",
+            "concept": "tempo"
+          }
+        ]
       }
     },
     {
