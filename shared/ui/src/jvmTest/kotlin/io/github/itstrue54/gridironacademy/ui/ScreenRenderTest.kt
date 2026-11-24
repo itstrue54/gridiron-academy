@@ -35,7 +35,9 @@ class ScreenRenderTest {
         val bytes = ImageComposeScene(width = 720, height = height, density = Density(2f, fontScale)) { ui() }.use { scene ->
             scene.render(0)
             scene.render(1_000_000_000L) // let effects and transitions settle
-            scene.render(2_000_000_000L).encodeToData(EncodedImageFormat.PNG)!!.bytes
+            scene.render(2_000_000_000L)
+            // Past the longest reveal/film animation, so the captured frame is the settled one.
+            scene.render(4_000_000_000L).encodeToData(EncodedImageFormat.PNG)!!.bytes
         }
         File(out, "$name.png").writeBytes(bytes)
         assertTrue(bytes.size > 10_000, "$name looks empty")
