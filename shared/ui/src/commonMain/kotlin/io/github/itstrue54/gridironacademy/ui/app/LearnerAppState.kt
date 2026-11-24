@@ -193,7 +193,7 @@ class LearnerAppState(
                 pct = grade.credit,
                 firstTry = firstTry,
                 answer = Attempts.answerText(step, answer),
-                msSpent = ms.coerceIn(0, Int.MAX_VALUE.toLong()).toInt(),
+                msSpent = ms.coerceIn(0, MAX_STEP_MS).toInt(),
                 epochDay = today(),
                 at = now(),
             )
@@ -238,16 +238,25 @@ class LearnerAppState(
     /** The Checkpoint or Big Game in progress, keyed by its screen, like [activeLesson]. */
     private var activeGate: Pair<Screen, Any>? = null
 
-    /** Gate attempts this session, so every retake draws a new set of questions. */
-    private var gateAttempts = 0
+    /**
+     * How many answers today's tries at this level's Checkpoint or Big Game have already
+     * given, saved or not. It is the same after a restart, so it stands in for an in-memory
+     * attempt counter: it's 0 before the first try and grows by at least one for any try
+     * the learner saw feedback on.
+     */
+    private fun gateAnswersToday(level: Level, context: AttemptContext): Int {
+        val steps = content.unitsOf(level).flatMap { u -> u.lessons.flatMap { l -> l.steps } }.mapTo(HashSet()) { it.id }
+        val day = today()
+        return (save.attempts + pending).count { it.context == context && it.epochDay == day && it.stepId in steps }
+    }
 
     /**
-     * A seed per level, day and attempt. The attempt count makes a same-day retake ask
-     * different questions (it can't be learned from the last try's feedback); the level
-     * and day keep a single attempt reproducible.
+     * A seed per level, day and try. The count of answers already given today makes a
+     * retake ask different questions, even after a restart (it can't be learned from the
+     * last try's feedback); the level and day keep a single attempt reproducible.
      */
-    private fun gateSeed(level: Level): Long =
-        (level.id.hashCode().toLong() * SEED_MIX + today()) * SEED_MIX + gateAttempts
+    private fun gateSeed(level: Level, context: AttemptContext): Long =
+        (level.id.hashCode().toLong() * SEED_MIX + today()) * SEED_MIX + gateAnswersToday(level, context)
 
     private inline fun <reified T : Any> gate(key: Screen, make: () -> T): T? {
         (activeGate?.takeIf { it.first == key }?.second as? T)?.let { return it }
@@ -258,7 +267,7 @@ class LearnerAppState(
     fun checkpointControllerOrNull(levelId: String, testOut: Boolean): LessonController? =
         gate(Screen.CheckpointPlay(levelId, testOut)) {
             val level = content.level(levelId)
-            LessonController(LevelTest.test(content.unitsOf(level), level.gate, gateSeed(level)), retryMisses = false,
+            LessonController(LevelTest.test(content.unitsOf(level), level.gate, gateSeed(level, AttemptContext.CHECK)), retryMisses = false,
                 now = now, onGraded = recorder(AttemptContext.CHECK))
         }
 
@@ -271,7 +280,7 @@ class LearnerAppState(
     fun speedRoundControllerOrNull(levelId: String): SpeedRoundController? =
         gate(Screen.BigGamePlay(levelId)) {
             val level = content.level(levelId)
-            SpeedRoundController(LevelTest.gamePool(content.unitsOf(level), level.gate, gateSeed(level)), SPEED_ROUND_MILLIS,
+            SpeedRoundController(LevelTest.gamePool(content.unitsOf(level), level.gate, gateSeed(level, AttemptContext.GAME)), SPEED_ROUND_MILLIS,
                 onGraded = recorder(AttemptContext.GAME))
         }
 
@@ -292,7 +301,7 @@ class LearnerAppState(
     fun gameControllerOrNull(levelId: String): LessonController? =
         gate(Screen.BigGamePlay(levelId)) {
             val level = content.level(levelId)
-            LessonController(LevelTest.gamePool(content.unitsOf(level), level.gate, gateSeed(level)), retryMisses = false,
+            LessonController(LevelTest.gamePool(content.unitsOf(level), level.gate, gateSeed(level, AttemptContext.GAME)), retryMisses = false,
                 now = now, onGraded = recorder(AttemptContext.GAME))
         }
 
@@ -306,7 +315,7 @@ class LearnerAppState(
     fun practice(): Practice =
         DailyPractice.pick(save.progress, save.attempts, content, currentLevel, today(), save.learnerId.hashCode().toLong())
 
-    val practiceDoneToday: Boolean get() = DailyPractice.doneToday(save.attempts, today())
+    val practiceDoneToday: Boolean get() = DailyPractice.doneToday(save.attempts, save.progress, content, today())
 
     fun startPractice() {
         activePractice = null
@@ -329,17 +338,37 @@ class LearnerAppState(
         if (screen != Screen.PracticePlay) return
         val steps = activePractice?.first ?: return
         val before = save.progress
-        val reviewed = steps.fold(before) { p, s ->
-            val right = s.id !in session.missedIds
+        val applied = applyPractice(before, steps, session.missedIds)
+        val after = applied.copy(xp = applied.xp + session.scorePct / XP_DIVISOR)
+        commit(save.copy(progress = after))
+        replaceTop(Screen.PracticeDone(session.scorePct, steps.size, after.xp - before.xp))
+    }
+
+    /**
+     * Applies [answered] practice steps to [before] on one day, read once so a midnight
+     * between the cards and the streak can't split them. Steps not in [answered] are untouched.
+     */
+    private fun applyPractice(before: Progress, answered: List<Step>, missedIds: Set<String>): Progress {
+        val day = today()
+        val moved = answered.fold(before) { p, s ->
+            val right = s.id !in missedIds
             when {
-                s.id in p.review -> Review.answered(p, s.id, right, today())
-                !right -> Review.miss(p, s.id, s.concept, today())
+                s.id in p.review -> Review.answered(p, s.id, right, day)
+                !right -> Review.miss(p, s.id, s.concept, day)
                 else -> p
             }
         }
-        val after = reviewed.copy(xp = reviewed.xp + session.scorePct / XP_DIVISOR).touch(today())
-        commit(save.copy(progress = after))
-        replaceTop(Screen.PracticeDone(session.scorePct, steps.size, after.xp - before.xp))
+        return moved.touch(day)
+    }
+
+    /** Leaving practice part-way keeps what was answered, with no XP: only a finished practice earns it. */
+    private fun leavePractice() {
+        val (steps, controller) = activePractice ?: return
+        activePractice = null
+        val session = controller.result
+        val answered = steps.filter { it.id in session.answeredIds }
+        if (answered.isEmpty()) return
+        commit(save.copy(progress = applyPractice(save.progress, answered, session.missedIds)))
     }
 
     /** The quiz in progress: its term, its questions and its controller, made once. */
@@ -552,11 +581,21 @@ class LearnerAppState(
 
     fun keepGoing() { confirmingLeave = false }
 
+    /**
+     * Writes answers still waiting to be saved. The shell calls it when the app leaves the
+     * screen, since Android may end a stopped app without another callback. A no-op when
+     * nothing is pending.
+     */
+    fun saveNow() {
+        if (pending.isNotEmpty()) commit(save)
+    }
+
     /** Returns false at the root, so the platform can close the app. */
     fun back(): Boolean {
         if (backStack.size <= 1) return false
         // Quitting drops the lesson's result, but the answers given still count.
         if (pending.isNotEmpty()) commit(save)
+        if (screen is Screen.PracticePlay) leavePractice()
         if (screen is Screen.LessonPlay) activeLesson = null
         if (screen is Screen.CheckpointPlay || screen is Screen.BigGamePlay) activeGate = null
         backStack = backStack.dropLast(1)
@@ -609,13 +648,11 @@ class LearnerAppState(
 
     fun startCheckpoint(level: Level, testOut: Boolean = false) {
         activeGate = null
-        gateAttempts++
         go(Screen.CheckpointPlay(level.id, testOut))
     }
 
     fun startBigGame(level: Level) {
         activeGate = null
-        gateAttempts++
         go(Screen.BigGamePlay(level.id))
     }
 
@@ -728,6 +765,8 @@ class LearnerAppState(
         const val GATE_MISSES = 3
         const val GATE_LOCK_MILLIS = 60_000L
         const val MILLIS_PER_DAY = 86_400_000L
+        /** One step counts at most five minutes: a question left open overnight isn't eight hours of study. */
+        const val MAX_STEP_MS = 300_000L
         const val NICKNAME_MAX = 20
         /** Practice XP, the same rate as a lesson: a tenth of the score. */
         const val XP_DIVISOR = 10

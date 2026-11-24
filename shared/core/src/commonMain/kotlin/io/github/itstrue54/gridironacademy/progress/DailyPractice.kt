@@ -67,9 +67,16 @@ object DailyPractice {
         return Practice(chosen.values.toList(), urgent = due.isNotEmpty() || rusty.isNotEmpty())
     }
 
-    /** Practice is done for the day once any review answer was given today. */
-    fun doneToday(attempts: List<AttemptEvent>, today: Long): Boolean =
-        attempts.any { it.context == AttemptContext.REVIEW && it.epochDay == today }
+    /**
+     * Practice is done for the day once a review answer was given today and no card is
+     * still due. Only cards practice can ask count: one whose step is gone from the content
+     * (or is a Learn card) would otherwise keep practice open forever.
+     */
+    fun doneToday(attempts: List<AttemptEvent>, progress: Progress, content: Content, today: Long): Boolean {
+        val askable = content.lessons.flatMap { it.steps }.filter { it !is Learn }.map { it.id }.toSet()
+        return attempts.any { it.context == AttemptContext.REVIEW && it.epochDay == today } &&
+            Review.due(progress, today).none { it.stepId in askable }
+    }
 
     private const val PRIME = 1_000_003L
 }

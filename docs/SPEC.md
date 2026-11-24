@@ -337,17 +337,20 @@ in the engine, unit-tested.
 | **Playbook quiz** | Generated from the team playbook (§7.5); `my_job` per position | Any, team-linked |
 | **Daily challenge** | One seeded mixed set per day (seed = epoch day + profile), same for everyone at a level so friends/teams can compare | All |
 
-Game sets are drawn with the injected `Rng` seeded from (profile, item set, attempt
-number), so a replay of the same attempt is identical (principle 1.5.4).
+Game sets are drawn with the injected `Rng`, so the same seed gives the same set
+(principle 1.5.4). Practice and the daily challenge are seeded from (profile, epoch
+day); the Checkpoint and Big Game from (level, day, the number of answers already given
+to that gate today, saved or not), so every retake is a new draw (§4.4).
 
 ### 4.4 Gates
 - Lessons open in order; pass = 60% first-attempt score.
 - Checkpoint (level test) opens when every lesson is passed; 12 questions; 80% to
-  pass. Drawn from the level's graded steps (seeded by level, day and attempt, so every
-  retake is a new draw that can't be learned from the last try's feedback; weighting
+  pass. Drawn from the level's graded steps (seeded by level, day and the number of answers already given to that gate today, saved or not, so every
+  retake, even after a restart, is a new draw that can't be learned from the last try's feedback; weighting
   toward low-mastery concepts comes with §4.6), each asked once with feedback but no
   retry. Misses go to review. The Speed round clock doesn't count time the app is away, on the rules screen, or under the Leave dialog; any screen change closes that dialog.
-- Big Game opens after the checkpoint; 70% to pass.
+- Big Game opens after the checkpoint; 70% to pass. Its set is seeded the same way as the
+  Checkpoint's (level, day, answers already given to that gate today), so a retake draws again.
 - Passing both passes the level. Stars per DESIGN (95/80/60).
 - **Level 0 has no test.** Finishing every lesson and one Picture Play passes it, so
   no pre-reader ever "fails" a test. A kid can also skip Level 0 entirely.
@@ -484,8 +487,18 @@ Game Day uses fictional teams (`TeamMark`).
   learner has already seen, 10 at most; topped up with Learning concepts of the current
   level when fewer than 5. Home leads with it (the one primary, DESIGN 9.1) only when
   cards are due or a concept is Rusty; otherwise it's a card above Continue. Answers are
-  logged as `review` attempts; a right answer moves a card up a box, a miss sends it (or
-  a new card) to box 1. Any review answer today marks practice done for the day.
+  logged as `review` attempts; a right answer moves a card up a box **only if it is due**
+  (a Rusty or Learning top-up can pick a step whose card isn't due yet; answering it
+  right changes nothing, so a card missed today can't climb today), a miss sends it (or
+  a new card) to box 1 whether due or not. Practice is done for the day once a review answer was given
+  today **and** no card practice can ask is still due (a card whose step is gone from the
+  content doesn't count). Leaving after one answer keeps practice open only while such
+  cards are due; a practice of top-up questions alone is done after its first answer.
+  Leaving practice part-way (Leave dialog or Back) applies only the steps answered:
+  their cards move, misses become cards, and it counts for the streak; unanswered
+  steps stay as they were, and no XP is awarded (only a finished practice earns it).
+  Card moves and the streak use one day read once, so a midnight mid-practice can't
+  split them.
   Assignment items join when the inbox exists.
 
 ### 6.5 Assignments inbox
@@ -750,8 +763,10 @@ Penetration test and a privacy review before M3 public release.
   answer as an `AttemptEvent` with its context, credit, first try or retry, the answer
   text and time spent; the newest `LearnerSave.MAX_ATTEMPTS` = 20,000 are kept, about
   5 MB, and the file is encoded and written off the main thread), `deviceId` and a local `learnerId` (UUIDs from the platform) and
-  `nextSeq`. Answers are saved with the lesson or gate result, or when the learner leaves
-  part-way: an answer counts even if the lesson doesn't. `SaveMigrations` (in
+  `nextSeq`. Answers are saved with the lesson or gate result, when the learner leaves
+  part-way, and when the app leaves the screen (`saveNow`): an answer counts even if the
+  lesson doesn't. Time spent on a step is wall time capped at `MAX_STEP_MS` (5 minutes),
+  so a question left open overnight adds five minutes to "minutes this week", not hours. `SaveMigrations` (in
   `shared/data/migration`) reads every version: schema 1 never wrote its version (it was
   the default), so a save without one is schema 1, and from schema 2 the version is
   always written. Fixtures: a hand-made v1 save and a real one from a phone.

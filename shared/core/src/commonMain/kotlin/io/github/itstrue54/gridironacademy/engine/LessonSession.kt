@@ -30,6 +30,9 @@ class LessonSession(steps: List<Step>, private val retryMisses: Boolean = true) 
     val scorePct: Int
         get() = if (firstTry.isEmpty()) 100 else (100f * totalCredit / firstTry.size).roundToInt()
 
+    /** Graded steps that have been answered at least once, in the order first answered. */
+    val answeredIds: Set<String> get() = firstTry.keys
+
     val missedIds: Set<String> get() = firstTry.filterValues { it < 1f }.keys
 
     fun submit(answer: Answer): Grade {

@@ -8,6 +8,8 @@ import io.github.itstrue54.gridironacademy.model.*
 import io.github.itstrue54.gridironacademy.progress.AgeBand
 import io.github.itstrue54.gridironacademy.progress.AttemptEvent
 import io.github.itstrue54.gridironacademy.progress.Profile
+import io.github.itstrue54.gridironacademy.progress.Progress
+import io.github.itstrue54.gridironacademy.progress.ReviewCard
 import io.github.itstrue54.gridironacademy.progress.LearnerSave
 import io.github.itstrue54.gridironacademy.progress.AttemptContext
 import io.github.itstrue54.gridironacademy.ui.app.InMemoryLearnerStore
@@ -168,6 +170,22 @@ class LearnerAppStateTest {
     }
 
     @Test
+    fun stepTimeIsCappedAtFiveMinutes() {
+        var clock = 1_000_000L
+        val store = InMemoryLearnerStore()
+        val s = LearnerAppState(content, store, nowMillis = { clock }) { 300 }
+        s.createProfile("Sam", AgeBand.AGE_18_PLUS)
+        val (level, lesson) = s.nextLesson()!!
+        s.startLesson(level, lesson)
+        val c = s.lessonController(level.id, lesson.id)
+        while (c.step is Learn) { c.submit(perfect(c.step!!)); c.next() }
+        clock += 8 * 3_600_000L // left open overnight
+        c.submit(perfect(c.step!!))
+        s.saveNow()
+        assertEquals(300_000, store.load()!!.attempts.single().msSpent)
+    }
+
+    @Test
     fun answersCountEvenWhenTheLearnerQuitsPartWay() {
         val store = InMemoryLearnerStore()
         val s = LearnerAppState(content, store) { 310 }
@@ -187,6 +205,47 @@ class LearnerAppStateTest {
         assertEquals(2, store.load()!!.attempts.size)
         assertFalse(store.load()!!.progress.lessonPassed(lesson.id), "the lesson itself doesn't count")
         assertEquals(0, s.unsavedAttempts)
+    }
+
+    /** A store that counts its writes, so a test can tell "wrote" from "did nothing". */
+    private class CountingStore : io.github.itstrue54.gridironacademy.ui.app.LearnerStore {
+        private val inner = InMemoryLearnerStore()
+        var writes = 0
+            private set
+        override fun load(): LearnerSave? = inner.load()
+        override fun save(save: LearnerSave) { writes++; inner.save(save) }
+    }
+
+    @Test
+    fun saveNowWritesPendingAnswers() {
+        val store = CountingStore()
+        val s = LearnerAppState(content, store) { 311 }
+        s.createProfile("Sam", AgeBand.AGE_18_PLUS)
+        val (level, lesson) = s.nextLesson()!!
+        s.startLesson(level, lesson)
+        val c = s.lessonController(level.id, lesson.id)
+        var answered = 0
+        while (answered < 3) {
+            val step = c.step!!
+            c.submit(perfect(step))
+            if (step !is Learn) answered++
+            c.next()
+        }
+        assertEquals(3, s.unsavedAttempts)
+        s.saveNow()
+        assertEquals(0, s.unsavedAttempts)
+        val fresh = LearnerAppState(content, store) { 311 }
+        assertEquals(3, fresh.save.attempts.size)
+    }
+
+    @Test
+    fun saveNowWithNothingPendingDoesNotWrite() {
+        val store = CountingStore()
+        val s = LearnerAppState(content, store) { 312 }
+        s.createProfile("Sam", AgeBand.AGE_18_PLUS)
+        val before = store.writes
+        s.saveNow()
+        assertEquals(before, store.writes)
     }
 
     @Test
@@ -512,6 +571,91 @@ class LearnerAppStateTest {
         assertTrue(content.scenes.welcome.description.isNotBlank())
     }
 
+    /** A learner with two review cards due on [day], and the state to practise them. */
+    private fun twoDueCards(day: () -> Long): Triple<LearnerAppState, InMemoryLearnerStore, List<Step>> {
+        val steps = content.lessons.flatMap { it.steps }.filter { it !is Learn }.take(2)
+        val cards = steps.mapIndexed { i, st -> st.id to ReviewCard(st.id, st.concept, 1, 10L + i) }.toMap()
+        val store = InMemoryLearnerStore(
+            LearnerSave(profile = Profile("Sam", AgeBand.AGE_18_PLUS), progress = Progress(review = cards), deviceId = "d", learnerId = "me"),
+        )
+        return Triple(LearnerAppState(content, store) { day() }, store, steps)
+    }
+
+    @Test
+    fun leavingPracticeMovesAnsweredCardsOnly() {
+        val (s, store, _) = twoDueCards { 500L }
+        s.startPractice()
+        val p = s.practiceControllerOrNull()!!
+        val first = p.step!!
+        val second = s.practice().steps.first { it.id != first.id }
+        p.submit(perfect(first))
+        s.confirmLeaveForTest()
+        assertEquals(Screen.Home, s.screen)
+        assertEquals(2, s.save.progress.review.getValue(first.id).box, "the answered card moved up")
+        assertEquals(1, s.save.progress.review.getValue(second.id).box, "the unanswered card is as it was")
+        assertEquals(store.load()!!.progress, s.save.progress, "and it is on disk")
+        assertEquals(0, s.save.progress.xp, "no XP for a practice that wasn't finished")
+    }
+
+    @Test
+    fun leavingPracticeCountsForStreak() {
+        val (s, _, _) = twoDueCards { 500L }
+        s.startPractice()
+        val p = s.practiceControllerOrNull()!!
+        p.submit(perfect(p.step!!))
+        s.confirmLeaveForTest()
+        assertEquals(500L, s.save.progress.lastActiveDay)
+    }
+
+    @Test
+    fun leavingPracticeWithNothingAnsweredChangesNothing() {
+        val (s, _, _) = twoDueCards { 500L }
+        val before = s.save.progress
+        s.startPractice()
+        s.practiceControllerOrNull()!!
+        s.back()
+        assertEquals(before, s.save.progress)
+    }
+
+    @Test
+    fun practiceNotDoneWhileCardsDue() {
+        val (s, _, _) = twoDueCards { 500L }
+        s.startPractice()
+        val p = s.practiceControllerOrNull()!!
+        p.submit(perfect(p.step!!))
+        s.confirmLeaveForTest()
+        assertFalse(s.practiceDoneToday, "one card is still due")
+    }
+
+    @Test
+    fun practiceDoneWhenNothingDue() {
+        val (s, _, _) = twoDueCards { 500L }
+        s.startPractice()
+        val p = s.practiceControllerOrNull()!!
+        playPerfect(p)
+        s.finishPractice(p.result)
+        assertTrue(s.practiceDoneToday)
+    }
+
+    @Test
+    fun practiceAcrossMidnightUsesOneDay() {
+        var day = 500L
+        var ticking = false
+        // Once ticking, every read of the clock is a later day: only one read may be used.
+        val (s, _, _) = twoDueCards { if (ticking) day++ else day }
+        s.startPractice()
+        val p = s.practiceControllerOrNull()!!
+        playPerfect(p)
+        ticking = true
+        s.finishPractice(p.result)
+        ticking = false
+        assertEquals(500L, s.save.progress.lastActiveDay)
+        assertEquals(2, s.save.progress.review.size)
+        s.save.progress.review.values.forEach { assertEquals(502L, it.dueDay, "box 2 is two days from the same day the streak used") }
+    }
+
+    private fun LearnerAppState.confirmLeaveForTest() { requestBack(); confirmLeave() }
+
     private fun playPerfect(c: LessonController) {
         while (!c.finished) { c.submit(perfect(c.step!!)); if (!c.finished && c.grade != null) c.next() }
     }
@@ -627,6 +771,54 @@ class LearnerAppStateTest {
         assertEquals("kid-2", next.level.id)
         assertTrue(s.levelUnlocked(next.level))
         assertEquals(content.unitsOf(next.level).first().lessons.first().id, next.lesson.id)
+    }
+
+    @Test
+    fun checkpointRetakeAfterRestartDrawsNewSet() {
+        val store = InMemoryLearnerStore()
+        val first = LearnerAppState(content, store) { 800 }
+        first.createProfile("Sam", AgeBand.AGE_18_PLUS)
+        val level = first.levels.first()
+        first.startCheckpoint(level)
+        val c1 = first.checkpointController(level.id, testOut = false)
+        val ids1 = mutableListOf<String>()
+        while (!c1.finished) { ids1 += c1.step!!.id; c1.submit(Answer.Choice(-1)); if (!c1.finished && c1.grade != null) c1.next() }
+        first.finishCheckpoint(level.id, false, c1.result)
+        assertEquals(level.gate.testQuestions, ids1.size)
+
+        val second = LearnerAppState(content, store) { 800 }
+        second.startCheckpoint(level)
+        val c2 = second.checkpointController(level.id, testOut = false)
+        val drawn = mutableListOf<String>()
+        while (!c2.finished) { drawn += c2.step!!.id; c2.submit(Answer.Choice(-1)); if (!c2.finished && c2.grade != null) c2.next() }
+        assertEquals(level.gate.testQuestions, drawn.size)
+        assertNotEquals(ids1, drawn)
+    }
+
+    @Test
+    fun bigGameRetakeAfterRestartDrawsNewSet() {
+        fun play(s: LearnerAppState, level: Level): List<String> {
+            s.startBigGame(level)
+            val round = s.speedRoundController(level.id)
+            val ids = mutableListOf<String>()
+            var t = 0L
+            while (!round.over) {
+                t += 1_000
+                round.tick(t)
+                round.current?.let { ids += it.id; round.answer(Answer.Choice(-1)) }
+            }
+            s.finishSpeedRound(level.id, round)
+            return ids
+        }
+        val store = InMemoryLearnerStore()
+        val first = LearnerAppState(content, store) { 801 }
+        first.createProfile("Sam", AgeBand.AGE_18_PLUS)
+        val level = first.levels.first()
+        assertTrue(first.bigGameIsSpeedRound(level.id))
+        val ids1 = play(first, level)
+        val ids2 = play(LearnerAppState(content, store) { 801 }, level)
+        assertTrue(ids1.isNotEmpty() && ids2.isNotEmpty())
+        assertNotEquals(ids1, ids2)
     }
 
     @Test

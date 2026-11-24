@@ -207,7 +207,8 @@ class EngineTest {
         assertTrue(Review.due(p, 100).isEmpty()); assertEquals(1, Review.due(p, 101).size)
         p = Review.answered(p, "s", true, 101); assertEquals(2, p.review["s"]!!.box); assertEquals(103, p.review["s"]!!.dueDay)
         p = Review.answered(p, "s", false, 103); assertEquals(1, p.review["s"]!!.box)
-        repeat(4) { p = Review.answered(p, "s", true, 200) }
+        var day = 200L
+        repeat(4) { p = Review.answered(p, "s", true, day); day = p.review["s"]!!.dueDay }  // each review on the day it falls due
         assertEquals(5, p.review["s"]!!.box)
         p = Review.answered(p, "s", true, 300)
         assertTrue(p.review.isEmpty())

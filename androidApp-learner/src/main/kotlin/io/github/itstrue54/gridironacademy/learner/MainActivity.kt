@@ -87,7 +87,11 @@ class MainActivity : ComponentActivity() {
         contentResolver.unregisterContentObserver(animationScaleObserver)
         // The grown-up zone never stays open behind the app (DESIGN 9.9). A rotation or
         // the backup file picker stops the activity too; those keep the zone open.
-        if (!isChangingConfigurations && !platform.pickerOpen) (model.load.value as? Load.Ready)?.app?.leftTheApp()
+        // Android may end a stopped app without another callback, so answers still waiting
+        // go to disk now, rotation and the file picker included.
+        val app = (model.load.value as? Load.Ready)?.app
+        app?.saveNow()
+        if (!isChangingConfigurations && !platform.pickerOpen) app?.leftTheApp()
         super.onStop()
     }
 
