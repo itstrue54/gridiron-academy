@@ -216,6 +216,10 @@ class LearnerAppState(
     var lockedTapLevelId: String? by mutableStateOf(null)
         private set
 
+    /** Counts every locked tap, so a repeat tap on the same card still re-announces the note. */
+    var lockedTapCount: Int by mutableStateOf(0)
+        private set
+
     /**
      * The lesson in progress lives here, not in composition, so it survives the screen
      * being rebuilt (a phone rotation) as long as this state does.
@@ -619,11 +623,12 @@ class LearnerAppState(
     fun levelThatOpens(level: Level): Level? {
         val passed = save.progress.levelsPassed
         val id = level.requires.firstOrNull { it !in passed } ?: level.requiresAny.firstOrNull { it !in passed }
-        return id?.let { levels.firstOrNull { l -> l.id == it } ?: content.level(it) }
+        // Only this profile's own ladder: another track's level number would name the wrong level.
+        return id?.let { levels.firstOrNull { l -> l.id == it } } ?: levels.firstOrNull { it.number == level.number - 1 }
     }
 
     /** A tap on a locked level opens nothing; it leaves a note on Home saying what does. */
-    fun tapLockedLevel(level: Level) { lockedTapLevelId = level.id }
+    fun tapLockedLevel(level: Level) { lockedTapLevelId = level.id; lockedTapCount++ }
 
     fun startLesson(level: Level, lesson: Lesson) {
         activeLesson = null

@@ -100,7 +100,7 @@ fun GateDoneScreen(state: LearnerAppState, done: Screen.GateDone) {
                 done.scorePct >= done.passPct - CLOSE_MARGIN -> Res.string.checkpoint_not_yet_kid
                 else -> Res.string.checkpoint_not_yet_far_kid
             },
-            done.passPct,
+            *if (kid) arrayOf(rightToPass(level.gate.testQuestions, done.passPct), level.gate.testQuestions) else arrayOf(done.passPct),
         )
         done.passed -> stringResource(if (kid) Res.string.game_won_kid else Res.string.game_won_adult)
         kid -> stringResource(Res.string.game_not_yet_kid, rightToPass(level.gate.gameQuestions, done.passPct), level.gate.gameQuestions)

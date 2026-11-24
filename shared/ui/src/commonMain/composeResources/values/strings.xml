@@ -136,8 +136,8 @@
     <string name="checkpoint_passed_adult">Checkpoint passed. The Big Game is open.</string>
     <string name="testout_passed_kid">You tested out! The Big Game is open.</string>
     <string name="testout_passed_adult">Tested out. The drills are marked done and the Big Game is open.</string>
-    <string name="checkpoint_not_yet_kid">So close! Get %1$d% to pass. Practice and try again.</string>
-    <string name="checkpoint_not_yet_far_kid">Not yet! Get %1$d% to pass. Play the drills again, then try.</string>
+    <string name="checkpoint_not_yet_kid">So close! Get %1$d of %2$d right to pass. Practice and try again.</string>
+    <string name="checkpoint_not_yet_far_kid">Not yet! Get %1$d of %2$d right to pass. Play the drills again, then try.</string>
     <string name="checkpoint_not_yet_adult">%1$d% passes the Checkpoint. Review and try again.</string>
     <string name="game_won_kid">You won the Big Game!</string>
     <string name="game_won_adult">Big Game won.</string>

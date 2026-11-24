@@ -144,10 +144,14 @@ class ScreenRenderTest {
 
     @Test fun homeLockedTap() {
         val kid = appState(AgeBand.AGE_8_9)
-        // Level 3, so the note sits in view above the Continue bar.
-        val locked = kid.levels.first { it.number == 3 }
+        // Level 2 is the bottom card, under the Continue bar: the note must scroll itself into view.
+        val locked = kid.levels.first { it.number == 2 }
         kid.tapLockedLevel(locked)
-        shot("03d-home-locked-tap-kid", height = 3000) { LearnerApp(kid, dark = false) }
+        // Tall enough that the whole ladder fits: ImageComposeScene does not scroll; the scroll-into-view itself is asserted in LockedLevelNoteUiTest.
+        shot("03d-home-locked-tap-kid", height = 3800) { LearnerApp(kid, dark = false) }
+        val adult = appState(AgeBand.AGE_18_PLUS)
+        adult.tapLockedLevel(adult.levels.first { it.number == 2 })
+        shot("04d-home-locked-tap-adult", height = 3000) { LearnerApp(adult, dark = true) }
     }
 
     @Test fun homeAndLevelBothSkins() {
