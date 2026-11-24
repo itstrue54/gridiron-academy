@@ -2,7 +2,7 @@ package io.github.itstrue54.gridironacademy.progress
 
 /**
  * Spaced review of missed items. A miss goes to box 1 (due tomorrow); each correct
- * review moves it up a box and out in time; a miss sends it back to box 1.
+ * review of a card that is due moves it up a box and out in time; a miss sends it back to box 1.
  * Clearing box 5 retires the card.
  */
 object Review {
@@ -14,6 +14,7 @@ object Review {
     fun answered(p: Progress, stepId: String, correct: Boolean, today: Long): Progress {
         val card = p.review[stepId] ?: return p
         if (!correct) return miss(p, stepId, card.concept, today)
+        if (card.dueDay > today) return p // not due yet: a right answer is practice, not a review
         if (card.box >= 5) return p.copy(review = p.review - stepId)
         val box = card.box + 1
         return p.copy(review = p.review + (stepId to card.copy(box = box, dueDay = today + intervalDays[box - 1])))

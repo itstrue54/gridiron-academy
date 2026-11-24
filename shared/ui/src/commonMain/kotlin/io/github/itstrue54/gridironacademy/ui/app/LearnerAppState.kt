@@ -193,7 +193,7 @@ class LearnerAppState(
                 pct = grade.credit,
                 firstTry = firstTry,
                 answer = Attempts.answerText(step, answer),
-                msSpent = ms.coerceIn(0, Int.MAX_VALUE.toLong()).toInt(),
+                msSpent = ms.coerceIn(0, MAX_STEP_MS).toInt(),
                 epochDay = today(),
                 at = now(),
             )
@@ -765,6 +765,8 @@ class LearnerAppState(
         const val GATE_MISSES = 3
         const val GATE_LOCK_MILLIS = 60_000L
         const val MILLIS_PER_DAY = 86_400_000L
+        /** One step counts at most five minutes: a question left open overnight isn't eight hours of study. */
+        const val MAX_STEP_MS = 300_000L
         const val NICKNAME_MAX = 20
         /** Practice XP, the same rate as a lesson: a tenth of the score. */
         const val XP_DIVISOR = 10

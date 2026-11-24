@@ -484,8 +484,10 @@ Game Day uses fictional teams (`TeamMark`).
   learner has already seen, 10 at most; topped up with Learning concepts of the current
   level when fewer than 5. Home leads with it (the one primary, DESIGN 9.1) only when
   cards are due or a concept is Rusty; otherwise it's a card above Continue. Answers are
-  logged as `review` attempts; a right answer moves a card up a box, a miss sends it (or
-  a new card) to box 1. Practice is done for the day once a review answer was given
+  logged as `review` attempts; a right answer moves a card up a box **only if it is due**
+  (a Rusty or Learning top-up can pick a step whose card isn't due yet; answering it
+  right changes nothing, so a card missed today can't climb today), a miss sends it (or
+  a new card) to box 1 whether due or not. Practice is done for the day once a review answer was given
   today **and** no card is still due, so leaving after one answer doesn't hide it.
   Leaving practice part-way (Leave dialog or Back) applies only the steps answered:
   their cards move, misses become cards, and it counts for the streak; unanswered
@@ -756,8 +758,10 @@ Penetration test and a privacy review before M3 public release.
   answer as an `AttemptEvent` with its context, credit, first try or retry, the answer
   text and time spent; the newest `LearnerSave.MAX_ATTEMPTS` = 20,000 are kept, about
   5 MB, and the file is encoded and written off the main thread), `deviceId` and a local `learnerId` (UUIDs from the platform) and
-  `nextSeq`. Answers are saved with the lesson or gate result, or when the learner leaves
-  part-way: an answer counts even if the lesson doesn't. `SaveMigrations` (in
+  `nextSeq`. Answers are saved with the lesson or gate result, when the learner leaves
+  part-way, and when the app leaves the screen (`saveNow`): an answer counts even if the
+  lesson doesn't. Time spent on a step is wall time capped at `MAX_STEP_MS` (5 minutes),
+  so a question left open overnight adds five minutes to "minutes this week", not hours. `SaveMigrations` (in
   `shared/data/migration`) reads every version: schema 1 never wrote its version (it was
   the default), so a save without one is schema 1, and from schema 2 the version is
   always written. Fixtures: a hand-made v1 save and a real one from a phone.

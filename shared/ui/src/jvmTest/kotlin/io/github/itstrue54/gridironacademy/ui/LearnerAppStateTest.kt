@@ -170,6 +170,22 @@ class LearnerAppStateTest {
     }
 
     @Test
+    fun stepTimeIsCappedAtFiveMinutes() {
+        var clock = 1_000_000L
+        val store = InMemoryLearnerStore()
+        val s = LearnerAppState(content, store, nowMillis = { clock }) { 300 }
+        s.createProfile("Sam", AgeBand.AGE_18_PLUS)
+        val (level, lesson) = s.nextLesson()!!
+        s.startLesson(level, lesson)
+        val c = s.lessonController(level.id, lesson.id)
+        while (c.step is Learn) { c.submit(perfect(c.step!!)); c.next() }
+        clock += 8 * 3_600_000L // left open overnight
+        c.submit(perfect(c.step!!))
+        s.saveNow()
+        assertEquals(300_000, store.load()!!.attempts.single().msSpent)
+    }
+
+    @Test
     fun answersCountEvenWhenTheLearnerQuitsPartWay() {
         val store = InMemoryLearnerStore()
         val s = LearnerAppState(content, store) { 310 }
