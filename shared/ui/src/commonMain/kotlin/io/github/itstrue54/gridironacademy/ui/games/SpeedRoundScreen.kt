@@ -162,7 +162,8 @@ fun SpeedRoundScreen(state: LearnerAppState, levelId: String, round: SpeedRoundC
                 when (val step = round.current) {
                     is MultipleChoice -> {
                         Prompt(step.prompt)
-                        choiceOrder(step.id, step.choices).forEachIndexed { shown, i ->
+                        val order = remember(step.id, step.choices) { choiceOrder(step.id, step.choices) }
+                        order.forEachIndexed { shown, i ->
                             AnswerButton(step.choices[i], AnswerState.REST, onClick = { round.answer(Answer.Choice(i)) }, letter = LETTERS.getOrElse(shown) { "${shown + 1}" })
                         }
                     }
