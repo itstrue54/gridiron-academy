@@ -19,6 +19,10 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.PathEffect
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.graphics.drawOutline
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
@@ -159,17 +163,27 @@ fun AnswerButton(
     val edge = when (state) {
         AnswerState.SELECTED -> c.gold
         AnswerState.CORRECT -> c.correct
-        AnswerState.RETRY, AnswerState.MISSED -> c.retry
+        AnswerState.RETRY -> c.retry
+        // Missed matches the field: a dashed green ring (a shape, not just a colour), no badge.
+        AnswerState.MISSED -> c.correct
         else -> c.line
     }
+    val dash = if (state == AnswerState.MISSED) PathEffect.dashPathEffect(floatArrayOf(18f, 12f)) else null
     Surface(
         onClick = onClick,
         enabled = state == AnswerState.REST || state == AnswerState.SELECTED,
         shape = skin.buttonShape,
         color = glass(),
         contentColor = if (state == AnswerState.DISABLED) c.inkDim else c.ink,
-        border = BorderStroke(if (state == AnswerState.REST || state == AnswerState.DISABLED) 2.dp else 3.dp, edge),
+        border = if (dash != null) null else BorderStroke(if (state == AnswerState.REST || state == AnswerState.DISABLED) 2.dp else 3.dp, edge),
         modifier = modifier
+            .drawWithContent {
+                drawContent()
+                if (dash != null) {
+                    val w = 3.dp.toPx()
+                    drawOutline(skin.buttonShape.createOutline(size, layoutDirection, this), edge, style = Stroke(w, pathEffect = dash))
+                }
+            }
             .fillMaxWidth()
             .heightIn(min = skin.touchTarget)
             .semantics {
@@ -195,7 +209,7 @@ fun AnswerButton(
             Text(text, style = Gridiron.type.answer, modifier = Modifier.weight(1f))
             when (state) {
                 AnswerState.CORRECT -> GlyphIcon(Glyph.CHECK, c.correct)
-                AnswerState.RETRY, AnswerState.MISSED -> GlyphIcon(Glyph.DASH, c.retry)
+                AnswerState.RETRY -> GlyphIcon(Glyph.DASH, c.retry)
                 // Selected shows a filled dot as well as the gold edge: colour is never alone.
                 AnswerState.SELECTED -> GlyphIcon(Glyph.PICKED, c.gold)
                 else -> Unit
@@ -335,7 +349,11 @@ fun FeedbackSheet(
             // Check is gone once graded, so focus moves to Continue instead of being lost.
             val continueFocus = remember { FocusRequester() }
             LaunchedEffect(Unit) { runCatching { continueFocus.requestFocus() } }
-            PrimaryButton(continueLabel, onContinue, modifier = Modifier.focusRequester(continueFocus))
+            // Focus lands here, which can cut off the polite verdict announcement: so the button
+            // itself carries it ("Not quite. Continue").
+            val continueSpoken = "${headline.trimEnd('.', '!')}. $continueLabel"
+            PrimaryButton(continueLabel, onContinue, modifier = Modifier.focusRequester(continueFocus)
+                .semantics { contentDescription = continueSpoken })
         }
     }
 }

@@ -115,6 +115,14 @@ class StepViewsUiTest {
         onNodeWithText("Continue", ignoreCase = true).assertIsFocused()
     }
 
+    @Test fun continueCarriesTheVerdictForTalkBack() = runComposeUiTest {
+        play(MultipleChoice("q1", "Pick", listOf("One", "Two"), 0, "Because."))
+        onNode(button("Two")).performClick()
+        onNodeWithText("Check", ignoreCase = true).performClick()
+        // Focus moves to Continue, which can cut off the live verdict, so the button says it too.
+        onNode(hasText("Continue", ignoreCase = true) and hasClickAction()).assertContentDescriptionContains("Not quite. Continue")
+    }
+
     @Test fun orderAnnouncesTheNewPosition() = runComposeUiTest {
         play(Order("o1", "Order", listOf("First", "Second", "Third"), "Because."))
         // Whatever the shuffle, the first item that can move down says where it landed, in a live region.

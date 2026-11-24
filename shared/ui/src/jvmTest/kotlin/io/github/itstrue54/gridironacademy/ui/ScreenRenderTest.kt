@@ -2,6 +2,7 @@ package io.github.itstrue54.gridironacademy.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -128,6 +129,27 @@ class ScreenRenderTest {
             controller.matchDraft = mapOf(step.pairs[0].left to step.pairs[0].right)
             shot(name, fontScale = scale) {
                 GridironTheme(skin = state.skin, dark = false) { LessonScreen(state, level.id, lesson.id, controller) }
+            }
+        }
+    }
+
+    /** Graded answer rows side by side (the lesson's own sheet hides them): the missed row is a dashed ring, in both skins, light and dark. */
+    @Test fun gradedAnswerRows() {
+        for ((name, skin, dark) in listOf(
+            Triple("f2-15-rows-kid-light", Skin.Kid, false), Triple("f2-15b-rows-kid-dark", Skin.Kid, true),
+            Triple("f2-15c-rows-adult-light", Skin.Adult, false), Triple("f2-15d-rows-adult-dark", Skin.Adult, true),
+        )) {
+            shot(name, height = 700) {
+                GridironTheme(skin = skin, dark = dark) {
+                    androidx.compose.foundation.layout.Column(
+                        Modifier.fillMaxSize().background(Gridiron.colors.surface).padding(16.dp),
+                        verticalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(12.dp),
+                    ) {
+                        io.github.itstrue54.gridironacademy.ui.components.AnswerState.entries.filter { it != io.github.itstrue54.gridironacademy.ui.components.AnswerState.SELECTED }.forEach {
+                            io.github.itstrue54.gridironacademy.ui.components.AnswerButton("State $it", it, onClick = {})
+                        }
+                    }
+                }
             }
         }
     }
