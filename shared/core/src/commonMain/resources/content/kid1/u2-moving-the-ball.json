@@ -328,7 +328,7 @@
         {
           "type": "multiple_choice",
           "id": "k1-downs-11",
-          "prompt": "It is 4th down. The offense does not make a first down. What happens next?",
+          "prompt": "In the NFL, it is 4th down. The offense does not make a first down. What happens next?",
           "choices": [
             "The other team gets the ball",
             "The offense gets 4 more downs",
