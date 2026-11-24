@@ -10,15 +10,27 @@ object LevelTest {
     fun test(units: List<CourseUnit>, gate: LevelGate, seed: Long): List<Step> =
         Rng(seed).sample(gradedSteps(units), gate.testQuestions)
 
+    /** True if [step] can be played in [game]. */
+    fun fits(game: GameType, step: Step): Boolean = when (game) {
+        GameType.SPEED_ROUND -> step is MultipleChoice || step is TrueFalse
+        GameType.READ_DEFENSE -> step is ReadDefense
+        GameType.GAME_DAY -> step is Situation
+        GameType.DIAGRAM_DASH -> step is DiagramTap
+    }
+
+    /**
+     * The gate game's questions. The gate's own [LevelGate.gameItems] come first (all of
+     * them, or a seeded sample if there are more than the game asks), then the level's
+     * lesson steps of the right kind fill the rest. An [LevelGate.ordered] gate plays
+     * game items then lesson items in authored order, cut to the game's length.
+     */
     fun gamePool(units: List<CourseUnit>, gate: LevelGate, seed: Long): List<Step> {
-        val all = gradedSteps(units)
-        val pool = when (gate.game) {
-            GameType.SPEED_ROUND -> all.filter { it is MultipleChoice || it is TrueFalse }
-            GameType.READ_DEFENSE -> all.filterIsInstance<ReadDefense>()
-            GameType.GAME_DAY -> all.filterIsInstance<Situation>()
-            GameType.DIAGRAM_DASH -> all.filterIsInstance<DiagramTap>()
-        }
-        return Rng(seed xor 0x5DEECE66DL).sample(pool, gate.gameQuestions)
+        val lesson = gradedSteps(units).filter { fits(gate.game, it) }
+        val q = gate.gameQuestions
+        if (gate.ordered) return (gate.gameItems + lesson).take(q)
+        val rng = Rng(seed xor 0x5DEECE66DL)
+        val own = if (gate.gameItems.size > q) rng.sample(gate.gameItems, q) else gate.gameItems
+        return own + rng.sample(lesson, q - own.size)
     }
 
     /** True if the level has enough content of the right kind to run its gate. */

@@ -34,13 +34,17 @@ def fingerprint(step: dict) -> str:
 
 
 def steps():
-    """(level, lesson, step) for every step, in course order."""
+    """(level, lesson, step) for every step, in course order. A gate's own game items
+    (curriculum.json gate.gameItems) come after the level's lessons, under a pseudo-lesson."""
     cur = json.loads((CONTENT / "curriculum.json").read_text())
     for lv in cur["levels"]:
         for f in lv["unitFiles"]:
             for lesson in json.loads((CONTENT / f).read_text())["lessons"]:
                 for s in lesson["steps"]:
                     yield lv, lesson, s
+        game = {"id": lv["id"] + "-big-game", "title": "Big Game items"}
+        for s in lv["gate"].get("gameItems", []):
+            yield lv, game, s
 
 
 def load_review():

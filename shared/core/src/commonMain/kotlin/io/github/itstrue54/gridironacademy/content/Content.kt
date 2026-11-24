@@ -29,6 +29,8 @@ class Content(
 
     fun level(id: String): Level = curriculum.levels.first { it.id == id }
     fun unitsOf(level: Level): List<CourseUnit> = unitsByLevel.getValue(level.id)
+    /** Steps written for the level's gate game alone (they sit in no lesson). */
+    fun gameItemsOf(level: Level): List<Step> = level.gate.gameItems
     fun levelOfLesson(lessonId: String): Level? = levelByLesson[lessonId]
 
     /** Every lesson in curriculum order (levels as listed, then units, then lessons). */
@@ -40,7 +42,8 @@ class Content(
         curriculum.levels.flatMap { lv -> unitsOf(lv).flatMap { u -> u.lessons.map { it.id to lv } } }.toMap()
     }
     private val conceptByStep by lazy {
-        lessons.flatMap { l -> l.steps.mapNotNull { s -> s.concept?.let { s.id to it } } }.toMap()
+        (lessons.flatMap { it.steps } + curriculum.levels.flatMap { it.gate.gameItems })
+            .mapNotNull { s -> s.concept?.let { s.id to it } }.toMap()
     }
 
     fun lesson(id: String): Lesson? = lessonById[id]

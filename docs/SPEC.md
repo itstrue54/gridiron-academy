@@ -247,7 +247,7 @@ the mastery map (§4.6) and placement (§4.5).
   `commonMain` only defines the `ContentSource` interface; `ClasspathContentSource` in
   the `jvmShared` source set (jvm + android) reads the packaged files. iOS gets its own
   reader at M5 (§11.3).
-- Files: `curriculum.json` (levels and gates), one file per unit, `glossary.json`,
+- Files: `curriculum.json` (levels and gates; a gate may carry `gameItems`, below), one file per unit, `glossary.json`,
   `concepts.json` (§3.2 catalogue + graph), `packs.json` (scheme packs, §7.4),
   `voice/<locale>.json` (feedback copy, DESIGN §11), `audio/` (Level 0 recordings).
 - Each file has `schemaVersion` and the bundle has a `contentVersion` (monotonic
@@ -261,6 +261,15 @@ the mastery map (§4.6) and placement (§4.5).
   complete; every pack resolves; Level 0 steps have audio for every prompt and choice
   and no text-only choice; every `[review]`-flagged step is excluded from release
   builds unless signed off (§13.3).
+- **Gate game items.** A gate (`curriculum.json` `levels[].gate`) may carry
+  `"gameItems": [ ...steps... ]`: ordinary steps (same JSON as in a unit file, e.g.
+  `"type": "situation"`) written for the Big Game only, in no lesson. They live inline in
+  the gate because the loader already decodes the whole gate with the curriculum, so no
+  new file kind or loader path is needed. They count everywhere lesson steps do: the
+  validator (same checks, ids unique across the whole course, and each must suit the
+  gate's game type), step/concept lookup, review fingerprints and `tools/review.py`
+  (listed after the level's lessons), and release gating (an unsigned game item holds its
+  level back like an unsigned lesson step).
 - **Load failure** never crashes the app: a bad or missing file shows a kind error
   with **Try again** (DESIGN §9.11), falls back to the last good bundle (bundled or
   previously downloaded), and writes a local diagnostic. Release content cannot fail
@@ -337,6 +346,14 @@ in the engine, unit-tested.
 | **Playbook quiz** | Generated from the team playbook (§7.5); `my_job` per position | Any, team-linked |
 | **Daily challenge** | One seeded mixed set per day (seed = epoch day + profile), same for everyone at a level so friends/teams can compare | All |
 
+**Gate game questions.** A gate game asks `gameQuestions` items. Its own `gameItems` are
+drawn first (all of them, or a seeded sample if there are more than `gameQuestions`);
+the level's lesson steps of the game's kind fill the rest. With `"ordered": true` the
+game instead plays game items then lesson items in authored order (first
+`gameQuestions`, any seed), for a game that tells one story: Level 8's whole-game sim
+(`architect-8`) is ordered, so its situations play in the order they are written. A gate
+is playable only if game items plus lesson items of the right kind reach `gameQuestions`.
+
 Game sets are drawn with the injected `Rng` seeded from (profile, item set, attempt
 number), so a replay of the same attempt is identical (principle 1.5.4).
 
@@ -347,7 +364,9 @@ number), so a replay of the same attempt is identical (principle 1.5.4).
   retake is a new draw that can't be learned from the last try's feedback; weighting
   toward low-mastery concepts comes with §4.6), each asked once with feedback but no
   retry. Misses go to review. The Speed round clock doesn't count time the app is away, on the rules screen, or under the Leave dialog; any screen change closes that dialog.
-- Big Game opens after the checkpoint; 70% to pass.
+- Big Game opens after the checkpoint; 70% to pass. Its questions come from the gate's
+  own game items first, then the level's lessons; an `ordered` gate plays them in
+  authored order (§4.3).
 - Passing both passes the level. Stars per DESIGN (95/80/60).
 - **Level 0 has no test.** Finishing every lesson and one Picture Play passes it, so
   no pre-reader ever "fails" a test. A kid can also skip Level 0 entirely.

@@ -250,7 +250,8 @@
         "testQuestions": 12,
         "game": "game_day",
         "gameQuestions": 10,
-        "gamePassPct": 70
+        "gamePassPct": 70,
+        "ordered": true
       }
     }
   ]

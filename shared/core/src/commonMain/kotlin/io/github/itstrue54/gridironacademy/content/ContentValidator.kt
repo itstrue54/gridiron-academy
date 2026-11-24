@@ -43,6 +43,8 @@ object ContentValidator {
             if (!LevelTest.gateIsPlayable(units, lv.gate)) {
                 err("level ${lv.id}", "not enough ${lv.gate.game} content to run its gate")
             }
+            errs += validateGameItems(lv, c.glossary.entries.map { it.id }.toSet())
+            lv.gate.gameItems.forEach { allStepIds += it.id }
             for (u in units) {
                 errs += validateUnit(u, lv.track == Track.KID, glossaryIds)
                 u.lessons.forEach { l -> allLessonIds += l.id; l.steps.forEach { allStepIds += it.id } }
@@ -78,7 +80,7 @@ object ContentValidator {
             }
         }
         // Sign-offs (SPEC 13.3): real steps, one each, a named reviewer and a real date.
-        val stepIds = c.lessons.flatMap { l -> l.steps.map { it.id } }.toSet()
+        val stepIds = (c.lessons.flatMap { l -> l.steps } + c.curriculum.levels.flatMap { it.gate.gameItems }).map { it.id }.toSet()
         dupes(c.review.signoffs.map { it.step }).forEach { err("review", "signed off twice: $it") }
         c.review.signoffs.forEach {
             if (it.step !in stepIds) err("review ${it.step}", "no such step")
@@ -101,6 +103,19 @@ object ContentValidator {
             if (p.check.passPct !in 1..100) err(where, "check passPct must be 1-100")
             val graded = p.lessons.mapNotNull { c.lesson(it) }.sumOf { l -> l.steps.count { it !is Learn } }
             if (graded < p.check.questions) err(where, "check needs ${p.check.questions} questions, lessons have $graded")
+        }
+        return errs
+    }
+
+    /** A gate's own game items are checked like lesson steps, and must suit the gate's game. */
+    private fun validateGameItems(lv: Level, glossaryIds: Set<String>): List<String> {
+        val errs = mutableListOf<String>()
+        fun err(where: String, msg: String) { errs += "$where: $msg" }
+        for (s in lv.gate.gameItems) {
+            val where = "step ${s.id}"
+            if (!LevelTest.fits(lv.gate.game, s)) err(where, "game item does not suit ${lv.gate.game} (level ${lv.id})")
+            s.concept?.let { if (it !in glossaryIds) err(where, "unknown concept '$it'") }
+            checkStep(s, where, lv.track == Track.KID, ::err)
         }
         return errs
     }
