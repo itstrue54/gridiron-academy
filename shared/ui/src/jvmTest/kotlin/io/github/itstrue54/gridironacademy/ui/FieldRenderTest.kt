@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.ImageComposeScene
 import androidx.compose.ui.Modifier
@@ -228,10 +227,17 @@ class FieldRenderTest {
     @Test
     fun motionIsReadInTheDrawSoAFrameDoesNotRecompose() {
         val rd = steps().filterIsInstance<ReadDefense>().first()
-        fun scene(progress: () -> Float, onCompose: () -> Unit) = ImageComposeScene(width = WIDTH_PX, height = 1000, density = Density(DENSITY)) {
+        val live = mutableStateOf(0f)
+        var inComposition = 0
+        var inDraw = 0
+        // Composition runs inside the Composer; the draw pass does not.
+        fun reader(value: () -> Float): () -> Float = {
+            if (Throwable().stackTrace.any { it.className.startsWith("androidx.compose.runtime.ComposerImpl") }) inComposition++ else inDraw++
+            value()
+        }
+        fun scene(progress: () -> Float) = ImageComposeScene(width = WIDTH_PX, height = 1000, density = Density(DENSITY)) {
             GridironTheme(skin = Skin.Adult, dark = false) {
                 Box(Modifier.fillMaxSize().background(Gridiron.colors.surface).padding(PAD_DP.dp)) {
-                    SideEffect { onCompose() }
                     FieldDiagram(rd.reveal, description = "draw", motion = progress)
                 }
             }
@@ -239,17 +245,14 @@ class FieldRenderTest {
         // Two renders each, so the canvas size (and the zoom buttons it decides) has settled.
         fun ImageComposeScene.frame(): ByteArray { render(1_000_000L); return render(2_000_000L).encodeToData(EncodedImageFormat.PNG)!!.bytes }
 
-        val live = mutableStateOf(0f)
-        var compositions = 0
-        val half = scene({ live.value }, { compositions++ }).use { s ->
+        val half = scene(reader { live.value }).use { s ->
             s.frame()
-            val settled = compositions
             live.value = 0.5f
-            val bytes = s.frame()
-            assertEquals(settled, compositions, "a progress change must redraw without recomposing the host")
-            bytes
+            s.frame()
         }
-        val fixed = scene({ 0.5f }, {}).use { it.frame() }
+        assertTrue(inDraw > 0, "motion was never read in the draw")
+        assertEquals(0, inComposition, "motion must be read in the draw, never in composition (it would recompose every frame)")
+        val fixed = scene { 0.5f }.use { it.frame() }
         assertContentEquals(fixed, half, "the draw-phase frame at 0.5 equals a frame made at 0.5 from the start")
     }
 }

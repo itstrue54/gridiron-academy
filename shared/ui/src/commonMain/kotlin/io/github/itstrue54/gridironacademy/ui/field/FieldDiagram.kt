@@ -112,8 +112,8 @@ enum class MarkState { SELECTED, CORRECT, WRONG, MISSED }
  * @param zoom pinch-zoom state; one per diagram by default. To keep zoom across a
  *   read-the-defense pre-snap and its reveal, hoist it and pass the same [window].
  * @param motion the reveal (DESIGN 7.7): null draws everyone where they stand; otherwise a
- *   progress read inside the draw (so an animation redraws without recomposing) that moves
- *   0..1 *   players along their rotate, drop and blitz paths, staggered, with a 25% ghost left
+ *   progress (0..1) read inside the draw, so an animation redraws without recomposing; it moves
+ *   players along their rotate, drop and blitz paths, staggered, with a 25% ghost left
  *   at each starting spot.
  * @param motionKinds which paths [motion] runs: the reveal's by default; film mode
  *   (DESIGN 7.8) passes [FieldGeometry.FILM_KINDS] so the whole play runs.
@@ -295,7 +295,10 @@ fun FieldDiagram(
     }
 }
 
-/** One mark-label [TextStyle] per label size, so a frame reuses it instead of making a new one. */
+/**
+ * One mark-label [TextStyle] per label size, so a frame reuses it instead of making a new one.
+ * Written during draw: draw-thread only.
+ */
 private class MarkLabelCache(private val fontFamily: FontFamily?) {
     private var size = Float.NaN
     private var style: TextStyle? = null
