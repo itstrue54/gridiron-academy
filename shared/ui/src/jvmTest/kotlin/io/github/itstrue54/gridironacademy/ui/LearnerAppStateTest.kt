@@ -758,6 +758,54 @@ class LearnerAppStateTest {
     }
 
     @Test
+    fun checkpointRetakeAfterRestartDrawsNewSet() {
+        val store = InMemoryLearnerStore()
+        val first = LearnerAppState(content, store) { 800 }
+        first.createProfile("Sam", AgeBand.AGE_18_PLUS)
+        val level = first.levels.first()
+        first.startCheckpoint(level)
+        val c1 = first.checkpointController(level.id, testOut = false)
+        val ids1 = mutableListOf<String>()
+        while (!c1.finished) { ids1 += c1.step!!.id; c1.submit(Answer.Choice(-1)); if (!c1.finished && c1.grade != null) c1.next() }
+        first.finishCheckpoint(level.id, false, c1.result)
+        assertEquals(level.gate.testQuestions, ids1.size)
+
+        val second = LearnerAppState(content, store) { 800 }
+        second.startCheckpoint(level)
+        val c2 = second.checkpointController(level.id, testOut = false)
+        val drawn = mutableListOf<String>()
+        while (!c2.finished) { drawn += c2.step!!.id; c2.submit(Answer.Choice(-1)); if (!c2.finished && c2.grade != null) c2.next() }
+        assertEquals(level.gate.testQuestions, drawn.size)
+        assertNotEquals(ids1, drawn)
+    }
+
+    @Test
+    fun bigGameRetakeAfterRestartDrawsNewSet() {
+        fun play(s: LearnerAppState, level: Level): List<String> {
+            s.startBigGame(level)
+            val round = s.speedRoundController(level.id)
+            val ids = mutableListOf<String>()
+            var t = 0L
+            while (!round.over) {
+                t += 1_000
+                round.tick(t)
+                round.current?.let { ids += it.id; round.answer(Answer.Choice(-1)) }
+            }
+            s.finishSpeedRound(level.id, round)
+            return ids
+        }
+        val store = InMemoryLearnerStore()
+        val first = LearnerAppState(content, store) { 801 }
+        first.createProfile("Sam", AgeBand.AGE_18_PLUS)
+        val level = first.levels.first()
+        assertTrue(first.bigGameIsSpeedRound(level.id))
+        val ids1 = play(first, level)
+        val ids2 = play(LearnerAppState(content, store) { 801 }, level)
+        assertTrue(ids1.isNotEmpty() && ids2.isNotEmpty())
+        assertNotEquals(ids1, ids2)
+    }
+
+    @Test
     fun theSpeedRoundClockEndsTheGameAndCountsWhatWasLeft() {
         val s = LearnerAppState(content, InMemoryLearnerStore()) { 700 }
         s.createProfile("Sam", AgeBand.AGE_18_PLUS)

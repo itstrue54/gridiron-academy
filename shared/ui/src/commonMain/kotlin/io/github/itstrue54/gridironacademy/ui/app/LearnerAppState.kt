@@ -238,16 +238,25 @@ class LearnerAppState(
     /** The Checkpoint or Big Game in progress, keyed by its screen, like [activeLesson]. */
     private var activeGate: Pair<Screen, Any>? = null
 
-    /** Gate attempts this session, so every retake draws a new set of questions. */
-    private var gateAttempts = 0
+    /**
+     * How many answers today's tries at this level's Checkpoint or Big Game have already
+     * given, saved or not. It is the same after a restart, so it stands in for an in-memory
+     * attempt counter: it's 0 before the first try and grows by at least one for any try
+     * the learner saw feedback on.
+     */
+    private fun gateAnswersToday(level: Level, context: AttemptContext): Int {
+        val steps = content.unitsOf(level).flatMap { u -> u.lessons.flatMap { l -> l.steps } }.mapTo(HashSet()) { it.id }
+        val day = today()
+        return (save.attempts + pending).count { it.context == context && it.epochDay == day && it.stepId in steps }
+    }
 
     /**
-     * A seed per level, day and attempt. The attempt count makes a same-day retake ask
-     * different questions (it can't be learned from the last try's feedback); the level
-     * and day keep a single attempt reproducible.
+     * A seed per level, day and try. The count of answers already given today makes a
+     * retake ask different questions, even after a restart (it can't be learned from the
+     * last try's feedback); the level and day keep a single attempt reproducible.
      */
-    private fun gateSeed(level: Level): Long =
-        (level.id.hashCode().toLong() * SEED_MIX + today()) * SEED_MIX + gateAttempts
+    private fun gateSeed(level: Level, context: AttemptContext): Long =
+        (level.id.hashCode().toLong() * SEED_MIX + today()) * SEED_MIX + gateAnswersToday(level, context)
 
     private inline fun <reified T : Any> gate(key: Screen, make: () -> T): T? {
         (activeGate?.takeIf { it.first == key }?.second as? T)?.let { return it }
@@ -258,7 +267,7 @@ class LearnerAppState(
     fun checkpointControllerOrNull(levelId: String, testOut: Boolean): LessonController? =
         gate(Screen.CheckpointPlay(levelId, testOut)) {
             val level = content.level(levelId)
-            LessonController(LevelTest.test(content.unitsOf(level), level.gate, gateSeed(level)), retryMisses = false,
+            LessonController(LevelTest.test(content.unitsOf(level), level.gate, gateSeed(level, AttemptContext.CHECK)), retryMisses = false,
                 now = now, onGraded = recorder(AttemptContext.CHECK))
         }
 
@@ -271,7 +280,7 @@ class LearnerAppState(
     fun speedRoundControllerOrNull(levelId: String): SpeedRoundController? =
         gate(Screen.BigGamePlay(levelId)) {
             val level = content.level(levelId)
-            SpeedRoundController(LevelTest.gamePool(content.unitsOf(level), level.gate, gateSeed(level)), SPEED_ROUND_MILLIS,
+            SpeedRoundController(LevelTest.gamePool(content.unitsOf(level), level.gate, gateSeed(level, AttemptContext.GAME)), SPEED_ROUND_MILLIS,
                 onGraded = recorder(AttemptContext.GAME))
         }
 
@@ -292,7 +301,7 @@ class LearnerAppState(
     fun gameControllerOrNull(levelId: String): LessonController? =
         gate(Screen.BigGamePlay(levelId)) {
             val level = content.level(levelId)
-            LessonController(LevelTest.gamePool(content.unitsOf(level), level.gate, gateSeed(level)), retryMisses = false,
+            LessonController(LevelTest.gamePool(content.unitsOf(level), level.gate, gateSeed(level, AttemptContext.GAME)), retryMisses = false,
                 now = now, onGraded = recorder(AttemptContext.GAME))
         }
 
@@ -639,13 +648,11 @@ class LearnerAppState(
 
     fun startCheckpoint(level: Level, testOut: Boolean = false) {
         activeGate = null
-        gateAttempts++
         go(Screen.CheckpointPlay(level.id, testOut))
     }
 
     fun startBigGame(level: Level) {
         activeGate = null
-        gateAttempts++
         go(Screen.BigGamePlay(level.id))
     }
 

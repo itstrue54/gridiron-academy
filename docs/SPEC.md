@@ -343,8 +343,8 @@ number), so a replay of the same attempt is identical (principle 1.5.4).
 ### 4.4 Gates
 - Lessons open in order; pass = 60% first-attempt score.
 - Checkpoint (level test) opens when every lesson is passed; 12 questions; 80% to
-  pass. Drawn from the level's graded steps (seeded by level, day and attempt, so every
-  retake is a new draw that can't be learned from the last try's feedback; weighting
+  pass. Drawn from the level's graded steps (seeded by level, day and the number of answers already given to that gate today, saved or not, so every
+  retake, even after a restart, is a new draw that can't be learned from the last try's feedback; weighting
   toward low-mastery concepts comes with §4.6), each asked once with feedback but no
   retry. Misses go to review. The Speed round clock doesn't count time the app is away, on the rules screen, or under the Leave dialog; any screen change closes that dialog.
 - Big Game opens after the checkpoint; 70% to pass.
