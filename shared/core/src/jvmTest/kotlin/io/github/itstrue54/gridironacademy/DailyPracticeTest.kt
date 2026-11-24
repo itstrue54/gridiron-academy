@@ -47,9 +47,18 @@ class DailyPracticeTest {
         assertTrue(days.size > 1, "practice varies from day to day")
     }
 
-    @Test fun `a review answer today marks practice done`() {
-        assertFalse(DailyPractice.doneToday(listOf(a("x", 100, 1f)), 100))
-        assertTrue(DailyPractice.doneToday(listOf(a("x", 100, 1f, AttemptContext.REVIEW)), 100))
-        assertFalse(DailyPractice.doneToday(listOf(a("x", 99, 1f, AttemptContext.REVIEW)), 100))
+    @Test fun `practice is not done while cards are still due`() {
+        val card = graded[3]
+        val progress = Review.miss(Progress(), card.id, card.concept, 99)
+        val attempts = listOf(a("x", 100, 1f, AttemptContext.REVIEW))
+        assertTrue(Review.due(progress, 100).isNotEmpty())
+        assertFalse(DailyPractice.doneToday(attempts, progress, 100))
+    }
+
+    @Test fun `practice is done once a review answer exists and nothing is due`() {
+        val attempts = listOf(a("x", 100, 1f, AttemptContext.REVIEW))
+        assertTrue(DailyPractice.doneToday(attempts, Progress(), 100))
+        assertFalse(DailyPractice.doneToday(listOf(a("x", 100, 1f)), Progress(), 100), "a lesson answer isn't practice")
+        assertFalse(DailyPractice.doneToday(listOf(a("x", 99, 1f, AttemptContext.REVIEW)), Progress(), 100), "yesterday's doesn't count")
     }
 }

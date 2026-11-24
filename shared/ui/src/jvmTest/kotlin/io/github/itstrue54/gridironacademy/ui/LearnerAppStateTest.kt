@@ -8,6 +8,8 @@ import io.github.itstrue54.gridironacademy.model.*
 import io.github.itstrue54.gridironacademy.progress.AgeBand
 import io.github.itstrue54.gridironacademy.progress.AttemptEvent
 import io.github.itstrue54.gridironacademy.progress.Profile
+import io.github.itstrue54.gridironacademy.progress.Progress
+import io.github.itstrue54.gridironacademy.progress.ReviewCard
 import io.github.itstrue54.gridironacademy.progress.LearnerSave
 import io.github.itstrue54.gridironacademy.progress.AttemptContext
 import io.github.itstrue54.gridironacademy.ui.app.InMemoryLearnerStore
@@ -552,6 +554,91 @@ class LearnerAppStateTest {
         assertTrue(content.scenes.welcome.diagram.players.isNotEmpty())
         assertTrue(content.scenes.welcome.description.isNotBlank())
     }
+
+    /** A learner with two review cards due on [day], and the state to practise them. */
+    private fun twoDueCards(day: () -> Long): Triple<LearnerAppState, InMemoryLearnerStore, List<Step>> {
+        val steps = content.lessons.flatMap { it.steps }.filter { it !is Learn }.take(2)
+        val cards = steps.mapIndexed { i, st -> st.id to ReviewCard(st.id, st.concept, 1, 10L + i) }.toMap()
+        val store = InMemoryLearnerStore(
+            LearnerSave(profile = Profile("Sam", AgeBand.AGE_18_PLUS), progress = Progress(review = cards), deviceId = "d", learnerId = "me"),
+        )
+        return Triple(LearnerAppState(content, store) { day() }, store, steps)
+    }
+
+    @Test
+    fun leavingPracticeMovesAnsweredCardsOnly() {
+        val (s, store, _) = twoDueCards { 500L }
+        s.startPractice()
+        val p = s.practiceControllerOrNull()!!
+        val first = p.step!!
+        val second = s.practice().steps.first { it.id != first.id }
+        p.submit(perfect(first))
+        s.confirmLeaveForTest()
+        assertEquals(Screen.Home, s.screen)
+        assertEquals(2, s.save.progress.review.getValue(first.id).box, "the answered card moved up")
+        assertEquals(1, s.save.progress.review.getValue(second.id).box, "the unanswered card is as it was")
+        assertEquals(store.load()!!.progress, s.save.progress, "and it is on disk")
+        assertEquals(0, s.save.progress.xp, "no XP for a practice that wasn't finished")
+    }
+
+    @Test
+    fun leavingPracticeCountsForStreak() {
+        val (s, _, _) = twoDueCards { 500L }
+        s.startPractice()
+        val p = s.practiceControllerOrNull()!!
+        p.submit(perfect(p.step!!))
+        s.confirmLeaveForTest()
+        assertEquals(500L, s.save.progress.lastActiveDay)
+    }
+
+    @Test
+    fun leavingPracticeWithNothingAnsweredChangesNothing() {
+        val (s, _, _) = twoDueCards { 500L }
+        val before = s.save.progress
+        s.startPractice()
+        s.practiceControllerOrNull()!!
+        s.back()
+        assertEquals(before, s.save.progress)
+    }
+
+    @Test
+    fun practiceNotDoneWhileCardsDue() {
+        val (s, _, _) = twoDueCards { 500L }
+        s.startPractice()
+        val p = s.practiceControllerOrNull()!!
+        p.submit(perfect(p.step!!))
+        s.confirmLeaveForTest()
+        assertFalse(s.practiceDoneToday, "one card is still due")
+    }
+
+    @Test
+    fun practiceDoneWhenNothingDue() {
+        val (s, _, _) = twoDueCards { 500L }
+        s.startPractice()
+        val p = s.practiceControllerOrNull()!!
+        playPerfect(p)
+        s.finishPractice(p.result)
+        assertTrue(s.practiceDoneToday)
+    }
+
+    @Test
+    fun practiceAcrossMidnightUsesOneDay() {
+        var day = 500L
+        var ticking = false
+        // Once ticking, every read of the clock is a later day: only one read may be used.
+        val (s, _, _) = twoDueCards { if (ticking) day++ else day }
+        s.startPractice()
+        val p = s.practiceControllerOrNull()!!
+        playPerfect(p)
+        ticking = true
+        s.finishPractice(p.result)
+        ticking = false
+        assertEquals(500L, s.save.progress.lastActiveDay)
+        assertEquals(2, s.save.progress.review.size)
+        s.save.progress.review.values.forEach { assertEquals(502L, it.dueDay, "box 2 is two days from the same day the streak used") }
+    }
+
+    private fun LearnerAppState.confirmLeaveForTest() { requestBack(); confirmLeave() }
 
     private fun playPerfect(c: LessonController) {
         while (!c.finished) { c.submit(perfect(c.step!!)); if (!c.finished && c.grade != null) c.next() }

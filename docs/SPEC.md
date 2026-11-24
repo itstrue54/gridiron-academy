@@ -485,7 +485,13 @@ Game Day uses fictional teams (`TeamMark`).
   level when fewer than 5. Home leads with it (the one primary, DESIGN 9.1) only when
   cards are due or a concept is Rusty; otherwise it's a card above Continue. Answers are
   logged as `review` attempts; a right answer moves a card up a box, a miss sends it (or
-  a new card) to box 1. Any review answer today marks practice done for the day.
+  a new card) to box 1. Practice is done for the day once a review answer was given
+  today **and** no card is still due, so leaving after one answer doesn't hide it.
+  Leaving practice part-way (Leave dialog or Back) applies only the steps answered:
+  their cards move, misses become cards, and it counts for the streak; unanswered
+  steps stay as they were, and no XP is awarded (only a finished practice earns it).
+  Card moves and the streak use one day read once, so a midnight mid-practice can't
+  split them.
   Assignment items join when the inbox exists.
 
 ### 6.5 Assignments inbox

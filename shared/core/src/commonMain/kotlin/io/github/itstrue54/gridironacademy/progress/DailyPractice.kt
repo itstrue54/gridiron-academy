@@ -67,9 +67,13 @@ object DailyPractice {
         return Practice(chosen.values.toList(), urgent = due.isNotEmpty() || rusty.isNotEmpty())
     }
 
-    /** Practice is done for the day once any review answer was given today. */
-    fun doneToday(attempts: List<AttemptEvent>, today: Long): Boolean =
-        attempts.any { it.context == AttemptContext.REVIEW && it.epochDay == today }
+    /**
+     * Practice is done for the day once a review answer was given today and no card is
+     * still due: leaving after one answer doesn't hide practice while cards wait.
+     */
+    fun doneToday(attempts: List<AttemptEvent>, progress: Progress, today: Long): Boolean =
+        attempts.any { it.context == AttemptContext.REVIEW && it.epochDay == today } &&
+            Review.due(progress, today).isEmpty()
 
     private const val PRIME = 1_000_003L
 }

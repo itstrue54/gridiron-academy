@@ -306,7 +306,7 @@ class LearnerAppState(
     fun practice(): Practice =
         DailyPractice.pick(save.progress, save.attempts, content, currentLevel, today(), save.learnerId.hashCode().toLong())
 
-    val practiceDoneToday: Boolean get() = DailyPractice.doneToday(save.attempts, today())
+    val practiceDoneToday: Boolean get() = DailyPractice.doneToday(save.attempts, save.progress, today())
 
     fun startPractice() {
         activePractice = null
@@ -329,17 +329,37 @@ class LearnerAppState(
         if (screen != Screen.PracticePlay) return
         val steps = activePractice?.first ?: return
         val before = save.progress
-        val reviewed = steps.fold(before) { p, s ->
-            val right = s.id !in session.missedIds
+        val applied = applyPractice(before, steps, session.missedIds)
+        val after = applied.copy(xp = applied.xp + session.scorePct / XP_DIVISOR)
+        commit(save.copy(progress = after))
+        replaceTop(Screen.PracticeDone(session.scorePct, steps.size, after.xp - before.xp))
+    }
+
+    /**
+     * Applies [answered] practice steps to [before] on one day, read once so a midnight
+     * between the cards and the streak can't split them. Steps not in [answered] are untouched.
+     */
+    private fun applyPractice(before: Progress, answered: List<Step>, missedIds: Set<String>): Progress {
+        val day = today()
+        val moved = answered.fold(before) { p, s ->
+            val right = s.id !in missedIds
             when {
-                s.id in p.review -> Review.answered(p, s.id, right, today())
-                !right -> Review.miss(p, s.id, s.concept, today())
+                s.id in p.review -> Review.answered(p, s.id, right, day)
+                !right -> Review.miss(p, s.id, s.concept, day)
                 else -> p
             }
         }
-        val after = reviewed.copy(xp = reviewed.xp + session.scorePct / XP_DIVISOR).touch(today())
-        commit(save.copy(progress = after))
-        replaceTop(Screen.PracticeDone(session.scorePct, steps.size, after.xp - before.xp))
+        return moved.touch(day)
+    }
+
+    /** Leaving practice part-way keeps what was answered, with no XP: only a finished practice earns it. */
+    private fun leavePractice() {
+        val (steps, controller) = activePractice ?: return
+        activePractice = null
+        val session = controller.result
+        val answered = steps.filter { it.id in session.answeredIds }
+        if (answered.isEmpty()) return
+        commit(save.copy(progress = applyPractice(save.progress, answered, session.missedIds)))
     }
 
     /** The quiz in progress: its term, its questions and its controller, made once. */
@@ -566,6 +586,7 @@ class LearnerAppState(
         if (backStack.size <= 1) return false
         // Quitting drops the lesson's result, but the answers given still count.
         if (pending.isNotEmpty()) commit(save)
+        if (screen is Screen.PracticePlay) leavePractice()
         if (screen is Screen.LessonPlay) activeLesson = null
         if (screen is Screen.CheckpointPlay || screen is Screen.BigGamePlay) activeGate = null
         backStack = backStack.dropLast(1)
