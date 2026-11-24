@@ -392,7 +392,9 @@ skill tree that fills in).
 - **XP** per lesson/game (existing), **streaks** (existing, with one free "rest day"
   per week so a missed Sunday doesn't break a kid's streak; weeks run Monday to
   Sunday, the rest day itself adds nothing, a second miss in the same week breaks
-  the streak, and the number shown reads 0 once the streak has lapsed). Home shows
+  the streak, and the number shown reads 0 once the streak has lapsed). The Coach
+  app's streak (`SnapshotAssembler`, computed from events) does not count rest days
+  yet, so it can read lower than the learner's Home. Home shows
   the streak as it stands today (`Streak.current`), not the stored count, and adds a
   "Rest day used" line while the rest day is what keeps it alive: yesterday was
   missed and this week's rest is still free, so practising today spends it
@@ -751,7 +753,7 @@ Penetration test and a privacy review before M3 public release.
 - Backup export: a JSON file `{schemaVersion, profiles, events}` (DESIGN §9.9).
   Import validates and refuses newer schema versions with a clear message.
 - Unlinked -> linked: local events upload; nothing is lost.
-- **Now (schema 2):** the save is still one JSON file (`FileLearnerStore`); SQLDelight
+- **Now (schema 3):** the save is still one JSON file (`FileLearnerStore`); SQLDelight
   replaces it when sync arrives. Schema 2 adds the attempt log (`attempts`, every graded
   answer as an `AttemptEvent` with its context, credit, first try or retry, the answer
   text and time spent; the newest `LearnerSave.MAX_ATTEMPTS` = 20,000 are kept, about

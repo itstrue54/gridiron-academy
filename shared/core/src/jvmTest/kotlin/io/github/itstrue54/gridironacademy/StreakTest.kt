@@ -87,4 +87,21 @@ class StreakTest {
         val fresh = Progress(streakDays = 4, lastActiveDay = mon + 5, restWeek = Streak.weekOf(mon - 7))
         assertTrue(Streak.restCoversYesterday(fresh, mon + 7), "missed Sunday, rest free")
     }
+
+    @Test fun missedSundayThenMondayReturn() {
+        val sat = mon + 5
+        val monday = mon + 7
+        val sunWeek = Streak.weekOf(mon + 6)
+        // rest free: Monday keeps the streak and the rest is recorded against Sunday's week
+        val free = Progress(streakDays = 3, lastActiveDay = sat, restWeek = sunWeek - 1)
+        assertEquals(3, Streak.current(free, monday))
+        val back = free.touch(monday)
+        assertEquals(4, back.streakDays)
+        assertEquals(sunWeek, back.restWeek)
+        assertEquals(back.streakDays, Streak.current(back, monday))
+        // rest already spent that week: the streak is gone and Monday starts a new one
+        val spent = Progress(streakDays = 3, lastActiveDay = sat, restWeek = sunWeek)
+        assertEquals(0, Streak.current(spent, monday))
+        assertEquals(1, spent.touch(monday).streakDays)
+    }
 }

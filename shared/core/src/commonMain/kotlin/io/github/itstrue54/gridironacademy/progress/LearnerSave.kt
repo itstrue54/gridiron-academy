@@ -55,6 +55,8 @@ data class Profile(
  * Version 2 adds the attempt log (SPEC 8.1): every graded answer, the raw material for
  * mastery, the Coach app and, once linked, sync. Ids come from the platform, never from
  * the engine.
+ *
+ * Version 3 adds `Progress.restWeek`, the week whose weekly rest day was used (SPEC 4.7).
  */
 @Serializable
 data class LearnerSave(
