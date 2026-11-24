@@ -27,6 +27,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
@@ -251,7 +253,11 @@ fun TimerRing(millisLeft: Long, limitMillis: Long) {
     val c = Gridiron.colors
     val seconds = ((millisLeft + 999) / 1000).toInt()
     val label = pluralStringResource(Res.plurals.speed_seconds_left, seconds, seconds)
-    Box(Modifier.size(72.dp).clearAndSetSemantics { contentDescription = label }, contentAlignment = Alignment.Center) {
+    // The ring grows with the digits so large text sits inside it (72dp is the floor).
+    val measurer = rememberTextMeasurer()
+    val digits = measurer.measure("$seconds", Gridiron.type.scoreboard).size
+    val side = with(LocalDensity.current) { maxOf(72.dp, maxOf(digits.width, digits.height).toDp() + 16.dp) }
+    Box(Modifier.size(side).clearAndSetSemantics { contentDescription = label }, contentAlignment = Alignment.Center) {
         Canvas(Modifier.matchParentSize()) {
             val stroke = (if (seconds <= LOW_SECONDS) 8 else 5).dp.toPx()
             val inset = stroke / 2

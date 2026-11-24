@@ -2,6 +2,7 @@ package io.github.itstrue54.gridironacademy.ui.screens
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTransformGestures
@@ -32,6 +33,10 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.TextMeasurer
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.rememberTextMeasurer
+import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
@@ -176,7 +181,16 @@ private fun MapCanvas(
     var scale by remember(layout.side) { mutableStateOf(1f) }
     var pan by remember(layout.side) { mutableStateOf(Offset.Zero) }
     val colW = with(density) { (view.width / PlaybookMap.MAX_COLS).toDp() }
-    val rowH = ROW_HEIGHT
+    // Labels are measured at the column width: each shrinks until its longest word fits (no
+    // mid-word break), and the row grows to the tallest label at the reader's text size.
+    val measurer = rememberTextMeasurer()
+    val labelStyle = Gridiron.type.label
+    val labelW = (colW - LABEL_PAD * 2).coerceAtLeast(1.dp)
+    // Not remembered: a font that loads late changes the widths, and reading it here recomposes.
+    val availPx = with(density) { labelW.roundToPx() }
+    val labels = layout.nodes.associate { n -> n.entry.id to fitLabel(measurer, n.entry.term, labelStyle, availPx, MIN_LABEL_SHRINK / density.fontScale) }
+    val labelH = with(density) { (labels.values.maxOfOrNull { it.second } ?: 0).toDp() }
+    val rowH = maxOf(ROW_HEIGHT, NODE + LABEL_GAP + labelH + ROW_GAP)
     val contentW = view.width.toFloat()
     val contentH = with(density) { (rowH * layout.rows).toPx() + TOP_PAD.toPx() * 2 }
 
@@ -248,6 +262,7 @@ private fun MapCanvas(
                     highlighted = id in matches || id == selected,
                     dimmed = searching && id !in matches,
                     offLadder = id !in onLadder,
+                    labelStyle = labels.getValue(id).first,
                     modifier = Modifier
                         .offset(x = colW * n.x.toFloat(), y = TOP_PAD + rowH * n.row)
                         .width(colW),
@@ -256,7 +271,8 @@ private fun MapCanvas(
             }
         }
         // Pinching always has buttons too (DESIGN 12): zoom about the middle of the view.
-        Row(Modifier.align(Alignment.BottomStart).padding(8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        // The hint shares the row with the buttons and wraps in what is left, so big text never puts it over them.
+        Row(Modifier.align(Alignment.BottomStart).fillMaxWidth().padding(8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.Bottom) {
             listOf(
                 Triple("−", stringResource(Res.string.map_zoom_out), 1f / ZOOM_STEP),
                 Triple("+", stringResource(Res.string.map_zoom_in), ZOOM_STEP),
@@ -281,11 +297,12 @@ private fun MapCanvas(
                     }
                 }
             }
+            Box(Modifier.weight(1f), contentAlignment = Alignment.BottomEnd) {
+                Text(stringResource(Res.string.map_zoom_hint), style = Gridiron.type.label, color = c.inkDim, textAlign = TextAlign.End,
+                    modifier = Modifier.background(c.surface.copy(alpha = HINT_BACK), RoundedCornerShape(HINT_RADIUS)).padding(horizontal = 8.dp, vertical = 2.dp)
+                        .clearAndSetSemantics { })
+            }
         }
-        Text(stringResource(Res.string.map_zoom_hint), style = Gridiron.type.label, color = c.inkDim,
-            modifier = Modifier.align(Alignment.BottomEnd).padding(8.dp)
-                .background(c.surface.copy(alpha = HINT_BACK), CircleShape).padding(horizontal = 8.dp, vertical = 2.dp)
-                .clearAndSetSemantics { })
     }
 }
 
@@ -297,6 +314,7 @@ private fun MasteryNode(
     highlighted: Boolean,
     dimmed: Boolean,
     offLadder: Boolean,
+    labelStyle: TextStyle,
     modifier: Modifier,
     onClick: () -> Unit,
 ) {
@@ -313,11 +331,9 @@ private fun MasteryNode(
                 .border(if (highlighted) 3.dp else 1.dp, if (highlighted) c.gold else c.line, CircleShape),
             contentAlignment = Alignment.Center,
         ) { if (!offLadder) MasteryGlyph(mastery, size = GLYPH) else GlyphIcon(Glyph.DASH, c.inkDim, size = GLYPH) }
-        // A long word shrinks rather than breaking mid-word ("Quarterbac / k").
-        val style = Gridiron.type.label
-        val long = entry.term.split(' ', '-').maxOf { it.length } > LONG_WORD
-        Text(entry.term, style = if (long) style.copy(fontSize = style.fontSize * SHRINK) else style, color = c.ink, textAlign = TextAlign.Center,
-            maxLines = 2, overflow = TextOverflow.Ellipsis, modifier = Modifier.padding(top = 4.dp))
+        // [labelStyle] was shrunk until the longest word fits, so it wraps at spaces only.
+        Text(entry.term, style = labelStyle, color = c.ink, textAlign = TextAlign.Center,
+            maxLines = LABEL_LINES, overflow = TextOverflow.Ellipsis, modifier = Modifier.padding(top = LABEL_GAP))
     }
 }
 
@@ -435,6 +451,29 @@ private fun sideLabel(s: PackSide): StringResource = when (s) {
     PackSide.RULES -> Res.string.map_rules
 }
 
+/**
+ * [style] shrunk (never below [minFactor]) until the longest word of [term] fits in
+ * [availPx], with the height in px the wrapped label then takes; no hyphenation, so a word
+ * is never split ("Quarterbac / k").
+ */
+private fun fitLabel(measurer: TextMeasurer, term: String, style: TextStyle, availPx: Int, minFactor: Float): Pair<TextStyle, Int> {
+    var s = style
+    var factor = 1f
+    while (factor > minFactor && term.split(' ', '-').any { measurer.measure(it, s, softWrap = false).size.width > availPx }) {
+        factor *= LABEL_SHRINK_STEP
+        s = style.copy(fontSize = style.fontSize * factor)
+    }
+    val h = measurer.measure(term, s, constraints = Constraints(maxWidth = availPx), maxLines = LABEL_LINES).size.height
+    return s to h
+}
+
+private val LABEL_PAD = 2.dp
+private val LABEL_GAP = 4.dp
+private val ROW_GAP = 12.dp
+private const val LABEL_LINES = 3
+/** The smallest a label may get: 0.8 of its normal size, counting the reader's text scale (so 0.4 of the declared size at 200%). */
+private const val MIN_LABEL_SHRINK = 0.8f
+private const val LABEL_SHRINK_STEP = 0.9f
 private val NODE = 44.dp
 private val GLYPH = 32.dp
 private val ROW_HEIGHT = 104.dp
@@ -446,7 +485,6 @@ private const val MAX_SCALE = 2.5f
 private const val DIMMED = 0.35f
 private const val FAINT = 0.5f
 private const val HINT_BACK = 0.85f
-private const val LONG_WORD = 9
-private const val SHRINK = 0.82f
+private val HINT_RADIUS = 16.dp
 /** The sheet never covers more than this share of the map (DESIGN 8, FeedbackSheet). */
 private const val SHEET_SHARE = 0.55f

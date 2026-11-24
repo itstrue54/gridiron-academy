@@ -4,6 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -559,7 +560,7 @@ fun SituationStrip(s: GameState) {
     Surface(shape = Gridiron.skin.cardShape, color = c.surfaceRaised, contentColor = c.ink, border = BorderStroke(1.dp, c.line), modifier = Modifier.fillMaxWidth()) {
         Column(Modifier.padding(Gridiron.skin.cardPadding), verticalArrangement = Arrangement.spacedBy(6.dp)) {
             Text(headline, style = Gridiron.type.scoreboard, color = c.ink)
-            Row(horizontalArrangement = Arrangement.spacedBy(14.dp)) {
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(14.dp), verticalArrangement = Arrangement.spacedBy(2.dp)) {
                 Text(stringResource(Res.string.quarter_clock, s.quarter, clock), style = Gridiron.type.label.copy(fontFeatureSettings = "tnum"), color = c.ink)
                 Text(spot, style = Gridiron.type.label, color = c.ink)
                 Text(score, style = Gridiron.type.label, color = c.ink)

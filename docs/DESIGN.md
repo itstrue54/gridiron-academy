@@ -735,6 +735,12 @@ sentences at most in Kid.
   `f2-*` at 200%). At 150%+ Home's level cards put the node above the words and Match
   stacks its two columns; at 130%+ answer buttons grow vertically; the diagram never shrinks below 220dp tall and the card
   scrolls instead; HUDs wrap to two lines.
+  Player-mark labels size from the mark in dp (the font scale is divided out), so they
+  never outgrow it. The situation line wraps (FlowRow). The feedback sheet scrolls and
+  shows a fade with a down arrow while more text is below. Playbook map labels shrink
+  (never mid-word) and the row grows to the tallest label; the letter chip and the
+  Speed round ring grow with their text; "More below" is at least 48dp tall. Renders
+  `f2-8` to `f2-13` are 360dp wide at 200%.
 - **Colour:** never the only carrier (section 1.2). Retry is amber with a dash icon,
   not red.
 - **Motor:** 48dp / 56dp targets, pinch zoom always has +/− buttons (7.10), no required drags (every drag has a tap

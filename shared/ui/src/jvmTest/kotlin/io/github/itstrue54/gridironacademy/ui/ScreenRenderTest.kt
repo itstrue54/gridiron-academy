@@ -1,6 +1,14 @@
 package io.github.itstrue54.gridironacademy.ui
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import io.github.itstrue54.gridironacademy.ui.components.FeedbackSheet
+import io.github.itstrue54.gridironacademy.ui.components.Verdict
+import io.github.itstrue54.gridironacademy.ui.theme.Gridiron
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.ImageComposeScene
 import androidx.compose.ui.unit.Density
@@ -78,6 +86,36 @@ class ScreenRenderTest {
         val level = kid.levels.first()
         kid.startBigGame(level)
         shot("f2-7-speed-rules-kid", fontScale = 2f) { LearnerApp(kid, dark = false) }
+    }
+
+    /** The C1 set: 360dp wide at 200% text, where marks, the situation line, the sheet, the map and the timer must hold. */
+    @Test fun fontScale200Diagrams() {
+        lessonShot("f2-8-situation-adult", AgeBand.AGE_18_PLUS, dark = false, fontScale = 2f, pick = { it is Situation })
+        lessonShot("f2-8b-situation-kid", AgeBand.AGE_8_9, dark = false, fontScale = 2f, pick = { it is Situation })
+        lessonShot("f2-9-tap-diagram-kid", AgeBand.AGE_8_9, dark = false, fontScale = 2f, pick = { it is DiagramTap })
+        val long = "The safety is the last line of the defense, so he stays deeper than every receiver and reads the quarterback's eyes before he breaks. " +
+            "If he jumps the short route, the tight end runs past him up the seam; that is why the call keeps two players over the top."
+        shot("f2-10-feedback-long-adult", fontScale = 2f) {
+            GridironTheme(skin = appState(AgeBand.AGE_18_PLUS).skin, dark = false) {
+                androidx.compose.foundation.layout.Box(Modifier.fillMaxSize().background(Gridiron.colors.surface)) {
+                    FeedbackSheet(Verdict.NOT_QUITE, "Not quite", long, "Continue", {}, maxHeight = 340.dp, detail = "Look at the deep half first.",
+                        modifier = Modifier.align(Alignment.BottomCenter))
+                }
+            }
+        }
+        val kid = withPracticeDue(AgeBand.AGE_8_9).also { it.openGlossary(); it.openPlaybookMap() }
+        shot("f2-11-playbook-map-kid", fontScale = 2f) { LearnerApp(kid, dark = false) }
+        val adult = withPracticeDue(AgeBand.AGE_18_PLUS).also { it.openGlossary(); it.openPlaybookMap() }
+        shot("f2-12-playbook-map-adult", fontScale = 2f) { LearnerApp(adult, dark = true) }
+        val speed = appState(AgeBand.AGE_8_9)
+        val level = speed.levels.first()
+        speed.startBigGame(level)
+        val round = speed.speedRoundController(level.id)
+        round.start(timed = true)
+        round.tick(8_000L)
+        shot("f2-13-speed-round-kid", fontScale = 2f) {
+            GridironTheme(skin = speed.skin, dark = false) { SpeedRoundScreen(speed, level.id, round, clock = false) }
+        }
     }
 
     @Test fun welcomeAndOnboarding() {

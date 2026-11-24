@@ -16,6 +16,9 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
@@ -172,8 +175,9 @@ fun AnswerButton(
                     color = if (state == AnswerState.SELECTED) c.gold else c.surface,
                     contentColor = if (state == AnswerState.SELECTED) c.onGold else c.inkDim,
                     border = BorderStroke(1.dp, c.line),
-                    modifier = Modifier.size(32.dp).clearAndSetSemantics { },
-                ) { Box(contentAlignment = Alignment.Center) { Text(letter, style = Gridiron.type.label) } }
+                    // Grows with the letter at large text sizes; 32dp is the floor.
+                    modifier = Modifier.widthIn(min = 32.dp).heightIn(min = 32.dp).clearAndSetSemantics { },
+                ) { Box(Modifier.padding(horizontal = 4.dp), contentAlignment = Alignment.Center) { Text(letter, style = Gridiron.type.label) } }
                 Spacer(Modifier.width(12.dp))
             }
             Text(text, style = Gridiron.type.answer, modifier = Modifier.weight(1f))
@@ -266,7 +270,9 @@ fun FeedbackSheet(
         modifier = modifier.fillMaxWidth().heightIn(max = maxHeight),
     ) {
         Column(Modifier.padding(skin.cardPadding)) {
-            Column(Modifier.weight(1f, fill = false).verticalScroll(rememberScrollState())) {
+            val scroll = rememberScrollState()
+            Box(Modifier.weight(1f, fill = false)) {
+            Column(Modifier.verticalScroll(scroll)) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     GlyphIcon(if (verdict == Verdict.RIGHT) Glyph.CHECK else Glyph.DASH, accent, size = 28.dp)
                     Spacer(Modifier.width(10.dp))
@@ -300,10 +306,25 @@ fun FeedbackSheet(
                     }
                 }
             }
+            // More text below the fold: a fade and an arrow say so (big text cuts the explanation).
+            if (scroll.canScrollForward) MoreTextCue()
+            }
             Spacer(Modifier.height(16.dp))
             PrimaryButton(continueLabel, onContinue)
         }
     }
+}
+
+/** A fade to the sheet's colour with a down arrow: the explanation goes on below. */
+@Composable
+private fun BoxScope.MoreTextCue() {
+    val c = Gridiron.colors
+    Box(
+        Modifier.align(Alignment.BottomCenter).fillMaxWidth().height(32.dp)
+            .background(Brush.verticalGradient(listOf(c.surfaceRaised.copy(alpha = 0f), c.surfaceRaised)))
+            .clearAndSetSemantics { },
+        contentAlignment = Alignment.BottomCenter,
+    ) { GlyphIcon(Glyph.DOWN, c.inkDim, size = 20.dp) }
 }
 
 /** A raised card with the skin's shape and a 1dp line (elevation is a tint, DESIGN 5). */

@@ -198,7 +198,10 @@ fun FieldDiagram(
                 // Marks shrink to the tightest spacing (a full-width formation on a phone puts
                 // linemen ~10dp apart), but never below a size that holds a two-digit number.
                 val markPx = FieldGeometry.markSize(diagram.players, t, skin.playerMark.toPx(), MIN_MARK.dp.toPx(), MARK_GAP.dp.toPx())
-                val labelSp = (baseLabelSp * markPx / skin.playerMark.toPx()).coerceAtLeast(MIN_MARK_LABEL_SP)
+                // The size follows the mark, not the reader's text size: .sp multiplies by the
+                // font scale again, so divide it out (a label that grew with the text spilled
+                // out of its mark at 200%).
+                val labelSp = (baseLabelSp * markPx / skin.playerMark.toPx()).coerceAtLeast(MIN_MARK_LABEL_SP) / fontScale
                 val markLabel = TextStyle(color = DiagramColors.label, fontFamily = bodyFamily, fontWeight = FontWeight.Bold, fontSize = labelSp.sp)
 
                 // Back to front: field, zones, paths, labels, then players on top so no label
