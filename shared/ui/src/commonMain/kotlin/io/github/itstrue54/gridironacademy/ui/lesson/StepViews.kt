@@ -130,7 +130,7 @@ fun Prompt(text: String) {
 
 @Composable
 private fun StepDiagram(diagram: Diagram?) {
-    if (diagram != null) FieldDiagram(diagram, description = diagram.spoken(), modifier = Modifier.fillMaxWidth())
+    if (diagram != null) FieldDiagram(diagram, description = remember(diagram) { diagram.spoken() }, modifier = Modifier.fillMaxWidth())
 }
 
 @Composable
@@ -152,6 +152,7 @@ fun LearnView(step: Learn) {
 private fun FilmDiagram(stepId: String, diagram: Diagram) {
     val reduced = Gridiron.reducedMotion
     val millis = Gridiron.skin.revealMillis * FILM_TO_REVEAL
+    val spoken = remember(diagram) { diagram.spoken() }
     val progress = remember(stepId) { Animatable(0f) }
     var plays by remember(stepId) { mutableStateOf(0) }
     LaunchedEffect(plays, reduced) {
@@ -163,8 +164,8 @@ private fun FilmDiagram(stepId: String, diagram: Diagram) {
     // Under the field, not on it: any corner of the field can be where the play ends.
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         FieldDiagram(
-            diagram, description = diagram.spoken(), modifier = Modifier.fillMaxWidth(),
-            motion = if (reduced) null else progress.value,
+            diagram, description = spoken, modifier = Modifier.fillMaxWidth(),
+            motion = if (reduced) null else progress::value,
             motionKinds = FieldGeometry.FILM_KINDS, motionStaggerMs = 0,
         )
         if (!reduced) ReplayChip(onClick = { plays++ }, modifier = Modifier, label = Res.string.watch_again)
@@ -290,7 +291,7 @@ fun DiagramTapView(step: DiagramTap, tapped: Set<String>, graded: Boolean, onCha
         }
         FieldDiagram(
             step.diagram,
-            description = step.diagram.spoken(),
+            description = remember(step.diagram) { step.diagram.spoken() },
             marks = marks,
             onTap = if (graded || asList) null else toggle,
             modifier = Modifier.fillMaxWidth(),
@@ -472,6 +473,8 @@ fun ReadDefenseView(step: ReadDefense, selected: Int?, graded: Boolean, onSelect
     val reduced = Gridiron.reducedMotion
     val zoom = rememberFieldZoomState(step.id)
     val window = remember(step.id) { FieldGeometry.window(step.preSnap, step.reveal) }
+    val preSnapSpoken = remember(step.preSnap) { step.preSnap.spoken() }
+    val revealSpoken = remember(step.reveal) { step.reveal.spoken() }
     val progress = remember(step.id) { Animatable(0f) }
     var replays by remember(step.id) { mutableStateOf(0) }
     LaunchedEffect(graded, replays, reduced) {
@@ -488,11 +491,11 @@ fun ReadDefenseView(step: ReadDefense, selected: Int?, graded: Boolean, onSelect
         if (step.disguised) DisguiseChip()
         Prompt(step.prompt)
         if (!graded) {
-            FieldDiagram(step.preSnap, step.preSnap.spoken(), zoom = zoom, window = window, modifier = Modifier.fillMaxWidth())
+            FieldDiagram(step.preSnap, preSnapSpoken, zoom = zoom, window = window, modifier = Modifier.fillMaxWidth())
         } else {
             // Replay sits on the field itself: the feedback sheet covers everything below it.
             Box {
-                FieldDiagram(step.reveal, step.reveal.spoken(), zoom = zoom, window = window, motion = progress.value, modifier = Modifier.fillMaxWidth())
+                FieldDiagram(step.reveal, revealSpoken, zoom = zoom, window = window, motion = progress::value, modifier = Modifier.fillMaxWidth())
                 if (!reduced) ReplayChip(onClick = { replays++ }, modifier = Modifier.align(Alignment.BottomStart).padding(6.dp))
             }
         }

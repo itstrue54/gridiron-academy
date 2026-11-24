@@ -56,6 +56,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextMeasurer
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.drawText
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.unit.dp
@@ -110,8 +111,9 @@ enum class MarkState { SELECTED, CORRECT, WRONG, MISSED }
  * @param labels the words drawn on or around the field, localised by the caller.
  * @param zoom pinch-zoom state; one per diagram by default. To keep zoom across a
  *   read-the-defense pre-snap and its reveal, hoist it and pass the same [window].
- * @param motion the reveal (DESIGN 7.7): null draws everyone where they stand; 0..1 moves
- *   players along their rotate, drop and blitz paths, staggered, with a 25% ghost left
+ * @param motion the reveal (DESIGN 7.7): null draws everyone where they stand; otherwise a
+ *   progress read inside the draw (so an animation redraws without recomposing) that moves
+ *   0..1 *   players along their rotate, drop and blitz paths, staggered, with a 25% ghost left
  *   at each starting spot.
  * @param motionKinds which paths [motion] runs: the reveal's by default; film mode
  *   (DESIGN 7.8) passes [FieldGeometry.FILM_KINDS] so the whole play runs.
@@ -131,7 +133,7 @@ fun FieldDiagram(
     labels: FieldLabels = FieldLabels(),
     zoom: FieldZoomState = rememberFieldZoomState(diagram),
     window: FieldWindow = remember(diagram) { FieldGeometry.window(diagram) },
-    motion: Float? = null,
+    motion: (() -> Float)? = null,
     motionKinds: Set<PathKind> = FieldGeometry.REVEAL_KINDS,
     motionStaggerMs: Int = FieldGeometry.REVEAL_STAGGER_MS,
 ) {
@@ -152,6 +154,24 @@ fun FieldDiagram(
 
     var canvasSize by remember { mutableStateOf(IntSize.Zero) }
     val density = LocalDensity.current
+    // Everything below depends only on the diagram, so a frame of motion does no grouping,
+    // lookup or allocation of it (the draw reads only `motion()` and the transform).
+    val drawnRoutes = remember(diagram) {
+        diagram.routes.filter { it.drawn }.mapNotNull { r -> diagram.players.firstOrNull { it.id == r.playerId }?.let { r to it } }
+    }
+    val labelledRoutes = remember(diagram) { diagram.routes.filter { it.label.isNotEmpty() && it.points.isNotEmpty() } }
+    val byId = remember(diagram) { diagram.players.associateBy { it.id } }
+    // Each mover's reveal paths, chained in order (a show-blitz then a drop is one trip), in
+    // the order the movers first appear in `routes`.
+    val trips = remember(diagram, motionKinds) {
+        diagram.routes.filter { it.kind in motionKinds }.groupBy { it.playerId }.mapValues { (_, rs) -> rs.flatMap { it.points } }
+    }
+    val order = remember(trips) { trips.keys.toList() }
+    val orderIndex = remember(order) { order.withIndex().associate { (i, id) -> id to i } }
+    val movers = remember(diagram, trips) { diagram.players.filter { it.id in trips } }
+    val ghostPaint = remember { Paint().apply { alpha = GHOST_ALPHA } }
+    // The mark label's size follows the mark, which follows the canvas: re-made only when it changes.
+    val markLabels = remember(bodyFamily) { MarkLabelCache(bodyFamily) }
     // Zoom controls appear only when the fitted picture had to shrink its marks.
     val crowded = remember(diagram, window, canvasSize, skin.playerMark, density) {
         canvasSize.width > 0 && with(density) {
@@ -199,21 +219,19 @@ fun FieldDiagram(
                 // linemen ~10dp apart), but never below a size that holds a two-digit number.
                 val markPx = FieldGeometry.markSize(diagram.players, t, skin.playerMark.toPx(), MIN_MARK.dp.toPx(), MARK_GAP.dp.toPx())
                 val labelSp = (baseLabelSp * markPx / skin.playerMark.toPx()).coerceAtLeast(MIN_MARK_LABEL_SP)
-                val markLabel = TextStyle(color = DiagramColors.label, fontFamily = bodyFamily, fontWeight = FontWeight.Bold, fontSize = labelSp.sp)
+                val markLabel = markLabels.styleFor(labelSp)
 
                 // Back to front: field, zones, paths, labels, then players on top so no label
                 // ever hides a player (DESIGN 7.2-7.5).
                 drawTurf(t)
                 drawZones(diagram, t, highlightZone, marks)
-                diagram.routes.filter { it.drawn }.forEach { route ->
-                    diagram.players.firstOrNull { it.id == route.playerId }?.let { drawRoute(route, it, t) }
-                }
+                drawnRoutes.forEach { (route, player) -> drawRoute(route, player, t) }
                 diagram.zones.forEach { z ->
                     if (z.label.isNotEmpty()) {
                         drawPill(measurer, z.label, labelStyle, pill, Offset(t.x(z.x + z.w / 2), t.y(z.y + z.h / 2)))
                     }
                 }
-                diagram.routes.filter { it.label.isNotEmpty() && it.points.isNotEmpty() }.forEach { r ->
+                labelledRoutes.forEach { r ->
                     val end = r.points.last()
                     drawPill(measurer, r.label, labelStyle, pill, Offset(t.x(end.x), t.y(end.y) - ROUTE_LABEL_LIFT.dp.toPx()))
                 }
@@ -232,36 +250,29 @@ fun FieldDiagram(
                     val left = listOf(inset, size.width - inset - w).firstOrNull { free(it) }
                     if (left != null) drawPill(measurer, labels.los, tagStyle, pill, Offset(left, y), anchorLeft = true)
                 }
-                if (motion == null) {
+                val progress = motion?.invoke()
+                if (progress == null) {
                     diagram.players.forEach { drawPlayer(it, t, markPx / 2, skin.helmets, marks[it.id], reducedMotion, measurer, markLabel) }
-                    FieldGeometry.ballAt(diagram.ball, 0f) { id, _ -> diagram.players.firstOrNull { it.id == id }?.let { Pt(it.x, it.y) } }
+                    FieldGeometry.ballAt(diagram.ball, 0f) { id, _ -> byId[id]?.let { Pt(it.x, it.y) } }
                         ?.let { drawFootball(Offset(t.x(it.x), t.y(it.y)), markPx) }
                 } else {
-                    // Each mover's reveal paths, chained in order (a show-blitz then a drop
-                    // is one trip), in the order the movers first appear in `routes`.
-                    val trips = diagram.routes.filter { it.kind in motionKinds }
-                        .groupBy { it.playerId }
-                        .mapValues { (_, rs) -> rs.flatMap { it.points } }
-                    val order = trips.keys.toList()
-                    val movers = diagram.players.filter { it.id in trips }
                     // The pre-snap spots stay as ghosts, all in one translucent layer.
                     if (movers.isNotEmpty()) {
-                        drawContext.canvas.saveLayer(Rect(Offset.Zero, size), Paint().apply { alpha = GHOST_ALPHA })
+                        drawContext.canvas.saveLayer(Rect(Offset.Zero, size), ghostPaint)
                         movers.forEach { drawPlayer(it, t, markPx / 2, skin.helmets, null, reducedMotion, measurer, markLabel) }
                         drawContext.canvas.restore()
                     }
                     diagram.players.forEach { p ->
                         val trip = trips[p.id]
                         val at = if (trip == null) null else FieldGeometry.along(
-                            p.x, p.y, trip, FieldGeometry.staggered(motion, order.indexOf(p.id), order.size, skin.revealMillis, motionStaggerMs),
+                            p.x, p.y, trip, FieldGeometry.staggered(progress, orderIndex.getValue(p.id), order.size, skin.revealMillis, motionStaggerMs),
                         )
                         drawPlayer(if (at == null) p else p.copy(x = at.x, y = at.y), t, markPx / 2, skin.helmets, marks[p.id], reducedMotion, measurer, markLabel)
                     }
-                    val byId = diagram.players.associateBy { it.id }
-                    FieldGeometry.ballAt(diagram.ball, motion) { id, time ->
+                    FieldGeometry.ballAt(diagram.ball, progress) { id, time ->
                         val p = byId[id] ?: return@ballAt null
                         val trip = trips[id] ?: return@ballAt Pt(p.x, p.y)
-                        FieldGeometry.along(p.x, p.y, trip, FieldGeometry.staggered(time, order.indexOf(id), order.size, skin.revealMillis, motionStaggerMs))
+                        FieldGeometry.along(p.x, p.y, trip, FieldGeometry.staggered(time, orderIndex.getValue(id), order.size, skin.revealMillis, motionStaggerMs))
                     }?.let { drawFootball(Offset(t.x(it.x), t.y(it.y)), markPx) }
                 }
                 // Zoomed in, nobody vanishes: players out of view get a marker on that edge
@@ -281,6 +292,17 @@ fun FieldDiagram(
                 if (showZoom) ZoomButtons(zoom = zoom, size = canvasSize, labels = labels, modifier = Modifier)
             }
         }
+    }
+}
+
+/** One mark-label [TextStyle] per label size, so a frame reuses it instead of making a new one. */
+private class MarkLabelCache(private val fontFamily: FontFamily?) {
+    private var size = Float.NaN
+    private var style: TextStyle? = null
+    fun styleFor(labelSp: Float): TextStyle {
+        val cached = style
+        if (cached != null && size == labelSp) return cached
+        return TextStyle(color = DiagramColors.label, fontFamily = fontFamily, fontWeight = FontWeight.Bold, fontSize = labelSp.sp).also { size = labelSp; style = it }
     }
 }
 
