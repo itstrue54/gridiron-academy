@@ -762,6 +762,23 @@ Penetration test and a privacy review before M3 public release.
 - Everything in DESIGN §12 applies to both apps. The coach dashboard heat map has a
   table alternative and never uses colour alone.
 - Every diagram has a generated text description (`DiagramDescriber`, §11.2).
+- **Screen reader (TalkBack), what every step says and where focus goes:**
+  - A graded list-mode answer that was a target but not tapped reads "missed", never
+    "correct". Match: a paired item (either side) says "paired with X" and is not
+    "selected" (that is only the left item being picked); the paired look is a link-colour
+    edge plus a dot, distinct from the gold pick edge. The hint names the layout
+    (left/right side by side, first/second list when stacked at large text), and a tap on
+    the right with nothing picked says to pick on the left first (live region).
+  - After Check, focus moves to Continue (Check is removed). After an Order move a
+    live region says "X: now N of M". The feedback sheet says "more text below" and offers
+    a "scroll down" action while its text is cut; the text itself is all in the tree.
+  - The Speed round shows its verdict as text ("Last answer: right / not quite") in a
+    live region; a sound and the points chip are never the only cue.
+  - Search fields have a label (it stays once the learner types), not just a placeholder.
+    Field diagram labels (LOS, zoom in/out) come from string resources.
+  - Large text: the Playbook map title keeps its row (the List/Map switch drops under it),
+    and a map label never breaks mid-word (it shrinks, then ellipsizes with the full name
+    in the node's description).
 - **Localisation:** all UI strings in resources, all content strings in content
   JSON keyed by locale. English (US) at launch; Spanish (US) is the first planned
   locale **[open]**. Football terms keep English names with a localised explanation

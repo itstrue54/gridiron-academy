@@ -37,6 +37,16 @@ import androidx.compose.ui.semantics.liveRegion
 import io.github.itstrue54.gridironacademy.ui.resources.Res
 import io.github.itstrue54.gridironacademy.ui.resources.answer_state_correct
 import io.github.itstrue54.gridironacademy.ui.resources.answer_state_wrong
+import io.github.itstrue54.gridironacademy.ui.resources.answer_state_missed
+import io.github.itstrue54.gridironacademy.ui.resources.more_text_below
+import io.github.itstrue54.gridironacademy.ui.resources.more_text_scroll
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.semantics.CustomAccessibilityAction
+import androidx.compose.ui.semantics.customActions
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.mutableStateOf
@@ -122,7 +132,8 @@ fun IconAction(glyph: Glyph, label: String, onClick: () -> Unit, modifier: Modif
     }
 }
 
-enum class AnswerState { REST, SELECTED, CORRECT, RETRY, DISABLED }
+/** MISSED: a right answer the learner did not pick; it must never read as "correct". */
+enum class AnswerState { REST, SELECTED, CORRECT, RETRY, MISSED, DISABLED }
 
 /**
  * A full-width answer (DESIGN 8): letter chip, text, and after grading a check or a dash
@@ -142,12 +153,13 @@ fun AnswerButton(
     val gradeWords = when (state) {
         AnswerState.CORRECT -> stringResource(Res.string.answer_state_correct)
         AnswerState.RETRY -> stringResource(Res.string.answer_state_wrong)
+        AnswerState.MISSED -> stringResource(Res.string.answer_state_missed)
         else -> ""
     }
     val edge = when (state) {
         AnswerState.SELECTED -> c.gold
         AnswerState.CORRECT -> c.correct
-        AnswerState.RETRY -> c.retry
+        AnswerState.RETRY, AnswerState.MISSED -> c.retry
         else -> c.line
     }
     Surface(
@@ -183,7 +195,7 @@ fun AnswerButton(
             Text(text, style = Gridiron.type.answer, modifier = Modifier.weight(1f))
             when (state) {
                 AnswerState.CORRECT -> GlyphIcon(Glyph.CHECK, c.correct)
-                AnswerState.RETRY -> GlyphIcon(Glyph.DASH, c.retry)
+                AnswerState.RETRY, AnswerState.MISSED -> GlyphIcon(Glyph.DASH, c.retry)
                 // Selected shows a filled dot as well as the gold edge: colour is never alone.
                 AnswerState.SELECTED -> GlyphIcon(Glyph.PICKED, c.gold)
                 else -> Unit
@@ -271,8 +283,18 @@ fun FeedbackSheet(
     ) {
         Column(Modifier.padding(skin.cardPadding)) {
             val scroll = rememberScrollState()
+            val scope = rememberCoroutineScope()
+            val moreText = stringResource(Res.string.more_text_below)
+            val scrollDown = stringResource(Res.string.more_text_scroll)
             Box(Modifier.weight(1f, fill = false)) {
-            Column(Modifier.verticalScroll(scroll)) {
+            // The fade below is only a picture; a screen reader hears that there is more and
+            // can scroll to it from here (the text itself is all in the tree).
+            Column(Modifier.verticalScroll(scroll).semantics {
+                if (scroll.canScrollForward) {
+                    stateDescription = moreText
+                    customActions = listOf(CustomAccessibilityAction(scrollDown) { scope.launch { scroll.animateScrollTo(scroll.maxValue) }; true })
+                }
+            }) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     GlyphIcon(if (verdict == Verdict.RIGHT) Glyph.CHECK else Glyph.DASH, accent, size = 28.dp)
                     Spacer(Modifier.width(10.dp))
@@ -310,7 +332,10 @@ fun FeedbackSheet(
             if (scroll.canScrollForward) MoreTextCue()
             }
             Spacer(Modifier.height(16.dp))
-            PrimaryButton(continueLabel, onContinue)
+            // Check is gone once graded, so focus moves to Continue instead of being lost.
+            val continueFocus = remember { FocusRequester() }
+            LaunchedEffect(Unit) { runCatching { continueFocus.requestFocus() } }
+            PrimaryButton(continueLabel, onContinue, modifier = Modifier.focusRequester(continueFocus))
         }
     }
 }

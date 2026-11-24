@@ -52,7 +52,8 @@ fun GlossaryScreen(state: LearnerAppState) {
         Column(Modifier.padding(horizontal = Gridiron.skin.gutter), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             OutlinedTextField(
                 value = query, onValueChange = { query = it.take(40) }, modifier = Modifier.fillMaxWidth(),
-                placeholder = { Text(stringResource(Res.string.glossary_search), style = Gridiron.type.body) },
+                // A label, not a placeholder: it stays for a screen reader once the learner types.
+                label = { Text(stringResource(Res.string.glossary_search), style = Gridiron.type.label) },
                 singleLine = true, textStyle = Gridiron.type.body.copy(color = c.ink),
             )
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {

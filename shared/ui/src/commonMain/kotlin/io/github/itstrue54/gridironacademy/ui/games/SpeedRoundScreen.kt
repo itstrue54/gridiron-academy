@@ -69,6 +69,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.LiveRegionMode
+import androidx.compose.ui.semantics.liveRegion
+import io.github.itstrue54.gridironacademy.ui.resources.speed_last_right
+import io.github.itstrue54.gridironacademy.ui.resources.speed_last_wrong
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import io.github.itstrue54.gridironacademy.ui.components.PrimaryButton
@@ -157,6 +161,15 @@ fun SpeedRoundScreen(state: LearnerAppState, levelId: String, round: SpeedRoundC
                             Text(stringResource(Res.string.speed_streak, round.streak), style = Gridiron.type.answer, color = c.ink)
                         }
                     }
+                }
+            }
+            // The verdict in words (a sound and a points chip are not enough): a polite live
+            // region, outside the rebuilt buttons so it is announced rather than rebuilt.
+            round.lastRight?.let { right ->
+                Row(Modifier.semantics { liveRegion = LiveRegionMode.Polite }, verticalAlignment = Alignment.CenterVertically) {
+                    GlyphIcon(if (right) Glyph.CHECK else Glyph.DASH, if (right) c.correct else c.retry, size = 20.dp)
+                    Spacer(Modifier.width(6.dp))
+                    Text(stringResource(if (right) Res.string.speed_last_right else Res.string.speed_last_wrong), style = Gridiron.type.label, color = c.ink)
                 }
             }
             // A fresh set of buttons for each question, so nothing stays selected.

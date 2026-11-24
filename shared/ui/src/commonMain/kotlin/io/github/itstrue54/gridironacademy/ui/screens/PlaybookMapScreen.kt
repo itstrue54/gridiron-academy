@@ -118,19 +118,27 @@ fun PlaybookMapScreen(state: LearnerAppState) {
     }
 
     Column(Modifier.fillMaxSize().screenBackground().safeDrawingPadding()) {
-        Row(Modifier.padding(horizontal = 8.dp), verticalAlignment = Alignment.CenterVertically) {
-            IconAction(Glyph.BACK, stringResource(Res.string.back), onClick = { state.back() })
-            Text(stringResource(Res.string.playbook_map), style = Gridiron.type.headline, color = c.ink,
-                modifier = Modifier.weight(1f).semantics { heading() })
+        // At large text the title keeps the whole row (a long word never breaks) and the
+        // List/Map switch drops to its own line.
+        val bigText = LocalDensity.current.fontScale >= LARGE_TEXT
+        val modeSwitch = @Composable {
             TextButton(onClick = { listMode = !listMode }) {
                 Text(stringResource(if (listMode) Res.string.map_show_map else Res.string.map_show_list),
                     style = Gridiron.type.label, color = c.link)
             }
         }
+        Row(Modifier.padding(horizontal = 8.dp), verticalAlignment = Alignment.CenterVertically) {
+            IconAction(Glyph.BACK, stringResource(Res.string.back), onClick = { state.back() })
+            Text(stringResource(Res.string.playbook_map), style = Gridiron.type.headline, color = c.ink,
+                modifier = Modifier.weight(1f).semantics { heading() })
+            if (!bigText) modeSwitch()
+        }
+        if (bigText) Row(Modifier.padding(horizontal = 8.dp).fillMaxWidth(), horizontalArrangement = Arrangement.End) { modeSwitch() }
         Column(Modifier.padding(horizontal = Gridiron.skin.gutter), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             OutlinedTextField(
                 value = query, onValueChange = { query = it.take(40) }, modifier = Modifier.fillMaxWidth(),
-                placeholder = { Text(stringResource(Res.string.glossary_search), style = Gridiron.type.body) },
+                // A label, not a placeholder: it stays for a screen reader once the learner types.
+                label = { Text(stringResource(Res.string.glossary_search), style = Gridiron.type.label) },
                 singleLine = true, textStyle = Gridiron.type.body.copy(color = c.ink),
             )
             Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -189,7 +197,7 @@ private fun MapCanvas(
     // Not remembered: a font that loads late changes the widths, and reading it here recomposes.
     val availPx = with(density) { labelW.roundToPx() }
     val labels = layout.nodes.associate { n -> n.entry.id to fitLabel(measurer, n.entry.term, labelStyle, availPx, MIN_LABEL_SHRINK / density.fontScale) }
-    val labelH = with(density) { (labels.values.maxOfOrNull { it.second } ?: 0).toDp() }
+    val labelH = with(density) { (labels.values.maxOfOrNull { it.heightPx } ?: 0).toDp() }
     val rowH = maxOf(ROW_HEIGHT, NODE + LABEL_GAP + labelH + ROW_GAP)
     val contentW = view.width.toFloat()
     val contentH = with(density) { (rowH * layout.rows).toPx() + TOP_PAD.toPx() * 2 }
@@ -262,7 +270,7 @@ private fun MapCanvas(
                     highlighted = id in matches || id == selected,
                     dimmed = searching && id !in matches,
                     offLadder = id !in onLadder,
-                    labelStyle = labels.getValue(id).first,
+                    label = labels.getValue(id),
                     modifier = Modifier
                         .offset(x = colW * n.x.toFloat(), y = TOP_PAD + rowH * n.row)
                         .width(colW),
@@ -314,7 +322,7 @@ private fun MasteryNode(
     highlighted: Boolean,
     dimmed: Boolean,
     offLadder: Boolean,
-    labelStyle: TextStyle,
+    label: MapLabel,
     modifier: Modifier,
     onClick: () -> Unit,
 ) {
@@ -331,9 +339,11 @@ private fun MasteryNode(
                 .border(if (highlighted) 3.dp else 1.dp, if (highlighted) c.gold else c.line, CircleShape),
             contentAlignment = Alignment.Center,
         ) { if (!offLadder) MasteryGlyph(mastery, size = GLYPH) else GlyphIcon(Glyph.DASH, c.inkDim, size = GLYPH) }
-        // [labelStyle] was shrunk until the longest word fits, so it wraps at spaces only.
-        Text(entry.term, style = labelStyle, color = c.ink, textAlign = TextAlign.Center,
-            maxLines = LABEL_LINES, overflow = TextOverflow.Ellipsis, modifier = Modifier.padding(top = LABEL_GAP))
+        // The style was shrunk until the longest word fits, so it wraps at spaces only; a word that
+        // fits at no size is ellipsized on one line (the full name is in the node's description).
+        Text(entry.term, style = label.style, color = c.ink, textAlign = TextAlign.Center,
+            maxLines = if (label.ellipsize) 1 else LABEL_LINES, softWrap = !label.ellipsize,
+            overflow = TextOverflow.Ellipsis, modifier = Modifier.padding(top = LABEL_GAP))
     }
 }
 
@@ -451,22 +461,33 @@ private fun sideLabel(s: PackSide): StringResource = when (s) {
     PackSide.RULES -> Res.string.map_rules
 }
 
+/** A map label: its style, the height it takes, and whether it had to be cut to one line. */
+private class MapLabel(val style: TextStyle, val heightPx: Int, val ellipsize: Boolean)
+
 /**
- * [style] shrunk (never below [minFactor]) until the longest word of [term] fits in
- * [availPx], with the height in px the wrapped label then takes; no hyphenation, so a word
- * is never split ("Quarterbac / k").
+ * [style] shrunk until the longest word of [term] fits in [availPx]: down to [minFactor]
+ * for legibility, then on to [LAST_RESORT] of that for a single overlong word. Hyphenation
+ * is off, so a word is never split ("Quarterbac / k"); if it fits at no size the label is
+ * ellipsized on one line instead. The height is what the wrapped label then takes.
  */
-private fun fitLabel(measurer: TextMeasurer, term: String, style: TextStyle, availPx: Int, minFactor: Float): Pair<TextStyle, Int> {
+private fun fitLabel(measurer: TextMeasurer, term: String, style: TextStyle, availPx: Int, minFactor: Float): MapLabel {
+    fun overlong(s: TextStyle) = term.split(' ', '-').any { measurer.measure(it, s, softWrap = false).size.width > availPx }
     var s = style
     var factor = 1f
-    while (factor > minFactor && term.split(' ', '-').any { measurer.measure(it, s, softWrap = false).size.width > availPx }) {
+    val floor = minFactor * LAST_RESORT
+    while (factor > floor && overlong(s)) {
         factor *= LABEL_SHRINK_STEP
         s = style.copy(fontSize = style.fontSize * factor)
     }
-    val h = measurer.measure(term, s, constraints = Constraints(maxWidth = availPx), maxLines = LABEL_LINES).size.height
-    return s to h
+    val ellipsize = overlong(s)
+    val h = if (ellipsize) measurer.measure(term, s, constraints = Constraints(maxWidth = availPx), maxLines = 1, softWrap = false, overflow = TextOverflow.Ellipsis).size.height
+        else measurer.measure(term, s, constraints = Constraints(maxWidth = availPx), maxLines = LABEL_LINES).size.height
+    return MapLabel(s, h, ellipsize)
 }
 
+/** A lone overlong word may go to this share of the usual floor before it is ellipsized. */
+private const val LAST_RESORT = 0.75f
+private const val LARGE_TEXT = 1.5f
 private val LABEL_PAD = 2.dp
 private val LABEL_GAP = 4.dp
 private val ROW_GAP = 12.dp

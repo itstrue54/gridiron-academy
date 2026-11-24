@@ -118,6 +118,20 @@ class ScreenRenderTest {
         }
     }
 
+    /** The C2 set: the Match board with a pair made, side by side and stacked at 200% text, 360dp wide. */
+    @Test fun matchBoardPaired() {
+        for ((name, scale, band) in listOf(Triple("f2-14-match-paired-adult", 1f, AgeBand.AGE_18_PLUS), Triple("f2-14b-match-paired-kid-200", 2f, AgeBand.AGE_8_9))) {
+            val state = appState(band)
+            val (level, lesson) = allSteps.first { (l, les) -> l.track == band.track && les.steps.any { it is Match } }
+            val step = lesson.steps.first { it is Match } as Match
+            val controller = LessonController(listOf(step))
+            controller.matchDraft = mapOf(step.pairs[0].left to step.pairs[0].right)
+            shot(name, fontScale = scale) {
+                GridironTheme(skin = state.skin, dark = false) { LessonScreen(state, level.id, lesson.id, controller) }
+            }
+        }
+    }
+
     @Test fun welcomeAndOnboarding() {
         shot("01-welcome-light") { LearnerApp(appState(null), dark = false) }
         val s = appState(null).also { it.startOnboarding() }

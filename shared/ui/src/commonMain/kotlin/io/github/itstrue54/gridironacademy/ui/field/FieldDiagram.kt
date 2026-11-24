@@ -7,6 +7,11 @@ import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.gestures.calculateCentroid
 import androidx.compose.foundation.gestures.calculatePan
 import androidx.compose.foundation.gestures.calculateZoom
+import io.github.itstrue54.gridironacademy.ui.resources.Res
+import io.github.itstrue54.gridironacademy.ui.resources.field_los
+import io.github.itstrue54.gridironacademy.ui.resources.map_zoom_in
+import io.github.itstrue54.gridironacademy.ui.resources.map_zoom_out
+import org.jetbrains.compose.resources.stringResource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -85,6 +90,14 @@ data class FieldLabels(
     val zoomOut: String = "Zoom out",
 )
 
+/** The words on a field in the app's language: callers need not pass them. */
+@Composable
+fun fieldLabels() = FieldLabels(
+    los = stringResource(Res.string.field_los),
+    zoomIn = stringResource(Res.string.map_zoom_in),
+    zoomOut = stringResource(Res.string.map_zoom_out),
+)
+
 /** Hoistable zoom for one diagram: reset by giving a new key (DESIGN §7.10). */
 @Stable
 class FieldZoomState {
@@ -128,7 +141,7 @@ fun FieldDiagram(
     highlightZone: String? = null,
     onTap: ((String) -> Unit)? = null,
     fitToCard: Boolean = true,
-    labels: FieldLabels = FieldLabels(),
+    labels: FieldLabels = fieldLabels(),
     zoom: FieldZoomState = rememberFieldZoomState(diagram),
     window: FieldWindow = remember(diagram) { FieldGeometry.window(diagram) },
     motion: Float? = null,
