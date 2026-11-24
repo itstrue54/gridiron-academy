@@ -448,9 +448,9 @@ fun OrderView(step: Order, order: List<String>, graded: Boolean, onChange: (List
         Text(stringResource(Res.string.order_hint), style = Gridiron.type.label, color = c.inkDim)
         // Focus stays on the old slot after a move, so say where the item went (live region).
         var moved by remember(step.id) { mutableStateOf("") }
-        if (moved.isNotEmpty() && !graded) {
-            Text(moved, style = Gridiron.type.label, color = c.ink, modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite })
-        }
+        // Always in the layout, two lines tall, so the first move never shifts the rows under the learner's finger.
+        Text(if (graded || moved.isEmpty()) " " else moved, style = Gridiron.type.label, color = c.ink, minLines = 2, maxLines = 2,
+            modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite })
         order.forEachIndexed { i, item ->
             val nowUp = stringResource(Res.string.order_now_at, item, i, order.size)
             val nowDown = stringResource(Res.string.order_now_at, item, i + 2, order.size)

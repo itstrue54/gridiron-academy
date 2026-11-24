@@ -165,12 +165,14 @@ fun SpeedRoundScreen(state: LearnerAppState, levelId: String, round: SpeedRoundC
             }
             // The verdict in words (a sound and a points chip are not enough): a polite live
             // region, outside the rebuilt buttons so it is announced rather than rebuilt.
-            round.lastRight?.let { right ->
-                Row(Modifier.semantics { liveRegion = LiveRegionMode.Polite }, verticalAlignment = Alignment.CenterVertically) {
-                    GlyphIcon(if (right) Glyph.CHECK else Glyph.DASH, if (right) c.correct else c.retry, size = 20.dp)
-                    Spacer(Modifier.width(6.dp))
-                    Text(stringResource(if (right) Res.string.speed_last_right else Res.string.speed_last_wrong), style = Gridiron.type.label, color = c.ink)
-                }
+            // The row is always there (blank before the first answer) so the buttons never jump, and
+            // the question number is in the words so a second identical verdict is announced again.
+            val right = round.lastRight
+            val verdict = right?.let { stringResource(if (it) Res.string.speed_last_right else Res.string.speed_last_wrong, round.answered) }
+            Row(Modifier.semantics { liveRegion = LiveRegionMode.Polite }, verticalAlignment = Alignment.CenterVertically) {
+                Box(Modifier.size(20.dp)) { if (right != null) GlyphIcon(if (right) Glyph.CHECK else Glyph.DASH, if (right) c.correct else c.retry, size = 20.dp) }
+                Spacer(Modifier.width(6.dp))
+                Text(verdict ?: " ", style = Gridiron.type.label, color = c.ink)
             }
             // A fresh set of buttons for each question, so nothing stays selected.
             key(round.answered) {

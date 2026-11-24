@@ -196,7 +196,10 @@ private fun MapCanvas(
     val labelW = (colW - LABEL_PAD * 2).coerceAtLeast(1.dp)
     // Not remembered: a font that loads late changes the widths, and reading it here recomposes.
     val availPx = with(density) { labelW.roundToPx() }
-    val labels = layout.nodes.associate { n -> n.entry.id to fitLabel(measurer, n.entry.term, labelStyle, availPx, MIN_LABEL_SHRINK / density.fontScale) }
+    // Measured once per width and text scale, not on every recomposition (a pan or zoom).
+    val labels = remember(layout, availPx, density.fontScale, labelStyle) {
+        layout.nodes.associate { n -> n.entry.id to fitLabel(measurer, n.entry.term, labelStyle, availPx, MIN_LABEL_SHRINK / density.fontScale) }
+    }
     val labelH = with(density) { (labels.values.maxOfOrNull { it.heightPx } ?: 0).toDp() }
     val rowH = maxOf(ROW_HEIGHT, NODE + LABEL_GAP + labelH + ROW_GAP)
     val contentW = view.width.toFloat()
@@ -305,8 +308,10 @@ private fun MapCanvas(
                     }
                 }
             }
-            Box(Modifier.weight(1f), contentAlignment = Alignment.BottomEnd) {
-                Text(stringResource(Res.string.map_zoom_hint), style = Gridiron.type.label, color = c.inkDim, textAlign = TextAlign.End,
+            // Decorative: one line at normal size, gone at large text where it would cover the nodes.
+            if (LocalDensity.current.fontScale < LARGE_TEXT) Box(Modifier.weight(1f), contentAlignment = Alignment.BottomEnd) {
+                Text(stringResource(Res.string.map_zoom_hint), style = Gridiron.type.label.copy(fontSize = Gridiron.type.label.fontSize * 0.85f), color = c.inkDim, textAlign = TextAlign.End,
+                    maxLines = 1, softWrap = false, overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.background(c.surface.copy(alpha = HINT_BACK), RoundedCornerShape(HINT_RADIUS)).padding(horizontal = 8.dp, vertical = 2.dp)
                         .clearAndSetSemantics { })
             }
@@ -477,7 +482,7 @@ private fun fitLabel(measurer: TextMeasurer, term: String, style: TextStyle, ava
     val floor = minFactor * LAST_RESORT
     while (factor > floor && overlong(s)) {
         factor *= LABEL_SHRINK_STEP
-        s = style.copy(fontSize = style.fontSize * factor)
+        s = style.copy(fontSize = style.fontSize * factor, lineHeight = style.lineHeight * factor)
     }
     val ellipsize = overlong(s)
     val h = if (ellipsize) measurer.measure(term, s, constraints = Constraints(maxWidth = availPx), maxLines = 1, softWrap = false, overflow = TextOverflow.Ellipsis).size.height

@@ -123,6 +123,24 @@ class StepViewsUiTest {
         onNode(hasText("Continue", ignoreCase = true) and hasClickAction()).assertContentDescriptionContains("Not quite. Continue")
     }
 
+    @Test fun continueSaysCorrectWhenRight() = runComposeUiTest {
+        play(MultipleChoice("q2", "Pick", listOf("One", "Two"), 0, "Because."))
+        onNode(button("One")).performClick()
+        onNodeWithText("Check", ignoreCase = true).performClick()
+        onNode(hasText("Continue", ignoreCase = true) and hasClickAction()).assert(SemanticsMatcher("reads a correct headline then Continue") {
+            val d = it.config.getOrNull(SemanticsProperties.ContentDescription)?.firstOrNull().orEmpty()
+            d.endsWith(". Continue") && !d.startsWith("Not quite")
+        })
+    }
+
+    @Test fun orderRowsDoNotMoveOnTheFirstAnnouncement() = runComposeUiTest {
+        play(Order("o2", "Order", listOf("First", "Second", "Third"), "Because."))
+        val before = onNodeWithText("1").fetchSemanticsNode().boundsInRoot.top
+        onAllNodes(hasContentDescription("down", substring = true) and hasClickAction() and isEnabled())[0].performClick()
+        val after = onNodeWithText("1").fetchSemanticsNode().boundsInRoot.top
+        kotlin.test.assertEquals(before, after)
+    }
+
     @Test fun orderAnnouncesTheNewPosition() = runComposeUiTest {
         play(Order("o1", "Order", listOf("First", "Second", "Third"), "Because."))
         // Whatever the shuffle, the first item that can move down says where it landed, in a live region.
@@ -153,10 +171,14 @@ class StepViewsUiTest {
         val round = state.speedRoundController(level.id)
         round.start(timed = false)
         setContent { GridironTheme(skin = state.skin, dark = false) { SpeedRoundScreen(state, level.id, round, clock = false) } }
+        val firstTop = onNode(SemanticsMatcher.keyIsDefined(SemanticsProperties.LiveRegion)).fetchSemanticsNode().boundsInRoot.let { it.top to it.height }
         val q = round.current!!
         val wrong = when (q) { is MultipleChoice -> Answer.Choice((q.answer + 1) % q.choices.size); is TrueFalse -> Answer.Bool(!q.answer); else -> error("unexpected") }
         runOnIdle { round.answer(wrong) }
-        onNodeWithText("Last answer: not quite").assertExists()
+        waitForIdle()
+        val nowTop = onNode(SemanticsMatcher.keyIsDefined(SemanticsProperties.LiveRegion)).fetchSemanticsNode().boundsInRoot.let { it.top to it.height }
+        kotlin.test.assertEquals(firstTop, nowTop, "the verdict row is reserved from the start, so the buttons below never move")
+        onNodeWithText("Question 1: not quite").assertExists()
     }
 
     @Test fun aLongExplanationTellsTalkBackThereIsMore() = runComposeUiTest {
