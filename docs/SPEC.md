@@ -305,7 +305,9 @@ Existing (v1): `learn`, `multiple_choice`, `true_false`, `match`, `order`,
 `diagram_tap`, `read_defense` (pre-snap, answer, reveal, optional `disguised`),
 `situation` (down, distance, clock, score; BEST/OK/POOR).
 
-New in v2:
+New in v2. **Planned (not built yet):** none of these nine types exists in code or content;
+the player renders only the v1 types above (teaching cards animate a "film mode", but
+there is no graded `film` step).
 
 | Type | What the learner does | Used for |
 |---|---|---|
@@ -325,17 +327,21 @@ direction of break within an angle) defined as named constants in `GradingRules`
 in the engine, unit-tested.
 
 ### 4.3 Games (activities)
+**Built:** Speed round, Diagram dash, Read the defense, Game day. **Planned (not built
+yet):** Picture Play, Route runner, Ref school, Playbook quiz, Daily challenge (marked
+below); `GameType` has only the four built games.
+
 | Game | Mechanic | Levels |
 |---|---|---|
-| **Picture Play** | 6 untimed `picture_choice`/`drag_to` rounds, sticker reward | 0 |
+| **Picture Play** (Planned, not built yet) | 6 untimed `picture_choice`/`drag_to` rounds, sticker reward | 0 |
 | **Speed round** | Timed MC/TF (60s), streak of 3 doubles points; the gate score is right answers out of *all* the round's questions, so ones the clock cuts off count as missed (accuracy alone would let one answer and a wait pass). **Untimed** option keeps scoring without a clock (DESIGN §12): a rules screen before the first question has the Clock switch, off by default for ages 8-9 and when a screen reader is on | 1-3, review |
 | **Diagram dash** | Run of `diagram_tap`/`align` | 3+ |
 | **Read the defense** | Run of `read_defense`, disguise flag at L7 | 4, 6, 7 |
 | **Game day** | A simulated game of `situation`/`call_it` decisions; coach points (BEST 1, OK 0.5, POOR 0) | 2, 5, 8 |
-| **Route runner** | Run of `draw_route` against shown coverage | 3+ |
-| **Ref school** | Run of `spot_foul`/`film` | 2+ |
-| **Playbook quiz** | Generated from the team playbook (§7.5); `my_job` per position | Any, team-linked |
-| **Daily challenge** | One seeded mixed set per day (seed = epoch day + profile), same for everyone at a level so friends/teams can compare | All |
+| **Route runner** (Planned, not built yet) | Run of `draw_route` against shown coverage | 3+ |
+| **Ref school** (Planned, not built yet) | Run of `spot_foul`/`film` | 2+ |
+| **Playbook quiz** (Planned, not built yet) | Generated from the team playbook (§7.5); `my_job` per position | Any, team-linked |
+| **Daily challenge** (Planned, not built yet) | One seeded mixed set per day (seed = epoch day + profile), same for everyone at a level so friends/teams can compare | All |
 
 Game sets are drawn with the injected `Rng` seeded from (profile, item set, attempt
 number), so a replay of the same attempt is identical (principle 1.5.4).
@@ -345,16 +351,19 @@ number), so a replay of the same attempt is identical (principle 1.5.4).
 - Checkpoint (level test) opens when every lesson is passed; 12 questions; 80% to
   pass. Drawn from the level's graded steps (seeded by level, day and attempt, so every
   retake is a new draw that can't be learned from the last try's feedback; weighting
-  toward low-mastery concepts comes with §4.6), each asked once with feedback but no
+  toward low-mastery concepts is **planned (not built yet)**; today the draw is uniform), each asked once with feedback but no
   retry. Misses go to review. The Speed round clock doesn't count time the app is away, on the rules screen, or under the Leave dialog; any screen change closes that dialog.
 - Big Game opens after the checkpoint; 70% to pass.
 - Passing both passes the level. Stars per DESIGN (95/80/60).
-- **Level 0 has no test.** Finishing every lesson and one Picture Play passes it, so
+- **Level 0 has no test.** **Planned (not built yet):** Level 0 does not exist (§6.9). Finishing every lesson and one Picture Play passes it, so
   no pre-reader ever "fails" a test. A kid can also skip Level 0 entirely.
 - **Assignment unlock:** a coach assignment can open a lesson above the learner's
   level (§7.4); it does not pass the level.
 
 ### 4.5 Placement
+**Status:** the engine side is built (`Placement`, `AgeBand.offeredPlacement`); the
+learner app never calls it, so no placement quiz is offered yet. **Planned (not built yet):**
+the quiz screens. Level 0 is not built either.
 - Kid profiles start at Level 0 if the age band is 4-7, else Kid L1. An optional
   "I know some football" quiz is offered from age 10.
 - Adults/teens: one 6-question quiz per level, ascending, stop at the first level
@@ -384,11 +393,15 @@ direct prerequisite already implies (seven were removed), a prerequisite first t
 at a later level than the concept that needs it, and a glossary `level` that isn't the
 level where the term is first taught (five were wrong and are fixed).
 
-Mastery drives: the coach dashboard (§7.3), the checkpoint weighting, daily practice
+Mastery drives: the coach dashboard (§7.3), the checkpoint weighting (**planned, not built
+yet**), daily practice
 selection, and the learner's **Playbook map** (the concept graph rendered as a
 skill tree that fills in).
 
 ### 4.7 Motivation
+**Built:** XP, streaks, stars. **Planned (not built yet):** stickers and the sticker book,
+badges, the team board, and the streak rest day.
+
 - **XP** per lesson/game (existing), **streaks** (existing, with one free "rest day"
   per week so a missed Sunday doesn't break a kid's streak), **stars**, **stickers**
   (Level 0 and kid track: one per lesson, collected in a sticker book),
@@ -469,6 +482,8 @@ due, (3) Continue.
 DESIGN §9.3. New step types get their own composables (§4.2). The player is a
 state machine in the engine (`LessonSession`), the UI only renders state and sends
 answers. A lesson can be quit and resumed; partial state is saved after every step.
+**Planned (not built yet):** today a quit lesson or game restarts from its first step (the
+app only restores the screen, as the level it belongs to).
 
 ### 6.3 Games
 DESIGN §9.4-9.6 for existing games; the new games reuse the same HUD components.
@@ -489,6 +504,9 @@ Game Day uses fictional teams (`TeamMark`).
   Assignment items join when the inbox exists.
 
 ### 6.5 Assignments inbox
+**Planned (not built yet).** The learner app has no inbox, strip or assignment check; the
+Assignment model and the coach-side screens exist.
+
 - Shows each active assignment: title, from (coach/parent display name), due date,
   progress ring, the note.
 - Opening an assignment shows its plan (§7.4): prerequisite primers, lessons, the
@@ -533,6 +551,9 @@ export/import backup, DESIGN §9.9). Linked progress syncs across devices throug
 event log (§8).
 
 ### 6.9 Level 0 mode specifics
+**Planned (not built yet).** There is no Level 0 content, mode or recorded audio, and the
+app offers profiles from age 6-7 up (ADR-015); a saved 4-5 band still loads.
+
 - Kid skin with 64dp targets, no text on answer pictures, prompts spoken
   automatically and on tap of the big speaker.
 - **Recorded voice** for every prompt, choice name and feedback line (`audio/` in
@@ -954,6 +975,10 @@ in < 500 ms on device.
 ---
 
 ## 14. Release plan
+
+The milestone scopes are plans, not status. Not built from M1-M4: Level 0, placement
+quiz screens, the nine new step types, checkpoint weighting, the assignments inbox,
+stickers, badges, the team board and lesson resume; see the **Planned** notes in §4, §6.
 
 | Milestone | Scope | Exit criteria |
 |---|---|---|
