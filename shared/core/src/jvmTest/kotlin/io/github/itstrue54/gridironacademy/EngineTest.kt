@@ -219,7 +219,7 @@ class EngineTest {
         assertEquals(1, p.streakDays)
         p = p.touch(10); assertEquals(1, p.streakDays)
         p = p.touch(11); assertEquals(2, p.streakDays)
-        p = p.touch(13); assertEquals(1, p.streakDays)
+        p = p.touch(14); assertEquals(1, p.streakDays) // three days later: lapsed
     }
 
     // ---- Placement ----
