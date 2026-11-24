@@ -73,6 +73,16 @@ class SnapshotAssemblerTest {
         assertEquals(1, s.learner("leo")!!.level)
     }
 
+    @Test fun `a game item attempt takes its gate's level`() {
+        val item = io.github.itstrue54.gridironacademy.model.Situation("g-gi", io.github.itstrue54.gridironacademy.model.GameState(1, 600, 1, 10, 25, 0), "p",
+            listOf(io.github.itstrue54.gridironacademy.model.SituationOption("a", io.github.itstrue54.gridironacademy.model.Quality.BEST, "w"),
+                io.github.itstrue54.gridironacademy.model.SituationOption("b", io.github.itstrue54.gridironacademy.model.Quality.POOR, "w")), "e")
+        val levels = content.curriculum.levels.map { if (it.id == "architect-8") it.copy(gate = it.gate.copy(gameItems = listOf(item))) else it }
+        val c = io.github.itstrue54.gridironacademy.content.Content(content.curriculum.copy(levels = levels), content.glossary, content.unitsByLevel, content.scenes, content.packs, content.review)
+        val s = SnapshotAssembler.assemble(rows.copy(events = listOf(attempt("mia", "g-gi", today - 1, 0))), c, today)
+        assertEquals(8, s.learner("mia")!!.level)
+    }
+
     @Test fun `streak ends today or yesterday`() {
         assertEquals(3, SnapshotAssembler.streak(setOf(today, today - 1, today - 2, today - 4), today))
         assertEquals(2, SnapshotAssembler.streak(setOf(today - 1, today - 2), today))

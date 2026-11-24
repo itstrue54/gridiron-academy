@@ -48,6 +48,24 @@ class Content(
 
     fun lesson(id: String): Lesson? = lessonById[id]
 
+    /** Every step in the course: lesson steps, then each gate's own game items. */
+    val allSteps: List<Step> by lazy { lessons.flatMap { it.steps } + curriculum.levels.flatMap { it.gate.gameItems } }
+    private val stepById by lazy { allSteps.associateBy { it.id } }
+    private val levelNumberByStep by lazy {
+        val m = mutableMapOf<String, Int>()
+        curriculum.levels.forEach { lv ->
+            unitsOf(lv).forEach { u -> u.lessons.forEach { l -> l.steps.forEach { m[it.id] = lv.number } } }
+            lv.gate.gameItems.forEach { m[it.id] = lv.number }
+        }
+        m
+    }
+
+    /** A step by id, lesson step or gate game item; null if there is none. */
+    fun step(id: String): Step? = stepById[id]
+
+    /** The number of the level a step belongs to (a game item belongs to its gate's level). */
+    fun levelNumberOfStep(id: String): Int? = levelNumberByStep[id]
+
     val graph: ConceptGraph by lazy { ConceptGraph(glossary.entries) }
 
     /** The lowest level number of any lesson that teaches [concept]; null if none does. */

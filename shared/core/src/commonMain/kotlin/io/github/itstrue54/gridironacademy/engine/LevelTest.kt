@@ -30,7 +30,10 @@ object LevelTest {
         if (gate.ordered) return (gate.gameItems + lesson).take(q)
         val rng = Rng(seed xor 0x5DEECE66DL)
         val own = if (gate.gameItems.size > q) rng.sample(gate.gameItems, q) else gate.gameItems
-        return own + rng.sample(lesson, q - own.size)
+        val picked = own + rng.sample(lesson, q - own.size)
+        // Game items are selected first, but met in a mixed order. Without any, the draw is
+        // already a shuffle, so it stays exactly as it was.
+        return if (own.isEmpty()) picked else rng.shuffled(picked)
     }
 
     /** True if the level has enough content of the right kind to run its gate. */

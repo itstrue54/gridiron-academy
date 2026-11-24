@@ -62,4 +62,10 @@ class LevelTestTest {
         // Too few of either: 3 game items + 4 lesson items is 7 < 10.
         assertFalse(LevelTest.gateIsPlayable(units(4), gate((1..3).map { sit("g$it") }, q = 10).copy(testQuestions = 4)))
     }
+
+    @Test fun `selected game items are mixed in with lesson items`() {
+        val g = gate((1..8).map { sit("g$it") }, q = 10)
+        val firstEight = (1L..12L).map { LevelTest.gamePool(units(20), g, it).take(8).all { s -> s.id.startsWith("g") } }
+        assertTrue(firstEight.any { !it }, "game items always came first")
+    }
 }

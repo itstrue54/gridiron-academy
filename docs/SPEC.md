@@ -347,8 +347,9 @@ in the engine, unit-tested.
 | **Daily challenge** | One seeded mixed set per day (seed = epoch day + profile), same for everyone at a level so friends/teams can compare | All |
 
 **Gate game questions.** A gate game asks `gameQuestions` items. Its own `gameItems` are
-drawn first (all of them, or a seeded sample if there are more than `gameQuestions`);
-the level's lesson steps of the game's kind fill the rest. With `"ordered": true` the
+selected first (all of them, or a seeded sample if there are more than `gameQuestions`);
+the level's lesson steps of the game's kind fill the rest, and the whole selection is then
+shuffled with the same `Rng`, so the learner meets the questions in a mixed order. With `"ordered": true` the
 game instead plays game items then lesson items in authored order (first
 `gameQuestions`, any seed), for a game that tells one story: Level 8's whole-game sim
 (`architect-8`) is ordered, so its situations play in the order they are written. A gate

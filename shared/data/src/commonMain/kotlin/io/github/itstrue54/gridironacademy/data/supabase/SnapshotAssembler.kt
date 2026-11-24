@@ -20,10 +20,6 @@ object SnapshotAssembler {
 
         val myTeams = rows.staff.filter { it.accountId == me }.map { it.teamId }.toSet()
         val approved = rows.members.filter { it.status == "approved" }
-        val stepLevel = content.lessons.flatMap { l ->
-            val n = content.levelOfLesson(l.id)?.number ?: 1
-            l.steps.map { it.id to n }
-        }.toMap()
 
         val learners = rows.learners.mapNotNull { r ->
             val band = AgeBand.entries.firstOrNull { it.label == r.ageBand } ?: return@mapNotNull null
@@ -34,7 +30,7 @@ object SnapshotAssembler {
                 nickname = r.nickname,
                 ageBand = band,
                 track = if (r.track == "kid") Track.KID else Track.ADULT,
-                level = xs.maxOfOrNull { stepLevel[it.stepId] ?: 1 } ?: 1,
+                level = xs.maxOfOrNull { content.levelNumberOfStep(it.stepId) ?: 1 } ?: 1,
                 streakDays = streak(xs.map { it.epochDay }.toSet(), today),
                 lastActiveDay = xs.maxOfOrNull { it.epochDay },
                 myChild = r.managedBy == me,
