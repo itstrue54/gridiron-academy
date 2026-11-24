@@ -37,4 +37,11 @@ object Streak {
 
     /** True when this week's rest day has already been spent. */
     fun restUsedThisWeek(p: Progress, today: Long): Boolean = p.restWeek == weekOf(today)
+
+    /**
+     * True when the streak is alive only because the rest day covers yesterday: the last active
+     * day was two days ago and that week's rest is still free. Practising today spends it.
+     */
+    fun restCoversYesterday(p: Progress, today: Long): Boolean =
+        today - p.lastActiveDay == 2L && current(p, today) > 0
 }

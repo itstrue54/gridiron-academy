@@ -767,4 +767,35 @@ class LearnerAppStateTest {
         s.back() // quit: the fading-out lesson screen asks again
         assertNull(s.lessonControllerOrNull(level.id, lesson.id))
     }
+
+    /** One lesson on [first], then Home on [later]. */
+    private fun homeAfterGap(first: Long, later: Long): Pair<LearnerAppState, () -> Unit> {
+        var day = first
+        val s = LearnerAppState(content, InMemoryLearnerStore()) { day }
+        s.createProfile("Leo", AgeBand.AGE_8_9)
+        val (level, lesson) = s.nextLesson()!!
+        s.startLesson(level, lesson)
+        val c = s.lessonController(level.id, lesson.id)
+        playPerfect(c)
+        s.finishLesson(level.id, lesson.id, c.result)
+        return s to { day = later }
+    }
+
+    @Test
+    fun homeStreakLapsedShowsStart() {
+        val (s, advance) = homeAfterGap(500, 504)
+        assertEquals(1, s.streakToday)
+        advance()
+        assertEquals(0, s.streakToday, "three missed days: Home reads start, not the stale 1")
+        assertFalse(s.restDayKeepingStreak)
+    }
+
+    @Test
+    fun homeShowsRestDayWhenYesterdayWasCovered() {
+        val (s, advance) = homeAfterGap(500, 502)
+        assertFalse(s.restDayKeepingStreak, "nothing missed yet")
+        advance()
+        assertEquals(1, s.streakToday)
+        assertTrue(s.restDayKeepingStreak)
+    }
 }

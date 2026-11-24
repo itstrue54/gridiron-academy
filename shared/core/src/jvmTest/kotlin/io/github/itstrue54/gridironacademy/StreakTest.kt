@@ -75,4 +75,16 @@ class StreakTest {
         assertEquals(2, Streak.weekOf(11))
         assertEquals(-1, Streak.weekOf(-4)) // floors, not truncates
     }
+
+    @Test fun restCoversYesterdayOnlyWhileTheRestIsWhatKeepsTheStreak() {
+        val p = run(mon, mon + 1)
+        assertTrue(Streak.restCoversYesterday(p, mon + 3))
+        assertFalse(Streak.restCoversYesterday(p, mon + 2), "yesterday was not missed")
+        assertFalse(Streak.restCoversYesterday(p, mon + 4), "lapsed")
+        // a rest spent on a missed Sunday belongs to the previous week; today is in the next
+        val sundayMissed = Progress(streakDays = 4, lastActiveDay = mon + 5, restWeek = Streak.weekOf(mon))
+        assertFalse(Streak.restCoversYesterday(sundayMissed, mon + 7), "that week's rest is spent, streak lapsed")
+        val fresh = Progress(streakDays = 4, lastActiveDay = mon + 5, restWeek = Streak.weekOf(mon - 7))
+        assertTrue(Streak.restCoversYesterday(fresh, mon + 7), "missed Sunday, rest free")
+    }
 }

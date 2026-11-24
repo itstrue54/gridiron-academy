@@ -32,6 +32,7 @@
     <string name="streak_days">%1$d day streak</string>
     <string name="streak_start_kid">Start a streak today!</string>
     <string name="streak_start_adult">Start a streak</string>
+    <string name="streak_rest_used">Rest day used. Keep it going!</string>
     <string name="continue_lesson">Continue: %1$s</string>
     <string name="all_done_kid">You did every drill here! More levels are on the way.</string>
     <string name="all_done_adult">Every drill here is done. More levels are on the way.</string>

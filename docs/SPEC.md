@@ -392,7 +392,11 @@ skill tree that fills in).
 - **XP** per lesson/game (existing), **streaks** (existing, with one free "rest day"
   per week so a missed Sunday doesn't break a kid's streak; weeks run Monday to
   Sunday, the rest day itself adds nothing, a second miss in the same week breaks
-  the streak, and the number shown reads 0 once the streak has lapsed), **stars**, **stickers**
+  the streak, and the number shown reads 0 once the streak has lapsed). Home shows
+  the streak as it stands today (`Streak.current`), not the stored count, and adds a
+  "Rest day used" line while the rest day is what keeps it alive: yesterday was
+  missed and this week's rest is still free, so practising today spends it
+  (`Streak.restCoversYesterday`). **Stars**, **stickers**
   (Level 0 and kid track: one per lesson, collected in a sticker book),
   **badges** for milestones (first level, first disguise read, 30-day streak).
 - **Team board** (team-linked only, opt-in by the coach, under-13s shown by
