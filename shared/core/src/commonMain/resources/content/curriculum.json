@@ -551,31 +551,31 @@
             "state": {
               "quarter": 2,
               "clock": 250,
-              "down": 2,
+              "down": 3,
               "toGo": 8,
               "yardLine": 30,
               "scoreDiff": -7,
               "timeouts": 3
             },
-            "prompt": "2nd and 8. Your call slides the line right, leaving the back to block the left edge. Before the snap, a linebacker and a safety creep up beside the end outside your left tackle. What's the adjustment?",
+            "prompt": "3rd and 8. Their best pass rusher, an end who has beaten your running back twice today, lines up outside your left tackle. Your slide sends the line one way and leaves the back to block the edge rusher on the other side. Which way do you slide?",
             "options": [
               {
-                "text": "Slide the protection left, toward the extra rushers",
+                "text": "Slide left, toward him",
                 "quality": "best",
-                "why": "Linemen sliding that way pick up the overload, and the back takes the lighter right side."
+                "why": "Your left tackle takes him, and the back gets the other end on the right side: an easier matchup."
               },
               {
-                "text": "Keep sliding right and trust the back",
+                "text": "Slide right, leaving him to the back",
                 "quality": "poor",
-                "why": "One back can't block three rushers coming off the same edge."
+                "why": "A running back alone against their best rusher is the mismatch they want, and he has already lost it twice."
               },
               {
-                "text": "Keep the protection and plan a hot throw to the left",
+                "text": "Slide right and have the quarterback get the ball out fast",
                 "quality": "ok",
-                "why": "If they all come, the hot throw into the space they leave can work, but fixing the protection buys more time."
+                "why": "Quick throws limit the damage, but the back is still alone on their best rusher, and 3rd and 8 often needs a longer route."
               }
             ],
-            "explanation": "Slide toward the pressure, and let the hot throw handle what's left.",
+            "explanation": "Slide toward the rusher you fear most, so a lineman blocks him and the back gets the easier job.",
             "concept": "slide-protection"
           },
           {
