@@ -74,7 +74,7 @@ data class LearnerSave(
     val attempts: List<AttemptEvent> = emptyList(),
 ) {
     companion object {
-        const val CURRENT_SCHEMA = 2
+        const val CURRENT_SCHEMA = 3
         /**
          * The attempt log keeps the newest this many answers (about 5 MB), so the save
          * stays quick to write and to back up. That's years of daily use; mastery reads

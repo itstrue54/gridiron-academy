@@ -757,6 +757,11 @@ Penetration test and a privacy review before M3 public release.
   `shared/data/migration`) reads every version: schema 1 never wrote its version (it was
   the default), so a save without one is schema 1, and from schema 2 the version is
   always written. Fixtures: a hand-made v1 save and a real one from a phone.
+- **Schema 3** adds `progress.restWeek` (the Monday-based week whose weekly rest day was
+  used; -1 = never), so a one-day gap keeps the streak once a week and no more. The
+  migration only stamps the version; `restWeek` takes its default. A v1 or v2 save reads as
+  v3; a v4 save is refused (`SaveTooNew`), in Backup/Restore too, which decodes through
+  `SaveMigrations`. Fixtures: v1, v1 as written by a phone, and v2.
 
 ---
 

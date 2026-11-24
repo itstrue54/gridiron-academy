@@ -55,4 +55,30 @@ class SaveMigrationsTest {
         val s = SaveMigrations.withIds(LearnerSave(attempts = listOf(a), nextSeq = 1), ids)
         assertEquals(s, SaveMigrations.decode(SaveMigrations.encode(s), ids))
     }
+
+    @Test fun v2FixtureMigratesToV3() {
+        val s = SaveMigrations.decode(fixture(2), ids)
+        assertEquals(3, s.schemaVersion)
+        assertEquals(-1L, s.progress.restWeek)
+        assertEquals(6, s.progress.streakDays)
+        assertEquals(240, s.progress.xp)
+        assertEquals(1, s.attempts.size)
+        assertEquals(1, s.nextSeq)
+        assertEquals("dev-2", s.deviceId)
+        assertEquals("learner-2", s.learnerId)
+        assertEquals(Profile("Mia", AgeBand.AGE_10_12), s.profile)
+        assertEquals(2, s.progress.review.getValue("k1-game-04").box)
+    }
+
+    @Test fun v1FixtureMigratesToV3() {
+        val s = SaveMigrations.decode(fixture(1), ids)
+        assertEquals(3, s.schemaVersion)
+        assertEquals(-1L, s.progress.restWeek)
+        assertEquals(185, s.progress.xp)
+    }
+
+    @Test fun v4SaveIsRefused() {
+        val text = fixture(2).replace("\"schemaVersion\":2", "\"schemaVersion\":4")
+        assertEquals(4, assertFailsWith<SaveTooNew> { SaveMigrations.decode(text, ids) }.version)
+    }
 }

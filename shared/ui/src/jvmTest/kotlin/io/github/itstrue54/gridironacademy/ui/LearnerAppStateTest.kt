@@ -401,10 +401,12 @@ class LearnerAppStateTest {
         assertEquals(s.save.learnerId, other.save.learnerId, "the same learner")
 
         val before = other.save
-        assertEquals(RestoreResult.TooNew, other.restoreBackup(backup.replace("\"schemaVersion\":2", "\"schemaVersion\":9")))
+        assertEquals(RestoreResult.TooNew, other.restoreBackup(backup.replace("\"schemaVersion\":${LearnerSave.CURRENT_SCHEMA}", "\"schemaVersion\":${LearnerSave.CURRENT_SCHEMA + 1}")))
         assertEquals(RestoreResult.NotABackup, other.restoreBackup("hello"))
         assertEquals(RestoreResult.NotABackup, other.restoreBackup("{}"), "no profile, no restore")
         assertEquals(before, other.save, "a refused file changes nothing")
+        assertEquals(RestoreResult.Restored, other.restoreBackup(backup.replace("\"schemaVersion\":${LearnerSave.CURRENT_SCHEMA}", "\"schemaVersion\":2")), "a backup from the previous schema restores")
+        assertEquals(-1L, other.save.progress.restWeek)
 
         val report = s.progressReport()
         assertEquals(s.levels.size, report.size)
