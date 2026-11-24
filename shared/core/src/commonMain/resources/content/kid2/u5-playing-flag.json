@@ -137,6 +137,20 @@
         },
         {
           "type": "multiple_choice",
+          "id": "k2-flag-14",
+          "prompt": "NFL FLAG lets every player catch a pass. In tackle football, which of these players can catch one?",
+          "choices": [
+            "The tight end at the end of the line",
+            "The center",
+            "A guard",
+            "Every lineman"
+          ],
+          "answer": 0,
+          "explanation": "In tackle football, players at the ends of the line can catch a pass. The center and guards are in the middle, so they can't. Flag lets everyone catch.",
+          "concept": "eligible-receiver"
+        },
+        {
+          "type": "multiple_choice",
           "id": "k2-flag-13",
           "prompt": "In NFL FLAG, can the quarterback run past the line with the ball?",
           "choices": [

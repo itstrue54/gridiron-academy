@@ -35,6 +35,15 @@ turnovers; position names; flag vs tackle; referees and penalties. Adults add: N
 dimensions, extra point spot (15) and two-point spot (2), down-and-distance, clock
 stoppages, play clock, penalty yardage, 7-on-the-line and eligible receivers, touchbacks.
 
+Added 2026-11-24 (each ladder grades what its later levels build on; SPEC 4.6): Kid L1
+asks the two-point try (2), the line of scrimmage, special teams, down and distance, the
+4th-down turnover and the offensive line's job, each with a card where none taught it, and
+two more questions each on the field, defense, snap, tackle and turnover. Adult L1 asks the
+extra-point spot, and two more each on the field (width, end-zone depth), defense, snap
+(when a play begins, the punt snap), tackle (forward progress, the NFL's down-by-contact
+rule) and turnover (on downs; an incomplete pass isn't one); Adult L2 two more on eligible
+receivers (a covered tight end, the shotgun quarterback).
+
 ## Level 2: Rookie / Season Ticket (done; see `docs/content-review/level-2.md`)
 As written: Kid 9 drills in 3 units (Kicking Plays: kickoff, onside kick, punts and fair
 catches; Referees and Rules: signals, common penalties, clock and timeouts; How Plays
@@ -46,6 +55,9 @@ situations for the level game), 65 steps. Kids' scoreboard and timeout rules say
 NFL" and point to their own league for youth and flag rules. Later added: Lining Up, and
 Playing Flag (NFL FLAG rules where flag differs from tackle: flag guarding, no fumbles,
 three plays to midfield, no-run zones, the 7-yard rush, 1- and 2-point tries; ADR-015).
+Added 2026-11-24: motion (one player moving sideways or away at the snap, NFL rule) in
+The Line of Scrimmage, the play clock in The Clock and Timeouts, a graded pass-interference
+question, and two more eligible-receiver questions (one contrasting tackle with NFL FLAG).
 
 Game-only items (added 2026-11-24): the adult Game Day gate carries 8 situations of its own
 (`a2-game-01`..`08`, in `curriculum.json` under the gate's `gameItems`, in no lesson):
@@ -82,6 +94,9 @@ pictures are consistent across tracks.
 Added 2026-10-20: Kid unit 4, Clock, Calls and Replay (the play call, the play clock, the
 two-minute warning, spike and kneel; replay, the red flag and overtime), plus leverage,
 the route tree and pulling guards in the existing kid drills.
+Added 2026-11-24 so kids are asked what Levels 4-7 build on: disguise in Count the
+Safeties, the double-team (on the 3-4 nose tackle) in Defensive Fronts, and the audible in
+Calling the Play, a card and two questions each. Ready for Varsity stays untagged (ADR-010).
 
 Originally planned:
 Route tree 0-9 (flat, slant, comeback, curl, out, dig, corner, post, go) drawn on diagrams;

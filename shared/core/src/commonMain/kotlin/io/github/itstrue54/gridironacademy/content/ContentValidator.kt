@@ -79,6 +79,7 @@ object ContentValidator {
                 }
             }
         }
+        errs += prerequisitesGradedOnEachLadder(c)
         // Sign-offs (SPEC 13.3): real steps, one each, a named reviewer and a real date.
         val stepIds = (c.lessons.flatMap { l -> l.steps } + c.curriculum.levels.flatMap { it.gate.gameItems }).map { it.id }.toSet()
         dupes(c.review.signoffs.map { it.step }).forEach { err("review", "signed off twice: $it") }
@@ -103,6 +104,45 @@ object ContentValidator {
             if (p.check.passPct !in 1..100) err(where, "check passPct must be 1-100")
             val graded = p.lessons.mapNotNull { c.lesson(it) }.sumOf { l -> l.steps.count { it !is Learn } }
             if (graded < p.check.questions) err(where, "check needs ${p.check.questions} questions, lessons have $graded")
+        }
+        return errs
+    }
+
+    /**
+     * A learner climbs one ladder: kid (the kid levels, then the shared ones) or adult. On each,
+     * a concept's prerequisites must be graded no later than the concept's own first graded
+     * level, or the learner meets it before ever being asked what it builds on. And a shared
+     * level's prerequisite that the glossary puts at a track level must be graded in the
+     * ladder's own track levels: ADR-010 counts such a term as known once a learner is past
+     * it, which is only honest if that track asked it (SPEC 4.6).
+     */
+    private fun prerequisitesGradedOnEachLadder(c: Content): List<String> {
+        val errs = mutableListOf<String>()
+        val levelOf = c.glossary.entries.associate { it.id to it.level }
+        for (track in listOf(Track.KID, Track.ADULT)) {
+            val ladder = c.curriculum.levels.filter { it.track == track || it.track == Track.SHARED }
+            val trackTop = ladder.filter { it.track == track }.maxOfOrNull { it.number } ?: 0
+            val firstGraded = mutableMapOf<String, Int>()
+            for (lv in ladder) {
+                val steps = c.unitsByLevel[lv.id].orEmpty().flatMap { u -> u.lessons.flatMap { it.steps } } + lv.gate.gameItems
+                steps.filter { it !is Learn }.forEach { s ->
+                    s.concept?.let { firstGraded[it] = minOf(firstGraded[it] ?: lv.number, lv.number) }
+                }
+            }
+            val name = track.name.lowercase()
+            for (e in c.glossary.entries) {
+                val at = firstGraded[e.id] ?: continue
+                for (r in e.requires.filter { it in levelOf }) {
+                    val rAt = firstGraded[r]
+                    val where = "glossary ${e.id}"
+                    when {
+                        rAt == null -> errs += "$where: graded on the $name ladder (Level $at), but its prerequisite '$r' is never graded there"
+                        rAt > at -> errs += "$where: graded on the $name ladder at Level $at, but its prerequisite '$r' isn't graded there until Level $rAt"
+                        at > trackTop && (levelOf[r] ?: 0) <= trackTop && rAt > trackTop ->
+                            errs += "$where: graded on the $name ladder at Level $at, but its prerequisite '$r' (a Level ${levelOf[r]} term) isn't graded in the $name track's own levels"
+                    }
+                }
+            }
         }
         return errs
     }

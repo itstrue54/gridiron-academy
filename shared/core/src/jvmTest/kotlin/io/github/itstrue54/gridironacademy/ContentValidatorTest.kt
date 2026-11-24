@@ -69,6 +69,61 @@ class ContentValidatorTest {
         assertTrue(level.id in withItem.reviewedOnly().curriculum.levels.map { it.id })
     }
 
+    private fun term(id: String, level: Int, vararg requires: String) =
+        GlossaryEntry(id, id, "Kid text.", "Full text.", level, PackSide.RULES, requires.toList())
+    private fun ask(id: String, concept: String) = MultipleChoice(id, "Pick one.", listOf("a", "b"), 0, "Because.", concept = concept)
+
+    /** The shipped course plus fixture terms, and one fixture lesson added to each named level. */
+    private fun errsWithLessons(terms: List<GlossaryEntry>, lessons: Map<String, List<Step>>): List<String> {
+        val units = content.unitsByLevel.mapValues { (id, us) ->
+            lessons[id]?.let { steps -> us + CourseUnit("fx-$id", "Fixture", listOf(Lesson("fx-$id-l", "Fixture", steps = steps))) } ?: us
+        }
+        val g = Glossary(content.glossary.entries + terms)
+        return ContentValidator.validate(Content(content.curriculum, g, units, content.scenes, content.packs, content.review))
+    }
+
+    @Test fun `prerequisiteMustBeGradedOnSameLadder`() {
+        // fx-term is graded on both ladders; its prerequisite only on the adult one (the kid
+        // lesson teaches it on a card, which isn't graded).
+        val terms = listOf(term("fx-pre", 1), term("fx-term", 1, "fx-pre"))
+        val errs = errsWithLessons(terms, mapOf(
+            "kid-1" to listOf(Learn("fx-k1", "Card", "Body.", concept = "fx-pre"), ask("fx-k2", "fx-term")),
+            "adult-1" to listOf(ask("fx-a1", "fx-pre"), ask("fx-a2", "fx-term")),
+        )).filter { "fx-" in it }
+        assertTrue(errs.any { "glossary fx-term" in it && "kid ladder" in it && "'fx-pre'" in it }, "$errs")
+        assertFalse(errs.any { "adult ladder" in it }, "$errs")
+
+        // Graded on the kid ladder too, but a level after the concept: still too late.
+        val late = errsWithLessons(terms, mapOf(
+            "kid-1" to listOf(Learn("fx-k1", "Card", "Body.", concept = "fx-pre"), ask("fx-k2", "fx-term")),
+            "kid-2" to listOf(ask("fx-k3", "fx-pre")),
+            "adult-1" to listOf(ask("fx-a1", "fx-pre"), ask("fx-a2", "fx-term")),
+        )).filter { "fx-" in it }
+        assertTrue(late.any { "glossary fx-term" in it && "kid ladder" in it && "Level 2" in it }, "$late")
+    }
+
+    @Test fun `a shared level's track-level prerequisites are graded in the track's own levels`() {
+        // A Level 4 concept needs a Level 2 term. The adult track grades that term at Level 2;
+        // the kid track only first grades it at Level 4 itself, so a kid reaching Level 4 has
+        // never been asked it, though ADR-010 counts it as known.
+        val terms = listOf(term("fx-pre", 2), term("fx-term", 4, "fx-pre"))
+        val shared = "varsity-4" to listOf(ask("fx-v1", "fx-pre"), ask("fx-v2", "fx-term"))
+        val errs = errsWithLessons(terms, mapOf(
+            "kid-2" to listOf(Learn("fx-k1", "Card", "Body.", concept = "fx-pre")),
+            "adult-2" to listOf(ask("fx-a1", "fx-pre")),
+            shared,
+        )).filter { "glossary fx-term" in it }
+        assertTrue(errs.any { "kid ladder" in it && "'fx-pre'" in it }, "$errs")
+        assertFalse(errs.any { "adult ladder" in it }, "$errs")
+
+        val fixed = errsWithLessons(terms, mapOf(
+            "kid-2" to listOf(ask("fx-k1", "fx-pre")),
+            "adult-2" to listOf(ask("fx-a1", "fx-pre")),
+            shared,
+        )).filter { "glossary fx-term" in it }
+        assertEquals(emptyList(), fixed)
+    }
+
     @Test fun `architect 8 plays its game in order`() {
         assertTrue(level.gate.ordered)
         val ids = { seed: Long -> io.github.itstrue54.gridironacademy.engine.LevelTest.gamePool(content.unitsOf(level), level.gate, seed).map { it.id } }

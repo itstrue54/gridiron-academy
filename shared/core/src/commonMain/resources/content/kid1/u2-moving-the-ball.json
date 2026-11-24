@@ -305,6 +305,41 @@
           "concept": "down"
         },
         {
+          "type": "learn",
+          "id": "k1-downs-09",
+          "title": "Down and distance",
+          "body": "People say the down and the yards to go together. \"3rd and 4\" means it is 3rd down, and the offense needs 4 more yards.",
+          "concept": "down-and-distance"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k1-downs-10",
+          "prompt": "It is 2nd down. The offense needs 6 more yards. How do people say that?",
+          "choices": [
+            "2nd and 6",
+            "6th and 2",
+            "2nd and 10",
+            "1st and 6"
+          ],
+          "answer": 0,
+          "explanation": "Say the down first, then the yards still needed: 2nd and 6. There is no 6th down, because the offense only gets 4.",
+          "concept": "down-and-distance"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k1-downs-11",
+          "prompt": "It is 4th down. The offense does not make a first down. What happens next?",
+          "choices": [
+            "The other team gets the ball",
+            "The offense gets 4 more downs",
+            "The offense gets 1 point",
+            "The game ends"
+          ],
+          "answer": 0,
+          "explanation": "4th down is the last try. Without a first down, the other team gets the ball where the play ended. That is why teams often punt on 4th down.",
+          "concept": "fourth-down"
+        },
+        {
           "type": "situation",
           "id": "k1-downs-08",
           "state": {
@@ -706,12 +741,34 @@
           "concept": "handoff"
         },
         {
+          "type": "multiple_choice",
+          "id": "k1-moving-10",
+          "prompt": "What starts most plays?",
+          "choices": [
+            "The snap",
+            "A handoff",
+            "A tackle",
+            "A touchdown"
+          ],
+          "answer": 0,
+          "explanation": "The center snaps the ball back to start the play. A handoff comes after the snap. A tackle ends a play.",
+          "concept": "snap"
+        },
+        {
           "type": "true_false",
           "id": "k1-moving-07",
           "statement": "If a forward pass hits the ground, the play is over.",
           "answer": true,
           "explanation": "That is an incomplete pass. The ball goes back and the team tries again.",
           "concept": "incomplete"
+        },
+        {
+          "type": "true_false",
+          "id": "k1-moving-11",
+          "statement": "The quarterback snaps the ball to the center.",
+          "answer": false,
+          "explanation": "The center snaps the ball. It goes back to the quarterback.",
+          "concept": "snap"
         },
         {
           "type": "match",
@@ -1001,6 +1058,28 @@
           "statement": "After a turnover, the other team gets the ball.",
           "answer": true,
           "explanation": "That is what makes turnovers so big.",
+          "concept": "turnover"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k1-turnovers-07",
+          "prompt": "Which one of these is a turnover?",
+          "choices": [
+            "An interception",
+            "A touchdown",
+            "A first down",
+            "A field goal"
+          ],
+          "answer": 0,
+          "explanation": "In an interception, the defense catches the pass and takes the ball. That is a turnover. The others are good plays for the offense.",
+          "concept": "turnover"
+        },
+        {
+          "type": "true_false",
+          "id": "k1-turnovers-08",
+          "statement": "A runner fumbles, and a teammate grabs the ball. That is a turnover.",
+          "answer": false,
+          "explanation": "Their own team still has the ball, so it is not a turnover. It is a turnover only when the other team gets the ball.",
           "concept": "turnover"
         }
       ],

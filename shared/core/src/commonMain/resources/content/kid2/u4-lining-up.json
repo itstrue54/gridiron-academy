@@ -229,6 +229,20 @@
           "concept": "eligible-receiver"
         },
         {
+          "type": "multiple_choice",
+          "id": "k2-line-09",
+          "prompt": "In tackle football, which of these players can catch a forward pass?",
+          "choices": [
+            "The running back",
+            "The center",
+            "The left guard",
+            "The right guard"
+          ],
+          "answer": 0,
+          "explanation": "Players in the backfield, like the running back, can catch a pass. The center and guards are linemen in the middle, so they can't. In NFL FLAG, everyone can.",
+          "concept": "eligible-receiver"
+        },
+        {
           "type": "true_false",
           "id": "k2-line-07",
           "statement": "The center and the guards are allowed to catch a forward pass.",
@@ -331,6 +345,35 @@
             "caption": "Shotgun, one tight end"
           },
           "concept": "ineligible-receiver"
+        },
+        {
+          "type": "learn",
+          "id": "k2-line-10",
+          "title": "Motion",
+          "body": "Before the snap, one player may run sideways or away from the line. That is motion. In the NFL, only one player may be moving at the snap. They can't be running toward the line.",
+          "concept": "motion"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k2-line-11",
+          "prompt": "Before the snap, one receiver runs sideways across the field. What is that called?",
+          "choices": [
+            "Motion",
+            "A false start",
+            "Offside",
+            "A fumble"
+          ],
+          "answer": 0,
+          "explanation": "One player running sideways before the snap is motion, and it is allowed. A false start is a penalty, like a lineman jumping too early. Offside is a penalty on the defense.",
+          "concept": "motion"
+        },
+        {
+          "type": "true_false",
+          "id": "k2-line-12",
+          "statement": "In the NFL, two players may be in motion when the ball is snapped.",
+          "answer": false,
+          "explanation": "Only one player may be moving at the snap. Everyone else must stand still.",
+          "concept": "motion"
         }
       ]
     },

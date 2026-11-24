@@ -830,6 +830,28 @@
           "concept": "ineligible-receiver"
         },
         {
+          "type": "multiple_choice",
+          "id": "a2-eligibility-10",
+          "prompt": "A wide receiver lines up on the line of scrimmage just outside the tight end. Can the tight end catch a forward pass?",
+          "choices": [
+            "No: he's no longer on the end of the line",
+            "Yes: tight ends are always eligible",
+            "Yes, if he reports to the referee first",
+            "Only if he catches it in the end zone"
+          ],
+          "answer": 0,
+          "explanation": "Eligibility depends on where a player lines up at the snap. With a receiver on the line outside him, the tight end is covered and ineligible. Reporting only helps a player wearing a lineman's number, and he still has to line up at an eligible spot.",
+          "concept": "eligible-receiver"
+        },
+        {
+          "type": "true_false",
+          "id": "a2-eligibility-11",
+          "statement": "In the NFL, a quarterback lined up in the shotgun is an eligible receiver.",
+          "answer": true,
+          "explanation": "A shotgun quarterback is a back, so he can catch a forward pass. Only a quarterback taking the snap hand to hand under center is ineligible.",
+          "concept": "eligible-receiver"
+        },
+        {
           "type": "true_false",
           "id": "a2-eligibility-05",
           "statement": "In the NFL, an offensive tackle can catch a pass if he reports to the referee as eligible and lines up at an eligible spot.",

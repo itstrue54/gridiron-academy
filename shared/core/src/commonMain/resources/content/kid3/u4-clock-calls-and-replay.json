@@ -30,6 +30,35 @@
         },
         {
           "type": "learn",
+          "id": "k3-calls-10",
+          "title": "The audible",
+          "body": "Sometimes the quarterback sees the defense and wants a different play. They change it at the line by calling a new play out loud, before the snap. That is an audible.",
+          "concept": "audible"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k3-calls-11",
+          "prompt": "The quarterback sees the defense and changes the play at the line. What is that called?",
+          "choices": [
+            "An audible",
+            "A huddle",
+            "A timeout",
+            "A false start"
+          ],
+          "answer": 0,
+          "explanation": "Changing the play at the line is an audible. The huddle comes before the team lines up. A timeout stops the clock, and a false start is a penalty.",
+          "concept": "audible"
+        },
+        {
+          "type": "true_false",
+          "id": "k3-calls-12",
+          "statement": "An audible is called after the ball is snapped.",
+          "answer": false,
+          "explanation": "An audible happens at the line, before the snap. After the snap, the play is already going.",
+          "concept": "audible"
+        },
+        {
+          "type": "learn",
           "id": "k3-calls-03",
           "title": "The play clock",
           "body": "In the NFL, the offense usually has 40 seconds after each play to snap the ball. A play clock counts down. If it reaches zero first, that's delay of game.",

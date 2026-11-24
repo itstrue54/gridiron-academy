@@ -256,7 +256,8 @@ the mastery map (§4.6) and placement (§4.5).
   v1 §4 (unique ids; answers in range; no duplicate choices; one BEST per situation;
   diagram targets exist; routes reference real players; read-defense pre/reveal show
   the same players; disguised reveals contain movement; every concept is in the
-  glossary; every gate is playable; kid text limits; no diagram has more than 11 a
+  glossary; every gate is playable; each prerequisite graded on the same ladder no later
+  than its concept (§4.6); kid text limits; no diagram has more than 11 a
   side, and a full 11-man offense has at least 7 on the line) plus: concept graph acyclic and
   complete; every pack resolves; Level 0 steps have audio for every prompt and choice
   and no text-only choice; every `[review]`-flagged step is excluded from release
@@ -402,7 +403,13 @@ Each concept id has a per-profile mastery record derived from attempts:
 validator rejects an unknown or self prerequisite, any cycle, a prerequisite another
 direct prerequisite already implies (seven were removed), a prerequisite first taught
 at a later level than the concept that needs it, and a glossary `level` that isn't the
-level where the term is first taught (five were wrong and are fixed).
+level where the term is first taught (five were wrong and are fixed). It also checks each
+**ladder** a learner climbs (kid: Kid 1-3 then Levels 4-8; adult: Adult 1-3 then 4-8): a
+concept graded on a ladder needs every prerequisite graded on that same ladder no later
+than the concept's first graded level there, and a shared level's prerequisite that the
+glossary puts at Level 1-3 must be graded in that track's own levels, since ADR-010 counts
+it as known once a learner is past it. (The kid track had never asked motion, double-team,
+disguise and some Level 1 basics its later levels build on; content added 2026-11-24.)
 
 Mastery drives: the coach dashboard (§7.3), the checkpoint weighting, daily practice
 selection, and the learner's **Playbook map** (the concept graph rendered as a

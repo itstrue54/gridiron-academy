@@ -293,6 +293,20 @@
           "concept": "defense-positions"
         },
         {
+          "type": "multiple_choice",
+          "id": "k1-positions-11",
+          "prompt": "What is the main job of the offensive line?",
+          "choices": [
+            "Block for the QB and the runners",
+            "Catch passes",
+            "Tackle the runner",
+            "Kick the ball"
+          ],
+          "answer": 0,
+          "explanation": "The five linemen block. They give the QB time and open room for runners. Receivers catch passes, and the defense tackles.",
+          "concept": "offensive-line"
+        },
+        {
           "type": "diagram_tap",
           "id": "k1-positions-07",
           "prompt": "Tap the quarterback.",
@@ -703,6 +717,28 @@
           "answer": false,
           "explanation": "Flag football has no tackling.",
           "concept": "flag-football"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k1-flag-06",
+          "prompt": "In tackle football, a defender brings the runner to the ground. What is that called?",
+          "choices": [
+            "A tackle",
+            "A fumble",
+            "A snap",
+            "A flag pull"
+          ],
+          "answer": 0,
+          "explanation": "Bringing the runner to the ground is a tackle. A flag pull does the same job in flag football, where there is no tackling.",
+          "concept": "tackle"
+        },
+        {
+          "type": "true_false",
+          "id": "k1-flag-07",
+          "statement": "In tackle football, a tackle ends the play.",
+          "answer": true,
+          "explanation": "Once the runner is tackled, the play is over. The next play starts near the spot where they went down.",
+          "concept": "tackle"
         },
         {
           "type": "true_false",
