@@ -10,7 +10,8 @@ class ReleaseContentTest {
     private val content = ContentLoader.load(ClasspathContentSource())
 
     private fun signed(vararg levels: String, except: String? = null): Content {
-        val ids = levels.flatMap { id -> content.unitsOf(content.level(id)).flatMap { u -> u.lessons.flatMap { it.steps } } }
+        // A level's gate game items need sign-off too (SPEC 3.3), so "signed" covers them.
+        val ids = levels.flatMap { id -> content.level(id).let { lv -> content.unitsOf(lv).flatMap { u -> u.lessons.flatMap { it.steps } } + content.gameItemsOf(lv) } }
             .map { it.id }.filter { it != except }
         val log = ReviewLog(signoffs = ids.map { Signoff(it, "Coach", "2026-10-21", 2026, "0123456789abcdef") })
         return Content(content.curriculum, content.glossary, content.unitsByLevel, content.scenes, content.packs, log)

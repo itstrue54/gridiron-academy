@@ -60,7 +60,8 @@ class ContentValidatorTest {
         val item = sit("g-r")
         val gate = level.gate.copy(gameItems = listOf(item))
         val levels = content.curriculum.levels.map { if (it.id == level.id) it.copy(gate = gate) else it }
-        val every = levels.flatMap { lv -> content.unitsByLevel.getValue(lv.id).flatMap { u -> u.lessons.flatMap { l -> l.steps } } }.map { it.id }
+        // Every other step in the course is signed, other levels' game items included.
+        val every = levels.flatMap { lv -> content.unitsByLevel.getValue(lv.id).flatMap { u -> u.lessons.flatMap { l -> l.steps } } + lv.gate.gameItems.filter { it.id != item.id } }.map { it.id }
         val signed = every.map { Signoff(it, "Coach", "2026-10-21", 2026, "0123456789abcdef") }
         val withoutItem = Content(content.curriculum.copy(levels = levels), content.glossary, content.unitsByLevel, content.scenes, content.packs, ReviewLog(signoffs = signed))
         assertTrue(level.id !in withoutItem.reviewedOnly().curriculum.levels.map { it.id })
