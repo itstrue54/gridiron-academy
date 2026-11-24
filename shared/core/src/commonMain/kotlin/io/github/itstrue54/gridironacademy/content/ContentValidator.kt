@@ -43,6 +43,11 @@ object ContentValidator {
             if (!LevelTest.gateIsPlayable(units, lv.gate)) {
                 err("level ${lv.id}", "not enough ${lv.gate.game} content to run its gate")
             }
+            // An ordered game tells one story start to finish: a cut would drop its ending.
+            val candidates = LevelTest.gameCandidates(units, lv.gate)
+            if (lv.gate.ordered && candidates != lv.gate.gameQuestions) {
+                err("level ${lv.id}", "ordered game asks ${lv.gate.gameQuestions} questions but has $candidates to play in order; they must match")
+            }
             errs += validateGameItems(lv, c.glossary.entries.map { it.id }.toSet())
             lv.gate.gameItems.forEach { allStepIds += it.id }
             for (u in units) {
@@ -80,6 +85,7 @@ object ContentValidator {
             }
         }
         errs += prerequisitesGradedOnEachLadder(c)
+        errs += gameItemsTaughtOnEachLadder(c)
         // Sign-offs (SPEC 13.3): real steps, one each, a named reviewer and a real date.
         val stepIds = (c.lessons.flatMap { l -> l.steps } + c.curriculum.levels.flatMap { it.gate.gameItems }).map { it.id }.toSet()
         dupes(c.review.signoffs.map { it.step }).forEach { err("review", "signed off twice: $it") }
@@ -140,6 +146,32 @@ object ContentValidator {
                         rAt > at -> errs += "$where: graded on the $name ladder at Level $at, but its prerequisite '$r' isn't graded there until Level $rAt"
                         at > trackTop && (levelOf[r] ?: 0) <= trackTop && rAt > trackTop ->
                             errs += "$where: graded on the $name ladder at Level $at, but its prerequisite '$r' (a Level ${levelOf[r]} term) isn't graded in the $name track's own levels"
+                    }
+                }
+            }
+        }
+        return errs
+    }
+
+    /**
+     * A gate game item is in no lesson, so a miss sends the learner to where its concept is
+     * taught ("Where you learned it"). On every ladder through the gate's level, some lesson
+     * step at or below that level must grade the concept.
+     */
+    private fun gameItemsTaughtOnEachLadder(c: Content): List<String> {
+        val errs = mutableListOf<String>()
+        for (lv in c.curriculum.levels) {
+            if (lv.gate.gameItems.isEmpty()) continue
+            val tracks = if (lv.track == Track.SHARED) listOf(Track.KID, Track.ADULT) else listOf(lv.track)
+            for (track in tracks) {
+                val graded = c.curriculum.levels
+                    .filter { (it.track == track || it.track == Track.SHARED) && it.number <= lv.number }
+                    .flatMap { l -> c.unitsByLevel[l.id].orEmpty().flatMap { u -> u.lessons.flatMap { it.steps } } }
+                    .filter { it !is Learn }.mapNotNull { it.concept }.toSet()
+                lv.gate.gameItems.forEach { s ->
+                    val concept = s.concept
+                    if (concept != null && concept !in graded) {
+                        errs += "step ${s.id}: game item's concept '$concept' has no graded lesson step on the ${track.name.lowercase()} ladder by Level ${lv.number}"
                     }
                 }
             }

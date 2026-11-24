@@ -58,6 +58,8 @@ three plays to midfield, no-run zones, the 7-yard rush, 1- and 2-point tries; AD
 Added 2026-11-24: motion (one player moving sideways or away at the snap, NFL rule) in
 The Line of Scrimmage, the play clock in The Clock and Timeouts, a graded pass-interference
 question, and two more eligible-receiver questions (one contrasting tackle with NFL FLAG).
+Adult 2's Pass Interference drill gained accepting or declining a penalty (a card and a
+question), which the game item `a2-game-04` asks about.
 
 Game-only items (added 2026-11-24): the adult Game Day gate carries 8 situations of its own
 (`a2-game-01`..`08`, in `curriculum.json` under the gate's `gameItems`, in no lesson):
@@ -190,7 +192,8 @@ single-high Cover 3, Tampa 2, the 46, Wide-9, 3-3-5) and scheme-vs-scheme matchu
 analytics (expected points and EPA, success rate, pass rate over expected, 4th-down
 models, two-point math); game management (clock, home field, weather, roster and cap);
 and "The Architect's Game": one fictional game (Harbor City Gulls vs Ridgeview Foxes)
-played in order through 11 decisions, which also feed the Game Day gate. System names
+played in order through 11 decisions, which are the Game Day gate: it asks all 11 in order
+(gate `ordered`, `gameQuestions` 11; the 70% pass mark means 8 of 11, since 7 is 64%). System names
 that come from coaches or teams are used only as the common labels for the systems.
 
 Originally planned:

@@ -250,7 +250,7 @@
             "The coaches"
           ],
           "answer": 0,
-          "explanation": "A kick is a special teams play. Even the team with the ball sends out special teams, with a kicker.",
+          "explanation": "Both teams send out special teams for a kick. One team kicks the ball. The other team tries to catch it or block the kick.",
           "concept": "special-teams"
         },
         {

@@ -34,7 +34,10 @@ data class LevelGate(
     val gameQuestions: Int = 10,
     /** Share to hit in the level game to pass. */
     val gamePassPct: Int = 70,
-    /** Play the game's questions in authored order instead of a seeded draw (SPEC 4.4). */
+    /**
+     * Play the game's questions in authored order instead of a seeded draw (SPEC 4.3). The
+     * validator requires the pool to be exactly [gameQuestions] long, so nothing is cut.
+     */
     val ordered: Boolean = false,
     /**
      * Steps written for this gate's game only: they never appear in a lesson. Each must suit

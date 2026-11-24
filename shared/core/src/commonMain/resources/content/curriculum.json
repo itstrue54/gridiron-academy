@@ -781,7 +781,7 @@
         "testPassPct": 80,
         "testQuestions": 12,
         "game": "game_day",
-        "gameQuestions": 10,
+        "gameQuestions": 11,
         "gamePassPct": 70,
         "ordered": true
       }

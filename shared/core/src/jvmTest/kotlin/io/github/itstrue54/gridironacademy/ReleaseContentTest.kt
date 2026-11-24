@@ -10,7 +10,7 @@ class ReleaseContentTest {
     private val content = ContentLoader.load(ClasspathContentSource())
 
     private fun signed(vararg levels: String, except: String? = null): Content {
-        // A level's gate game items need sign-off too (SPEC 3.3), so "signed" covers them.
+        // A level's gate game items need sign-off too (SPEC 13.3), so "signed" covers them.
         val ids = levels.flatMap { id -> content.level(id).let { lv -> content.unitsOf(lv).flatMap { u -> u.lessons.flatMap { it.steps } } + content.gameItemsOf(lv) } }
             .map { it.id }.filter { it != except }
         val log = ReviewLog(signoffs = ids.map { Signoff(it, "Coach", "2026-10-21", 2026, "0123456789abcdef") })
@@ -44,7 +44,8 @@ class ReleaseContentTest {
         // its prerequisites ship. Nothing partly signed gets through.
         val shipped = content.reviewedOnly()
         shipped.curriculum.levels.forEach { lv ->
-            val unsigned = content.unitsOf(lv).flatMap { u -> u.lessons.flatMap { it.steps } }.filterNot { content.signedOff(it.id) }
+            val steps = content.unitsOf(lv).flatMap { u -> u.lessons.flatMap { it.steps } } + content.gameItemsOf(lv)
+            val unsigned = steps.filterNot { content.signedOff(it.id) }
             assertEquals(emptyList(), unsigned.map { it.id }, "${lv.id} shipped with unsigned steps")
         }
     }

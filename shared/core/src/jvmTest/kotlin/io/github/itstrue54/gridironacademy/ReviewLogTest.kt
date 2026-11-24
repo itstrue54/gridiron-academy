@@ -29,7 +29,7 @@ class ReviewLogTest {
             Json.parseToJsonElement(source.read(f)!!).jsonObject.getValue("lessons").jsonArray
                 .flatMap { it.jsonObject.getValue("steps").jsonArray }
         }
-        // A gate's own game items are signed off like any step (SPEC 3.3).
+        // A gate's own game items are signed off like any step (SPEC 13.3).
         val gameItems = Json.parseToJsonElement(source.read("curriculum.json")!!).jsonObject.getValue("levels").jsonArray
             .flatMap { it.jsonObject.getValue("gate").jsonObject["gameItems"]?.jsonArray.orEmpty() }
         (lessonSteps + gameItems).associateBy { it.jsonObject.getValue("id").jsonPrimitive.content }

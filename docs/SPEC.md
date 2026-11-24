@@ -353,8 +353,12 @@ the level's lesson steps of the game's kind fill the rest, and the whole selecti
 shuffled with the same `Rng`, so the learner meets the questions in a mixed order. With `"ordered": true` the
 game instead plays game items then lesson items in authored order (first
 `gameQuestions`, any seed), for a game that tells one story: Level 8's whole-game sim
-(`architect-8`) is ordered, so its situations play in the order they are written. A gate
-is playable only if game items plus lesson items of the right kind reach `gameQuestions`.
+(`architect-8`) is ordered, so its 11 situations play in the order they are written and
+its gate asks all 11 (8 of 11 to pass the 70% mark). A gate is playable only if game
+items plus lesson items of the right kind reach `gameQuestions`; an ordered gate's must
+equal it exactly, so no cut drops the story's ending. Each game item's concept must be
+graded by some lesson step at or below the gate's level on every ladder through it, so a
+miss can always point to where it was taught.
 
 Game sets are drawn with the injected `Rng` seeded from (profile, item set, attempt
 number), so a replay of the same attempt is identical (principle 1.5.4).
@@ -409,7 +413,9 @@ concept graded on a ladder needs every prerequisite graded on that same ladder n
 than the concept's first graded level there, and a shared level's prerequisite that the
 glossary puts at Level 1-3 must be graded in that track's own levels, since ADR-010 counts
 it as known once a learner is past it. (The kid track had never asked motion, double-team,
-disguise and some Level 1 basics its later levels build on; content added 2026-11-24.)
+disguise, the audible, the two-point try and some Level 1 basics; content added
+2026-11-24. Audible and the two-point try are no term's prerequisite, so no rule guards
+them.)
 
 Mastery drives: the coach dashboard (§7.3), the checkpoint weighting, daily practice
 selection, and the learner's **Playbook map** (the concept graph rendered as a
@@ -951,10 +957,14 @@ page from `tools/review-page.html`, and turns approvals into sign-offs; a flag n
 signs. Release gating is on by default for release builds (an internal build can pass
 `-Pgridiron.reviewedOnly=false`); both apps then ship `Content.reviewedOnly()`, only levels whose every step is signed
 (a level that needs a dropped one goes too, and so do packs using dropped lessons). A
-release never ships unsigned content: a level with any unsigned step is held back whole. As
-of 2026-10-21 every one of the 748 steps is signed (itstrue54, rule season 2026, after a
-coach's pre-read that fixed 17 steps), so a gated release ships the whole course. New or
-edited steps go back through `tools/review.py export`/`page`/`apply`.
+release never ships unsigned content: a level with any unsigned step is held back whole. On
+2026-10-21 every one of the then 748 steps was signed (itstrue54, rule season 2026, after a
+coach's pre-read that fixed 17 steps). The 2026-11-24 content round added unsigned steps
+and game items to kid-1, kid-2, kid-3, adult-1, adult-2 and college-5, so until the owner
+signs them off a gated release holds those levels back and, through the cascade, every
+level that needs them: adult-3, varsity-4 (both Level 3s are held) and everything after,
+which today is the whole course. New or edited steps go back through
+`tools/review.py export`/`page`/`apply`.
 
 ### 13.4 UI tests
 - `FieldRenderTest` (jvm) already renders real content diagrams headlessly to

@@ -36,6 +36,10 @@ object LevelTest {
         return if (own.isEmpty()) picked else rng.shuffled(picked)
     }
 
+    /** How many steps the gate's game could ask: its own items plus the lesson steps of its kind. */
+    fun gameCandidates(units: List<CourseUnit>, gate: LevelGate): Int =
+        gate.gameItems.size + gradedSteps(units).count { fits(gate.game, it) }
+
     /** True if the level has enough content of the right kind to run its gate. */
     fun gateIsPlayable(units: List<CourseUnit>, gate: LevelGate): Boolean =
         gradedSteps(units).size >= gate.testQuestions &&
