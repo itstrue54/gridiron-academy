@@ -27,6 +27,7 @@ import io.github.itstrue54.gridironacademy.progress.LevelReport
 import io.github.itstrue54.gridironacademy.progress.ConceptMastery
 import io.github.itstrue54.gridironacademy.progress.Mastery
 import io.github.itstrue54.gridironacademy.progress.ProgressReport
+import io.github.itstrue54.gridironacademy.progress.Streak
 import io.github.itstrue54.gridironacademy.progress.TrackChange
 import io.github.itstrue54.gridironacademy.progress.TrackSwitch
 import io.github.itstrue54.gridironacademy.data.migration.SaveTooNew
@@ -305,6 +306,12 @@ class LearnerAppState(
     /** Today's practice: the same set all day for this profile (SPEC 6.4). */
     fun practice(): Practice =
         DailyPractice.pick(save.progress, save.attempts, content, currentLevel, today(), save.learnerId.hashCode().toLong())
+
+    /** The streak as it stands today: zero once it has lapsed (SPEC 4.7). */
+    val streakToday: Int get() = Streak.current(save.progress, today())
+
+    /** True when yesterday was missed and this week's rest day is what keeps the streak alive. */
+    val restDayKeepingStreak: Boolean get() = Streak.restCoversYesterday(save.progress, today())
 
     val practiceDoneToday: Boolean get() = DailyPractice.doneToday(save.attempts, today())
 

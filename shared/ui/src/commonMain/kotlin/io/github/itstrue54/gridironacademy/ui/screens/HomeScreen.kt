@@ -59,6 +59,7 @@ import io.github.itstrue54.gridironacademy.ui.resources.continue_lesson
 import io.github.itstrue54.gridironacademy.ui.resources.home_title
 import io.github.itstrue54.gridironacademy.ui.resources.level_n
 import io.github.itstrue54.gridironacademy.ui.resources.level_progress
+import io.github.itstrue54.gridironacademy.ui.resources.streak_rest_used
 import io.github.itstrue54.gridironacademy.ui.resources.level_state_locked
 import io.github.itstrue54.gridironacademy.ui.resources.level_state_open
 import io.github.itstrue54.gridironacademy.ui.resources.level_state_passed
@@ -101,7 +102,7 @@ fun HomeScreen(state: LearnerAppState) {
             IconAction(Glyph.GLOSSARY, stringResource(Res.string.glossary), onClick = state::openGlossary)
             IconAction(Glyph.SETTINGS, stringResource(Res.string.grown_up_zone), onClick = state::openGrownUpGate)
         }
-        StreakChip(state.save.progress.streakDays, kid)
+        StreakChip(state.streakToday, state.restDayKeepingStreak, kid)
         Spacer(Modifier.size(12.dp))
         // Home opens scrolled to the level being played, not to the top of the list.
         val current = next?.level?.id ?: state.levels.lastOrNull { state.levelUnlocked(it) }?.id
@@ -176,7 +177,7 @@ private fun PracticeCard(label: String, kid: Boolean, onClick: () -> Unit) {
 }
 
 @Composable
-private fun StreakChip(days: Int, kid: Boolean) {
+private fun StreakChip(days: Int, restUsed: Boolean, kid: Boolean) {
     val c = Gridiron.colors
     val label = if (days > 0) stringResource(Res.string.streak_days, days)
     else stringResource(if (kid) Res.string.streak_start_kid else Res.string.streak_start_adult)
@@ -184,7 +185,10 @@ private fun StreakChip(days: Int, kid: Boolean) {
         Row(Modifier.padding(horizontal = 10.dp, vertical = 6.dp), verticalAlignment = Alignment.CenterVertically) {
             GlyphIcon(Glyph.FLAME, if (days > 0) c.gold else c.line, size = 20.dp)
             Spacer(Modifier.width(6.dp))
-            Text(label, style = Gridiron.type.label)
+            Column {
+                Text(label, style = Gridiron.type.label)
+                if (restUsed) Text(stringResource(Res.string.streak_rest_used), style = Gridiron.type.label, color = c.inkDim)
+            }
         }
     }
 }

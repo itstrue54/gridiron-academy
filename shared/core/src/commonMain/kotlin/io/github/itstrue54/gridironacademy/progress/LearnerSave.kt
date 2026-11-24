@@ -55,6 +55,8 @@ data class Profile(
  * Version 2 adds the attempt log (SPEC 8.1): every graded answer, the raw material for
  * mastery, the Coach app and, once linked, sync. Ids come from the platform, never from
  * the engine.
+ *
+ * Version 3 adds `Progress.restWeek`, the week whose weekly rest day was used (SPEC 4.7).
  */
 @Serializable
 data class LearnerSave(
@@ -74,7 +76,7 @@ data class LearnerSave(
     val attempts: List<AttemptEvent> = emptyList(),
 ) {
     companion object {
-        const val CURRENT_SCHEMA = 2
+        const val CURRENT_SCHEMA = 3
         /**
          * The attempt log keeps the newest this many answers (about 5 MB), so the save
          * stays quick to write and to back up. That's years of daily use; mastery reads

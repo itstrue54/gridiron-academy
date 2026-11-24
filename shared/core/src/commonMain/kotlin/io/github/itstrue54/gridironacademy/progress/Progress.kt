@@ -20,6 +20,8 @@ data class Progress(
     val streakDays: Int = 0,
     val lastActiveDay: Long = -1,
     val xp: Int = 0,
+    /** Week index (see [Streak.weekOf]) whose free rest day is spent; -1 = never. */
+    val restWeek: Long = -1,
 ) {
     fun withLesson(lessonId: String, pct: Int): Progress {
         val prev = lessons[lessonId]
@@ -33,10 +35,6 @@ data class Progress(
     fun lessonPassed(lessonId: String): Boolean =
         (lessons[lessonId]?.bestPct ?: -1) >= LessonSession.LESSON_PASS_PCT
 
-    /** Count a day of practice toward the streak. Same-day repeats do nothing. */
-    fun touch(today: Long): Progress = when {
-        today == lastActiveDay -> this
-        today == lastActiveDay + 1 -> copy(streakDays = streakDays + 1, lastActiveDay = today)
-        else -> copy(streakDays = 1, lastActiveDay = today)
-    }
+    /** Count a day of practice toward the streak; see [Streak] for the rest-day rules. */
+    fun touch(today: Long): Progress = Streak.touch(this, today)
 }

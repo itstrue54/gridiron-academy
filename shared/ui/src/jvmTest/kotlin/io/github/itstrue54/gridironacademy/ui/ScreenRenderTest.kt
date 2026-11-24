@@ -87,7 +87,7 @@ class ScreenRenderTest {
     }
 
     /** A learner who missed a question yesterday: practice leads Home. */
-    private fun withPracticeDue(band: AgeBand): LearnerAppState {
+    private fun withPracticeDue(band: AgeBand, daysLater: Long = 1): LearnerAppState {
         var day = 500L
         val s = LearnerAppState(content, InMemoryLearnerStore()) { day }
         s.createProfile(if (band.child) "Leo" else "Sam", band)
@@ -111,7 +111,7 @@ class ScreenRenderTest {
             c.submit(a); if (!c.finished && c.grade != null) c.next()
         }
         s.finishLesson(level.id, lesson.id, c.result); s.back()
-        day = 501
+        day = 500L + daysLater
         return s
     }
 
@@ -140,6 +140,11 @@ class ScreenRenderTest {
     @Test fun homeWithPracticeDue() {
         shot("03b-home-practice-kid") { LearnerApp(withPracticeDue(AgeBand.AGE_8_9), dark = false) }
         shot("04b-home-practice-adult") { LearnerApp(withPracticeDue(AgeBand.AGE_18_PLUS), dark = true) }
+    }
+
+    @Test fun homeStreakRestDay() {
+        // Played on day 500, missed 501, Home on 502: the weekly rest day is what keeps the streak.
+        shot("03c-home-streak-rest-kid") { LearnerApp(withPracticeDue(AgeBand.AGE_8_9, daysLater = 2), dark = false) }
     }
 
     @Test fun homeAndLevelBothSkins() {

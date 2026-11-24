@@ -22,6 +22,7 @@ object SaveMigrations {
         val version = o["schemaVersion"]?.jsonPrimitive?.intOrNull ?: 1
         if (version > LearnerSave.CURRENT_SCHEMA) throw SaveTooNew(version)
         if (version < 2) o = v1to2(o)
+        if (version < 3) o = v2to3(o)
         return withIds(ContentLoader.json.decodeFromJsonElement(LearnerSave.serializer(), o), newId)
     }
 
@@ -35,4 +36,7 @@ object SaveMigrations {
 
     /** v1 -> v2: the attempt log arrives. Old progress is kept as is; the log starts empty. */
     private fun v1to2(o: JsonObject): JsonObject = JsonObject(o + ("schemaVersion" to JsonPrimitive(2)))
+
+    /** v2 -> v3: `progress.restWeek` arrives. It defaults to -1 (no rest day used yet); all else is kept. */
+    private fun v2to3(o: JsonObject): JsonObject = JsonObject(o + ("schemaVersion" to JsonPrimitive(3)))
 }

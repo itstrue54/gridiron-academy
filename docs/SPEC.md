@@ -390,7 +390,15 @@ skill tree that fills in).
 
 ### 4.7 Motivation
 - **XP** per lesson/game (existing), **streaks** (existing, with one free "rest day"
-  per week so a missed Sunday doesn't break a kid's streak), **stars**, **stickers**
+  per week so a missed Sunday doesn't break a kid's streak; weeks run Monday to
+  Sunday, the rest day itself adds nothing, a second miss in the same week breaks
+  the streak, and the number shown reads 0 once the streak has lapsed). The Coach
+  app's streak (`SnapshotAssembler`, computed from events) does not count rest days
+  yet, so it can read lower than the learner's Home. Home shows
+  the streak as it stands today (`Streak.current`), not the stored count, and adds a
+  "Rest day used" line while the rest day is what keeps it alive: yesterday was
+  missed and this week's rest is still free, so practising today spends it
+  (`Streak.restCoversYesterday`). **Stars**, **stickers**
   (Level 0 and kid track: one per lesson, collected in a sticker book),
   **badges** for milestones (first level, first disguise read, 30-day streak).
 - **Team board** (team-linked only, opt-in by the coach, under-13s shown by
@@ -745,7 +753,7 @@ Penetration test and a privacy review before M3 public release.
 - Backup export: a JSON file `{schemaVersion, profiles, events}` (DESIGN §9.9).
   Import validates and refuses newer schema versions with a clear message.
 - Unlinked -> linked: local events upload; nothing is lost.
-- **Now (schema 2):** the save is still one JSON file (`FileLearnerStore`); SQLDelight
+- **Now (schema 3):** the save is still one JSON file (`FileLearnerStore`); SQLDelight
   replaces it when sync arrives. Schema 2 adds the attempt log (`attempts`, every graded
   answer as an `AttemptEvent` with its context, credit, first try or retry, the answer
   text and time spent; the newest `LearnerSave.MAX_ATTEMPTS` = 20,000 are kept, about
@@ -755,6 +763,11 @@ Penetration test and a privacy review before M3 public release.
   `shared/data/migration`) reads every version: schema 1 never wrote its version (it was
   the default), so a save without one is schema 1, and from schema 2 the version is
   always written. Fixtures: a hand-made v1 save and a real one from a phone.
+- **Schema 3** adds `progress.restWeek` (the Monday-based week whose weekly rest day was
+  used; -1 = never), so a one-day gap keeps the streak once a week and no more. The
+  migration only stamps the version; `restWeek` takes its default. A v1 or v2 save reads as
+  v3; a v4 save is refused (`SaveTooNew`), in Backup/Restore too, which decodes through
+  `SaveMigrations`. Fixtures: v1, v1 as written by a phone, and v2.
 
 ---
 
