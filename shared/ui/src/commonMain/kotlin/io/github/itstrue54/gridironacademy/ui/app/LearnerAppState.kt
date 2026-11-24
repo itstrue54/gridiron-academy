@@ -315,7 +315,7 @@ class LearnerAppState(
     fun practice(): Practice =
         DailyPractice.pick(save.progress, save.attempts, content, currentLevel, today(), save.learnerId.hashCode().toLong())
 
-    val practiceDoneToday: Boolean get() = DailyPractice.doneToday(save.attempts, save.progress, today())
+    val practiceDoneToday: Boolean get() = DailyPractice.doneToday(save.attempts, save.progress, content, today())
 
     fun startPractice() {
         activePractice = null
