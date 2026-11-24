@@ -552,6 +552,15 @@ class LearnerAppState(
 
     fun keepGoing() { confirmingLeave = false }
 
+    /**
+     * Writes answers still waiting to be saved. The shell calls it when the app leaves the
+     * screen, since Android may end a stopped app without another callback. A no-op when
+     * nothing is pending.
+     */
+    fun saveNow() {
+        if (pending.isNotEmpty()) commit(save)
+    }
+
     /** Returns false at the root, so the platform can close the app. */
     fun back(): Boolean {
         if (backStack.size <= 1) return false

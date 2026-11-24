@@ -189,6 +189,47 @@ class LearnerAppStateTest {
         assertEquals(0, s.unsavedAttempts)
     }
 
+    /** A store that counts its writes, so a test can tell "wrote" from "did nothing". */
+    private class CountingStore : io.github.itstrue54.gridironacademy.ui.app.LearnerStore {
+        private val inner = InMemoryLearnerStore()
+        var writes = 0
+            private set
+        override fun load(): LearnerSave? = inner.load()
+        override fun save(save: LearnerSave) { writes++; inner.save(save) }
+    }
+
+    @Test
+    fun saveNowWritesPendingAnswers() {
+        val store = CountingStore()
+        val s = LearnerAppState(content, store) { 311 }
+        s.createProfile("Sam", AgeBand.AGE_18_PLUS)
+        val (level, lesson) = s.nextLesson()!!
+        s.startLesson(level, lesson)
+        val c = s.lessonController(level.id, lesson.id)
+        var answered = 0
+        while (answered < 3) {
+            val step = c.step!!
+            c.submit(perfect(step))
+            if (step !is Learn) answered++
+            c.next()
+        }
+        assertEquals(3, s.unsavedAttempts)
+        s.saveNow()
+        assertEquals(0, s.unsavedAttempts)
+        val fresh = LearnerAppState(content, store) { 311 }
+        assertEquals(3, fresh.save.attempts.size)
+    }
+
+    @Test
+    fun saveNowWithNothingPendingDoesNotWrite() {
+        val store = CountingStore()
+        val s = LearnerAppState(content, store) { 312 }
+        s.createProfile("Sam", AgeBand.AGE_18_PLUS)
+        val before = store.writes
+        s.saveNow()
+        assertEquals(before, store.writes)
+    }
+
     @Test
     fun gatesLogTheirAnswersAsCheckAndGame() {
         val store = InMemoryLearnerStore()
