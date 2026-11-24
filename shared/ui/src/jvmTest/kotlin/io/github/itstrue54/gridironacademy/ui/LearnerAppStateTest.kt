@@ -765,4 +765,39 @@ class LearnerAppStateTest {
         s.back() // quit: the fading-out lesson screen asks again
         assertNull(s.lessonControllerOrNull(level.id, lesson.id))
     }
+
+    @Test
+    fun nextLevelAfterPassedLevel() {
+        val s = LearnerAppState(content, InMemoryLearnerStore()) { 200 }
+        s.createProfile("Leo", AgeBand.AGE_8_9)
+        val first = s.levels.first()
+        val second = assertNotNull(s.nextLevelAfter(first))
+        assertEquals(first.number + 1, second.number)
+        s.openLevel(first)
+        s.openNextLevel(first)
+        assertEquals(Screen.LevelDetail(second.id), s.screen)
+        assertTrue(s.back())
+        assertEquals(Screen.Home, s.screen, "Back from the next level goes Home, not to the level just finished")
+    }
+
+    @Test
+    fun nextLevelNullAtTop() {
+        val s = LearnerAppState(content, InMemoryLearnerStore()) { 200 }
+        s.createProfile("Leo", AgeBand.AGE_8_9)
+        assertNull(s.nextLevelAfter(s.levels.last()))
+    }
+
+    @Test
+    fun tappingALockedLevelNamesWhatOpensItAndGoesNowhere() {
+        val s = LearnerAppState(content, InMemoryLearnerStore()) { 200 }
+        s.createProfile("Leo", AgeBand.AGE_8_9)
+        val locked = s.levels.first { !s.levelUnlocked(it) }
+        val opener = assertNotNull(s.levelThatOpens(locked))
+        assertTrue(opener.number < locked.number)
+        s.tapLockedLevel(locked)
+        assertEquals(locked.id, s.lockedTapLevelId)
+        assertEquals(Screen.Home, s.screen)
+        s.openLevel(s.levels.first())
+        assertNull(s.lockedTapLevelId, "the note goes away when the screen changes")
+    }
 }

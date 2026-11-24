@@ -251,7 +251,8 @@ fun LessonDoneScreen(state: LearnerAppState, done: Screen.LessonDone) {
         if (done.passed) GoldSweep(Modifier.widthIn(max = 220.dp))
         StarRow(done.stars, stringResource(Res.string.stars_label, done.stars), size = 44.dp)
         Text(stringResource(Res.string.done_score, done.scorePct), style = Gridiron.type.title, color = c.ink)
-        Text(stringResource(Res.string.done_xp, done.xpGained), style = Gridiron.type.answer, color = c.xp)
+        // A try that earned nothing says nothing about XP: "+0 XP" in big blue is a scoreboard of failure.
+        if (done.xpGained > 0) Text(stringResource(Res.string.done_xp, done.xpGained), style = Gridiron.type.answer, color = c.xp)
         val pass = LessonSession.LESSON_PASS_PCT
         Text(
             when (done.opens) {
@@ -270,12 +271,13 @@ fun LessonDoneScreen(state: LearnerAppState, done: Screen.LessonDone) {
         )
         if (done.missedCount > 0) Text(stringResource(Res.string.done_review), style = Gridiron.type.label, color = c.inkDim)
         Spacer(Modifier.size(8.dp))
-        PrimaryButton(stringResource(Res.string.back_to_level), onClick = { state.back() })
-        if (!done.passed) {
-            SecondaryButton(stringResource(Res.string.try_again), onClick = {
-                state.back()
-                state.startLesson(state.content.level(done.levelId), state.lesson(done.levelId, done.lessonId))
-            })
+        // Below the pass mark the next move is another go; above it, back to the level.
+        val tryAgain = { state.back(); state.startLesson(state.content.level(done.levelId), state.lesson(done.levelId, done.lessonId)) }
+        if (done.passed) {
+            PrimaryButton(stringResource(Res.string.back_to_level), onClick = { state.back() })
+        } else {
+            PrimaryButton(stringResource(Res.string.try_again), onClick = tryAgain)
+            SecondaryButton(stringResource(Res.string.back_to_level), onClick = { state.back() })
         }
     }
     if (done.passed) Celebration()

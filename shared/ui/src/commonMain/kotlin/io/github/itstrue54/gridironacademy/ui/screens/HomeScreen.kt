@@ -1,9 +1,12 @@
 package io.github.itstrue54.gridironacademy.ui.screens
 
+import androidx.compose.ui.semantics.liveRegion
+import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import io.github.itstrue54.gridironacademy.ui.resources.level_locked_tap
 import io.github.itstrue54.gridironacademy.ui.resources.xp_total
 import io.github.itstrue54.gridironacademy.ui.resources.season_progress
 import io.github.itstrue54.gridironacademy.ui.components.glass
@@ -253,13 +256,14 @@ private fun LevelRow(state: LearnerAppState, level: Level, modifier: Modifier = 
     )
     val levelLabel = stringResource(Res.string.level_n, level.number)
     val progressLabel = stringResource(Res.string.level_progress, passedCount, total)
+    val note = if (state.lockedTapLevelId == level.id) state.levelThatOpens(level) else null
+    Column(modifier) {
     Surface(
-        onClick = { state.openLevel(level) },
-        enabled = unlocked,
+        onClick = { if (unlocked) state.openLevel(level) else state.tapLockedLevel(level) },
         shape = Gridiron.skin.cardShape,
         color = c.surfaceRaised.copy(alpha = 0.94f),
         contentColor = c.ink,
-        modifier = modifier.fillMaxWidth().clearAndSetSemantics {
+        modifier = Modifier.fillMaxWidth().clearAndSetSemantics {
             contentDescription = "$levelLabel, ${level.title}. $stateWord. $progressLabel"
         },
     ) {
@@ -286,6 +290,17 @@ private fun LevelRow(state: LearnerAppState, level: Level, modifier: Modifier = 
                 words(Modifier.weight(1f))
             }
         }
+    }
+    // Said aloud too: a polite live region, outside the card whose own semantics are cleared.
+    if (note != null) {
+        Text(
+            stringResource(Res.string.level_locked_tap, note.number),
+            style = Gridiron.type.label, color = c.ink,
+            modifier = Modifier.fillMaxWidth().padding(top = 6.dp)
+                .background(c.surfaceRaised, Gridiron.skin.chipShape).padding(horizontal = 14.dp, vertical = 8.dp)
+                .semantics { liveRegion = LiveRegionMode.Polite },
+        )
+    }
     }
 }
 

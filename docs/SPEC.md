@@ -465,6 +465,18 @@ above the primary action when a coach or parent has assigned something (§6.5).
 Primary action priority: (1) an overdue assignment, (2) today's practice if cards are
 due, (3) Continue.
 
+Tapping a locked level card opens nothing but says what opens it ("Finish Level 2
+first.", a polite live region, so a screen reader hears it); the note clears on any
+screen change.
+
+**Finish screens.** Below the drill pass mark (§4.4) the lesson-done screen makes
+*Try again* primary and hides the XP line when the gain is 0; at or above it, *Back to
+the level* stays primary. After a Checkpoint or Big Game that passes a level, a primary
+*Next level* opens the next level (Back from there goes Home); there is none at the top
+of the ladder or when the next level is still locked. Pass marks and scoring are
+unchanged. Kid copy states gate targets as "N of M right" (from the gate's question
+count and pass percentage); adult copy keeps percentages.
+
 ### 6.2 Lesson player
 DESIGN §9.3. New step types get their own composables (§4.2). The player is a
 state machine in the engine (`LessonSession`), the UI only renders state and sends
