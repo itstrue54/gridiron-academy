@@ -73,13 +73,11 @@ object SnapshotAssembler {
         )
     }
 
-    /** Days in a row with practice, ending today or yesterday (a missed today isn't a break yet). */
-    fun streak(days: Set<Long>, today: Long): Int {
-        var d = if (today in days) today else today - 1
-        var n = 0
-        while (d in days) { n++; d-- }
-        return n
-    }
+    /**
+     * The streak the learner's own Home shows today (SPEC 4.7): their practice days replayed
+     * through the same rule, one free rest day a week included, and 0 once it has lapsed.
+     */
+    fun streak(days: Set<Long>, today: Long): Int = Streak.current(Streak.replay(days), today)
 
     /** A payload this app version can't read is skipped, never a crash. */
     private fun decode(row: EventRow): EventPayload? =

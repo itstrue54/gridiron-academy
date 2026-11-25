@@ -41,6 +41,13 @@ class DemoCoachRepositoryTest {
         assertTrue(s.attempts.values.flatten().all { it.epochDay <= today })
     }
 
+    @Test fun `demo streaks follow the streak rule`() {
+        // A rest day covers one missed day, never more: idle three days or longer reads 0 (SPEC 4.7).
+        DemoCoachRepository(content, today).snapshot.value.learners.forEach { l ->
+            if (l.streakDays > 0) assertTrue(today - l.lastActiveDay!! <= 2, l.id)
+        }
+    }
+
     @Test fun `send numbers assignments and refuses notes with contact details`() = runBlocking {
         val repo = DemoCoachRepository(content, today)
         val draft = Assignment("", fromName = "", packIds = listOf("def-quarters"),

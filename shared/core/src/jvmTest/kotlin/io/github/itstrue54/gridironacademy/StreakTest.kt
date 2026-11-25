@@ -104,4 +104,12 @@ class StreakTest {
         assertEquals(0, Streak.current(spent, monday))
         assertEquals(1, spent.touch(monday).streakDays)
     }
+
+    @Test fun replayMatchesTouchingDayByDay() {
+        val days = longArrayOf(mon, mon + 1, mon + 3, mon + 4, mon + 7)
+        assertEquals(run(*days), Streak.replay(days.toList()))
+        // order and repeats don't matter: days from several devices arrive in any order
+        assertEquals(run(*days), Streak.replay(listOf(mon + 4, mon, mon + 7, mon + 1, mon + 3, mon, mon + 4)))
+        assertEquals(Progress(), Streak.replay(emptyList()))
+    }
 }
