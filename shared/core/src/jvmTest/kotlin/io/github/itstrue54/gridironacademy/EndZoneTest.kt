@@ -71,4 +71,36 @@ class EndZoneTest {
         val said = DiagramDescriber.describe(d)
         assertTrue(said.indexOf("End zone") < said.indexOf("Shaded area"), said)
     }
+
+    /** The tester's report (2026-11-25): the quiz asked for an end zone the picture didn't have. */
+    @Test fun `the which-way quiz shows both end zones and no line of scrimmage`() {
+        val content = ContentLoader.load(ClasspathContentSource())
+        val step = content.curriculum.levels.flatMap { content.unitsOf(it) }.flatMap { it.lessons }.flatMap { it.steps }
+            .first { it.id == "k1-field-07" } as DiagramTap
+        val d = step.diagram
+        assertEquals(50f, d.goalAhead)
+        assertEquals(-50f, d.goalBehind)
+        assertFalse(d.lineOfScrimmage)
+        val z = d.zones.associateBy { it.id }
+        // A is exactly the far end zone, C the near one, B the field of play between them.
+        assertEquals(50f to 60f, z.getValue("A").let { it.y to it.y + it.h })
+        assertEquals(-60f to -50f, z.getValue("C").let { it.y to it.y + it.h })
+        assertEquals(-50f to 50f, z.getValue("B").let { it.y to it.y + it.h })
+        assertEquals(setOf("A"), step.targets)
+    }
+
+    @Test fun `scoring cards draw a real end zone instead of a labelled box`() {
+        val content = ContentLoader.load(ClasspathContentSource())
+        val byId = content.curriculum.levels.flatMap { content.unitsOf(it) }.flatMap { it.lessons }.flatMap { it.steps }.associateBy { it.id }
+        for (id in listOf("k1-scoring-01", "a1-scoring-01")) {
+            val d = (byId.getValue(id) as Learn).diagram!!
+            assertEquals(10f, d.goalAhead, id)
+            assertTrue(d.zones.none { it.label == "End zone" }, id)
+        }
+        for (id in listOf("k1-scoring-04", "a1-scoring-02")) {
+            val d = (byId.getValue(id) as Learn).diagram!!
+            assertEquals(-2f, d.goalBehind, id)
+            assertTrue(d.zones.none { it.label == "End zone" }, id)
+        }
+    }
 }

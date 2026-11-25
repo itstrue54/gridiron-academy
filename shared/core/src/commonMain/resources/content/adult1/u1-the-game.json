@@ -280,16 +280,6 @@
                 "kind": "blitz"
               }
             ],
-            "zones": [
-              {
-                "id": "ez",
-                "label": "End zone",
-                "x": -9,
-                "y": 12,
-                "w": 18,
-                "h": 10
-              }
-            ],
             "ball": [
               {
                 "playerId": "qb",
@@ -302,7 +292,8 @@
             ],
             "depth": 22,
             "behind": 7,
-            "caption": "The runner carries it into the end zone"
+            "caption": "The runner carries it into the end zone",
+            "goalAhead": 10
           },
           "concept": "touchdown"
         },
@@ -393,16 +384,6 @@
                 "kind": "blitz"
               }
             ],
-            "zones": [
-              {
-                "id": "ez",
-                "label": "End zone",
-                "x": -6,
-                "y": -9,
-                "w": 12,
-                "h": 7
-              }
-            ],
             "ball": [
               {
                 "playerId": "qb",
@@ -415,7 +396,8 @@
             ],
             "depth": 3,
             "behind": 9,
-            "caption": "Tackled in their own end zone: a safety, 2 points"
+            "caption": "Tackled in their own end zone: a safety, 2 points",
+            "goalBehind": -2
           },
           "concept": "field-goal"
         },
