@@ -37,7 +37,7 @@ object DailyPractice {
         seed: Long,
     ): Practice {
         val rng = Rng(seed * PRIME + today)
-        val stepsById = content.lessons.flatMap { it.steps }.associateBy { it.id }
+        val stepsById = content.allSteps.associateBy { it.id }
         val chosen = LinkedHashMap<String, Step>()
         fun add(s: Step?) { if (s != null && s !is Learn && s.id !in chosen && chosen.size < PracticeRules.MAX_ITEMS) chosen[s.id] = s }
 

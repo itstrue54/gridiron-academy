@@ -247,7 +247,7 @@ the mastery map (§4.6) and placement (§4.5).
   `commonMain` only defines the `ContentSource` interface; `ClasspathContentSource` in
   the `jvmShared` source set (jvm + android) reads the packaged files. iOS gets its own
   reader at M5 (§11.3).
-- Files: `curriculum.json` (levels and gates), one file per unit, `glossary.json`,
+- Files: `curriculum.json` (levels and gates; a gate may carry `gameItems`, below), one file per unit, `glossary.json`,
   `concepts.json` (§3.2 catalogue + graph), `packs.json` (scheme packs, §7.4),
   `voice/<locale>.json` (feedback copy, DESIGN §11), `audio/` (Level 0 recordings).
 - Each file has `schemaVersion` and the bundle has a `contentVersion` (monotonic
@@ -256,11 +256,21 @@ the mastery map (§4.6) and placement (§4.5).
   v1 §4 (unique ids; answers in range; no duplicate choices; one BEST per situation;
   diagram targets exist; routes reference real players; read-defense pre/reveal show
   the same players; disguised reveals contain movement; every concept is in the
-  glossary; every gate is playable; kid text limits; no diagram has more than 11 a
+  glossary; every gate is playable; each prerequisite graded on the same ladder no later
+  than its concept (§4.6); kid text limits; no diagram has more than 11 a
   side, and a full 11-man offense has at least 7 on the line) plus: concept graph acyclic and
   complete; every pack resolves; Level 0 steps have audio for every prompt and choice
   and no text-only choice; every `[review]`-flagged step is excluded from release
   builds unless signed off (§13.3).
+- **Gate game items.** A gate (`curriculum.json` `levels[].gate`) may carry
+  `"gameItems": [ ...steps... ]`: ordinary steps (same JSON as in a unit file, e.g.
+  `"type": "situation"`) written for the Big Game only, in no lesson. They live inline in
+  the gate because the loader already decodes the whole gate with the curriculum, so no
+  new file kind or loader path is needed. They count everywhere lesson steps do: the
+  validator (same checks, ids unique across the whole course, and each must suit the
+  gate's game type), step/concept lookup, review fingerprints and `tools/review.py`
+  (listed after the level's lessons), and release gating (an unsigned game item holds its
+  level back like an unsigned lesson step).
 - **Load failure** never crashes the app: a bad or missing file shows a kind error
   with **Try again** (DESIGN §9.11), falls back to the last good bundle (bundled or
   previously downloaded), and writes a local diagnostic. Release content cannot fail
@@ -337,6 +347,19 @@ in the engine, unit-tested.
 | **Playbook quiz** | Generated from the team playbook (§7.5); `my_job` per position | Any, team-linked |
 | **Daily challenge** | One seeded mixed set per day (seed = epoch day + profile), same for everyone at a level so friends/teams can compare | All |
 
+**Gate game questions.** A gate game asks `gameQuestions` items. Its own `gameItems` are
+selected first (all of them, or a seeded sample if there are more than `gameQuestions`);
+the level's lesson steps of the game's kind fill the rest, and the whole selection is then
+shuffled with the same `Rng`, so the learner meets the questions in a mixed order. With `"ordered": true` the
+game instead plays game items then lesson items in authored order (first
+`gameQuestions`, any seed), for a game that tells one story: Level 8's whole-game sim
+(`architect-8`) is ordered, so its 11 situations play in the order they are written and
+its gate asks all 11 (8 of 11 to pass the 70% mark). A gate is playable only if game
+items plus lesson items of the right kind reach `gameQuestions`; an ordered gate's must
+equal it exactly, so no cut drops the story's ending. Each game item's concept must be
+graded by some lesson step at or below the gate's level on every ladder through it, so a
+miss can always point to where it was taught.
+
 Game sets are drawn with the injected `Rng` seeded from (profile, item set, attempt
 number), so a replay of the same attempt is identical (principle 1.5.4).
 
@@ -347,7 +370,9 @@ number), so a replay of the same attempt is identical (principle 1.5.4).
   retake is a new draw that can't be learned from the last try's feedback; weighting
   toward low-mastery concepts comes with §4.6), each asked once with feedback but no
   retry. Misses go to review. The Speed round clock doesn't count time the app is away, on the rules screen, or under the Leave dialog; any screen change closes that dialog.
-- Big Game opens after the checkpoint; 70% to pass.
+- Big Game opens after the checkpoint; 70% to pass. Its questions come from the gate's
+  own game items first, then the level's lessons; an `ordered` gate plays them in
+  authored order (§4.3).
 - Passing both passes the level. Stars per DESIGN (95/80/60).
 - **Level 0 has no test.** Finishing every lesson and one Picture Play passes it, so
   no pre-reader ever "fails" a test. A kid can also skip Level 0 entirely.
@@ -382,7 +407,15 @@ Each concept id has a per-profile mastery record derived from attempts:
 validator rejects an unknown or self prerequisite, any cycle, a prerequisite another
 direct prerequisite already implies (seven were removed), a prerequisite first taught
 at a later level than the concept that needs it, and a glossary `level` that isn't the
-level where the term is first taught (five were wrong and are fixed).
+level where the term is first taught (five were wrong and are fixed). It also checks each
+**ladder** a learner climbs (kid: Kid 1-3 then Levels 4-8; adult: Adult 1-3 then 4-8): a
+concept graded on a ladder needs every prerequisite graded on that same ladder no later
+than the concept's first graded level there, and a shared level's prerequisite that the
+glossary puts at Level 1-3 must be graded in that track's own levels, since ADR-010 counts
+it as known once a learner is past it. (The kid track had never asked motion, double-team,
+disguise, the audible, the two-point try and some Level 1 basics; content added
+2026-11-24. Audible and the two-point try are no term's prerequisite, so no rule guards
+them.)
 
 Mastery drives: the coach dashboard (§7.3), the checkpoint weighting, daily practice
 selection, and the learner's **Playbook map** (the concept graph rendered as a
@@ -924,10 +957,13 @@ page from `tools/review-page.html`, and turns approvals into sign-offs; a flag n
 signs. Release gating is on by default for release builds (an internal build can pass
 `-Pgridiron.reviewedOnly=false`); both apps then ship `Content.reviewedOnly()`, only levels whose every step is signed
 (a level that needs a dropped one goes too, and so do packs using dropped lessons). A
-release never ships unsigned content: a level with any unsigned step is held back whole. As
-of 2026-10-21 every one of the 748 steps is signed (itstrue54, rule season 2026, after a
-coach's pre-read that fixed 17 steps), so a gated release ships the whole course. New or
-edited steps go back through `tools/review.py export`/`page`/`apply`.
+release never ships unsigned content: a level with any unsigned step is held back whole. On
+2026-10-21 every one of the then 748 steps was signed (itstrue54, rule season 2026, after a
+coach's pre-read that fixed 17 steps). The 2026-11-24 content round added 68 steps
+and game items to kid-1, kid-2, kid-3, adult-1, adult-2 and college-5; itstrue54 signed all
+68 on 2026-11-25, so every level is fully signed again and a gated release ships the whole
+course. New or edited steps go back through
+`tools/review.py export`/`page`/`apply`.
 
 ### 13.4 UI tests
 - `FieldRenderTest` (jvm) already renders real content diagrams headlessly to

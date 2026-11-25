@@ -1,7 +1,7 @@
 package io.github.itstrue54.gridironacademy
 
 import io.github.itstrue54.gridironacademy.content.*
-import io.github.itstrue54.gridironacademy.model.Learn
+import io.github.itstrue54.gridironacademy.model.*
 import io.github.itstrue54.gridironacademy.progress.*
 import kotlin.test.*
 
@@ -27,6 +27,20 @@ class DailyPracticeTest {
         assertTrue(p.urgent)
         // Not due yet the day it was missed.
         assertFalse(DailyPractice.pick(progress, listOf(a(missed.id, 99, 0f)), content, level, 99, 1).urgent)
+    }
+
+    @Test fun `a missed game item comes back in practice`() {
+        val lv = content.level("architect-8")
+        val concept = content.glossary.entries.first().id
+        val item = Situation("g-gi", GameState(1, 600, 1, 10, 25, 0), "p",
+            listOf(SituationOption("a", Quality.BEST, "w"), SituationOption("b", Quality.POOR, "w")), "e", concept = concept)
+        val levels = content.curriculum.levels.map { if (it.id == lv.id) it.copy(gate = it.gate.copy(gameItems = listOf(item))) else it }
+        val withItem = Content(content.curriculum.copy(levels = levels), content.glossary, content.unitsByLevel, content.scenes, content.packs, content.review)
+        val progress = Review.miss(Progress(), item.id, concept, 99)
+        val p = DailyPractice.pick(progress, listOf(a(item.id, 99, 0f)), withItem, level, 100, 1)
+        assertEquals(item.id, p.steps.first().id)
+        assertEquals(8, withItem.levelNumberOfStep(item.id))
+        assertEquals(item, withItem.step(item.id))
     }
 
     @Test fun `concepts still being learned top it up, never more than ten`() {

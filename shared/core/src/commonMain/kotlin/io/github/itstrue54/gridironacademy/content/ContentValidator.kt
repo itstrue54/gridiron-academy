@@ -43,6 +43,13 @@ object ContentValidator {
             if (!LevelTest.gateIsPlayable(units, lv.gate)) {
                 err("level ${lv.id}", "not enough ${lv.gate.game} content to run its gate")
             }
+            // An ordered game tells one story start to finish: a cut would drop its ending.
+            val candidates = LevelTest.gameCandidates(units, lv.gate)
+            if (lv.gate.ordered && candidates != lv.gate.gameQuestions) {
+                err("level ${lv.id}", "ordered game asks ${lv.gate.gameQuestions} questions but has $candidates to play in order; they must match")
+            }
+            errs += validateGameItems(lv, c.glossary.entries.map { it.id }.toSet())
+            lv.gate.gameItems.forEach { allStepIds += it.id }
             for (u in units) {
                 errs += validateUnit(u, lv.track == Track.KID, glossaryIds)
                 u.lessons.forEach { l -> allLessonIds += l.id; l.steps.forEach { allStepIds += it.id } }
@@ -77,8 +84,10 @@ object ContentValidator {
                 }
             }
         }
+        errs += prerequisitesGradedOnEachLadder(c)
+        errs += gameItemsTaughtOnEachLadder(c)
         // Sign-offs (SPEC 13.3): real steps, one each, a named reviewer and a real date.
-        val stepIds = c.lessons.flatMap { l -> l.steps.map { it.id } }.toSet()
+        val stepIds = (c.lessons.flatMap { l -> l.steps } + c.curriculum.levels.flatMap { it.gate.gameItems }).map { it.id }.toSet()
         dupes(c.review.signoffs.map { it.step }).forEach { err("review", "signed off twice: $it") }
         c.review.signoffs.forEach {
             if (it.step !in stepIds) err("review ${it.step}", "no such step")
@@ -101,6 +110,84 @@ object ContentValidator {
             if (p.check.passPct !in 1..100) err(where, "check passPct must be 1-100")
             val graded = p.lessons.mapNotNull { c.lesson(it) }.sumOf { l -> l.steps.count { it !is Learn } }
             if (graded < p.check.questions) err(where, "check needs ${p.check.questions} questions, lessons have $graded")
+        }
+        return errs
+    }
+
+    /**
+     * A learner climbs one ladder: kid (the kid levels, then the shared ones) or adult. On each,
+     * a concept's prerequisites must be graded no later than the concept's own first graded
+     * level, or the learner meets it before ever being asked what it builds on. And a shared
+     * level's prerequisite that the glossary puts at a track level must be graded in the
+     * ladder's own track levels: ADR-010 counts such a term as known once a learner is past
+     * it, which is only honest if that track asked it (SPEC 4.6).
+     */
+    private fun prerequisitesGradedOnEachLadder(c: Content): List<String> {
+        val errs = mutableListOf<String>()
+        val levelOf = c.glossary.entries.associate { it.id to it.level }
+        for (track in listOf(Track.KID, Track.ADULT)) {
+            val ladder = c.curriculum.levels.filter { it.track == track || it.track == Track.SHARED }
+            val trackTop = ladder.filter { it.track == track }.maxOfOrNull { it.number } ?: 0
+            val firstGraded = mutableMapOf<String, Int>()
+            for (lv in ladder) {
+                val steps = c.unitsByLevel[lv.id].orEmpty().flatMap { u -> u.lessons.flatMap { it.steps } } + lv.gate.gameItems
+                steps.filter { it !is Learn }.forEach { s ->
+                    s.concept?.let { firstGraded[it] = minOf(firstGraded[it] ?: lv.number, lv.number) }
+                }
+            }
+            val name = track.name.lowercase()
+            for (e in c.glossary.entries) {
+                val at = firstGraded[e.id] ?: continue
+                for (r in e.requires.filter { it in levelOf }) {
+                    val rAt = firstGraded[r]
+                    val where = "glossary ${e.id}"
+                    when {
+                        rAt == null -> errs += "$where: graded on the $name ladder (Level $at), but its prerequisite '$r' is never graded there"
+                        rAt > at -> errs += "$where: graded on the $name ladder at Level $at, but its prerequisite '$r' isn't graded there until Level $rAt"
+                        at > trackTop && (levelOf[r] ?: 0) <= trackTop && rAt > trackTop ->
+                            errs += "$where: graded on the $name ladder at Level $at, but its prerequisite '$r' (a Level ${levelOf[r]} term) isn't graded in the $name track's own levels"
+                    }
+                }
+            }
+        }
+        return errs
+    }
+
+    /**
+     * A gate game item is in no lesson, so a miss sends the learner to where its concept is
+     * taught ("Where you learned it"). On every ladder through the gate's level, some lesson
+     * step at or below that level must grade the concept.
+     */
+    private fun gameItemsTaughtOnEachLadder(c: Content): List<String> {
+        val errs = mutableListOf<String>()
+        for (lv in c.curriculum.levels) {
+            if (lv.gate.gameItems.isEmpty()) continue
+            val tracks = if (lv.track == Track.SHARED) listOf(Track.KID, Track.ADULT) else listOf(lv.track)
+            for (track in tracks) {
+                val graded = c.curriculum.levels
+                    .filter { (it.track == track || it.track == Track.SHARED) && it.number <= lv.number }
+                    .flatMap { l -> c.unitsByLevel[l.id].orEmpty().flatMap { u -> u.lessons.flatMap { it.steps } } }
+                    .filter { it !is Learn }.mapNotNull { it.concept }.toSet()
+                lv.gate.gameItems.forEach { s ->
+                    val concept = s.concept
+                    if (concept != null && concept !in graded) {
+                        errs += "step ${s.id}: game item's concept '$concept' has no graded lesson step on the ${track.name.lowercase()} ladder by Level ${lv.number}"
+                    }
+                }
+            }
+        }
+        return errs
+    }
+
+    /** A gate's own game items are checked like lesson steps, and must suit the gate's game. */
+    private fun validateGameItems(lv: Level, glossaryIds: Set<String>): List<String> {
+        val errs = mutableListOf<String>()
+        fun err(where: String, msg: String) { errs += "$where: $msg" }
+        for (s in lv.gate.gameItems) {
+            val where = "step ${s.id}"
+            if (!LevelTest.fits(lv.gate.game, s)) err(where, "game item does not suit ${lv.gate.game} (level ${lv.id})")
+            s.concept?.let { if (it !in glossaryIds) err(where, "unknown concept '$it'") }
+            checkStep(s, where, lv.track == Track.KID, ::err)
         }
         return errs
     }

@@ -25,10 +25,14 @@ class ReviewLogTest {
 
     /** Every shipped step's raw JSON, by id. */
     private val rawSteps: Map<String, JsonElement> by lazy {
-        content.curriculum.levels.flatMap { it.unitFiles }.flatMap { f ->
+        val lessonSteps = content.curriculum.levels.flatMap { it.unitFiles }.flatMap { f ->
             Json.parseToJsonElement(source.read(f)!!).jsonObject.getValue("lessons").jsonArray
                 .flatMap { it.jsonObject.getValue("steps").jsonArray }
-        }.associateBy { it.jsonObject.getValue("id").jsonPrimitive.content }
+        }
+        // A gate's own game items are signed off like any step (SPEC 13.3).
+        val gameItems = Json.parseToJsonElement(source.read("curriculum.json")!!).jsonObject.getValue("levels").jsonArray
+            .flatMap { it.jsonObject.getValue("gate").jsonObject["gameItems"]?.jsonArray.orEmpty() }
+        (lessonSteps + gameItems).associateBy { it.jsonObject.getValue("id").jsonPrimitive.content }
     }
 
     @Test fun `the fingerprint matches the review tool's`() {

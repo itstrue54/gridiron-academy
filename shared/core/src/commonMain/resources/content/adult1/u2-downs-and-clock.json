@@ -191,6 +191,48 @@
           "concept": "first-down"
         },
         {
+          "type": "multiple_choice",
+          "id": "a1-downs-09",
+          "prompt": "When does a play from scrimmage begin?",
+          "choices": [
+            "When the ball is snapped",
+            "When the referee whistles the ball ready",
+            "When the quarterback starts calling signals",
+            "When the offense breaks the huddle"
+          ],
+          "answer": 0,
+          "explanation": "The snap puts the ball in play. The referee's whistle before it only says the ball is ready, and the huddle and the signals come before the play.",
+          "concept": "snap"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a1-downs-11",
+          "prompt": "A runner is stopped after a 5-yard gain, then the tackler drives him back 3 yards before he falls. Where is the ball spotted?",
+          "choices": [
+            "Where his forward progress stopped: a 5-yard gain",
+            "Where he went down: a 2-yard gain",
+            "At the old line of scrimmage",
+            "Wherever the offense chooses"
+          ],
+          "answer": 0,
+          "explanation": "Officials spot the ball where the runner's forward progress was stopped, not where he was pushed back to. Being driven backward doesn't cost the offense yards.",
+          "concept": "tackle"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a1-downs-12",
+          "prompt": "In the NFL, a runner slips and his knee touches the turf, but no defender has touched him. What happens?",
+          "choices": [
+            "He can get up and keep running",
+            "The play is over where he fell",
+            "It's a fumble",
+            "It's a penalty on the offense"
+          ],
+          "answer": 0,
+          "explanation": "In the NFL a runner who goes down untouched isn't down until a defender touches him, so he can get up and go. In college and high school, the play ends as soon as his knee touches the ground.",
+          "concept": "tackle"
+        },
+        {
           "type": "true_false",
           "id": "a1-downs-05",
           "statement": "An incomplete forward pass keeps the clock running.",
@@ -230,6 +272,20 @@
           ],
           "explanation": "Long-distance 4th downs in your own territory are almost always punts.",
           "concept": "punt"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a1-downs-10",
+          "prompt": "On a punt, who receives the snap?",
+          "choices": [
+            "The punter",
+            "The quarterback",
+            "The holder",
+            "The returner"
+          ],
+          "answer": 0,
+          "explanation": "A long snapper sends it about 15 yards back to the punter. On a field goal the snap goes to the holder, who sets the ball down for the kicker.",
+          "concept": "snap"
         },
         {
           "type": "situation",

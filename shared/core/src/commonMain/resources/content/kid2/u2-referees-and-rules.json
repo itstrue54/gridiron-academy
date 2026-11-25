@@ -145,6 +145,20 @@
           "concept": "offside"
         },
         {
+          "type": "multiple_choice",
+          "id": "k2-penalties-09",
+          "prompt": "The ball is in the air. A defender grabs the receiver's arms so they can't catch it. What is the penalty?",
+          "choices": [
+            "Pass interference",
+            "Offside",
+            "Delay of game",
+            "False start"
+          ],
+          "answer": 0,
+          "explanation": "Grabbing to stop a catch while the ball is in the air is pass interference. Offside, delay of game and false start all happen before the snap.",
+          "concept": "pass-interference"
+        },
+        {
           "type": "true_false",
           "id": "k2-penalties-07",
           "statement": "If the play clock runs out before the snap, the offense loses 5 yards.",
@@ -214,6 +228,13 @@
           "concept": "game-clock"
         },
         {
+          "type": "learn",
+          "id": "k2-clock-07",
+          "title": "The play clock",
+          "body": "There is another, shorter clock: the play clock. It counts down between plays. The offense must snap the ball before it reaches zero.",
+          "concept": "play-clock"
+        },
+        {
           "type": "multiple_choice",
           "id": "k2-clock-03",
           "prompt": "In the NFL, how many timeouts does each team get in a half?",
@@ -234,6 +255,20 @@
           "answer": false,
           "explanation": "A pass that is not caught stops the clock.",
           "concept": "game-clock"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k2-clock-08",
+          "prompt": "What does the play clock count down?",
+          "choices": [
+            "Time left to snap the ball",
+            "Time left in the game",
+            "Time left in a timeout",
+            "Time until halftime"
+          ],
+          "answer": 0,
+          "explanation": "The play clock gives the offense time to start the next play. The game clock is the one that shows time left in the game.",
+          "concept": "play-clock"
         },
         {
           "type": "multiple_choice",

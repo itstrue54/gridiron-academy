@@ -1158,6 +1158,35 @@
           "concept": "mofo"
         },
         {
+          "type": "learn",
+          "id": "k3-safeties-07",
+          "title": "Disguise",
+          "body": "Defenses like to hide their plan. Two safeties may start deep, then one runs to the middle at the snap. Showing one look and playing another is called a disguise.",
+          "concept": "disguise"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k3-safeties-08",
+          "prompt": "Two safeties start deep. At the snap, one runs to the middle and the other moves up. What did the defense do?",
+          "choices": [
+            "Used a disguise",
+            "Broke a rule",
+            "Made a mistake",
+            "Called a timeout"
+          ],
+          "answer": 0,
+          "explanation": "The defense showed two deep safeties, then played with one. That is a disguise. Defenders may move before and after the snap, so it is not against the rules.",
+          "concept": "disguise"
+        },
+        {
+          "type": "true_false",
+          "id": "k3-safeties-09",
+          "statement": "If two safeties stand deep before the snap, they always stay deep.",
+          "answer": false,
+          "explanation": "A safety can move at the snap to hide the plan. That is a disguise. So the count before the snap is a clue, not a promise.",
+          "concept": "disguise"
+        },
+        {
           "type": "true_false",
           "id": "k3-safeties-06",
           "statement": "Counting safeties is a clue, not a promise.",

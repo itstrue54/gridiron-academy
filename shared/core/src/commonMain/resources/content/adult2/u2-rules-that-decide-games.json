@@ -86,6 +86,27 @@
           "concept": "holding"
         },
         {
+          "type": "learn",
+          "id": "a2-pi-10",
+          "title": "Accept or decline",
+          "body": "After a foul, the team that was fouled chooses. It can accept the penalty (the yards are marked off and, usually, the down is replayed) or decline it and keep the result of the play. Teams decline when the play went better for them than the penalty would.",
+          "concept": "penalty"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a2-pi-11",
+          "prompt": "3rd and 8. The quarterback completes a 20-yard pass, but the defense was offside on the play. What should the offense do?",
+          "choices": [
+            "Decline the penalty and keep the 20-yard gain",
+            "Accept it: 5 yards and replay 3rd down",
+            "Accept it and add 5 yards to the 20",
+            "Let the referee choose"
+          ],
+          "answer": 0,
+          "explanation": "For offside, the offense gets the play or the penalty, not both. The 20-yard gain and a first down beat 3rd and 3 after a 5-yard offside. The referee explains the options, but the fouled team decides.",
+          "concept": "penalty"
+        },
+        {
           "type": "multiple_choice",
           "id": "a2-pi-09",
           "prompt": "After a foul, how does the referee tell everyone what was called?",

@@ -35,12 +35,34 @@
           "concept": "field"
         },
         {
+          "type": "multiple_choice",
+          "id": "k1-field-08",
+          "prompt": "How many end zones does a football field have?",
+          "choices": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "answer": 1,
+          "explanation": "There is one end zone at each end of the field. That makes 2.",
+          "concept": "field"
+        },
+        {
           "type": "true_false",
           "id": "k1-field-04",
           "statement": "The end zone is where you score a touchdown.",
           "answer": true,
           "explanation": "Get the ball into the end zone to score.",
           "concept": "endzone"
+        },
+        {
+          "type": "true_false",
+          "id": "k1-field-09",
+          "statement": "A team scores in the end zone that it guards.",
+          "answer": false,
+          "explanation": "A team guards one end zone and scores in the other one. To score, they must reach the other team's end zone.",
+          "concept": "field"
         },
         {
           "type": "multiple_choice",
@@ -109,6 +131,27 @@
           ],
           "explanation": "Zone A is the end zone at the far end. That is where the offense wants to carry or catch the ball.",
           "concept": "endzone"
+        },
+        {
+          "type": "learn",
+          "id": "k1-field-10",
+          "title": "The line of scrimmage",
+          "body": "Each play starts where the ball is. Picture a line across the field through the ball. That is the line of scrimmage. Each team stays on its own side until the play starts.",
+          "concept": "line-of-scrimmage"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k1-field-11",
+          "prompt": "Before a play, the ball sits on an invisible line. What is it called?",
+          "choices": [
+            "The line of scrimmage",
+            "The goal line",
+            "The 50-yard line",
+            "The sideline"
+          ],
+          "answer": 0,
+          "explanation": "The line through the ball is the line of scrimmage. It moves to wherever the ball is. The goal line and the 50-yard line are painted on and never move.",
+          "concept": "line-of-scrimmage"
         }
       ],
       "blurb": "Where the game happens."
@@ -166,6 +209,49 @@
           "answer": false,
           "explanation": "The team with the ball is the offense.",
           "concept": "offense"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k1-game-09",
+          "prompt": "The other team has the ball. Your team is trying to stop them. What is your team called?",
+          "choices": [
+            "The defense",
+            "The offense",
+            "The referees",
+            "The coaches"
+          ],
+          "answer": 0,
+          "explanation": "The team without the ball is the defense. The offense is the team that has the ball.",
+          "concept": "defense"
+        },
+        {
+          "type": "true_false",
+          "id": "k1-game-10",
+          "statement": "When the defense gets the ball, they become the offense.",
+          "answer": true,
+          "explanation": "The team with the ball is always the offense. So when the ball changes teams, the teams switch jobs.",
+          "concept": "defense"
+        },
+        {
+          "type": "learn",
+          "id": "k1-game-11",
+          "title": "Special teams",
+          "body": "Some plays are kicks, like a punt or a field goal. The players on the field for a kick are called special teams.",
+          "concept": "special-teams"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k1-game-12",
+          "prompt": "What do we call the players on the field for a kick?",
+          "choices": [
+            "Special teams",
+            "The offense",
+            "The referees",
+            "The coaches"
+          ],
+          "answer": 0,
+          "explanation": "Both teams send out special teams for a kick. One team kicks the ball. The other team tries to catch it or block the kick.",
+          "concept": "special-teams"
         },
         {
           "type": "learn",
@@ -551,6 +637,34 @@
           "answer": 1,
           "explanation": "6 for the touchdown plus 1 for the kick makes 7.",
           "concept": "extra-point"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k1-scoring-11",
+          "prompt": "In the NFL, a team scores a touchdown. On the try after it, they run the ball into the end zone. How many points is that try?",
+          "choices": [
+            "1",
+            "2",
+            "3",
+            "6"
+          ],
+          "answer": 1,
+          "explanation": "In the NFL, a run or pass after a touchdown is worth 2 points. A kick is worth 1. Some youth leagues flip that.",
+          "concept": "two-point"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k1-scoring-12",
+          "prompt": "A team scores a touchdown. Then they make a 2-point try. How many points in all?",
+          "choices": [
+            "7",
+            "8",
+            "9",
+            "12"
+          ],
+          "answer": 1,
+          "explanation": "6 for the touchdown plus 2 for the try makes 8. A 1-point kick would have made 7.",
+          "concept": "two-point"
         },
         {
           "type": "multiple_choice",

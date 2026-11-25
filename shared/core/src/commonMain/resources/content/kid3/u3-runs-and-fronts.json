@@ -1440,6 +1440,35 @@
           ],
           "explanation": "The first number is linemen, the second is linebackers.",
           "concept": "four-three"
+        },
+        {
+          "type": "learn",
+          "id": "k3-fronts-07",
+          "title": "Double-team",
+          "body": "In tackle football, two blockers sometimes block the same defender. That is a double-team. Offenses often double-team a big, strong lineman, like the nose tackle in a 3-4.",
+          "concept": "double-team"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "k3-fronts-08",
+          "prompt": "Two blockers push the same defender together. What is that called?",
+          "choices": [
+            "A double-team",
+            "Holding",
+            "A false start",
+            "A shift"
+          ],
+          "answer": 0,
+          "explanation": "Two blockers on one defender is a double-team. In tackle football, it is legal. Flag has no blocking. Holding is grabbing to stop a player, and that is a penalty.",
+          "concept": "double-team"
+        },
+        {
+          "type": "true_false",
+          "id": "k3-fronts-09",
+          "statement": "Offenses double-team a strong defender when one blocker might not be enough to move them.",
+          "answer": true,
+          "explanation": "Two blockers can move a big defender that one blocker can't. That opens room for the runner.",
+          "concept": "double-team"
         }
       ]
     },

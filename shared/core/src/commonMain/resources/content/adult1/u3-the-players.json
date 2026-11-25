@@ -708,6 +708,28 @@
           "concept": "turnover"
         },
         {
+          "type": "multiple_choice",
+          "id": "a1-turnovers-08",
+          "prompt": "It's 4th and 2. The offense runs for 1 yard. What happens?",
+          "choices": [
+            "A turnover on downs: the other team takes over at that spot",
+            "The offense gets a fifth down",
+            "The offense must punt from where the ball is",
+            "The other team takes over at its own 20"
+          ],
+          "answer": 0,
+          "explanation": "Coming up short on 4th down is a turnover on downs. The defense takes over where the play ended, which is why teams usually punt instead.",
+          "concept": "turnover"
+        },
+        {
+          "type": "true_false",
+          "id": "a1-turnovers-09",
+          "statement": "An incomplete pass is a turnover.",
+          "answer": false,
+          "explanation": "The offense keeps the ball and just loses the down. A turnover means the other team gets possession: an interception, a lost fumble, or a failed 4th down.",
+          "concept": "turnover"
+        },
+        {
           "type": "true_false",
           "id": "a1-turnovers-04",
           "statement": "A fumble can be recovered by either team.",
@@ -756,6 +778,28 @@
           "answer": 0,
           "explanation": "An interception: the defense takes the ball and becomes the offense.",
           "concept": "interception"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a1-turnovers-10",
+          "prompt": "A defender intercepts a pass and starts running it back. Which team is now defending?",
+          "choices": [
+            "The team that threw the pass",
+            "The team that intercepted it",
+            "Neither: the play is over",
+            "Both teams' special teams"
+          ],
+          "answer": 0,
+          "explanation": "Possession changed, so the team that threw it now has to stop the runner. Offense and defense always follow the ball.",
+          "concept": "defense"
+        },
+        {
+          "type": "true_false",
+          "id": "a1-turnovers-11",
+          "statement": "The defense can score points.",
+          "answer": true,
+          "explanation": "A safety gives the defense 2 points, and a defender who returns an interception or fumble to the end zone scores a touchdown.",
+          "concept": "defense"
         }
       ],
       "blurb": "How possession changes."

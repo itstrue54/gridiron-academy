@@ -9,7 +9,8 @@ package io.github.itstrue54.gridironacademy.content
  */
 fun Content.reviewedOnly(): Content {
     val kept = curriculum.levels.filter { lv ->
-        unitsOf(lv).all { u -> u.lessons.all { l -> l.steps.all { signedOff(it.id) } } }
+        unitsOf(lv).all { u -> u.lessons.all { l -> l.steps.all { signedOff(it.id) } } } &&
+            gameItemsOf(lv).all { signedOff(it.id) }
     }.map { it.id }.toMutableSet()
     do {
         val before = kept.size

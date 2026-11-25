@@ -132,7 +132,7 @@ class CoachDashboard(val snapshot: CoachSnapshot, private val content: Content, 
     /** The concept's steps the team misses most, with the usual wrong answer. */
     fun mostMissed(teamId: String, concept: String): List<MissedItem> {
         val members = snapshot.membersOf(teamId).map { it.id }.toSet()
-        val steps = content.lessons.flatMap { it.steps }.filter { it.concept == concept && it !is Learn }
+        val steps = content.allSteps.filter { it.concept == concept && it !is Learn }
         val tries = members.flatMap { attempts(it) }.filter { it.firstTry }.groupBy { it.stepId }
         return steps.mapNotNull { s ->
             val xs = tries[s.id].orEmpty()

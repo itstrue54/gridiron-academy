@@ -446,6 +446,20 @@
         },
         {
           "type": "multiple_choice",
+          "id": "a1-scoring-08",
+          "prompt": "From which yard line is an NFL extra-point kick snapped?",
+          "choices": [
+            "The 15",
+            "The 10",
+            "The 20",
+            "The 25"
+          ],
+          "answer": 0,
+          "explanation": "It's snapped from the 15. Add the 10-yard end zone and the hold, and the kick is about 33 yards.",
+          "concept": "extra-point"
+        },
+        {
+          "type": "multiple_choice",
           "id": "a1-scoring-04",
           "prompt": "A team scores a touchdown and then attempts a two-point conversion successfully. What did the drive produce?",
           "choices": [
@@ -493,6 +507,34 @@
           "answer": false,
           "explanation": "A safety is scored by the defense, when the offense is stopped in its own end zone (or commits certain fouls there).",
           "concept": "safety-score"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a1-scoring-09",
+          "prompt": "How wide is an NFL field?",
+          "choices": [
+            "53 1/3 yards",
+            "50 yards",
+            "60 yards",
+            "100 yards"
+          ],
+          "answer": 0,
+          "explanation": "The field is 160 feet, or 53 1/3 yards, wide. 100 yards is its length between the goal lines.",
+          "concept": "field"
+        },
+        {
+          "type": "multiple_choice",
+          "id": "a1-scoring-10",
+          "prompt": "How deep is each end zone?",
+          "choices": [
+            "10 yards",
+            "5 yards",
+            "15 yards",
+            "20 yards"
+          ],
+          "answer": 0,
+          "explanation": "Each end zone is 10 yards deep, so the whole field is 120 yards from end line to end line. The goal posts stand on the end line at the back.",
+          "concept": "field"
         }
       ],
       "blurb": "Six ways the scoreboard moves."
