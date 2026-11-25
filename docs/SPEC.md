@@ -959,11 +959,10 @@ signs. Release gating is on by default for release builds (an internal build can
 (a level that needs a dropped one goes too, and so do packs using dropped lessons). A
 release never ships unsigned content: a level with any unsigned step is held back whole. On
 2026-10-21 every one of the then 748 steps was signed (itstrue54, rule season 2026, after a
-coach's pre-read that fixed 17 steps). The 2026-11-24 content round added unsigned steps
-and game items to kid-1, kid-2, kid-3, adult-1, adult-2 and college-5, so until the owner
-signs them off a gated release holds those levels back and, through the cascade, every
-level that needs them: adult-3, varsity-4 (both Level 3s are held) and everything after,
-which today is the whole course. New or edited steps go back through
+coach's pre-read that fixed 17 steps). The 2026-11-24 content round added 68 steps
+and game items to kid-1, kid-2, kid-3, adult-1, adult-2 and college-5; itstrue54 signed all
+68 on 2026-11-25, so every level is fully signed again and a gated release ships the whole
+course. New or edited steps go back through
 `tools/review.py export`/`page`/`apply`.
 
 ### 13.4 UI tests
