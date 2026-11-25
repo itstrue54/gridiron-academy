@@ -71,6 +71,16 @@
     <string name="match_paired_with">paired with %1$s</string>
     <string name="order_belongs_at">not quite, goes at number %1$d</string>
     <string name="answer_state_correct">correct</string>
+    <string name="answer_state_missed">missed, this was one of the answers</string>
+    <string name="match_hint_stacked">Tap one in the first list, then its partner in the second.</string>
+    <string name="match_pick_left_first">Pick one on the left first, then its partner.</string>
+    <string name="match_pick_left_first_stacked">Pick one in the first list first, then its partner.</string>
+    <string name="order_now_at">%1$s: now %2$d of %3$d</string>
+    <string name="speed_last_right">Question %1$d: right</string>
+    <string name="speed_last_wrong">Question %1$d: not quite</string>
+    <string name="more_text_below">more text below</string>
+    <string name="more_text_scroll">Scroll down to read more</string>
+    <string name="field_los">LOS</string>
     <string name="answer_state_wrong">your answer, not quite</string>
     <string name="map_zoom_in">Zoom in</string>
     <string name="map_zoom_out">Zoom out</string>

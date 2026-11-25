@@ -27,6 +27,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
@@ -67,6 +69,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.LiveRegionMode
+import androidx.compose.ui.semantics.liveRegion
+import androidx.compose.ui.text.style.TextOverflow
+import io.github.itstrue54.gridironacademy.ui.resources.speed_last_right
+import io.github.itstrue54.gridironacademy.ui.resources.speed_last_wrong
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import io.github.itstrue54.gridironacademy.ui.components.PrimaryButton
@@ -156,6 +163,20 @@ fun SpeedRoundScreen(state: LearnerAppState, levelId: String, round: SpeedRoundC
                         }
                     }
                 }
+            }
+            // The verdict in words (a sound and a points chip are not enough): a polite live
+            // region, outside the rebuilt buttons so it is announced rather than rebuilt.
+            // The row is always there (blank before the first answer) so the buttons never jump, and
+            // the question number is in the words so a second identical verdict is announced again.
+            val right = round.lastRight
+            val verdict = right?.let { stringResource(if (it) Res.string.speed_last_right else Res.string.speed_last_wrong, round.answered) }
+            Row(Modifier.semantics { liveRegion = LiveRegionMode.Polite }, verticalAlignment = Alignment.CenterVertically) {
+                Box(Modifier.size(20.dp)) { if (right != null) GlyphIcon(if (right) Glyph.CHECK else Glyph.DASH, if (right) c.correct else c.retry, size = 20.dp) }
+                Spacer(Modifier.width(6.dp))
+                // One line at any text size, so a long verdict at 200% can't push the buttons down;
+                // TalkBack still reads the whole text.
+                Text(verdict ?: " ", style = Gridiron.type.label, color = c.ink, maxLines = 1,
+                    overflow = TextOverflow.Ellipsis, modifier = Modifier.weight(1f))
             }
             // A fresh set of buttons for each question, so nothing stays selected.
             key(round.answered) {
@@ -251,7 +272,11 @@ fun TimerRing(millisLeft: Long, limitMillis: Long) {
     val c = Gridiron.colors
     val seconds = ((millisLeft + 999) / 1000).toInt()
     val label = pluralStringResource(Res.plurals.speed_seconds_left, seconds, seconds)
-    Box(Modifier.size(72.dp).clearAndSetSemantics { contentDescription = label }, contentAlignment = Alignment.Center) {
+    // The ring grows with the digits so large text sits inside it (72dp is the floor).
+    val measurer = rememberTextMeasurer()
+    val digits = measurer.measure("$seconds", Gridiron.type.scoreboard).size
+    val side = with(LocalDensity.current) { maxOf(72.dp, maxOf(digits.width, digits.height).toDp() + 16.dp) }
+    Box(Modifier.size(side).clearAndSetSemantics { contentDescription = label }, contentAlignment = Alignment.Center) {
         Canvas(Modifier.matchParentSize()) {
             val stroke = (if (seconds <= LOW_SECONDS) 8 else 5).dp.toPx()
             val inset = stroke / 2

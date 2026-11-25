@@ -16,6 +16,13 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.PathEffect
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.graphics.drawOutline
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
@@ -34,6 +41,16 @@ import androidx.compose.ui.semantics.liveRegion
 import io.github.itstrue54.gridironacademy.ui.resources.Res
 import io.github.itstrue54.gridironacademy.ui.resources.answer_state_correct
 import io.github.itstrue54.gridironacademy.ui.resources.answer_state_wrong
+import io.github.itstrue54.gridironacademy.ui.resources.answer_state_missed
+import io.github.itstrue54.gridironacademy.ui.resources.more_text_below
+import io.github.itstrue54.gridironacademy.ui.resources.more_text_scroll
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.semantics.CustomAccessibilityAction
+import androidx.compose.ui.semantics.customActions
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.mutableStateOf
@@ -119,7 +136,8 @@ fun IconAction(glyph: Glyph, label: String, onClick: () -> Unit, modifier: Modif
     }
 }
 
-enum class AnswerState { REST, SELECTED, CORRECT, RETRY, DISABLED }
+/** MISSED: a right answer the learner did not pick; it must never read as "correct". */
+enum class AnswerState { REST, SELECTED, CORRECT, RETRY, MISSED, DISABLED }
 
 /**
  * A full-width answer (DESIGN 8): letter chip, text, and after grading a check or a dash
@@ -139,22 +157,33 @@ fun AnswerButton(
     val gradeWords = when (state) {
         AnswerState.CORRECT -> stringResource(Res.string.answer_state_correct)
         AnswerState.RETRY -> stringResource(Res.string.answer_state_wrong)
+        AnswerState.MISSED -> stringResource(Res.string.answer_state_missed)
         else -> ""
     }
     val edge = when (state) {
         AnswerState.SELECTED -> c.gold
         AnswerState.CORRECT -> c.correct
         AnswerState.RETRY -> c.retry
+        // Missed matches the field: a dashed green ring (a shape, not just a colour), no badge.
+        AnswerState.MISSED -> c.correct
         else -> c.line
     }
+    val dash = if (state == AnswerState.MISSED) PathEffect.dashPathEffect(floatArrayOf(18f, 12f)) else null
     Surface(
         onClick = onClick,
         enabled = state == AnswerState.REST || state == AnswerState.SELECTED,
         shape = skin.buttonShape,
         color = glass(),
         contentColor = if (state == AnswerState.DISABLED) c.inkDim else c.ink,
-        border = BorderStroke(if (state == AnswerState.REST || state == AnswerState.DISABLED) 2.dp else 3.dp, edge),
+        border = if (dash != null) null else BorderStroke(if (state == AnswerState.REST || state == AnswerState.DISABLED) 2.dp else 3.dp, edge),
         modifier = modifier
+            .drawWithContent {
+                drawContent()
+                if (dash != null) {
+                    val w = 3.dp.toPx()
+                    drawOutline(skin.buttonShape.createOutline(size, layoutDirection, this), edge, style = Stroke(w, pathEffect = dash))
+                }
+            }
             .fillMaxWidth()
             .heightIn(min = skin.touchTarget)
             .semantics {
@@ -172,8 +201,9 @@ fun AnswerButton(
                     color = if (state == AnswerState.SELECTED) c.gold else c.surface,
                     contentColor = if (state == AnswerState.SELECTED) c.onGold else c.inkDim,
                     border = BorderStroke(1.dp, c.line),
-                    modifier = Modifier.size(32.dp).clearAndSetSemantics { },
-                ) { Box(contentAlignment = Alignment.Center) { Text(letter, style = Gridiron.type.label) } }
+                    // Grows with the letter at large text sizes; 32dp is the floor.
+                    modifier = Modifier.widthIn(min = 32.dp).heightIn(min = 32.dp).clearAndSetSemantics { },
+                ) { Box(Modifier.padding(horizontal = 4.dp), contentAlignment = Alignment.Center) { Text(letter, style = Gridiron.type.label) } }
                 Spacer(Modifier.width(12.dp))
             }
             Text(text, style = Gridiron.type.answer, modifier = Modifier.weight(1f))
@@ -266,7 +296,19 @@ fun FeedbackSheet(
         modifier = modifier.fillMaxWidth().heightIn(max = maxHeight),
     ) {
         Column(Modifier.padding(skin.cardPadding)) {
-            Column(Modifier.weight(1f, fill = false).verticalScroll(rememberScrollState())) {
+            val scroll = rememberScrollState()
+            val scope = rememberCoroutineScope()
+            val moreText = stringResource(Res.string.more_text_below)
+            val scrollDown = stringResource(Res.string.more_text_scroll)
+            Box(Modifier.weight(1f, fill = false)) {
+            // The fade below is only a picture; a screen reader hears that there is more and
+            // can scroll to it from here (the text itself is all in the tree).
+            Column(Modifier.verticalScroll(scroll).semantics {
+                if (scroll.canScrollForward) {
+                    stateDescription = moreText
+                    customActions = listOf(CustomAccessibilityAction(scrollDown) { scope.launch { scroll.animateScrollTo(scroll.maxValue) }; true })
+                }
+            }) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     GlyphIcon(if (verdict == Verdict.RIGHT) Glyph.CHECK else Glyph.DASH, accent, size = 28.dp)
                     Spacer(Modifier.width(10.dp))
@@ -300,10 +342,32 @@ fun FeedbackSheet(
                     }
                 }
             }
+            // More text below the fold: a fade and an arrow say so (big text cuts the explanation).
+            if (scroll.canScrollForward) MoreTextCue()
+            }
             Spacer(Modifier.height(16.dp))
-            PrimaryButton(continueLabel, onContinue)
+            // Check is gone once graded, so focus moves to Continue instead of being lost.
+            val continueFocus = remember { FocusRequester() }
+            LaunchedEffect(Unit) { runCatching { continueFocus.requestFocus() } }
+            // Focus lands here, which can cut off the polite verdict announcement: so the button
+            // itself carries it ("Not quite. Continue").
+            val continueSpoken = "${headline.trimEnd('.', '!')}. $continueLabel"
+            PrimaryButton(continueLabel, onContinue, modifier = Modifier.focusRequester(continueFocus)
+                .semantics { contentDescription = continueSpoken })
         }
     }
+}
+
+/** A fade to the sheet's colour with a down arrow: the explanation goes on below. */
+@Composable
+private fun BoxScope.MoreTextCue() {
+    val c = Gridiron.colors
+    Box(
+        Modifier.align(Alignment.BottomCenter).fillMaxWidth().height(32.dp)
+            .background(Brush.verticalGradient(listOf(c.surfaceRaised.copy(alpha = 0f), c.surfaceRaised)))
+            .clearAndSetSemantics { },
+        contentAlignment = Alignment.BottomCenter,
+    ) { GlyphIcon(Glyph.DOWN, c.inkDim, size = 20.dp) }
 }
 
 /** A raised card with the skin's shape and a 1dp line (elevation is a tint, DESIGN 5). */

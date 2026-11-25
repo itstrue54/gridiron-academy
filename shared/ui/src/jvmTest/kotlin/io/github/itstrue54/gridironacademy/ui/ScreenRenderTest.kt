@@ -1,6 +1,15 @@
 package io.github.itstrue54.gridironacademy.ui
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import io.github.itstrue54.gridironacademy.ui.components.FeedbackSheet
+import io.github.itstrue54.gridironacademy.ui.components.Verdict
+import io.github.itstrue54.gridironacademy.ui.theme.Gridiron
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.ImageComposeScene
 import androidx.compose.ui.unit.Density
@@ -78,6 +87,71 @@ class ScreenRenderTest {
         val level = kid.levels.first()
         kid.startBigGame(level)
         shot("f2-7-speed-rules-kid", fontScale = 2f) { LearnerApp(kid, dark = false) }
+    }
+
+    /** The C1 set: 360dp wide at 200% text, where marks, the situation line, the sheet, the map and the timer must hold. */
+    @Test fun fontScale200Diagrams() {
+        lessonShot("f2-8-situation-adult", AgeBand.AGE_18_PLUS, dark = false, fontScale = 2f, pick = { it is Situation })
+        lessonShot("f2-8b-situation-kid", AgeBand.AGE_8_9, dark = false, fontScale = 2f, pick = { it is Situation })
+        lessonShot("f2-9-tap-diagram-kid", AgeBand.AGE_8_9, dark = false, fontScale = 2f, pick = { it is DiagramTap })
+        val long = "The safety is the last line of the defense, so he stays deeper than every receiver and reads the quarterback's eyes before he breaks. " +
+            "If he jumps the short route, the tight end runs past him up the seam; that is why the call keeps two players over the top."
+        shot("f2-10-feedback-long-adult", fontScale = 2f) {
+            GridironTheme(skin = appState(AgeBand.AGE_18_PLUS).skin, dark = false) {
+                androidx.compose.foundation.layout.Box(Modifier.fillMaxSize().background(Gridiron.colors.surface)) {
+                    FeedbackSheet(Verdict.NOT_QUITE, "Not quite", long, "Continue", {}, maxHeight = 340.dp, detail = "Look at the deep half first.",
+                        modifier = Modifier.align(Alignment.BottomCenter))
+                }
+            }
+        }
+        val kid = withPracticeDue(AgeBand.AGE_8_9).also { it.openGlossary(); it.openPlaybookMap() }
+        shot("f2-11-playbook-map-kid", fontScale = 2f) { LearnerApp(kid, dark = false) }
+        val adult = withPracticeDue(AgeBand.AGE_18_PLUS).also { it.openGlossary(); it.openPlaybookMap() }
+        shot("f2-12-playbook-map-adult", fontScale = 2f) { LearnerApp(adult, dark = true) }
+        val speed = appState(AgeBand.AGE_8_9)
+        val level = speed.levels.first()
+        speed.startBigGame(level)
+        val round = speed.speedRoundController(level.id)
+        round.start(timed = true)
+        round.tick(8_000L)
+        shot("f2-13-speed-round-kid", fontScale = 2f) {
+            GridironTheme(skin = speed.skin, dark = false) { SpeedRoundScreen(speed, level.id, round, clock = false) }
+        }
+    }
+
+    /** The C2 set: the Match board with a pair made, side by side and stacked at 200% text, 360dp wide. */
+    @Test fun matchBoardPaired() {
+        for ((name, scale, band) in listOf(Triple("f2-14-match-paired-adult", 1f, AgeBand.AGE_18_PLUS), Triple("f2-14b-match-paired-kid-200", 2f, AgeBand.AGE_8_9))) {
+            val state = appState(band)
+            val (level, lesson) = allSteps.first { (l, les) -> l.track == band.track && les.steps.any { it is Match } }
+            val step = lesson.steps.first { it is Match } as Match
+            val controller = LessonController(listOf(step))
+            controller.matchDraft = mapOf(step.pairs[0].left to step.pairs[0].right)
+            shot(name, fontScale = scale) {
+                GridironTheme(skin = state.skin, dark = false) { LessonScreen(state, level.id, lesson.id, controller) }
+            }
+        }
+    }
+
+    /** Graded answer rows side by side (the lesson's own sheet hides them): the missed row is a dashed ring, in both skins, light and dark. */
+    @Test fun gradedAnswerRows() {
+        for ((name, skin, dark) in listOf(
+            Triple("f2-15-rows-kid-light", Skin.Kid, false), Triple("f2-15b-rows-kid-dark", Skin.Kid, true),
+            Triple("f2-15c-rows-adult-light", Skin.Adult, false), Triple("f2-15d-rows-adult-dark", Skin.Adult, true),
+        )) {
+            shot(name, height = 700) {
+                GridironTheme(skin = skin, dark = dark) {
+                    androidx.compose.foundation.layout.Column(
+                        Modifier.fillMaxSize().background(Gridiron.colors.surface).padding(16.dp),
+                        verticalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(12.dp),
+                    ) {
+                        io.github.itstrue54.gridironacademy.ui.components.AnswerState.entries.filter { it != io.github.itstrue54.gridironacademy.ui.components.AnswerState.SELECTED }.forEach {
+                            io.github.itstrue54.gridironacademy.ui.components.AnswerButton("State $it", it, onClick = {})
+                        }
+                    }
+                }
+            }
+        }
     }
 
     @Test fun welcomeAndOnboarding() {

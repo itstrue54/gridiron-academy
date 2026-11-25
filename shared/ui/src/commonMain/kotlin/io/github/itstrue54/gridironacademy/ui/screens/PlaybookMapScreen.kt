@@ -2,6 +2,7 @@ package io.github.itstrue54.gridironacademy.ui.screens
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTransformGestures
@@ -32,6 +33,10 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.TextMeasurer
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.rememberTextMeasurer
+import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
@@ -113,19 +118,27 @@ fun PlaybookMapScreen(state: LearnerAppState) {
     }
 
     Column(Modifier.fillMaxSize().screenBackground().safeDrawingPadding()) {
-        Row(Modifier.padding(horizontal = 8.dp), verticalAlignment = Alignment.CenterVertically) {
-            IconAction(Glyph.BACK, stringResource(Res.string.back), onClick = { state.back() })
-            Text(stringResource(Res.string.playbook_map), style = Gridiron.type.headline, color = c.ink,
-                modifier = Modifier.weight(1f).semantics { heading() })
+        // At large text the title keeps the whole row (a long word never breaks) and the
+        // List/Map switch drops to its own line.
+        val bigText = LocalDensity.current.fontScale >= LARGE_TEXT
+        val modeSwitch = @Composable {
             TextButton(onClick = { listMode = !listMode }) {
                 Text(stringResource(if (listMode) Res.string.map_show_map else Res.string.map_show_list),
                     style = Gridiron.type.label, color = c.link)
             }
         }
+        Row(Modifier.padding(horizontal = 8.dp), verticalAlignment = Alignment.CenterVertically) {
+            IconAction(Glyph.BACK, stringResource(Res.string.back), onClick = { state.back() })
+            Text(stringResource(Res.string.playbook_map), style = Gridiron.type.headline, color = c.ink,
+                modifier = Modifier.weight(1f).semantics { heading() })
+            if (!bigText) modeSwitch()
+        }
+        if (bigText) Row(Modifier.padding(horizontal = 8.dp).fillMaxWidth(), horizontalArrangement = Arrangement.End) { modeSwitch() }
         Column(Modifier.padding(horizontal = Gridiron.skin.gutter), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             OutlinedTextField(
                 value = query, onValueChange = { query = it.take(40) }, modifier = Modifier.fillMaxWidth(),
-                placeholder = { Text(stringResource(Res.string.glossary_search), style = Gridiron.type.body) },
+                // A label, not a placeholder: it stays for a screen reader once the learner types.
+                label = { Text(stringResource(Res.string.glossary_search), style = Gridiron.type.label) },
                 singleLine = true, textStyle = Gridiron.type.body.copy(color = c.ink),
             )
             Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -176,7 +189,19 @@ private fun MapCanvas(
     var scale by remember(layout.side) { mutableStateOf(1f) }
     var pan by remember(layout.side) { mutableStateOf(Offset.Zero) }
     val colW = with(density) { (view.width / PlaybookMap.MAX_COLS).toDp() }
-    val rowH = ROW_HEIGHT
+    // Labels are measured at the column width: each shrinks until its longest word fits (no
+    // mid-word break), and the row grows to the tallest label at the reader's text size.
+    val measurer = rememberTextMeasurer()
+    val labelStyle = Gridiron.type.label
+    val labelW = (colW - LABEL_PAD * 2).coerceAtLeast(1.dp)
+    val availPx = with(density) { labelW.roundToPx() }
+    // Measured once per width, text scale and style (a font that loads late changes the style),
+    // not on every recomposition (a pan or zoom).
+    val labels = remember(layout, availPx, density.fontScale, labelStyle) {
+        layout.nodes.associate { n -> n.entry.id to fitLabel(measurer, n.entry.term, labelStyle, availPx, MIN_LABEL_SHRINK / density.fontScale) }
+    }
+    val labelH = with(density) { (labels.values.maxOfOrNull { it.heightPx } ?: 0).toDp() }
+    val rowH = maxOf(ROW_HEIGHT, NODE + LABEL_GAP + labelH + ROW_GAP)
     val contentW = view.width.toFloat()
     val contentH = with(density) { (rowH * layout.rows).toPx() + TOP_PAD.toPx() * 2 }
 
@@ -248,6 +273,7 @@ private fun MapCanvas(
                     highlighted = id in matches || id == selected,
                     dimmed = searching && id !in matches,
                     offLadder = id !in onLadder,
+                    label = labels.getValue(id),
                     modifier = Modifier
                         .offset(x = colW * n.x.toFloat(), y = TOP_PAD + rowH * n.row)
                         .width(colW),
@@ -256,7 +282,8 @@ private fun MapCanvas(
             }
         }
         // Pinching always has buttons too (DESIGN 12): zoom about the middle of the view.
-        Row(Modifier.align(Alignment.BottomStart).padding(8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        // The hint shares the row with the buttons and wraps in what is left, so big text never puts it over them.
+        Row(Modifier.align(Alignment.BottomStart).fillMaxWidth().padding(8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.Bottom) {
             listOf(
                 Triple("−", stringResource(Res.string.map_zoom_out), 1f / ZOOM_STEP),
                 Triple("+", stringResource(Res.string.map_zoom_in), ZOOM_STEP),
@@ -281,11 +308,14 @@ private fun MapCanvas(
                     }
                 }
             }
+            // Decorative: one line at normal size, gone at large text where it would cover the nodes.
+            if (LocalDensity.current.fontScale < LARGE_TEXT) Box(Modifier.weight(1f), contentAlignment = Alignment.BottomEnd) {
+                Text(stringResource(Res.string.map_zoom_hint), style = Gridiron.type.label.copy(fontSize = Gridiron.type.label.fontSize * 0.85f), color = c.inkDim, textAlign = TextAlign.End,
+                    maxLines = 1, softWrap = false, overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.background(c.surface.copy(alpha = HINT_BACK), RoundedCornerShape(HINT_RADIUS)).padding(horizontal = 8.dp, vertical = 2.dp)
+                        .clearAndSetSemantics { })
+            }
         }
-        Text(stringResource(Res.string.map_zoom_hint), style = Gridiron.type.label, color = c.inkDim,
-            modifier = Modifier.align(Alignment.BottomEnd).padding(8.dp)
-                .background(c.surface.copy(alpha = HINT_BACK), CircleShape).padding(horizontal = 8.dp, vertical = 2.dp)
-                .clearAndSetSemantics { })
     }
 }
 
@@ -297,6 +327,7 @@ private fun MasteryNode(
     highlighted: Boolean,
     dimmed: Boolean,
     offLadder: Boolean,
+    label: MapLabel,
     modifier: Modifier,
     onClick: () -> Unit,
 ) {
@@ -313,11 +344,11 @@ private fun MasteryNode(
                 .border(if (highlighted) 3.dp else 1.dp, if (highlighted) c.gold else c.line, CircleShape),
             contentAlignment = Alignment.Center,
         ) { if (!offLadder) MasteryGlyph(mastery, size = GLYPH) else GlyphIcon(Glyph.DASH, c.inkDim, size = GLYPH) }
-        // A long word shrinks rather than breaking mid-word ("Quarterbac / k").
-        val style = Gridiron.type.label
-        val long = entry.term.split(' ', '-').maxOf { it.length } > LONG_WORD
-        Text(entry.term, style = if (long) style.copy(fontSize = style.fontSize * SHRINK) else style, color = c.ink, textAlign = TextAlign.Center,
-            maxLines = 2, overflow = TextOverflow.Ellipsis, modifier = Modifier.padding(top = 4.dp))
+        // The style was shrunk until the longest word fits, so it wraps at spaces only; a word that
+        // fits at no size is ellipsized on one line (the full name is in the node's description).
+        Text(entry.term, style = label.style, color = c.ink, textAlign = TextAlign.Center,
+            maxLines = if (label.ellipsize) 1 else LABEL_LINES, softWrap = !label.ellipsize,
+            overflow = TextOverflow.Ellipsis, modifier = Modifier.padding(top = LABEL_GAP))
     }
 }
 
@@ -435,6 +466,40 @@ private fun sideLabel(s: PackSide): StringResource = when (s) {
     PackSide.RULES -> Res.string.map_rules
 }
 
+/** A map label: its style, the height it takes, and whether it had to be cut to one line. */
+private class MapLabel(val style: TextStyle, val heightPx: Int, val ellipsize: Boolean)
+
+/**
+ * [style] shrunk until the longest word of [term] fits in [availPx]: down to [minFactor]
+ * for legibility, then on to [LAST_RESORT] of that for a single overlong word. Hyphenation
+ * is off, so a word is never split ("Quarterbac / k"); if it fits at no size the label is
+ * ellipsized on one line instead. The height is what the wrapped label then takes.
+ */
+private fun fitLabel(measurer: TextMeasurer, term: String, style: TextStyle, availPx: Int, minFactor: Float): MapLabel {
+    fun overlong(s: TextStyle) = term.split(' ', '-').any { measurer.measure(it, s, softWrap = false).size.width > availPx }
+    var s = style
+    var factor = 1f
+    val floor = minFactor * LAST_RESORT
+    while (factor > floor && overlong(s)) {
+        factor *= LABEL_SHRINK_STEP
+        s = style.copy(fontSize = style.fontSize * factor, lineHeight = style.lineHeight * factor)
+    }
+    val ellipsize = overlong(s)
+    val h = if (ellipsize) measurer.measure(term, s, constraints = Constraints(maxWidth = availPx), maxLines = 1, softWrap = false, overflow = TextOverflow.Ellipsis).size.height
+        else measurer.measure(term, s, constraints = Constraints(maxWidth = availPx), maxLines = LABEL_LINES).size.height
+    return MapLabel(s, h, ellipsize)
+}
+
+/** A lone overlong word may go to this share of the usual floor before it is ellipsized. */
+private const val LAST_RESORT = 0.75f
+private const val LARGE_TEXT = 1.5f
+private val LABEL_PAD = 2.dp
+private val LABEL_GAP = 4.dp
+private val ROW_GAP = 12.dp
+private const val LABEL_LINES = 3
+/** The smallest a label may get: 0.8 of its normal size, counting the reader's text scale (so 0.4 of the declared size at 200%). */
+private const val MIN_LABEL_SHRINK = 0.8f
+private const val LABEL_SHRINK_STEP = 0.9f
 private val NODE = 44.dp
 private val GLYPH = 32.dp
 private val ROW_HEIGHT = 104.dp
@@ -446,7 +511,6 @@ private const val MAX_SCALE = 2.5f
 private const val DIMMED = 0.35f
 private const val FAINT = 0.5f
 private const val HINT_BACK = 0.85f
-private const val LONG_WORD = 9
-private const val SHRINK = 0.82f
+private val HINT_RADIUS = 16.dp
 /** The sheet never covers more than this share of the map (DESIGN 8, FeedbackSheet). */
 private const val SHEET_SHARE = 0.55f

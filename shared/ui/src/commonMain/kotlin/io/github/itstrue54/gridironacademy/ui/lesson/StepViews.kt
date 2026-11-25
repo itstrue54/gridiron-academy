@@ -4,6 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -71,6 +72,12 @@ import io.github.itstrue54.gridironacademy.ui.resources.down_and_distance
 import io.github.itstrue54.gridironacademy.ui.resources.down_and_goal
 import io.github.itstrue54.gridironacademy.ui.resources.match_answer
 import io.github.itstrue54.gridironacademy.ui.resources.match_hint
+import io.github.itstrue54.gridironacademy.ui.resources.match_hint_stacked
+import io.github.itstrue54.gridironacademy.ui.resources.match_pick_left_first
+import io.github.itstrue54.gridironacademy.ui.resources.match_pick_left_first_stacked
+import io.github.itstrue54.gridironacademy.ui.resources.order_now_at
+import androidx.compose.ui.semantics.LiveRegionMode
+import androidx.compose.ui.semantics.liveRegion
 import io.github.itstrue54.gridironacademy.ui.resources.midfield
 import io.github.itstrue54.gridironacademy.ui.resources.move_down
 import io.github.itstrue54.gridironacademy.ui.resources.move_up
@@ -301,7 +308,9 @@ fun DiagramTapView(step: DiagramTap, tapped: Set<String>, graded: Boolean, onCha
             targets.forEach { (id, words) ->
                 val state = when {
                     !graded -> if (id in tapped) AnswerState.SELECTED else AnswerState.REST
-                    id in step.targets -> AnswerState.CORRECT
+                    id in step.targets && id in tapped -> AnswerState.CORRECT
+                    // An answer nobody tapped is not "correct": it is the one that was missed.
+                    id in step.targets -> AnswerState.MISSED
                     id in tapped -> AnswerState.RETRY
                     else -> AnswerState.DISABLED
                 }
@@ -321,12 +330,23 @@ fun MatchView(step: Match, rightOrder: List<String>, pairs: Map<String, String>,
     val c = Gridiron.colors
     val lefts = step.pairs.map { it.left }
     val truth = step.pairs.associate { it.left to it.right }
+    // Side by side; at large text (DESIGN 12) the right-hand items go under the left
+    // ones, so words aren't split across lines in half-width columns.
+    val stacked = LocalDensity.current.fontScale >= LARGE_TEXT
+    // A tap on the right with nothing picked on the left says what to do instead of nothing.
+    var nudged by remember(step.id) { mutableStateOf(false) }
+    if (selectedLeft != null && nudged) nudged = false
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
         Prompt(step.prompt)
-        Text(stringResource(Res.string.match_hint), style = Gridiron.type.label, color = c.inkDim)
-        // Side by side; at large text (DESIGN 12) the right-hand items go under the left
-        // ones, so words aren't split across lines in half-width columns.
-        val stacked = LocalDensity.current.fontScale >= LARGE_TEXT
+        Text(
+            stringResource(when {
+                nudged -> if (stacked) Res.string.match_pick_left_first_stacked else Res.string.match_pick_left_first
+                stacked -> Res.string.match_hint_stacked
+                else -> Res.string.match_hint
+            }),
+            style = Gridiron.type.label, color = if (nudged) c.ink else c.inkDim,
+            modifier = Modifier.semantics { if (nudged) liveRegion = LiveRegionMode.Polite },
+        )
         val leftColumn = @Composable { colModifier: Modifier ->
             Column(colModifier, verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 lefts.forEachIndexed { i, left ->
@@ -340,7 +360,7 @@ fun MatchView(step: Match, rightOrder: List<String>, pairs: Map<String, String>,
                         graded -> stringResource(Res.string.match_answer, truth[left].orEmpty())
                         else -> pairs[left]?.let { stringResource(Res.string.match_paired_with, it) }.orEmpty()
                     }
-                    MatchChip(LETTERS[i], left, state, paired = left in pairs, spoken = leftWords) {
+                    MatchChip(LETTERS[i], left, state, paired = !graded && left in pairs, spoken = leftWords) {
                         if (left in pairs) onPairs(pairs - left)
                         // Always select: the first item starts selected, and a toggle made the
                         // natural first tap deselect it (found playing on a phone).
@@ -357,14 +377,11 @@ fun MatchView(step: Match, rightOrder: List<String>, pairs: Map<String, String>,
                 rightOrder.forEach { right ->
                     val owner = pairs.entries.firstOrNull { it.value == right }?.key
                     val letter = owner?.let { LETTERS[lefts.indexOf(it)] }
-                    val state = when {
-                        graded -> AnswerState.DISABLED
-                        owner != null -> AnswerState.SELECTED
-                        else -> AnswerState.REST
-                    }
-                    MatchChip(letter, right, state, paired = owner != null,
+                    // Paired is its own look (not the gold "picked" edge the left item wears).
+                    val state = if (graded) AnswerState.DISABLED else AnswerState.REST
+                    MatchChip(letter, right, state, paired = !graded && owner != null,
                         spoken = owner?.let { stringResource(Res.string.match_paired_with, it) }.orEmpty()) {
-                        val left = selectedLeft ?: return@MatchChip
+                        val left = selectedLeft ?: run { nudged = true; return@MatchChip }
                         // Pairing a right item takes it from whoever had it.
                         onPairs(pairs.filterValues { it != right } + (left to right))
                         onSelectLeft(lefts.firstOrNull { it != left && it !in pairs && it != owner })
@@ -387,10 +404,11 @@ fun MatchView(step: Match, rightOrder: List<String>, pairs: Map<String, String>,
 @Composable
 private fun MatchChip(letter: String?, text: String, state: AnswerState, paired: Boolean, spoken: String, onClick: () -> Unit) {
     val c = Gridiron.colors
-    val edge = when (state) {
-        AnswerState.SELECTED -> c.gold
-        AnswerState.CORRECT -> c.correct
-        AnswerState.RETRY -> c.retry
+    val edge = when {
+        state == AnswerState.SELECTED -> c.gold
+        state == AnswerState.CORRECT -> c.correct
+        state == AnswerState.RETRY -> c.retry
+        paired -> c.link
         else -> c.line
     }
     Surface(
@@ -399,7 +417,7 @@ private fun MatchChip(letter: String?, text: String, state: AnswerState, paired:
         shape = Gridiron.skin.buttonShape,
         color = c.surfaceRaised,
         contentColor = c.ink,
-        border = BorderStroke(if (state == AnswerState.REST) 2.dp else 3.dp, edge),
+        border = BorderStroke(if (state == AnswerState.REST && !paired) 2.dp else 3.dp, edge),
         modifier = Modifier.fillMaxWidth().heightIn(min = Gridiron.skin.touchTarget).semantics {
             role = Role.Button
             selected = state == AnswerState.SELECTED
@@ -414,7 +432,8 @@ private fun MatchChip(letter: String?, text: String, state: AnswerState, paired:
             when (state) {
                 AnswerState.CORRECT -> GlyphIcon(Glyph.CHECK, c.correct, size = 18.dp)
                 AnswerState.RETRY -> GlyphIcon(Glyph.DASH, c.retry, size = 18.dp)
-                else -> Unit
+                // A dot in the link colour: paired, not "picked" (that is the gold edge alone).
+                else -> if (paired) GlyphIcon(Glyph.PICKED, c.link, size = 18.dp)
             }
         }
     }
@@ -427,7 +446,12 @@ fun OrderView(step: Order, order: List<String>, graded: Boolean, onChange: (List
     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
         Prompt(step.prompt)
         Text(stringResource(Res.string.order_hint), style = Gridiron.type.label, color = c.inkDim)
+        // Focus stays on the old slot after a move, so say where the item went (live region,
+        // below the list so it never shifts the rows under the learner's finger).
+        var moved by remember(step.id) { mutableStateOf("") }
         order.forEachIndexed { i, item ->
+            val nowUp = stringResource(Res.string.order_now_at, item, i, order.size)
+            val nowDown = stringResource(Res.string.order_now_at, item, i + 2, order.size)
             val state = when {
                 !graded -> AnswerState.REST
                 step.items[i] == item -> AnswerState.CORRECT
@@ -450,12 +474,15 @@ fun OrderView(step: Order, order: List<String>, graded: Boolean, onChange: (List
                     if (graded) {
                         GlyphIcon(if (state == AnswerState.CORRECT) Glyph.CHECK else Glyph.DASH, edge, Modifier.padding(12.dp))
                     } else {
-                        IconAction(Glyph.UP, stringResource(Res.string.move_up, item), enabled = i > 0, onClick = { onChange(order.swap(i, i - 1)) })
-                        IconAction(Glyph.DOWN, stringResource(Res.string.move_down, item), enabled = i < order.lastIndex, onClick = { onChange(order.swap(i, i + 1)) })
+                        IconAction(Glyph.UP, stringResource(Res.string.move_up, item), enabled = i > 0, onClick = { moved = nowUp; onChange(order.swap(i, i - 1)) })
+                        IconAction(Glyph.DOWN, stringResource(Res.string.move_down, item), enabled = i < order.lastIndex, onClick = { moved = nowDown; onChange(order.swap(i, i + 1)) })
                     }
                 }
             }
         }
+        // Always present (blank until the first move) so the first announcement is heard.
+        Text(if (graded || moved.isEmpty()) " " else moved, style = Gridiron.type.label, color = c.ink,
+            modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite })
     }
 }
 
@@ -559,7 +586,7 @@ fun SituationStrip(s: GameState) {
     Surface(shape = Gridiron.skin.cardShape, color = c.surfaceRaised, contentColor = c.ink, border = BorderStroke(1.dp, c.line), modifier = Modifier.fillMaxWidth()) {
         Column(Modifier.padding(Gridiron.skin.cardPadding), verticalArrangement = Arrangement.spacedBy(6.dp)) {
             Text(headline, style = Gridiron.type.scoreboard, color = c.ink)
-            Row(horizontalArrangement = Arrangement.spacedBy(14.dp)) {
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(14.dp), verticalArrangement = Arrangement.spacedBy(2.dp)) {
                 Text(stringResource(Res.string.quarter_clock, s.quarter, clock), style = Gridiron.type.label.copy(fontFeatureSettings = "tnum"), color = c.ink)
                 Text(spot, style = Gridiron.type.label, color = c.ink)
                 Text(score, style = Gridiron.type.label, color = c.ink)
