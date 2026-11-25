@@ -25,6 +25,14 @@ object Streak {
         }
     }
 
+    /**
+     * The streak state left by practising on each of [days], oldest first (duplicates and order
+     * don't matter). The Coach app folds a learner's attempt days through this, so its streak
+     * follows the same rest-day rule as the learner's Home.
+     */
+    fun replay(days: Iterable<Long>): Progress =
+        days.distinct().sorted().fold(Progress()) { p, d -> touch(p, d) }
+
     /** The streak to show on [today]: zero once it has lapsed. */
     fun current(p: Progress, today: Long): Int {
         val gap = today - p.lastActiveDay

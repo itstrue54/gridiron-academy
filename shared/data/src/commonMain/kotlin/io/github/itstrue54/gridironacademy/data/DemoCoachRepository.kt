@@ -156,7 +156,7 @@ class DemoCoachRepository(
             DemoLearner("bolt", "Bolt", AgeBand.AGE_13_17, 4, 0.66, 0.4, 3, 1, myChild = false, onTeam = true, positions = listOf(PositionGroup.DB)),
             DemoLearner("tree", "Tree", AgeBand.AGE_13_17, 4, 0.6, 0.1, 0, 9, myChild = false, onTeam = true, positions = listOf(PositionGroup.TE)),
             DemoLearner("ice", "Ice", AgeBand.AGE_13_17, 5, 0.9, 0.5, 15, 0, myChild = false, onTeam = true, positions = listOf(PositionGroup.LB, PositionGroup.ST)),
-            DemoLearner("rook", "Rook", AgeBand.AGE_13_17, 4, 0.5, 0.3, 1, 3, myChild = false, onTeam = true, positions = listOf(PositionGroup.DL)),
+            DemoLearner("rook", "Rook", AgeBand.AGE_13_17, 4, 0.5, 0.3, 0, 3, myChild = false, onTeam = true, positions = listOf(PositionGroup.DL)),
         )
     }
 }

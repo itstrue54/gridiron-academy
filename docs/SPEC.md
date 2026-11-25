@@ -392,9 +392,12 @@ skill tree that fills in).
 - **XP** per lesson/game (existing), **streaks** (existing, with one free "rest day"
   per week so a missed Sunday doesn't break a kid's streak; weeks run Monday to
   Sunday, the rest day itself adds nothing, a second miss in the same week breaks
-  the streak, and the number shown reads 0 once the streak has lapsed). The Coach
-  app's streak (`SnapshotAssembler`, computed from events) does not count rest days
-  yet, so it can read lower than the learner's Home. Home shows
+  the streak, and the number shown reads 0 once the streak has lapsed). Both apps
+  use one rule in core (`Streak`): the learner's save touches it on each day of
+  practice, and the Coach app (`SnapshotAssembler`, which stores no derived state)
+  replays the distinct days of the learner's answer events through the same rule
+  (`Streak.replay`, oldest first) and shows `Streak.current` for today, so a parent or
+  coach sees the number the learner's Home shows once those answers have synced. Home shows
   the streak as it stands today (`Streak.current`), not the stored count, and adds a
   "Rest day used" line while the rest day is what keeps it alive: yesterday was
   missed and this week's rest is still free, so practising today spends it
