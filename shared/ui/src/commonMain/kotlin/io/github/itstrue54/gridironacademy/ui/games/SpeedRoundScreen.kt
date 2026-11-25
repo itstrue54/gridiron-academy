@@ -71,6 +71,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.liveRegion
+import androidx.compose.ui.text.style.TextOverflow
 import io.github.itstrue54.gridironacademy.ui.resources.speed_last_right
 import io.github.itstrue54.gridironacademy.ui.resources.speed_last_wrong
 import androidx.compose.ui.semantics.heading
@@ -172,7 +173,10 @@ fun SpeedRoundScreen(state: LearnerAppState, levelId: String, round: SpeedRoundC
             Row(Modifier.semantics { liveRegion = LiveRegionMode.Polite }, verticalAlignment = Alignment.CenterVertically) {
                 Box(Modifier.size(20.dp)) { if (right != null) GlyphIcon(if (right) Glyph.CHECK else Glyph.DASH, if (right) c.correct else c.retry, size = 20.dp) }
                 Spacer(Modifier.width(6.dp))
-                Text(verdict ?: " ", style = Gridiron.type.label, color = c.ink)
+                // One line at any text size, so a long verdict at 200% can't push the buttons down;
+                // TalkBack still reads the whole text.
+                Text(verdict ?: " ", style = Gridiron.type.label, color = c.ink, maxLines = 1,
+                    overflow = TextOverflow.Ellipsis, modifier = Modifier.weight(1f))
             }
             // A fresh set of buttons for each question, so nothing stays selected.
             key(round.answered) {

@@ -194,9 +194,9 @@ private fun MapCanvas(
     val measurer = rememberTextMeasurer()
     val labelStyle = Gridiron.type.label
     val labelW = (colW - LABEL_PAD * 2).coerceAtLeast(1.dp)
-    // Not remembered: a font that loads late changes the widths, and reading it here recomposes.
     val availPx = with(density) { labelW.roundToPx() }
-    // Measured once per width and text scale, not on every recomposition (a pan or zoom).
+    // Measured once per width, text scale and style (a font that loads late changes the style),
+    // not on every recomposition (a pan or zoom).
     val labels = remember(layout, availPx, density.fontScale, labelStyle) {
         layout.nodes.associate { n -> n.entry.id to fitLabel(measurer, n.entry.term, labelStyle, availPx, MIN_LABEL_SHRINK / density.fontScale) }
     }
