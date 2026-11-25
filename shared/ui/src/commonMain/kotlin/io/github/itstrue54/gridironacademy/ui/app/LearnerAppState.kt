@@ -208,9 +208,17 @@ class LearnerAppState(
     /** Every screen change also closes the Leave dialog: it belongs to the screen it asked about. */
     var backStack: List<Screen>
         get() = stack
-        private set(value) { stack = value; confirmingLeave = false }
+        private set(value) { stack = value; confirmingLeave = false; lockedTapLevelId = null }
 
     val screen: Screen get() = backStack.last()
+
+    /** Set when a learner taps a locked level on Home: the note saying what opens it. Cleared on any screen change. */
+    var lockedTapLevelId: String? by mutableStateOf(null)
+        private set
+
+    /** Counts every locked tap, so a repeat tap on the same card still re-announces the note. */
+    var lockedTapCount: Int by mutableStateOf(0)
+        private set
 
     /**
      * The lesson in progress lives here, not in composition, so it survives the screen
@@ -601,6 +609,28 @@ class LearnerAppState(
     }
 
     fun openLevel(level: Level) = go(Screen.LevelDetail(level.id))
+
+    /** The level after this one on the ladder, or null at the top. */
+    fun nextLevelAfter(level: Level): Level? = levels.firstOrNull { it.number == level.number + 1 }
+
+    /** From a finished level straight to the next; Back from there goes Home. */
+    fun openNextLevel(from: Level) {
+        val next = nextLevelAfter(from) ?: return
+        backStack = listOf(Screen.Home, Screen.LevelDetail(next.id))
+    }
+
+    /** The level whose pass would bring this one closer to opening: first required one not passed. */
+    fun levelThatOpens(level: Level): Level? {
+        val passed = save.progress.levelsPassed
+        // Only this profile's own ladder: another track's level number would name the wrong level.
+        val unmet = (level.requires + level.requiresAny).filter { it !in passed }
+        return unmet.firstNotNullOfOrNull { id -> levels.firstOrNull { it.id == id } }
+            // A requirement on another track: name the nearest earlier level here that isn't passed yet.
+            ?: levels.lastOrNull { it.number < level.number && it.id !in passed }
+    }
+
+    /** A tap on a locked level opens nothing; it leaves a note on Home saying what does. */
+    fun tapLockedLevel(level: Level) { lockedTapLevelId = level.id; lockedTapCount++ }
 
     fun startLesson(level: Level, lesson: Lesson) {
         activeLesson = null

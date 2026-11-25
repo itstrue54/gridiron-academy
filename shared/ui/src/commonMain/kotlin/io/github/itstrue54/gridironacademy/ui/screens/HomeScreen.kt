@@ -1,9 +1,14 @@
 package io.github.itstrue54.gridironacademy.ui.screens
 
+import androidx.compose.ui.semantics.hideFromAccessibility
+import androidx.compose.ui.semantics.liveRegion
+import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import io.github.itstrue54.gridironacademy.ui.resources.level_locked_tap
+import io.github.itstrue54.gridironacademy.ui.resources.level_locked_tap_earlier
 import io.github.itstrue54.gridironacademy.ui.resources.xp_total
 import io.github.itstrue54.gridironacademy.ui.resources.season_progress
 import io.github.itstrue54.gridironacademy.ui.components.glass
@@ -71,6 +76,8 @@ import io.github.itstrue54.gridironacademy.ui.theme.screenBackground
 import io.github.itstrue54.gridironacademy.ui.theme.Voice
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.key
+import androidx.compose.runtime.withFrameNanos
 import org.jetbrains.compose.resources.pluralStringResource
 import io.github.itstrue54.gridironacademy.ui.components.SecondaryButton
 import io.github.itstrue54.gridironacademy.ui.components.Card
@@ -253,13 +260,13 @@ private fun LevelRow(state: LearnerAppState, level: Level, modifier: Modifier = 
     )
     val levelLabel = stringResource(Res.string.level_n, level.number)
     val progressLabel = stringResource(Res.string.level_progress, passedCount, total)
+    Column(modifier) {
     Surface(
-        onClick = { state.openLevel(level) },
-        enabled = unlocked,
+        onClick = { if (unlocked) state.openLevel(level) else state.tapLockedLevel(level) },
         shape = Gridiron.skin.cardShape,
         color = c.surfaceRaised.copy(alpha = 0.94f),
         contentColor = c.ink,
-        modifier = modifier.fillMaxWidth().clearAndSetSemantics {
+        modifier = Modifier.fillMaxWidth().clearAndSetSemantics {
             contentDescription = "$levelLabel, ${level.title}. $stateWord. $progressLabel"
         },
     ) {
@@ -286,6 +293,8 @@ private fun LevelRow(state: LearnerAppState, level: Level, modifier: Modifier = 
                 words(Modifier.weight(1f))
             }
         }
+    }
+    LockedNote(state, level)
     }
 }
 
@@ -362,14 +371,14 @@ private fun SeasonCard(state: LearnerAppState, level: Level, modifier: Modifier 
     val levelLabel = stringResource(Res.string.level_n, level.number)
     val progressLabel = stringResource(Res.string.level_progress, done, total)
     val accent = when (nodeState) { NodeState.PASSED -> c.gold; NodeState.OPEN -> c.rank; NodeState.LOCKED -> c.line }
+    Column(modifier) {
     Surface(
-        onClick = { state.openLevel(level) },
-        enabled = unlocked,
+        onClick = { if (unlocked) state.openLevel(level) else state.tapLockedLevel(level) },
         shape = Gridiron.skin.cardShape,
         color = glass(),
         contentColor = c.ink,
         border = BorderStroke(if (nodeState == NodeState.OPEN) 1.5.dp else 1.dp, if (nodeState == NodeState.OPEN) c.rank else c.line),
-        modifier = modifier.fillMaxWidth().clearAndSetSemantics {
+        modifier = Modifier.fillMaxWidth().clearAndSetSemantics {
             contentDescription = "$levelLabel, ${level.title}. $stateWord. $progressLabel"
         },
     ) {
@@ -384,6 +393,41 @@ private fun SeasonCard(state: LearnerAppState, level: Level, modifier: Modifier 
                 Spacer(Modifier.size(4.dp))
                 Text(progressLabel, style = Gridiron.type.label, color = c.inkDim)
             }
+        }
+    }
+    LockedNote(state, level)
+    }
+}
+
+/**
+ * What a tap on a locked level says. The live-region box is always in the layout (zero height
+ * while empty) so a screen reader sees the text change; the text is keyed on the tap count so a
+ * second tap on the same card says it again, and it scrolls itself into view.
+ */
+@Composable
+private fun LockedNote(state: LearnerAppState, level: Level) {
+    val c = Gridiron.colors
+    // The tapped card names the level that opens it, or says "the earlier levels" when none
+    // on this ladder is left to name.
+    val note = if (state.lockedTapLevelId != level.id) null else state.levelThatOpens(level)
+        ?.let { stringResource(Res.string.level_locked_tap, it.number) }
+        ?: stringResource(Res.string.level_locked_tap_earlier)
+    val requester = remember { BringIntoViewRequester() }
+    // One frame first: the box has to grow to hold the note before there is anything to bring into view.
+    LaunchedEffect(note, state.lockedTapCount) { if (note != null) { withFrameNanos { }; requester.bringIntoView() } }
+    // The live region stays in place so a note that appears in it is announced, but while it is
+    // empty it is hidden from TalkBack, so the cards don't gain silent stops.
+    Box(Modifier.fillMaxWidth().bringIntoViewRequester(requester).semantics(mergeDescendants = true) {
+        liveRegion = LiveRegionMode.Polite
+        if (note == null) hideFromAccessibility()
+    }) {
+        if (note != null) key(state.lockedTapCount) {
+            Text(
+                note,
+                style = Gridiron.type.label, color = c.ink,
+                modifier = Modifier.fillMaxWidth().padding(top = 6.dp)
+                    .background(c.surfaceRaised, Gridiron.skin.chipShape).padding(horizontal = 14.dp, vertical = 8.dp),
+            )
         }
     }
 }

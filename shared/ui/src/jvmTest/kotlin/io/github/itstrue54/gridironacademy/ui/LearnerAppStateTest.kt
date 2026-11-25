@@ -8,6 +8,7 @@ import io.github.itstrue54.gridironacademy.model.*
 import io.github.itstrue54.gridironacademy.progress.AgeBand
 import io.github.itstrue54.gridironacademy.progress.AttemptEvent
 import io.github.itstrue54.gridironacademy.progress.Profile
+import io.github.itstrue54.gridironacademy.progress.Progress
 import io.github.itstrue54.gridironacademy.progress.LearnerSave
 import io.github.itstrue54.gridironacademy.progress.AttemptContext
 import io.github.itstrue54.gridironacademy.ui.app.InMemoryLearnerStore
@@ -764,5 +765,58 @@ class LearnerAppStateTest {
         assertNotNull(s.lessonControllerOrNull(level.id, lesson.id))
         s.back() // quit: the fading-out lesson screen asks again
         assertNull(s.lessonControllerOrNull(level.id, lesson.id))
+    }
+
+    @Test
+    fun nextLevelAfterPassedLevel() {
+        val s = LearnerAppState(content, InMemoryLearnerStore()) { 200 }
+        s.createProfile("Leo", AgeBand.AGE_8_9)
+        val first = s.levels.first()
+        val second = assertNotNull(s.nextLevelAfter(first))
+        assertEquals(first.number + 1, second.number)
+        s.openLevel(first)
+        s.openNextLevel(first)
+        assertEquals(Screen.LevelDetail(second.id), s.screen)
+        assertTrue(s.back())
+        assertEquals(Screen.Home, s.screen, "Back from the next level goes Home, not to the level just finished")
+    }
+
+    @Test
+    fun nextLevelNullAtTop() {
+        val s = LearnerAppState(content, InMemoryLearnerStore()) { 200 }
+        s.createProfile("Leo", AgeBand.AGE_8_9)
+        assertNull(s.nextLevelAfter(s.levels.last()))
+    }
+
+    @Test
+    fun tappingALockedLevelNamesWhatOpensItAndGoesNowhere() {
+        val s = LearnerAppState(content, InMemoryLearnerStore()) { 200 }
+        s.createProfile("Leo", AgeBand.AGE_8_9)
+        val locked = s.levels.first { !s.levelUnlocked(it) }
+        val opener = assertNotNull(s.levelThatOpens(locked))
+        assertTrue(opener.number < locked.number)
+        s.tapLockedLevel(locked)
+        assertEquals(locked.id, s.lockedTapLevelId)
+        assertEquals(Screen.Home, s.screen)
+        s.openLevel(s.levels.first())
+        assertNull(s.lockedTapLevelId, "the note goes away when the screen changes")
+    }
+
+    @Test
+    fun aLockedNoteOnlyNamesAnUnpassedEarlierLevelOnTheProfilesOwnLadder() {
+        for (band in listOf(AgeBand.AGE_8_9, AgeBand.AGE_18_PLUS)) {
+            val ladder = LearnerAppState(content, InMemoryLearnerStore()) { 200 }.also { it.createProfile("Leo", band) }.levels
+            for (k in 0..ladder.size) {
+                val passed = ladder.take(k).map { it.id }.toSet()
+                val save = LearnerSave(profile = Profile("Leo", band), progress = Progress(levelsPassed = passed))
+                val s = LearnerAppState(content, InMemoryLearnerStore(save)) { 200 }
+                for (locked in s.levels.filter { !s.levelUnlocked(it) }) {
+                    val opener = s.levelThatOpens(locked) ?: continue
+                    assertTrue(opener in s.levels, "$band, $k passed: ${opener.id} is on this ladder")
+                    assertTrue(opener.id !in passed, "$band, $k passed: ${locked.id} names ${opener.id}, already passed")
+                    assertTrue(opener.number < locked.number, "$band, $k passed: ${opener.id} comes before ${locked.id}")
+                }
+            }
+        }
     }
 }

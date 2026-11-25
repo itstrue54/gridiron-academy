@@ -42,10 +42,14 @@
 
     <!-- Level (DESIGN 9.2) -->
     <string name="back">Back</string>
+    <string name="level_locked_tap">Finish Level %1$d first.</string>
+    <string name="level_locked_tap_earlier">Finish the earlier levels first.</string>
     <string name="drill_locked">Pass %1$s to unlock</string>
     <string name="checkpoint">Checkpoint</string>
+    <string name="checkpoint_blurb_kid">A %1$d-question test. Get %2$d right to pass.</string>
     <string name="checkpoint_blurb">A %1$d-question test. Get %2$d% to pass.</string>
     <string name="big_game">Big Game</string>
+    <string name="big_game_blurb_kid">Play the level game. Get %1$d of %2$d right to win.</string>
     <string name="big_game_blurb">Play the level game. Get %1$d% to pass.</string>
     <string name="stars_label">%1$d of 3 stars</string>
 
@@ -96,9 +100,9 @@
     <string name="partial_adult">Partly right.</string>
     <string name="best_kid">Great call, Coach!</string>
     <string name="best_adult">Best call.</string>
-    <string name="ok_kid">Reasonable. There was a better one.</string>
+    <string name="ok_kid">Good pick! One answer was even better.</string>
     <string name="ok_adult">Reasonable.</string>
-    <string name="poor_kid">That one cost you. See why.</string>
+    <string name="poor_kid">That one won't work here. Let's see why.</string>
     <string name="poor_adult">Costly.</string>
     <string name="best_was">Best call: %1$s</string>
 
@@ -133,12 +137,12 @@
     <string name="checkpoint_passed_adult">Checkpoint passed. The Big Game is open.</string>
     <string name="testout_passed_kid">You tested out! The Big Game is open.</string>
     <string name="testout_passed_adult">Tested out. The drills are marked done and the Big Game is open.</string>
-    <string name="checkpoint_not_yet_kid">So close! Get %1$d% to pass. Practice and try again.</string>
-    <string name="checkpoint_not_yet_far_kid">Not yet! Get %1$d% to pass. Play the drills again, then try.</string>
+    <string name="checkpoint_not_yet_kid">So close! Get %1$d of %2$d right to pass. Practice and try again.</string>
+    <string name="checkpoint_not_yet_far_kid">Not yet! Get %1$d of %2$d right to pass. Play the drills again, then try.</string>
     <string name="checkpoint_not_yet_adult">%1$d% passes the Checkpoint. Review and try again.</string>
     <string name="game_won_kid">You won the Big Game!</string>
     <string name="game_won_adult">Big Game won.</string>
-    <string name="game_not_yet_kid">Get %1$d% to win the Big Game. You can play again any time!</string>
+    <string name="game_not_yet_kid">Get %1$d of %2$d right to win the Big Game. You can play again any time!</string>
     <string name="game_not_yet_adult">%1$d% wins the Big Game.</string>
     <string name="level_done_kid">Touchdown! Level %1$d done!</string>
     <string name="level_done_adult">Level %1$d complete</string>
@@ -192,6 +196,7 @@
     <string name="done_xp">+%1$d XP</string>
     <string name="back_to_level">Back to the level</string>
     <string name="try_again">Try again</string>
+    <string name="next_level">Next level</string>
     <!-- Coach & Parent app (DESIGN 14). Adult voice, plain words for parents. -->
     <string name="tab_players">Players</string>
     <string name="tab_my_kids">My kids</string>

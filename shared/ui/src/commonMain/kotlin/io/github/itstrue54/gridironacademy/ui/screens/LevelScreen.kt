@@ -25,6 +25,7 @@ import io.github.itstrue54.gridironacademy.ui.components.Glyph
 import io.github.itstrue54.gridironacademy.ui.components.GlyphIcon
 import io.github.itstrue54.gridironacademy.ui.components.IconAction
 import io.github.itstrue54.gridironacademy.ui.components.SecondaryButton
+import io.github.itstrue54.gridironacademy.ui.theme.Voice
 import io.github.itstrue54.gridironacademy.ui.components.StarRow
 import io.github.itstrue54.gridironacademy.ui.resources.Res
 import io.github.itstrue54.gridironacademy.ui.resources.back
@@ -32,6 +33,9 @@ import io.github.itstrue54.gridironacademy.ui.resources.big_game
 import io.github.itstrue54.gridironacademy.ui.resources.big_game_blurb
 import io.github.itstrue54.gridironacademy.ui.resources.checkpoint
 import io.github.itstrue54.gridironacademy.ui.resources.checkpoint_blurb
+import io.github.itstrue54.gridironacademy.ui.resources.checkpoint_blurb_kid
+import io.github.itstrue54.gridironacademy.ui.resources.big_game_blurb_kid
+import io.github.itstrue54.gridironacademy.ui.games.rightToPass
 import io.github.itstrue54.gridironacademy.ui.resources.best_score
 import io.github.itstrue54.gridironacademy.ui.resources.big_game_locked
 import io.github.itstrue54.gridironacademy.ui.resources.checkpoint_locked
@@ -110,7 +114,11 @@ fun LevelScreen(state: LearnerAppState, level: Level) {
                 val best = state.save.progress.levelTests[level.id]
                 GateCard(
                     title = stringResource(Res.string.checkpoint),
-                    blurb = stringResource(Res.string.checkpoint_blurb, level.gate.testQuestions, level.gate.testPassPct),
+                    blurb = if (Gridiron.skin.voice == Voice.KID) {
+                        stringResource(Res.string.checkpoint_blurb_kid, level.gate.testQuestions, rightToPass(level.gate.testQuestions, level.gate.testPassPct))
+                    } else {
+                        stringResource(Res.string.checkpoint_blurb, level.gate.testQuestions, level.gate.testPassPct)
+                    },
                     open = state.checkpointOpen(level),
                     passed = (best ?: -1) >= level.gate.testPassPct,
                     best = best,
@@ -124,7 +132,11 @@ fun LevelScreen(state: LearnerAppState, level: Level) {
                 val best = state.save.progress.levelGames[level.id]
                 GateCard(
                     title = stringResource(Res.string.big_game),
-                    blurb = stringResource(Res.string.big_game_blurb, level.gate.gamePassPct),
+                    blurb = if (Gridiron.skin.voice == Voice.KID) {
+                        stringResource(Res.string.big_game_blurb_kid, rightToPass(level.gate.gameQuestions, level.gate.gamePassPct), level.gate.gameQuestions)
+                    } else {
+                        stringResource(Res.string.big_game_blurb, level.gate.gamePassPct)
+                    },
                     open = state.bigGameOpen(level),
                     passed = (best ?: -1) >= level.gate.gamePassPct,
                     best = best,

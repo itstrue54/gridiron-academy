@@ -61,6 +61,8 @@ import io.github.itstrue54.gridironacademy.ui.resources.stars_label
 import io.github.itstrue54.gridironacademy.ui.resources.testout_passed_adult
 import io.github.itstrue54.gridironacademy.ui.resources.testout_passed_kid
 import io.github.itstrue54.gridironacademy.ui.resources.try_again
+import io.github.itstrue54.gridironacademy.ui.resources.next_level
+import io.github.itstrue54.gridironacademy.ui.games.rightToPass
 import io.github.itstrue54.gridironacademy.ui.resources.your_score
 import io.github.itstrue54.gridironacademy.engine.LessonSession
 import io.github.itstrue54.gridironacademy.ui.theme.Gridiron
@@ -78,7 +80,7 @@ fun GateDoneScreen(state: LearnerAppState, done: Screen.GateDone) {
     val c = Gridiron.colors
     val kid = Gridiron.skin.voice == Voice.KID
     val level = state.content.level(done.levelId)
-    val next = state.levels.firstOrNull { it.number == level.number + 1 }
+    val next = state.nextLevelAfter(level)
     val headline = when {
         done.levelPassed -> stringResource(if (kid) Res.string.level_done_kid else Res.string.level_done_adult, level.number)
         done.gate == Gate.CHECKPOINT -> stringResource(Res.string.checkpoint)
@@ -98,10 +100,11 @@ fun GateDoneScreen(state: LearnerAppState, done: Screen.GateDone) {
                 done.scorePct >= done.passPct - CLOSE_MARGIN -> Res.string.checkpoint_not_yet_kid
                 else -> Res.string.checkpoint_not_yet_far_kid
             },
-            done.passPct,
+            *if (kid) arrayOf(rightToPass(level.gate.testQuestions, done.passPct), level.gate.testQuestions) else arrayOf(done.passPct),
         )
         done.passed -> stringResource(if (kid) Res.string.game_won_kid else Res.string.game_won_adult)
-        else -> stringResource(if (kid) Res.string.game_not_yet_kid else Res.string.game_not_yet_adult, done.passPct)
+        kid -> stringResource(Res.string.game_not_yet_kid, rightToPass(level.gate.gameQuestions, done.passPct), level.gate.gameQuestions)
+        else -> stringResource(Res.string.game_not_yet_adult, done.passPct)
     }
     val stars = LessonSession.stars(done.scorePct)
     Box(Modifier.fillMaxSize()) {
@@ -146,6 +149,10 @@ fun GateDoneScreen(state: LearnerAppState, done: Screen.GateDone) {
                             if (done.gate == Gate.CHECKPOINT) state.startCheckpoint(level, done.testOut) else state.startBigGame(level)
                         },
                     )
+                }
+                done.levelPassed && next != null && state.levelUnlocked(next) -> {
+                    PrimaryButton(stringResource(Res.string.next_level), onClick = { state.openNextLevel(level) })
+                    SecondaryButton(stringResource(Res.string.back_to_level), onClick = { state.back() })
                 }
                 else -> PrimaryButton(stringResource(Res.string.back_to_level), onClick = { state.back() })
             }
