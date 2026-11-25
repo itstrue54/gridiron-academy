@@ -43,6 +43,7 @@
     <!-- Level (DESIGN 9.2) -->
     <string name="back">Back</string>
     <string name="level_locked_tap">Finish Level %1$d first.</string>
+    <string name="level_locked_tap_earlier">Finish the earlier levels first.</string>
     <string name="drill_locked">Pass %1$s to unlock</string>
     <string name="checkpoint">Checkpoint</string>
     <string name="checkpoint_blurb_kid">A %1$d-question test. Get %2$d right to pass.</string>

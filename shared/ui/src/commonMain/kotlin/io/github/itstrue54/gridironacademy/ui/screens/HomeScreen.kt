@@ -1,5 +1,6 @@
 package io.github.itstrue54.gridironacademy.ui.screens
 
+import androidx.compose.ui.semantics.hideFromAccessibility
 import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.foundation.BorderStroke
@@ -7,6 +8,7 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import io.github.itstrue54.gridironacademy.ui.resources.level_locked_tap
+import io.github.itstrue54.gridironacademy.ui.resources.level_locked_tap_earlier
 import io.github.itstrue54.gridironacademy.ui.resources.xp_total
 import io.github.itstrue54.gridironacademy.ui.resources.season_progress
 import io.github.itstrue54.gridironacademy.ui.components.glass
@@ -405,14 +407,23 @@ private fun SeasonCard(state: LearnerAppState, level: Level, modifier: Modifier 
 @Composable
 private fun LockedNote(state: LearnerAppState, level: Level) {
     val c = Gridiron.colors
-    val note = if (state.lockedTapLevelId == level.id) state.levelThatOpens(level) else null
+    // The tapped card names the level that opens it, or says "the earlier levels" when none
+    // on this ladder is left to name.
+    val note = if (state.lockedTapLevelId != level.id) null else state.levelThatOpens(level)
+        ?.let { stringResource(Res.string.level_locked_tap, it.number) }
+        ?: stringResource(Res.string.level_locked_tap_earlier)
     val requester = remember { BringIntoViewRequester() }
     // One frame first: the box has to grow to hold the note before there is anything to bring into view.
     LaunchedEffect(note, state.lockedTapCount) { if (note != null) { withFrameNanos { }; requester.bringIntoView() } }
-    Box(Modifier.fillMaxWidth().bringIntoViewRequester(requester).semantics(mergeDescendants = true) { liveRegion = LiveRegionMode.Polite }) {
+    // The live region stays in place so a note that appears in it is announced, but while it is
+    // empty it is hidden from TalkBack, so the cards don't gain silent stops.
+    Box(Modifier.fillMaxWidth().bringIntoViewRequester(requester).semantics(mergeDescendants = true) {
+        liveRegion = LiveRegionMode.Polite
+        if (note == null) hideFromAccessibility()
+    }) {
         if (note != null) key(state.lockedTapCount) {
             Text(
-                stringResource(Res.string.level_locked_tap, note.number),
+                note,
                 style = Gridiron.type.label, color = c.ink,
                 modifier = Modifier.fillMaxWidth().padding(top = 6.dp)
                     .background(c.surfaceRaised, Gridiron.skin.chipShape).padding(horizontal = 14.dp, vertical = 8.dp),

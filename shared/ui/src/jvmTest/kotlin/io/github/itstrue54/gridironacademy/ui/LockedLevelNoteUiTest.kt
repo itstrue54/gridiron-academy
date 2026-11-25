@@ -22,16 +22,25 @@ class LockedLevelNoteUiTest {
         val locked = state.levels.first { it.number == 2 }
         setContent { LearnerApp(state, dark = false) }
         onAllNodesWithText("Finish Level", substring = true).assertCountEquals(0)
+        assertEquals(0, reachableLiveRegions().size, "an empty note box is no TalkBack stop")
 
         repeat(2) { n ->
             state.tapLockedLevel(locked)
             waitForIdle()
             onNodeWithText("Finish Level 1 first.").assertExists("after tap ${n + 1}").assertIsDisplayed()
-            val live = onAllNodes(SemanticsProperties.LiveRegion.let { key -> SemanticsMatcher.keyIsDefined(key) })
-                .fetchSemanticsNodes().filter { it.config.getOrNull(SemanticsProperties.Text)?.any { t -> t.text.startsWith("Finish Level") } == true }
-            assertEquals(1, live.size, "exactly one live region carries the note")
+            val live = reachableLiveRegions()
+            assertEquals(1, live.size, "only the tapped card's note is a TalkBack stop")
+            assertEquals(true, live.single().config.getOrNull(SemanticsProperties.Text)?.any { t -> t.text.startsWith("Finish Level") },
+                "and it carries the note")
         }
     }
+
+    /** Live regions TalkBack can land on: the note boxes not hidden from accessibility. */
+    private fun ComposeUiTest.reachableLiveRegions() =
+        onAllNodes(SemanticsMatcher.keyIsDefined(SemanticsProperties.LiveRegion) and
+            SemanticsMatcher.keyNotDefined(SemanticsProperties.HideFromAccessibility))
+            .fetchSemanticsNodes()
+            .filter { it.config.getOrNull(SemanticsProperties.Text)?.any { t -> t.text.startsWith("Finish") } != false }
 
     @Test fun kidSkinExposesTheNoteAfterEachTap() = check(AgeBand.AGE_8_9)
     @Test fun primeTimeExposesTheNoteAfterEachTap() = check(AgeBand.AGE_18_PLUS)

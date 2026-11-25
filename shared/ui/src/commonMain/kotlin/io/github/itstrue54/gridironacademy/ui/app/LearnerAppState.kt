@@ -622,9 +622,11 @@ class LearnerAppState(
     /** The level whose pass would bring this one closer to opening: first required one not passed. */
     fun levelThatOpens(level: Level): Level? {
         val passed = save.progress.levelsPassed
-        val id = level.requires.firstOrNull { it !in passed } ?: level.requiresAny.firstOrNull { it !in passed }
         // Only this profile's own ladder: another track's level number would name the wrong level.
-        return id?.let { levels.firstOrNull { l -> l.id == it } } ?: levels.firstOrNull { it.number == level.number - 1 }
+        val unmet = (level.requires + level.requiresAny).filter { it !in passed }
+        return unmet.firstNotNullOfOrNull { id -> levels.firstOrNull { it.id == id } }
+            // A requirement on another track: name the nearest earlier level here that isn't passed yet.
+            ?: levels.lastOrNull { it.number < level.number && it.id !in passed }
     }
 
     /** A tap on a locked level opens nothing; it leaves a note on Home saying what does. */
