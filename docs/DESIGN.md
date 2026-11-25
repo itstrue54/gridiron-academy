@@ -253,7 +253,8 @@ least 20 x 10 yards (so one player is not a giant close-up), and clamp to the fi
 width, shifting the window rather than squashing it. A diagram with nothing on it
 shows `-behind..depth` across the whole field. A zone spans `x..x+w` across and
 `y..y+h` downfield. The scale is `min(w/xSpan, h/ySpan)`,
-and the picture is centred; turf fills the whole canvas and the canvas clips. A formation-only diagram (no routes) crops tighter than
+and the picture is centred; turf fills the whole canvas and the canvas clips. A goal
+line (below) is always in frame, like the line of scrimmage. A formation-only diagram (no routes) crops tighter than
 a deep route concept. Aspect: the lesson card allows 4:3 to 3:4; the game screens
 let the diagram fill all remaining height.
 
@@ -265,10 +266,23 @@ ring gives 7.14:1 outlines and 3.75:1 or better paths, in both themes.
 - Stripes alternate `turfA` / `turfB` every 5 yards.
 - Yard lines every 5 yards in chalk at 35% opacity, every 10 yards at 60%; the
   line of scrimmage is a **solid 2dp chalk line** with a small "LOS" tag at the left
-  end in Adult skin only.
+  end in Adult skin only. A diagram with `lineOfScrimmage: false` (a picture of the
+  field, not of a play) draws neither; y = 0 is then an ordinary yard line.
 - Hash marks every yard at the hash lines (+-3.1 yards), 4dp long, chalk at 40%.
-- The sideline is a 3dp chalk line when the crop reaches it. An end zone, when in
-  frame, is `turfB` with a 40% chalk diagonal hatch.
+- The sideline is a 3dp chalk line when the crop reaches it.
+- **Goal lines and end zones** (built 2026-11-25). Open midfield is the default: a
+  diagram shows no goal line unless it sets `goalAhead` (yards up the field, > 0: the
+  goal line the offense is driving toward) or `goalBehind` (yards behind the line,
+  < 0: its own). Each draws a **4dp solid chalk goal line**, then 10 yards of end zone
+  in `turfB` with a **40% chalk diagonal hatch** (1dp lines, 10dp apart, counted from
+  the left sideline so they pan with the field), a 3dp end line, and plain `turfA`
+  out of bounds beyond it. No stripes, yard lines or hashes inside an end zone, and the
+  sidelines stop at the end lines. With a goal line, the stripes and yard lines are
+  counted from it rather than from the LOS, because the ball can sit on any yard but
+  the field's lines can't. When both are set they must be exactly 100 yards apart
+  (the whole field, to scale: ADR-007), as in the kid quiz `k1-field-07`, which shows
+  both end zones and no line of scrimmage. Before this, an "end zone" was a labelled
+  `DiagramZone` box on midfield turf, which only worked while a label could say so.
 - Optional **yard numerals** (Kid skin) printed in chalk at 50% on each 10.
 - Caption: one line, `label` style, under the field, from `Diagram.caption`.
 
@@ -328,7 +342,9 @@ zone being discussed is filled; the rest show edges only.
 Every `Diagram` produces a **text description** (`DiagramDescriber`, in the engine,
 section 11.2 of the spec): "Offense in shotgun: quarterback 5 yards behind the
 center; running back beside him; three receivers wide left, one wide right..." plus
-the routes and zones. The canvas exposes that text as its content description. Tap
+the routes and zones. Each end zone is one neutral sentence ("End zone, from 50 yards up
+the field to 60 yards up the field."): it says where, never whose, because "which end
+zone is theirs" is itself a quiz question. The canvas exposes that text as its content description. Tap
 questions also render a **list mode**: every player and shaded area as a row of words
 ("DE, Defense, left of the middle, 1 yard off the ball") under the picture, which stops
 taking taps while the list is open. A "Show as a list" link on each tap question turns it

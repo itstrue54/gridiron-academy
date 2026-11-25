@@ -10,7 +10,7 @@ import kotlin.math.roundToInt
 
 /**
  * A diagram as plain sentences for screen readers (SPEC 11.2, DESIGN 7.6): who is where,
- * who goes where, and the shaded areas. Deterministic, so a description never changes
+ * who goes where, any end zone, and the shaded areas. Deterministic, so a description never changes
  * between runs and can be tested word for word.
  *
  * Offense moves up the field. "Left" and "right" are as the picture is drawn. Yards are
@@ -53,6 +53,10 @@ object DiagramDescriber {
         val zone: (label: String, from: Int, to: Int) -> String = { label, from, to ->
             "Shaded area $label, from ${yardWords(from)} to ${yardWords(to)}."
         },
+        /** Neutral on purpose: which end zone is whose is a question the quiz asks. */
+        val endZone: (from: Int, to: Int) -> String = { from, to ->
+            "End zone, from ${yardWords(from)} to ${yardWords(to)}."
+        },
     )
 
     /** Within this many yards of x = 0 is "the middle"; past [WIDE] is "wide". */
@@ -74,6 +78,8 @@ object DiagramDescriber {
             val p = d.players.firstOrNull { it.id == r.playerId } ?: return@forEach
             parts += route(p, r, w)
         }
+        d.goalAhead?.let { g -> parts += w.endZone(g.roundToInt(), (g + Diagram.END_ZONE_DEPTH).roundToInt()) }
+        d.goalBehind?.let { g -> parts += w.endZone(g.roundToInt(), (g - Diagram.END_ZONE_DEPTH).roundToInt()) }
         d.zones.forEach { z ->
             parts += w.zone(z.label, z.y.roundToInt(), (z.y + z.h).roundToInt())
         }

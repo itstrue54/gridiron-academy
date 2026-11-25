@@ -48,6 +48,7 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.drawscope.clipRect
 import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.semantics.clearAndSetSemantics
@@ -203,7 +204,7 @@ fun FieldDiagram(
 
                 // Back to front: field, zones, paths, labels, then players on top so no label
                 // ever hides a player (DESIGN 7.2-7.5).
-                drawTurf(t)
+                drawTurf(t, diagram)
                 drawZones(diagram, t, highlightZone, marks)
                 diagram.routes.filter { it.drawn }.forEach { route ->
                     diagram.players.firstOrNull { it.id == route.playerId }?.let { drawRoute(route, it, t) }
@@ -217,7 +218,7 @@ fun FieldDiagram(
                     val end = r.points.last()
                     drawPill(measurer, r.label, labelStyle, pill, Offset(t.x(end.x), t.y(end.y) - ROUTE_LABEL_LIFT.dp.toPx()))
                 }
-                if (skin.losTag) {
+                if (skin.losTag && diagram.lineOfScrimmage) {
                     // Just under the line at whichever end has no player on it; none if both do.
                     val tag = measurer.measure(labels.los, tagStyle)
                     val w = tag.size.width + 12.dp.toPx()
@@ -305,6 +306,11 @@ private const val MAJOR_LINE_YARDS = 10
 private const val MINOR_LINE_ALPHA = 0.35f
 private const val MAJOR_LINE_ALPHA = 0.6f
 private const val HASH_ALPHA = 0.4f
+/** The goal line is drawn twice as heavy as the LOS; the end line matches the sideline. */
+private const val GOAL_LINE = 4
+private const val END_LINE = 3
+private const val END_ZONE_HATCH_SPACING = 10
+private const val END_ZONE_HATCH_ALPHA = 0.4f
 private const val SELECTED_SCALE = 1.15f
 
 // ---- Zoom (DESIGN §7.10) ----
@@ -370,43 +376,93 @@ private fun ZoomButtons(zoom: FieldZoomState, size: IntSize, labels: FieldLabels
 
 // ---- Field dressing (DESIGN §7.2) ----
 
-private fun DrawScope.drawTurf(t: FieldTransform) {
+private fun DrawScope.drawTurf(t: FieldTransform, d: Diagram) {
     // The visible field in yards: the whole canvas, not just the fitted window.
     val top = t.yYards(0f)
     val bottom = t.yYards(size.height)
     val left = t.xYards(0f)
     val right = t.xYards(size.width)
+    // Yard lines are counted from a goal line when there is one: the ball can sit on any
+    // yard, the lines can't. Without one they are counted from the LOS, as always.
+    val base = d.goalAhead ?: d.goalBehind ?: 0f
+    // The field of play lies between the goal lines; with none, it runs past the frame.
+    val playMin = d.goalBehind ?: Float.NEGATIVE_INFINITY
+    val playMax = d.goalAhead ?: Float.POSITIVE_INFINITY
+    val ks = floor((bottom - base) / STRIPE_YARDS).toInt()..ceil((top - base) / STRIPE_YARDS).toInt()
+    fun lineY(k: Int) = base + k * STRIPE_YARDS
 
-    for (k in floor(bottom / STRIPE_YARDS).toInt()..ceil(top / STRIPE_YARDS).toInt()) {
-        val y0 = t.y((k * STRIPE_YARDS).toFloat())
-        val y1 = t.y(((k + 1) * STRIPE_YARDS).toFloat())
+    for (k in ks) {
+        val y0 = t.y(lineY(k))
+        val y1 = t.y(lineY(k + 1))
         drawRect(if (k % 2 == 0) DiagramColors.turfA else DiagramColors.turfB, Offset(0f, y1), Size(size.width, y0 - y1))
     }
 
     val xFrom = t.x(maxOf(left, -FieldGeometry.HALF_WIDTH))
     val xTo = t.x(minOf(right, FieldGeometry.HALF_WIDTH))
+    d.goalAhead?.let { drawEndZone(t, it, ahead = true, xFrom, xTo) }
+    d.goalBehind?.let { drawEndZone(t, it, ahead = false, xFrom, xTo) }
+
     val line = 1.dp.toPx()
-    for (k in floor(bottom / STRIPE_YARDS).toInt()..ceil(top / STRIPE_YARDS).toInt()) {
-        val yards = k * STRIPE_YARDS
-        if (yards == 0) continue // the LOS is drawn on its own
-        val alpha = if (yards % MAJOR_LINE_YARDS == 0) MAJOR_LINE_ALPHA else MINOR_LINE_ALPHA
-        drawLine(DiagramColors.chalk.copy(alpha = alpha), Offset(xFrom, t.y(yards.toFloat())), Offset(xTo, t.y(yards.toFloat())), line)
+    for (k in ks) {
+        val yards = lineY(k)
+        if (yards == 0f && d.lineOfScrimmage) continue // the LOS is drawn on its own
+        if (yards <= playMin || yards >= playMax) continue // goal lines are drawn on their own; none in an end zone
+        val alpha = if ((k * STRIPE_YARDS) % MAJOR_LINE_YARDS == 0) MAJOR_LINE_ALPHA else MINOR_LINE_ALPHA
+        drawLine(DiagramColors.chalk.copy(alpha = alpha), Offset(xFrom, t.y(yards)), Offset(xTo, t.y(yards)), line)
     }
 
     val hashLen = 4.dp.toPx()
-    for (yd in ceil(bottom).toInt()..floor(top).toInt()) {
+    for (j in ceil(bottom - base).toInt()..floor(top - base).toInt()) {
+        val yd = base + j
+        if (yd <= playMin || yd >= playMax) continue
         for (hx in listOf(-FieldGeometry.HASH_X, FieldGeometry.HASH_X)) {
             val cx = t.x(hx)
-            drawLine(DiagramColors.chalk.copy(alpha = HASH_ALPHA), Offset(cx - hashLen / 2, t.y(yd.toFloat())), Offset(cx + hashLen / 2, t.y(yd.toFloat())), line)
+            drawLine(DiagramColors.chalk.copy(alpha = HASH_ALPHA), Offset(cx - hashLen / 2, t.y(yd)), Offset(cx + hashLen / 2, t.y(yd)), line)
         }
     }
 
+    // Sidelines stop at the end lines.
     val sideline = 3.dp.toPx()
+    val sideTop = d.goalAhead?.let { t.y(it + Diagram.END_ZONE_DEPTH) }?.coerceAtLeast(0f) ?: 0f
+    val sideBottom = d.goalBehind?.let { t.y(it - Diagram.END_ZONE_DEPTH) }?.coerceAtMost(size.height) ?: size.height
     for (sx in listOf(-FieldGeometry.HALF_WIDTH, FieldGeometry.HALF_WIDTH)) {
-        if (sx in left..right) drawLine(DiagramColors.chalk, Offset(t.x(sx), 0f), Offset(t.x(sx), size.height), sideline)
+        if (sx in left..right && sideTop < sideBottom) drawLine(DiagramColors.chalk, Offset(t.x(sx), sideTop), Offset(t.x(sx), sideBottom), sideline)
     }
 
-    drawLine(DiagramColors.chalk, Offset(xFrom, t.y(0f)), Offset(xTo, t.y(0f)), 2.dp.toPx())
+    if (d.lineOfScrimmage) drawLine(DiagramColors.chalk, Offset(xFrom, t.y(0f)), Offset(xTo, t.y(0f)), 2.dp.toPx())
+}
+
+/**
+ * The end zone past the goal line at [goal] yards, up the field when [ahead], else
+ * behind: `turfB` with a 40% chalk diagonal hatch, a heavy goal line on the field side, an
+ * end line 10 yards on, and plain turf out of bounds beyond it (DESIGN 7.2). [xFrom]..[xTo]
+ * are the sidelines, or the canvas edges if they are out of view.
+ */
+private fun DrawScope.drawEndZone(t: FieldTransform, goal: Float, ahead: Boolean, xFrom: Float, xTo: Float) {
+    val endLine = if (ahead) goal + Diagram.END_ZONE_DEPTH else goal - Diagram.END_ZONE_DEPTH
+    val yTop = t.y(maxOf(goal, endLine))
+    val yBottom = t.y(minOf(goal, endLine))
+    // Out of bounds past the end line: one solid tone, no stripes or lines.
+    if (ahead) drawRect(DiagramColors.turfA, Offset.Zero, Size(size.width, yTop.coerceAtLeast(0f)))
+    else drawRect(DiagramColors.turfA, Offset(0f, yBottom), Size(size.width, (size.height - yBottom).coerceAtLeast(0f)))
+    drawRect(DiagramColors.turfB, Offset(0f, yTop), Size(size.width, yBottom - yTop))
+
+    val h = yBottom - yTop
+    if (xTo > xFrom && h > 0f) {
+        val spacing = END_ZONE_HATCH_SPACING.dp.toPx()
+        val hatch = DiagramColors.chalk.copy(alpha = END_ZONE_HATCH_ALPHA)
+        // Counted from the left sideline, so the hatch moves with the field when panned.
+        val anchor = t.x(-FieldGeometry.HALF_WIDTH)
+        var x0 = anchor + floor((xFrom - h - anchor) / spacing) * spacing
+        clipRect(xFrom, yTop, xTo, yBottom) {
+            while (x0 < xTo) {
+                drawLine(hatch, Offset(x0, yBottom), Offset(x0 + h, yTop), 1.dp.toPx())
+                x0 += spacing
+            }
+        }
+    }
+    drawLine(DiagramColors.chalk, Offset(xFrom, t.y(goal)), Offset(xTo, t.y(goal)), GOAL_LINE.dp.toPx())
+    drawLine(DiagramColors.chalk, Offset(xFrom, t.y(endLine)), Offset(xTo, t.y(endLine)), END_LINE.dp.toPx())
 }
 
 // ---- Zones (DESIGN §7.5) ----

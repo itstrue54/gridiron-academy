@@ -26,7 +26,23 @@ data class Diagram(
      * Empty: no ball is drawn. The first spot is who holds it at the snap.
      */
     val ball: List<BallSpot> = emptyList(),
-)
+    /**
+     * The goal line the offense is driving toward, in yards up the field (> 0). Its end
+     * zone runs 10 yards past it to the end line. Null: no goal line in this picture, just
+     * open field (DESIGN 7.2).
+     */
+    val goalAhead: Float? = null,
+    /** The offense's own goal line, in yards behind the line (< 0); its end zone runs 10 yards behind it. */
+    val goalBehind: Float? = null,
+    /** False: no line of scrimmage is drawn, for a picture of the field rather than of a play. */
+    val lineOfScrimmage: Boolean = true,
+) {
+    companion object {
+        /** An end zone is 10 yards deep, and 100 yards of field lie between the goal lines. */
+        const val END_ZONE_DEPTH = 10f
+        const val FIELD_LENGTH = 100f
+    }
+}
 
 /**
  * The ball reaches [playerId] at [at], a fraction 0..1 of the play. Between two spots it

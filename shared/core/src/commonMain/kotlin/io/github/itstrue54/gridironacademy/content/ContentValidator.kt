@@ -204,6 +204,21 @@ object ContentValidator {
         }
         if (d.ball.zipWithNext().any { (a, b) -> b.at <= a.at }) err(w, "ball spots out of time order")
         d.players.forEach { if (it.x !in -27f..27f) err(w, "player ${it.id} off the field (x=${it.x})") }
+        // Goal lines sit on their own side of the ball, a real field apart, and nobody
+        // stands out of bounds beyond an end line (DESIGN 7.2).
+        d.goalAhead?.let { g ->
+            if (g <= 0f) err(w, "goalAhead must be up the field (> 0), got $g")
+            d.players.filter { it.y > g + Diagram.END_ZONE_DEPTH }.forEach { err(w, "player ${it.id} past the end line (y=${it.y})") }
+        }
+        d.goalBehind?.let { g ->
+            if (g >= 0f) err(w, "goalBehind must be behind the line (< 0), got $g")
+            d.players.filter { it.y < g - Diagram.END_ZONE_DEPTH }.forEach { err(w, "player ${it.id} past the end line (y=${it.y})") }
+        }
+        val ahead = d.goalAhead
+        val behind = d.goalBehind
+        if (ahead != null && behind != null && ahead - behind != Diagram.FIELD_LENGTH) {
+            err(w, "goal lines ${ahead - behind} apart; a field is 100 yards between them")
+        }
         // Football legality: never more than 11 a side, and a full offense has seven on the
         // line at the snap. A partial offense (a whiteboard concept drawing) is fine.
         for (side in Side.entries) {
