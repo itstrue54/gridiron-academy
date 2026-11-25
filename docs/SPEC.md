@@ -252,12 +252,20 @@ the mastery map (§4.6) and placement (§4.5).
   `voice/<locale>.json` (feedback copy, DESIGN §11), `audio/` (Level 0 recordings).
 - Each file has `schemaVersion` and the bundle has a `contentVersion` (monotonic
   integer) and a `ruleSeason` (e.g. `2026`).
+- **Diagrams** (`Diagram`, DESIGN §7): players, routes, shaded zones and an optional
+  ball path in yards from the line of scrimmage, plus `depth`/`behind`/`caption`. Open
+  midfield is the default; `goalAhead`/`goalBehind` add a goal line and a real end zone
+  (DESIGN §7.2), and `lineOfScrimmage: false` drops the LOS from a picture of the field
+  rather than a play. Every optional field defaults to absent and is never written out,
+  so adding one leaves existing steps and their review fingerprints untouched.
 - **Validation** (`ContentValidator`, enforced in CI by `ContentTest`): everything in
   v1 §4 (unique ids; answers in range; no duplicate choices; one BEST per situation;
   diagram targets exist; routes reference real players; read-defense pre/reveal show
   the same players; disguised reveals contain movement; every concept is in the
   glossary; every gate is playable; kid text limits; no diagram has more than 11 a
-  side, and a full 11-man offense has at least 7 on the line) plus: concept graph acyclic and
+  side, and a full 11-man offense has at least 7 on the line; a diagram's `goalAhead` is
+  up the field and `goalBehind` behind the line, both together are 100 yards apart, and
+  nobody stands past an end line) plus: concept graph acyclic and
   complete; every pack resolves; Level 0 steps have audio for every prompt and choice
   and no text-only choice; every `[review]`-flagged step is excluded from release
   builds unless signed off (§13.3).
