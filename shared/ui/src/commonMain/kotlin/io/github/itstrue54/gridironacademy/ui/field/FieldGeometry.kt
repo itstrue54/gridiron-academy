@@ -97,16 +97,18 @@ object FieldGeometry {
 
     /**
      * The tight bounds of every player, route point and zone, plus [MARGIN], always
-     * including the line of scrimmage and clamped to the field's width. A diagram with
+     * including the line of scrimmage and any goal line, and clamped to the field's width. A diagram with
      * nothing on it shows [Diagram.behind] to [Diagram.depth] across the whole field.
      */
     fun window(d: Diagram): FieldWindow {
         val xs = mutableListOf<Float>()
-        val ys = mutableListOf(0f) // the LOS is always in frame
+        val ys = mutableListOf(0f) // the LOS is always in frame, and so is any goal line
+        d.goalAhead?.let { ys += it }
+        d.goalBehind?.let { ys += it }
         d.players.forEach { xs += it.x; ys += it.y }
         d.routes.forEach { r -> r.points.forEach { xs += it.x; ys += it.y } }
         d.zones.forEach { z -> xs += z.x; xs += z.x + z.w; ys += z.y; ys += z.y + z.h }
-        if (xs.isEmpty()) return FieldWindow(-HALF_WIDTH, HALF_WIDTH, -d.behind, d.depth)
+        if (xs.isEmpty()) return FieldWindow(-HALF_WIDTH, HALF_WIDTH, minOf(-d.behind, ys.min()), maxOf(d.depth, ys.max()))
 
         var xMin = xs.min() - MARGIN
         var xMax = xs.max() + MARGIN

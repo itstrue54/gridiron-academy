@@ -150,6 +150,67 @@ class FieldRenderTest {
         assertTrue(turf == DiagramColors.turfA || turf == DiagramColors.turfB, "open turf, got $turf")
     }
 
+    private fun isTurf(c: Color) = c == DiagramColors.turfA || c == DiagramColors.turfB
+
+    /** Every pixel across one field row, from [x0] to [x1] yards. */
+    private fun Rendered.row(y: Float, x0: Float, x1: Float): List<Color> =
+        (t.x(x0).toInt()..t.x(x1).toInt()).map { Color(bitmap.getColor(PAD_PX + it, PAD_PX + t.y(y).toInt())) }
+
+    @Test
+    fun anEndZoneIsHatchedTurfBehindAHeavyGoalLine() {
+        // Goal line at 10: the end zone runs 10..20 (DESIGN 7.2).
+        val r = render("end-zone-ahead", Diagram(depth = 22f, behind = 6f, goalAhead = 10f), Skin.Adult, dark = false)
+        assertNear(DiagramColors.chalk, r.at(10f, 10f), "goal line, solid chalk")
+        assertNear(DiagramColors.chalk, r.at(10f, 20f), "end line, solid chalk")
+        // 12.5 is a turfA stripe on open field and 15 a yard line; in the end zone both are
+        // turfB under a thin hatch: no stripes, no yard line.
+        for (y in listOf(12.5f, 15f)) {
+            val row = r.row(y, -20f, 20f)
+            assertTrue(row.none { it == DiagramColors.turfA }, "y=$y: no turfA stripe in the end zone")
+            assertTrue(row.count { it == DiagramColors.turfB } > row.size * 3 / 4, "y=$y: mostly end-zone turf, no yard line")
+            assertTrue(row.any { !isTurf(it) }, "y=$y: the hatch crosses the row")
+        }
+        // No hash marks in the end zone.
+        assertTrue(r.row(13f, FieldGeometry.HASH_X - 0.2f, FieldGeometry.HASH_X + 0.2f).count { !isTurf(it) } < 3, "no hash at y=13")
+    }
+
+    @Test
+    fun yardLinesAreMeasuredFromTheGoalLine() {
+        // Ball on the 2, own goal line behind it: yard lines at -2 + 5k, so one at 3, none at 5.
+        val r = render("end-zone-behind", Diagram(depth = 8f, behind = 14f, goalBehind = -2f), Skin.Adult, dark = false)
+        assertNear(DiagramColors.chalk, r.at(10f, -2f), "own goal line")
+        assertNear(DiagramColors.chalk, r.at(10f, 0f), "line of scrimmage")
+        assertFalse(isTurf(r.at(10f, 3f)), "yard line 5 yards out of the end zone")
+        assertTrue(isTurf(r.at(10f, 5f)), "no yard line 5 yards from the ball")
+        val inside = r.row(-7f, -20f, 20f)
+        assertTrue(inside.none { it == DiagramColors.turfA }, "own end zone is end-zone turf")
+    }
+
+    @Test
+    fun aFieldPictureCanLeaveOutTheLineOfScrimmage() {
+        val on = render("los-on", Diagram(depth = 12f, behind = 6f), Skin.Adult, dark = false)
+        val off = render("los-off", Diagram(depth = 12f, behind = 6f, lineOfScrimmage = false), Skin.Adult, dark = false)
+        assertNear(DiagramColors.chalk, on.at(10f, 0f), "solid LOS")
+        // Without it, y = 0 is an ordinary 10-yard line: 60% chalk, not the solid line.
+        val plain = off.at(10f, 0f)
+        assertFalse(isTurf(plain), "a yard line still marks y = 0")
+        assertTrue(abs(plain.red - DiagramColors.chalk.red) > 0.1f, "no solid LOS, got $plain")
+        // The Adult "LOS" tag goes with it.
+        val tagAt = { r: Rendered -> Color(r.bitmap.getColor(PAD_PX + (14 * DENSITY).toInt(), PAD_PX + r.t.y(0f).toInt() + (LOS_TAG_DROP * DENSITY).toInt())) }
+        assertFalse(isTurf(tagAt(on)), "LOS tag with the line")
+        assertTrue(isTurf(tagAt(off)), "no LOS tag without the line, got ${tagAt(off)}")
+    }
+
+    @Test
+    fun theWhichWayQuizShowsBothEndZones() {
+        val step = steps().first { it.id == "k1-field-07" } as DiagramTap
+        render("k1-field-07-kid", step.diagram, Skin.Kid, dark = false)
+        render("k1-field-07-graded", step.diagram, Skin.Kid, dark = true, marks = mapOf("A" to MarkState.CORRECT))
+        for (id in listOf("k1-scoring-01", "k1-scoring-04", "a1-scoring-01", "a1-scoring-02")) {
+            render("scoring-$id", (steps().first { it.id == id } as Learn).diagram!!, if (id.startsWith("k")) Skin.Kid else Skin.Adult, dark = false)
+        }
+    }
+
     @Test
     fun zoomingInSeparatesACrowdedLine() {
         // Five linemen 1.6 yards apart with receivers at the sidelines: crowded on a phone.
@@ -208,6 +269,8 @@ class FieldRenderTest {
         const val DENSITY = 2f
         const val PAD_DP = 16
         const val PAD_PX = (PAD_DP * DENSITY).toInt()
+        /** FieldDiagram draws the Adult "LOS" tag this far under the line. */
+        const val LOS_TAG_DROP = 10
     }
 
     @Test

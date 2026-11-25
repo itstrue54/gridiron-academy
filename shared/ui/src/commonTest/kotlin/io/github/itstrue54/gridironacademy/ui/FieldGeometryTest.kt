@@ -19,6 +19,13 @@ class FieldGeometryTest {
     }
 
     @Test
+    fun aGoalLineIsAlwaysInFrameLikeTheLos() {
+        val w = FieldGeometry.window(Diagram(players = listOf(p("a", -10f, 5f), p("b", 12f, 9f)), goalAhead = 20f, goalBehind = -80f))
+        assertEquals(20f + FieldGeometry.MARGIN, w.yMax)
+        assertEquals(-80f - FieldGeometry.MARGIN, w.yMin)
+    }
+
+    @Test
     fun windowNeverCropsPastTheSidelinesAndShiftsInstead() {
         val w = FieldGeometry.window(Diagram(players = listOf(p("wide", 25f, 0f), p("qb", 10f, -5f))))
         assertEquals(FieldGeometry.HALF_WIDTH, w.xMax)
